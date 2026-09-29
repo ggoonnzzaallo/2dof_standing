@@ -1,0 +1,2 @@
+# STEP exporters include trailing spaces in generated records.
+*.step -whitespace

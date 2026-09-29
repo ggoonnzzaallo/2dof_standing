@@ -1,0 +1,12 @@
+{
+  "grid_angles_deg": [
+    -80,
+    -40,
+    0,
+    40,
+    80
+  ],
+  "configurations": 25,
+  "scope": "Rigid nominal envelopes; excludes horns, fasteners and wires. Discrete samples only.",
+  "clashes": []
+}

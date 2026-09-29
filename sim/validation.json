@@ -1,0 +1,10 @@
+{
+  "gymnasium_check": "passed",
+  "random_steps_finite": 1500,
+  "ppo_smoke_steps": 512,
+  "actor_parameters": 4994,
+  "actor_flash_bytes": 19976,
+  "c_parity_max_abs_error": 2.2351741790771484e-08,
+  "trained_policy_delivered": false,
+  "physical_robot_tested": false
+}

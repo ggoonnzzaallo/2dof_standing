@@ -1,0 +1,66 @@
+{
+  "paddle.stl": {
+    "watertight": true,
+    "connected_components": 1,
+    "bounds_mm": [
+      [
+        -12.0,
+        13.8,
+        60.01
+      ],
+      [
+        12.0,
+        20.8,
+        132.0
+      ]
+    ]
+  },
+  "middle_link.stl": {
+    "watertight": true,
+    "connected_components": 1,
+    "bounds_mm": [
+      [
+        -10.5,
+        -12.0,
+        15.0
+      ],
+      [
+        16.5,
+        12.0,
+        86.0
+      ]
+    ]
+  },
+  "base.stl": {
+    "watertight": true,
+    "connected_components": 1,
+    "bounds_mm": [
+      [
+        -35.0,
+        -32.0,
+        0.0
+      ],
+      [
+        35.0,
+        32.0,
+        41.0
+      ]
+    ]
+  },
+  "battery_guard.stl": {
+    "watertight": true,
+    "connected_components": 1,
+    "bounds_mm": [
+      [
+        -31.5,
+        -30.5,
+        3.0
+      ],
+      [
+        31.5,
+        -10.5,
+        14.0
+      ]
+    ]
+  }
+}
