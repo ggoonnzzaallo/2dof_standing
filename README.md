@@ -2,7 +2,7 @@
 
 Recommended architecture: **XIAO nRF52840 Sense + two FEETECH FT90M servos + one 500 mAh, 1S LiPo**. Train on a computer with MuJoCo and Stable-Baselines3 PPO; run the small exported actor on the XIAO. The **IMU is already on the XIAO Sense board**, which is attached to the robot's base. No boost converter, external IMU, servo driver board, or separate charger is required.
 
-This is a concrete prototype design, not a proven self-righting product. CAD exports and software checks are supplied. No physical robot has been assembled or tested, and no trained recovery policy is included. The low-voltage motor cutoff described in `HARDWARE.md` is a firmware requirement, not implemented code yet; implement and test it before untethered battery runs.
+This is a concrete prototype design, not a proven self-righting product. CAD exports and software checks are supplied. No physical robot has been assembled or tested, and no trained recovery policy is included. The low-voltage motor cutoff and 100 mA charge-current configuration described in `HARDWARE.md` are firmware requirements, not implemented code yet; implement and test them before untethered battery runs or relying on USB charging for the 500 mAh pack.
 
 ## Package
 
@@ -10,6 +10,7 @@ This is a concrete prototype design, not a proven self-righting product. CAD exp
 - [Controller comparison and IMU location](docs/CONTROLLER_DECISION.md)
 - [AliExpress one-marketplace shopping plan](docs/ALIEXPRESS_SOURCING.md)
 - [Wiring, commissioning, and design rationale](HARDWARE.md)
+- [Onboard voltage monitoring and USB-C charging plan](HARDWARE.md#battery-monitoring-and-charging)
 - [Power budget and brownout acceptance test](HARDWARE.md#power-budget-and-brownout-check)
 - [CAD assembly](cad/assembly.step), [preview](cad/preview.png), and [CAD/printing notes](cad/README.md)
 - [Training and deployment pipeline](sim/README.md)
