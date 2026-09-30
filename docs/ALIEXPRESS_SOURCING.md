@@ -6,7 +6,7 @@ Live AliExpress item pages were not accessible for verification in this work ses
 
 | Needed | Search phrase | Confirm in the listing before adding to cart |
 |---|---|---|
-| Controller | `Seeed XIAO nRF52840 Sense 102010469` | **Sense**, nRF52840, onboard **LSM6DS3TR-C** IMU, BQ25101 LiPo charger. Avoid the plain nRF52840 and unrelated ESP32S3 Sense. Prefer Seeed's official store if identifiable. |
+| Controller | `Seeed XIAO nRF52840 Sense 102010469` | Buy the standard **Sense, SKU 102010469**: nRF52840, onboard **LSM6DS3TR-C** IMU, BQ25101 LiPo charger. The plain **102010448** lacks the IMU. **Sense Plus 102010694** retains it but adds unnecessary underside I/O pads; check mount and battery-pad clearance before substituting. Prefer Seeed's official store if identifiable. |
 | Two identical servos | `FEETECH FT90M 3V 8.4V 20T` | FT90M model and published 3–8.4 V range; matching **20T** horns and center screws included. Check mounting-flange and output dimensions against `cad/README.md`. Do not silently choose FT90M-FB or generic SG90. |
 | 1S battery | `1S 3.7V 500mAh 25C LiPo JST RCY` | Standard LiPo full-charge **4.2 V**, 1S, plausible discharge rating and measured pack dimensions at or below **59.5 × 19 × 7.5 mm** for the current CAD. Confirm connector type and polarity from photos, not just a title. A different dimension or plug requires a drawing/BOM change. |
 | Battery mating lead | `JST RCY male pigtail 20AWG` | Mates physically and electrically to the selected battery. Check red/black polarity with a meter before connecting XIAO BAT pads. |
