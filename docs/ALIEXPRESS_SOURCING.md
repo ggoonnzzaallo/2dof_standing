@@ -17,6 +17,6 @@ Live AliExpress item pages were not accessible for verification in this work ses
 
 **Skip the capacitor and signal resistors for the first order.** If loaded testing later shows power transients or signal back-powering, `BOM.md` lists exact optional parts and the symptoms that justify them.
 
-Use a cart subtotal **with tax and shipping to your ZIP code** to check the $100 target. The $72.82 recommended parts subtotal, including the matching offboard 500 mA charger, comes from several USA sellers, not from an AliExpress cart. Do not choose a cheaper battery, servo, or charger until its voltage, connector polarity, stall-current behavior and dimensions are credible; those determine whether the robot can rise and charge safely.
+Use a cart subtotal **with tax and shipping to your ZIP code** to check the $100 target. The $62.83 recommended parts subtotal comes from several USA sellers, not from an AliExpress cart. Do not choose a cheaper battery or servo until its voltage, connector polarity, stall-current behavior and dimensions are credible; those determine whether the robot can rise and charge safely.
 
 Chosen AliExpress item links and checkout total: **not yet verified**. Once selected, add exact item URLs and variant names above so future BOM changes remain reproducible.
