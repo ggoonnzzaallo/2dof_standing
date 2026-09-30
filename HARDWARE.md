@@ -10,21 +10,19 @@ EFLB5001S25 1S battery / keyed RCY connector
         +---- Pololu 2810 VIN
                    VOUT ----+-------- Servo 1 positive
                             +-------- Servo 2 positive
-                            +-------- 1000 uF capacitor (+)
   - ----+---------------------------- XIAO BAT- / GND
         +---------------------------- Pololu GND
         +---------------------------- Both servo grounds
-        +---------------------------- Capacitor (-)
 
-XIAO D0 ---- 1 kohm ---- Servo 1 signal
-XIAO D1 ---- 1 kohm ---- Servo 2 signal
+XIAO D0 ---------------- Servo 1 signal
+XIAO D1 ---------------- Servo 2 signal
 XIAO D2 ---------------- Pololu ON
 USB-C ------------------ XIAO programming + onboard charging
 ```
 
-Make the power split at the battery harness. Servo current must not flow through XIAO 3V3, 5V/VBUS, tiny PCB traces or a solderless breadboard. Route controller ground back to the same power-star point as servo ground. Observe capacitor polarity. Secure and insulate the capacitor next to the switch; it is not included in the CAD envelope. The capacitor suppresses brief disturbances; it cannot rescue an undersized battery or long resistive power wiring.
+Make the power split at the battery harness. Servo current must not flow through XIAO 3V3, 5V/VBUS, tiny PCB traces or a solderless breadboard. Route controller ground back to the same power-star point as servo ground. Keep the high-current wiring short and secure. No external capacitor or signal resistors are needed in this first wiring layout. Measure the battery voltage at the controller during hard servo direction changes; add the optional capacitor from `BOM.md` across the switched servo supply only if transients or resets appear. A capacitor cannot rescue an undersized battery or long resistive power wiring. [Pololu notes that capacitors near its switch can reduce spikes when interrupting large currents](https://www.pololu.com/product/2810).
 
-Leave the **Pololu's physical slide OFF**. In that position D2 high enables the servo supply; low or disconnected disables it. Sliding it ON overrides software power-off. Initialize D2 low before any PWM setup, and hold PWM outputs low before cutting servo power to avoid feeding an unpowered servo through its signal pin. The series resistors limit accidental injection current but do not replace that sequencing. [Pololu 2810 documentation](https://www.pololu.com/product/2810).
+Leave the **Pololu's physical slide OFF**. In that position D2 high enables the servo supply; low or disconnected disables it. Sliding it ON overrides software power-off. Initialize D2 low before any PWM setup. Before cutting servo power, stop both PWM outputs and set their pins low; keep them low until servo power is restored. This avoids intentionally driving an unpowered servo through its signal pin. Check the actual servos for back-powering; two optional 1 kΩ series resistors can limit that current if it occurs, but do not replace correct sequencing. [Pololu 2810 documentation](https://www.pololu.com/product/2810).
 
 Use the XIAO BAT pads for the standard 1S battery. **Do not apply battery voltage to 3V3, and do not connect 5 V to BAT.** The board has its own charging/regulation circuit. During USB charging/programming, keep servo power disabled. Configure 100 mA charging if appropriate to the board revision; approximately 5–7 hours from empty is a planning estimate for 500 mAh, including taper. At the default 50 mA it takes roughly twice as long. Do not assume power-path or charger behavior from a different XIAO board. [Seeed board documentation and schematic links](https://wiki.seeedstudio.com/XIAO_BLE/).
 

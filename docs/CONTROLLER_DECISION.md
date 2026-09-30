@@ -38,14 +38,14 @@ The XIAO is therefore **better for our selected battery and component-count goal
 
 The minimum active hardware is **one XIAO Sense, two servos and one 1S battery**. A matching battery connector/pigtail and wires are still needed for a removable pack. The XIAO already supplies the processor, IMU, regulator and USB charger; it requires **no separate Raspberry Pi, IMU breakout, servo driver board, boost converter or charging board** for this design.
 
-The main BOM adds one Pololu servo-power switch, one capacitor and two signal resistors. These are small but purposeful:
+The recommended Rev A BOM adds **one Pololu servo-power switch** to the minimum active hardware. The capacitor and two signal resistors are optional troubleshooting parts, not necessary purchases for the first build:
 
-| Additional item | Why it is in Rev A | If removed |
+| Item | Why consider it | If omitted |
 |---|---|---|
-| Servo-power switch | MCU can turn servo power off on a low-battery fault and while charging/programming. | Servos remain connected whenever the battery is plugged in. The pack must be unplugged for a true shutdown; USB charging needs careful testing with the permanently attached servo rail. |
-| 1000 µF capacitor | Buffers brief servo-current spikes near the load. | Simpler wiring, with less margin against brownouts. Add it if voltage dips appear. |
-| Two 1 kΩ resistors | Limit current that could enter unpowered servo signal inputs. | Acceptable only after verifying the exact servo input behavior and power-sequencing discipline. |
+| Servo-power switch — **included** | MCU can turn servo power off on a low-battery fault and while charging/programming. | Servos remain connected whenever the battery is plugged in. The pack must be unplugged for a true shutdown; USB charging needs careful testing with the permanently attached servo rail. |
+| 1000 µF capacitor — **optional** | Buffers brief servo-current spikes near the load. | Start without it; add if loaded voltage measurements show dips/spikes or the MCU resets despite short, sound wiring. |
+| Two 1 kΩ resistors — **optional** | Limit current that could enter unpowered servo signal inputs. | Use correct firmware power sequencing and verify with the actual servos. Add only if back-powering is observed. |
 
-I recommend **retaining the switch for the first build**. It is the one added board that allows the firmware to cut motor power. The capacitor and two resistors can be treated as bench-fit parts if minimizing solder joints is more valuable than electrical margin. A simple mechanical slide switch may be smaller/cheaper, but it gives up firmware-controlled shutdown. Those are design choices, not one-for-one substitutions.
+I recommend **retaining the switch for the first build**. It is the one added board that allows the firmware to cut motor power. Wire the servo signals directly for now and measure supply behavior under load. A simple mechanical slide switch may be smaller/cheaper, but it gives up firmware-controlled shutdown. Those are design choices, not one-for-one substitutions.
 
 Separately, the current **500 mAh battery** is the largest footprint driver. The reference uses a 220 mAh pack. A properly rated smaller cell could materially shrink the platform, but it will shorten runtime and must be checked for stall-current delivery, connector, 4.2 V charge chemistry and physical protection before redrawing the base.
