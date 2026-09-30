@@ -10,6 +10,7 @@ This is a concrete prototype design, not a proven self-righting product. CAD exp
 - [Controller comparison and IMU location](docs/CONTROLLER_DECISION.md)
 - [AliExpress one-marketplace shopping plan](docs/ALIEXPRESS_SOURCING.md)
 - [Wiring, commissioning, and design rationale](HARDWARE.md)
+- [Power budget and brownout acceptance test](HARDWARE.md#power-budget-and-brownout-check)
 - [CAD assembly](cad/assembly.step), [preview](cad/preview.png), and [CAD/printing notes](cad/README.md)
 - [Training and deployment pipeline](sim/README.md)
 - [Software validation results](sim/validation.json) and [sampled CAD motion check](cad/motion_check.json)
@@ -34,6 +35,6 @@ The CAD solids export successfully; each printed part is one valid connected sol
 
 The Gymnasium environment check, 1,500 randomized steps and a short 512-step PPO training smoke test pass. Exported C inference agrees with SB3 deterministic inference to better than 1e-5 on 100 test observations. The smoke policy is discarded; that test establishes software operation, not learned recovery.
 
-The next physical milestones are: fit the supplied servo horns; measure travel/torque/lag at 4.2, 3.8 and 3.5 V; demonstrate a scripted rise from each major fall direction; update the model; then train and transfer. If scripted recovery is mechanically impossible from a resting pose, change the contact geometry before spending time on RL.
+The next physical milestones are: fit the supplied servo horns; measure travel/torque/lag at 4.2, 3.8 and 3.6 V; demonstrate a scripted rise from each major fall direction; update the model; then train and transfer. If scripted recovery is mechanically impossible from a resting pose, change the contact geometry before spending time on RL.
 
 The USA distributor prices and listing availability in `BOM.md` were checked on **27 September 2026**. Recommended purchased parts total **$62.83**, before shipping, tax and any tariff. The capacitor and signal resistors are optional diagnostic additions, not first-order requirements. Heat shrink is a $4.95 optional purchase if absent from the bench. A delivered total below $100 is plausible but is not a checkout quote; multiple sellers' shipping can consume the remaining margin. AliExpress can consolidate shopping into one marketplace, but its live listings and prices have not been verified; use the [shopping criteria](docs/ALIEXPRESS_SOURCING.md) before selecting substitutes.
