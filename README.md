@@ -2,7 +2,7 @@
 
 Recommended architecture: **XIAO nRF52840 Sense + two FEETECH FT90M servos + one 500 mAh, 1S LiPo**. Train on a computer with MuJoCo and Stable-Baselines3 PPO; run the small exported actor on the XIAO. The **IMU is already on the XIAO Sense board**, which is attached to the robot's base. No boost converter, external IMU, servo driver board, or separate charger is required.
 
-This is a concrete prototype design, not a proven self-righting product. CAD exports and software checks are supplied. No physical robot has been assembled or tested, and no trained recovery policy is included.
+This is a concrete prototype design, not a proven self-righting product. CAD exports and software checks are supplied. No physical robot has been assembled or tested, and no trained recovery policy is included. The low-voltage motor cutoff described in `HARDWARE.md` is a firmware requirement, not implemented code yet; implement and test it before untethered battery runs.
 
 ## Package
 
