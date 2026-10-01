@@ -13,6 +13,8 @@ The IMU is the LSM6DS3TR-C chip **on the XIAO nRF52840 Sense PCB**. Mount that P
 
 This sensor set is enough to **attempt** the current ten-input policy because its inputs are base gravity direction and angular rate, the last two commanded joint targets and the previous two actions; actual joint angles and contact state are deliberately excluded. It is not full-state feedback. A stalled, back-driven or lagging servo can be far from its commanded target without the controller knowing. If measured recovery trials show this matters, the first sensor upgrade should be two joint-position feedback channels or servos that expose angle telemetry, rather than a second base IMU. Such a change also requires updating the policy observation and training model.
 
+**Optional purchase hedge:** two [FT90M-FB feedback servos](https://www.feetechrc.com/2kg-cm-digital-steering-gear-ft90m-fb.html) can replace the standard FT90Ms before ordering. They retain ordinary PWM position control and expose the internal potentiometer on a fourth wire. Leave each fourth wire insulated and disconnected for the initial ten-input policy; buying the option does not require using it. If feedback later proves useful, move the two PWM outputs to XIAO D6/D7, keep D2 for the power switch, and use D0/D1 as analog feedback inputs. Measure the fourth-wire voltage over the intended motion and power range **before** connecting it to a 3.3 V XIAO input; FEETECH gives example feedback values up to 3.2 V, but the assembled robot has not been tested. Calibrate voltage versus actual joint angle and update both simulation observations and firmware if the policy will consume that feedback. This is a wiring/firmware option, not a separate encoder or extra board.
+
 ## Power and signals
 
 ```text
