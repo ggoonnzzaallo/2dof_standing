@@ -23,6 +23,12 @@ python3 -m venv .venv-sim
 
 The version pins record the tested environment rather than a claim that these are the newest releases. The default two million steps is a starting budget, not a convergence prediction. Repeat with independent seeds. The C compiler is required only for `check.py`'s host parity check.
 
+## The servo is not an ideal angle source
+
+The policy sends **target-angle changes**, not joint angles or motor torque. In `environment.py`, each command first passes through 0–40 ms of randomized delay. An internal servo target moves toward it at a finite rate. The simulated servo then compares that target with the **actual simulated joint angle and velocity** and applies a bounded torque; floor contact or gravity can make the joint lag, stall, or be pushed away from the target. This mirrors the division of work on the robot: the real FT90M's internal potentiometer closes its own position loop, while the XIAO only knows the angle it requested. Actual simulated joint angle is used inside the servo physics and training reward, **not as an input to the policy**.
+
+The present **3–5 rad/s** speed, **0.045–0.070 N·m** torque, gain and delay ranges are placeholders, not measurements of an FT90M on one LiPo cell. [FEETECH specifies 0.125 s per 60° with no load at 4.8 V](https://www.feetechrc.com/Data/feetechrc/upload/file/20201231/6374502922105716084085377.pdf); that does not predict speed at 3.6–4.2 V while pushing against the floor. Before substantial training, mark a horn and film repeatable angle steps from a fixed camera at several battery voltages, first unloaded and then with a representative link/load. Fit command delay, joint angle versus time, steady tracking error and reversal deadband/backlash. Use a known lever/load and brief current measurements to bound usable torque without holding the servo stalled. Temporary video gives angle/speed measurements for calibration; the finished robot does not need joint sensors merely to calibrate the simulator. Compare real and simulated traces for held-out commands, then randomize parameters around the measured range. If large unobserved joint deviations still defeat recovery, add feedback servos and retrain with their angle readings.
+
 ## Observation/action contract
 
 The 10 float32 inputs, in order, are:
