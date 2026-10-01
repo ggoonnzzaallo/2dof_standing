@@ -10,6 +10,7 @@ This is a concrete prototype design, not a proven self-righting product. CAD exp
 - [Controller comparison and IMU location](docs/CONTROLLER_DECISION.md)
 - [Servo choice versus SO-100 smart servos](docs/SERVO_DECISION.md)
 - [AliExpress one-marketplace shopping plan](docs/ALIEXPRESS_SOURCING.md)
+- [DigiKey-centered sourcing audit](docs/DIGIKEY_SOURCING.md)
 - [Wiring, commissioning, and design rationale](HARDWARE.md)
 - [Onboard voltage monitoring and USB-C charging plan](HARDWARE.md#battery-monitoring-and-charging)
 - [Power budget and brownout acceptance test](HARDWARE.md#power-budget-and-brownout-check)
