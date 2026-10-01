@@ -38,7 +38,7 @@ Two outputs are clipped to ±1, multiplied by 0.06 rad and added to the stored j
 
 There is no `VecNormalize` state to forget during export. The export preserves SB3's deterministic Gaussian mean and final action clipping; it does not introduce an extra output tanh. The actor contains 4,994 floats (19,976 bytes), about 4,864 multiply-accumulates per call plus tanh operations. It fits the proposed MCU comfortably in memory; measure worst-case execution time on the real firmware before committing to 50 Hz.
 
-Actual joint angle and velocity are used for simulated servo dynamics and reward, **not policy observations**, since standard FT90M servos do not report them. A future feedback-servo upgrade requires a changed wiring/model/observation contract.
+Actual joint angle and velocity are used for simulated servo dynamics and reward, **not policy observations**, since standard FT90M servos do not report them. Floor contact is likewise used to score success during training, not passed to the policy. It is fine for a simulator to use these privileged quantities for its reward: the deployed policy only runs inference and does not calculate that reward. A future feedback-servo upgrade requires a changed wiring/model/observation contract.
 
 ## Real training sequence
 
@@ -52,7 +52,7 @@ Actual joint angle and velocity are used for simulated servo dynamics and reward
 
 ## IMU and sim-to-real details still to implement
 
-The simulator currently exposes true projected gravity with noise. Real hardware needs a quaternion-based gyro/accelerometer attitude filter and explicit sensor-to-base alignment. A normalized raw accelerometer reading is not gravity during a flip. Match the filter's latency and dynamic errors in training; gate accelerometer correction during strong non-gravitational acceleration, and test recovery through 180-degree orientations. Avoid a roll/pitch formula that changes branches or saturates at 90 degrees.
+**The current environment is a software starter, not yet sensor-faithful for transfer.** Its gravity observation comes from MuJoCo's exact base orientation plus noise, while the real robot has only one base-mounted accelerometer/gyro. Real hardware needs a quaternion-based gyro/accelerometer attitude filter and explicit sensor-to-base alignment; the environment must then use the same estimator or model its delay and dynamic errors before training a deployment policy. A normalized raw accelerometer reading is not gravity during a flip. Gate accelerometer correction during strong non-gravitational acceleration, and test recovery through 180-degree orientations. Avoid a roll/pitch formula that changes branches or saturates at 90 degrees. The IMU cannot directly see joint angle, contact or absolute yaw; upright recovery should not depend on absolute yaw.
 
 The 10-input starter has no history or battery observation. If real servo lag creates partial observability, add a short observation history first (and update the exporter), or a battery-voltage feature after calibrating the ADC. A recurrent policy is an option, but makes deployment and reset behavior more complicated. Do not change observation dimensions only on one side.
 

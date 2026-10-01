@@ -2,6 +2,17 @@
 
 The IMU is the LSM6DS3TR-C chip **on the XIAO nRF52840 Sense PCB**. Mount that PCB rigidly on the base, near the controller envelope shown in `cad/assembly.step`. There is no separate IMU module or IMU wire harness. The reference ATOM Matrix also contains its own IMU (MPU6886). See the [board comparison and parts-count options](docs/CONTROLLER_DECISION.md).
 
+## What the robot can measure
+
+| Device | Available to the XIAO | Role |
+|---|---|---|
+| **One** onboard LSM6DS3TR-C IMU | Three-axis acceleration and three-axis angular velocity | Estimate base orientation relative to gravity and its rotation rate. Six axes means two three-axis measurements, **not six IMUs**. The IMU is rigidly attached to the base, so it does not directly measure either moving link. [Seeed IMU guide](https://wiki.seeedstudio.com/XIAO-BLE-Sense-IMU-Usage/). |
+| XIAO battery-voltage ADC divider | Cell voltage after calibration | Low-battery protection and optional policy input; not a joint or contact sensor. See battery-monitoring details below. |
+| Two standard FT90M servos | Commanded PWM targets only | Each servo uses an **internal carbon-film potentiometer** to close its own position loop, but the selected three-wire FT90M exposes only signal, power and ground. It does not send actual shaft angle, velocity, load or current to the XIAO. It has no externally readable encoder. [FT90M specification](https://www.feetechrc.com/Data/feetechrc/upload/file/20210809/6376411509095078411776244.pdf). |
+| XIAO Sense onboard microphone | Present but unused | It is not required for upright recovery or the current policy. [Seeed board specification](https://wiki.seeedstudio.com/XIAO_BLE/). |
+
+This sensor set is enough to **attempt** the current ten-input policy because its inputs are base gravity direction and angular rate, the last two commanded joint targets and the previous two actions; actual joint angles and contact state are deliberately excluded. It is not full-state feedback. A stalled, back-driven or lagging servo can be far from its commanded target without the controller knowing. If measured recovery trials show this matters, the first sensor upgrade should be two joint-position feedback channels or servos that expose angle telemetry, rather than a second base IMU. Such a change also requires updating the policy observation and training model.
+
 ## Power and signals
 
 ```text
