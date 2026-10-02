@@ -15,7 +15,7 @@ The **known checkout totals** are $23.44 (Pololu) plus $28.97 (two batteries), o
 
 ## Incoming checks before assembly
 
-1. Photograph or measure the received PTK servo's label and dimensions, spline and supplied horn/center screw. Print the [small fit coupons](../cad/README.md), including the new pivot coupon if adding the opposed supports, and update `cad/build_cad.py` from the actual measurements before final printing. The current PTK geometry is provisional.
+1. Photograph or measure the received PTK servo's label and dimensions, spline and supplied horn/center screw. Also measure the battery and connector against the new centered tunnel. Print the [small fit coupons](../cad/README.md), including the pivot coupon if adding the opposed supports, and update `cad/build_cad.py` from actual measurements before final printing. The current PTK geometry is provisional.
 2. Confirm connector polarity with a multimeter before connecting the battery. Keep motor current off XIAO power traces; the battery feeds the XIAO and, separately through Pololu 2810, both servo power wires.
 3. Characterize one servo, then both, at battery voltages near 4.2, 3.8 and 3.6 V. Record current, voltage sag, travel, unloaded and loaded step response, and whether a scripted rise succeeds. The reference robot's one-cell success is useful evidence, but the PTK servo is not guaranteed by a published 1S rating.
 4. Update the servo ranges in `sim/` from the measured PTK data before substantial RL training. The current numbers are placeholders and should not be treated as measured PTK performance.

@@ -91,12 +91,12 @@ These servos provide no external joint-angle feedback. Firmware stores commanded
 
 ## Mechanics and order of work
 
-At 80 g, a simple weight moment about a 35 mm base edge is approximately **0.027 N·m**. That is a useful sizing scale, not a proof that the actuator can execute a recovery trajectory. Floor contact, paddle reach, dynamic impulses and orientation can make the required joint torque much larger. The upper joint's job includes pushing on the floor, not merely lifting its own light paddle.
+At a hypothetical 100 g assembled mass, a simple weight moment about a 35 mm base edge is approximately **0.034 N·m**. The centered reinforced design has not been weighed; this is a sizing example, not a mass prediction or proof that the actuator can execute a recovery trajectory. Floor contact, paddle reach, dynamic impulses and orientation can make the required joint torque much larger. The upper joint's job includes pushing on the floor, not merely lifting its own paddle.
 
-1. Print a fit sample (base mount or sliced mount section), check the case, flange holes and actual horn. Correct HORN_FACE and hole locations before printing the complete set.
+1. Print the servo, horn and pivot fit coupons; check the case, flange holes, actual horn, bearing and pin. Measure the delivered battery as well. Correct CAD dimensions before printing the complete set.
 2. Center one unloaded servo at its measured neutral. Install the correct OEM horn and output screw; establish angle direction and pulse calibration. Repeat for the second servo.
 3. Assemble the two ear mounts and the two lateral horn adapters using the BOM. Keep screw ends and nut flats out of moving envelopes. Trim excess screw projection if required.
-4. Fit battery below its guard with the guard feet resting on the base. Strap across the guard. Nothing sharp or a tie edge should bear directly on the pouch. Secure the controller rigidly, insulate its underside and document sensor-axis orientation.
+4. Slide the battery into the centered tunnel from the +X end. Retain it at the end with a tie through the two side-wall windows; do not compress or abrade the pouch. Secure the XIAO on the +Y shelf and the switch on the −Y shelf, insulate their undersides, confirm USB-C and slide access, and document sensor-axis orientation.
 5. Wire and polarity-check with the battery disconnected. Test the MCU from USB first with the servo supply disabled. Then energize one servo on a current-limited bench supply, followed by both. Check voltage sag during direction reversals.
 6. Test full intended travel slowly while supported. Then try four cardinal side falls, diagonal falls and inverted starts on a controlled surface. Start with scripted slow motion and a small search over safe waypoint sequences.
 7. Weigh each moving assembly, measure COM, current, loaded response and floor friction. Feed those values back into MuJoCo before substantive policy training.

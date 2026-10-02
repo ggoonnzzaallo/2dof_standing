@@ -2,36 +2,36 @@
   "base.stl": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 16776.0
+    "volume_mm3": 28928.8
   },
-  "battery_guard.stl": {
+  "battery_tunnel_fit_coupon.stl": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 2346.0
+    "volume_mm3": 5280.0
   },
   "horn_fit_coupon.stl": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 939.6
+    "volume_mm3": 1617.2
   },
   "middle_link.stl": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 5949.3
+    "volume_mm3": 10449.1
   },
   "paddle.stl": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 6514.2
+    "volume_mm3": 9586.5
   },
   "pivot_fit_coupon.stl": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 1609.9
+    "volume_mm3": 1633.8
   },
   "servo_mount_fit_coupon.stl": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 1401.0
+    "volume_mm3": 1842.1
   }
 }

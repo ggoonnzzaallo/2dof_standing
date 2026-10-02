@@ -9,7 +9,7 @@ def overlaps(a,b):
     x=a.val().BoundingBox(); y=b.val().BoundingBox()
     if any(getattr(x,k+'max')<=getattr(y,k+'min') or getattr(y,k+'max')<=getattr(x,k+'min') for k in 'xyz'):return 0.
     return a.intersect(b).val().Volume()
-fixed={n:parts[n][0] for n in ('base','servo_1_envelope','bearing_1_envelope','battery_envelope','battery_guard','controller_envelope','switch_envelope')}
+fixed={n:parts[n][0] for n in ('base','servo_1_envelope','bearing_1_envelope','battery_envelope','controller_envelope','switch_envelope')}
 records=[]
 angles=list(range(-80,81,20))
 for a in angles:

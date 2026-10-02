@@ -16,7 +16,7 @@ This sheet distinguishes **provisional CAD inputs** from dimensions measured on 
 | Shaft/spline outside diameter and tooth count | ~5.0, 25T | — | — | OEM horn only; no printed spline |
 | Boss maximum diameter and projection from case | 11.0 × 4.4 assumed | — | — | `servo()` envelope |
 | Shaft tip from case back | 30.1 nominal | — | — | `servo()` envelope |
-| OEM horn face from joint center after seating | 16.5 assumed | — | — | `HORN_FACE` |
+| OEM horn face before / after the 18 mm inward servo shift | 16.5 assumed local / −1.5 robot coordinate | — | — | `AXIAL_SHIFT`, `HORN_FACE` |
 | OEM horn thickness, arm width and usable hole radius | not established | — | — | `cut_adapter()` slots and `horn` envelope |
 | OEM center-screw thread and usable length | not established | — | — | Use supplied screw; do not force an M2 substitute |
 | Center screw installable before the printed hub covers access | required | — | — | `outboard_hub_x()` assembly sequence |
@@ -26,4 +26,6 @@ This sheet distinguishes **provisional CAD inputs** from dimensions measured on 
 | Axial freedom and rotation with pin seated | no side preload or rubbing | — | — | Opposite-side support at each joint |
 | Servo pulse center, safe range and direction | 1500 µs trial center; ±80° design goal | — | — | Firmware and `sim/robot.xml` joint limits |
 
-Print [servo-mount fit coupon](servo_mount_fit_coupon.stl), [horn fit coupon](horn_fit_coupon.stl), and [pivot fit coupon](pivot_fit_coupon.stl) first. Check the case clearance, ear-hole alignment, horn attachment, bearing seat and pin retention without driving the arm. If a coupon needs filing to fit, change the CAD parameter rather than using filing as the final design. Check that both bearing axes line up with their servo shaft axes and that the links rotate freely without axial preload. Record any interference from screw heads, leads or the rotating horn; the current motion check omits those items.
+Battery and base checks for the centered layout: verify the actual cell length, width, thickness, connector end, and bend radius against the **67 × 21 × 10 mm nominal tunnel**. The retaining tie must contact an end stop or protective connector area, not the LiPo pouch face. Check XIAO USB-C access on the +Y shelf, switch access on the −Y shelf, and wire slack through both joint sweeps.
+
+Print [servo-mount fit coupon](servo_mount_fit_coupon.stl), [horn fit coupon](horn_fit_coupon.stl), [pivot fit coupon](pivot_fit_coupon.stl), and [battery-tunnel fit coupon](battery_tunnel_fit_coupon.stl) before the full parts. Check the case clearance, ear-hole alignment, horn attachment, bearing seat, pin retention and battery slide fit without driving the arm. If a coupon needs filing to fit, change the CAD parameter rather than using filing as the final design. Check that both bearing axes line up with their servo shaft axes and that the links rotate freely without axial preload. With the assembled joints unpowered, gently side-load each link and inspect the cheek roots and disk-to-spine transitions for visible flex or layer cracking before powered tests. Record any interference from screw heads, leads or the rotating horn; the current motion check omits those items.
