@@ -63,13 +63,30 @@ def servo():
     return s
 
 def ring_x(z):
-    # The mounting frame sits behind the two servo ears, leaving the body open.
-    r=box(3.5,22,FLANGE_SPAN+6.5,(-.95,0,z-OUTPUT_OFFSET_Z))
+    # The front hoop sits behind the two servo ears. The same local-axis cage
+    # is used at both joints; the upper one is only rotated into position.
+    r=box(3.5,22,FLANGE_SPAN+6.5,(-.95,0,z-OUTPUT_OFFSET_Z)).edges('|X').fillet(3)
     r=r.cut(box(9,BODY_W+2*CLEARANCE,BODY_L+2*CLEARANCE,
                 (-.95,0,z-OUTPUT_OFFSET_Z)))
     for dz in (MOUNT_TOP_Z,MOUNT_BOTTOM_Z):
         r=r.cut(hole_x(-4,0,z+dz,M2_CLEAR,7))
     return r
+
+def servo_cage_x(z):
+    """Open-ended, two-sided servo cradle with a continuous printed load path.
+
+    The body inserts from the output/horn side through both hoops. Side rails
+    tie the rear collar to the mounting frame while leaving the case, mounting
+    screws, and rear lead exit accessible. All clearances remain provisional.
+    """
+    rear=box(3.5,22,30,(-14,0,z-OUTPUT_OFFSET_Z)).edges('|X').fillet(3)
+    rear=rear.cut(box(6,BODY_W+2*CLEARANCE,BODY_L+2*CLEARANCE,
+                      (-14,0,z-OUTPUT_OFFSET_Z)))
+    cage=ring_x(z).union(rear)
+    for yy in (-9,9):
+        rail=box(14,3.5,8,(-7.5,yy,z-OUTPUT_OFFSET_Z)).edges('|X').fillet(1.5)
+        cage=cage.union(rail)
+    return cage
 
 def cut_adapter(a,z):
     # OEM 25T horn and its center screw pass through this access opening.
@@ -131,7 +148,7 @@ base=base.union(box(2,21,10,(-33,0,8)))
 # The battery is retained by a tie through the two windows at the open end.
 for yy in (-12,12):
     base=base.cut(box(3.5,6,3.2,(32,yy,8)))
-base=base.union(ring_x(J1_Z).translate((AXIAL_SHIFT,0,0)))
+base=base.union(servo_cage_x(J1_Z).translate((AXIAL_SHIFT,0,0)))
 base=base.union(box(5,16,J1_Z-23.6,(27.5+AXIAL_SHIFT,0,(DECK_Z+DECK_T-.2+J1_Z-8)/2)))
 base=base.union(tapered_foot(15.8,23,(27.5+AXIAL_SHIFT,0),(9,20),(5,16)))
 base=base.union(bearing_block_x(J1_Z))
@@ -150,8 +167,8 @@ spine=box(12,14,J2_Z-J1_Z-26,(0,0,(J1_Z+11+J2_Z-15)/2)).edges('|Z').fillet(3)
 link=link.union(spine)
 # Both upper joint supports grow from the centered spine. The servo-side web
 # is below its case; the bearing-side web is short and clear of the paddle.
-upper_ring=to_upper(ring_x(0).translate((AXIAL_SHIFT,0,0)))
-link=link.union(upper_ring)
+upper_cage=to_upper(servo_cage_x(0).translate((AXIAL_SHIFT,0,0)))
+link=link.union(upper_cage)
 link=link.union(box(14,20,6,(0,-9.5,J2_Z-26)))
 link=link.union(box(16,5,14.4,(0,9.5,J2_Z-15)))
 link=link.union(tapered_foot(J2_Z-23,J2_Z-15,(0,9.5),(20,9),(16,5)))
@@ -189,7 +206,7 @@ parts={
     'switch_envelope':(box(15.24,15.24,3,(0,-22.5,4.5)),(.65,.21,.24)),
 }
 assembly=cq.Assembly(name='self_righting_robot_concept')
-summary={'status':'CENTERED PTK 7465 MG PROVISIONAL: non-W servo dimensions, horn fit, battery tunnel, outboard pivot fit, full travel and physical righting unvalidated','units':'mm','servo_model':SERVO_MODEL,'nominal_servo_dimensions_mm':{'body_length':BODY_L,'body_width':BODY_W,'body_depth':BODY_DEPTH,'flange_span':FLANGE_SPAN,'mount_pitch':MOUNT_PITCH,'output_offset_from_body_midpoint':OUTPUT_OFFSET_Z,'servo_axial_shift':AXIAL_SHIFT,'horn_face_robot_coordinate':HORN_FACE},'outboard_pivots':{'bearing':'MR83ZZ 3x8x3 mm','pin':'3x12 mm','bearing_axis_start_mm':BEARING_INNER_X,'moving_hub_outer_face_mm':HUB_OUTER_X},'base_footprint_mm':[BASE_X,BASE_Y],'deck_top_z_mm':DECK_Z+DECK_T,'battery_tunnel_inner_width_mm':21,'joint_origins_mm':[[0,0,J1_Z],[0,0,J2_Z]],'axes_upright':[[1,0,0],[0,1,0]],'parts':{}}
+summary={'status':'TWO-SIDED CAGED PTK 7465 MG PROVISIONAL: non-W servo dimensions, horn fit, battery tunnel, outboard pivot fit, full travel and physical righting unvalidated','units':'mm','servo_model':SERVO_MODEL,'nominal_servo_dimensions_mm':{'body_length':BODY_L,'body_width':BODY_W,'body_depth':BODY_DEPTH,'flange_span':FLANGE_SPAN,'mount_pitch':MOUNT_PITCH,'output_offset_from_body_midpoint':OUTPUT_OFFSET_Z,'servo_axial_shift':AXIAL_SHIFT,'horn_face_robot_coordinate':HORN_FACE},'servo_cages':{'front_and_rear_outer_width_mm':22,'rear_collar_outer_height_mm':30,'rail_count_per_servo':2,'rail_section_mm':[3.5,8],'body_clearance_per_side_mm':CLEARANCE,'rear_end':'open for servo lead'},'outboard_pivots':{'bearing':'MR83ZZ 3x8x3 mm','pin':'3x12 mm','bearing_axis_start_mm':BEARING_INNER_X,'moving_hub_outer_face_mm':HUB_OUTER_X},'base_footprint_mm':[BASE_X,BASE_Y],'deck_top_z_mm':DECK_Z+DECK_T,'battery_tunnel_inner_width_mm':21,'joint_origins_mm':[[0,0,J1_Z],[0,0,J2_Z]],'axes_upright':[[1,0,0],[0,1,0]],'parts':{}}
 for name,(shape,color) in parts.items():
     solid=shape.val()
     assert solid.isValid(),f'Invalid CAD: {name}'
@@ -207,7 +224,7 @@ battery_tunnel_coupon=box(22,30,3,(0,0,1.5)).union(box(22,30,3,(0,0,14.5)))
 for yy in (-12,12):
     battery_tunnel_coupon=battery_tunnel_coupon.union(box(22,3,10,(0,yy,8)))
 fit_coupons={
-    'servo_mount_fit_coupon':ring_x(0),
+    'servo_mount_fit_coupon':servo_cage_x(0),
     'horn_fit_coupon':cut_adapter(adapter_x(0),0),
     'pivot_fit_coupon':bearing_block_x(0).union(box(9,5,4,(5,0,-6))).union(outboard_hub_x(-12)),
     'battery_tunnel_fit_coupon':battery_tunnel_coupon,

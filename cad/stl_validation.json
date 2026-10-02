@@ -2,7 +2,7 @@
   "base.stl": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 28928.8
+    "volume_mm3": 30614.3
   },
   "battery_tunnel_fit_coupon.stl": {
     "watertight": true,
@@ -17,7 +17,7 @@
   "middle_link.stl": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 10449.1
+    "volume_mm3": 12122.2
   },
   "paddle.stl": {
     "watertight": true,
@@ -32,6 +32,6 @@
   "servo_mount_fit_coupon.stl": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 1842.1
+    "volume_mm3": 3515.1
   }
 }
