@@ -1,6 +1,6 @@
 # Procurement status — 1 October 2026
 
-The user reports **all robot components ordered**. This records what is known from the conversation; it is not a delivery or inspection record. Do not reorder parts solely because a historical sourcing page still has purchase links.
+The user reports **all Rev A robot components ordered**. The later opposed-pivot CAD revision adds two bearings and two dowel pins that have **not** been reported ordered. This records what is known from the conversation; it is not a delivery or inspection record. Do not reorder parts solely because a historical sourcing page still has purchase links.
 
 | Component | Reported status | Evidence and remaining check |
 |---|---|---|
@@ -9,12 +9,13 @@ The user reports **all robot components ordered**. This records what is known fr
 | Pololu 2810 LV Mini MOSFET Slide Switch | Two ordered, backordered | User supplied a sales-order image showing two units. One is used; one is spare. |
 | Pololu 2181 male JST-RCY lead | Two ordered, backordered | Same sales order. One is used; one is spare. The Pololu order total for both product lines was $23.44 with shipping and tax. |
 | XIAO nRF52840 Sense and remaining consumables/fasteners | Ordered, per user's overall report | Exact seller, variant, quantities and paid amounts were not supplied. Verify the board says **Sense** and has the onboard IMU; check fasteners against the received servo ears and horns. |
+| MR83ZZ bearings, two; 3 × 12 mm dowel pins, two | **Proposed; not ordered** | New opposite-side pivot supports. Review the [revised CAD](../cad/README.md) and measure actual servo/horn spacing before purchase; direct candidate links are in the [BOM](../BOM.md). |
 
 The **known checkout totals** are $23.44 (Pololu) plus $28.97 (two batteries), or **$52.41**. This is not the project's total: servo, controller and remaining order costs are unknown. The original under-$100 goal cannot yet be assessed from recorded receipts. Do not publish personal details from order screenshots in this repository.
 
 ## Incoming checks before assembly
 
-1. Photograph or measure the received PTK servo's label and dimensions, spline and supplied horn/center screw. Print the two [small fit coupons](../cad/README.md) and update `cad/build_cad.py` from the actual measurements before final printing. The current PTK geometry is provisional.
+1. Photograph or measure the received PTK servo's label and dimensions, spline and supplied horn/center screw. Print the [small fit coupons](../cad/README.md), including the new pivot coupon if adding the opposed supports, and update `cad/build_cad.py` from the actual measurements before final printing. The current PTK geometry is provisional.
 2. Confirm connector polarity with a multimeter before connecting the battery. Keep motor current off XIAO power traces; the battery feeds the XIAO and, separately through Pololu 2810, both servo power wires.
 3. Characterize one servo, then both, at battery voltages near 4.2, 3.8 and 3.6 V. Record current, voltage sag, travel, unloaded and loaded step response, and whether a scripted rise succeeds. The reference robot's one-cell success is useful evidence, but the PTK servo is not guaranteed by a published 1S rating.
 4. Update the servo ranges in `sim/` from the measured PTK data before substantial RL training. The current numbers are placeholders and should not be treated as measured PTK performance.

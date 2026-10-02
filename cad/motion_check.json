@@ -1,12 +1,16 @@
 {
   "grid_angles_deg": [
     -80,
+    -60,
     -40,
+    -20,
     0,
+    20,
     40,
+    60,
     80
   ],
-  "configurations": 25,
-  "scope": "Rigid nominal envelopes; excludes horns, fasteners and wires. Discrete samples only.",
+  "configurations": 81,
+  "scope": "Rigid nominal envelopes including outboard bearings and pins; excludes horns, fasteners and wires. Discrete samples only.",
   "clashes": []
 }

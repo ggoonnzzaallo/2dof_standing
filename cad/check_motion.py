@@ -9,20 +9,21 @@ def overlaps(a,b):
     x=a.val().BoundingBox(); y=b.val().BoundingBox()
     if any(getattr(x,k+'max')<=getattr(y,k+'min') or getattr(y,k+'max')<=getattr(x,k+'min') for k in 'xyz'):return 0.
     return a.intersect(b).val().Volume()
-fixed={n:parts[n][0] for n in ('base','servo_1_envelope','battery_envelope','battery_guard','controller_envelope','switch_envelope')}
+fixed={n:parts[n][0] for n in ('base','servo_1_envelope','bearing_1_envelope','battery_envelope','battery_guard','controller_envelope','switch_envelope')}
 records=[]
-angles=[-80,-40,0,40,80]
+angles=list(range(-80,81,20))
 for a in angles:
-    mid={n:rot1(parts[n][0],a) for n in ('middle_link','servo_2_envelope')}
+    mid={n:rot1(parts[n][0],a) for n in ('middle_link','servo_2_envelope','bearing_2_envelope','pin_1_envelope')}
     for b in angles:
-        paddle=rot1(rot2(parts['paddle'][0],b),a)
+        upper={n:rot1(rot2(parts[n][0],b),a) for n in ('paddle','pin_2_envelope')}
         for n,s in mid.items():
             for m,t in fixed.items():
                 v=overlaps(s,t)
                 if v>.1: records.append({'q1_deg':a,'q2_deg':b,'parts':[n,m],'volume_mm3':round(v,2)})
-        for m,t in {**fixed,**mid}.items():
-            v=overlaps(paddle,t)
-            if v>.1: records.append({'q1_deg':a,'q2_deg':b,'parts':['paddle',m],'volume_mm3':round(v,2)})
-result={'grid_angles_deg':angles,'configurations':25,'scope':'Rigid nominal envelopes; excludes horns, fasteners and wires. Discrete samples only.','clashes':records}
+        for n,s in upper.items():
+            for m,t in {**fixed,**mid}.items():
+                v=overlaps(s,t)
+                if v>.1: records.append({'q1_deg':a,'q2_deg':b,'parts':[n,m],'volume_mm3':round(v,2)})
+result={'grid_angles_deg':angles,'configurations':len(angles)**2,'scope':'Rigid nominal envelopes including outboard bearings and pins; excludes horns, fasteners and wires. Discrete samples only.','clashes':records}
 Path(__file__).with_name('motion_check.json').write_text(json.dumps(result,indent=2))
 print(json.dumps(result,indent=2))

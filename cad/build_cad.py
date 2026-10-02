@@ -25,6 +25,11 @@ CLEARANCE = 0.30  # radial / per-side cavity clearance
 HORN_FACE = 16.5  # provisional OEM horn's outer face from joint centre
 PAD_T = 2.5
 M2_CLEAR = 2.2
+BEARING_OD, BEARING_ID, BEARING_W = 8.0, 3.0, 3.0  # MR83ZZ
+PIN_D, PIN_L = 3.0, 12.0
+BEARING_INNER_X = 27.0
+PIN_INNER_X = 20.0
+HUB_OUTER_X = 23.5
 
 def box(x,y,z,center):
     return cq.Workplane('XY').box(x,y,z).translate(center)
@@ -74,8 +79,34 @@ def adapter_x(z):
     # non-manifold STL edges even when the B-rep kernel accepts the solid.
     return hole_x(HORN_FACE,0,z,24,PAD_T)
 
+def outboard_hub_x(z):
+    """Moving journal. Pin bore is blind, preserving the horn screw cavity."""
+    hub=hole_x(HORN_FACE+PAD_T-.2,0,z,12,HUB_OUTER_X-(HORN_FACE+PAD_T-.2))
+    return hub.cut(hole_x(PIN_INNER_X,0,z,3.05,HUB_OUTER_X-PIN_INNER_X+.2))
+
+def bearing_block_x(z):
+    """Fixed support with an outside-in 3 mm bearing seat and inner shoulder."""
+    block=box(5,14,16,(27.5,0,z))
+    # Rear relief clears the rotating inner ring; the annular shoulder bears
+    # only near the OD of the stationary outer ring.
+    block=block.cut(hole_x(24.8,0,z,6.2,5.4))
+    block=block.cut(hole_x(BEARING_INNER_X,0,z,8.05,3.2))
+    return block
+
+def bearing_x(z):
+    return hole_x(BEARING_INNER_X,0,z,BEARING_OD,BEARING_W).cut(
+        hole_x(BEARING_INNER_X-.1,0,z,BEARING_ID,BEARING_W+.2))
+
+def pin_x(z):
+    return hole_x(PIN_INNER_X,0,z,PIN_D,PIN_L)
+
+def to_upper(s):
+    return s.rotate((0,0,0),(0,0,1),90).translate((0,0,J2_Z))
+
 base=cq.Workplane('XY').box(BASE_X,BASE_Y,BASE_T,centered=(True,True,False)).edges('|Z').fillet(5)
 base=base.union(ring_x(J1_Z))
+base=base.union(box(5,14,16.4,(27.5,0,11)))
+base=base.union(bearing_block_x(J1_Z))
 # Stiffen the base mount without blocking the servo's rear body.
 for yy in (-9,9):
     base=base.union(box(8,3,6,(-3,yy,5)))
@@ -96,12 +127,20 @@ upper_ring=ring_x(0).rotate((0,0,0),(0,0,1),90).translate((0,0,J2_Z))
 link=link.union(upper_ring)
 link=link.union(box(17,3,5,(8,-1.7,J2_Z-23)))
 link=cut_adapter(link,J1_Z)
+link=link.union(outboard_hub_x(J1_Z))
+# The upper outboard bearing is held by a low side bridge. At y>25 it
+# crosses underneath the paddle's axial envelope, outside the horn sweep.
+link=link.union(box(4,29,5,(HORN_FACE+PAD_T/2,14,J2_Z-13)))
+link=link.union(box(18,5,5,(9,27.5,J2_Z-13)))
+link=link.union(box(8,5,8,(0,27.5,J2_Z-8)))
+link=link.union(to_upper(bearing_block_x(0)))
 
 paddle=adapter_x(0).rotate((0,0,0),(0,0,1),90).translate((0,0,J2_Z))
 paddle=paddle.union(box(16,5.5,TIP_Z-J2_Z-8,(0,HORN_FACE+2.75,(TIP_Z+J2_Z+8)/2)))
 paddle=paddle.union(box(24,7,8,(0,HORN_FACE+3.5,TIP_Z-4)))
 paddle=paddle.rotate((0,0,J2_Z),(0,0,J2_Z+1),-90).translate((0,0,-J2_Z))
 paddle=cut_adapter(paddle,0).rotate((0,0,0),(0,0,1),90).translate((0,0,J2_Z))
+paddle=paddle.union(to_upper(outboard_hub_x(0)))
 
 # Nominal OEM horn envelopes. For visualization only: spline is deliberately
 # not printed. Actual horn geometry must be measured before final release.
@@ -123,12 +162,16 @@ parts={
     'servo_2_envelope':(servo().rotate((0,0,0),(0,0,1),90).translate((0,0,J2_Z)),(.17,.19,.22)),
     'horn_1_envelope':(horn.translate((0,0,J1_Z)),(.87,.87,.82)),
     'horn_2_envelope':(horn.rotate((0,0,0),(0,0,1),90).translate((0,0,J2_Z)),(.87,.87,.82)),
+    'bearing_1_envelope':(bearing_x(J1_Z),(.70,.74,.78)),
+    'bearing_2_envelope':(to_upper(bearing_x(0)),(.70,.74,.78)),
+    'pin_1_envelope':(pin_x(J1_Z),(.83,.83,.87)),
+    'pin_2_envelope':(to_upper(pin_x(0)),(.83,.83,.87)),
     'battery_envelope':(box(59.5,19,7.5,(0,-20.5,7.75)),(.67,.70,.73)),
     'controller_envelope':(box(21,17.8,4,(23,18,6)),(.15,.33,.40)),
     'switch_envelope':(box(15.24,15.24,3,(-23,18,5.5)),(.65,.21,.24)),
 }
 assembly=cq.Assembly(name='self_righting_robot_concept')
-summary={'status':'PTK 7465 MG PROVISIONAL: non-W servo dimensions, horn fit, full travel and physical righting unvalidated','units':'mm','servo_model':SERVO_MODEL,'nominal_servo_dimensions_mm':{'body_length':BODY_L,'body_width':BODY_W,'body_depth':BODY_DEPTH,'flange_span':FLANGE_SPAN,'mount_pitch':MOUNT_PITCH,'output_offset_from_body_midpoint':OUTPUT_OFFSET_Z,'horn_face_from_joint_axis':HORN_FACE},'base_mm':[BASE_X,BASE_Y,BASE_T],'joint_origins_mm':[[0,0,J1_Z],[0,0,J2_Z]],'axes_upright':[[1,0,0],[0,1,0]],'parts':{}}
+summary={'status':'PTK 7465 MG PROVISIONAL: non-W servo dimensions, horn fit, outboard pivot fit, full travel and physical righting unvalidated','units':'mm','servo_model':SERVO_MODEL,'nominal_servo_dimensions_mm':{'body_length':BODY_L,'body_width':BODY_W,'body_depth':BODY_DEPTH,'flange_span':FLANGE_SPAN,'mount_pitch':MOUNT_PITCH,'output_offset_from_body_midpoint':OUTPUT_OFFSET_Z,'horn_face_from_joint_axis':HORN_FACE},'outboard_pivots':{'bearing':'MR83ZZ 3x8x3 mm','pin':'3x12 mm','bearing_axis_start_mm':BEARING_INNER_X,'moving_hub_outer_face_mm':HUB_OUTER_X},'base_mm':[BASE_X,BASE_Y,BASE_T],'joint_origins_mm':[[0,0,J1_Z],[0,0,J2_Z]],'axes_upright':[[1,0,0],[0,1,0]],'parts':{}}
 for name,(shape,color) in parts.items():
     solid=shape.val()
     assert solid.isValid(),f'Invalid CAD: {name}'
@@ -145,6 +188,7 @@ for name,(shape,color) in parts.items():
 fit_coupons={
     'servo_mount_fit_coupon':ring_x(0),
     'horn_fit_coupon':cut_adapter(adapter_x(0),0),
+    'pivot_fit_coupon':bearing_block_x(0).union(box(14,5,4,(20,0,-6))).union(outboard_hub_x(-12)),
 }
 for name,shape in fit_coupons.items():
     assert shape.val().isValid() and len(shape.solids().vals())==1,name

@@ -19,6 +19,11 @@ This sheet distinguishes **provisional CAD inputs** from dimensions measured on 
 | OEM horn face from joint center after seating | 16.5 assumed | — | — | `HORN_FACE` |
 | OEM horn thickness, arm width and usable hole radius | not established | — | — | `cut_adapter()` slots and `horn` envelope |
 | OEM center-screw thread and usable length | not established | — | — | Use supplied screw; do not force an M2 substitute |
+| Center screw installable before the printed hub covers access | required | — | — | `outboard_hub_x()` assembly sequence |
+| Bearing OD × bore × width | MR83ZZ 8 × 3 × 3 | — | — | Outboard support pocket at both hinges |
+| Actual dowel diameter × length | nominal 3 × 12 | — | — | Blind hub bore and bearing bore at both hinges |
+| Printed bearing seat / dowel-bore fit | CAD diameters 8.05 / 3.05 | — | — | `pivot_fit_coupon` before full print |
+| Axial freedom and rotation with pin seated | no side preload or rubbing | — | — | Opposite-side support at each joint |
 | Servo pulse center, safe range and direction | 1500 µs trial center; ±80° design goal | — | — | Firmware and `sim/robot.xml` joint limits |
 
-Print [servo-mount fit coupon](servo_mount_fit_coupon.stl) and [horn fit coupon](horn_fit_coupon.stl) first. Check the case clearance, ear-hole alignment and horn attachment without driving the arm. If either coupon needs filing to fit, change the CAD parameter rather than using filing as the final design. Record any interference from screw heads, leads or the rotating horn; the current motion check omits those items.
+Print [servo-mount fit coupon](servo_mount_fit_coupon.stl), [horn fit coupon](horn_fit_coupon.stl), and [pivot fit coupon](pivot_fit_coupon.stl) first. Check the case clearance, ear-hole alignment, horn attachment, bearing seat and pin retention without driving the arm. If a coupon needs filing to fit, change the CAD parameter rather than using filing as the final design. Check that both bearing axes line up with their servo shaft axes and that the links rotate freely without axial preload. Record any interference from screw heads, leads or the rotating horn; the current motion check omits those items.
