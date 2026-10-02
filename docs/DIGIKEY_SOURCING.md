@@ -1,4 +1,6 @@
-# DigiKey-centered sourcing, with servos from AliExpress
+# Historical DigiKey-centered sourcing audit
+
+**Superseded after ordering:** The user reports all parts ordered, with PTK 7465 MG servos and a separate Pololu/battery purchase. The FT90M line and estimates below are historical candidates, not the current [BOM](../BOM.md) or the actual delivered costs. See [procurement status](PROCUREMENT_STATUS.md).
 
 Checked 30 September 2026 for US delivery. This is a sourcing option, not a change to the recommended electrical design or a placed order. Product pages and stock can change before checkout. A DigiKey Marketplace item can ship from a different seller and incur a separate freight charge even though it appears in the same cart.
 

@@ -1,8 +1,8 @@
-"""Original parametric concept, millimetres. Requires cadquery >=2.5.
+"""PTK 7465 MG concept, millimetres. Requires cadquery >=2.5.
 
-FT90M body/flange dimensions from manufacturer drawing; horn-plane offset and
-horn hole radii are fit-check parameters, not measured hardware dimensions.
-Exported STEP/STLs are prototype geometry, not a tested production release.
+The nominal envelope uses the published 7465-family dimensions, including a
+7465W drawing as a proxy for flange details. Horn and mounting dimensions
+must be checked against the delivered non-W servos before final printing.
 """
 from pathlib import Path
 import json
@@ -11,9 +11,18 @@ import cadquery as cq
 OUT = Path(__file__).resolve().parent
 BASE_X, BASE_Y, BASE_T = 70.0, 64.0, 3.0
 J1_Z, J2_Z, TIP_Z = 27.0, 72.0, 132.0
-BODY_L, BODY_W = 23.3, 12.1
+SERVO_MODEL = 'PTK 7465 MG (nominal 7465-family envelope; incoming fit check required)'
+BODY_L, BODY_W, BODY_DEPTH = 23.9, 12.0, 22.0
+FLANGE_SPAN, MOUNT_PITCH = 31.8, 27.8
+OUTPUT_OFFSET_Z = 6.0  # output axis from body long-axis midpoint, toward one end
+FLANGE_FROM_BACK = 18.4  # published side-view nominal, front mounting face
+SERVO_BACK_X = -16.0
+FLANGE_FRONT_X = SERVO_BACK_X + FLANGE_FROM_BACK
+FLANGE_T = 1.6
+MOUNT_TOP_Z = -OUTPUT_OFFSET_Z + MOUNT_PITCH/2
+MOUNT_BOTTOM_Z = -OUTPUT_OFFSET_Z - MOUNT_PITCH/2
 CLEARANCE = 0.30  # radial / per-side cavity clearance
-HORN_FACE = 13.8  # fit-check: OEM horn's outer face from robot centre
+HORN_FACE = 16.5  # provisional OEM horn's outer face from joint centre
 PAD_T = 2.5
 M2_CLEAR = 2.2
 
@@ -28,24 +37,31 @@ def hole_y(x,y,z,d,length):
     return cq.Workplane('XZ',origin=(x,y,z)).circle(d/2).extrude(length)
 
 def servo():
-    """Servo axis is +X; output centre at y=z=0. Back face x=-16."""
-    s=box(21.45,BODY_W,BODY_L,(-16+21.45/2,0,-5.8))
-    s=s.union(hole_x(5.45,0,0,11,3.8))
-    s=s.union(box(1.6,BODY_W,32.5,(1.6,0,-5.7)))
-    s=s.union(hole_x(9.25,0,0,3.95,3.2))
-    for z in (8.55,-19.95):
-        s=s.cut(hole_x(-1,0,z,2,6))
+    """Approximate PTK envelope; axis +X, output centre y=z=0."""
+    s=box(BODY_DEPTH,BODY_W,BODY_L,
+          (SERVO_BACK_X+BODY_DEPTH/2,0,-OUTPUT_OFFSET_Z))
+    s=s.union(hole_x(SERVO_BACK_X+BODY_DEPTH,0,0,11,4.4))
+    s=s.union(box(FLANGE_T,BODY_W,FLANGE_SPAN,
+                  (FLANGE_FRONT_X-FLANGE_T/2,0,-OUTPUT_OFFSET_Z)))
+    # 25T ~5 mm shaft; do not print or use this as a spline mating profile.
+    s=s.union(hole_x(SERVO_BACK_X+BODY_DEPTH+4.4,0,0,5,3.7))
+    for z in (MOUNT_TOP_Z,MOUNT_BOTTOM_Z):
+        s=s.cut(hole_x(FLANGE_FRONT_X-FLANGE_T-.5,0,z,2,FLANGE_T+1))
     return s
 
 def ring_x(z):
-    r=box(3,21,38,(-.7,0,z-5))
-    r=r.cut(box(8,BODY_W+2*CLEARANCE,BODY_L+2*CLEARANCE,(-.7,0,z-5.8)))
-    for dz in (8.55,-19.95):
+    # The mounting frame sits behind the two servo ears, leaving the body open.
+    r=box(3,21,FLANGE_SPAN+5.5,(-.7,0,z-OUTPUT_OFFSET_Z))
+    r=r.cut(box(8,BODY_W+2*CLEARANCE,BODY_L+2*CLEARANCE,
+                (-.7,0,z-OUTPUT_OFFSET_Z)))
+    for dz in (MOUNT_TOP_Z,MOUNT_BOTTOM_Z):
         r=r.cut(hole_x(-3,0,z+dz,M2_CLEAR,6))
     return r
 
 def cut_adapter(a,z):
-    a=a.cut(hole_x(HORN_FACE-1,0,z,5.2,10))
+    # OEM 25T horn and its center screw pass through this access opening.
+    # The print does not try to mate directly with the metal output spline.
+    a=a.cut(hole_x(HORN_FACE-1,0,z,6.8,10))
     # Four radial slots accept an OEM cross/double horn, drilled to 2.2 mm.
     for rot in (0,90,180,270):
         slot=cq.Workplane('YZ',origin=(HORN_FACE-1,0,z)).center(0,7.5).slot2D(5,M2_CLEAR,90).extrude(10)
@@ -89,8 +105,8 @@ paddle=cut_adapter(paddle,0).rotate((0,0,0),(0,0,1),90).translate((0,0,J2_Z))
 
 # Nominal OEM horn envelopes. For visualization only: spline is deliberately
 # not printed. Actual horn geometry must be measured before final release.
-horn=hole_x(11.5,0,0,9,2.3).union(box(2.3,5,21,(12.65,0,0)))
-horn=horn.cut(hole_x(11,0,0,2.2,4))
+horn=hole_x(14.2,0,0,9,2.3).union(box(2.3,5,21,(15.35,0,0)))
+horn=horn.cut(hole_x(13.9,0,0,2.2,4))
 
 # A strapped bridge shields the pouch face; end feet carry strap preload.
 # Open long sides provide clearance for wires. Add thin insulation below PCB.
@@ -112,7 +128,7 @@ parts={
     'switch_envelope':(box(15.24,15.24,3,(-23,18,5.5)),(.65,.21,.24)),
 }
 assembly=cq.Assembly(name='self_righting_robot_concept')
-summary={'status':'CONCEPT: horn fit, full travel and physical righting unvalidated','units':'mm','base_mm':[BASE_X,BASE_Y,BASE_T],'joint_origins_mm':[[0,0,J1_Z],[0,0,J2_Z]],'axes_upright':[[1,0,0],[0,1,0]],'parts':{}}
+summary={'status':'PTK 7465 MG PROVISIONAL: non-W servo dimensions, horn fit, full travel and physical righting unvalidated','units':'mm','servo_model':SERVO_MODEL,'nominal_servo_dimensions_mm':{'body_length':BODY_L,'body_width':BODY_W,'body_depth':BODY_DEPTH,'flange_span':FLANGE_SPAN,'mount_pitch':MOUNT_PITCH,'output_offset_from_body_midpoint':OUTPUT_OFFSET_Z,'horn_face_from_joint_axis':HORN_FACE},'base_mm':[BASE_X,BASE_Y,BASE_T],'joint_origins_mm':[[0,0,J1_Z],[0,0,J2_Z]],'axes_upright':[[1,0,0],[0,1,0]],'parts':{}}
 for name,(shape,color) in parts.items():
     solid=shape.val()
     assert solid.isValid(),f'Invalid CAD: {name}'
@@ -123,6 +139,18 @@ for name,(shape,color) in parts.items():
     assembly.add(shape,name=name,color=cq.Color(*color))
     vertices,triangles=solid.tessellate(.3)
     summary['parts'][name]={'volume_mm3':solid.Volume(),'color':color,'vertices':[[v.x,v.y,v.z] for v in vertices],'triangles':triangles}
+
+# Small, disposable fit prints let the received servo/horn settle uncertain
+# dimensions before a full base or moving link is printed.
+fit_coupons={
+    'servo_mount_fit_coupon':ring_x(0),
+    'horn_fit_coupon':cut_adapter(adapter_x(0),0),
+}
+for name,shape in fit_coupons.items():
+    assert shape.val().isValid() and len(shape.solids().vals())==1,name
+    cq.exporters.export(shape,str(OUT/f'{name}.step'))
+    cq.exporters.export(shape,str(OUT/f'{name}.stl'),tolerance=.05,angularTolerance=.15)
+summary['fit_coupons']=list(fit_coupons)
 assembly.save(str(OUT/'assembly.step'))
 (OUT/'geometry.json').write_text(json.dumps(summary))
 print(json.dumps({k:round(v['volume_mm3'],1) for k,v in summary['parts'].items()},indent=2))

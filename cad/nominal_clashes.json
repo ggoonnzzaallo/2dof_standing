@@ -1,16 +1,1 @@
-[
-  {
-    "parts": [
-      "servo_1_envelope",
-      "horn_1_envelope"
-    ],
-    "overlap_mm3": 8.03
-  },
-  {
-    "parts": [
-      "servo_2_envelope",
-      "horn_2_envelope"
-    ],
-    "overlap_mm3": 8.03
-  }
-]
+[]

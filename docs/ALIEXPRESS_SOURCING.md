@@ -1,4 +1,6 @@
-# AliExpress shopping plan
+# Historical AliExpress shopping plan
+
+**Superseded after ordering:** The user reports all parts ordered and chose PTK 7465 MG instead of the FT90M candidate in the old search table below. Use the [current BOM](../BOM.md) and [procurement record](PROCUREMENT_STATUS.md) for Rev A. These search terms are retained only as sourcing history; do not use them to order another servo pair.
 
 AliExpress is an acceptable and potentially convenient **single marketplace checkout** for this project. Several sellers can still be involved, and shipping fees or delivery dates may differ per item. The repository's `BOM.md` preserves exact USA distributor links and the prices verified on 27 September 2026 as a baseline. It does **not** claim those prices apply on AliExpress.
 
