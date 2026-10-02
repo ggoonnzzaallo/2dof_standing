@@ -1,5 +1,7 @@
 # Hardware and commissioning
 
+**Servo revision note (1 October 2026):** Two PTK 7465 MG servos have been ordered for this robot. Most servo-specific measurements and limits below describe the earlier FT90M design and are **not PTK specifications**. Preserve the shared battery/servo-power topology, but verify PTK input/signal compatibility, current, travel, horn and mounting geometry on receipt. The published FT90M torque/current figures must not be used to certify PTK power or recovery. See [procurement status](docs/PROCUREMENT_STATUS.md).
+
 The IMU is the LSM6DS3TR-C chip **on the XIAO nRF52840 Sense PCB**. Mount that PCB rigidly on the base, near the controller envelope shown in `cad/assembly.step`. There is no separate IMU module or IMU wire harness. The reference ATOM Matrix also contains its own IMU (MPU6886). See the [board comparison and parts-count options](docs/CONTROLLER_DECISION.md).
 
 ## What the robot can measure
