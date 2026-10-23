@@ -11,7 +11,7 @@ p=Path(__file__).resolve().parent
 d=json.loads((p/'geometry.json').read_text())
 j1,j2=(o[2] for o in d['joint_origins_mm'])
 fig=plt.figure(figsize=(12,8),facecolor='#f5f6f4')
-for i,az in enumerate((-55,35)):
+for i,az in enumerate((-55,135)):
     ax=fig.add_subplot(1,2,i+1,projection='3d',facecolor='#f5f6f4')
     for name,part in d['parts'].items():
         verts=np.array(part['vertices']); faces=verts[np.array(part['triangles'])]
@@ -20,15 +20,15 @@ for i,az in enumerate((-55,35)):
         light=np.array([.3,-.5,.8]); light/=np.linalg.norm(light)
         brightness=.55+.45*np.abs(normals@light)
         ax.add_collection3d(Poly3DCollection(faces,facecolors=np.array(part['color'])*brightness[:,None],linewidths=0))
-    ax.set(xlim=(-45,45),ylim=(-45,45),zlim=(0,150))
-    ax.set_box_aspect((90,90,150)); ax.view_init(21,az); ax.set_axis_off()
+    ax.set(xlim=(-45,45),ylim=(-45,45),zlim=(0,175))
+    ax.set_box_aspect((90,90,175)); ax.view_init(21,az); ax.set_axis_off()
     ax.quiver(0,0,j1,25,0,0,color='#c64d45',arrow_length_ratio=.25,linewidth=2)
     ax.quiver(0,0,j2,0,25,0,color='#5075bc',arrow_length_ratio=.25,linewidth=2)
     ax.text(25,0,j1,' J1 · X',color='#9c3535',fontsize=10)
     ax.text(0,25,j2,' J2 · Y',color='#365aa0',fontsize=10)
-fig.suptitle('SELF-RIGHTING ARM  /  PTK 7465 MG CONCEPT',x=.08,ha='left',fontsize=20,fontweight='bold',y=.96)
-fig.text(.08,.90,'70 × 64 mm base  •  145 mm upright  •  matching two-sided servo cages',fontsize=13,color='#48565b')
-fig.text(.08,.065,'Teal: centered structure    Amber: moving tip    Gray: purchased-part envelopes',fontsize=11,color='#48565b')
+fig.suptitle('SELF-RIGHTING ARM  /  REFERENCE-STYLE CAD',x=.08,ha='left',fontsize=20,fontweight='bold',y=.96)
+fig.text(.08,.90,'70 × 64 mm base  •  170 mm upright  •  two-sided PTK servo frames',fontsize=13,color='#48565b')
+fig.text(.08,.065,'Blue: printed structure    Dark/gray: purchased-part envelopes',fontsize=11,color='#48565b')
 fig.text(.08,.025,'Provisional family envelope — check delivered non-W servo, OEM horn, fasteners and full travel.',fontsize=10,color='#9c3535')
 fig.subplots_adjust(left=0,right=1,bottom=.1,top=.88,wspace=-.15)
 fig.savefig(p/'preview.png',dpi=170,facecolor=fig.get_facecolor())

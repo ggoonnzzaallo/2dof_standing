@@ -11,7 +11,7 @@ import cadquery as cq
 OUT = Path(__file__).resolve().parent
 BASE_X, BASE_Y, BASE_T = 70.0, 64.0, 3.0
 DECK_Z, DECK_T = 13.0, 3.0
-J1_Z, J2_Z, TIP_Z = 42.0, 87.0, 145.0
+J1_Z, J2_Z, TIP_Z = 42.0, 87.0, 170.0
 SERVO_MODEL = 'PTK 7465 MG (nominal 7465-family envelope; incoming fit check required)'
 BODY_L, BODY_W, BODY_DEPTH = 23.9, 12.0, 22.0
 FLANGE_SPAN, MOUNT_PITCH = 31.8, 27.8
@@ -73,19 +73,21 @@ def ring_x(z):
     return r
 
 def servo_cage_x(z):
-    """Open-ended, two-sided servo cradle with a continuous printed load path.
+    """Open-ended, two-sided servo cradle with reference-style side windows.
 
-    The body inserts from the output/horn side through both hoops. Side rails
-    tie the rear collar to the mounting frame while leaving the case, mounting
-    screws, and rear lead exit accessible. All clearances remain provisional.
+    The body inserts from the output/horn side through both hoops. Broad side
+    frames tie the rear collar to the mounting frame, making one square bracket
+    silhouette. Their windows expose the servo case and reduce print mass.
+    The rear lead exit stays open. All clearances remain provisional.
     """
     rear=box(3.5,22,30,(-14,0,z-OUTPUT_OFFSET_Z)).edges('|X').fillet(3)
     rear=rear.cut(box(6,BODY_W+2*CLEARANCE,BODY_L+2*CLEARANCE,
                       (-14,0,z-OUTPUT_OFFSET_Z)))
     cage=ring_x(z).union(rear)
     for yy in (-9,9):
-        rail=box(14,3.5,8,(-7.5,yy,z-OUTPUT_OFFSET_Z)).edges('|X').fillet(1.5)
-        cage=cage.union(rail)
+        side=box(14.5,3.5,30,(-7.5,yy,z-OUTPUT_OFFSET_Z))
+        side=side.cut(box(9,5,20,(-7.5,yy,z-OUTPUT_OFFSET_Z)))
+        cage=cage.union(side)
     return cage
 
 def cut_adapter(a,z):
@@ -136,11 +138,11 @@ def pin_x(z):
 def to_upper(s):
     return s.rotate((0,0,0),(0,0,1),90).translate((0,0,J2_Z))
 
-base=cq.Workplane('XY').box(BASE_X,BASE_Y,BASE_T,centered=(True,True,False)).edges('|Z').fillet(5)
+base=cq.Workplane('XY').box(BASE_X,BASE_Y,BASE_T,centered=(True,True,False)).edges('|Z').fillet(2)
 # Centered battery tunnel: lower floor and upper structural deck, open at +X
 # for pack insertion. The deck also gives the two lower joint supports one
 # continuous load path into the base instead of two narrow feet.
-deck=cq.Workplane('XY').box(BASE_X,30,DECK_T,centered=(True,True,False)).translate((0,0,DECK_Z)).edges('|Z').fillet(3)
+deck=cq.Workplane('XY').box(BASE_X,30,DECK_T,centered=(True,True,False)).translate((0,0,DECK_Z)).edges('|Z').fillet(2)
 base=base.union(deck)
 for yy in (-12,12):
     base=base.union(box(68,3,10,(0,yy,8)))
@@ -178,8 +180,7 @@ link=cut_adapter(link,J1_Z)
 link=link.union(outboard_hub_x(J1_Z))
 
 paddle=to_upper(adapter_x(0))
-paddle=paddle.union(box(16,10,TIP_Z-J2_Z-19,(0,0,(TIP_Z+J2_Z+3)/2)).edges('|Z').fillet(3))
-paddle=paddle.union(box(22,10,8,(0,0,TIP_Z-4)).edges('|Z').fillet(3))
+paddle=paddle.union(box(16,10,TIP_Z-J2_Z-11,(0,0,(TIP_Z+J2_Z+11)/2)).edges('|Z').fillet(1.5))
 paddle=paddle.rotate((0,0,J2_Z),(0,0,J2_Z+1),-90).translate((0,0,-J2_Z))
 paddle=cut_adapter(paddle,0).rotate((0,0,0),(0,0,1),90).translate((0,0,J2_Z))
 paddle=paddle.union(to_upper(outboard_hub_x(0)))
@@ -190,9 +191,9 @@ horn=hole_x(14.2,0,0,9,2.3).union(box(2.3,5,21,(15.35,0,0)))
 horn=horn.cut(hole_x(13.9,0,0,2.2,4))
 
 parts={
-    'base':(base,(.20,.56,.57)),
-    'middle_link':(link,(.26,.69,.66)),
-    'paddle':(paddle,(.95,.64,.25)),
+    'base':(base,(.27,.47,.61)),
+    'middle_link':(link,(.30,.53,.67)),
+    'paddle':(paddle,(.34,.59,.72)),
     'servo_1_envelope':(servo().translate((AXIAL_SHIFT,0,J1_Z)),(.17,.19,.22)),
     'servo_2_envelope':(to_upper(servo().translate((AXIAL_SHIFT,0,0))),(.17,.19,.22)),
     'horn_1_envelope':(horn.translate((AXIAL_SHIFT,0,J1_Z)),(.87,.87,.82)),
@@ -206,7 +207,7 @@ parts={
     'switch_envelope':(box(15.24,15.24,3,(0,-22.5,4.5)),(.65,.21,.24)),
 }
 assembly=cq.Assembly(name='self_righting_robot_concept')
-summary={'status':'TWO-SIDED CAGED PTK 7465 MG PROVISIONAL: non-W servo dimensions, horn fit, battery tunnel, outboard pivot fit, full travel and physical righting unvalidated','units':'mm','servo_model':SERVO_MODEL,'nominal_servo_dimensions_mm':{'body_length':BODY_L,'body_width':BODY_W,'body_depth':BODY_DEPTH,'flange_span':FLANGE_SPAN,'mount_pitch':MOUNT_PITCH,'output_offset_from_body_midpoint':OUTPUT_OFFSET_Z,'servo_axial_shift':AXIAL_SHIFT,'horn_face_robot_coordinate':HORN_FACE},'servo_cages':{'front_and_rear_outer_width_mm':22,'rear_collar_outer_height_mm':30,'rail_count_per_servo':2,'rail_section_mm':[3.5,8],'body_clearance_per_side_mm':CLEARANCE,'rear_end':'open for servo lead'},'outboard_pivots':{'bearing':'MR83ZZ 3x8x3 mm','pin':'3x12 mm','bearing_axis_start_mm':BEARING_INNER_X,'moving_hub_outer_face_mm':HUB_OUTER_X},'base_footprint_mm':[BASE_X,BASE_Y],'deck_top_z_mm':DECK_Z+DECK_T,'battery_tunnel_inner_width_mm':21,'joint_origins_mm':[[0,0,J1_Z],[0,0,J2_Z]],'axes_upright':[[1,0,0],[0,1,0]],'parts':{}}
+summary={'status':'REFERENCE-STYLE TWO-SIDED PTK 7465 MG PROVISIONAL: non-W servo dimensions, horn fit, battery tunnel, outboard pivot fit, full travel and physical righting unvalidated','units':'mm','servo_model':SERVO_MODEL,'nominal_servo_dimensions_mm':{'body_length':BODY_L,'body_width':BODY_W,'body_depth':BODY_DEPTH,'flange_span':FLANGE_SPAN,'mount_pitch':MOUNT_PITCH,'output_offset_from_body_midpoint':OUTPUT_OFFSET_Z,'servo_axial_shift':AXIAL_SHIFT,'horn_face_robot_coordinate':HORN_FACE},'servo_cages':{'front_and_rear_outer_width_mm':22,'rear_collar_outer_height_mm':30,'side_frame_count_per_servo':2,'side_frame_section_mm':[14.5,3.5,30],'side_window_mm':[9,20],'body_clearance_per_side_mm':CLEARANCE,'rear_end':'open for servo lead'},'outboard_pivots':{'bearing':'MR83ZZ 3x8x3 mm','pin':'3x12 mm','bearing_axis_start_mm':BEARING_INNER_X,'moving_hub_outer_face_mm':HUB_OUTER_X},'base_footprint_mm':[BASE_X,BASE_Y],'deck_top_z_mm':DECK_Z+DECK_T,'battery_tunnel_inner_width_mm':21,'joint_origins_mm':[[0,0,J1_Z],[0,0,J2_Z]],'axes_upright':[[1,0,0],[0,1,0]],'tip_z_mm':TIP_Z,'parts':{}}
 for name,(shape,color) in parts.items():
     solid=shape.val()
     assert solid.isValid(),f'Invalid CAD: {name}'
