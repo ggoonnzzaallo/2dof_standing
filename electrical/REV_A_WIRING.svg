@@ -1,83 +1,93 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350 850" role="img" aria-labelledby="title description">
-  <title id="title">Rev A self-righting robot wiring schematic</title>
-  <desc id="description">One-cell battery feeds the XIAO BAT input and Pololu 2810 VIN in parallel. Pololu VOUT feeds both servo positive wires. All grounds share the battery-negative splice. XIAO D0, D1 and D2 connect to the two servo signal wires and Pololu ON respectively. USB-C charges the battery through the XIAO's onboard charger.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1040" role="img" aria-labelledby="title description">
+  <title id="title">Rev A robot wiring: three physical power buses and all control wires</title>
+  <desc id="description">The battery mating lead feeds a three-way positive bus to XIAO BAT+ and Pololu VIN, and a five-way negative bus to XIAO BAT-, Pololu GND, and both servo grounds. Pololu VOUT feeds a three-way switched positive bus to both servo power wires. Separate full-length wires connect XIAO D0 to lower servo signal, D1 to upper servo signal, and D2 to Pololu ON.</desc>
   <defs>
     <style>
       text { font-family: Arial, Helvetica, sans-serif; fill: #18212a; }
-      .title { font-size: 28px; font-weight: 700; }
-      .sub { font-size: 15px; fill: #475569; }
-      .block-title { font-size: 20px; font-weight: 700; }
-      .body { font-size: 16px; }
-      .small { font-size: 14px; fill: #475569; }
-      .net { font-size: 14px; font-weight: 700; }
-      .box { fill: #f8fafc; stroke: #334155; stroke-width: 2; rx: 8; }
-      .plus { fill: none; stroke: #be3e3e; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-      .motor { fill: none; stroke: #bf651c; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .title { font-size: 29px; font-weight: 700; }
+      .subtitle { font-size: 15px; fill: #475569; }
+      .section { font-size: 19px; font-weight: 700; }
+      .label { font-size: 17px; font-weight: 600; }
+      .detail { font-size: 14px; fill: #475569; }
+      .bus-label { font-size: 17px; font-weight: 700; }
+      .box { fill: #f8fafc; stroke: #64748b; stroke-width: 2; rx: 7; }
+      .bus-plus { fill: #fff2f0; stroke: #bb3d38; stroke-width: 2.5; rx: 9; }
+      .bus-ground { fill: #f0f3f6; stroke: #334155; stroke-width: 2.5; rx: 9; }
+      .bus-servo { fill: #fff3e8; stroke: #b95f16; stroke-width: 2.5; rx: 9; }
+      .plus { fill: none; stroke: #bb3d38; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
       .ground { fill: none; stroke: #334155; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-      .signal { fill: #2463a6; }
-      .dot-plus { fill: #be3e3e; }
-      .dot-motor { fill: #bf651c; }
+      .servo { fill: none; stroke: #b95f16; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .signal { fill: none; stroke: #1769ad; stroke-width: 3; stroke-linecap: round; }
+      .dot-plus { fill: #bb3d38; }
       .dot-ground { fill: #334155; }
+      .dot-servo { fill: #b95f16; }
     </style>
   </defs>
 
-  <rect width="1350" height="850" fill="#ffffff"/>
-  <text x="68" y="55" class="title">Rev A · robot electrical wiring</text>
-  <text x="68" y="83" class="sub">One 1S LiPo · XIAO nRF52840 Sense · Pololu 2810 LV · two PTK 7465 MG servos</text>
+  <rect width="1400" height="1040" fill="#ffffff"/>
+  <text x="65" y="51" class="title">Rev A · complete robot wiring</text>
+  <text x="65" y="79" class="subtitle">The three bus blocks are physical insulated solder junctions. Each drawn line is one wire; this is a connectivity diagram, not a scale drawing.</text>
+  <text x="65" y="124" class="section">Power distribution</text>
 
-  <!-- Battery-positive bus: battery, XIAO BAT+, and switch VIN only. -->
-  <path class="plus" d="M160 230 V126 H800 V230 M500 126 V230"/>
-  <circle class="dot-plus" cx="500" cy="126" r="6"/>
-  <text x="330" y="117" class="net" fill="#be3e3e">VBAT+ · direct cell positive</text>
+  <!-- J1: battery-positive three-way splice. -->
+  <path class="plus" d="M265 210 H320 M375 185 V170 H590 M465 235 V260 H1010"/>
+  <rect class="box" x="70" y="185" width="195" height="50"/>
+  <text x="88" y="216" class="label">RCY red · battery +</text>
+  <rect class="bus-plus" x="320" y="185" width="200" height="50"/>
+  <text x="338" y="216" class="bus-label">J1 · VBAT+ (3-way)</text>
+  <rect class="box" x="590" y="145" width="250" height="50"/>
+  <text x="609" y="176" class="label">XIAO BAT+ pad</text>
+  <rect class="box" x="1010" y="235" width="250" height="50"/>
+  <text x="1029" y="266" class="label">Pololu VIN</text>
+  <circle class="dot-plus" cx="375" cy="185" r="5"/>
+  <circle class="dot-plus" cx="465" cy="235" r="5"/>
 
-  <!-- Shared return: servo current meets battery negative, not XIAO traces. -->
-  <path class="ground" d="M160 395 V730 H1240 M500 430 V730 M800 430 V730 M1090 570 V730 M1200 355 H1240 V730"/>
-  <circle class="dot-ground" cx="500" cy="730" r="6"/>
-  <circle class="dot-ground" cx="800" cy="730" r="6"/>
-  <circle class="dot-ground" cx="1090" cy="730" r="6"/>
-  <circle class="dot-ground" cx="1240" cy="730" r="6"/>
-  <text x="410" y="760" class="net">GND · common battery-negative splice</text>
+  <!-- J2: battery-negative five-way splice. No servo return passes through XIAO. -->
+  <path class="ground" d="M265 435 H320 M370 400 V345 H1010 M470 400 V390 H590 M470 460 V505 H590 M370 460 V555 H1010"/>
+  <rect class="box" x="70" y="410" width="195" height="50"/>
+  <text x="88" y="441" class="label">RCY black · battery −</text>
+  <rect class="bus-ground" x="320" y="400" width="200" height="60"/>
+  <text x="340" y="436" class="bus-label">J2 · GND (5-way)</text>
+  <rect class="box" x="1010" y="320" width="250" height="50"/>
+  <text x="1029" y="351" class="label">Pololu GND</text>
+  <rect class="box" x="590" y="365" width="250" height="50"/>
+  <text x="609" y="396" class="label">XIAO BAT− pad</text>
+  <rect class="box" x="590" y="480" width="250" height="50"/>
+  <text x="609" y="511" class="label">Servo 1 GND</text>
+  <rect class="box" x="1010" y="530" width="250" height="50"/>
+  <text x="1029" y="561" class="label">Servo 2 GND</text>
+  <circle class="dot-ground" cx="370" cy="400" r="5"/>
+  <circle class="dot-ground" cx="470" cy="400" r="5"/>
+  <circle class="dot-ground" cx="470" cy="460" r="5"/>
+  <circle class="dot-ground" cx="370" cy="460" r="5"/>
 
-  <!-- Pololu switched positive rail, with a branch to each servo. -->
-  <path class="motor" d="M915 345 H970 V540 M970 335 H1020 M970 345 V335 M970 540 H1020"/>
-  <circle class="dot-motor" cx="970" cy="345" r="6"/>
-  <circle class="dot-motor" cx="970" cy="540" r="6"/>
-  <text x="946" y="460" class="net" fill="#bf651c" transform="rotate(-90 946 460)">VSERVO+</text>
+  <!-- J3: Pololu-switched servo-positive three-way splice. -->
+  <path class="servo" d="M265 675 H320 M375 650 V620 H590 M465 700 V745 H1010"/>
+  <rect class="box" x="70" y="650" width="195" height="50"/>
+  <text x="88" y="681" class="label">Pololu VOUT</text>
+  <rect class="bus-servo" x="320" y="650" width="200" height="50"/>
+  <text x="338" y="681" class="bus-label">J3 · SERVO+ (3)</text>
+  <rect class="box" x="590" y="595" width="250" height="50"/>
+  <text x="609" y="626" class="label">Servo 1 + (red)</text>
+  <rect class="box" x="1010" y="720" width="250" height="50"/>
+  <text x="1029" y="751" class="label">Servo 2 + (red)</text>
+  <circle class="dot-servo" cx="375" cy="650" r="5"/>
+  <circle class="dot-servo" cx="465" cy="700" r="5"/>
 
-  <rect class="box" x="75" y="230" width="170" height="165"/>
-  <text x="94" y="268" class="block-title">1S LiPo</text>
-  <text x="94" y="300" class="body">500 mAh</text>
-  <text x="94" y="327" class="small">JST-RCY pack</text>
-  <text x="94" y="356" class="small">+ / −: meter-check</text>
+  <text x="65" y="813" class="section">Control wires · each line is a separate direct connection</text>
+  <path class="signal" d="M325 851 H1060 M325 906 H1060 M325 961 H1060"/>
+  <rect class="box" x="70" y="828" width="255" height="46"/>
+  <text x="88" y="857" class="label">XIAO D0 · PWM1</text>
+  <rect class="box" x="1060" y="828" width="270" height="46"/>
+  <text x="1078" y="857" class="label">Servo 1 signal</text>
+  <rect class="box" x="70" y="883" width="255" height="46"/>
+  <text x="88" y="912" class="label">XIAO D1 · PWM2</text>
+  <rect class="box" x="1060" y="883" width="270" height="46"/>
+  <text x="1078" y="912" class="label">Servo 2 signal</text>
+  <rect class="box" x="70" y="938" width="255" height="46"/>
+  <text x="88" y="967" class="label">XIAO D2 · enable</text>
+  <rect class="box" x="1060" y="938" width="270" height="46"/>
+  <text x="1078" y="967" class="label">Pololu ON</text>
 
-  <rect class="box" x="420" y="230" width="230" height="200"/>
-  <text x="442" y="265" class="block-title">XIAO Sense</text>
-  <text x="442" y="292" class="small">BAT+ from VBAT+</text>
-  <text x="442" y="317" class="small">BAT− / GND to GND</text>
-  <text x="442" y="346" class="body signal">D0 → PWM1</text>
-  <text x="442" y="371" class="body signal">D1 → PWM2</text>
-  <text x="442" y="396" class="body signal">D2 → MOTOR_EN</text>
-
-  <rect class="box" x="700" y="230" width="215" height="200"/>
-  <text x="721" y="265" class="block-title">Pololu 2810 LV</text>
-  <text x="721" y="318" class="small">VIN: VBAT+</text>
-  <text x="721" y="347" class="small">VOUT: VSERVO+</text>
-  <text x="721" y="376" class="small">GND: GND</text>
-  <text x="721" y="405" class="body signal">ON: MOTOR_EN</text>
-
-  <rect class="box" x="1020" y="225" width="180" height="140"/>
-  <text x="1039" y="259" class="block-title">Servo 1</text>
-  <text x="1039" y="284" class="small">lower joint</text>
-  <text x="1039" y="312" class="body signal">SIG: PWM1</text>
-  <text x="1039" y="340" class="small">red: VSERVO+</text>
-  <text x="1208" y="347" class="small">GND</text>
-
-  <rect class="box" x="1020" y="430" width="180" height="140"/>
-  <text x="1039" y="464" class="block-title">Servo 2</text>
-  <text x="1039" y="489" class="small">upper joint</text>
-  <text x="1039" y="517" class="body signal">SIG: PWM2</text>
-  <text x="1039" y="545" class="small">red: VSERVO+</text>
-
-  <text x="72" y="795" class="small">Same net name = soldered connection. Blue labels identify signal wires; servo red wires never connect to XIAO 3V3 or VBUS.</text>
-  <text x="72" y="820" class="small">USB-C is on the XIAO. Before charging: Pololu slide OFF, D2 LOW, and verify VOUT is off. Firmware interlock is not yet implemented.</text>
+  <text x="65" y="1020" class="detail">Never connect servo + to XIAO 3V3/VBUS. USB-C and the IMU are already on the XIAO. For USB charging, first verify D2 LOW and VOUT off.</text>
 </svg>

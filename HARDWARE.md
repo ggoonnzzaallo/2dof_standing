@@ -23,13 +23,14 @@ The [one-page electrical schematic](electrical/REV_A_WIRING.pdf) and [pin-by-pin
 
 ```text
 EFLB5001S25 1S battery / keyed RCY connector
-  + ----+---------------------------- XIAO BAT+
-        +---- Pololu 2810 VIN
-                   VOUT ----+-------- Servo 1 positive
-                            +-------- Servo 2 positive
-  - ----+---------------------------- XIAO BAT- / GND
-        +---------------------------- Pololu GND
-        +---------------------------- Both servo grounds
+  + ---- J1 VBAT+ bus ----+----------- XIAO BAT+
+                         +----------- Pololu 2810 VIN
+                                  VOUT ---- J3 SERVO+ bus ----+---- Servo 1 positive
+                                                              +---- Servo 2 positive
+  - ---- J2 GND bus -----+----------- XIAO BAT- / GND
+                         +----------- Pololu GND
+                         +----------- Servo 1 ground
+                         +----------- Servo 2 ground
 
 XIAO D0 ---------------- Servo 1 signal
 XIAO D1 ---------------- Servo 2 signal
@@ -37,7 +38,7 @@ XIAO D2 ---------------- Pololu ON
 USB-C ------------------ XIAO programming + onboard charging
 ```
 
-**The servos are not powered by the XIAO.** At the RCY pigtail, split battery positive into a thin XIAO BAT+ branch and a separate, short power branch through the Pololu switch to both servo red leads. Split battery negative into XIAO BAT−/GND and both servo black/brown leads at the same battery-side junction. Only the two servo signal leads and the switch's ON control lead connect to XIAO GPIOs. The shared ground gives those signals a common reference; the motor current returns directly to the battery junction, not through the controller board. Never connect servo red leads to XIAO 3V3 or 5V/VBUS, and do not route motor current through tiny PCB traces or a solderless breadboard.
+**The servos are not powered by the XIAO.** The RCY lead's positive conductor enters J1, a three-way positive bus feeding XIAO BAT+ and Pololu VIN. Its negative conductor enters J2, a five-way ground bus feeding XIAO BAT−, Pololu GND and both servo grounds. Pololu VOUT enters J3, a three-way switched positive bus feeding both servo red leads. These buses can be three separately insulated solder splices or three isolated pad groups; they do not require an active distribution board. Only the two servo signal leads and the switch's ON control lead connect to XIAO GPIOs. The shared ground gives those signals a common reference; the motor current returns directly to J2, not through the controller board. Never connect servo red leads to XIAO 3V3 or 5V/VBUS, and do not route motor current through tiny PCB traces or a solderless breadboard.
 
 Keep the high-current wiring short and secure. No external capacitor or signal resistors are planned in the first wiring layout. Measure the battery voltage at the controller during hard servo direction changes; add a capacitor across the switched servo supply only if measured transients or resets justify one. A capacitor cannot rescue an undersized battery or long resistive power wiring. [Pololu notes that capacitors near its switch can reduce spikes when interrupting large currents](https://www.pololu.com/product/2810).
 
