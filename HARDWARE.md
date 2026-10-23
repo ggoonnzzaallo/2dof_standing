@@ -19,6 +19,8 @@ If command-only observations prove insufficient after physical trials, joint fee
 
 ## Power and signals
 
+The [one-page electrical schematic](electrical/REV_A_WIRING.pdf) and [pin-by-pin wiring guide](electrical/README.md) show the Rev A harness to build. The text netlist below describes the same connections.
+
 ```text
 EFLB5001S25 1S battery / keyed RCY connector
   + ----+---------------------------- XIAO BAT+

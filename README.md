@@ -13,6 +13,7 @@ This is a prototype design, not a proven self-righting product. **The revised CA
 - [Historical AliExpress shopping plan](docs/ALIEXPRESS_SOURCING.md)
 - [Historical DigiKey sourcing audit](docs/DIGIKEY_SOURCING.md)
 - [Wiring, commissioning, and design rationale](HARDWARE.md)
+- [One-page electrical schematic](electrical/REV_A_WIRING.pdf) ([SVG](electrical/REV_A_WIRING.svg), [PNG](electrical/REV_A_WIRING.png)) and [pin-by-pin wiring guide](electrical/README.md)
 - [Onboard voltage monitoring and USB-C charging plan](HARDWARE.md#battery-monitoring-and-charging)
 - [Power budget and brownout acceptance test](HARDWARE.md#power-budget-and-brownout-check)
 - [CAD assembly](cad/assembly.step), [preview](cad/preview.png), [servo-mount fit coupon](cad/servo_mount_fit_coupon.stl), [horn fit coupon](cad/horn_fit_coupon.stl), [pivot fit coupon](cad/pivot_fit_coupon.stl), [battery-tunnel fit coupon](cad/battery_tunnel_fit_coupon.stl), [measurement sheet](cad/FIT_CHECK.md), and [CAD/printing notes](cad/README.md)
