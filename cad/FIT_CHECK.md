@@ -1,34 +1,24 @@
 # PTK 7465 MG incoming fit check
 
-This sheet distinguishes **provisional CAD inputs** from dimensions measured on the two delivered non-W servos. Fill both measured columns before changing `build_cad.py` or printing the final base and link. The 7465W drawing and related MG-D page are useful family references, but neither establishes the exact dimensions of the purchased units.
+Measure **both delivered servos** before printing full robot parts. The current model uses published 7465-family dimensions, not a verified drawing of the ordered non-W units. The four small STL coupons let you settle the interfaces cheaply.
 
-| Feature (mm unless stated) | Current CAD input | Servo 1 measured | Servo 2 measured | Where used |
-|---|---:|---|---|---|
-| Main body length along mounting-hole line | 23.9 | — | — | `BODY_L` |
-| Main body width | 12.0 | — | — | `BODY_W` |
-| Main body depth, back to case top | 22.0 | — | — | `BODY_DEPTH` |
-| Ear/flange overall span | 31.8 | — | — | `FLANGE_SPAN` |
-| Ear mounting-hole pitch | 27.8 | — | — | `MOUNT_PITCH` |
-| Mounting-hole diameter | 2.0 nominal | — | — | Check M2 clearance and flange holes |
-| Output axis from body midpoint toward front end | 6.0 | — | — | `OUTPUT_OFFSET_Z` |
-| Front flange face from case back | 18.4 | — | — | `FLANGE_FROM_BACK` |
-| Ear thickness | 1.6 assumed | — | — | `FLANGE_T` |
-| Body insertion through front hoop and rear collar | 0.3 clearance per side in both openings | — | — | Full `servo_mount_fit_coupon` cage; no case compression |
-| Rear lead and molded strain relief beyond case | not established; rear of cage remains open | — | — | Route without pinching or sharp bend |
-| Access to both ear fasteners with servo seated | required | — | — | Front hoop and two side rails |
-| Shaft/spline outside diameter and tooth count | ~5.0, 25T | — | — | OEM horn only; no printed spline |
-| Boss maximum diameter and projection from case | 11.0 × 4.4 assumed | — | — | `servo()` envelope |
-| Shaft tip from case back | 30.1 nominal | — | — | `servo()` envelope |
-| OEM horn face before / after the 18 mm inward servo shift | 16.5 assumed local / −1.5 robot coordinate | — | — | `AXIAL_SHIFT`, `HORN_FACE` |
-| OEM horn thickness, arm width and usable hole radius | not established | — | — | `cut_adapter()` slots and `horn` envelope |
-| OEM center-screw thread and usable length | not established | — | — | Use supplied screw; do not force an M2 substitute |
-| Center screw installable before the printed hub covers access | required | — | — | `outboard_hub_x()` assembly sequence |
-| Bearing OD × bore × width | MR83ZZ 8 × 3 × 3 | — | — | Outboard support pocket at both hinges |
-| Actual dowel diameter × length | nominal 3 × 12 | — | — | Blind hub bore and bearing bore at both hinges |
-| Printed bearing seat / dowel-bore fit | CAD diameters 8.05 / 3.05 | — | — | `pivot_fit_coupon` before full print |
-| Axial freedom and rotation with pin seated | no side preload or rubbing | — | — | Opposite-side support at each joint |
-| Servo pulse center, safe range and direction | 1500 µs trial center; ±80° design goal | — | — | Firmware and `sim/robot.xml` joint limits |
+| Feature | Current provisional CAD value | Servo 1 | Servo 2 |
+|---|---:|---|---|
+| Case length × width × depth | 23.9 × 12.0 × 22.0 mm | — | — |
+| Ear span and mounting-hole pitch | 31.8 / 27.8 mm | — | — |
+| Ear thickness and hole diameter | 1.6 / 2.0 mm | — | — |
+| Output offset from case midpoint | 6.0 mm | — | — |
+| Flange front face from case back | 18.4 mm | — | — |
+| Boss diameter and projection | 11.0 × 4.4 mm | — | — |
+| Output spline diameter and tooth count | about 5 mm / likely 25T | — | — |
+| OEM horn face in the robot frame | +22 mm along motor axis | — | — |
+| OEM horn thickness, arm width, usable hole positions | unknown; tab uses two provisional holes at ±3.3 mm, z+7.8 mm | — | — |
+| OEM center-screw thread and length | unknown; use supplied screw | — | — |
+| Rear lead and molded strain relief | unknown | — | — |
+| Battery pouch length × width × thickness, connector bend | envelope 59.5 × 19 × 7.5 mm | — | — |
+| MR83ZZ bearing OD × ID × width | nominal 8 × 3 × 3 mm | — | — |
+| Rear support pin diameter × length | nominal 3 × 12 mm in CAD | — | — |
 
-Battery and base checks for the centered layout: verify the actual cell length, width, thickness, connector end, and bend radius against the **67 × 21 × 10 mm nominal tunnel**. The retaining tie must contact an end stop or protective connector area, not the LiPo pouch face. Check XIAO USB-C access on the +Y shelf, switch access on the −Y shelf, and wire slack through both joint sweeps. The reference-style straight upper arm now reaches **170 mm above the base**; verify that the added reach and mass do not prevent slow recovery on the intended surface.
+The [mount coupon](servo_mount_fit_coupon.stl) checks the exposed two-ear bracket. Confirm both ear screws can be installed without crushing the case or pinching the lead. The [horn-tab coupon](horn_fit_coupon.stl) checks the actual OEM horn and screw access: its center clearance is 7.0 mm and the two 2.2 mm lateral holes are **only placeholders**. Attach to the OEM horn; never force the spline or assume a generic SG90 pattern. The [bearing coupon](pivot_fit_coupon.stl) checks the 8.05 mm pocket. The [battery coupon](battery_tunnel_fit_coupon.stl) checks the 21 mm wide × 10 mm high tunnel; do not compress the LiPo pouch.
 
-Print [servo-mount fit coupon](servo_mount_fit_coupon.stl), [horn fit coupon](horn_fit_coupon.stl), [pivot fit coupon](pivot_fit_coupon.stl), and [battery-tunnel fit coupon](battery_tunnel_fit_coupon.stl) before the full parts. The servo coupon contains the complete shared windowed frame: verify that each actual servo slides through both hoops, seats against the front mount without case compression, exposes both ear fasteners, and allows its lead and strain relief to leave the open rear. Check horn attachment, bearing seat, pin retention and battery slide fit without driving the arm. If a coupon needs filing to fit, change the CAD parameter rather than using filing as the final design. Check that both bearing axes line up with their servo shaft axes and that the links rotate freely without axial preload. With the assembled joints unpowered, gently side-load each link and inspect the frame-to-deck/web joints, window corners, cheek roots and disk-to-spine transitions for visible flex or layer cracking before powered tests. Record any interference from screw heads, leads or the rotating horn; the current motion check omits those items.
+After adjusting `build_cad.py`, dry-assemble both joints unpowered. Seat the bearing by its outer ring only; check pin retention, coaxial alignment, free rotation, axial play, screw-head clearance and wire slack throughout the travel. Lightly side-load each link and inspect bridge roots, tabs and posts for flex or layer cracking. Check USB-C and slide-switch access at the base. Record the safe pulse endpoints and rotation direction for each servo before powering a full sweep.
