@@ -1,2 +1,5 @@
 # STEP exporters include trailing spaces in generated records.
 *.step -whitespace
+
+# PDF cross-reference records use significant trailing spaces; treat as binary.
+*.pdf binary
