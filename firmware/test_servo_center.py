@@ -209,9 +209,22 @@ int main(){
   }
   send("off\n");checkOff();
   fresh();send("dance-loop\n");
-  clockMs=27;loop();assert(lastDanceUpdateMs==20);
+  clockMs=27;loop();assert(lastDanceUpdateMs==25);
   clockMs=40;loop();assert(lastDanceUpdateMs==40); // No drift after a late frame.
   send("off\n");checkOff();
+  fresh();send("tempo 1000\n");checkOff();
+  fresh();send("dance-loop\n");clockMs=6000;send("keep\n");
+  // Above misses the heartbeat deliberately; restart for phase continuity checks.
+  send("dance-loop\n");
+  clockMs=startedAt+1000;
+  const float phaseBefore=tempoPhaseAt(1000),speedBefore=tempoVelocityAt(1000);
+  send("tempo 1000\n");
+  assert(std::abs(fmodf(phaseBefore,2*PI_F)-tempoPhaseAt(1000))<0.0001f);
+  assert(std::abs(speedBefore-tempoVelocityAt(1000))<0.000001f);
+  assert(std::abs(tempoVelocityAt(3000)-2*PI_F/1000)<0.000001f);
+  send("tempo 99999999999999\n");checkOff();
+  fresh();send("dance-loop\n");send("tempo 999\n");checkOff();
+  fresh();send("dance-loop\n");send("tempo xyz\n");checkOff();
   std::cout << "PASS: disarmed boot, explicit commands, centering, wide and small jogs, timeouts, "
                "disconnect, emergency stop, malformed input, rollover, attach failure.\n";
 }

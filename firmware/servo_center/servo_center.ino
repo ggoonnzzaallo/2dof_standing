@@ -30,12 +30,38 @@ constexpr uint32_t SMALL_HOLD_MS = JOG_STEP_MS * SMALL_STEPS;
 
 // Continuous phase-offset waves, with gentle fade-in/out at neutral.
 constexpr uint32_t DANCE_PERIOD_MS = 8000;
-constexpr uint32_t LOOP_PERIOD_MS = 2500;
+constexpr uint32_t LOOP_PERIOD_MS = 1600;
 constexpr uint32_t DANCE_MOTION_MS = 24000;
 constexpr uint32_t DANCE_RAMP_MS = 4000;
 constexpr uint32_t DANCE_HOLD_MS = DANCE_MOTION_MS+1500;
-constexpr uint32_t DANCE_UPDATE_MS = 20;
+constexpr uint32_t DANCE_UPDATE_MS = 5;
 uint32_t lastDanceUpdateMs = 0;
+constexpr float PI_F=3.14159265358979323846f;
+constexpr uint32_t TEMPO_RAMP_MS=2000;
+uint32_t tempoAt=0;
+float tempoPhase0=0;
+float tempoOmega0=2.0f*PI_F/LOOP_PERIOD_MS;
+float tempoOmega1=2.0f*PI_F/LOOP_PERIOD_MS;
+
+float tempoVelocityAt(uint32_t elapsed) {
+  const uint32_t dt=elapsed-tempoAt;
+  if (dt>=TEMPO_RAMP_MS) return tempoOmega1;
+  const float u=float(dt)/TEMPO_RAMP_MS;
+  const float blend=u*u*u*(10.0f+u*(-15.0f+6.0f*u));
+  return tempoOmega0+(tempoOmega1-tempoOmega0)*blend;
+}
+
+float tempoPhaseAt(uint32_t elapsed) {
+  const uint32_t dt=elapsed-tempoAt;
+  if (dt>=TEMPO_RAMP_MS) {
+    return tempoPhase0+(tempoOmega0+tempoOmega1)*0.5f*TEMPO_RAMP_MS+
+      tempoOmega1*(dt-TEMPO_RAMP_MS);
+  }
+  const float u=float(dt)/TEMPO_RAMP_MS;
+  // Integral of quintic velocity blending preserves position through tempo changes.
+  const float integral=u*u*u*u*(2.5f+u*(-3.0f+u));
+  return tempoPhase0+tempoOmega0*dt+(tempoOmega1-tempoOmega0)*TEMPO_RAMP_MS*integral;
+}
 uint32_t lastHeartbeatAt=0, lastBatteryAt=0, lastBatteryReportAt=0;
 uint16_t batteryMv=0;
 uint8_t lowBatteryCount=0;
@@ -98,7 +124,7 @@ void motorOff() {
 }
 
 void help() {
-  Serial.println("ROBOT SERVO CENTER 0.9");
+  Serial.println("ROBOT SERVO CENTER 0.10");
   Serial.println("OFF. No automatic movement. Support the arm and keep joints clear.");
   if (!USE_SERVO_POWER_SWITCH) {
     Serial.println("REV B DIRECT POWER: off/! stop PWM only; servo power stays live.");
@@ -108,6 +134,7 @@ void help() {
   Serial.println("Connect the battery before any power/centering command.");
   Serial.println(USE_SERVO_POWER_SWITCH ? "power  : Rev A rail enabled for 3 seconds, no pulses"
                                         : "power  : unavailable; Rev B has no power switch");
+  Serial.println("tempo N : live loop period 1000-10000 ms, phase-preserving 2-second speed transition");
   Serial.println("battery : read BAT voltage estimate, millivolts");
   Serial.println("dance-loop : continuous FAST waves; keep heartbeat every 2 seconds; off/! stops");
   Serial.println("dance  : BOTH joints, smooth 1100-1900 us, center then stop after 25.5 seconds");
@@ -185,10 +212,12 @@ void beginDance(bool continuous=false) {
   startedAt=millis();
   permittedMs=DANCE_HOLD_MS;
   lastDanceUpdateMs=0;
+  tempoAt=0; tempoPhase0=0;
+  tempoOmega0=tempoOmega1=2.0f*PI_F/LOOP_PERIOD_MS;
   activeMode=continuous ? 9 : 8;
   lastHeartbeatAt=millis();
   if (continuous) {
-    Serial.println("DANCE LOOP: 2.5-second cycles, 1100-1900 us, battery guard and heartbeat enabled.");
+    Serial.println("DANCE LOOP: 1.6-second cycles, 1100-1900 us, battery guard and heartbeat enabled.");
     return;
   }
   Serial.println("DANCE: BOTH joints 1100-1900 us, neutral then PWM off in 25.5 seconds.");
@@ -209,16 +238,40 @@ void updateDance(uint32_t elapsed) {
     (elapsed<DANCE_MOTION_MS-elapsed ? elapsed : DANCE_MOTION_MS-elapsed);
   const float t=rampTime<DANCE_RAMP_MS ? float(rampTime)/DANCE_RAMP_MS : 1.0f;
   const float envelope=t*t*t*(10.0f+t*(-15.0f+6.0f*t));
-  constexpr float PI_F=3.14159265358979323846f;
-  const uint32_t period=continuous ? LOOP_PERIOD_MS : DANCE_PERIOD_MS;
-  const float phase=2.0f*PI_F*float(elapsed%period)/period;
+  const float phase=continuous ? fmodf(tempoPhaseAt(elapsed),2.0f*PI_F) :
+    2.0f*PI_F*float(elapsed%DANCE_PERIOD_MS)/DANCE_PERIOD_MS;
   activeServo.writeMicroseconds(CENTER_US+int(lroundf(400.0f*envelope*sinf(phase))));
   secondServo.writeMicroseconds(CENTER_US+int(lroundf(400.0f*envelope*cosf(phase))));
 }
 
+void changeTempo(const char* value) {
+  uint32_t period=0;
+  bool valid=*value!='\0';
+  for (const char* c=value; *c; ++c) {
+    if (*c<'0' || *c>'9' || period>10000) { valid=false; break; }
+    period=period*10+uint32_t(*c-'0');
+  }
+  if (!valid || period<1000 || period>10000) {
+    motorOff();
+    Serial.println("OFF: invalid tempo, use 1000-10000 milliseconds.");
+    return;
+  }
+  if (activeMode!=9) {
+    Serial.println("Tempo ignored: continuous dance is not active.");
+    return;
+  }
+  const uint32_t elapsed=millis()-startedAt;
+  const float phase=fmodf(tempoPhaseAt(elapsed),2.0f*PI_F);
+  const float velocity=tempoVelocityAt(elapsed);
+  tempoPhase0=phase; tempoOmega0=velocity; tempoOmega1=2.0f*PI_F/period;
+  tempoAt=elapsed;
+  Serial.print("TEMPO_MS: "); Serial.println(uint16_t(period));
+}
+
 void executeCommand() {
   command[commandLength] = '\0';
-  if (strcmp(command, "battery")==0) {
+  if (strncmp(command,"tempo ",6)==0) changeTempo(command+6);
+  else if (strcmp(command, "battery")==0) {
     if (!activeMode) batteryMv=readBatteryMv();
     reportBattery();
   }

@@ -10,7 +10,9 @@ import robot
 
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--port')
+parser.add_argument('--period-ms',type=int,default=1600)
 args=parser.parse_args()
+if not 1000<=args.period_ms<=10000:parser.error('--period-ms must be 1000-10000')
 port=robot.find_port(args.port)
 robot.BUILD.parent.mkdir(parents=True,exist_ok=True)
 pidfile=robot.BUILD.parent/'dance.pid'
@@ -23,6 +25,8 @@ if pidfile.exists():
     else:
         raise SystemExit('A dance host is already running; stop it before opening another.')
 pidfile.write_text(str(os.getpid()))
+periodfile=robot.BUILD.parent/'dance-period-ms'
+periodfile.write_text(str(args.period_ms))
 running=True
 
 def stop(signum,frame):
@@ -41,7 +45,7 @@ with logfile.open('a',buffering=1) as log:
         time.sleep(1)
         s.write(b'help\noff\nbattery\n');s.flush();time.sleep(.4)
         initial=s.read(8192).decode(errors='replace')
-        if 'ROBOT SERVO CENTER 0.9' not in initial or 'OFF.' not in initial.splitlines():
+        if 'ROBOT SERVO CENTER 0.10' not in initial or 'OFF.' not in initial.splitlines():
             raise RuntimeError('Expected version/disarmed acknowledgement missing: '+initial)
         volts=re.findall(r'BATTERY_MV: (\d+)',initial)
         if not volts or not 3700<=int(volts[-1])<=4400:
@@ -49,9 +53,17 @@ with logfile.open('a',buffering=1) as log:
         emit('Initial BAT estimate: '+volts[-1]+' mV (uncalibrated, USB connected).')
         if running:
             s.write(b'dance-loop\n');s.flush()
+        last_period=None
         next_keep=time.monotonic()
         buffer=''
         while running:
+            try:
+                desired_period=int(periodfile.read_text())
+            except (OSError,ValueError):
+                desired_period=None
+            if desired_period is not None and 1000<=desired_period<=10000 and desired_period!=last_period:
+                s.write(f'tempo {desired_period}\n'.encode());s.flush()
+                last_period=desired_period
             if time.monotonic()>=next_keep:
                 s.write(b'keep\n');s.flush();next_keep=time.monotonic()+2
             buffer+=s.read(2048).decode(errors='replace')
