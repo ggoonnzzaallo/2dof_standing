@@ -1,0 +1,92 @@
+{
+  "status": "awaiting_whole_assembly_export",
+  "files": [
+    {
+      "filename": "Assembly 1 - BASE.step",
+      "bytes": 111178,
+      "sha256": "f2c46fe966a9405c277e84c7c5fd94a0f8e21d2e7f9911f13ad6bb7de819db29",
+      "product_names": [
+        "BASE"
+      ]
+    },
+    {
+      "filename": "Assembly 1 - BATTERY.step",
+      "bytes": 25952,
+      "sha256": "4de9cea42c55911cae85f07e387144a395f1c986515c976e3ae9d3e7671b3bb5",
+      "product_names": [
+        "BATTERY"
+      ]
+    },
+    {
+      "filename": "Assembly 1 - CONTROLLER BOARD.step",
+      "bytes": 1438662,
+      "sha256": "dd152be285f6b4a928ad024377e36c061a325a9b75467d13c40f599f05025c9a",
+      "product_names": [
+        "CONTROLLER BOARD"
+      ]
+    },
+    {
+      "filename": "Assembly 1 - LOWER SERVO (1).step",
+      "bytes": 283302,
+      "sha256": "853c6ede35018958ddce7b4bc55fdf84a8123f3c3e5f9135d977cda870e6ce36",
+      "product_names": [
+        "LOWER SERVO"
+      ]
+    },
+    {
+      "filename": "Assembly 1 - LOWER SERVO.step",
+      "bytes": 283298,
+      "sha256": "05d94154f172523ec2a9b0743697575f4b99be29a776bb29df3dfbabc5c5ddae",
+      "product_names": [
+        "LOWER SERVO"
+      ]
+    },
+    {
+      "filename": "Assembly 1 - MIDDLE LINK, MAIN BODY.step",
+      "bytes": 91596,
+      "sha256": "fb870845277fe6f6031d0bf05efee84eae4388a9134d399f96e0c2c097f29306",
+      "product_names": [
+        "MIDDLE LINK, MAIN BODY"
+      ]
+    },
+    {
+      "filename": "Assembly 1 - MIDDLE LINK, SERVO HORN BRACKET.step",
+      "bytes": 17343,
+      "sha256": "ceec3d0ca3f0c97edaa67c15efc815121c1c76a9b3a8cea937874c5171b39e50",
+      "product_names": [
+        "MIDDLE LINK, SERVO HORN BRACKET"
+      ]
+    },
+    {
+      "filename": "Assembly 1 - TOP LINK, MAIN BODY.step",
+      "bytes": 67817,
+      "sha256": "52c267a30e4166f877f06bbd2a5c37dce0b9ac58ee341432911aead007d8d305",
+      "product_names": [
+        "TOP LINK, MAIN BODY"
+      ]
+    },
+    {
+      "filename": "Assembly 1 - TOP LINK, SERVO HORN BRACKET.step",
+      "bytes": 14011,
+      "sha256": "c8829fc4755dd7c7df9e7f3aa47b06cc915f0856a7fc18df45b6090caad60e1f",
+      "product_names": [
+        "TOP LINK, SERVO HORN BRACKET"
+      ]
+    }
+  ],
+  "findings": [
+    "All nine STEP files contain the cleaned-up component names.",
+    "Both servo exports have product name LOWER SERVO and identical imported bounding boxes in local coordinates.",
+    "A suffix such as (1) is not an upper/lower identifier.",
+    "Printed-link geometry has offset coordinates, but hardware exports do not provide their distinct assembly placements. Do not assemble using identity transforms."
+  ],
+  "servo_bbox_mm": [
+    -15.85,
+    -5.95,
+    0,
+    15.85,
+    5.95,
+    29.8
+  ],
+  "next_input": "One whole-assembly STEP, with individual-file export disabled, to retain instance placements."
+}
