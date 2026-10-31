@@ -14,7 +14,13 @@ ARDUINO = r'''
 #include <deque>
 #include <string>
 #define TARGET_SEEED_XIAO_NRF52840_SENSE 1
-constexpr uint8_t D0=0, D1=1, D2=2, VBAT_ENABLE=14, PIN_CHARGING_CURRENT=22;
+constexpr uint8_t D0=0, D1=1, D2=2, VBAT_ENABLE=14, PIN_CHARGING_CURRENT=22, PIN_VBAT=32;
+constexpr int AR_INTERNAL_3_0=1;
+inline int adcRaw=1800;
+inline void analogReference(int){}
+inline void analogReadResolution(int){}
+inline void analogSampleTime(int){}
+inline int analogRead(int){return adcRaw;}
 constexpr int LOW=0, HIGH=1, INPUT=0, OUTPUT=1;
 inline uint32_t clockMs=0;
 inline int pins[33]={};
@@ -30,6 +36,8 @@ struct FakeSerial {
   explicit operator bool() const{return open;}
   void begin(int){}
   void println(const char*){}
+  void print(const char*){}
+  void println(unsigned short){}
   int available(){return rx.size();}
   int read(){char c=rx.front();rx.pop_front();return c;}
   void send(const std::string& line){for(char c:line)rx.push_back(c);}
@@ -41,7 +49,7 @@ SERVO = r'''
 #include <cassert>
 #include <cstdint>
 #define INVALID_SERVO 255
-class Servo {
+class FineServo {
  public:
   bool enabled=false, fail=false;
   int pin=-1, pulse=0;
@@ -71,7 +79,7 @@ void checkOff(){
 void send(const std::string& s){Serial.send(s);while(Serial.available())loop();}
 void fresh(){
   Serial.open=false;Serial.rx.clear();loop();
-  clockMs=0;activeServo.fail=false;secondServo.fail=false;setup();checkOff();
+  clockMs=0;adcRaw=1800;activeServo.fail=false;secondServo.fail=false;setup();checkOff();
   Serial.open=true;loop();checkOff();
 }
 int main(){
@@ -160,15 +168,12 @@ int main(){
     if (t%DANCE_UPDATE_MS) {
       assert(activeServo.pulse==previousLower && secondServo.pulse==previousUpper);
     }
-    assert(std::abs(activeServo.pulse-previousLower)<=11);
-    assert(std::abs(secondServo.pulse-previousUpper)<=11);
+    assert(std::abs(activeServo.pulse-previousLower)<=12);
+    assert(std::abs(secondServo.pulse-previousUpper)<=12);
     previousLower=activeServo.pulse;previousUpper=secondServo.pulse;
     assert(activeServo.pulse>=1100 && activeServo.pulse<=1900);
     assert(secondServo.pulse>=1100 && secondServo.pulse<=1900);
-    if(t%DANCE_SEGMENT_MS==0 && t/DANCE_SEGMENT_MS<DANCE_STEPS) {
-      assert(activeServo.pulse==DANCE_TARGETS_US[t/DANCE_SEGMENT_MS][0]);
-      assert(secondServo.pulse==DANCE_TARGETS_US[t/DANCE_SEGMENT_MS][1]);
-    }
+
   }
   assert(activeServo.pulse==1500 && secondServo.pulse==1500);
   clockMs=origin+DANCE_HOLD_MS;loop();checkOff();
@@ -177,6 +182,19 @@ int main(){
   fresh();secondServo.fail=true;send("dance\n");checkOff();
   fresh();clockMs=UINT32_MAX-10;send("dance\n");
   clockMs=startedAt+DANCE_HOLD_MS;loop();checkOff();
+  fresh();send("battery\n");checkOff();assert(batteryMv>3890 && batteryMv<3920);
+  fresh();adcRaw=1600;send("dance-loop\n");checkOff();
+  fresh();send("dance-loop\n");assert(activeMode==9);
+  clockMs=4000;send("keep\n");assert(activeMode==9);
+  clockMs=8000;send("keep\n");assert(activeMode==9);
+  clockMs=13000;loop();checkOff();
+  fresh();send("dance-loop\n");adcRaw=1600;
+  clockMs=100;loop();assert(activeMode==9);
+  clockMs=200;loop();checkOff();
+  send("dance-loop\n");checkOff(); // Cannot restart while low.
+  fresh();send("dance-loop\n");adcRaw=0;clockMs=100;loop();checkOff();
+  fresh();send("dance-loop\n!\n");checkOff();
+  fresh();send("dance-loop\n");Serial.open=false;loop();checkOff();
   std::cout << "PASS: disarmed boot, explicit commands, centering, wide and small jogs, timeouts, "
                "disconnect, emergency stop, malformed input, rollover, attach failure.\n";
 }
@@ -186,7 +204,7 @@ with tempfile.TemporaryDirectory(prefix='2dof-center-test-') as directory:
     root = Path(directory)
     (root/'Arduino.h').write_text(ARDUINO)
     (root/'Adafruit_TinyUSB.h').write_text('#pragma once\n')
-    (root/'Servo.h').write_text(SERVO)
+    (root/'FineServo.h').write_text(SERVO)
     (root/'servo_center.ino').write_text(SKETCH.read_text())
     (root/'test.cpp').write_text(TEST)
     for switched in (0, 1):

@@ -1,8 +1,8 @@
 # Rev B terminal control - direct battery power
 
-**Current source: version 0.6, direct-powered servos with no Pololu.** D0/marked 0 controls the lower servo, D1/marked 1 controls the upper, and D2 is unused. Both PWM outputs stop on boot, timeout, USB serial disconnect, `off` or `!`. **None of these actions disconnects servo power.** Full OFF requires battery and USB unplugged.
+**Current source: version 0.8, direct-powered servos with no Pololu.** D0/marked 0 controls the lower servo, D1/marked 1 controls the upper, and D2 is unused. Both PWM outputs stop on boot, timeout, USB serial disconnect, `off` or `!`. **None of these actions disconnects servo power.** Full OFF requires battery and USB unplugged.
 
-The user confirmed Rev B wiring is live. Version 0.3 has also executed individual joint motions on this harness. Version 0.6 was successfully built and uploaded. It smooths the simultaneous dance following the user's report of jerkiness with 0.5; commissioning details and physical observations are recorded separately in the [validation log](VALIDATION.md). Earlier 0.4 target builds were blocked by compiler subprocesses terminated with signal 9. Source defaults to `ROBOT_USE_POWER_SWITCH=0`; setting it to 1 is only for the archived Pololu Rev A harness.
+The user confirmed Rev B wiring is live. Version 0.3 has also executed individual joint motions on this harness. Version 0.8 was successfully built and uploaded. It adds battery telemetry and guarded continuous faster dancing to the finer-PWM driver introduced in 0.7; commissioning details and physical observations are recorded separately in the [validation log](VALIDATION.md). Earlier 0.4 target builds were blocked by compiler subprocesses terminated with signal 9. Source defaults to `ROBOT_USE_POWER_SWITCH=0`; setting it to 1 is only for the archived Pololu Rev A harness.
 
 ## Build and upload from Terminal or VS Code
 
@@ -18,7 +18,7 @@ python3 scripts/robot.py check
 
 On a fresh checkout, first run `python3 scripts/robot.py setup`. This macOS setup stores tools under ignored `.tools/` and firmware under ignored `build/`. It pins Arduino CLI 1.5.1 and Seeed's regular/non-mbed nRF52 Boards 1.1.13 with bundled Servo/TinyUSB libraries. Apple Silicon uses native Arm GNU 13.2.Rel1. Python 3.12+, macOS Command Line Tools and network access are needed for setup. No Arduino IDE or VS Code extension is required; the same commands are available under **Terminal -> Run Task -> Robot: ...**.
 
-The upload script accepts only a recognized XIAO nRF52840 Sense and requires the uploader's `Device programmed.` acknowledgement. The `check` command sends only `help` and `off`, checks the 0.6 banner and `OFF.` response, then closes serial. If upload cannot reach the bootloader, double-press reset, list ports and retry. Do not use boot LED appearance alone as proof of bootloader mode.
+The upload script accepts only a recognized XIAO nRF52840 Sense and requires the uploader's `Device programmed.` acknowledgement. The `check` command sends only `help` and `off`, checks the 0.8 banner and `OFF.` response, then closes serial. If upload cannot reach the bootloader, double-press reset, list ports and retry. Do not use boot LED appearance alone as proof of bootloader mode.
 
 ## Run movements yourself
 
@@ -32,7 +32,10 @@ Serial uses **115200 baud**. Type **one command**, press Enter, and wait for the
 
 | Command | Action |
 |---|---|
-| `dance` | Both joints simultaneously; slower minimum-jerk opposing/same-direction 1100–1900 us sweeps, neutral hold, PWM stops after 23.9 s; supervised clearance required |
+| `battery` | BAT-node estimate in millivolts; no motion started |
+| `dance-loop` | Continuous 4-second cycles, 1100–1900 us; requires `keep` every 2 s; 5 s heartbeat timeout |
+| `keep` | Refresh continuous dance heartbeat; no motion started |
+| `dance` | Both joints simultaneously; continuous phase-offset 1100–1900 us waves, neutral hold, PWM stops after 25.5 s; supervised clearance required |
 | `lower-small` | D0: 1500, 1450, 1500, 1550, 1500 us; approximately 1.5 s each; stop at 7.5 s |
 | `upper-small` | Same small supported-assembly check on D1 |
 | `lower` | D0 nominal neutral 1500 us for up to 15 s |
@@ -44,9 +47,23 @@ Serial uses **115200 baud**. Type **one command**, press Enter, and wait for the
 | `help` | Stop PWM and print menu |
 | `power` | No effect in Rev B; the electronic power switch was removed |
 
-The small checks passed on both assembled joints with version 0.3 before rewiring. Actual shaft angles, endpoints, loaded supply margins and Rev B power behavior are not yet characterized. The nRF52 Servo library quantizes pulses in 8 us steps (1500 us requested is approximately 1496 us); these are nominal commands, not encoder measurements. Do not use wide jogs with installed horns/links until limits are established.
+The small checks passed on both assembled joints with version 0.3 before rewiring. Actual shaft angles, endpoints, loaded supply margins and Rev B power behavior are not yet characterized. Earlier versions used an 8 us PWM grid; version 0.7 configures 1 us increments. These are nominal commands, not encoder measurements. Do not use wide jogs with installed horns/links until limits are established.
 
-The dance uses 3.2-second segments with zero commanded velocity and acceleration at each waypoint, and target updates every 20 ms. Version 0.5 used 1.8-second cubic segments with acceleration discontinuities. This improves the commanded trajectory; servo deadband, gear backlash, supply behavior and the bundled library's 8 us pulse resolution can still affect physical smoothness. Initial center acquisition is not position-aware because these servos provide no feedback.
+The dance uses continuous sine/cosine targets with an 8-second period, a 4-second quintic fade-in/out, 24 seconds of motion and a final 1.5-second neutral hold. Targets update every 20 ms. It no longer stops at intermediate waypoints. The project-owned `FineServo.h` uses the board core's hardware PWM at 1 MHz with a 20,000-tick frame: 1 us pulse increments at the same 50 Hz, replacing the bundled Servo library's 8 us increments. No downloaded core files are patched. Servo deadband, gearing, friction, supply behavior and mechanical flexibility can still affect physical smoothness. Initial center acquisition is not position-aware because these servos provide no feedback.
+
+## Continuous faster dance and battery guard
+
+Use the project Python environment (it contains pyserial):
+
+```sh
+.tools/arduino/python/bin/python scripts/dance.py
+```
+
+This supervised host verifies firmware 0.8, reads battery voltage, starts `dance-loop`, sends a heartbeat every 2 seconds, and logs voltage to `build/dance.log`. Press Ctrl+C to stop. The process ID is stored in `build/dance.pid`; sending that process SIGTERM also requests an explicit PWM stop. Do not open a second serial monitor while it runs. Firmware stops on USB serial disconnect or a missed 5-second heartbeat. The continuous loop uses a 4-second cycle (twice the timed dance's speed), the same range and a gentle initial fade-in. It does not periodically stop/recenter.
+
+All motion commands now require a battery estimate between 3.7 and 4.4 V before arming. During motion the ADC samples every 100 ms: two consecutive readings below 3.6 V, one below 3.4 V, or one above 4.4 V stop PWM. The host exits after a guard stop and does not restart automatically. `battery` reads the BAT node using the classic Sense's onboard 1 MOhm/510 kOhm divider, 12-bit ADC, internal 3.0 V full-scale and 40 us acquisition. Results are uncalibrated estimates; USB/charging affects the node voltage, and absent-cell detection, state of charge and current sensing are not provided. This can miss brief brownout transients.
+
+**This is a motion guard, not a battery disconnect.** Servo idle drain continues after PWM stop; unplug battery and USB if voltage is low or for storage. USB's approximately 100 mA charging path may supply less current than dancing consumes, so USB connected does not prove net charging. No claim of unattended over-discharge protection is made.
 
 ## Horn installation / neutral
 
@@ -56,7 +73,7 @@ For initial centering, remove horns and driven links, command one servo to nomin
 
 For routine USB-C charging, **unplug both complete servo plugs**, keep the battery connected to XIAO BAT+/GND and connect USB. The board's charger is not a motor supply. USB can feed the shared BAT+ bus even without a battery, so battery removal alone is not full OFF when USB remains attached. No separate charger or extra disconnect component is added.
 
-The sketch selects approximately **100 mA** via `PIN_CHARGING_CURRENT` LOW and keeps `VBAT_ENABLE` LOW. See [HARDWARE.md](../HARDWARE.md) for pin mappings and charging limits. Rev B has no automatic physical low-voltage cutoff. A future voltage alarm can stop PWM, but servo idle current remains until the pack is unplugged. The alarm is not yet implemented. Disconnect battery and USB for storage.
+The sketch selects approximately **100 mA** via `PIN_CHARGING_CURRENT` LOW and keeps `VBAT_ENABLE` LOW. See [HARDWARE.md](../HARDWARE.md) for pin mappings and charging limits. Rev B has no automatic physical low-voltage cutoff. A future voltage alarm can stop PWM, but servo idle current remains until the pack is unplugged. The voltage motion guard is implemented in version 0.8; it is not a physical cutoff. Disconnect battery and USB for storage.
 
 ## Validation and drawing tools
 
