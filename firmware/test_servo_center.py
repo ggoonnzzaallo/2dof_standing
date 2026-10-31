@@ -98,7 +98,29 @@ int main(){
   clockMs+=POWER_TEST_MS;loop();checkOff(); // millis rollover is safe.
 
   fresh();activeServo.fail=true;send("lower\n");checkOff();
-  std::cout << "PASS: disarmed boot, explicit commands, center-only PWM, timeouts, "
+  // Each unloaded jog selects one output, changes target at known times,
+  // returns to neutral before detaching, and still honors immediate shutdown.
+  for (bool upper : {false, true}) {
+    fresh();send(upper ? "upper-jog\n" : "lower-jog\n");
+    assert(activeServo.pin==(upper ? D1 : D0));
+    assert(pins[upper ? D0 : D1]==LOW);
+    assert(activeServo.pulse==1500);
+    const int expected[]={1500,1200,1800,1200,1800,1200,1500};
+    const uint32_t origin=startedAt;
+    for (uint32_t i=1;i<7;++i) {
+      clockMs=origin+i*1500-1;loop();
+      assert(activeServo.pulse==expected[i-1]);
+      ++clockMs;loop();assert(activeServo.pulse==expected[i]);
+    }
+    clockMs=origin+10499;loop();assert(activeServo.attached() && activeServo.pulse==1500);
+    ++clockMs;loop();checkOff();
+  }
+  fresh();send("lower-jog\n");send("!\n");checkOff();
+  fresh();send("upper-jog\n");Serial.open=false;loop();checkOff();
+  fresh();clockMs=UINT32_MAX-10;send("lower-jog\n");
+  clockMs=startedAt+3000;loop();assert(activeServo.pulse==1800);
+  clockMs=startedAt+10500;loop();checkOff();
+  std::cout << "PASS: disarmed boot, explicit commands, centering and bounded jogs, timeouts, "
                "disconnect, emergency stop, malformed input, rollover, attach failure.\n";
 }
 '''

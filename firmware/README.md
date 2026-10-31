@@ -1,6 +1,6 @@
 # First power-up and servo centering
 
-Use `servo_center/servo_center.ino` for the wired XIAO **nRF52840 Sense**, two PTK 7465 MG servos, and Pololu **2810 LV**. It starts with D2 LOW and both servo signals LOW. It does not move on boot. Serial commands test the switch or center one servo at a time; each command has a short timeout and closing the serial monitor disables the rail. This is supervised bench firmware; it has no automatic battery cutoff or policy inference.
+Use `servo_center/servo_center.ino` for the wired XIAO **nRF52840 Sense**, two PTK 7465 MG servos, and Pololu **2810 LV**. It starts with D2 LOW and both servo signals LOW. It does not move on boot. Serial commands test the switch, center a servo or jog one unloaded servo at a time; each command has a short timeout and closing the serial monitor disables the rail. This is supervised bench firmware; it has no automatic battery cutoff or policy inference.
 
 ## 1. Unpowered checks
 
@@ -62,7 +62,9 @@ For an ambiguous OFF reading, an optional temporary **1–10 kilohm resistor** a
 2. If the motor settles quietly, send `off`, unplug the battery and USB, and gently fit its supplied OEM horn to the nearest spline tooth that gives the intended upright link pose. Avoid turning the shaft while seating the horn. Use the supplied center screw; do not substitute an unverified thread. Small angular offsets can be calibrated later.
 3. Reconnect and command `lower` again. Confirm the horn returns to the same position without binding. Remove power again before fastening the driven print and rear support.
 4. Repeat with `upper` for D1. Its `lower`/`upper` names refer to the wiring, not the horn orientation. If both servos are permanently wired, they share switched power, but only the selected servo receives pulses; both must remain unloaded until each is checked.
-5. After both centers are established, assemble the moving prints, check passive supports and wire slack, and record alignment offsets. Safe endpoint measurement and slow motion tests come next; this sketch only centers.
+5. After both centers are established, assemble the moving prints, check passive supports and wire slack, and record alignment offsets. Safe endpoint measurement and slow motion tests come next.
+
+For a clearly visible unloaded motion check, version **0.2** adds `lower-jog` and `upper-jog`. Keep **both horns and driven printed parts off the splines**. The selected output follows **1500 → 1200 → 1800 → 1200 → 1800 → 1200 → 1500 µs**, holding each target for approximately 1.5 seconds before stopping PWM and commanding power off at 10.5 seconds. Actual travel angles are uncalibrated; this is not an endpoint test. Only one servo receives PWM. Ordinary `lower` and `upper` still hold neutral without jogging. Use `off` or `!` to stop early; USB disconnect also stops the test. Do not run the jog with assembled links until clearance and limits have been established.
 
 The 1500 µs command is a **nominal starting point**, not a measurement of actual shaft angle. The bundled nRF52 Servo library uses 8 µs timer steps, so a 1500 µs request is represented as approximately 1496 µs; keep this quantization in mind when measuring offsets. Actual pulse timing remains unmeasured. The servos do not report their positions. Direct 1S operation is the reference-project experiment; the related manufacturer's published range starts at 5 V, so don't treat successful centering as proof of adequate loaded performance. If a servo twitches, buzzes persistently, gets hot, or cannot settle unloaded, send `off` and check supply sag, signal/ground wiring and mechanical rubbing before attaching a long arm.
 
@@ -73,6 +75,8 @@ The 1500 µs command is a **nominal starting point**, not a measurement of actua
 | `power` | Servo rail on for 3 seconds, both PWM pins LOW |
 | `lower` | D0 at 1500 µs for 15 seconds |
 | `upper` | D1 at 1500 µs for 15 seconds |
+| `lower-jog` | Unloaded D0 motion between 1200–1800 µs, return to 1500 µs, off at 10.5 seconds |
+| `upper-jog` | Same unloaded motion check on D1 |
 | `off` | Stop PWM, pull D0/D1 LOW, then D2 LOW |
 | `help` | Stop and print commands |
 | `!` (no newline needed) | Immediate stop; send a newline before another command |
