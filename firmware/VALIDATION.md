@@ -37,13 +37,16 @@ All powered checks used the Pololu slide in **OFF**. Both servo horns remain off
 | Battery only: XIAO BAT+ to its own GND | 3.9 V |
 | Battery only: XIAO 3V3 to its own GND | 3.27 V |
 | USB and battery: repeat XIAO 3V3 to its own GND | 3.3 V |
-| Reported resting Pololu VOUT | Initially 0.7 V, later 1.17 V, most recently 3.9 V; not yet explained |
+| Earlier reported resting Pololu VOUT | 0.7 V, then 1.17 V, then 3.9 V; slide position for the last reading was initially unclear |
+| Explicit physical slide position check: VOUT | OFF approximately 1.1 V; ON approximately 3.9 V |
 | USB and battery: XIAO D2 to XIAO GND | 0 V |
 | USB and battery: Pololu ON to the same XIAO GND | 0 V on latest check |
 
 An early XIAO 3V3 reading of 1.1 V was not reproduced in the subsequent supply checks. An early Pololu ON reading of 1.11 V relative to Pololu GND was not reproduced when both control-wire ends were measured using XIAO GND. No cause has been established for these differences; do not infer that an intermittent connection has been ruled out. A reported approximately 2-megohm VIN-to-VOUT resistance does not check for a power-to-ground short.
 
-The agent repeated the USB `help`/`off` check and received the expected version banner and `OFF.` acknowledgement. The reported 3.9 V resting VOUT stopped preparation for the timed power test; no `power`, `lower` or `upper` command has been sent. Another `help`/`off` check also received the expected acknowledgement. **Timed switch operation, reliable rail shutdown, supply sag under servo load and servo centering remain unverified.** Next, compare VOUT in both physical slide positions to check for the switch's hardware override. A supervised three-second `power` command with no PWM remains pending resolution of the resting output and explicit meter readiness.
+The agent repeated the USB `help`/`off` check and received the expected version banner and `OFF.` acknowledgement. The reported 3.9 V resting VOUT stopped preparation for the timed power test; no `power`, `lower` or `upper` command has been sent. Another `help`/`off` check also received the expected acknowledgement. The subsequent explicit slide-position check shows that the mechanical switch changes the output voltage.
+
+Pololu states that the [disabled output is disconnected and floating](https://forum.pololu.com/t/reverse-voltage-on-mini-mosfet-slide-switch-with-2810/11758). The guide's earlier expectation that OFF must measure near 0 V was too strict and has been corrected. The approximately 1.1 V OFF reading is compatible with a floating output, but its source/current capability has not been determined; no light-load resistor test was performed. **Timed software switch operation, shutdown under a known load, supply sag under servo load and servo centering remain unverified.** A supervised three-second `power` command with no PWM is next, after explicit meter readiness with the slide returned to OFF.
 
 Re-run software checks with:
 

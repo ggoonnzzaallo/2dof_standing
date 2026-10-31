@@ -47,11 +47,14 @@ Use the meter in **DC volts**, with black on common GND and red on the named pos
 |---|---|
 | Pololu VIN to GND | Approximately the measured battery voltage, no more than 4.2 V for this 1S pack |
 | XIAO 3V3 to GND | About 3.3 V |
-| Pololu VOUT to GND after `off` | Falls toward 0 V; capacitors may take a moment to discharge |
+| Pololu ON to GND after `off` | Near 0 V; this is the control pad connected to D2 |
+| Pololu VOUT to GND after `off` | Output is disconnected/floating; a residual meter reading is possible |
 | Send `power` | VOUT approximately follows VIN for **3 seconds**, then switches off |
 | Send `off`, or `!` | Stops PWM and disables VOUT |
 
-Do not proceed if VOUT remains powered with `off` and the slide OFF. First check D2 → **ON**, the slide position, and whether VIN and VOUT were accidentally bridged. Neither a HIGH/LOW command nor the slide can fix a physical bypass. The slide's **ON** position forces the rail on and defeats software shutdown; see [Pololu's documentation](https://www.pololu.com/product/2810).
+Pololu confirms that the [OFF output is disconnected and floating](https://forum.pololu.com/t/reverse-voltage-on-mini-mosfet-slide-switch-with-2810/11758); it is not actively clamped to GND. A nonzero VOUT reading alone does not prove that the rail can supply current. Record its OFF baseline, verify D2 and Pololu **ON** are near 0 V, then compare the timed enabled and disabled readings. If the output continues to drive a load with `off` and the slide OFF, check D2 → **ON**, the slide position, and whether VIN and VOUT were accidentally bridged. Neither a HIGH/LOW command nor the slide can fix a physical bypass. The slide's **ON** position forces the rail on and defeats software shutdown; see [Pololu's documentation](https://www.pololu.com/product/2810).
+
+For an ambiguous OFF reading, an optional temporary **1–10 kilohm resistor** across VOUT–GND provides a small known test load. Attach/remove it with both power sources unplugged and compare powered OFF/ON voltages. This is a diagnostic aid, not a required permanent BOM component; do not short VOUT to GND or use the meter's current range across the supply. A resistor test has not yet been performed on this build.
 
 ## 4. Center, then attach the horns
 
