@@ -13,7 +13,7 @@ The newer native linker prints warnings for unimplemented POSIX file-descriptor/
 
 ## Hardware status
 
-The connected USB device is identified as **Seeed XIAO nRF52840 Sense** (VID 2886 / application PID 8045). The user confirmed the battery is unplugged and both horns are off.
+The connected USB device is identified as **Seeed XIAO nRF52840 Sense** (VID 2886 / application PID 8045). At upload, the user confirmed the battery was unplugged and both horns were off.
 
 **Firmware upload confirmed:** after entering bootloader USB PID **0045**, the native Python uploader flashed the compiled DFU package and returned **`Device programmed.`**. A subsequent USB check received **`ROBOT SERVO CENTER 0.1`**, the command menu and **`OFF.`**. The verification sends only `help` and `off`, both disarming commands, and closes the serial connection afterward.
 
@@ -21,7 +21,29 @@ Bootloader mode was identified by USB enumeration; the user did not observe the 
 
 The bundled Servo implementation was inspected: its 20 ms period is 50 Hz and its 8 µs duty resolution rounds a 1500 µs request down to approximately 1496 µs. Host tests check the requested value, not physical pulse timing.
 
-No servo power-on command has been sent. No motor movement, electrical voltage measurement, PWM timing measurement, low-voltage cutoff test or mechanical fit test has been performed by the agent. Host tests do not verify physical D2 voltage or a correctly wired Pololu switch. Verify VIN, 3V3 and disabled VOUT with a meter before the first powered servo command.
+No servo power-on command has been sent. No motor movement, PWM timing measurement, low-voltage cutoff test or mechanical fit test has been performed by the agent. Electrical measurements below were taken and reported by the user; the agent has no direct voltage telemetry. Host tests do not verify physical GPIO voltages or wiring.
+
+## User-reported electrical checks
+
+All powered checks used the Pololu slide in **OFF**. Both servo horns remain off. The user confirmed no wire is attached to XIAO 3V3, and Pololu VIN connects to the battery-positive bus shared with XIAO BAT+.
+
+| Check | Reported result |
+|---|---|
+| Battery terminal voltage | 3.963 V |
+| Pololu VIN to common GND | Approximately 3.9 V |
+| XIAO GND to negative bus, USB and battery unplugged | Approximately 0 ohms |
+| XIAO GND to Pololu GND, USB and battery unplugged | Approximately 0 ohms |
+| USB only: XIAO 3V3 to its own GND | 3.3 V |
+| Battery only: XIAO BAT+ to its own GND | 3.9 V |
+| Battery only: XIAO 3V3 to its own GND | 3.27 V |
+| USB and battery: repeat XIAO 3V3 to its own GND | 3.3 V |
+| Reported resting Pololu VOUT | Initially 0.7 V, later 1.17 V, most recently 3.9 V; not yet explained |
+| USB and battery: XIAO D2 to XIAO GND | 0 V |
+| USB and battery: Pololu ON to the same XIAO GND | 0 V on latest check |
+
+An early XIAO 3V3 reading of 1.1 V was not reproduced in the subsequent supply checks. An early Pololu ON reading of 1.11 V relative to Pololu GND was not reproduced when both control-wire ends were measured using XIAO GND. No cause has been established for these differences; do not infer that an intermittent connection has been ruled out. A reported approximately 2-megohm VIN-to-VOUT resistance does not check for a power-to-ground short.
+
+The agent repeated the USB `help`/`off` check and received the expected version banner and `OFF.` acknowledgement. The reported 3.9 V resting VOUT stopped preparation for the timed power test; no `power`, `lower` or `upper` command has been sent. Another `help`/`off` check also received the expected acknowledgement. **Timed switch operation, reliable rail shutdown, supply sag under servo load and servo centering remain unverified.** Next, compare VOUT in both physical slide positions to check for the switch's hardware override. A supervised three-second `power` command with no PWM remains pending resolution of the resting output and explicit meter readiness.
 
 Re-run software checks with:
 
