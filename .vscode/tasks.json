@@ -1,0 +1,63 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Robot: set up tools",
+      "type": "process",
+      "command": "python3",
+      "args": ["scripts/robot.py", "setup"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Robot: build centering firmware",
+      "type": "process",
+      "command": "python3",
+      "args": ["scripts/robot.py", "build"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "group": {"kind": "build", "isDefault": true},
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Robot: find XIAO",
+      "type": "process",
+      "command": "python3",
+      "args": ["scripts/robot.py", "ports"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Robot: upload disarmed centering firmware",
+      "type": "process",
+      "command": "python3",
+      "args": ["scripts/robot.py", "upload"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Robot: check USB with power off",
+      "type": "process",
+      "command": "python3",
+      "args": ["scripts/robot.py", "check"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Robot: serial monitor",
+      "type": "process",
+      "command": "python3",
+      "args": ["scripts/robot.py", "monitor"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": [],
+      "presentation": {"focus": true, "panel": "dedicated"}
+    },
+    {
+      "label": "Robot: test shutdown logic",
+      "type": "process",
+      "command": "python3",
+      "args": ["scripts/robot.py", "test"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    }
+  ]
+}
