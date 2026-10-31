@@ -30,6 +30,7 @@ constexpr uint32_t SMALL_HOLD_MS = JOG_STEP_MS * SMALL_STEPS;
 
 // Continuous phase-offset waves, with gentle fade-in/out at neutral.
 constexpr uint32_t DANCE_PERIOD_MS = 8000;
+constexpr uint32_t LOOP_PERIOD_MS = 2500;
 constexpr uint32_t DANCE_MOTION_MS = 24000;
 constexpr uint32_t DANCE_RAMP_MS = 4000;
 constexpr uint32_t DANCE_HOLD_MS = DANCE_MOTION_MS+1500;
@@ -97,7 +98,7 @@ void motorOff() {
 }
 
 void help() {
-  Serial.println("ROBOT SERVO CENTER 0.8");
+  Serial.println("ROBOT SERVO CENTER 0.9");
   Serial.println("OFF. No automatic movement. Support the arm and keep joints clear.");
   if (!USE_SERVO_POWER_SWITCH) {
     Serial.println("REV B DIRECT POWER: off/! stop PWM only; servo power stays live.");
@@ -187,7 +188,7 @@ void beginDance(bool continuous=false) {
   activeMode=continuous ? 9 : 8;
   lastHeartbeatAt=millis();
   if (continuous) {
-    Serial.println("DANCE LOOP: 4-second cycles, 1100-1900 us, battery guard and heartbeat enabled.");
+    Serial.println("DANCE LOOP: 2.5-second cycles, 1100-1900 us, battery guard and heartbeat enabled.");
     return;
   }
   Serial.println("DANCE: BOTH joints 1100-1900 us, neutral then PWM off in 25.5 seconds.");
@@ -195,7 +196,9 @@ void beginDance(bool continuous=false) {
 
 void updateDance(uint32_t elapsed) {
   if (elapsed-lastDanceUpdateMs<DANCE_UPDATE_MS) return;
-  lastDanceUpdateMs=elapsed;
+  // Anchor targets to the fixed frame grid; do not accumulate loop-delay drift.
+  lastDanceUpdateMs=elapsed-(elapsed%DANCE_UPDATE_MS);
+  elapsed=lastDanceUpdateMs;
   const bool continuous=activeMode==9;
   if (!continuous && elapsed>=DANCE_MOTION_MS) {
     activeServo.writeMicroseconds(CENTER_US);
@@ -207,7 +210,7 @@ void updateDance(uint32_t elapsed) {
   const float t=rampTime<DANCE_RAMP_MS ? float(rampTime)/DANCE_RAMP_MS : 1.0f;
   const float envelope=t*t*t*(10.0f+t*(-15.0f+6.0f*t));
   constexpr float PI_F=3.14159265358979323846f;
-  const uint32_t period=continuous ? 4000 : DANCE_PERIOD_MS;
+  const uint32_t period=continuous ? LOOP_PERIOD_MS : DANCE_PERIOD_MS;
   const float phase=2.0f*PI_F*float(elapsed%period)/period;
   activeServo.writeMicroseconds(CENTER_US+int(lroundf(400.0f*envelope*sinf(phase))));
   secondServo.writeMicroseconds(CENTER_US+int(lroundf(400.0f*envelope*cosf(phase))));

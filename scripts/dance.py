@@ -41,7 +41,7 @@ with logfile.open('a',buffering=1) as log:
         time.sleep(1)
         s.write(b'help\noff\nbattery\n');s.flush();time.sleep(.4)
         initial=s.read(8192).decode(errors='replace')
-        if 'ROBOT SERVO CENTER 0.8' not in initial or 'OFF.' not in initial.splitlines():
+        if 'ROBOT SERVO CENTER 0.9' not in initial or 'OFF.' not in initial.splitlines():
             raise RuntimeError('Expected version/disarmed acknowledgement missing: '+initial)
         volts=re.findall(r'BATTERY_MV: (\d+)',initial)
         if not volts or not 3700<=int(volts[-1])<=4400:

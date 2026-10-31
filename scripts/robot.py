@@ -188,7 +188,7 @@ def main():
                 'time.sleep(1); s.write(bytes([104,101,108,112,10,111,102,102,10])); '
                 'time.sleep(0.5); data=s.read(8192).decode(errors="replace"); s.close(); '
                 'print(data); '
-                'sys.exit(0 if "ROBOT SERVO CENTER 0.8" in data and "OFF." in data.splitlines() else 1)')
+                'sys.exit(0 if "ROBOT SERVO CENTER 0.9" in data and "OFF." in data.splitlines() else 1)')
         run([PYTHON, '-c', code, find_port(args.port)])
     else:
         run([sys.executable, ROOT / 'firmware' / 'test_servo_center.py'])

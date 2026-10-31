@@ -1,8 +1,8 @@
 # Rev B terminal control - direct battery power
 
-**Current source: version 0.8, direct-powered servos with no Pololu.** D0/marked 0 controls the lower servo, D1/marked 1 controls the upper, and D2 is unused. Both PWM outputs stop on boot, timeout, USB serial disconnect, `off` or `!`. **None of these actions disconnects servo power.** Full OFF requires battery and USB unplugged.
+**Current source: version 0.9, direct-powered servos with no Pololu.** D0/marked 0 controls the lower servo, D1/marked 1 controls the upper, and D2 is unused. Both PWM outputs stop on boot, timeout, USB serial disconnect, `off` or `!`. **None of these actions disconnects servo power.** Full OFF requires battery and USB unplugged.
 
-The user confirmed Rev B wiring is live. Version 0.3 has also executed individual joint motions on this harness. Version 0.8 was successfully built and uploaded. It adds battery telemetry and guarded continuous faster dancing to the finer-PWM driver introduced in 0.7; commissioning details and physical observations are recorded separately in the [validation log](VALIDATION.md). Earlier 0.4 target builds were blocked by compiler subprocesses terminated with signal 9. Source defaults to `ROBOT_USE_POWER_SWITCH=0`; setting it to 1 is only for the archived Pololu Rev A harness.
+The user confirmed Rev B wiring is live. Version 0.3 has also executed individual joint motions on this harness. Version 0.9 was successfully built and uploaded. It adds battery telemetry and guarded continuous faster dancing to the finer-PWM driver introduced in 0.7; commissioning details and physical observations are recorded separately in the [validation log](VALIDATION.md). Earlier 0.4 target builds were blocked by compiler subprocesses terminated with signal 9. Source defaults to `ROBOT_USE_POWER_SWITCH=0`; setting it to 1 is only for the archived Pololu Rev A harness.
 
 ## Build and upload from Terminal or VS Code
 
@@ -18,7 +18,7 @@ python3 scripts/robot.py check
 
 On a fresh checkout, first run `python3 scripts/robot.py setup`. This macOS setup stores tools under ignored `.tools/` and firmware under ignored `build/`. It pins Arduino CLI 1.5.1 and Seeed's regular/non-mbed nRF52 Boards 1.1.13 with bundled Servo/TinyUSB libraries. Apple Silicon uses native Arm GNU 13.2.Rel1. Python 3.12+, macOS Command Line Tools and network access are needed for setup. No Arduino IDE or VS Code extension is required; the same commands are available under **Terminal -> Run Task -> Robot: ...**.
 
-The upload script accepts only a recognized XIAO nRF52840 Sense and requires the uploader's `Device programmed.` acknowledgement. The `check` command sends only `help` and `off`, checks the 0.8 banner and `OFF.` response, then closes serial. If upload cannot reach the bootloader, double-press reset, list ports and retry. Do not use boot LED appearance alone as proof of bootloader mode.
+The upload script accepts only a recognized XIAO nRF52840 Sense and requires the uploader's `Device programmed.` acknowledgement. The `check` command sends only `help` and `off`, checks the 0.9 banner and `OFF.` response, then closes serial. If upload cannot reach the bootloader, double-press reset, list ports and retry. Do not use boot LED appearance alone as proof of bootloader mode.
 
 ## Run movements yourself
 
@@ -33,7 +33,7 @@ Serial uses **115200 baud**. Type **one command**, press Enter, and wait for the
 | Command | Action |
 |---|---|
 | `battery` | BAT-node estimate in millivolts; no motion started |
-| `dance-loop` | Continuous 4-second cycles, 1100–1900 us; requires `keep` every 2 s; 5 s heartbeat timeout |
+| `dance-loop` | Continuous 2.5-second cycles, 1100–1900 us; requires `keep` every 2 s; 5 s heartbeat timeout |
 | `keep` | Refresh continuous dance heartbeat; no motion started |
 | `dance` | Both joints simultaneously; continuous phase-offset 1100–1900 us waves, neutral hold, PWM stops after 25.5 s; supervised clearance required |
 | `lower-small` | D0: 1500, 1450, 1500, 1550, 1500 us; approximately 1.5 s each; stop at 7.5 s |
@@ -49,7 +49,7 @@ Serial uses **115200 baud**. Type **one command**, press Enter, and wait for the
 
 The small checks passed on both assembled joints with version 0.3 before rewiring. Actual shaft angles, endpoints, loaded supply margins and Rev B power behavior are not yet characterized. Earlier versions used an 8 us PWM grid; version 0.7 configures 1 us increments. These are nominal commands, not encoder measurements. Do not use wide jogs with installed horns/links until limits are established.
 
-The dance uses continuous sine/cosine targets with an 8-second period, a 4-second quintic fade-in/out, 24 seconds of motion and a final 1.5-second neutral hold. Targets update every 20 ms. It no longer stops at intermediate waypoints. The project-owned `FineServo.h` uses the board core's hardware PWM at 1 MHz with a 20,000-tick frame: 1 us pulse increments at the same 50 Hz, replacing the bundled Servo library's 8 us increments. No downloaded core files are patched. Servo deadband, gearing, friction, supply behavior and mechanical flexibility can still affect physical smoothness. Initial center acquisition is not position-aware because these servos provide no feedback.
+The dance uses continuous sine/cosine targets with an 8-second period, a 4-second quintic fade-in/out, 24 seconds of motion and a final 1.5-second neutral hold. Targets update on a fixed 20 ms grid; late loop iterations do not shift subsequent target deadlines. It no longer stops at intermediate waypoints. The project-owned `FineServo.h` uses the board core's hardware PWM at 1 MHz with a 20,000-tick frame: 1 us pulse increments at the same 50 Hz, replacing the bundled Servo library's 8 us increments. No downloaded core files are patched. Servo deadband, gearing, friction, supply behavior and mechanical flexibility can still affect physical smoothness. Initial center acquisition is not position-aware because these servos provide no feedback.
 
 ## Continuous faster dance and battery guard
 
@@ -59,7 +59,7 @@ Use the project Python environment (it contains pyserial):
 .tools/arduino/python/bin/python scripts/dance.py
 ```
 
-This supervised host verifies firmware 0.8, reads battery voltage, starts `dance-loop`, sends a heartbeat every 2 seconds, and logs voltage to `build/dance.log`. Press Ctrl+C to stop. The process ID is stored in `build/dance.pid`; sending that process SIGTERM also requests an explicit PWM stop. Do not open a second serial monitor while it runs. Firmware stops on USB serial disconnect or a missed 5-second heartbeat. The continuous loop uses a 4-second cycle (twice the timed dance's speed), the same range and a gentle initial fade-in. It does not periodically stop/recenter.
+This supervised host verifies firmware 0.9, reads battery voltage, starts `dance-loop`, sends a heartbeat every 2 seconds, and logs voltage to `build/dance.log`. Press Ctrl+C to stop. The process ID is stored in `build/dance.pid`; sending that process SIGTERM also requests an explicit PWM stop. Do not open a second serial monitor while it runs. Firmware stops on USB serial disconnect or a missed 5-second heartbeat. The continuous loop uses a 2.5-second cycle (1.6 times version 0.8's speed), the same range and a gentle initial fade-in. It does not periodically stop/recenter.
 
 All motion commands now require a battery estimate between 3.7 and 4.4 V before arming. During motion the ADC samples every 100 ms: two consecutive readings below 3.6 V, one below 3.4 V, or one above 4.4 V stop PWM. The host exits after a guard stop and does not restart automatically. `battery` reads the BAT node using the classic Sense's onboard 1 MOhm/510 kOhm divider, 12-bit ADC, internal 3.0 V full-scale and 40 us acquisition. Results are uncalibrated estimates; USB/charging affects the node voltage, and absent-cell detection, state of charge and current sensing are not provided. This can miss brief brownout transients.
 

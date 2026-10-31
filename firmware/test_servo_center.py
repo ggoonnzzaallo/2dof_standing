@@ -195,6 +195,23 @@ int main(){
   fresh();send("dance-loop\n");adcRaw=0;clockMs=100;loop();checkOff();
   fresh();send("dance-loop\n!\n");checkOff();
   fresh();send("dance-loop\n");Serial.open=false;loop();checkOff();
+  fresh();send("dance-loop\n");
+  int previousFastLower=1500,previousFastUpper=1500;
+  for(uint32_t t=0;t<60000;++t) {
+    clockMs=t;
+    if(t%2000==0) send("keep\n"); else loop();
+    assert(activeMode==9 && activeServo.attached() && secondServo.attached());
+    assert(activeServo.pulse>=1100 && activeServo.pulse<=1900);
+    assert(secondServo.pulse>=1100 && secondServo.pulse<=1900);
+    assert(std::abs(activeServo.pulse-previousFastLower)<=26);
+    assert(std::abs(secondServo.pulse-previousFastUpper)<=26);
+    previousFastLower=activeServo.pulse;previousFastUpper=secondServo.pulse;
+  }
+  send("off\n");checkOff();
+  fresh();send("dance-loop\n");
+  clockMs=27;loop();assert(lastDanceUpdateMs==20);
+  clockMs=40;loop();assert(lastDanceUpdateMs==40); // No drift after a late frame.
+  send("off\n");checkOff();
   std::cout << "PASS: disarmed boot, explicit commands, centering, wide and small jogs, timeouts, "
                "disconnect, emergency stop, malformed input, rollover, attach failure.\n";
 }
