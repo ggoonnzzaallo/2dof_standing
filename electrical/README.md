@@ -4,6 +4,8 @@ Open or print [the one-page wiring schematic](REV_A_WIRING.pdf), or view its edi
 
 ![Rev A power and signal wiring](REV_A_WIRING.png)
 
+For reading on a phone, use the large-text [power connections](PHONE_WIRING_POWER.png) and [signal connections](PHONE_WIRING_SIGNALS.png). Each box in the power map is one separate bus; join all points within that box and keep the three buses insulated from one another. These are connection maps, not physical pad-location drawings.
+
 **Read the labels on your actual boards before soldering.** This diagram assumes the ordered XIAO **nRF52840 Sense** and Pololu **2810 LV**, not similarly named variants. Verify the JST-RCY mating lead's red/black polarity with a multimeter; connector color and orientation alone are insufficient.
 
 | Physical junction / wire | Join these points | Purpose |
