@@ -58,7 +58,9 @@ OFF: test timer expired.
 OFF.
 ```
 
-The final acknowledgement followed an additional explicit `off`; the serial connection was then closed. The command/timeout path is confirmed by USB responses. **The user's peak and post-shutdown meter readings, physical motion observations, shutdown under a known load, supply sag under servo load and servo centering are still pending.** A serial acknowledgement does not establish actual output voltage or electrical switching time.
+The final acknowledgement followed an additional explicit `off`; the serial connection was then closed. The command/timeout path is confirmed by USB responses. The user reported that VOUT went down to **0 V during the test** and read approximately **3 V afterward**. This does not match the expected active-high ON behavior; meter timing, probe/pad identification and wiring remain unverified. No servo PWM commands will be sent until the discrepancy is resolved. A wiring close-up is the next diagnostic step, including confirmation that D2 reaches the **ON** pad rather than the separate switch-control terminal.
+
+**Electrical software switching has not passed commissioning.** Physical motion observations, shutdown under a known load, supply sag under servo load and servo centering remain pending. A serial acknowledgement does not establish actual output voltage or electrical switching time.
 
 Re-run software checks with:
 
