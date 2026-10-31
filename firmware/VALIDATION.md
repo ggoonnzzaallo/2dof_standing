@@ -106,3 +106,13 @@ Re-run software checks with:
 python3 scripts/robot.py test
 python3 scripts/robot.py build
 ```
+
+## Rev B live wiring and compound-motion request
+
+The user confirmed physical rewiring without the Pololu. Existing firmware accepted both small-motion commands and both individual 1200–1800 us jogs, with timeout and explicit OFF acknowledgements. The user confirmed the larger lower-joint swings were clear. The upper jog also completed in software; no separate physical-observation response was received before the user requested compound motion and more range.
+
+Version 0.5 adds a second Servo instance and explicit `dance` command. Both joints interpolate with smoothstep between paired 1100–1900 us targets, returning to nominal 1500 us and holding neutral for 1.5 seconds before stopping PWM at 14.1 seconds. Boot remains disarmed; timeout, serial disconnect, emergency stop, malformed commands and attachment failures stop both channels. Host tests pass in both power profiles, including every millisecond of the dance bounds, keyframes, neutral finish, second-channel attachment failure and rollover. These tests do not establish physical clearance or real PWM timing.
+
+The first version 0.5 sandboxed build was killed; the next elevated attempt reached linking but `ld` was killed with signal 9. The installed older Seeed compiler cannot run on this Mac (`bad CPU type`). Running the native linker's version query succeeded, and a subsequent cached native build completed with exit code zero (CLI reported it could not determine program size). No security settings were changed.
+
+Version 0.5 was uploaded to `/dev/cu.usbmodem101`; the uploader returned `Device programmed.`. A USB handshake verified `ROBOT SERVO CENTER 0.5` and `OFF.` before motion. One `dance` command then returned `DANCE: BOTH joints 1100-1900 us, neutral then PWM off in 14.1 seconds.`, followed by `OFF: test timer expired.` and the explicit additional `OFF.`. The firmware also stated that direct servo power remains connected. Serial closed afterward. Physical dance clearance/return observation is awaiting user feedback; the acknowledgements establish command execution, not measured shaft positions.

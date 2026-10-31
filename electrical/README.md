@@ -47,7 +47,7 @@ For charging, keep the pack connected to BAT+ and GND, remove both servo plugs a
 
 ## Firmware and regeneration
 
-The [bench firmware guide](../firmware/README.md) covers terminal control. Version 0.4 defaults to Rev B direct power, leaves D2 as an unconnected input and makes the stop semantics explicit. Older version 0.3 motion commands can still produce PWM after rewiring, but its power-off wording no longer describes the hardware.
+The [bench firmware guide](../firmware/README.md) covers terminal control. Version 0.5 defaults to Rev B direct power, leaves D2 as an unconnected input and makes the stop semantics explicit. Older version 0.3 motion commands can still produce PWM after rewiring, but its power-off wording no longer describes the hardware.
 
 Using the project-local Python environment with `reportlab`, `pymupdf` and Pillow installed:
 
@@ -58,6 +58,6 @@ Using the project-local Python environment with `reportlab`, `pymupdf` and Pillo
 
 ## History and sources
 
-The [Rev A PDF](REV_A_WIRING.pdf), [SVG](REV_A_WIRING.svg) and [PNG](REV_A_WIRING.png) are archived switch-based wiring, **not the current build instructions**. Earlier switch tests remain in the [validation log](../firmware/VALIDATION.md); the Rev B physical rewire is not yet confirmed.
+The [Rev A PDF](REV_A_WIRING.pdf), [SVG](REV_A_WIRING.svg) and [PNG](REV_A_WIRING.png) are archived switch-based wiring, **not the current build instructions**. Earlier switch tests remain in the [validation log](../firmware/VALIDATION.md); the user has confirmed the Rev B physical rewire is live.
 
 Manufacturer references: [Seeed pinout and battery/USB charging](https://wiki.seeedstudio.com/XIAO_BLE/), [XIAO Sense schematic](https://files.seeedstudio.com/wiki/XIAO-BLE/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf), and [TI BQ25101 charger description](https://www.ti.com/product/BQ25101). The charger has a battery/system output; that shared node is why unplugging the battery is not sufficient isolation when USB remains connected.

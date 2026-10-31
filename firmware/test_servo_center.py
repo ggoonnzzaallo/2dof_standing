@@ -62,7 +62,7 @@ TEST = r'''
 #include <iostream>
 
 void checkOff(){
-  assert(!activeServo.attached());
+  assert(!activeServo.attached() && !secondServo.attached());
   assert(pins[D0]==LOW && pins[D1]==LOW);
   if (USE_SERVO_POWER_SWITCH) assert(pins[D2]==LOW);
   else assert(modes[D2]==INPUT && writes[D2]==0);
@@ -71,7 +71,7 @@ void checkOff(){
 void send(const std::string& s){Serial.send(s);while(Serial.available())loop();}
 void fresh(){
   Serial.open=false;Serial.rx.clear();loop();
-  clockMs=0;activeServo.fail=false;setup();checkOff();
+  clockMs=0;activeServo.fail=false;secondServo.fail=false;setup();checkOff();
   Serial.open=true;loop();checkOff();
 }
 int main(){
@@ -149,6 +149,26 @@ int main(){
   fresh();clockMs=UINT32_MAX-10;send("upper-small\n");
   clockMs=startedAt+4500;loop();assert(activeServo.pulse==1550);
   clockMs=startedAt+7500;loop();checkOff();
+  fresh();send("dance\n");
+  assert(activeMode==8 && activeServo.pin==D0 && secondServo.pin==D1);
+  const uint32_t origin=startedAt;
+  for(uint32_t t=0;t<DANCE_HOLD_MS;++t) {
+    clockMs=origin+t;loop();
+    assert(activeServo.attached() && secondServo.attached());
+    assert(activeServo.pulse>=1100 && activeServo.pulse<=1900);
+    assert(secondServo.pulse>=1100 && secondServo.pulse<=1900);
+    if(t%DANCE_SEGMENT_MS==0 && t/DANCE_SEGMENT_MS<DANCE_STEPS) {
+      assert(activeServo.pulse==DANCE_TARGETS_US[t/DANCE_SEGMENT_MS][0]);
+      assert(secondServo.pulse==DANCE_TARGETS_US[t/DANCE_SEGMENT_MS][1]);
+    }
+  }
+  assert(activeServo.pulse==1500 && secondServo.pulse==1500);
+  clockMs=origin+DANCE_HOLD_MS;loop();checkOff();
+  fresh();send("dance\n!\n");checkOff();
+  fresh();send("dance\n");Serial.open=false;loop();checkOff();
+  fresh();secondServo.fail=true;send("dance\n");checkOff();
+  fresh();clockMs=UINT32_MAX-10;send("dance\n");
+  clockMs=startedAt+DANCE_HOLD_MS;loop();checkOff();
   std::cout << "PASS: disarmed boot, explicit commands, centering, wide and small jogs, timeouts, "
                "disconnect, emergency stop, malformed input, rollover, attach failure.\n";
 }

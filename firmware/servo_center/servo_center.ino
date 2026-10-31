@@ -27,7 +27,16 @@ constexpr uint16_t SMALL_TARGETS_US[] = {1500, 1450, 1500, 1550, 1500};
 constexpr size_t SMALL_STEPS = sizeof(SMALL_TARGETS_US) / sizeof(SMALL_TARGETS_US[0]);
 constexpr uint32_t SMALL_HOLD_MS = JOG_STEP_MS * SMALL_STEPS;
 
+// Piecewise smoothstep interpolation, both joints driven simultaneously.
+constexpr uint16_t DANCE_TARGETS_US[][2] = {
+  {1500,1500}, {1100,1900}, {1900,1100}, {1100,1100},
+  {1900,1900}, {1100,1900}, {1900,1100}, {1500,1500}
+};
+constexpr size_t DANCE_STEPS = sizeof(DANCE_TARGETS_US)/sizeof(DANCE_TARGETS_US[0]);
+constexpr uint32_t DANCE_SEGMENT_MS = 1800;
+constexpr uint32_t DANCE_HOLD_MS = (DANCE_STEPS-1)*DANCE_SEGMENT_MS+1500;
 Servo activeServo;
+Servo secondServo;
 uint8_t activeMode = 0;  // 0 off, 1 power, 2/3 center, 4/5 wide jog, 6/7 small jog.
 uint8_t jogStep = 0;
 uint32_t startedAt = 0;
@@ -39,6 +48,7 @@ bool discardLine = false;
 void motorOff() {
   // detach() must only be called when attached on the bundled nRF52 library.
   if (activeServo.attached()) activeServo.detach();
+  if (secondServo.attached()) secondServo.detach();
   digitalWrite(D0, LOW);
   digitalWrite(D1, LOW);
   pinMode(D0, OUTPUT);
@@ -55,7 +65,7 @@ void motorOff() {
 }
 
 void help() {
-  Serial.println("ROBOT SERVO CENTER 0.4");
+  Serial.println("ROBOT SERVO CENTER 0.5");
   Serial.println("OFF. No automatic movement. Support the arm and keep joints clear.");
   if (!USE_SERVO_POWER_SWITCH) {
     Serial.println("REV B DIRECT POWER: off/! stop PWM only; servo power stays live.");
@@ -65,6 +75,7 @@ void help() {
   Serial.println("Connect the battery before any power/centering command.");
   Serial.println(USE_SERVO_POWER_SWITCH ? "power  : Rev A rail enabled for 3 seconds, no pulses"
                                         : "power  : unavailable; Rev B has no power switch");
+  Serial.println("dance  : BOTH joints, smooth 1100-1900 us, center then stop after 14.1 seconds");
   Serial.println("lower  : lower servo D0 at 1500 us for 15 seconds");
   Serial.println("upper  : upper servo D1 at 1500 us for 15 seconds");
   Serial.println("lower-jog : HORNS OFF ONLY, D0 1200-1800 us, off in 10.5 seconds");
@@ -123,9 +134,44 @@ void beginTest(uint8_t mode) {
                           : "UPPER: 1500 us, off in 15 seconds.");
 }
 
+void beginDance() {
+  motorOff();
+  if (USE_SERVO_POWER_SWITCH) digitalWrite(D2, HIGH);
+  if (activeServo.attach(D0,1000,2000)==INVALID_SERVO ||
+      secondServo.attach(D1,1000,2000)==INVALID_SERVO) {
+    motorOff();
+    Serial.println("ERROR: could not start both PWM outputs.");
+    return;
+  }
+  activeServo.writeMicroseconds(CENTER_US);
+  secondServo.writeMicroseconds(CENTER_US);
+  startedAt=millis();
+  permittedMs=DANCE_HOLD_MS;
+  activeMode=8;
+  Serial.println("DANCE: BOTH joints 1100-1900 us, neutral then PWM off in 14.1 seconds.");
+}
+
+void updateDance(uint32_t elapsed) {
+  const uint32_t segment=elapsed/DANCE_SEGMENT_MS;
+  if (segment>=DANCE_STEPS-1) {
+    activeServo.writeMicroseconds(CENTER_US);
+    secondServo.writeMicroseconds(CENTER_US);
+    return;
+  }
+  const float t=float(elapsed%DANCE_SEGMENT_MS)/DANCE_SEGMENT_MS;
+  const float blend=t*t*(3.0f-2.0f*t);
+  const int lower=DANCE_TARGETS_US[segment][0]+int(
+    (int(DANCE_TARGETS_US[segment+1][0])-int(DANCE_TARGETS_US[segment][0]))*blend);
+  const int upper=DANCE_TARGETS_US[segment][1]+int(
+    (int(DANCE_TARGETS_US[segment+1][1])-int(DANCE_TARGETS_US[segment][1]))*blend);
+  activeServo.writeMicroseconds(lower);
+  secondServo.writeMicroseconds(upper);
+}
+
 void executeCommand() {
   command[commandLength] = '\0';
-  if (strcmp(command, "power") == 0) beginTest(1);
+  if (strcmp(command, "dance") == 0) beginDance();
+  else if (strcmp(command, "power") == 0) beginTest(1);
   else if (strcmp(command, "lower") == 0) beginTest(2);
   else if (strcmp(command, "upper") == 0) beginTest(3);
   else if (strcmp(command, "lower-jog") == 0) beginTest(4);
@@ -180,7 +226,8 @@ void loop() {
     explainStop();
   }
 
-  if (activeMode >= 4) {
+  if (activeMode == 8) updateDance(uint32_t(millis()-startedAt));
+  else if (activeMode >= 4) {
     const uint32_t step = uint32_t(millis() - startedAt) / JOG_STEP_MS;
     const size_t steps = activeMode >= 6 ? SMALL_STEPS : JOG_STEPS;
     if (step < steps && step != jogStep) {
