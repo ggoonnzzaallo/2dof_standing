@@ -21,7 +21,7 @@ Bootloader mode was identified by USB enumeration; the user did not observe the 
 
 The bundled Servo implementation was inspected: its 20 ms period is 50 Hz and its 8 µs duty resolution rounds a 1500 µs request down to approximately 1496 µs. Host tests check the requested value, not physical pulse timing.
 
-No servo power-on command has been sent. No motor movement, PWM timing measurement, low-voltage cutoff test or mechanical fit test has been performed by the agent. Electrical measurements below were taken and reported by the user; the agent has no direct voltage telemetry. Host tests do not verify physical GPIO voltages or wiring.
+No servo PWM/centering command has been sent. One supervised three-second power-only command has been acknowledged, as recorded below. No PWM timing measurement, low-voltage cutoff test or mechanical fit test has been performed by the agent. Electrical measurements below were taken and reported by the user; the agent has no direct voltage or motion telemetry. Host tests do not verify physical GPIO voltages or wiring.
 
 ## User-reported electrical checks
 
@@ -44,9 +44,21 @@ All powered checks used the Pololu slide in **OFF**. Both servo horns remain off
 
 An early XIAO 3V3 reading of 1.1 V was not reproduced in the subsequent supply checks. An early Pololu ON reading of 1.11 V relative to Pololu GND was not reproduced when both control-wire ends were measured using XIAO GND. No cause has been established for these differences; do not infer that an intermittent connection has been ruled out. A reported approximately 2-megohm VIN-to-VOUT resistance does not check for a power-to-ground short.
 
-The agent repeated the USB `help`/`off` check and received the expected version banner and `OFF.` acknowledgement. The reported 3.9 V resting VOUT stopped preparation for the timed power test; no `power`, `lower` or `upper` command has been sent. Another `help`/`off` check also received the expected acknowledgement. The subsequent explicit slide-position check shows that the mechanical switch changes the output voltage.
+The agent repeated the USB `help`/`off` check and received the expected version banner and `OFF.` acknowledgement. The reported 3.9 V resting VOUT initially stopped preparation for the timed power test; at that point no `power`, `lower` or `upper` command had been sent. Another `help`/`off` check also received the expected acknowledgement. The subsequent explicit slide-position check shows that the mechanical switch changes the output voltage.
 
-Pololu states that the [disabled output is disconnected and floating](https://forum.pololu.com/t/reverse-voltage-on-mini-mosfet-slide-switch-with-2810/11758). The guide's earlier expectation that OFF must measure near 0 V was too strict and has been corrected. The approximately 1.1 V OFF reading is compatible with a floating output, but its source/current capability has not been determined; no light-load resistor test was performed. **Timed software switch operation, shutdown under a known load, supply sag under servo load and servo centering remain unverified.** A supervised three-second `power` command with no PWM is next, after explicit meter readiness with the slide returned to OFF.
+Pololu states that the [disabled output is disconnected and floating](https://forum.pololu.com/t/reverse-voltage-on-mini-mosfet-slide-switch-with-2810/11758). The guide's earlier expectation that OFF must measure near 0 V was too strict and has been corrected. The approximately 1.1 V OFF reading is compatible with a floating output, but its source/current capability has not been determined; no light-load resistor test was performed.
+
+## Supervised software switch test
+
+The user explicitly confirmed the meter was positioned, the slide was OFF and both horns were off. The agent opened USB serial, verified the expected version and disarmed acknowledgement, then sent **one `power` command**. No PWM command was sent. The firmware replied:
+
+```text
+POWER ONLY: measure VOUT to GND now; off in 3 seconds.
+OFF: test timer expired.
+OFF.
+```
+
+The final acknowledgement followed an additional explicit `off`; the serial connection was then closed. The command/timeout path is confirmed by USB responses. **The user's peak and post-shutdown meter readings, physical motion observations, shutdown under a known load, supply sag under servo load and servo centering are still pending.** A serial acknowledgement does not establish actual output voltage or electrical switching time.
 
 Re-run software checks with:
 
