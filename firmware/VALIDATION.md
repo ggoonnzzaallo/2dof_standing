@@ -4,10 +4,11 @@
 
 - Full target build for `Seeeduino:nrf52:xiaonRF52840Sense` using Arduino CLI 1.5.1, Seeed nRF52 Boards 1.1.13 and native Apple Silicon Arm GNU 13.2.Rel1 / GCC 13.2.1.
 - Bundled libraries: Adafruit TinyUSB 1.7.0 and Servo 1.1.2. No separately installed Servo library is used.
-- Target sizes: version 0.1 **50,224 bytes flash / 7,704 bytes global RAM**; version 0.2 **50,976 bytes flash / 7,704 bytes global RAM**.
+- Target sizes: version 0.1 **50,224 bytes flash / 7,704 bytes global RAM**; version 0.2 **50,976 bytes flash / 7,704 bytes global RAM**; version 0.3 **51,184 bytes flash / 7,704 bytes global RAM**.
 - Native Arduino ctags 5.8-arduino11 built from official source. The local cached source renames the reserved `__unused__` macro to avoid a collision with current macOS SDK headers. This cache is excluded from git.
 - Host tests against the actual sketch: disarmed boot, explicit newline arming, exactly 1500 µs commands, one selected PWM output, timed power-off, serial disconnect shutdown, immediate stop, malformed/overlong input, timer rollover and PWM attachment failure.
 - Version 0.2 host tests additionally verify both jog outputs, 1200/1800 µs target changes at the scheduled times, neutral before the 10.5-second cutoff, emergency stop/disconnect during jogging and timer rollover during a jog. Both the host checks and full target build passed. The first restricted target build's linker was terminated with signal 9; a repeat with project-tool execution access completed successfully.
+- Version 0.3 host tests additionally verify both small-motion outputs, the 1450/1550 µs target sequence, neutral before the 7.5-second cutoff, emergency stop/disconnect and timer rollover. The host checks and full target build passed.
 - VS Code task JSON, Python syntax and whitespace checks.
 
 The newer native linker prints warnings for unimplemented POSIX file-descriptor/syscall stubs in Newlib. The build succeeds; this sketch does not use those POSIX interfaces. The vendor UF2 conversion script also emits a Python regex-escape warning. Neither warning was suppressed.
@@ -76,6 +77,16 @@ After the user reconnected the battery and confirmed readiness, the agent sent `
 ## Assembly neutral
 
 The user requested both servos be placed at neutral for installing the horns. The agent sent `lower` and `upper` sequentially at nominal **1500 µs**, holding each for approximately three seconds and explicitly stopping it before proceeding. The firmware acknowledged both neutral commands and each `OFF.`; the serial connection then closed. Both last commanded positions are the assembly zero at nominal 1500 µs. There was no full-range sweep or measurement of the true mechanical travel midpoint. Horns should be fitted with USB and battery disconnected, without rotating the shafts; small spline alignment offsets can be calibrated later.
+
+## Small-motion checks with horns installed
+
+After installing the horns, the user requested smaller movements. Version **0.3** adds `lower-small` and `upper-small`: nominal **1500, 1450, 1500, 1550, 1500 µs**, approximately 1.5 seconds per target, followed by PWM stop and a power-off command at 7.5 seconds. Actual angles remain uncalibrated. Only the selected servo receives PWM; the user supports the arm and checks clearance because the other joint is not actively held.
+
+The user confirmed the battery was unplugged, USB connected and both joints clear for upload. Arduino CLI/native uploader reported **`Device programmed.`**. A subsequent disarming USB check received **`ROBOT SERVO CENTER 0.3`**, its new small-motion commands and **`OFF.`**.
+
+After the user reconnected the battery and confirmed readiness, `lower-small` ran once, followed by its timer-expiry acknowledgement and an explicit `OFF.`. The user confirmed the lower movement was **clear and unobstructed**. `upper-small` then ran once, also followed by its timer-expiry acknowledgement and an explicit `OFF.`; the serial connection closed after each test. The user confirmed the upper movement was also **clear and unobstructed**. Both joints' last commanded target was nominal 1500 µs, and PWM stopped afterward.
+
+The 1200–1800 µs `*-jog` commands remain explicitly labeled **HORNS OFF ONLY** in the menu. Small movements do not establish full joint limits, loaded power margin, physical power isolation or precise angle calibration.
 
 Re-run software checks with:
 

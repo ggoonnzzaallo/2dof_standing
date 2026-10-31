@@ -120,7 +120,27 @@ int main(){
   fresh();clockMs=UINT32_MAX-10;send("lower-jog\n");
   clockMs=startedAt+3000;loop();assert(activeServo.pulse==1800);
   clockMs=startedAt+10500;loop();checkOff();
-  std::cout << "PASS: disarmed boot, explicit commands, centering and bounded jogs, timeouts, "
+  for (bool upper : {false, true}) {
+    fresh();send(upper ? "upper-small\n" : "lower-small\n");
+    assert(activeServo.pin==(upper ? D1 : D0));
+    assert(pins[upper ? D0 : D1]==LOW);
+    const int expected[]={1500,1450,1500,1550,1500};
+    const uint32_t origin=startedAt;
+    assert(activeServo.pulse==1500);
+    for (uint32_t i=1;i<5;++i) {
+      clockMs=origin+i*1500-1;loop();assert(activeServo.pulse==expected[i-1]);
+      ++clockMs;loop();assert(activeServo.pulse==expected[i]);
+    }
+    clockMs=origin+7499;loop();assert(activeServo.attached() && activeServo.pulse==1500);
+    ++clockMs;loop();checkOff();
+  }
+  fresh();send("lower-small\n");clockMs=startedAt+1500;loop();
+  send("!\n");checkOff();
+  fresh();send("upper-small\n");Serial.open=false;loop();checkOff();
+  fresh();clockMs=UINT32_MAX-10;send("upper-small\n");
+  clockMs=startedAt+4500;loop();assert(activeServo.pulse==1550);
+  clockMs=startedAt+7500;loop();checkOff();
+  std::cout << "PASS: disarmed boot, explicit commands, centering, wide and small jogs, timeouts, "
                "disconnect, emergency stop, malformed input, rollover, attach failure.\n";
 }
 '''

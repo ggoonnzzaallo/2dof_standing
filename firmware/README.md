@@ -1,4 +1,4 @@
-# First power-up and servo centering
+# First power-up, servo centering and small-motion checks
 
 Use `servo_center/servo_center.ino` for the wired XIAO **nRF52840 Sense**, two PTK 7465 MG servos, and Pololu **2810 LV**. It starts with D2 LOW and both servo signals LOW. It does not move on boot. Serial commands test the switch, center a servo or jog one unloaded servo at a time; each command has a short timeout and closing the serial monitor disables the rail. This is supervised bench firmware; it has no automatic battery cutoff or policy inference.
 
@@ -66,6 +66,10 @@ For an ambiguous OFF reading, an optional temporary **1–10 kilohm resistor** a
 
 For a clearly visible unloaded motion check, version **0.2** adds `lower-jog` and `upper-jog`. Keep **both horns and driven printed parts off the splines**. The selected output follows **1500 → 1200 → 1800 → 1200 → 1800 → 1200 → 1500 µs**, holding each target for approximately 1.5 seconds before stopping PWM and commanding power off at 10.5 seconds. Actual travel angles are uncalibrated; this is not an endpoint test. Only one servo receives PWM. Ordinary `lower` and `upper` still hold neutral without jogging. Use `off` or `!` to stop early; USB disconnect also stops the test. Do not run the jog with assembled links until clearance and limits have been established.
 
+## 5. Small movements with horns installed
+
+Version **0.3** adds `lower-small` and `upper-small` for a supported assembly with clearance around neutral. Each command follows **1500 → 1450 → 1500 → 1550 → 1500 µs**, approximately 1.5 seconds per target, then stops PWM and commands power off at **7.5 seconds**. These pulse widths are nominal; physical angles are not calibrated. Start at the known assembly-neutral pose. Support the links because the unselected servo receives no PWM and both share the switched rail. Test one joint at a time and inspect for rubbing or cable tension before testing the other. The wider `*-jog` commands remain unloaded/horns-off tests; use the explicit `*-small` commands for this assembled check. Shutdown releases active holding, so keep the arm supported afterward too.
+
 The 1500 µs command is a **nominal starting point**, not a measurement of actual shaft angle. The bundled nRF52 Servo library uses 8 µs timer steps, so a 1500 µs request is represented as approximately 1496 µs; keep this quantization in mind when measuring offsets. Actual pulse timing remains unmeasured. The servos do not report their positions. Direct 1S operation is the reference-project experiment; the related manufacturer's published range starts at 5 V, so don't treat successful centering as proof of adequate loaded performance. If a servo twitches, buzzes persistently, gets hot, or cannot settle unloaded, send `off` and check supply sag, signal/ground wiring and mechanical rubbing before attaching a long arm.
 
 ## Bench commands and charging
@@ -77,6 +81,8 @@ The 1500 µs command is a **nominal starting point**, not a measurement of actua
 | `upper` | D1 at 1500 µs for 15 seconds |
 | `lower-jog` | Unloaded D0 motion between 1200–1800 µs, return to 1500 µs, off at 10.5 seconds |
 | `upper-jog` | Same unloaded motion check on D1 |
+| `lower-small` | Supported D0 assembly check at 1450–1550 µs around neutral, return to 1500 µs, off at 7.5 seconds |
+| `upper-small` | Same small assembly check on D1 |
 | `off` | Stop PWM, pull D0/D1 LOW, then D2 LOW |
 | `help` | Stop and print commands |
 | `!` (no newline needed) | Immediate stop; send a newline before another command |
@@ -85,4 +91,4 @@ Commands that enable the rail intentionally work over USB for **supervised bench
 
 ## Validation
 
-Compilation and supervised hardware commissioning are different checks. See `VALIDATION.md` for what was actually verified; no physical motor test or oscilloscope measurement has been performed by the agent.
+Compilation and supervised hardware commissioning are different checks. See `VALIDATION.md` for command acknowledgements and the user's physical observations. Unloaded movement was confirmed on both servos; actual PWM timing, shaft angles and loaded supply behavior have not been measured by the agent.
