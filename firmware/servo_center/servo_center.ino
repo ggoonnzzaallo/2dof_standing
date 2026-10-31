@@ -27,14 +27,17 @@ constexpr uint16_t SMALL_TARGETS_US[] = {1500, 1450, 1500, 1550, 1500};
 constexpr size_t SMALL_STEPS = sizeof(SMALL_TARGETS_US) / sizeof(SMALL_TARGETS_US[0]);
 constexpr uint32_t SMALL_HOLD_MS = JOG_STEP_MS * SMALL_STEPS;
 
-// Piecewise smoothstep interpolation, both joints driven simultaneously.
+// Minimum-jerk segments: zero velocity and acceleration at each waypoint.
+// Keep full excursion; reduce speed and update targets once per 20 ms servo frame.
 constexpr uint16_t DANCE_TARGETS_US[][2] = {
   {1500,1500}, {1100,1900}, {1900,1100}, {1100,1100},
   {1900,1900}, {1100,1900}, {1900,1100}, {1500,1500}
 };
 constexpr size_t DANCE_STEPS = sizeof(DANCE_TARGETS_US)/sizeof(DANCE_TARGETS_US[0]);
-constexpr uint32_t DANCE_SEGMENT_MS = 1800;
+constexpr uint32_t DANCE_SEGMENT_MS = 3200;
 constexpr uint32_t DANCE_HOLD_MS = (DANCE_STEPS-1)*DANCE_SEGMENT_MS+1500;
+constexpr uint32_t DANCE_UPDATE_MS = 20;
+uint32_t lastDanceUpdateMs = 0;
 Servo activeServo;
 Servo secondServo;
 uint8_t activeMode = 0;  // 0 off, 1 power, 2/3 center, 4/5 wide jog, 6/7 small jog.
@@ -65,7 +68,7 @@ void motorOff() {
 }
 
 void help() {
-  Serial.println("ROBOT SERVO CENTER 0.5");
+  Serial.println("ROBOT SERVO CENTER 0.6");
   Serial.println("OFF. No automatic movement. Support the arm and keep joints clear.");
   if (!USE_SERVO_POWER_SWITCH) {
     Serial.println("REV B DIRECT POWER: off/! stop PWM only; servo power stays live.");
@@ -75,7 +78,7 @@ void help() {
   Serial.println("Connect the battery before any power/centering command.");
   Serial.println(USE_SERVO_POWER_SWITCH ? "power  : Rev A rail enabled for 3 seconds, no pulses"
                                         : "power  : unavailable; Rev B has no power switch");
-  Serial.println("dance  : BOTH joints, smooth 1100-1900 us, center then stop after 14.1 seconds");
+  Serial.println("dance  : BOTH joints, smooth 1100-1900 us, center then stop after 23.9 seconds");
   Serial.println("lower  : lower servo D0 at 1500 us for 15 seconds");
   Serial.println("upper  : upper servo D1 at 1500 us for 15 seconds");
   Serial.println("lower-jog : HORNS OFF ONLY, D0 1200-1800 us, off in 10.5 seconds");
@@ -147,11 +150,14 @@ void beginDance() {
   secondServo.writeMicroseconds(CENTER_US);
   startedAt=millis();
   permittedMs=DANCE_HOLD_MS;
+  lastDanceUpdateMs=0;
   activeMode=8;
-  Serial.println("DANCE: BOTH joints 1100-1900 us, neutral then PWM off in 14.1 seconds.");
+  Serial.println("DANCE: BOTH joints 1100-1900 us, neutral then PWM off in 23.9 seconds.");
 }
 
 void updateDance(uint32_t elapsed) {
+  if (elapsed-lastDanceUpdateMs<DANCE_UPDATE_MS) return;
+  lastDanceUpdateMs=elapsed;
   const uint32_t segment=elapsed/DANCE_SEGMENT_MS;
   if (segment>=DANCE_STEPS-1) {
     activeServo.writeMicroseconds(CENTER_US);
@@ -159,7 +165,7 @@ void updateDance(uint32_t elapsed) {
     return;
   }
   const float t=float(elapsed%DANCE_SEGMENT_MS)/DANCE_SEGMENT_MS;
-  const float blend=t*t*(3.0f-2.0f*t);
+  const float blend=t*t*t*(10.0f+t*(-15.0f+6.0f*t));
   const int lower=DANCE_TARGETS_US[segment][0]+int(
     (int(DANCE_TARGETS_US[segment+1][0])-int(DANCE_TARGETS_US[segment][0]))*blend);
   const int upper=DANCE_TARGETS_US[segment][1]+int(

@@ -152,9 +152,17 @@ int main(){
   fresh();send("dance\n");
   assert(activeMode==8 && activeServo.pin==D0 && secondServo.pin==D1);
   const uint32_t origin=startedAt;
+  int previousLower=1500,previousUpper=1500;
   for(uint32_t t=0;t<DANCE_HOLD_MS;++t) {
     clockMs=origin+t;loop();
     assert(activeServo.attached() && secondServo.attached());
+    // No changes between servo frames; bounded movement even on full reversals.
+    if (t%DANCE_UPDATE_MS) {
+      assert(activeServo.pulse==previousLower && secondServo.pulse==previousUpper);
+    }
+    assert(std::abs(activeServo.pulse-previousLower)<=11);
+    assert(std::abs(secondServo.pulse-previousUpper)<=11);
+    previousLower=activeServo.pulse;previousUpper=secondServo.pulse;
     assert(activeServo.pulse>=1100 && activeServo.pulse<=1900);
     assert(secondServo.pulse>=1100 && secondServo.pulse<=1900);
     if(t%DANCE_SEGMENT_MS==0 && t/DANCE_SEGMENT_MS<DANCE_STEPS) {

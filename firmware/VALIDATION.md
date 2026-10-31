@@ -116,3 +116,11 @@ Version 0.5 adds a second Servo instance and explicit `dance` command. Both join
 The first version 0.5 sandboxed build was killed; the next elevated attempt reached linking but `ld` was killed with signal 9. The installed older Seeed compiler cannot run on this Mac (`bad CPU type`). Running the native linker's version query succeeded, and a subsequent cached native build completed with exit code zero (CLI reported it could not determine program size). No security settings were changed.
 
 Version 0.5 was uploaded to `/dev/cu.usbmodem101`; the uploader returned `Device programmed.`. A USB handshake verified `ROBOT SERVO CENTER 0.5` and `OFF.` before motion. One `dance` command then returned `DANCE: BOTH joints 1100-1900 us, neutral then PWM off in 14.1 seconds.`, followed by `OFF: test timer expired.` and the explicit additional `OFF.`. The firmware also stated that direct servo power remains connected. Serial closed afterward. Physical dance clearance/return observation is awaiting user feedback; the acknowledgements establish command execution, not measured shaft positions.
+
+## Version 0.6 smoother dance
+
+The user observed jerkiness during version 0.5's dance. Version 0.6 retains the 1100–1900 us range and paired waypoints, replacing cubic smoothstep with quintic minimum-jerk interpolation (zero first and second derivative at segment endpoints). Segments increase from 1.8 to 3.2 seconds, targets update every 20 ms, and total runtime becomes 23.9 seconds including the final 1.5-second neutral hold. This does not smooth acquisition from an unknown physical starting pose. Host tests pass in both power profiles and verify target updates only on scheduled frames, per-frame changes at most 11 us before hardware quantization, bounds, waypoints, neutral finish and both-output stop paths. Physical improvement requires user observation.
+
+The native target build succeeded: 51,576 bytes flash and 7,720 bytes global RAM. The uploader returned `Device programmed.` for version 0.6.
+
+The USB handshake verified version 0.6 and `OFF.`. One smoother `dance` then ran, acknowledging its 23.9-second duration, timer expiry, and an additional explicit `OFF.`; serial closed afterward. Nominal final targets were 1500 us on both joints. Direct power remains connected. Whether the physical motion is smoother awaits user observation.
