@@ -1,5 +1,7 @@
 # Procurement status — 1 October 2026
 
+**Rev B update, 30 October 2026:** the two purchased Pololu 2810 boards are now unused spares. The battery pigtail and existing servo plugs remain in use; no new part is required for the direct-battery rewire. The receipt totals below remain actual spending, not refunded/subtracted costs.
+
 The user reports **all Rev A robot components ordered**. The later opposed-pivot CAD revision adds two bearings and two dowel pins that have **not** been reported ordered. This records what is known from the conversation; it is not a delivery or inspection record. Do not reorder parts solely because a historical sourcing page still has purchase links.
 
 | Component | Reported status | Evidence and remaining check |

@@ -35,7 +35,7 @@
       "problemMatcher": []
     },
     {
-      "label": "Robot: check USB with power off",
+      "label": "Robot: check USB with PWM stopped",
       "type": "process",
       "command": "python3",
       "args": ["scripts/robot.py", "check"],

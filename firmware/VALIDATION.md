@@ -1,5 +1,7 @@
 # Bench firmware validation — 30 October 2026
 
+**Current design update:** Rev B removes the Pololu. Version 0.4 defaults to direct battery power and is prepared in source; the last physically tested/uploaded version remains 0.3 on Rev A. All measurements and motor observations below predate the requested physical rewire. No robot upload or motion command was performed during the Rev B schematic change.
+
 ## Passed
 
 - Full target build for `Seeeduino:nrf52:xiaonRF52840Sense` using Arduino CLI 1.5.1, Seeed nRF52 Boards 1.1.13 and native Apple Silicon Arm GNU 13.2.Rel1 / GCC 13.2.1.
@@ -87,6 +89,16 @@ The user confirmed the battery was unplugged, USB connected and both joints clea
 After the user reconnected the battery and confirmed readiness, `lower-small` ran once, followed by its timer-expiry acknowledgement and an explicit `OFF.`. The user confirmed the lower movement was **clear and unobstructed**. `upper-small` then ran once, also followed by its timer-expiry acknowledgement and an explicit `OFF.`; the serial connection closed after each test. The user confirmed the upper movement was also **clear and unobstructed**. Both joints' last commanded target was nominal 1500 µs, and PWM stopped afterward.
 
 The 1200–1800 µs `*-jog` commands remain explicitly labeled **HORNS OFF ONLY** in the menu. Small movements do not establish full joint limits, loaded power margin, physical power isolation or precise angle calibration.
+
+## Rev B direct-battery change
+
+At the user's request, the current design omits the Pololu and its D2 lead, merging the former positive buses into one four-way VBAT+ bus and removing the switch's ground branch. The user confirmed both existing servo connectors are removable three-pin plugs; no extra disconnect component is added. For routine charging and USB-only programming, unplug both complete servo plugs. Battery-only operation is manually switched by the RCY connector; full OFF requires USB removed too.
+
+Version **0.4** defaults to `ROBOT_USE_POWER_SWITCH=0`. D2 is an unused input and receives no GPIO writes. `power` does not energize or arm anything; motion/stop commands retain their PWM behavior, and every stop is explicitly described as PWM-only. Optional `ROBOT_USE_POWER_SWITCH=1` retains compatibility with the archived switched topology. Host tests pass for **both** profiles, including D2 isolation and no-op `power` in direct mode, existing timed motions, disconnect and emergency stops. No Rev B hardware claim follows from host tests.
+
+**Native version 0.4 target build is not verified.** Build attempts ended with externally terminated processes (signal 9 in compiler tools including `as` and `cc1`), and one attempt reported an invalid Arduino instance. A single-job retry also encountered signal 9. The cause is undetermined; no operating-system security settings were changed. There is no successful target-size result for 0.4 and no firmware upload was attempted. The upload command rebuilds first and aborts on build failure, so it will not intentionally upload an old cached package after an unsuccessful build.
+
+The new Rev B one-page SVG/PDF/PNG and both phone diagrams were regenerated and visually inspected. The PDF is a single US-Letter landscape vector sheet, and its PNG preview is rendered from that actual PDF. No overlaps or clipped labels were observed. Rev A drawings remain explicitly archived in the electrical guide.
 
 Re-run software checks with:
 

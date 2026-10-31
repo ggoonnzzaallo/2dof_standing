@@ -31,37 +31,37 @@ def bus_group(draw,top,title,rows,color,fill):
         text(draw,192,y+23,detail,23,color=MUTED)
 
 img,draw=page(1735)
-text(draw,45,55,'POWER WIRES',49,True)
-text(draw,45,105,'Join points within each box; keep boxes separate.',30,color=MUTED)
+text(draw,45,55,'REV B - POWER WIRES',49,True)
+text(draw,45,105,'Two buses. No Pololu. Keep the buses separate.',30,color=MUTED)
 bus_group(draw,150,'1  BATTERY POSITIVE  /  J1',[
     ('Battery +','Red lead from the RCY mating harness'),
     ('XIAO BAT+','Battery pad on the underside of the XIAO'),
-    ('Pololu VIN','Input power to the switch'),
+    ('Lower servo +','Red wire through existing 3-pin plug'),
+    ('Upper servo +','Red wire through existing 3-pin plug'),
 ],RED,'#FBE9E8')
-bus_group(draw,580,'2  COMMON GROUND  /  J2',[
+bus_group(draw,700,'2  COMMON GROUND  /  J2',[
     ('Battery −','Black lead from the RCY mating harness'),
     ('XIAO BAT− or GND','Connect one of these ground points'),
-    ('Pololu GND','Ground pad on the switch'),
     ('Lower servo −','Brown / black ground wire'),
     ('Upper servo −','Brown / black ground wire'),
 ],GROUND,'#E6ECF0')
-bus_group(draw,1205,'3  SWITCHED SERVO POSITIVE  /  J3',[
-    ('Pololu VOUT','Power after the switch'),
-    ('Lower servo +','Red servo wire'),
-    ('Upper servo +','Red servo wire'),
-],'#B85D16','#FFF0E0')
-text(draw,45,1660,'Keep the three buses separately insulated.',30,True)
-text(draw,45,1700,'Servo red wires do not connect to XIAO 3V3 or 5V.',28,color=MUTED)
+card(draw,35,1235,930,430,'#FFF0E0','#FFF0E0')
+text(draw,65,1280,'USB charging / programming',37,True)
+text(draw,65,1335,'Unplug BOTH complete servo plugs.',32,True)
+text(draw,65,1385,'Keep battery connected for charging.',30)
+text(draw,65,1450,'Full OFF = battery AND USB unplugged.',30,True)
+text(draw,65,1500,'USB can still feed the BAT+ bus.',30)
+text(draw,65,1565,'No servo power from XIAO 3V3 or 5V.',30)
+text(draw,65,1615,'off / ! stop PWM; they do not cut power.',29)
 img.save(OUT/'PHONE_WIRING_POWER.png')
 
 img,draw=page(1040)
-text(draw,45,55,'SIGNAL WIRES',49,True)
+text(draw,45,55,'REV B - SIGNAL WIRES',49,True)
 text(draw,45,105,'Use the labels on the actual boards.',31,color=MUTED)
-text(draw,45,150,'XIAO markings 0, 1, 2 mean D0, D1, D2.',29,color=MUTED)
+text(draw,45,150,'XIAO markings 0 and 1 mean D0 and D1.',29,color=MUTED)
 for y,pin,label,detail,color in [
     (260,'D0 / 0','LOWER SERVO','Yellow / orange signal',BLUE),
     (440,'D1 / 1','UPPER SERVO','Yellow / orange signal',BLUE),
-    (620,'D2 / 2','POLOLU ON','The pad labeled ON',PURPLE),
 ]:
     card(draw,45,y-65,325,130)
     text(draw,75,y-23,'XIAO',29,color=MUTED)
@@ -71,10 +71,12 @@ for y,pin,label,detail,color in [
     card(draw,615,y-65,340,130)
     text(draw,638,y-19,label,30,True)
     text(draw,638,y+23,detail,24,color=MUTED)
-card(draw,35,745,930,250,'#E8EEF4','#E8EEF4')
-text(draw,65,795,'Pololu physical slide: OFF',39,True)
-text(draw,65,853,'D2 HIGH → servo power ON',34)
-text(draw,65,901,'D2 LOW → servo power OFF',34)
-text(draw,65,957,'Physical ON forces servo power on.',29,color=MUTED)
+card(draw,35,570,930,160,'#E8EEF4','#E8EEF4')
+text(draw,65,620,'D2 / 2 is UNUSED',39,True)
+text(draw,65,680,'Remove its old Pololu ON wire completely.',30)
+card(draw,35,770,930,230,'#FFF0E0','#FFF0E0')
+text(draw,65,820,'off / ! = STOP PWM ONLY',36,True)
+text(draw,65,875,'No electronic power disconnect remains.',30)
+text(draw,65,935,'Unplug battery AND USB for full OFF.',30)
 img.save(OUT/'PHONE_WIRING_SIGNALS.png')
 print('Wrote phone power and signal diagrams.')

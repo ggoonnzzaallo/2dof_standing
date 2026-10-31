@@ -1,36 +1,63 @@
-# Rev A electrical schematic and wiring
+# Rev B electrical wiring - direct battery, no switch
 
-Open or print [the one-page wiring schematic](REV_A_WIRING.pdf), or view its editable [SVG](REV_A_WIRING.svg) and [PNG preview](REV_A_WIRING.png). It shows **every external wire**, including both servo PWM signals and the D2 switch-control wire. J1, J2 and J3 are three **separate physical power junctions**. The XIAO charger, IMU, regulator and battery-voltage divider are already on the XIAO PCB; the Pololu MOSFET circuit is already on the switch PCB. No separate charger, IMU, boost converter, servo-driver board, resistor or capacitor is needed for the first wiring pass.
+**Current wiring: Rev B, 30 October 2026.** The Pololu 2810 and its D2 control wire are removed at the user's request. Reuse the battery RCY pigtail and both existing removable three-pin servo plugs. No new component is needed.
 
-![Rev A power and signal wiring](REV_A_WIRING.png)
+Open the [one-page PDF](REV_B_WIRING.pdf), [editable SVG](REV_B_WIRING.svg), or [PNG](REV_B_WIRING.png). Phone-sized maps: [power](PHONE_WIRING_POWER.png) and [signals](PHONE_WIRING_SIGNALS.png).
 
-For reading on a phone, use the large-text [power connections](PHONE_WIRING_POWER.png) and [signal connections](PHONE_WIRING_SIGNALS.png). Each box in the power map is one separate bus; join all points within that box and keep the three buses insulated from one another. These are connection maps, not physical pad-location drawings.
+![Rev B complete wiring](REV_B_WIRING.png)
 
-**Read the labels on your actual boards before soldering.** This diagram assumes the ordered XIAO **nRF52840 Sense** and Pololu **2810 LV**, not similarly named variants. Verify the JST-RCY mating lead's red/black polarity with a multimeter; connector color and orientation alone are insufficient.
+## Every connection
 
-| Physical junction / wire | Join these points | Purpose |
+| Physical bus / wire | Join these points | Purpose |
 |---|---|---|
-| **J1 `VBAT+` bus, 3-way** | Battery/pigtail positive → XIAO underside **BAT+** pad **and** Pololu **VIN** | Feeds the controller and the switched servo branch in parallel. |
-| **J2 `GND` bus, 5-way** | Battery/pigtail negative → XIAO underside **BAT−** pad or board **GND**, Pololu **GND**, and both servo ground wires | Common signal reference. Servo return current goes directly to this battery-side junction, not through the XIAO. |
-| **J3 `SERVO+` bus, 3-way** | Pololu **VOUT** → both servo positive/red wires | Switched motor power only; never connect this bus to XIAO `3V3`, `5V`, or `VBUS`. |
-| `PWM1` | XIAO **D0** → lower servo signal wire | First joint's command. |
-| `PWM2` | XIAO **D1** → upper servo signal wire | Second joint's command. |
-| `MOTOR_EN` | XIAO **D2** → Pololu **ON** | `HIGH` enables the servo rail when the Pololu slide is physically **OFF**; `LOW` or floating disables it. |
+| **J1 VBAT+, 4-way** | Battery/pigtail positive, XIAO underside **BAT+**, lower servo red, upper servo red | Direct battery power to all three devices. Keep the two servo plugs removable. |
+| **J2 GND, 4-way** | Battery/pigtail negative, XIAO **BAT- or GND**, lower servo ground, upper servo ground | Common return; servo current returns directly to this bus, not through the XIAO. Use one XIAO ground connection. |
+| **D0 / marked 0** | XIAO D0 to lower servo signal | Lower-joint PWM. |
+| **D1 / marked 1** | XIAO D1 to upper servo signal | Upper-joint PWM. |
+| **D2 / marked 2** | **No wire** | Unused; remove the old Pololu ON lead completely. |
 
-J1 and J2 are the positive and negative buses you identified; J3 is a third bus **after** the Pololu switch, so both servos can share its switched output. A bus here means a common, mechanically supported conductor. J1 and J2 can be short tinned wire splices with their listed leads soldered along them and covered by separate insulating sleeves. The Pololu 2810 has two connected VOUT pads, so J3 can be those pads: solder one servo positive lead to each and omit an external J3 splice. Three mutually isolated copper pad groups on a small piece of perfboard are an alternative if you want a tidier harness; that board is a mounting choice, not another electronic circuit. Keep J1 and J2 near the RCY pigtail and strain-relieve each joint. Never join J1 to J3 except through Pololu VIN→VOUT. The battery-positive branch to the XIAO should carry only board/charging current; the servo current uses the J1→Pololu→J3 path.
+Each servo plug still carries **all three wires: positive, ground and signal**. J_S1/J_S2 labels on the sheet identify those same lower/upper plugs across the power and signal sections. Verify actual wire labels/colors. XIAO **3V3 and 5V/VBUS are not connected to either servo**. No external IMU, PWM board, switch, booster, capacitor or resistor is added.
 
-## Compact bus construction
+## Rewire from Rev A
 
-The lightest option is an **inline, staggered solder harness** using the 10 cm, 20-AWG male RCY mating pigtail. Work only on this removable pigtail; leave the LiPo's attached leads intact. For J1, run the pigtail's red lead to Pololu VIN and tap a short XIAO BAT+ lead onto it. For J2, use the pigtail's black lead as a continuous ground backbone: make two small, separated taps along it, one for XIAO ground plus Pololu GND and one for the two servo grounds. This spreads the five ground connections across two low-profile joints instead of making one large solder lump. For J3, solder the two servo positive wires directly to the two VOUT pads. The XIAO branches can be thin hookup wire; keep the common battery and servo-current conductors at least as substantial as the existing pigtail and servo leads.
+1. Disconnect **both battery and USB**. Unplug both servo connectors.
+2. Remove the Pololu board and its VIN, VOUT, GND and D2/ON connections.
+3. Merge the former J1 battery-positive and J3 servo-positive junctions into **one J1 bus**. Keep the single existing branch to XIAO BAT+; do not route servo power through that pad or the XIAO PCB.
+4. Remove the old Pololu ground branch. J2 now joins only battery negative, one XIAO ground, and the two servo grounds.
+5. Keep D0 and D1 signal wiring. Keep the removable servo connectors; insulate J1 and J2 separately, strain-relieve the harness, and inspect polarity/shorts with all power removed.
+6. Upload the Rev B firmware with the battery and **both complete servo plugs disconnected**, using USB to power the XIAO. The revision is prepared in the repository; it has not been remotely flashed as part of this wiring change.
 
-Before soldering, thread appropriately sized heat-shrink tubing onto each lead. Space the exposed junctions along the harness so the insulated bulges do not stack; sleeve **every exposed junction separately**. Fix the harness to the printed base with a tie or printed clip, leaving no solder joint to take cable pull or servo motion. Verify with a meter that the three buses are mutually isolated before inserting the battery. If you expect to change wiring often, a tiny three-island perfboard with reinforced copper/wire for the servo-current paths is easier to rework, but adds a board and mounting space. A terminal block or breadboard is unnecessarily bulky for this build.
+The existing printed switch shelf can stay empty. No CAD reprint is required to remove the electronics.
 
-The XIAO's **USB-C** port is used for programming and, after charge-mode firmware and electrical checks are complete, for charging the connected 1S battery through its onboard charger. No USB wire is soldered into the harness. The Pololu's physical **OFF** position does **not** force VOUT off if D2 drives `ON` high; its physical **ON** position forces VOUT on. Leave the slide OFF for firmware control. See [power, cutoff and charging details](../HARDWARE.md#battery-monitoring-and-charging).
+## Running, stopping, charging
 
-Before plugging in the battery, check continuity from every point in each row and verify **no short between J1 and J2 or between J3 and J2**. Insulate all three buses separately. Keep the battery-to-switch and switch-to-servo power wires short, and give both moving servo leads strain relief and enough slack through the full joint range. If your servo lead colors differ, identify its `+`, `−` and signal wires from its supplied labeling rather than assuming a color code.
+| Mode | Battery | USB | Servo plugs |
+|---|---|---|---|
+| Normal robot operation | Connected | Unplugged | Both connected |
+| Supervised terminal motion test | Connected | Connected | Both connected; support the arm |
+| USB firmware upload / programming | Unplugged | Connected | **Both complete plugs unplugged** |
+| Charge through XIAO USB-C | Connected | Connected | **Both complete plugs unplugged** |
+| Full OFF / storage / wiring work | Unplugged | Unplugged | Any; disconnect plugs before rework |
 
-Use the [VS Code/command-line bench firmware guide](../firmware/README.md) for upload, a timed switch test and individual servo centering. It boots with the rail disabled.
+**Battery disconnection is the manual OFF control during battery-only operation. With USB connected, battery disconnection alone does not guarantee servo power is off.** The XIAO charger connects to BAT+, which is now also the servo-positive bus. USB can therefore feed that bus even with the battery absent. The charger is not a motor supply; disconnect both full servo plugs for USB-only programming and routine charging. This uses the connectors already on the robot rather than adding another switch or connector.
 
-For first power-up, keep the servo horns off and unplug the servo connectors if removable; if hardwired, keep both splines unloaded. Power the XIAO by USB, configure D2 LOW, and confirm the Pololu slide is OFF. Connect the battery only after polarity checks. Measure `VBAT+` at the XIAO BAT pads and verify D2 and Pololu **ON** are near 0 V. The [disabled VOUT is floating](https://forum.pololu.com/t/reverse-voltage-on-mini-mosfet-slide-switch-with-2810/11758), so it need not measure exactly 0 V. Record the OFF baseline, confirm VOUT follows battery voltage during the timed enable test, and confirm it falls again after shutdown before centering one unloaded servo, then the second. See the bench guide for an optional light-load test if the OFF reading is ambiguous. **The firmware cutoff and USB charge interlock described in `HARDWARE.md` are still requirements, not implemented features**, so verify the servo supply is disabled before charging through USB-C. Disconnect the RCY pack for storage and a true power-off.
+`off`, `!`, timeout and serial disconnect **stop PWM only** in Rev B. They cannot physically cut servo power, guarantee released holding torque, stop idle drain, or provide a battery low-voltage disconnect. Disconnect battery **and USB** for true power-off. A future low-battery alarm can request manual disconnection; software cannot replace the removed power switch.
 
-Manufacturer references: [Seeed XIAO nRF52840 Sense pinout, battery and charge instructions](https://wiki.seeedstudio.com/XIAO_BLE/), [Seeed board schematic](https://files.seeedstudio.com/wiki/XIAO-BLE/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf), and [Pololu 2810 pin behavior and schematic](https://www.pololu.com/product/2810).
+For charging, keep the pack connected to BAT+ and GND, remove both servo plugs and connect USB-C. Firmware selects approximately 100 mA; the charge setting and limitations are in [HARDWARE.md](../HARDWARE.md). The brief USB+battery motor-test mode is for supervised commands, not unattended charging.
+
+## Firmware and regeneration
+
+The [bench firmware guide](../firmware/README.md) covers terminal control. Version 0.4 defaults to Rev B direct power, leaves D2 as an unconnected input and makes the stop semantics explicit. Older version 0.3 motion commands can still produce PWM after rewiring, but its power-off wording no longer describes the hardware.
+
+Using the project-local Python environment with `reportlab`, `pymupdf` and Pillow installed:
+
+```sh
+.tools/arduino/python/bin/python electrical/render_schematic.py
+.tools/arduino/python/bin/python electrical/render_phone_wiring.py
+```
+
+## History and sources
+
+The [Rev A PDF](REV_A_WIRING.pdf), [SVG](REV_A_WIRING.svg) and [PNG](REV_A_WIRING.png) are archived switch-based wiring, **not the current build instructions**. Earlier switch tests remain in the [validation log](../firmware/VALIDATION.md); the Rev B physical rewire is not yet confirmed.
+
+Manufacturer references: [Seeed pinout and battery/USB charging](https://wiki.seeedstudio.com/XIAO_BLE/), [XIAO Sense schematic](https://files.seeedstudio.com/wiki/XIAO-BLE/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf), and [TI BQ25101 charger description](https://www.ti.com/product/BQ25101). The charger has a battery/system output; that shared node is why unplugging the battery is not sufficient isolation when USB remains connected.

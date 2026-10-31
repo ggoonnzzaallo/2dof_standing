@@ -15,13 +15,15 @@ ARDUINO = r'''
 #include <string>
 #define TARGET_SEEED_XIAO_NRF52840_SENSE 1
 constexpr uint8_t D0=0, D1=1, D2=2, VBAT_ENABLE=14, PIN_CHARGING_CURRENT=22;
-constexpr int LOW=0, HIGH=1, OUTPUT=1;
+constexpr int LOW=0, HIGH=1, INPUT=0, OUTPUT=1;
 inline uint32_t clockMs=0;
 inline int pins[33]={};
+inline int modes[33]={};
+inline unsigned writes[33]={};
 inline uint32_t millis(){return clockMs;}
 inline void delay(uint32_t ms){clockMs+=ms;}
-inline void digitalWrite(uint8_t pin,int level){pins[pin]=level;}
-inline void pinMode(uint8_t,int){}
+inline void digitalWrite(uint8_t pin,int level){pins[pin]=level;++writes[pin];}
+inline void pinMode(uint8_t pin,int mode){modes[pin]=mode;}
 struct FakeSerial {
   bool open=false;
   std::deque<char> rx;
@@ -45,7 +47,8 @@ class Servo {
   int pin=-1, pulse=0;
   bool attached(){return enabled;}
   uint8_t attach(int p,int,int){
-    assert(pins[D2]==HIGH); // No deliberate PWM into an unpowered servo.
+    if (ROBOT_USE_POWER_SWITCH) assert(pins[D2]==HIGH);
+    else assert(modes[D2]==INPUT && writes[D2]==0);
     if(fail)return INVALID_SERVO;
     pin=p;enabled=true;return 0; // Zero is a successful channel index.
   }
@@ -60,7 +63,9 @@ TEST = r'''
 
 void checkOff(){
   assert(!activeServo.attached());
-  assert(pins[D0]==LOW && pins[D1]==LOW && pins[D2]==LOW);
+  assert(pins[D0]==LOW && pins[D1]==LOW);
+  if (USE_SERVO_POWER_SWITCH) assert(pins[D2]==LOW);
+  else assert(modes[D2]==INPUT && writes[D2]==0);
   assert(activeMode==0);
 }
 void send(const std::string& s){Serial.send(s);while(Serial.available())loop();}
@@ -73,13 +78,17 @@ int main(){
   // Boot, opening the monitor and malformed input never arm motors.
   fresh();assert(pins[VBAT_ENABLE]==LOW && pins[PIN_CHARGING_CURRENT]==LOW);
   send("lower");checkOff();send("\n");
-  assert(activeMode==2 && pins[D2]==HIGH && activeServo.pin==D0);
+  assert(activeMode==2 && activeServo.pin==D0);
+  if (USE_SERVO_POWER_SWITCH) assert(pins[D2]==HIGH);
   assert(activeServo.pulse==1500);
   send("off\n");checkOff();
 
-  fresh();send("power\n");assert(pins[D2]==HIGH && !activeServo.attached());
-  clockMs=POWER_TEST_MS-1;loop();assert(activeMode==1);
-  ++clockMs;loop();checkOff();
+  fresh();send("power\n");
+  if (USE_SERVO_POWER_SWITCH) {
+    assert(pins[D2]==HIGH && !activeServo.attached());
+    clockMs=POWER_TEST_MS-1;loop();assert(activeMode==1);
+    ++clockMs;loop();checkOff();
+  } else checkOff();
 
   fresh();send("lower\n");clockMs=CENTER_HOLD_MS-1;loop();assert(activeMode==2);
   ++clockMs;loop();checkOff();
@@ -152,7 +161,10 @@ with tempfile.TemporaryDirectory(prefix='2dof-center-test-') as directory:
     (root/'Servo.h').write_text(SERVO)
     (root/'servo_center.ino').write_text(SKETCH.read_text())
     (root/'test.cpp').write_text(TEST)
-    binary = root/'test'
-    subprocess.run(['c++','-std=c++17','-Wall','-Wextra','-Werror',
-                    '-I',str(root),str(root/'test.cpp'),'-o',str(binary)],check=True)
-    subprocess.run([str(binary)],check=True)
+    for switched in (0, 1):
+        print(f'Power profile: {"Rev A switched" if switched else "Rev B direct"}', flush=True)
+        binary = root/f'test-{switched}'
+        subprocess.run(['c++','-std=c++17','-Wall','-Wextra','-Werror',
+                        f'-DROBOT_USE_POWER_SWITCH={switched}',
+                        '-I',str(root),str(root/'test.cpp'),'-o',str(binary)],check=True)
+        subprocess.run([str(binary)],check=True)

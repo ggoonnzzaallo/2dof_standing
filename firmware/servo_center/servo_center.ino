@@ -1,6 +1,10 @@
-// XIAO nRF52840 Sense + Pololu 2810 + PTK 7465 MG, supervised bench use.
+// Rev B: XIAO nRF52840 Sense + direct-battery PTK 7465 MG, supervised bench use.
 // Select Seeed nRF52 Boards > Seeed XIAO nRF52840 Sense (non-mbed core).
 // Boot is disarmed. Commands require a newline in the USB Serial Monitor.
+
+#ifndef ROBOT_USE_POWER_SWITCH
+#define ROBOT_USE_POWER_SWITCH 0  // Set to 1 only for the archived Pololu Rev A harness.
+#endif
 
 #include <Arduino.h>
 #include <Adafruit_TinyUSB.h>
@@ -12,6 +16,7 @@
 #endif
 
 constexpr uint16_t CENTER_US = 1500;  // Nominal starting center; verify on hardware.
+constexpr bool USE_SERVO_POWER_SWITCH = ROBOT_USE_POWER_SWITCH;
 constexpr uint32_t POWER_TEST_MS = 3000;
 constexpr uint32_t CENTER_HOLD_MS = 15000;
 constexpr uint32_t JOG_STEP_MS = 1500;
@@ -38,34 +43,55 @@ void motorOff() {
   digitalWrite(D1, LOW);
   pinMode(D0, OUTPUT);
   pinMode(D1, OUTPUT);
-  digitalWrite(D2, LOW);
-  pinMode(D2, OUTPUT);
+  if (USE_SERVO_POWER_SWITCH) {
+    digitalWrite(D2, LOW);
+    pinMode(D2, OUTPUT);
+  } else {
+    pinMode(D2, INPUT);  // Unused in Rev B; no external wire.
+  }
   activeMode = 0;
   permittedMs = 0;
   jogStep = 0;
 }
 
 void help() {
-  Serial.println("ROBOT SERVO CENTER 0.3");
+  Serial.println("ROBOT SERVO CENTER 0.4");
   Serial.println("OFF. No automatic movement. Support the arm and keep joints clear.");
+  if (!USE_SERVO_POWER_SWITCH) {
+    Serial.println("REV B DIRECT POWER: off/! stop PWM only; servo power stays live.");
+    Serial.println("Full power-off requires battery AND USB disconnected.");
+    Serial.println("Unplug both complete servo plugs for USB charging/programming.");
+  }
   Serial.println("Connect the battery before any power/centering command.");
-  Serial.println("power  : VOUT enabled for 3 seconds, no servo pulses");
+  Serial.println(USE_SERVO_POWER_SWITCH ? "power  : Rev A rail enabled for 3 seconds, no pulses"
+                                        : "power  : unavailable; Rev B has no power switch");
   Serial.println("lower  : lower servo D0 at 1500 us for 15 seconds");
   Serial.println("upper  : upper servo D1 at 1500 us for 15 seconds");
   Serial.println("lower-jog : HORNS OFF ONLY, D0 1200-1800 us, off in 10.5 seconds");
   Serial.println("upper-jog : HORNS OFF ONLY, D1 1200-1800 us, off in 10.5 seconds");
   Serial.println("lower-small : D0 1500/1450/1500/1550/1500 us, off in 7.5 seconds");
   Serial.println("upper-small : D1 1500/1450/1500/1550/1500 us, off in 7.5 seconds");
-  Serial.println("off    : stop PWM and disable the servo rail");
+  Serial.println(USE_SERVO_POWER_SWITCH ? "off    : stop PWM and request Rev A rail off"
+                                        : "off    : stop PWM ONLY; direct power remains connected");
   Serial.println("!      : immediate off, no newline needed");
   Serial.println("help   : stop and show these commands");
-  Serial.println("Pololu slide must stay OFF. Disconnect the pack for true power-off.");
+  if (USE_SERVO_POWER_SWITCH) Serial.println("Rev A Pololu slide must stay OFF for MCU control.");
+}
+
+void explainStop() {
+  if (!USE_SERVO_POWER_SWITCH) {
+    Serial.println("PWM stopped only; direct servo power remains connected.");
+  }
 }
 
 void beginTest(uint8_t mode) {
   motorOff();
-  // Power first; signal pins remain LOW until the selected PWM is attached.
-  digitalWrite(D2, HIGH);
+  if (mode == 1 && !USE_SERVO_POWER_SWITCH) {
+    Serial.println("No electronic power switch: power command has no effect. PWM remains stopped.");
+    return;
+  }
+  // Rev A enables power first; Rev B's direct supply is already live.
+  if (USE_SERVO_POWER_SWITCH) digitalWrite(D2, HIGH);
   startedAt = millis();
   activeMode = mode;
   permittedMs = mode == 1 ? POWER_TEST_MS :
@@ -78,7 +104,8 @@ void beginTest(uint8_t mode) {
   const uint8_t pin = (mode == 2 || mode == 4 || mode == 6) ? D0 : D1;
   if (activeServo.attach(pin, 1000, 2000) == INVALID_SERVO) {
     motorOff();
-    Serial.println("ERROR: could not start PWM; rail disabled.");
+    Serial.println("ERROR: could not start PWM; outputs stopped.");
+    explainStop();
     return;
   }
   activeServo.writeMicroseconds(CENTER_US);
@@ -108,14 +135,19 @@ void executeCommand() {
   else {
     motorOff();
     if (strcmp(command, "help") == 0) help();
-    else if (strcmp(command, "off") == 0) Serial.println("OFF.");
-    else Serial.println("Unknown command; rail disabled. Send help.");
+    else if (strcmp(command, "off") == 0) {
+      Serial.println("OFF.");
+      explainStop();
+    } else {
+      Serial.println("Unknown command; PWM stopped. Send help.");
+      explainStop();
+    }
   }
   commandLength = 0;
 }
 
 void setup() {
-  // First operations in the sketch leave motor power and both signals LOW.
+  // Stop both signals immediately; Rev A also disables its power switch.
   motorOff();
   // Use the board-core pin mappings, not Arduino pin 13 (which is an LED).
   digitalWrite(VBAT_ENABLE, LOW);
@@ -145,6 +177,7 @@ void loop() {
   if (activeMode && uint32_t(millis() - startedAt) >= permittedMs) {
     motorOff();
     Serial.println("OFF: test timer expired.");
+    explainStop();
   }
 
   if (activeMode >= 4) {
@@ -164,6 +197,7 @@ void loop() {
       commandLength = 0;
       discardLine = true;  // Discard any queued command tail until newline.
       Serial.println("OFF: emergency stop. Send a newline before another command.");
+      explainStop();
       continue;
     }
     if (c == '\r' || c == '\n') {
@@ -178,6 +212,7 @@ void loop() {
         commandLength = 0;
         discardLine = true;
         Serial.println("OFF: input too long; line discarded.");
+        explainStop();
       }
     }
   }

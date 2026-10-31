@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="1200" height="950" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1200 950" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="1200" height="950"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-950)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="1200" height="950" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="35" y="902" style="font-family: Helvetica-Bold; font-size: 35px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1804) scale(1,-1)">Rev B | direct battery power</text>
+			<text x="35" y="870" style="font-family: Helvetica; font-size: 18px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1740) scale(1,-1)">No Pololu board. Two insulated power buses. Two direct PWM wires. D2 is unused.</text>
+			<text x="35" y="832" style="font-family: Helvetica-Bold; font-size: 20px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1664) scale(1,-1)">POWER | join all points on each bus; keep positive and ground separate</text>
+			<rect x="35" y="720" width="230" height="50" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="51" y="738.0" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1476) scale(1,-1)">Battery RCY + / red</text>
+			<path d="M 265,745 L 330,745 Z" style="stroke: rgb(74%,20%,20%); stroke-linecap: butt; stroke-width: 3;"/>
+			<rect x="330" y="710" width="245" height="70" rx="8" ry="8" style="stroke: rgb(74%,20%,20%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(98%,91%,90%); fill-rule: evenodd;"/>
+			<text x="346" y="754" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1508) scale(1,-1)">J1  VBAT+ / 4-way</text>
+			<text x="346" y="732" style="font-family: Helvetica; font-size: 14px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1464) scale(1,-1)">One physical positive junction</text>
+			<path d="M 575,745 L 640,745 Z" style="stroke: rgb(74%,20%,20%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 640,795 L 640,645 Z" style="stroke: rgb(74%,20%,20%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 640,795 L 815,795 Z" style="stroke: rgb(74%,20%,20%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="640" cy="795" r="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(74%,20%,20%); fill-rule: evenodd;"/>
+			<rect x="815" y="760" width="350" height="70" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="831" y="804" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1608) scale(1,-1)">XIAO BAT+ pad</text>
+			<text x="831" y="782" style="font-family: Helvetica; font-size: 14px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1564) scale(1,-1)">Underside battery pad; one branch wire</text>
+			<path d="M 640,720 L 815,720 Z" style="stroke: rgb(74%,20%,20%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="640" cy="720" r="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(74%,20%,20%); fill-rule: evenodd;"/>
+			<rect x="815" y="685" width="350" height="70" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="831" y="729" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1458) scale(1,-1)">Lower servo J_S1 / +</text>
+			<text x="831" y="707" style="font-family: Helvetica; font-size: 14px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1414) scale(1,-1)">Red wire through its removable 3-pin plug</text>
+			<path d="M 640,645 L 815,645 Z" style="stroke: rgb(74%,20%,20%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="640" cy="645" r="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(74%,20%,20%); fill-rule: evenodd;"/>
+			<rect x="815" y="610" width="350" height="70" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="831" y="654" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1308) scale(1,-1)">Upper servo J_S2 / +</text>
+			<text x="831" y="632" style="font-family: Helvetica; font-size: 14px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1264) scale(1,-1)">Red wire through its removable 3-pin plug</text>
+			<circle cx="640" cy="745" r="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(74%,20%,20%); fill-rule: evenodd;"/>
+			<rect x="35" y="455" width="230" height="50" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="51" y="473.0" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,946) scale(1,-1)">Battery RCY - / black</text>
+			<path d="M 265,480 L 330,480 Z" style="stroke: rgb(20%,27%,33%); stroke-linecap: butt; stroke-width: 3;"/>
+			<rect x="330" y="445" width="245" height="70" rx="8" ry="8" style="stroke: rgb(20%,27%,33%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(90%,92%,94%); fill-rule: evenodd;"/>
+			<text x="346" y="489" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,978) scale(1,-1)">J2  GND / 4-way</text>
+			<text x="346" y="467" style="font-family: Helvetica; font-size: 14px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,934) scale(1,-1)">One physical negative junction</text>
+			<path d="M 575,480 L 640,480 Z" style="stroke: rgb(20%,27%,33%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 640,535 L 640,385 Z" style="stroke: rgb(20%,27%,33%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 640,535 L 815,535 Z" style="stroke: rgb(20%,27%,33%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="640" cy="535" r="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,27%,33%); fill-rule: evenodd;"/>
+			<rect x="815" y="500" width="350" height="70" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="831" y="544" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1088) scale(1,-1)">XIAO BAT- or GND</text>
+			<text x="831" y="522" style="font-family: Helvetica; font-size: 14px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1044) scale(1,-1)">Connect one ground point, not both</text>
+			<path d="M 640,460 L 815,460 Z" style="stroke: rgb(20%,27%,33%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="640" cy="460" r="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,27%,33%); fill-rule: evenodd;"/>
+			<rect x="815" y="425" width="350" height="70" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="831" y="469" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,938) scale(1,-1)">Lower servo J_S1 / GND</text>
+			<text x="831" y="447" style="font-family: Helvetica; font-size: 14px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,894) scale(1,-1)">Brown or black ground wire</text>
+			<path d="M 640,385 L 815,385 Z" style="stroke: rgb(20%,27%,33%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="640" cy="385" r="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,27%,33%); fill-rule: evenodd;"/>
+			<rect x="815" y="350" width="350" height="70" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="831" y="394" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,788) scale(1,-1)">Upper servo J_S2 / GND</text>
+			<text x="831" y="372" style="font-family: Helvetica; font-size: 14px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,744) scale(1,-1)">Brown or black ground wire</text>
+			<circle cx="640" cy="480" r="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,27%,33%); fill-rule: evenodd;"/>
+			<text x="35" y="313" style="font-family: Helvetica-Bold; font-size: 20px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,626) scale(1,-1)">SIGNALS | the same J_S1 and J_S2 plugs also carry these PWM wires</text>
+			<path d="M 265,265 L 815,265 Z" style="stroke: rgb(9%,42%,66%); stroke-linecap: butt; stroke-width: 3;"/>
+			<rect x="35" y="240" width="230" height="50" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="51" y="258.0" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,516) scale(1,-1)">XIAO D0 / marked 0</text>
+			<rect x="815" y="240" width="350" height="50" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="831" y="258.0" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,516) scale(1,-1)">Lower servo J_S1 / SIG</text>
+			<path d="M 265,200 L 815,200 Z" style="stroke: rgb(9%,42%,66%); stroke-linecap: butt; stroke-width: 3;"/>
+			<rect x="35" y="175" width="230" height="50" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="51" y="193.0" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,386) scale(1,-1)">XIAO D1 / marked 1</text>
+			<rect x="815" y="175" width="350" height="50" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
+			<text x="831" y="193.0" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,386) scale(1,-1)">Upper servo J_S2 / SIG</text>
+			<text x="35" y="147" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,294) scale(1,-1)">D2: remove its old ON wire and leave unconnected. XIAO 3V3 and 5V are not servo supplies.</text>
+			<rect x="35" y="32" width="1130" height="93" rx="8" ry="8" style="stroke: rgb(89%,70%,40%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,94%,87%); fill-rule: evenodd;"/>
+			<text x="51" y="71.5" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,143) scale(1,-1)"></text>
+			<text x="52" y="99" style="font-family: Helvetica-Bold; font-size: 20px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,198) scale(1,-1)">USB charging/programming: unplug BOTH complete 3-pin servo plugs.</text>
+			<text x="52" y="71" style="font-family: Helvetica; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,142) scale(1,-1)">Battery unplug = full OFF only with USB unplugged too. USB can feed the shared BAT+ bus.</text>
+			<text x="52" y="46" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,92) scale(1,-1)">off / ! stop PWM only. No electronic power cutoff remains. Keep the battery connected for charging.</text>
+			<text x="35" y="11" style="font-family: Helvetica; font-size: 13px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,22) scale(1,-1)">Connection map, not a physical pad layout. Sources and operating steps: electrical/README.md</text>
+		</g>
+	</g>
+</svg>

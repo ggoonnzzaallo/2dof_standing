@@ -125,7 +125,7 @@ def build():
         f'"{PYTHON}" "{{runtime.platform.path}}/tools/uf2conv/uf2conv.py" '
         '-f 0xADA52840 -c -o "{build.path}/{build.project_name}.uf2" '
         '"{build.path}/{build.project_name}.hex"')
-    args = ['compile', '--fqbn', FQBN, '--build-path', str(BUILD)]
+    args = ['compile', '--jobs', '1', '--fqbn', FQBN, '--build-path', str(BUILD)]
     for key, value in props.items():
         args.extend(['--build-property', f'{key}={value}'])
     arduino(*args, str(ROOT / 'firmware' / 'servo_center'))
@@ -179,7 +179,7 @@ def main():
     elif args.action == 'upload':
         upload(args.port)
     elif args.action == 'monitor':
-        run([PYTHON, '-m', 'serial.tools.miniterm', find_port(args.port), '115200', '--eol', 'LF'])
+        run([PYTHON, '-m', 'serial.tools.miniterm', find_port(args.port), '115200', '--eol', 'LF', '--echo'])
     elif args.action == 'check':
         # Both commands disarm. Request help explicitly because a USB host can
         # assert DTR before we open the port and miss the initial version banner.
@@ -188,7 +188,7 @@ def main():
                 'time.sleep(1); s.write(bytes([104,101,108,112,10,111,102,102,10])); '
                 'time.sleep(0.5); data=s.read(8192).decode(errors="replace"); s.close(); '
                 'print(data); '
-                'sys.exit(0 if "ROBOT SERVO CENTER 0.3" in data and "OFF." in data.splitlines() else 1)')
+                'sys.exit(0 if "ROBOT SERVO CENTER 0.4" in data and "OFF." in data.splitlines() else 1)')
         run([PYTHON, '-c', code, find_port(args.port)])
     else:
         run([sys.executable, ROOT / 'firmware' / 'test_servo_center.py'])
