@@ -1,5 +1,7 @@
 # Training and deployment pipeline
 
+**Final CAD update:** the user's corrected Onshape assembly is imported in [cad/onshape_import](../cad/onshape_import/README.md). Its structural pivots are at CAD Z=24.4 and 61.4 mm, unlike the provisional model below. The XML has not yet been rebuilt from that assembly; grouping, angle signs, measured masses and servo calibration remain to be reviewed.
+
 **Electrical Rev B:** the real build is being simplified to omit the Pololu switch. Existing CAD/simulation component placeholders may still include its old envelope/mass; reweigh and update the model before training. See [current wiring](../electrical/README.md).
 
 **Reference-layout PTK revision:** `robot.xml` places the battery below the deck, puts the joints at 42 and 87 mm, and extends the upper arm to the CAD's 170 mm tip. It still uses rough primitive contact geometry and placeholder masses from before the open-bridge CAD revision. Rebuild its mass distribution and contact shapes from printed and weighed parts before transfer training. Servo speed, torque, lag and current behavior at 1S voltage have **not** been measured; `environment.py` retains exploratory placeholder dynamics. Do not train a transfer policy from those numbers until the delivered servos and assembled geometry are characterized.

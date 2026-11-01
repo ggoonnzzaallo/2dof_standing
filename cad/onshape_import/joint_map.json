@@ -1,0 +1,56 @@
+{
+  "status": "rigid grouping and PWM signs awaiting user review",
+  "units": "mm",
+  "root": "base; free in world, not bolted to ground",
+  "neutral": "exported upright pose; servo electrical offsets uncalibrated",
+  "joints": [
+    {
+      "name": "lower",
+      "parent": "base",
+      "child": "middle",
+      "origin_cad_mm": [
+        0,
+        0.0,
+        24.4
+      ],
+      "axis_cad": [
+        1,
+        0,
+        0
+      ],
+      "pwm_sign": null,
+      "limits_rad": null
+    },
+    {
+      "name": "upper",
+      "parent": "middle",
+      "child": "upper",
+      "origin_cad_mm": [
+        -2.35,
+        0,
+        61.4
+      ],
+      "origin_relative_to_lower_mm": [
+        -2.35,
+        0.0,
+        37.0
+      ],
+      "axis_cad": [
+        0,
+        1,
+        0
+      ],
+      "structural_axis_confirmed_by_user": true,
+      "pwm_sign": null,
+      "limits_rad": null
+    }
+  ],
+  "servo_visual_residual_offset_mm": {
+    "perpendicular_delta_mm": [
+      0.55,
+      0,
+      0.30000000000000426
+    ],
+    "distance_mm": 0.6264982043070855
+  }
+}
