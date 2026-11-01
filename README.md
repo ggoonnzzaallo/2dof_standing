@@ -24,6 +24,7 @@ This is an assembled prototype, with both servo joints tested and Rev B wiring l
 - [Power budget and brownout acceptance test](HARDWARE.md#power-budget-and-brownout-check)
 - [Final Onshape assembly and 3D review](cad/onshape_import/README.md); [earlier parametric CAD and fit coupons](cad/README.md)
 - [VS Code setup, first power-up and servo centering](firmware/README.md) — disarmed USB-controlled bench program
+- [IMU commissioning and CSV logging](firmware/imu_bench/README.md) — first hardware-deployment stage, with servo outputs inactive
 - [Training and deployment pipeline](sim/README.md)
 - [Neural recovery animation, experiment results and saved actor](sim/recovery/README.md)
 - [Current model checks](sim/onshape/validation.json), [Gymnasium checks](sim/validation.json), and [calibration/learning plan](docs/SIM_CALIBRATION_PLAN.md)

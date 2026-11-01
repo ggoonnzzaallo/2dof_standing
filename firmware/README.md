@@ -22,6 +22,8 @@ The upload script accepts only a recognized XIAO nRF52840 Sense and requires the
 
 The separate [policy arithmetic probe](policy_probe/README.md) builds the simulation-trained actor with `python3 scripts/robot.py build-probe`. It generates no servo pulses and has not been uploaded. The normal upload command above still installs the bench firmware.
 
+For the first hardware-deployment stage, the [IMU commissioning program](imu_bench/README.md) uses `build-imu` / `upload-imu` and provides sensor-only acceleration, gyro and battery logging through `scripts/imu.py`. It contains no servo PWM or learned-policy control. Confirm the USB-only, servo-plugs-disconnected setup before uploading it.
+
 ## Run movements yourself
 
 With USB and battery disconnected, reconnect the complete servo plugs. Support the arm, check clearance and reconnect the battery, then USB for a supervised terminal test. This is a brief motor test, not unattended charging. Start from the established upright assembly pose.

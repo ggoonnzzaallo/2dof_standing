@@ -111,7 +111,7 @@ def require_tools():
 
 def build(sketch='servo_center'):
     require_tools()
-    if sketch not in ('servo_center', 'policy_probe'):
+    if sketch not in ('servo_center', 'policy_probe', 'imu_bench'):
         raise ValueError('Unknown project sketch.')
     build_path = ROOT / 'build' / sketch
     props = {'tools.nrfutil.cmd': str(UPLOADER),
@@ -152,11 +152,11 @@ def find_port(requested=None):
     return matching[0]
 
 
-def upload(port):
+def upload(port, sketch='servo_center'):
     selected = find_port(port)
-    build()
-    print(f'Uploading disarmed centering firmware to {selected}', flush=True)
-    result = arduino('upload', '--fqbn', FQBN, '--port', selected, '--input-dir', str(BUILD),
+    build(sketch)
+    print(f'Uploading {sketch} firmware to {selected}', flush=True)
+    result = arduino('upload', '--fqbn', FQBN, '--port', selected, '--input-dir', str(ROOT / 'build' / sketch),
             '--upload-property', f'tools.nrfutil.cmd={UPLOADER}',
             '--upload-property', f'tools.nrfutil.cmd.macosx={UPLOADER}',
             '--upload-property', f'cmd={UPLOADER}', capture_output=True, text=True)
@@ -170,7 +170,7 @@ def upload(port):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['setup', 'build', 'build-probe', 'ports', 'upload', 'monitor', 'check', 'test'])
+    parser.add_argument('action', choices=['setup', 'build', 'build-probe', 'build-imu', 'ports', 'upload', 'upload-imu', 'monitor', 'check', 'test'])
     parser.add_argument('--port', help='Explicit XIAO serial port; auto-detects if exactly one is connected')
     args = parser.parse_args()
     if args.action == 'setup':
@@ -179,10 +179,14 @@ def main():
         build()
     elif args.action == 'build-probe':
         build('policy_probe')
+    elif args.action == 'build-imu':
+        build('imu_bench')
     elif args.action == 'ports':
         print(json.dumps(board_ports(), indent=2))
     elif args.action == 'upload':
         upload(args.port)
+    elif args.action == 'upload-imu':
+        upload(args.port, 'imu_bench')
     elif args.action == 'monitor':
         run([PYTHON, '-m', 'serial.tools.miniterm', find_port(args.port), '115200', '--eol', 'LF', '--echo'])
     elif args.action == 'check':
@@ -198,6 +202,8 @@ def main():
     else:
         run([sys.executable, ROOT / 'firmware' / 'test_servo_center.py'])
         run([sys.executable, ROOT / 'firmware' / 'test_fine_servo.py'])
+        run([sys.executable, ROOT / 'firmware' / 'test_imu_bench.py'])
+        run([sys.executable, ROOT / 'firmware' / 'test_imu_logger.py'])
 
 
 if __name__ == '__main__':

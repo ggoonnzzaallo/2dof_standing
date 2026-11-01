@@ -1,0 +1,30 @@
+{
+  "record_date": "2026-11-01",
+  "status": "passed",
+  "command": "python3 scripts/robot.py build-imu",
+  "build_exit_code": 0,
+  "fqbn": "Seeeduino:nrf52:xiaonRF52840Sense",
+  "core_version": "1.1.13",
+  "arduino_cli_version": "1.5.1",
+  "compiler": "Arm GNU 13.2.Rel1, native macOS arm64",
+  "program_storage_bytes": 53428,
+  "static_ram_bytes": 7960,
+  "source_sha256": {
+    "Lsm6ds3.h": "a8bd2cee3cd3bb48087fdbbc2a5deb5b9a7a4655b42768fc81a12fb1d0f4acc2",
+    "imu_bench.ino": "34b2296fb3e2930d4fa8d5d7f72de46ca38744dd187b01ee37f1588ba5e37ad7"
+  },
+  "elf_sha256": "a8386317ac3981d303a933f8b85e8c2b173860a86912a5cb7a6e2b5e38679cb6",
+  "uf2_sha256": "50afad2396aaa5a602049ba06de2294cb9b6c610bcd265864dc4d7e65e408b3f",
+  "firmware_uploaded": false,
+  "hardware_sensor_identity_verified": false,
+  "sensor_to_base_alignment_calibrated": false,
+  "physical_motor_commands_sent": false,
+  "known_toolchain_warnings": [
+    "Newlib nano unimplemented POSIX syscall stubs; no POSIX process/file API is used by the sketch.",
+    "Bundled uf2conv.py invalid escape sequence SyntaxWarning; UF2 generation completed."
+  ],
+  "limitations": [
+    "Fake I2C tests cannot verify sensor connectivity, acquisition timing, mounting axes or physical accuracy.",
+    "Pinned core Wire implementation has unbounded hardware-event waits; timeout/fault behavior must be resolved before integrating motor control."
+  ]
+}
