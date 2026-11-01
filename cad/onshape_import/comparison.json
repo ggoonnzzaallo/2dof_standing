@@ -1,16 +1,16 @@
 {
-  "baseline_source": "source/robot_onshape.step",
-  "corrected_source": "source/robot_onshape_corrected.step",
-  "corrected_sha256": "33293658bcd80fbc9263385b39d48f95ebd64727f0e6365abd837628e959245e",
+  "baseline_source": "source/robot_onshape_corrected.step",
+  "current_source": "source/robot_onshape_third.step",
+  "source_sha256": "a1e8b9f62ebc51399e4eba8f90decf3a52301894228f108a6677a035fa2ee229",
   "changed_instances": [
     {
       "alias": "upper_servo",
       "translation_delta_mm": [
-        0.55,
-        -0.18024604183360005,
-        2.1715214828475027
+        0.0,
+        0.0,
+        -0.14999999999999858
       ],
-      "rotation_matrix_max_delta": 3.191891195797329e-16
+      "rotation_matrix_max_delta": 0.0
     }
   ],
   "unchanged_instances": 8,
@@ -27,9 +27,9 @@
       "perpendicular_delta_mm": [
         0.55,
         0,
-        0.30000000000000426
+        0.14999999999999858
       ],
-      "distance_mm": 0.6264982043070855
+      "distance_mm": 0.5700877125495687
     },
     "upper_structural_pair": {
       "perpendicular_delta_mm": [
@@ -40,5 +40,10 @@
       "distance_mm": 0.0
     }
   },
+  "suggested_upper_servo_translation_cad_mm": [
+    -0.55,
+    0,
+    -0.15
+  ],
   "structural_axes_authoritative": true
 }

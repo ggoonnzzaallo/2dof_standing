@@ -1,5 +1,5 @@
 {
-  "status": "corrected_whole_assembly_imported",
+  "status": "third_whole_assembly_imported_residual_offset",
   "files": [
     {
       "filename": "Assembly 1 - BASE.step",
@@ -88,14 +88,13 @@
     5.95,
     29.8
   ],
-  "next_input": "Review proposed rigid groups and joint signs. No further export is required to preserve the confirmed structural axes; physical fit and servo-model fidelity remain separate checks.",
+  "next_input": "Confirm grouping; optional upper servo placement correction. Keep the confirmed structural axis.",
   "assembly_report": "assembly_inspection.json",
   "current_findings": [
-    "Nine placed components are preserved. Servo aliases are assigned by height, retaining original names.",
-    "Only the upper servo instance transform changed compared with the first whole-assembly export.",
-    "Lower modeled shaft and structural pivot are coaxial.",
-    "Both upper structural pivots are coaxial at X=-2.35, Z=61.4 mm.",
-    "Corrected upper servo modeled shaft is at X=-1.8, Z=61.7 mm; residual perpendicular offset is 0.626498 mm.",
-    "Structural upper axis remains the user-confirmed reference. Servo model discrepancy is recorded without silently moving imported geometry."
+    "Nine placed components are preserved. Only the upper servo instance moved relative to the second export, by -0.15 mm along CAD Z.",
+    "Lower modeled shaft and structural pivot remain coaxial.",
+    "Both upper structural pivots remain coaxial at X=-2.35, Z=61.4 mm.",
+    "Upper servo modeled shaft is at X=-1.8, Z=61.55 mm; residual perpendicular offset is 0.570088 mm.",
+    "Translation (-0.55,0,-0.15) mm in exported assembly coordinates would align the current upper servo shaft without moving the structural axis."
   ]
 }

@@ -29,7 +29,7 @@ def name(label):
     return attr.Get().ToExtString() if label.FindAttribute(TDataStd_Name.GetID_s(),attr) else ''
 
 def inspect(source=None):
-    source=Path(source) if source else OUT/'source/robot_onshape_corrected.step'
+    source=Path(source) if source else OUT/'source/robot_onshape_third.step'
     doc=TDocStd_Document(TCollection_ExtendedString('robot'))
     reader=STEPCAFControl_Reader();reader.SetNameMode(True)
     status=reader.ReadFile(str(source))

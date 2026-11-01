@@ -1,0 +1,44 @@
+{
+  "baseline_source": "source/robot_onshape.step",
+  "corrected_source": "source/robot_onshape_corrected.step",
+  "corrected_sha256": "33293658bcd80fbc9263385b39d48f95ebd64727f0e6365abd837628e959245e",
+  "changed_instances": [
+    {
+      "alias": "upper_servo",
+      "translation_delta_mm": [
+        0.55,
+        -0.18024604183360005,
+        2.1715214828475027
+      ],
+      "rotation_matrix_max_delta": 3.191891195797329e-16
+    }
+  ],
+  "unchanged_instances": 8,
+  "joint_alignment": {
+    "lower": {
+      "perpendicular_delta_mm": [
+        0,
+        -0.0,
+        0.0
+      ],
+      "distance_mm": 0.0
+    },
+    "upper": {
+      "perpendicular_delta_mm": [
+        0.55,
+        0,
+        0.30000000000000426
+      ],
+      "distance_mm": 0.6264982043070855
+    },
+    "upper_structural_pair": {
+      "perpendicular_delta_mm": [
+        0.0,
+        0,
+        0.0
+      ],
+      "distance_mm": 0.0
+    }
+  },
+  "structural_axes_authoritative": true
+}
