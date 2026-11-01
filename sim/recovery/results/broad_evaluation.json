@@ -1,0 +1,3114 @@
+{
+  "status": "Exploratory simulation evaluation; not physical validation",
+  "model_sha256": "ccf63163ab02820a343b74ce28905d2dd313ac06e7a81f1aa290ac568ee9c971",
+  "robot_xml_sha256": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+  "episodes": 100,
+  "successes": 100,
+  "successful_and_audit_passed": 100,
+  "pose_sampling": "Requested tilt uniform [0, pi], rotation-axis azimuth uniform [0, 2pi]; not uniform SO(3). Each reset then settles for 0.8 seconds.",
+  "randomization": "Existing exploratory mass/friction/servo delay, speed, torque, gain and observation noise; not calibrated physical uncertainty.",
+  "seeds": "9000 onward, distinct from demonstration/development/final scripted-case tests",
+  "physical_robot_commands_sent": false,
+  "trials": [
+    {
+      "seed": 9000,
+      "requested_start": {
+        "tilt": 0.7602406593784179,
+        "azimuth": 0.8650060489990368
+      },
+      "control_start_qpos": [
+        -0.008158124394565074,
+        0.015046293484056776,
+        0.0019999472034675763,
+        0.9990655219256933,
+        -2.4529491873856573e-08,
+        -3.6495327948082363e-07,
+        -0.043221324588778975,
+        -0.0003353768700906135,
+        3.1507322645234443e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.84,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 93,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9001,
+      "requested_start": {
+        "tilt": 1.9688011097218563,
+        "azimuth": 5.132924274123946
+      },
+      "control_start_qpos": [
+        -0.007391266690720067,
+        0.014623354068418623,
+        0.03449188921053116,
+        0.60892293256042,
+        0.20433950695868974,
+        -0.7481933033316805,
+        0.16632801612333925,
+        -0.00012889956670312881,
+        0.029585037167391866
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 5.0,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 251,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9002,
+      "requested_start": {
+        "tilt": 2.90782681887002,
+        "azimuth": 1.9119139306530792
+      },
+      "control_start_qpos": [
+        -0.10276748146818615,
+        -0.04392109826916685,
+        0.03433555924278363,
+        0.6104989925492595,
+        -0.1476168127272572,
+        0.7692842290655061,
+        0.1170556773833463,
+        -0.00015255559561803866,
+        -0.018683724094820768
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.64,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 133,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9003,
+      "requested_start": {
+        "tilt": 2.650740448247863,
+        "azimuth": 1.3722609842938942
+      },
+      "control_start_qpos": [
+        -0.05061169184261193,
+        0.022695649669874085,
+        0.03433774832001684,
+        0.6082827332956706,
+        0.1619576569352168,
+        0.7662969516592656,
+        -0.12864997323014998,
+        -0.00013678682226939414,
+        -0.01813420844549085
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.54,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 128,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9004,
+      "requested_start": {
+        "tilt": 2.205218732215294,
+        "azimuth": 0.45988186630301586
+      },
+      "control_start_qpos": [
+        -0.007375348530800961,
+        -0.005696199311543256,
+        0.03459405766672434,
+        0.6110736361320425,
+        0.7359760416830974,
+        0.2241699628936913,
+        0.18621521159423365,
+        -0.012367127744857827,
+        -0.0005413061834107247
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.18,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 160,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9005,
+      "requested_start": {
+        "tilt": 0.536773209418578,
+        "azimuth": 4.28765915722801
+      },
+      "control_start_qpos": [
+        0.006022157210278183,
+        -0.011672966065709145,
+        0.001999946102273234,
+        0.9999894771047279,
+        -6.946366212585028e-09,
+        -3.740463039808399e-07,
+        0.004587557048511555,
+        -0.00037810336511904223,
+        3.3165780019454973e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.02,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 102,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9006,
+      "requested_start": {
+        "tilt": 1.1588832895488799,
+        "azimuth": 1.8499053970076424
+      },
+      "control_start_qpos": [
+        0.021242025001569142,
+        -0.008771338455167811,
+        0.034335772936952724,
+        0.619899238689643,
+        -0.05840391962213438,
+        0.7811362041547678,
+        0.04626171855273477,
+        -0.00014197633763466454,
+        -0.018667450199651988
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.62,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 132,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9007,
+      "requested_start": {
+        "tilt": 2.4764189191812442,
+        "azimuth": 4.395443230369945
+      },
+      "control_start_qpos": [
+        0.010458684350293963,
+        -0.0124573486296547,
+        0.03450428708863116,
+        0.614070683462767,
+        -0.18352756890759894,
+        -0.7528851788107751,
+        -0.14966206830557985,
+        -0.00012021638379726836,
+        0.02582579047390689
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.54,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 178,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9008,
+      "requested_start": {
+        "tilt": 0.9353214519794053,
+        "azimuth": 3.4642121611327656
+      },
+      "control_start_qpos": [
+        0.006685968011638232,
+        0.0326994249172484,
+        0.03464005796464551,
+        0.6394742237208414,
+        -0.7633198079916338,
+        -0.07032109251270889,
+        0.05891122025609497,
+        0.007271225342898502,
+        1.6422616915045944e-05
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.04,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 203,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9009,
+      "requested_start": {
+        "tilt": 1.3969643500589881,
+        "azimuth": 0.7932058064364029
+      },
+      "control_start_qpos": [
+        0.04035279810484283,
+        0.004845352131595046,
+        0.03430220376674626,
+        0.5483299519198281,
+        0.36564271194343395,
+        0.6944092666358648,
+        -0.2888519368820153,
+        -0.00022503708038050095,
+        -0.027278352206393425
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.74,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 138,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9010,
+      "requested_start": {
+        "tilt": 1.0044710997326909,
+        "azimuth": 3.4086142681495604
+      },
+      "control_start_qpos": [
+        0.0028423186451805907,
+        0.031189607429346147,
+        0.03463983948728416,
+        0.6401588675277778,
+        -0.7640347302960903,
+        -0.06154925372990857,
+        0.051567863948626884,
+        0.0070300811416440165,
+        6.311577380777527e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.94,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 198,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9011,
+      "requested_start": {
+        "tilt": 0.9742322284841334,
+        "azimuth": 0.6746473979779019
+      },
+      "control_start_qpos": [
+        -0.019419675638869906,
+        -0.0024022524811286574,
+        0.001999950750269205,
+        0.9910960215248011,
+        4.3119308835681603e-08,
+        -3.383747595305733e-07,
+        0.13314907479061366,
+        -0.00026131877104591355,
+        -4.846611731247486e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.0,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 51,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9012,
+      "requested_start": {
+        "tilt": 2.2307315951237388,
+        "azimuth": 4.9279881207183305
+      },
+      "control_start_qpos": [
+        0.007477582448640176,
+        0.009192356006128485,
+        0.03450340742804178,
+        0.6214301755757641,
+        0.14114173544377795,
+        -0.7620014901787814,
+        0.11514024650446862,
+        -0.00014772178666476368,
+        0.026004065631160554
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.48,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 175,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9013,
+      "requested_start": {
+        "tilt": 2.290854358892585,
+        "azimuth": 5.472452456742593
+      },
+      "control_start_qpos": [
+        -0.015465835210927393,
+        0.03172662820521786,
+        0.03451006476383886,
+        0.5666174772966636,
+        0.3441459300543355,
+        -0.6939105255721395,
+        0.2810629747035301,
+        -1.633496859237164e-05,
+        0.023749455662798066
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.46,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 174,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9014,
+      "requested_start": {
+        "tilt": 2.83991234114388,
+        "azimuth": 2.408858901669171
+      },
+      "control_start_qpos": [
+        -0.07801540727310442,
+        -0.02374699707071219,
+        0.03463955289955477,
+        0.5366194949167546,
+        -0.640624240641099,
+        0.4210251441781515,
+        -0.35267255060192965,
+        0.007468958319400185,
+        1.4459701890756656e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.96,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 199,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9015,
+      "requested_start": {
+        "tilt": 2.633929262503661,
+        "azimuth": 1.3183915271613968
+      },
+      "control_start_qpos": [
+        -0.02721611330880725,
+        0.01846249213915033,
+        0.034329504311989445,
+        0.5992822720944997,
+        0.2064497745907719,
+        0.7559255333848931,
+        -0.16375541793003126,
+        -0.00017095883666273223,
+        -0.02037722961449479
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.62,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 132,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9016,
+      "requested_start": {
+        "tilt": 2.4447584389054495,
+        "azimuth": 2.4924298555451982
+      },
+      "control_start_qpos": [
+        -0.044564169373996515,
+        -0.012218857251715303,
+        0.03463965733274193,
+        0.5820410796445413,
+        -0.6946909853896427,
+        0.32396767806659565,
+        -0.2714361066489146,
+        0.007071825155942483,
+        4.797169243018562e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.9,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 196,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9017,
+      "requested_start": {
+        "tilt": 1.7760372496614527,
+        "azimuth": 3.615537757048571
+      },
+      "control_start_qpos": [
+        0.017201675720324657,
+        0.010664968426652361,
+        0.03463938370807517,
+        0.6134806559853828,
+        -0.7323398793638037,
+        -0.22652225759591194,
+        0.1897562980214497,
+        0.007363290117371632,
+        1.8381293636197034e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.0200000000000005,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 202,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9018,
+      "requested_start": {
+        "tilt": 2.2802042728333562,
+        "azimuth": 0.10876786141809014
+      },
+      "control_start_qpos": [
+        -0.007832295003899889,
+        0.02751034401422778,
+        0.03460052347408313,
+        0.635797347782398,
+        0.7646241698061372,
+        0.08101727790112613,
+        0.06743746868496989,
+        -0.010159583775977346,
+        -0.00027176862085828625
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.5600000000000005,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 229,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9019,
+      "requested_start": {
+        "tilt": 2.751418781311214,
+        "azimuth": 1.913812959053165
+      },
+      "control_start_qpos": [
+        -0.07266026643644291,
+        -0.03146792249508786,
+        0.03432034709978819,
+        0.6073015926339308,
+        -0.16230833490506938,
+        0.7670392025381243,
+        0.12841978731609976,
+        -0.00017578290574806857,
+        -0.022787830779348744
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.72,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 137,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9020,
+      "requested_start": {
+        "tilt": 1.1190283936795336,
+        "azimuth": 2.598920424895786
+      },
+      "control_start_qpos": [
+        -0.007447414666404909,
+        0.03443112362481153,
+        0.03463857617049648,
+        0.6318422972885688,
+        -0.7542751548133074,
+        0.13679466804334658,
+        -0.11459284874447724,
+        0.007363657337455286,
+        1.934216227758089e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.38,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 220,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9021,
+      "requested_start": {
+        "tilt": 2.897523765480274,
+        "azimuth": 6.271341699762589
+      },
+      "control_start_qpos": [
+        0.009824025978577925,
+        0.12294598248405217,
+        0.034605993439111894,
+        0.6394903739046358,
+        0.7683929296266532,
+        -0.019249000144118494,
+        -0.015932462977501227,
+        -0.008827751456673555,
+        -0.0006103664778203926
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.36,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 169,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9022,
+      "requested_start": {
+        "tilt": 2.5825198475409357,
+        "azimuth": 3.0595777320724054
+      },
+      "control_start_qpos": [
+        0.006277200877231331,
+        -0.04439409131941401,
+        0.03462616037225526,
+        0.6401942354035884,
+        -0.7663101592350493,
+        0.041470093366123915,
+        -0.03464552157743865,
+        0.011685053862799112,
+        4.250844631001687e-07
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 5.0,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 251,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9023,
+      "requested_start": {
+        "tilt": 3.090468352344478,
+        "azimuth": 1.1558136940022556
+      },
+      "control_start_qpos": [
+        -0.07883080993660369,
+        0.10724506225878742,
+        0.034290287823041936,
+        0.5571582668093886,
+        0.34212610589402415,
+        0.7069457526642302,
+        -0.26972596497511253,
+        0.0009594419538075268,
+        -0.030722629262320507
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.8000000000000003,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 141,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9024,
+      "requested_start": {
+        "tilt": 2.5172714374300806,
+        "azimuth": 4.068573235542535
+      },
+      "control_start_qpos": [
+        0.03223877769588174,
+        -0.05554923250783107,
+        0.03449475700977091,
+        0.5848214994255508,
+        -0.29270406244814023,
+        -0.7179839705939632,
+        -0.2383425341942398,
+        -6.369342271855345e-05,
+        0.028237023364215703
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.8200000000000003,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 192,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9025,
+      "requested_start": {
+        "tilt": 1.657224778520159,
+        "azimuth": 3.9626859000830565
+      },
+      "control_start_qpos": [
+        -0.02848960929189012,
+        -0.016503026161282693,
+        0.03450740436835738,
+        0.5668675503847047,
+        -0.3433980767513638,
+        -0.6944061915489628,
+        -0.2802480728618362,
+        -4.134416220702325e-05,
+        0.024387123527220354
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.5,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 176,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9026,
+      "requested_start": {
+        "tilt": 0.8845237731505974,
+        "azimuth": 1.1746603536310023
+      },
+      "control_start_qpos": [
+        -0.002889525230231646,
+        0.01612047874677376,
+        0.0019999801323912067,
+        0.9976755041942308,
+        -1.0144930842119564e-08,
+        -1.3702051491720246e-07,
+        -0.06814387962811105,
+        -0.00030051095013135546,
+        -1.98282385585409e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.94,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 98,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9027,
+      "requested_start": {
+        "tilt": 0.795673534052742,
+        "azimuth": 2.2080380418611827
+      },
+      "control_start_qpos": [
+        -0.012036593971856946,
+        -0.026143801337451755,
+        0.0019999735189233105,
+        0.9994012968083282,
+        -5.835972951232841e-09,
+        -1.8336328709789656e-07,
+        -0.03459838056614476,
+        -0.00025002895855523027,
+        -3.485320311952637e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.04,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 103,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9028,
+      "requested_start": {
+        "tilt": 2.2987891591886154,
+        "azimuth": 3.2610875010141487
+      },
+      "control_start_qpos": [
+        0.004902635317879292,
+        -0.014432816793119498,
+        0.03463812076570439,
+        0.6364127774311634,
+        -0.7599640042362446,
+        -0.10122908436837229,
+        0.08477123017573064,
+        0.007894065418006229,
+        5.810092507095782e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.92,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 197,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9029,
+      "requested_start": {
+        "tilt": 2.448676888076377,
+        "azimuth": 2.897853675496604
+      },
+      "control_start_qpos": [
+        -0.018340799383834854,
+        -0.021017361271706347,
+        0.03464332278085858,
+        0.6110358117956052,
+        -0.7289035514133962,
+        0.23662005160423946,
+        -0.19835775916013576,
+        0.006251973231144252,
+        3.914293758179522e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.7600000000000002,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 139,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9030,
+      "requested_start": {
+        "tilt": 1.3050422827324897,
+        "azimuth": 2.1517477467587036
+      },
+      "control_start_qpos": [
+        0.04186175303501593,
+        -0.0041197525108777585,
+        0.034299498774199993,
+        0.5789126438033871,
+        -0.2797173250770942,
+        0.7334255488662191,
+        0.22069284801862923,
+        -0.0001945903317686992,
+        -0.028226984359896984
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.7800000000000002,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 140,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9031,
+      "requested_start": {
+        "tilt": 0.7879511231983719,
+        "azimuth": 0.2796040156300497
+      },
+      "control_start_qpos": [
+        -0.0040164137054473255,
+        0.006580457867335974,
+        0.0019998879900131267,
+        0.9996988378233798,
+        2.6723492693131493e-08,
+        -6.234794728535005e-07,
+        0.024540449347866235,
+        -0.00026647021184837493,
+        -8.733249194170343e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.96,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 99,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9032,
+      "requested_start": {
+        "tilt": 1.611893077564879,
+        "azimuth": 0.6029842412838109
+      },
+      "control_start_qpos": [
+        -0.012585680765706729,
+        -0.022817437877255414,
+        0.034614009260793555,
+        0.5936524111925308,
+        0.7121505213211932,
+        0.28779053927319326,
+        0.23998969805408712,
+        -0.0062446388606828655,
+        -0.0002355634467267746
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.16,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 159,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9033,
+      "requested_start": {
+        "tilt": 1.5610227841743933,
+        "azimuth": 4.437104145569931
+      },
+      "control_start_qpos": [
+        -0.009000022007376676,
+        -0.005263464554726968,
+        0.034529735997792445,
+        0.6250528136091552,
+        -0.12789400476865842,
+        -0.7628762324337532,
+        -0.10474711323561263,
+        -5.147302814550687e-05,
+        0.017867050962235953
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.68,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 185,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9034,
+      "requested_start": {
+        "tilt": 1.8749582945940746,
+        "azimuth": 3.8735116311126165
+      },
+      "control_start_qpos": [
+        0.026410979209566185,
+        0.02400012057398497,
+        0.03463747787149989,
+        0.5708215334525231,
+        -0.6817098142021156,
+        -0.3508772776175113,
+        0.2938020459750915,
+        0.008055582547024093,
+        6.903018270786445e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.2,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 211,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9035,
+      "requested_start": {
+        "tilt": 2.1168180188202235,
+        "azimuth": 0.14244477673574416
+      },
+      "control_start_qpos": [
+        -0.007804481732585558,
+        0.01629175857739473,
+        0.034610317369318785,
+        0.6350803617492204,
+        0.7621959919093185,
+        0.0963252458023245,
+        0.08032217040749727,
+        -0.00701868508632484,
+        -8.234334273005107e-05
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.14,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 158,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9036,
+      "requested_start": {
+        "tilt": 1.8454493765694409,
+        "azimuth": 4.113941255365389
+      },
+      "control_start_qpos": [
+        -0.014939565069556756,
+        -0.021044796737545064,
+        0.03452119518833762,
+        0.590073055245507,
+        -0.2809083736951741,
+        -0.7211857745897581,
+        -0.2297723951882305,
+        -8.867793591857084e-05,
+        0.020354686764886054
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.92,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 247,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9037,
+      "requested_start": {
+        "tilt": 1.8581813352251975,
+        "azimuth": 4.690109020426078
+      },
+      "control_start_qpos": [
+        0.0019339910222560556,
+        -0.0002707778565335559,
+        0.03452474710614263,
+        0.6334681006763231,
+        -0.010511930830382595,
+        -0.7736503898149996,
+        -0.00852872058674951,
+        -7.650839250602236e-05,
+        0.018999214582928928
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.64,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 183,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9038,
+      "requested_start": {
+        "tilt": 0.15109531671600332,
+        "azimuth": 0.3236471720110789
+      },
+      "control_start_qpos": [
+        0.0009341400829868885,
+        -0.0008104023805600547,
+        0.001999979773513944,
+        0.9996720231406674,
+        -2.8895177501287075e-09,
+        -1.3984529919212853e-07,
+        -0.02560949335355403,
+        -0.0002888321342201849,
+        -2.692324293619341e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.96,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 99,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9039,
+      "requested_start": {
+        "tilt": 0.7502598108955093,
+        "azimuth": 0.30895399349850894
+      },
+      "control_start_qpos": [
+        -0.006926148585022865,
+        0.006218227643397896,
+        0.0019998984691639563,
+        0.9991843643085431,
+        6.013811454332454e-09,
+        -6.168987731529201e-07,
+        0.04038076424427176,
+        -0.0002779944765577484,
+        -6.520765669721997e-10
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.0,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 51,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9040,
+      "requested_start": {
+        "tilt": 0.3961035243486481,
+        "azimuth": 2.9791965285645845
+      },
+      "control_start_qpos": [
+        -0.00023429776478695489,
+        0.0032598891896793774,
+        0.001999984823752221,
+        0.9996023202864857,
+        5.997954837484485e-10,
+        -1.0523671617423196e-07,
+        0.028199313428910123,
+        -0.0003717807007139264,
+        1.2694474856489954e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.96,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 99,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9041,
+      "requested_start": {
+        "tilt": 2.573354685921452,
+        "azimuth": 1.323219643120905
+      },
+      "control_start_qpos": [
+        -0.02198850274251194,
+        0.01676792164660122,
+        0.03428546948576532,
+        0.5981370041496846,
+        0.2009411079291099,
+        0.7594625880820857,
+        -0.15833942249080402,
+        -0.00020330990339603456,
+        -0.031970806166677246
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.84,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 143,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9042,
+      "requested_start": {
+        "tilt": 1.328781497820455,
+        "azimuth": 3.8807231480053317
+      },
+      "control_start_qpos": [
+        0.005791560129884768,
+        0.04568537858680797,
+        0.03463957116337141,
+        0.5674766678518537,
+        -0.6774344791844101,
+        -0.35878252504576397,
+        0.30054593255888346,
+        0.007400574851862236,
+        2.6703927298432633e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.94,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 198,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9043,
+      "requested_start": {
+        "tilt": 1.725385216288692,
+        "azimuth": 6.159945480371298
+      },
+      "control_start_qpos": [
+        0.0016533039447111737,
+        -0.0003453042203876448,
+        0.03459153691434574,
+        0.6371228947342195,
+        0.7676827863673862,
+        -0.05300687894738848,
+        -0.04390703024518665,
+        -0.013109514270026872,
+        -0.0005155197066412188
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.66,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 184,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9044,
+      "requested_start": {
+        "tilt": 1.8267324605951119,
+        "azimuth": 4.620040429972764
+      },
+      "control_start_qpos": [
+        9.987058178246552e-05,
+        -0.002608494235291576,
+        0.03452968281405949,
+        0.6327782893356,
+        -0.043609318832305025,
+        -0.7722800797682433,
+        -0.03568392144440339,
+        -5.382798766625647e-05,
+        0.017800054780347904
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.94,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 248,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9045,
+      "requested_start": {
+        "tilt": 1.3852401708976587,
+        "azimuth": 5.861072420908894
+      },
+      "control_start_qpos": [
+        0.007789670153596411,
+        -0.022764441440765146,
+        0.03460212930480801,
+        0.6220766891716055,
+        0.74785614012793,
+        -0.17824291679688695,
+        -0.1481932828234295,
+        -0.009668906876713769,
+        -0.00019845848942198242
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.2800000000000002,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 165,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9046,
+      "requested_start": {
+        "tilt": 1.1414707961182449,
+        "azimuth": 4.17101616178775
+      },
+      "control_start_qpos": [
+        -0.03747437630990282,
+        -0.008347722549414072,
+        0.03453252080797705,
+        0.6098123839844453,
+        -0.21134530146853853,
+        -0.7439499079534574,
+        -0.1732066809982282,
+        -6.049677728089143e-05,
+        0.0171063053986349
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.48,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 175,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9047,
+      "requested_start": {
+        "tilt": 2.868400526955342,
+        "azimuth": 6.022388194821914
+      },
+      "control_start_qpos": [
+        0.038817703580636916,
+        0.1091049986296466,
+        0.03460489439046761,
+        0.6324746088501214,
+        0.7599163030661936,
+        -0.11533301616549882,
+        -0.09592380766140528,
+        -0.00876892765862113,
+        -0.0003046043207549778
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.3000000000000003,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 166,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9048,
+      "requested_start": {
+        "tilt": 1.231616468504099,
+        "azimuth": 0.17984629916123876
+      },
+      "control_start_qpos": [
+        -0.004323051428096895,
+        -0.007450078964546828,
+        0.034612463742998686,
+        0.6372583363946026,
+        0.7647304242363416,
+        0.07319809889291318,
+        0.061083788858845106,
+        -0.00683855373007066,
+        -0.0003285183509051827
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.46,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 224,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9049,
+      "requested_start": {
+        "tilt": 1.4064873417687922,
+        "azimuth": 3.3465856599041706
+      },
+      "control_start_qpos": [
+        0.002711547445098324,
+        0.005105538117315291,
+        0.03463304245594277,
+        0.6371113861433368,
+        -0.7615932539326146,
+        -0.09096329991137464,
+        0.07609517251495884,
+        0.009553955252818883,
+        8.575076466942208e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.8000000000000003,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 191,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9050,
+      "requested_start": {
+        "tilt": 0.8367327380878409,
+        "azimuth": 2.528588383957372
+      },
+      "control_start_qpos": [
+        -0.02751228825182278,
+        0.005258220587373489,
+        0.001999969109047853,
+        0.9926750846525643,
+        -2.596468184450059e-08,
+        -2.1295381730449618e-07,
+        -0.12081463615795314,
+        -0.00033788115996356084,
+        -3.983750575896352e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.98,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 100,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9051,
+      "requested_start": {
+        "tilt": 3.006382053133486,
+        "azimuth": 3.85600818971516
+      },
+      "control_start_qpos": [
+        0.11491827164051185,
+        -0.07155851690503968,
+        0.03464338361004038,
+        0.5535633178119485,
+        -0.6602613277104672,
+        -0.3889523811952464,
+        0.3260961169127689,
+        0.006033477497515049,
+        9.117340468837986e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.1,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 206,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9052,
+      "requested_start": {
+        "tilt": 1.2890893297796888,
+        "azimuth": 0.3883257549854244
+      },
+      "control_start_qpos": [
+        -0.007299065863546987,
+        -0.022287285191914696,
+        0.03460277825049167,
+        0.6293821956421747,
+        0.7566147073065025,
+        0.13621884875423143,
+        0.11338722035663036,
+        -0.009545739401494084,
+        -0.0003365389827965699
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.08,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 155,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9053,
+      "requested_start": {
+        "tilt": 1.467474727409067,
+        "azimuth": 0.491343802537795
+      },
+      "control_start_qpos": [
+        -0.0005634102686382889,
+        -0.012102890661453678,
+        0.03459930984416706,
+        0.6230481354912818,
+        0.7496452396643303,
+        0.171651771015122,
+        0.1427540017541289,
+        -0.010840771727889926,
+        -0.00042316958990579325
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.1,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 156,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9054,
+      "requested_start": {
+        "tilt": 1.1553930083333495,
+        "azimuth": 0.39240214093937625
+      },
+      "control_start_qpos": [
+        -0.006876547265581416,
+        -0.02758831272650542,
+        0.034608248676353946,
+        0.6357251907657678,
+        0.7633139873386467,
+        0.0882687755325417,
+        0.07357894960509316,
+        -0.007708707172530153,
+        -0.00019309331715028683
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.14,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 158,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9055,
+      "requested_start": {
+        "tilt": 2.4346647809696917,
+        "azimuth": 0.1121065135896828
+      },
+      "control_start_qpos": [
+        -0.002768759937461058,
+        0.010575732238060062,
+        0.03460257097868825,
+        0.6337916094449363,
+        0.7620872786855003,
+        0.10175637213462586,
+        0.0847160917000142,
+        -0.009885520974836054,
+        -0.00037238973212532184
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.02,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 152,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9056,
+      "requested_start": {
+        "tilt": 2.713853015368172,
+        "azimuth": 3.6262751107765983
+      },
+      "control_start_qpos": [
+        0.0623811498802474,
+        -0.06996227313993524,
+        0.03464043550411638,
+        0.6043890139321215,
+        -0.7212333896785292,
+        -0.2593965431104073,
+        0.21737007814634193,
+        0.006777707671702531,
+        3.5540575971992537e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.92,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 197,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9057,
+      "requested_start": {
+        "tilt": 0.6238645055274477,
+        "azimuth": 2.9443113758596255
+      },
+      "control_start_qpos": [
+        -0.0010828466637694263,
+        -0.004260425100925523,
+        0.0019998973761513337,
+        0.9999998577848155,
+        -2.1339330036978444e-08,
+        -6.172197079537771e-07,
+        0.0005333197596458363,
+        -0.00035225898016533837,
+        -8.798874202558458e-10
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.96,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 99,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9058,
+      "requested_start": {
+        "tilt": 1.6989739067215541,
+        "azimuth": 5.4377266237842985
+      },
+      "control_start_qpos": [
+        -0.02598567448397366,
+        0.017056884838319433,
+        0.03450638038517659,
+        0.5698559952442525,
+        0.3355987184953283,
+        -0.6982730265462475,
+        0.2739569769624751,
+        -6.539225957093708e-05,
+        0.024714092300076495
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.72,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 187,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9059,
+      "requested_start": {
+        "tilt": 1.8870240811986985,
+        "azimuth": 4.2344401124195485
+      },
+      "control_start_qpos": [
+        -0.011256081465421348,
+        -0.01896406107770384,
+        0.0344876825048323,
+        0.6013905624234114,
+        -0.23471677401695465,
+        -0.7394639453581644,
+        -0.19086775772367473,
+        -0.00015106171818628464,
+        0.030867130660684295
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.5,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 176,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9060,
+      "requested_start": {
+        "tilt": 0.2602169360944058,
+        "azimuth": 2.0854432029090124
+      },
+      "control_start_qpos": [
+        -0.00030337345663897984,
+        -0.0017726953817048848,
+        0.001999940569696476,
+        0.9999821005216253,
+        -8.815776351721449e-09,
+        -4.134084953654074e-07,
+        0.005983196151461983,
+        -0.0004182398743319272,
+        3.6908148766618347e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.8800000000000001,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 95,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9061,
+      "requested_start": {
+        "tilt": 0.7775965927610443,
+        "azimuth": 5.94258902256053
+      },
+      "control_start_qpos": [
+        0.020064067555050878,
+        -0.0010774458246870337,
+        0.001999975182067652,
+        0.9890741517127113,
+        -2.4253864802753664e-08,
+        -1.7047477525402815e-07,
+        -0.14741886722449024,
+        -0.00031354726729963854,
+        -3.1899426181396947e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.8800000000000001,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 95,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9062,
+      "requested_start": {
+        "tilt": 1.7989171113184492,
+        "azimuth": 2.612472243516725
+      },
+      "control_start_qpos": [
+        -0.018641860662030708,
+        0.011768772393634153,
+        0.03464259425891903,
+        0.6072976887300998,
+        -0.7245062204740335,
+        0.24984278853418546,
+        -0.20942500990801458,
+        0.006376049662171822,
+        1.96777748896348e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.1,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 206,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9063,
+      "requested_start": {
+        "tilt": 2.6201652447581285,
+        "azimuth": 2.8177309916841566
+      },
+      "control_start_qpos": [
+        -0.03743977243089452,
+        -0.06921157093718347,
+        0.0346332873346211,
+        0.6330502657911351,
+        -0.7565294311623075,
+        0.12580764087724497,
+        -0.10527591492792107,
+        0.009073749047260821,
+        1.878779227998665e-05
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.08,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 205,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9064,
+      "requested_start": {
+        "tilt": 0.3918911771554102,
+        "azimuth": 1.3789107420411713
+      },
+      "control_start_qpos": [
+        -0.0005644247206097277,
+        0.0006868587553211364,
+        0.0019999547403537145,
+        0.9998737729257763,
+        4.68335496208937e-09,
+        -3.131312717104722e-07,
+        0.01588830434865747,
+        -0.0003320875766906633,
+        -4.86890915481896e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.92,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 97,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9065,
+      "requested_start": {
+        "tilt": 2.2747588050617433,
+        "azimuth": 4.84013399137418
+      },
+      "control_start_qpos": [
+        0.02011706202527806,
+        0.009001174395656553,
+        0.03452111189237133,
+        0.6277919285601621,
+        0.10135931813642596,
+        -0.7672783207422825,
+        0.0829913343701257,
+        -9.057350154661197e-05,
+        0.020253329521119728
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 5.24,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 263,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9066,
+      "requested_start": {
+        "tilt": 1.6924589167312043,
+        "azimuth": 0.9125138388850744
+      },
+      "control_start_qpos": [
+        0.033142828306691935,
+        0.024980497356459932,
+        0.0343363285128032,
+        0.5555337264155089,
+        0.351438330135324,
+        0.7000249459888049,
+        -0.2789954370952418,
+        -0.00014240301760397813,
+        -0.018515252311593584
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.0,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 201,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9067,
+      "requested_start": {
+        "tilt": 0.02190269318598149,
+        "azimuth": 0.7993235073330832
+      },
+      "control_start_qpos": [
+        0.00012063705075932176,
+        -0.00012248724401220926,
+        0.0019999674538556836,
+        0.9999996022128465,
+        2.686997784126027e-09,
+        -2.2498564327180152e-07,
+        0.0008919496045591823,
+        -0.00027681198162096866,
+        -4.54018745599966e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.8800000000000001,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 95,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9068,
+      "requested_start": {
+        "tilt": 0.8558191954209518,
+        "azimuth": 5.313153903143704
+      },
+      "control_start_qpos": [
+        0.00829600039951891,
+        0.013457919468624594,
+        0.0019999618662144224,
+        0.9998255193981685,
+        1.6486587740849509e-09,
+        -2.6547140199880257e-07,
+        0.018679688437249847,
+        -0.0002760053741056508,
+        -3.11101722783141e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.06,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 104,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9069,
+      "requested_start": {
+        "tilt": 2.796331151217496,
+        "azimuth": 1.9303446345869046
+      },
+      "control_start_qpos": [
+        -0.0705084392196437,
+        -0.03754782966028809,
+        0.03433055608895148,
+        0.6048803344451743,
+        -0.1791468861242785,
+        0.7628044352311307,
+        0.141970305998062,
+        -0.00014777457110332244,
+        -0.020077527404241728
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.82,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 142,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9070,
+      "requested_start": {
+        "tilt": 1.4268508715385009,
+        "azimuth": 4.286445361790172
+      },
+      "control_start_qpos": [
+        -0.023257183342965865,
+        -0.008015248696137484,
+        0.034523162654101124,
+        0.612508533871666,
+        -0.19725085738941453,
+        -0.7482505201932202,
+        -0.1613894489243274,
+        -9.822598625741667e-05,
+        0.019514885025422625
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 5.0,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 251,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9071,
+      "requested_start": {
+        "tilt": 1.5125702117758544,
+        "azimuth": 3.0789391891887674
+      },
+      "control_start_qpos": [
+        -0.002748405362441662,
+        0.004959036632498575,
+        0.03463438534097985,
+        0.6408384733066038,
+        -0.7658389956546677,
+        0.04070215861709925,
+        -0.03405903916173827,
+        0.009119437349369822,
+        3.767332453616391e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.52,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 177,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9072,
+      "requested_start": {
+        "tilt": 2.7408654825966035,
+        "azimuth": 3.5211964998431955
+      },
+      "control_start_qpos": [
+        0.050307253851696335,
+        -0.08209449882889566,
+        0.03464151220257969,
+        0.629341411537982,
+        -0.7509187707783351,
+        -0.1533819900745814,
+        0.12854708295755413,
+        0.006605412629405117,
+        3.395736405931918e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.98,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 200,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9073,
+      "requested_start": {
+        "tilt": 1.4901378288533673,
+        "azimuth": 4.089357915280387
+      },
+      "control_start_qpos": [
+        -0.031244952735198537,
+        -0.01177006308624316,
+        0.03452826064201431,
+        0.5862501159234902,
+        -0.2937606941672383,
+        -0.7156267651840647,
+        -0.2406112821425234,
+        -5.325830518445763e-05,
+        0.01816216490270855
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.56,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 179,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9074,
+      "requested_start": {
+        "tilt": 2.920781244379165,
+        "azimuth": 0.5503127417636604
+      },
+      "control_start_qpos": [
+        -0.07294573173714852,
+        0.09425949959213027,
+        0.034616441535571876,
+        0.6063329263611815,
+        0.7269912144572348,
+        0.24743243894711336,
+        0.20644937555963985,
+        -0.0054765209576630326,
+        -0.0002459360885768977
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.6000000000000005,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 231,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9075,
+      "requested_start": {
+        "tilt": 1.3183999382380323,
+        "azimuth": 5.711348259964428
+      },
+      "control_start_qpos": [
+        0.0042175819052893216,
+        -0.043147647971465974,
+        0.03460652906699135,
+        0.5925102391160084,
+        0.7118147677247934,
+        -0.2899235849369323,
+        -0.2412377828800987,
+        -0.008631815830542754,
+        -0.0002860053105629859
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.6000000000000005,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 231,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9076,
+      "requested_start": {
+        "tilt": 0.4427118674280019,
+        "azimuth": 5.248566484343494
+      },
+      "control_start_qpos": [
+        -0.0003933142628070109,
+        0.0027429209532536477,
+        0.0019999826972803354,
+        0.998174229773189,
+        -7.619327863416725e-09,
+        -1.1983337363449794e-07,
+        -0.06040038920970889,
+        -0.0003470225062328214,
+        -2.164753776699999e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.9000000000000001,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 96,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9077,
+      "requested_start": {
+        "tilt": 0.7301223961766191,
+        "azimuth": 0.8865081388821974
+      },
+      "control_start_qpos": [
+        -0.008824870093038572,
+        0.015547359866698442,
+        0.0019999294878917393,
+        0.9992163650720415,
+        -2.0438099226485985e-08,
+        -4.8696904625874e-07,
+        -0.039581002665138997,
+        -0.0003121681830428575,
+        -9.095233823777068e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.84,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 93,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9078,
+      "requested_start": {
+        "tilt": 2.845113932960358,
+        "azimuth": 1.418099226787049
+      },
+      "control_start_qpos": [
+        -0.09765567021139974,
+        0.0314652325527448,
+        0.034306005576621175,
+        0.6130685284976238,
+        0.11615914526141388,
+        0.7760264132872546,
+        -0.09185335169940635,
+        -0.00018387299736549666,
+        -0.026570445391003453
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.68,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 135,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9079,
+      "requested_start": {
+        "tilt": 1.9940442168629346,
+        "azimuth": 3.4426551378403123
+      },
+      "control_start_qpos": [
+        0.008583064543318506,
+        0.00018395181988607934,
+        0.034636333062394505,
+        0.63092429790908,
+        -0.7536852389975252,
+        -0.1411671678469377,
+        0.11817326917392108,
+        0.008474467949278022,
+        1.7976078517880027e-07
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.92,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 197,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9080,
+      "requested_start": {
+        "tilt": 1.5485130394465605,
+        "azimuth": 3.1553130308516226
+      },
+      "control_start_qpos": [
+        0.0012156599506997572,
+        0.003919820018934883,
+        0.03463677662589335,
+        0.6417877927739231,
+        -0.7666139321220233,
+        -0.015554582876335356,
+        0.013021638696009832,
+        0.008378337966687915,
+        5.225297800970936e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.04,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 203,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9081,
+      "requested_start": {
+        "tilt": 3.116283746602217,
+        "azimuth": 3.3099982111626662
+      },
+      "control_start_qpos": [
+        0.041326267202035555,
+        -0.16041086431784482,
+        0.034648834451867186,
+        0.6384758673307351,
+        -0.760699305161957,
+        -0.08960520595007254,
+        0.07520665548358883,
+        0.0042817552896003645,
+        5.102268065098173e-05
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.04,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 203,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9082,
+      "requested_start": {
+        "tilt": 0.28692760164311754,
+        "azimuth": 5.6308316620409595
+      },
+      "control_start_qpos": [
+        0.0018074051224569018,
+        0.0015587105824524084,
+        0.00199990153328018,
+        0.9999891105104407,
+        -1.240198869632978e-08,
+        -6.148849839435734e-07,
+        -0.004666782634732083,
+        -0.00034716248288990995,
+        -6.7006692411578805e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.08,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 105,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9083,
+      "requested_start": {
+        "tilt": 2.601026566798083,
+        "azimuth": 3.592663688417221
+      },
+      "control_start_qpos": [
+        0.04070231960645564,
+        -0.04377400937376829,
+        0.03463685695157297,
+        0.6140510477376895,
+        -0.7333818755665661,
+        -0.2236598726168943,
+        0.18726611210709548,
+        0.008139412485102944,
+        1.2137622122113075e-05
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.0600000000000005,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 204,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9084,
+      "requested_start": {
+        "tilt": 2.7444564063530903,
+        "azimuth": 2.6424912477254634
+      },
+      "control_start_qpos": [
+        -0.06037362418547799,
+        -0.06347544123749402,
+        0.034640555039913874,
+        0.5978971594943743,
+        -0.7135832261052565,
+        0.2798712187613918,
+        -0.23449960980518805,
+        0.0070228166868928155,
+        1.008005068604838e-05
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.98,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 200,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9085,
+      "requested_start": {
+        "tilt": 2.7618716674395336,
+        "azimuth": 5.274816851087437
+      },
+      "control_start_qpos": [
+        0.019124579088628538,
+        0.05657457289980383,
+        0.03452294653364825,
+        0.5759369066415906,
+        0.3217883232328403,
+        -0.703846501288639,
+        0.2633420916277072,
+        -5.746045828446685e-05,
+        0.02009424147461375
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.96,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 249,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9086,
+      "requested_start": {
+        "tilt": 1.266154484272029,
+        "azimuth": 2.730935266386434
+      },
+      "control_start_qpos": [
+        -0.0081700389061842,
+        0.02441462157703691,
+        0.03464004402098373,
+        0.6311994019093509,
+        -0.7534082620314502,
+        0.14126579316792795,
+        -0.11835236124667858,
+        0.007189156827233806,
+        4.4343799574925085e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.66,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 134,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9087,
+      "requested_start": {
+        "tilt": 2.7038228075054973,
+        "azimuth": 0.572420887911142
+      },
+      "control_start_qpos": [
+        -0.06284517508910065,
+        0.06253018495741716,
+        0.03460627669079772,
+        0.6008353991032312,
+        0.7217016811630762,
+        0.26412555650396613,
+        0.21995726174036812,
+        -0.008268393202707025,
+        -0.0002001011986772458
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.12,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 157,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9088,
+      "requested_start": {
+        "tilt": 0.37468053916133975,
+        "azimuth": 5.194373286206945
+      },
+      "control_start_qpos": [
+        0.005969011618576337,
+        0.0033946740480199186,
+        0.0019999367205291736,
+        0.9999977377679256,
+        -5.133515076055108e-09,
+        -4.401612368571957e-07,
+        -0.0021270775343260953,
+        -0.0004940982698404711,
+        -7.925294367120518e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 2.1,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 106,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9089,
+      "requested_start": {
+        "tilt": 2.8708546481028057,
+        "azimuth": 2.353997175094894
+      },
+      "control_start_qpos": [
+        -0.07051279446132185,
+        -0.008639665565610688,
+        0.034628090248504446,
+        0.5318900399252783,
+        -0.6364396891522818,
+        0.4286256328854084,
+        -0.35821442507751683,
+        0.011114013802251018,
+        1.7004090041682977e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.04,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 203,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9090,
+      "requested_start": {
+        "tilt": 1.6691040256323866,
+        "azimuth": 2.5757258890606116
+      },
+      "control_start_qpos": [
+        -0.014455773218833531,
+        0.021385166298821884,
+        0.034637623132995725,
+        0.5978655384169634,
+        -0.7139637143731371,
+        0.2794077602693358,
+        -0.2339741781333611,
+        0.007949932248784168,
+        4.4687142384560445e-06
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 4.0600000000000005,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 204,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9091,
+      "requested_start": {
+        "tilt": 0.34989222398458997,
+        "azimuth": 4.904653726122726
+      },
+      "control_start_qpos": [
+        0.003647480307277509,
+        0.0008559996034802271,
+        0.001999924564132968,
+        0.9999125642770823,
+        -8.15345638673488e-09,
+        -5.258480129171825e-07,
+        0.013223607698117097,
+        -0.0002837520043976361,
+        5.304152803744157e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.8800000000000001,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 95,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9092,
+      "requested_start": {
+        "tilt": 2.44278608080082,
+        "azimuth": 4.5099291764934
+      },
+      "control_start_qpos": [
+        0.024791723788540006,
+        -0.005886157288487717,
+        0.03451308007911469,
+        0.6232968750912017,
+        -0.13276383766132863,
+        -0.762967837720033,
+        -0.10841977456072091,
+        -0.00010527287114791054,
+        0.02300723829387644
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.8000000000000003,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 191,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9093,
+      "requested_start": {
+        "tilt": 0.3699753108340874,
+        "azimuth": 1.0835452181185825
+      },
+      "control_start_qpos": [
+        -0.002904656181328257,
+        0.0029782407559161015,
+        0.0019998750991963537,
+        0.9999041639413095,
+        3.6171360283581214e-09,
+        -6.347167823658044e-07,
+        -0.01384423823933406,
+        -0.0004453424192695344,
+        -1.077056825534397e-08
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.84,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 93,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9094,
+      "requested_start": {
+        "tilt": 2.271810255675722,
+        "azimuth": 5.313647566413144
+      },
+      "control_start_qpos": [
+        -0.012321316764711227,
+        0.026941900348717292,
+        0.034517294008491246,
+        0.5848510194375676,
+        0.2959445765944314,
+        -0.7154110635874369,
+        0.2419774839605381,
+        -6.314432668494886e-05,
+        0.021730214306798102
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.66,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 184,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9095,
+      "requested_start": {
+        "tilt": 0.8666146508958469,
+        "azimuth": 4.298715447590057
+      },
+      "control_start_qpos": [
+        0.0036258348612780173,
+        -0.017028241968573967,
+        0.0019999655977989694,
+        0.9948936150132985,
+        -2.3811027489711764e-08,
+        -2.376410681290023e-07,
+        -0.10092915736156016,
+        -0.00027443034082557283,
+        -4.192544753956137e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.9000000000000001,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 96,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9096,
+      "requested_start": {
+        "tilt": 2.3061312509641176,
+        "azimuth": 4.4910953507032065
+      },
+      "control_start_qpos": [
+        0.010579911184193214,
+        -0.0059566958881390455,
+        0.034502234483690476,
+        0.6229711635307162,
+        -0.1298642477306103,
+        -0.7640919440926981,
+        -0.10585701461494768,
+        -0.00011087281907784162,
+        0.0264932075240876
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 5.04,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 253,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9097,
+      "requested_start": {
+        "tilt": 1.558495875245657,
+        "azimuth": 5.880750951067061
+      },
+      "control_start_qpos": [
+        0.012810893014449348,
+        -0.019257902379607846,
+        0.0346043411521977,
+        0.6135788699988257,
+        0.7374337552546877,
+        -0.2170749713694571,
+        -0.18052945384862704,
+        -0.009248989476767307,
+        -0.00048047583770866194
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 3.22,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 162,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9098,
+      "requested_start": {
+        "tilt": 0.4439376837551121,
+        "azimuth": 5.557592879928397
+      },
+      "control_start_qpos": [
+        0.006216317398214907,
+        0.006532526041098411,
+        0.001999952827493144,
+        0.9999884364056854,
+        8.065177817290776e-10,
+        -3.282776869029367e-07,
+        0.004809059658960563,
+        -0.00028983014197030295,
+        -5.986319465804907e-09
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.94,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 98,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "seed": 9099,
+      "requested_start": {
+        "tilt": 0.6608773700202212,
+        "azimuth": 3.906077982965725
+      },
+      "control_start_qpos": [
+        0.010399308184707468,
+        -0.011558984518973118,
+        0.0019999203579118825,
+        0.9997914785972077,
+        -1.2715159286385445e-08,
+        -5.542641920183676e-07,
+        -0.02042056130721725,
+        -0.000404403169872707,
+        -1.1526584184571721e-08
+      ],
+      "success": true,
+      "mujoco_warning_count": 0,
+      "seconds": 1.94,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 98,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    }
+  ]
+}

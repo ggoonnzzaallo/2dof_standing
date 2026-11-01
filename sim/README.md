@@ -8,6 +8,8 @@
 
 The old 170 mm/42 mm/87 mm primitive model is preserved in [archive](archive/robot_before_onshape.xml). It is no longer the environment default. The final CAD spans 153 mm from base underside to tip.
 
+**Recovery experiment:** a [demonstration-trained actor](recovery/README.md) now passes 10/10 nominal, 30/30 separate scripted-case and 100/100 broader held-out simulated trials. PPO refinement was tested for 67,584 transitions and did not improve the retained checkpoint. The saved actor and host-verified C export are simulation-only; real sensor/servo calibration and firmware integration remain outstanding.
+
 Use **MuJoCo + Gymnasium + Stable-Baselines3 PPO**. The two-action, small-MLP problem does not justify changing to a GPU robotics stack before basic recovery is demonstrated. SB3 recommends CPU operation for its MLP PPO workloads and supports multiple environments. [Official PPO documentation](https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html), [MuJoCo simulation documentation](https://mujoco.readthedocs.io/en/stable/computation/index.html).
 
 ## Supplied runnable starter
@@ -19,7 +21,7 @@ Use **MuJoCo + Gymnasium + Stable-Baselines3 PPO**. The two-action, small-MLP pr
 - `train.py`: SB3 PPO with separate 64×64 tanh actor/critic, CPU and optional subprocess environments.
 - `export_actor.py`: actor-only C export, no neural-network runtime required.
 - `check.py`: environment validation, random rollout, short training smoke test, and compiled C-vs-SB3 parity test.
-- `validation.json`: current environment check results; contact/geometry checks are in `onshape/validation.json`. Historical pre-Onshape smoke-training/export checks are preserved in `archive/software_validation_before_onshape.json`. No useful trained controller has been produced.
+- `validation.json`: current environment check results; contact/geometry checks are in `onshape/validation.json`. Current trained-candidate evaluation/export results are in `recovery/results`; historical pre-Onshape smoke checks are in `archive/software_validation_before_onshape.json`.
 
 From this package's root:
 

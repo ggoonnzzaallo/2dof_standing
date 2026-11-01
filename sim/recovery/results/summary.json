@@ -1,0 +1,31 @@
+{
+  "record_date": "2026-11-01",
+  "status": "Exploratory simulation-only controller; not flashed to robot",
+  "selected_training_method": "Behavior cloning from successful simulated demonstrations; PPO refinement candidates were worse on development evaluation",
+  "selected_checkpoint_ppo_steps": 0,
+  "ppo_refinement_steps_tested": 67584,
+  "nominal_successes": 10,
+  "nominal_episodes": 10,
+  "zero_action_nominal_successes": 1,
+  "held_out_scripted_case_successes": 30,
+  "held_out_scripted_case_episodes": 30,
+  "broad_randomized_successes": 100,
+  "broad_randomized_episodes": 100,
+  "broad_successes_with_snapshot_audit_passed": 100,
+  "broad_median_control_time_s": 3.41,
+  "broad_max_control_time_s": 5.24,
+  "timing_note": "Times exclude 0.8 s initial settling and include the required 1 s upright dwell",
+  "model_sha256": "ccf63163ab02820a343b74ce28905d2dd313ac06e7a81f1aa290ac568ee9c971",
+  "robot_xml_sha256": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+  "limitations": [
+    "One training seed, finite simulated test sets; no guarantee of always recovering",
+    "Requested fall poses settle before control; inverted straight-arm starts commonly settle onto a side first",
+    "Exact simulated gravity plus noise is used; real IMU estimator/alignment is not integrated",
+    "Servo/PWM mapping, joint limits, hardware distribution and dynamics remain uncalibrated",
+    "Adjacent contacts remain excluded dynamically; a separate snapshot audit ignores pivot mating regions"
+  ],
+  "physical_robot_commands_sent": false,
+  "firmware_uploaded": false,
+  "development_successes": 10,
+  "development_episodes": 10
+}

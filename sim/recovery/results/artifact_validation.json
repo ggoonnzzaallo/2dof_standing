@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "dataset_frames": 13750,
+  "dataset_episodes": 71,
+  "model_and_dataset_hashes": "matched",
+  "finite_bounded_observation_action_arrays": "passed",
+  "metrics_recomputed_from_trial_records": "passed",
+  "no_mujoco_warnings_in_broad_test": true,
+  "actor_export_host_parity": "passed",
+  "physical_robot_commands_sent": false
+}

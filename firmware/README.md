@@ -20,6 +20,8 @@ On a fresh checkout, first run `python3 scripts/robot.py setup`. This macOS setu
 
 The upload script accepts only a recognized XIAO nRF52840 Sense and requires the uploader's `Device programmed.` acknowledgement. The `check` command sends only `help` and `off`, checks the 0.10 banner and `OFF.` response, then closes serial. If upload cannot reach the bootloader, double-press reset, list ports and retry. Do not use boot LED appearance alone as proof of bootloader mode.
 
+The separate [policy arithmetic probe](policy_probe/README.md) builds the simulation-trained actor with `python3 scripts/robot.py build-probe`. It generates no servo pulses and has not been uploaded. The normal upload command above still installs the bench firmware.
+
 ## Run movements yourself
 
 With USB and battery disconnected, reconnect the complete servo plugs. Support the arm, check clearance and reconnect the battery, then USB for a supervised terminal test. This is a brief motor test, not unattended charging. Start from the established upright assembly pose.

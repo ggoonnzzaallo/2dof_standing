@@ -1,0 +1,1427 @@
+{
+  "status": "Exploratory open-loop trajectory search; not a policy or hardware validation",
+  "robot_xml_sha256": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+  "config": {
+    "cases": [
+      "side_000",
+      "side_045",
+      "side_090",
+      "side_135",
+      "side_180",
+      "side_225",
+      "side_270",
+      "side_315",
+      "inverted"
+    ],
+    "population": 32,
+    "iterations": 5,
+    "knots": 6,
+    "segment": 0.5,
+    "hold": 1.5,
+    "workers": 3,
+    "seed": 17,
+    "out": "runs/recovery_search_seed17"
+  },
+  "success_definition": "Environment requires base upright within 10 degrees, joints near neutral, low angular rate and floor contact for one second",
+  "adjacent_collision_audit": "Snapshot screening completed; physical calibration and dynamic contact validation remain pending",
+  "results": [
+    {
+      "case": "side_000",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.0
+      },
+      "zero_motion_baseline": {
+        "score": -1.3748134999845107,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.1828903806805035,
+        "best_smoothed_upright": -0.18101419167706342,
+        "final_joint_degrees": [
+          -0.6238525046873155,
+          -0.01048168402348379
+        ]
+      },
+      "result": {
+        "score": 58.04345535143711,
+        "success": true,
+        "invalid": false,
+        "steps": 203,
+        "final_upright": 0.9999999999996674,
+        "best_smoothed_upright": 0.9999999999996784,
+        "final_joint_degrees": [
+          -0.01962431883238768,
+          2.2327749632555878e-07
+        ]
+      },
+      "waypoints_rad": [
+        [
+          1.303698814225469,
+          0.2347618467024716
+        ],
+        [
+          0.25665048190086176,
+          0.5935964891265
+        ],
+        [
+          0.34265371208164347,
+          -0.16884741180042817
+        ],
+        [
+          -0.14227494977211796,
+          0.1557114331369896
+        ],
+        [
+          0.2641879195350551,
+          -0.05457310537676199
+        ],
+        [
+          -0.1985768333226878,
+          0.1593993169722145
+        ]
+      ],
+      "trace_file": "side_000.npz",
+      "iterations": [
+        {
+          "iteration": 0,
+          "case": "side_000",
+          "best": {
+            "score": 57.81556689073741,
+            "success": true,
+            "invalid": false,
+            "steps": 219,
+            "final_upright": 0.999999999999662,
+            "best_smoothed_upright": 0.9999999999996654,
+            "final_joint_degrees": [
+              -0.019625509200292417,
+              -3.795189465491163e-07
+            ]
+          },
+          "successful_candidates": 18
+        },
+        {
+          "iteration": 1,
+          "case": "side_000",
+          "best": {
+            "score": 57.85599605134105,
+            "success": true,
+            "invalid": false,
+            "steps": 220,
+            "final_upright": 0.9999999999996646,
+            "best_smoothed_upright": 0.9999999999997969,
+            "final_joint_degrees": [
+              -0.019626321614066525,
+              -4.957076337252897e-07
+            ]
+          },
+          "successful_candidates": 20
+        },
+        {
+          "iteration": 2,
+          "case": "side_000",
+          "best": {
+            "score": 57.932897553954035,
+            "success": true,
+            "invalid": false,
+            "steps": 217,
+            "final_upright": 0.9999999999996665,
+            "best_smoothed_upright": 0.9999999999996658,
+            "final_joint_degrees": [
+              -0.019624318831484827,
+              2.2320011166398642e-07
+            ]
+          },
+          "successful_candidates": 25
+        },
+        {
+          "iteration": 3,
+          "case": "side_000",
+          "best": {
+            "score": 57.994571674441644,
+            "success": true,
+            "invalid": false,
+            "steps": 217,
+            "final_upright": 0.9999999999996666,
+            "best_smoothed_upright": 0.9999999999996664,
+            "final_joint_degrees": [
+              -0.019624318831484674,
+              2.2320011195388151e-07
+            ]
+          },
+          "successful_candidates": 32
+        },
+        {
+          "iteration": 4,
+          "case": "side_000",
+          "best": {
+            "score": 58.04345535143711,
+            "success": true,
+            "invalid": false,
+            "steps": 203,
+            "final_upright": 0.9999999999996674,
+            "best_smoothed_upright": 0.9999999999996784,
+            "final_joint_degrees": [
+              -0.01962431883238768,
+              2.2327749632555878e-07
+            ]
+          },
+          "successful_candidates": 32
+        }
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 204,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "case": "side_045",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.7853981633974483
+      },
+      "zero_motion_baseline": {
+        "score": -1.7345747033408916,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.22970874953189763,
+        "best_smoothed_upright": -0.22968570065905042,
+        "final_joint_degrees": [
+          -0.010338637436557881,
+          -1.3400797108729827
+        ]
+      },
+      "result": {
+        "score": 57.97939382398058,
+        "success": true,
+        "invalid": false,
+        "steps": 219,
+        "final_upright": 0.9999999999996663,
+        "best_smoothed_upright": 0.9999999999997166,
+        "final_joint_degrees": [
+          -0.01962431883148508,
+          2.232001126663539e-07
+        ]
+      },
+      "waypoints_rad": [
+        [
+          1.3962634016,
+          1.1158788754888094
+        ],
+        [
+          0.1710668152637594,
+          -0.020453349950204553
+        ],
+        [
+          -0.3850806340917237,
+          -0.43588792036507945
+        ],
+        [
+          0.07845197577893082,
+          0.0890400826789071
+        ],
+        [
+          -0.15338842380920253,
+          -0.08319867383801338
+        ],
+        [
+          0.3293158517821945,
+          0.7091053678759749
+        ]
+      ],
+      "trace_file": "side_045.npz",
+      "iterations": [
+        {
+          "iteration": 0,
+          "case": "side_045",
+          "best": {
+            "score": 57.82965496018379,
+            "success": true,
+            "invalid": false,
+            "steps": 220,
+            "final_upright": 0.9999999999996653,
+            "best_smoothed_upright": 0.9999999999996666,
+            "final_joint_degrees": [
+              -0.01962550920029245,
+              -3.79518945024629e-07
+            ]
+          },
+          "successful_candidates": 14
+        },
+        {
+          "iteration": 1,
+          "case": "side_045",
+          "best": {
+            "score": 57.91183934722206,
+            "success": true,
+            "invalid": false,
+            "steps": 222,
+            "final_upright": 0.9999999999996636,
+            "best_smoothed_upright": 0.9999999999997611,
+            "final_joint_degrees": [
+              -0.019625509200292504,
+              -3.7951894422167353e-07
+            ]
+          },
+          "successful_candidates": 19
+        },
+        {
+          "iteration": 2,
+          "case": "side_045",
+          "best": {
+            "score": 57.93122229353676,
+            "success": true,
+            "invalid": false,
+            "steps": 215,
+            "final_upright": 0.9999999999996629,
+            "best_smoothed_upright": 0.9999999999997423,
+            "final_joint_degrees": [
+              -0.019625509200292157,
+              -3.7951892926893543e-07
+            ]
+          },
+          "successful_candidates": 30
+        },
+        {
+          "iteration": 3,
+          "case": "side_045",
+          "best": {
+            "score": 57.964946380636995,
+            "success": true,
+            "invalid": false,
+            "steps": 219,
+            "final_upright": 0.9999999999996643,
+            "best_smoothed_upright": 0.9999999999997141,
+            "final_joint_degrees": [
+              -0.019626321614066612,
+              -4.957076331133469e-07
+            ]
+          },
+          "successful_candidates": 32
+        },
+        {
+          "iteration": 4,
+          "case": "side_045",
+          "best": {
+            "score": 57.97939382398058,
+            "success": true,
+            "invalid": false,
+            "steps": 219,
+            "final_upright": 0.9999999999996663,
+            "best_smoothed_upright": 0.9999999999997166,
+            "final_joint_degrees": [
+              -0.01962431883148508,
+              2.232001126663539e-07
+            ]
+          },
+          "successful_candidates": 32
+        }
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 220,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "case": "side_090",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 1.5707963267948966
+      },
+      "zero_motion_baseline": {
+        "score": -1.7346134992804456,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.22970874953237802,
+        "best_smoothed_upright": -0.2297087495325691,
+        "final_joint_degrees": [
+          -0.010338637434829656,
+          -1.340079710924062
+        ]
+      },
+      "result": {
+        "score": 57.99728651106686,
+        "success": true,
+        "invalid": false,
+        "steps": 218,
+        "final_upright": 0.9999999999996637,
+        "best_smoothed_upright": 0.9999999999997419,
+        "final_joint_degrees": [
+          -0.019626321614066664,
+          -4.957076322357359e-07
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.3962634016,
+          1.283446031895442
+        ],
+        [
+          1.1400751647183,
+          -0.19275385932977265
+        ],
+        [
+          -0.5725905957849994,
+          -0.11879436110353328
+        ],
+        [
+          0.039372757840180364,
+          0.16892689243572082
+        ],
+        [
+          0.10326836906190928,
+          -0.13282694467914208
+        ],
+        [
+          0.12615466910143291,
+          0.6133805828802326
+        ]
+      ],
+      "trace_file": "side_090.npz",
+      "iterations": [
+        {
+          "iteration": 0,
+          "case": "side_090",
+          "best": {
+            "score": 57.61886624154824,
+            "success": true,
+            "invalid": false,
+            "steps": 221,
+            "final_upright": 0.9999999999996618,
+            "best_smoothed_upright": 0.9999999999996975,
+            "final_joint_degrees": [
+              -0.01962550920029198,
+              -3.7951894523908763e-07
+            ]
+          },
+          "successful_candidates": 14
+        },
+        {
+          "iteration": 1,
+          "case": "side_090",
+          "best": {
+            "score": 57.79115777359964,
+            "success": true,
+            "invalid": false,
+            "steps": 219,
+            "final_upright": 0.9999999999996657,
+            "best_smoothed_upright": 0.9999999999997204,
+            "final_joint_degrees": [
+              -0.019626321614066425,
+              -4.957076335207963e-07
+            ]
+          },
+          "successful_candidates": 13
+        },
+        {
+          "iteration": 2,
+          "case": "side_090",
+          "best": {
+            "score": 57.84913030760971,
+            "success": true,
+            "invalid": false,
+            "steps": 215,
+            "final_upright": 0.999999999999663,
+            "best_smoothed_upright": 0.9999999999996944,
+            "final_joint_degrees": [
+              -0.019625509200292116,
+              -3.7951892813739163e-07
+            ]
+          },
+          "successful_candidates": 19
+        },
+        {
+          "iteration": 3,
+          "case": "side_090",
+          "best": {
+            "score": 57.89017786158793,
+            "success": true,
+            "invalid": false,
+            "steps": 215,
+            "final_upright": 0.9999999999996672,
+            "best_smoothed_upright": 0.9999999999996904,
+            "final_joint_degrees": [
+              -0.01962431883148481,
+              2.232001282461436e-07
+            ]
+          },
+          "successful_candidates": 21
+        },
+        {
+          "iteration": 4,
+          "case": "side_090",
+          "best": {
+            "score": 57.99728651106686,
+            "success": true,
+            "invalid": false,
+            "steps": 218,
+            "final_upright": 0.9999999999996637,
+            "best_smoothed_upright": 0.9999999999997419,
+            "final_joint_degrees": [
+              -0.019626321614066664,
+              -4.957076322357359e-07
+            ]
+          },
+          "successful_candidates": 19
+        }
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 219,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "case": "side_135",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 2.356194490192345
+      },
+      "zero_motion_baseline": {
+        "score": -1.3256060062164343,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.17621234839484629,
+        "best_smoothed_upright": -0.17582151057760553,
+        "final_joint_degrees": [
+          0.5104725346241477,
+          -9.364496340707092e-05
+        ]
+      },
+      "result": {
+        "score": 58.00624561033139,
+        "success": true,
+        "invalid": false,
+        "steps": 207,
+        "final_upright": 0.9999999999996676,
+        "best_smoothed_upright": 0.9999999999997046,
+        "final_joint_degrees": [
+          -0.019624318831498774,
+          2.2320523497070491e-07
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.3697863416433684,
+          -0.15297534821788386
+        ],
+        [
+          -0.6133366057968164,
+          -0.5052770679222216
+        ],
+        [
+          0.057918790241587144,
+          0.1143838945643829
+        ],
+        [
+          0.44997027524496863,
+          -0.253855120925147
+        ],
+        [
+          -0.0006903748854440508,
+          -0.08722784927812482
+        ],
+        [
+          -0.14009783778161125,
+          0.24587275457128538
+        ]
+      ],
+      "trace_file": "side_135.npz",
+      "iterations": [
+        {
+          "iteration": 0,
+          "case": "side_135",
+          "best": {
+            "score": 57.77561793040884,
+            "success": true,
+            "invalid": false,
+            "steps": 212,
+            "final_upright": 0.999999999999668,
+            "best_smoothed_upright": 0.9999999999997533,
+            "final_joint_degrees": [
+              -0.019624318831484723,
+              2.2320024757357642e-07
+            ]
+          },
+          "successful_candidates": 18
+        },
+        {
+          "iteration": 1,
+          "case": "side_135",
+          "best": {
+            "score": 57.8056773248432,
+            "success": true,
+            "invalid": false,
+            "steps": 221,
+            "final_upright": 0.999999999999664,
+            "best_smoothed_upright": 0.9999999999996672,
+            "final_joint_degrees": [
+              -0.019625509200292206,
+              -3.7951894548843725e-07
+            ]
+          },
+          "successful_candidates": 15
+        },
+        {
+          "iteration": 2,
+          "case": "side_135",
+          "best": {
+            "score": 57.8975688860462,
+            "success": true,
+            "invalid": false,
+            "steps": 209,
+            "final_upright": 0.9999999999996643,
+            "best_smoothed_upright": 0.9999999999997385,
+            "final_joint_degrees": [
+              -0.019626321614067733,
+              -4.957064389381376e-07
+            ]
+          },
+          "successful_candidates": 30
+        },
+        {
+          "iteration": 3,
+          "case": "side_135",
+          "best": {
+            "score": 57.96258912267319,
+            "success": true,
+            "invalid": false,
+            "steps": 214,
+            "final_upright": 0.999999999999668,
+            "best_smoothed_upright": 0.9999999999996669,
+            "final_joint_degrees": [
+              -0.019624318831484855,
+              2.232000774822687e-07
+            ]
+          },
+          "successful_candidates": 30
+        },
+        {
+          "iteration": 4,
+          "case": "side_135",
+          "best": {
+            "score": 58.00624561033139,
+            "success": true,
+            "invalid": false,
+            "steps": 207,
+            "final_upright": 0.9999999999996676,
+            "best_smoothed_upright": 0.9999999999997046,
+            "final_joint_degrees": [
+              -0.019624318831498774,
+              2.2320523497070491e-07
+            ]
+          },
+          "successful_candidates": 32
+        }
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 208,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "case": "side_180",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 3.141592653589793
+      },
+      "zero_motion_baseline": {
+        "score": -1.3255149014368823,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.17621234836907076,
+        "best_smoothed_upright": -0.17574097897203536,
+        "final_joint_degrees": [
+          0.5104725322173093,
+          -9.364494367932784e-05
+        ]
+      },
+      "result": {
+        "score": 57.97187819429282,
+        "success": true,
+        "invalid": false,
+        "steps": 208,
+        "final_upright": 0.9999999999996647,
+        "best_smoothed_upright": 0.999999999999665,
+        "final_joint_degrees": [
+          -0.019626321614076358,
+          -4.957081691976427e-07
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.3776782397493512,
+          -0.6012270142151176
+        ],
+        [
+          -0.7650224224387076,
+          -0.24920914846380443
+        ],
+        [
+          0.3802906071369001,
+          -0.03915075525661977
+        ],
+        [
+          -0.3859544329146121,
+          -0.15867470520029178
+        ],
+        [
+          0.6700629613872281,
+          0.29355422569136336
+        ],
+        [
+          -0.25939996703096974,
+          -0.05764664308031414
+        ]
+      ],
+      "trace_file": "side_180.npz",
+      "iterations": [
+        {
+          "iteration": 0,
+          "case": "side_180",
+          "best": {
+            "score": 57.74499405981007,
+            "success": true,
+            "invalid": false,
+            "steps": 220,
+            "final_upright": 0.999999999999662,
+            "best_smoothed_upright": 0.9999999999996648,
+            "final_joint_degrees": [
+              -0.019625509200292286,
+              -3.7951894539406094e-07
+            ]
+          },
+          "successful_candidates": 10
+        },
+        {
+          "iteration": 1,
+          "case": "side_180",
+          "best": {
+            "score": 57.8087316002389,
+            "success": true,
+            "invalid": false,
+            "steps": 221,
+            "final_upright": 0.9999999999996618,
+            "best_smoothed_upright": 0.9999999999996801,
+            "final_joint_degrees": [
+              -0.01962550920029202,
+              -3.795189461102399e-07
+            ]
+          },
+          "successful_candidates": 15
+        },
+        {
+          "iteration": 2,
+          "case": "side_180",
+          "best": {
+            "score": 57.850414085805355,
+            "success": true,
+            "invalid": false,
+            "steps": 205,
+            "final_upright": 0.9999999999996619,
+            "best_smoothed_upright": 0.9999999999996652,
+            "final_joint_degrees": [
+              -0.019625509200369373,
+              -3.7954128068874235e-07
+            ]
+          },
+          "successful_candidates": 23
+        },
+        {
+          "iteration": 3,
+          "case": "side_180",
+          "best": {
+            "score": 57.97187819429282,
+            "success": true,
+            "invalid": false,
+            "steps": 208,
+            "final_upright": 0.9999999999996647,
+            "best_smoothed_upright": 0.999999999999665,
+            "final_joint_degrees": [
+              -0.019626321614076358,
+              -4.957081691976427e-07
+            ]
+          },
+          "successful_candidates": 30
+        },
+        {
+          "iteration": 4,
+          "case": "side_180",
+          "best": {
+            "score": 57.97187819429282,
+            "success": true,
+            "invalid": false,
+            "steps": 208,
+            "final_upright": 0.9999999999996647,
+            "best_smoothed_upright": 0.999999999999665,
+            "final_joint_degrees": [
+              -0.019626321614076358,
+              -4.957081691976427e-07
+            ]
+          },
+          "successful_candidates": 31
+        }
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 209,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "case": "side_225",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 3.9269908169872414
+      },
+      "zero_motion_baseline": {
+        "score": -1.3256396525163419,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.17621234840436434,
+        "best_smoothed_upright": -0.17585125225650547,
+        "final_joint_degrees": [
+          0.5104725355128793,
+          -9.36449706885933e-05
+        ]
+      },
+      "result": {
+        "score": 58.05285578992754,
+        "success": true,
+        "invalid": false,
+        "steps": 213,
+        "final_upright": 0.9999999999996682,
+        "best_smoothed_upright": 0.9999999999996668,
+        "final_joint_degrees": [
+          -0.01962431883148498,
+          2.2320004643134398e-07
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.3349699905102492,
+          0.49599880040728517
+        ],
+        [
+          0.4353397577409238,
+          0.6569388113734944
+        ],
+        [
+          0.02150392028465578,
+          -0.10643916472073506
+        ],
+        [
+          0.19825832316393432,
+          -0.09173284162080071
+        ],
+        [
+          -0.06125704853523065,
+          0.3069971971096946
+        ],
+        [
+          -0.06686200198929078,
+          -0.3544453863195734
+        ]
+      ],
+      "trace_file": "side_225.npz",
+      "iterations": [
+        {
+          "iteration": 0,
+          "case": "side_225",
+          "best": {
+            "score": 57.74419521251356,
+            "success": true,
+            "invalid": false,
+            "steps": 222,
+            "final_upright": 0.9999999999996639,
+            "best_smoothed_upright": 0.9999999999997411,
+            "final_joint_degrees": [
+              -0.019625509200292355,
+              -3.795189446790548e-07
+            ]
+          },
+          "successful_candidates": 13
+        },
+        {
+          "iteration": 1,
+          "case": "side_225",
+          "best": {
+            "score": 57.93748609442403,
+            "success": true,
+            "invalid": false,
+            "steps": 204,
+            "final_upright": 0.9999999999996679,
+            "best_smoothed_upright": 0.9999999999996698,
+            "final_joint_degrees": [
+              -0.019624318831837215,
+              2.232093819184657e-07
+            ]
+          },
+          "successful_candidates": 19
+        },
+        {
+          "iteration": 2,
+          "case": "side_225",
+          "best": {
+            "score": 57.93748609442403,
+            "success": true,
+            "invalid": false,
+            "steps": 204,
+            "final_upright": 0.9999999999996679,
+            "best_smoothed_upright": 0.9999999999996698,
+            "final_joint_degrees": [
+              -0.019624318831837215,
+              2.232093819184657e-07
+            ]
+          },
+          "successful_candidates": 21
+        },
+        {
+          "iteration": 3,
+          "case": "side_225",
+          "best": {
+            "score": 58.00939601799245,
+            "success": true,
+            "invalid": false,
+            "steps": 201,
+            "final_upright": 0.9999999999996672,
+            "best_smoothed_upright": 0.9999999999996677,
+            "final_joint_degrees": [
+              -0.01962431882589078,
+              2.2332191392678758e-07
+            ]
+          },
+          "successful_candidates": 26
+        },
+        {
+          "iteration": 4,
+          "case": "side_225",
+          "best": {
+            "score": 58.05285578992754,
+            "success": true,
+            "invalid": false,
+            "steps": 213,
+            "final_upright": 0.9999999999996682,
+            "best_smoothed_upright": 0.9999999999996668,
+            "final_joint_degrees": [
+              -0.01962431883148498,
+              2.2320004643134398e-07
+            ]
+          },
+          "successful_candidates": 31
+        }
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 214,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "case": "side_270",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 4.71238898038469
+      },
+      "zero_motion_baseline": {
+        "score": -1.5038199043889655,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.19902712282969326,
+        "best_smoothed_upright": -0.1990271228296943,
+        "final_joint_degrees": [
+          -0.003966321868187116,
+          1.269604154386536
+        ]
+      },
+      "result": {
+        "score": 57.88743337267365,
+        "success": true,
+        "invalid": false,
+        "steps": 219,
+        "final_upright": 0.9999999999996658,
+        "best_smoothed_upright": 0.9999999999996655,
+        "final_joint_degrees": [
+          -0.019626321614066605,
+          -4.957076348449523e-07
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.0939411452293544,
+          -1.1873935947076002
+        ],
+        [
+          -0.3858304562341213,
+          0.7603731445393528
+        ],
+        [
+          -0.0625633782954483,
+          0.07709452170216965
+        ],
+        [
+          0.283777823694307,
+          0.2270733844345888
+        ],
+        [
+          0.21214522043591727,
+          0.09109819370480379
+        ],
+        [
+          0.02974051261124307,
+          -0.7147778251532165
+        ]
+      ],
+      "trace_file": "side_270.npz",
+      "iterations": [
+        {
+          "iteration": 0,
+          "case": "side_270",
+          "best": {
+            "score": 57.756710868695286,
+            "success": true,
+            "invalid": false,
+            "steps": 222,
+            "final_upright": 0.9999999999996636,
+            "best_smoothed_upright": 0.999999999999677,
+            "final_joint_degrees": [
+              -0.019625509200292202,
+              -3.7951894469226783e-07
+            ]
+          },
+          "successful_candidates": 13
+        },
+        {
+          "iteration": 1,
+          "case": "side_270",
+          "best": {
+            "score": 57.79011225748731,
+            "success": true,
+            "invalid": false,
+            "steps": 216,
+            "final_upright": 0.9999999999996656,
+            "best_smoothed_upright": 0.999999999999668,
+            "final_joint_degrees": [
+              -0.019626321614066255,
+              -4.95707633704911e-07
+            ]
+          },
+          "successful_candidates": 11
+        },
+        {
+          "iteration": 2,
+          "case": "side_270",
+          "best": {
+            "score": 57.842399816561894,
+            "success": true,
+            "invalid": false,
+            "steps": 217,
+            "final_upright": 0.9999999999996626,
+            "best_smoothed_upright": 0.9999999999996654,
+            "final_joint_degrees": [
+              -0.01962550920029231,
+              -3.79518945166487e-07
+            ]
+          },
+          "successful_candidates": 22
+        },
+        {
+          "iteration": 3,
+          "case": "side_270",
+          "best": {
+            "score": 57.88743337267365,
+            "success": true,
+            "invalid": false,
+            "steps": 219,
+            "final_upright": 0.9999999999996658,
+            "best_smoothed_upright": 0.9999999999996655,
+            "final_joint_degrees": [
+              -0.019626321614066605,
+              -4.957076348449523e-07
+            ]
+          },
+          "successful_candidates": 14
+        },
+        {
+          "iteration": 4,
+          "case": "side_270",
+          "best": {
+            "score": 57.88743337267365,
+            "success": true,
+            "invalid": false,
+            "steps": 219,
+            "final_upright": 0.9999999999996658,
+            "best_smoothed_upright": 0.9999999999996655,
+            "final_joint_degrees": [
+              -0.019626321614066605,
+              -4.957076348449523e-07
+            ]
+          },
+          "successful_candidates": 18
+        }
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 220,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "case": "side_315",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 5.497787143782138
+      },
+      "zero_motion_baseline": {
+        "score": -1.503819917528881,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.19902712282969362,
+        "best_smoothed_upright": -0.199027122829694,
+        "final_joint_degrees": [
+          -0.003966321868183804,
+          1.2696041543865402
+        ]
+      },
+      "result": {
+        "score": 57.87046995820576,
+        "success": true,
+        "invalid": false,
+        "steps": 201,
+        "final_upright": 0.9999999999996628,
+        "best_smoothed_upright": 0.999999999999665,
+        "final_joint_degrees": [
+          -0.019625509194589996,
+          -3.7983671428424656e-07
+        ]
+      },
+      "waypoints_rad": [
+        [
+          1.3962634016,
+          -1.185350032382798
+        ],
+        [
+          -0.4356279942739421,
+          -0.48051114591657834
+        ],
+        [
+          -0.8877835251188306,
+          -0.8044652753441018
+        ],
+        [
+          0.2998594343728649,
+          -0.57542653931691
+        ],
+        [
+          -0.02664443374310434,
+          0.25142498610199054
+        ],
+        [
+          0.18565900107152267,
+          -0.1356008608081597
+        ]
+      ],
+      "trace_file": "side_315.npz",
+      "iterations": [
+        {
+          "iteration": 0,
+          "case": "side_315",
+          "best": {
+            "score": 57.69401522449836,
+            "success": true,
+            "invalid": false,
+            "steps": 222,
+            "final_upright": 0.9999999999996656,
+            "best_smoothed_upright": 0.999999999999667,
+            "final_joint_degrees": [
+              -0.01962632161406655,
+              -4.957076341153975e-07
+            ]
+          },
+          "successful_candidates": 11
+        },
+        {
+          "iteration": 1,
+          "case": "side_315",
+          "best": {
+            "score": 57.80861955618157,
+            "success": true,
+            "invalid": false,
+            "steps": 211,
+            "final_upright": 0.999999999999664,
+            "best_smoothed_upright": 0.9999999999997018,
+            "final_joint_degrees": [
+              -0.019626321614066435,
+              -4.957073606255774e-07
+            ]
+          },
+          "successful_candidates": 10
+        },
+        {
+          "iteration": 2,
+          "case": "side_315",
+          "best": {
+            "score": 57.81968549219655,
+            "success": true,
+            "invalid": false,
+            "steps": 220,
+            "final_upright": 0.9999999999996647,
+            "best_smoothed_upright": 0.9999999999997292,
+            "final_joint_degrees": [
+              -0.019626321614066508,
+              -4.957076345569399e-07
+            ]
+          },
+          "successful_candidates": 20
+        },
+        {
+          "iteration": 3,
+          "case": "side_315",
+          "best": {
+            "score": 57.82188020392257,
+            "success": true,
+            "invalid": false,
+            "steps": 221,
+            "final_upright": 0.999999999999662,
+            "best_smoothed_upright": 0.999999999999665,
+            "final_joint_degrees": [
+              -0.019625509200292122,
+              -3.7951894563369837e-07
+            ]
+          },
+          "successful_candidates": 17
+        },
+        {
+          "iteration": 4,
+          "case": "side_315",
+          "best": {
+            "score": 57.87046995820576,
+            "success": true,
+            "invalid": false,
+            "steps": 201,
+            "final_upright": 0.9999999999996628,
+            "best_smoothed_upright": 0.999999999999665,
+            "final_joint_degrees": [
+              -0.019625509194589996,
+              -3.7983671428424656e-07
+            ]
+          },
+          "successful_candidates": 22
+        }
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 202,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    },
+    {
+      "case": "inverted",
+      "requested_start": {
+        "tilt": 3.141592653589793,
+        "azimuth": 0.0
+      },
+      "zero_motion_baseline": {
+        "score": -1.3235950304988318,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.17621234782429812,
+        "best_smoothed_upright": -0.17404413225303988,
+        "final_joint_degrees": [
+          0.5104724813489808,
+          -9.364452676859072e-05
+        ]
+      },
+      "result": {
+        "score": 57.966654080829684,
+        "success": true,
+        "invalid": false,
+        "steps": 207,
+        "final_upright": 0.999999999999665,
+        "best_smoothed_upright": 0.9999999999996653,
+        "final_joint_degrees": [
+          -0.019626321614077548,
+          -4.957126392049338e-07
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.1939798979295717,
+          0.4259022248780333
+        ],
+        [
+          0.6060663022604139,
+          1.3962634016
+        ],
+        [
+          0.27376062510101545,
+          -0.07618888525727982
+        ],
+        [
+          0.0014180085844760486,
+          -0.06824243013944985
+        ],
+        [
+          0.33149253149286245,
+          0.18944667197712806
+        ],
+        [
+          -0.11697075007454666,
+          -0.24030776040381194
+        ]
+      ],
+      "trace_file": "inverted.npz",
+      "iterations": [
+        {
+          "iteration": 0,
+          "case": "inverted",
+          "best": {
+            "score": 57.75140797340321,
+            "success": true,
+            "invalid": false,
+            "steps": 222,
+            "final_upright": 0.999999999999663,
+            "best_smoothed_upright": 0.9999999999996767,
+            "final_joint_degrees": [
+              -0.019625509200292327,
+              -3.795189454154007e-07
+            ]
+          },
+          "successful_candidates": 14
+        },
+        {
+          "iteration": 1,
+          "case": "inverted",
+          "best": {
+            "score": 57.78204797571619,
+            "success": true,
+            "invalid": false,
+            "steps": 222,
+            "final_upright": 0.9999999999996645,
+            "best_smoothed_upright": 0.9999999999996654,
+            "final_joint_degrees": [
+              -0.019626321614066435,
+              -4.957076351666634e-07
+            ]
+          },
+          "successful_candidates": 23
+        },
+        {
+          "iteration": 2,
+          "case": "inverted",
+          "best": {
+            "score": 57.826757965466015,
+            "success": true,
+            "invalid": false,
+            "steps": 220,
+            "final_upright": 0.9999999999996654,
+            "best_smoothed_upright": 0.9999999999996648,
+            "final_joint_degrees": [
+              -0.01962632161406668,
+              -4.957076354158117e-07
+            ]
+          },
+          "successful_candidates": 21
+        },
+        {
+          "iteration": 3,
+          "case": "inverted",
+          "best": {
+            "score": 57.89370892063304,
+            "success": true,
+            "invalid": false,
+            "steps": 216,
+            "final_upright": 0.9999999999996658,
+            "best_smoothed_upright": 0.9999999999996654,
+            "final_joint_degrees": [
+              -0.019626321614066425,
+              -4.957076356462302e-07
+            ]
+          },
+          "successful_candidates": 30
+        },
+        {
+          "iteration": 4,
+          "case": "inverted",
+          "best": {
+            "score": 57.966654080829684,
+            "success": true,
+            "invalid": false,
+            "steps": 207,
+            "final_upright": 0.999999999999665,
+            "best_smoothed_upright": 0.9999999999996653,
+            "final_joint_degrees": [
+              -0.019626321614077548,
+              -4.957126392049338e-07
+            ]
+          },
+          "successful_candidates": 32
+        }
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 208,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      }
+    }
+  ],
+  "physical_robot_commands_sent": false,
+  "rl_training_performed": false,
+  "wall_seconds": 107.02939733304083
+}

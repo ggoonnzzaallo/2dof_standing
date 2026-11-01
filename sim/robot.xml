@@ -124,6 +124,28 @@
     <mesh name="base_collision_52" file="base_collision_52.obj" />
     <mesh name="base_collision_53" file="base_collision_53.obj" />
     <mesh name="upper_servo_visual" file="upper_servo_visual.obj" />
+    <mesh name="upper_servo_collision_00" file="upper_servo_collision_00.obj" />
+    <mesh name="upper_servo_collision_01" file="upper_servo_collision_01.obj" />
+    <mesh name="upper_servo_collision_02" file="upper_servo_collision_02.obj" />
+    <mesh name="upper_servo_collision_03" file="upper_servo_collision_03.obj" />
+    <mesh name="upper_servo_collision_04" file="upper_servo_collision_04.obj" />
+    <mesh name="upper_servo_collision_05" file="upper_servo_collision_05.obj" />
+    <mesh name="upper_servo_collision_06" file="upper_servo_collision_06.obj" />
+    <mesh name="upper_servo_collision_07" file="upper_servo_collision_07.obj" />
+    <mesh name="upper_servo_collision_08" file="upper_servo_collision_08.obj" />
+    <mesh name="upper_servo_collision_09" file="upper_servo_collision_09.obj" />
+    <mesh name="upper_servo_collision_10" file="upper_servo_collision_10.obj" />
+    <mesh name="upper_servo_collision_11" file="upper_servo_collision_11.obj" />
+    <mesh name="upper_servo_collision_12" file="upper_servo_collision_12.obj" />
+    <mesh name="upper_servo_collision_13" file="upper_servo_collision_13.obj" />
+    <mesh name="upper_servo_collision_14" file="upper_servo_collision_14.obj" />
+    <mesh name="upper_servo_collision_15" file="upper_servo_collision_15.obj" />
+    <mesh name="upper_servo_collision_16" file="upper_servo_collision_16.obj" />
+    <mesh name="upper_servo_collision_17" file="upper_servo_collision_17.obj" />
+    <mesh name="upper_servo_collision_18" file="upper_servo_collision_18.obj" />
+    <mesh name="upper_servo_collision_19" file="upper_servo_collision_19.obj" />
+    <mesh name="upper_servo_collision_20" file="upper_servo_collision_20.obj" />
+    <mesh name="upper_servo_collision_21" file="upper_servo_collision_21.obj" />
     <mesh name="top_link_servo_horn_bracket_visual" file="top_link_servo_horn_bracket_visual.obj" />
     <mesh name="top_link_servo_horn_bracket_collision_00" file="top_link_servo_horn_bracket_collision_00.obj" />
     <mesh name="top_link_servo_horn_bracket_collision_01" file="top_link_servo_horn_bracket_collision_01.obj" />
@@ -223,6 +245,27 @@
     <mesh name="top_link_main_body_collision_70" file="top_link_main_body_collision_70.obj" />
     <mesh name="top_link_main_body_collision_71" file="top_link_main_body_collision_71.obj" />
     <mesh name="lower_servo_visual" file="lower_servo_visual.obj" />
+    <mesh name="lower_servo_collision_00" file="lower_servo_collision_00.obj" />
+    <mesh name="lower_servo_collision_01" file="lower_servo_collision_01.obj" />
+    <mesh name="lower_servo_collision_02" file="lower_servo_collision_02.obj" />
+    <mesh name="lower_servo_collision_03" file="lower_servo_collision_03.obj" />
+    <mesh name="lower_servo_collision_04" file="lower_servo_collision_04.obj" />
+    <mesh name="lower_servo_collision_05" file="lower_servo_collision_05.obj" />
+    <mesh name="lower_servo_collision_06" file="lower_servo_collision_06.obj" />
+    <mesh name="lower_servo_collision_07" file="lower_servo_collision_07.obj" />
+    <mesh name="lower_servo_collision_08" file="lower_servo_collision_08.obj" />
+    <mesh name="lower_servo_collision_09" file="lower_servo_collision_09.obj" />
+    <mesh name="lower_servo_collision_10" file="lower_servo_collision_10.obj" />
+    <mesh name="lower_servo_collision_11" file="lower_servo_collision_11.obj" />
+    <mesh name="lower_servo_collision_12" file="lower_servo_collision_12.obj" />
+    <mesh name="lower_servo_collision_13" file="lower_servo_collision_13.obj" />
+    <mesh name="lower_servo_collision_14" file="lower_servo_collision_14.obj" />
+    <mesh name="lower_servo_collision_15" file="lower_servo_collision_15.obj" />
+    <mesh name="lower_servo_collision_16" file="lower_servo_collision_16.obj" />
+    <mesh name="lower_servo_collision_17" file="lower_servo_collision_17.obj" />
+    <mesh name="lower_servo_collision_18" file="lower_servo_collision_18.obj" />
+    <mesh name="lower_servo_collision_19" file="lower_servo_collision_19.obj" />
+    <mesh name="lower_servo_collision_20" file="lower_servo_collision_20.obj" />
     <mesh name="middle_link_main_body_visual" file="middle_link_main_body_visual.obj" />
     <mesh name="middle_link_main_body_collision_00" file="middle_link_main_body_collision_00.obj" />
     <mesh name="middle_link_main_body_collision_01" file="middle_link_main_body_collision_01.obj" />
@@ -483,7 +526,28 @@
         <geom name="middle_link_servo_horn_bracket_collision_49" type="mesh" mesh="middle_link_servo_horn_bracket_collision_49" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
         <geom name="middle_link_servo_horn_bracket_collision_50" type="mesh" mesh="middle_link_servo_horn_bracket_collision_50" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
         <geom name="upper_servo_visual" type="mesh" mesh="upper_servo_visual" pos="-0 -0 -0.0244" group="1" contype="0" conaffinity="0" mass="0" rgba=".12 .13 .14 1" />
-        <geom name="upper_servo_collision" type="box" pos="-0.0018 -0.0035 0.0316" size="0.00595 0.0149 0.01585" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_00" type="mesh" mesh="upper_servo_collision_00" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_01" type="mesh" mesh="upper_servo_collision_01" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_02" type="mesh" mesh="upper_servo_collision_02" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_03" type="mesh" mesh="upper_servo_collision_03" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_04" type="mesh" mesh="upper_servo_collision_04" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_05" type="mesh" mesh="upper_servo_collision_05" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_06" type="mesh" mesh="upper_servo_collision_06" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_07" type="mesh" mesh="upper_servo_collision_07" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_08" type="mesh" mesh="upper_servo_collision_08" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_09" type="mesh" mesh="upper_servo_collision_09" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_10" type="mesh" mesh="upper_servo_collision_10" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_11" type="mesh" mesh="upper_servo_collision_11" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_12" type="mesh" mesh="upper_servo_collision_12" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_13" type="mesh" mesh="upper_servo_collision_13" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_14" type="mesh" mesh="upper_servo_collision_14" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_15" type="mesh" mesh="upper_servo_collision_15" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_16" type="mesh" mesh="upper_servo_collision_16" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_17" type="mesh" mesh="upper_servo_collision_17" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_18" type="mesh" mesh="upper_servo_collision_18" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_19" type="mesh" mesh="upper_servo_collision_19" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_20" type="mesh" mesh="upper_servo_collision_20" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
+        <geom name="upper_servo_collision_21" type="mesh" mesh="upper_servo_collision_21" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
         <geom name="middle_link_main_body_visual" type="mesh" mesh="middle_link_main_body_visual" pos="-0 -0 -0.0244" group="1" contype="0" conaffinity="0" mass="0" rgba=".91 .57 .20 1" />
         <geom name="middle_link_main_body_collision_00" type="mesh" mesh="middle_link_main_body_collision_00" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
         <geom name="middle_link_main_body_collision_01" type="mesh" mesh="middle_link_main_body_collision_01" pos="-0 -0 -0.0244" group="3" mass="0" rgba=".91 .57 .20 1" />
@@ -639,7 +703,27 @@
       <geom name="base_collision_52" type="mesh" mesh="base_collision_52" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
       <geom name="base_collision_53" type="mesh" mesh="base_collision_53" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
       <geom name="lower_servo_visual" type="mesh" mesh="lower_servo_visual" pos="0 0 0" group="1" contype="0" conaffinity="0" mass="0" rgba=".12 .13 .14 1" />
-      <geom name="lower_servo_collision" type="box" pos="-0.0065 0 0.01885" size="0.0149 0.00595 0.01585" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_00" type="mesh" mesh="lower_servo_collision_00" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_01" type="mesh" mesh="lower_servo_collision_01" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_02" type="mesh" mesh="lower_servo_collision_02" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_03" type="mesh" mesh="lower_servo_collision_03" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_04" type="mesh" mesh="lower_servo_collision_04" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_05" type="mesh" mesh="lower_servo_collision_05" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_06" type="mesh" mesh="lower_servo_collision_06" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_07" type="mesh" mesh="lower_servo_collision_07" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_08" type="mesh" mesh="lower_servo_collision_08" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_09" type="mesh" mesh="lower_servo_collision_09" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_10" type="mesh" mesh="lower_servo_collision_10" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_11" type="mesh" mesh="lower_servo_collision_11" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_12" type="mesh" mesh="lower_servo_collision_12" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_13" type="mesh" mesh="lower_servo_collision_13" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_14" type="mesh" mesh="lower_servo_collision_14" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_15" type="mesh" mesh="lower_servo_collision_15" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_16" type="mesh" mesh="lower_servo_collision_16" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_17" type="mesh" mesh="lower_servo_collision_17" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_18" type="mesh" mesh="lower_servo_collision_18" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_19" type="mesh" mesh="lower_servo_collision_19" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
+      <geom name="lower_servo_collision_20" type="mesh" mesh="lower_servo_collision_20" pos="0 0 0" group="3" mass="0" rgba=".21 .53 .78 1" />
       <site name="imu" pos="-0.02210957 -0.02351904 0.00423" size=".001" rgba="1 0 0 1" />
     </body>
   </worldbody>

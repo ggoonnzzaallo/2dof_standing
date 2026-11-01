@@ -15,6 +15,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 PRINTED = {'base', 'middle_link_main_body', 'middle_link_servo_horn_bracket',
            'top_link_main_body', 'top_link_servo_horn_bracket'}
+DECOMPOSED = PRINTED | {'lower_servo', 'upper_servo'}
 PARAMETERS = dict(threshold=.0006, real_metric=True, preprocess_mode='auto',
                   resolution=2000, mcts_nodes=15, mcts_iterations=100,
                   mcts_max_depth=3, decimate=True, max_ch_vertex=64, seed=17)
@@ -70,7 +71,7 @@ def main():
                                         'parameters': parameters, 'version': manifest['coacd_version']},
                                        sort_keys=True).encode()).hexdigest()
         start = time.monotonic()
-        if alias not in PRINTED:
+        if alias not in DECOMPOSED:
             hulls = []
             method = 'CAD bounding box hardware envelope; internal geometry not modeled'
         elif hull_path.exists() and not args.rebuild and json.loads(hull_path.read_text())['key'] == key:
@@ -92,7 +93,7 @@ def main():
         manifest['parts'][alias] = {
             'group': part['group'], 'visual': visual, 'collision_meshes': files,
             'collision_method': method, 'input_watertight_after_welding': watertight,
-            'removed_degenerate_triangles': removed, 'parameters': parameters if alias in PRINTED else None,
+            'removed_degenerate_triangles': removed, 'parameters': parameters if alias in DECOMPOSED else None,
             'bbox_cad_m': [vertices.min(axis=0).tolist(), vertices.max(axis=0).tolist()],
             'cad_mesh_volume_m3': float(volume(vertices, faces)),
             'sum_collision_hull_volume_m3': float(sum(volume(v, f) for v, f in hulls)),

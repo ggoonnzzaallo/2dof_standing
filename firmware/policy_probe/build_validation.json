@@ -1,0 +1,38 @@
+{
+  "record_date": "2026-11-01",
+  "status": "passed",
+  "command": "python3 scripts/robot.py build-probe",
+  "fqbn": "Seeeduino:nrf52:xiaonRF52840Sense",
+  "core_version": "1.1.13",
+  "arduino_cli_version": "1.5.1",
+  "compiler": "Arm GNU 13.2.Rel1, native macOS arm64",
+  "sketch_sha256": "926e886d4609b3dd6c46cd0f8b3d453ff4bc7385dac08c9c2f75c49d7c3cdb68",
+  "actor_header_sha256": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff",
+  "elf_sha256": "b418f900d083f532ecbd9526bb60c9fb3f82a86904da20859b826373b5f198fd",
+  "flash_load_bytes": 69976,
+  "flash_sections": {
+    ".text": 69224,
+    ".ARM.exidx": 8,
+    ".data": 744
+  },
+  "static_ram_bytes": 7464,
+  "static_ram_sections": {
+    ".data": 744,
+    ".bss": 6720
+  },
+  "runtime_heap_and_stack_measured": false,
+  "MCU_inference_timing_measured": false,
+  "firmware_uploaded": false,
+  "servo_PWM_generated": false,
+  "known_toolchain_warnings": [
+    "Newlib nano unimplemented POSIX syscall stubs (_close, _fstat, _getpid, _isatty, _kill, _lseek, _read); probe does not use POSIX file/process APIs.",
+    "Bundled uf2conv.py invalid escape sequence SyntaxWarning; UF2 was generated."
+  ],
+  "note": "Application image only; excludes bootloader/SoftDevice flash, and static RAM is not runtime high-water use. Not the complete robot controller.",
+  "build_exit_code": 0,
+  "arduino_cli_program_storage_bytes": 69968,
+  "arduino_cli_program_storage_limit_bytes": 811008,
+  "arduino_cli_ram_limit_bytes": 237568,
+  "flash_accounting_note": "CLI counts .text + .data (69,968 bytes); load-section total additionally includes 8 bytes of .ARM.exidx.",
+  "uf2_sha256": "72642d5f851ae32801e597586823e65940498d5a85a4d609eeb319bf467d6668"
+}

@@ -36,7 +36,7 @@ def main():
         'gymnasium_version':gymnasium.__version__, 'gymnasium_check':'passed',
         'rollouts':trials, 'policy_period_s':.02, 'physics_timestep_s':env.physics_dt,
         'wall_seconds':time.monotonic()-start, 'rl_training_performed':False,
-        'physical_robot_commands_sent':False, 'actor_C_parity':'Not rerun; historical pre-Onshape results preserved in archive/software_validation_before_onshape.json',
+        'physical_robot_commands_sent':False, 'actor_C_parity':'Separate trained-candidate verification is in recovery/results/policy_simulation_only.json; historical pre-Onshape results are in archive/software_validation_before_onshape.json',
     }
     physics = json.loads((HERE/'validation.json').read_text())
     assert physics['status'] == 'passed' and physics['robot_xml_sha256'] == report['robot_xml_sha256'], 'Run check_model.py for this XML first.'

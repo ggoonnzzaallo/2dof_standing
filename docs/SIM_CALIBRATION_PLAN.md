@@ -2,6 +2,8 @@
 
 The final-CAD exploratory simulator is runnable. The next work is to establish the physical conventions and dynamics that the exported policy must share. No additional CAD export is needed unless the mechanism changes.
 
+**Current working preference:** the user wants Codex to lead implementation, simulation experiments and testing autonomously. The learning options below are optional for later. Request the user's help only when a physical observation or measurement is necessary; do not make them choose ownership for routine work. Continue useful software work while physical calibration data is pending.
+
 | Stage | What you do on the physical robot | What Codex can implement | Learning option |
 |---|---|---|---|
 | Review the model | Orbit it; confirm which pieces move with each joint and compare the zero pose with the assembled robot | Fix grouping/placements if needed; keep the structural upper axis authoritative | Run `sim/view.py --wiggle`, then inspect the three nested bodies in `sim/robot.xml` |
@@ -26,6 +28,6 @@ For servo measurements: note the battery estimate and whether USB is attached, s
 
 ## Software work that can proceed independently
 
-The model generator, visual review, geometry/inertia checks and Gymnasium interface are available now. We can also add plotting/log-analysis tools, define reset/evaluation cases and prepare trajectory-search tooling while measurements are being collected. Training a policy for exploration is possible, but a policy intended for hardware should use calibrated signs, endpoints, sensor observations and plausible servo dynamics. Current adjacent-body collision exclusions also need review against the measured mechanical stops.
+The model generator, visual review, geometry/inertia checks and Gymnasium interface are available now. Codex has also implemented trajectory search, audited demonstration collection, behavior cloning, PPO comparison, held-out evaluation and C-export checks. The [selected simulation-only neural controller](../sim/recovery/README.md) passes 100/100 broader held-out simulated trials. Hardware transfer still needs calibrated signs, endpoints, sensor observations and plausible servo dynamics; current adjacent-body collision exclusions also need review against the measured mechanical stops. Codex retains ownership of implementation and will ask only for the necessary physical observations.
 
 The custom carrier PCB stays on the [hardware backlog](HARDWARE_BACKLOG.md); no PCB redesign is needed for these stages.

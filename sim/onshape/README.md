@@ -35,7 +35,7 @@ Edit [assumptions.json](assumptions.json), then run the builder and checks below
 
 ## Contacts and numerical checks
 
-Detailed visual meshes do not collide. The five printed components use **294 separate convex collision meshes**, generated with [CoACD](https://github.com/SarahWeiii/CoACD); the four hardware components use CAD bounding boxes. Separate assets preserve the large concavities in the printed frames. A single mesh asset would be convexified by MuJoCo and fill those spaces. See the [MuJoCo 3.2.6 mesh reference](https://mujoco.readthedocs.io/en/3.2.6/XMLreference.html#asset-mesh).
+Detailed visual meshes do not collide. The five printed components use **294 separate convex collision meshes**, generated with [CoACD](https://github.com/SarahWeiii/CoACD); the two servos add 43 convex pieces, for **337 collision meshes** total. Battery and board use CAD bounding boxes. Servo boxes were replaced because their envelopes falsely overlapped the horn brackets around the output shafts. Separate assets preserve the large concavities in the printed frames. A single mesh asset would be convexified by MuJoCo and fill those spaces. See the [MuJoCo 3.2.6 mesh reference](https://mujoco.readthedocs.io/en/3.2.6/XMLreference.html#asset-mesh).
 
 Before decomposition, duplicated seam vertices are welded and degenerate triangles are removed. Four degenerate triangles on the top link had caused automatic remeshing to thicken it; the repaired closed mesh now bypasses that remeshing step. [manifest.json](manifest.json) records parameters, source hashes and per-part quality data. Sum-of-hull volumes differs from each original printed mesh by about 0–1.9%; this is a sanity check, not a proof of spatial coverage or a bound on all surface error. The CoACD concavity threshold is 0.6 mm in real-metric mode. Small screw holes/fillets are approximate.
 
@@ -47,7 +47,7 @@ Current [model checks](validation.json) cover compile, visual placement, reconst
 
 [Environment checks](environment_validation.json) pass Gymnasium's checker and 1,500 random-action steps each with and without parameter randomization. Resets now use the robot's collision support points to place the neutral assembly 2 mm above the floor at the requested orientation, then settle it. They no longer start every orientation at a fixed 180 mm base height. The policy observation/action dimensions remain 10/2; servo dynamics still permit tracking error and are not ideal angle constraints.
 
-No physical robot commands or RL training were performed for this update. Historical exporter/C-parity checks are preserved in [archive](../archive/software_validation_before_onshape.json); they have not been rerun here.
+These model checks do not train a policy or send physical robot commands. Subsequent [recovery experiments](../recovery/README.md) now include trajectory search, demonstration training, PPO comparisons, held-out evaluation and C-export parity for the selected simulation-only actor. Historical pre-Onshape checks remain in [archive](../archive/software_validation_before_onshape.json).
 
 ## Run and inspect
 

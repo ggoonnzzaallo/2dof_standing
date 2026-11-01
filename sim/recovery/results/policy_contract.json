@@ -1,0 +1,52 @@
+{
+  "status": "Simulation-only, hardware calibration/integration incomplete",
+  "observation_size": 10,
+  "action_size": 2,
+  "inputs": [
+    {
+      "indices": [
+        0,
+        1,
+        2
+      ],
+      "meaning": "Unit DOWN vector in robot base axes"
+    },
+    {
+      "indices": [
+        3,
+        4,
+        5
+      ],
+      "meaning": "Base gyro rad/s divided by 10, clipped +/-1"
+    },
+    {
+      "indices": [
+        6,
+        7
+      ],
+      "meaning": "Last commanded joint targets divided by 80 degrees (1.3962634016 rad)"
+    },
+    {
+      "indices": [
+        8,
+        9
+      ],
+      "meaning": "Previous clipped policy action"
+    }
+  ],
+  "outputs": "Two actions clipped +/-1; add 0.06 rad times action to targets every 20 ms, clamp targets +/-80 degrees",
+  "initial_targets_and_previous_actions": [
+    0,
+    0
+  ],
+  "inference_period_s": 0.02,
+  "hidden_layers": [
+    64,
+    64
+  ],
+  "activation": "tanh",
+  "hardware_calibration_complete": false,
+  "IMU_estimator_integrated": false,
+  "servo_mapping_calibrated": false,
+  "MCU_timing_tested": false
+}

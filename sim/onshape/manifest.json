@@ -240,11 +240,45 @@
     "upper_servo": {
       "group": "middle",
       "visual": "upper_servo_visual.obj",
-      "collision_meshes": [],
-      "collision_method": "CAD bounding box hardware envelope; internal geometry not modeled",
+      "collision_meshes": [
+        "upper_servo_collision_00.obj",
+        "upper_servo_collision_01.obj",
+        "upper_servo_collision_02.obj",
+        "upper_servo_collision_03.obj",
+        "upper_servo_collision_04.obj",
+        "upper_servo_collision_05.obj",
+        "upper_servo_collision_06.obj",
+        "upper_servo_collision_07.obj",
+        "upper_servo_collision_08.obj",
+        "upper_servo_collision_09.obj",
+        "upper_servo_collision_10.obj",
+        "upper_servo_collision_11.obj",
+        "upper_servo_collision_12.obj",
+        "upper_servo_collision_13.obj",
+        "upper_servo_collision_14.obj",
+        "upper_servo_collision_15.obj",
+        "upper_servo_collision_16.obj",
+        "upper_servo_collision_17.obj",
+        "upper_servo_collision_18.obj",
+        "upper_servo_collision_19.obj",
+        "upper_servo_collision_20.obj",
+        "upper_servo_collision_21.obj"
+      ],
+      "collision_method": "CoACD, separate mesh asset for each convex piece",
       "input_watertight_after_welding": true,
       "removed_degenerate_triangles": 0,
-      "parameters": null,
+      "parameters": {
+        "threshold": 0.0006,
+        "real_metric": true,
+        "preprocess_mode": "off",
+        "resolution": 2000,
+        "mcts_nodes": 15,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "decimate": true,
+        "max_ch_vertex": 64,
+        "seed": 17
+      },
       "bbox_cad_m": [
         [
           -0.00775,
@@ -258,7 +292,7 @@
         ]
       ],
       "cad_mesh_volume_m3": 6.884764365874283e-06,
-      "sum_collision_hull_volume_m3": 0.0
+      "sum_collision_hull_volume_m3": 6.883806229411964e-06
     },
     "top_link_servo_horn_bracket": {
       "group": "upper",
@@ -429,11 +463,44 @@
     "lower_servo": {
       "group": "base",
       "visual": "lower_servo_visual.obj",
-      "collision_meshes": [],
-      "collision_method": "CAD bounding box hardware envelope; internal geometry not modeled",
+      "collision_meshes": [
+        "lower_servo_collision_00.obj",
+        "lower_servo_collision_01.obj",
+        "lower_servo_collision_02.obj",
+        "lower_servo_collision_03.obj",
+        "lower_servo_collision_04.obj",
+        "lower_servo_collision_05.obj",
+        "lower_servo_collision_06.obj",
+        "lower_servo_collision_07.obj",
+        "lower_servo_collision_08.obj",
+        "lower_servo_collision_09.obj",
+        "lower_servo_collision_10.obj",
+        "lower_servo_collision_11.obj",
+        "lower_servo_collision_12.obj",
+        "lower_servo_collision_13.obj",
+        "lower_servo_collision_14.obj",
+        "lower_servo_collision_15.obj",
+        "lower_servo_collision_16.obj",
+        "lower_servo_collision_17.obj",
+        "lower_servo_collision_18.obj",
+        "lower_servo_collision_19.obj",
+        "lower_servo_collision_20.obj"
+      ],
+      "collision_method": "CoACD, separate mesh asset for each convex piece",
       "input_watertight_after_welding": true,
       "removed_degenerate_triangles": 0,
-      "parameters": null,
+      "parameters": {
+        "threshold": 0.0006,
+        "real_metric": true,
+        "preprocess_mode": "off",
+        "resolution": 2000,
+        "mcts_nodes": 15,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "decimate": true,
+        "max_ch_vertex": 64,
+        "seed": 17
+      },
       "bbox_cad_m": [
         [
           -0.0214,
@@ -447,7 +514,7 @@
         ]
       ],
       "cad_mesh_volume_m3": 6.884764365874285e-06,
-      "sum_collision_hull_volume_m3": 0.0
+      "sum_collision_hull_volume_m3": 6.882641056088688e-06
     },
     "middle_link_main_body": {
       "group": "middle",

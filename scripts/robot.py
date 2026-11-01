@@ -109,8 +109,11 @@ def require_tools():
         raise SystemExit('First run: python3 scripts/robot.py setup')
 
 
-def build():
+def build(sketch='servo_center'):
     require_tools()
+    if sketch not in ('servo_center', 'policy_probe'):
+        raise ValueError('Unknown project sketch.')
+    build_path = ROOT / 'build' / sketch
     props = {'tools.nrfutil.cmd': str(UPLOADER),
              'tools.nrfutil.cmd.macosx': str(UPLOADER)}
     if platform.system() == 'Darwin' and platform.machine() == 'arm64':
@@ -125,10 +128,10 @@ def build():
         f'"{PYTHON}" "{{runtime.platform.path}}/tools/uf2conv/uf2conv.py" '
         '-f 0xADA52840 -c -o "{build.path}/{build.project_name}.uf2" '
         '"{build.path}/{build.project_name}.hex"')
-    args = ['compile', '--jobs', '1', '--fqbn', FQBN, '--build-path', str(BUILD)]
+    args = ['compile', '--jobs', '1', '--fqbn', FQBN, '--build-path', str(build_path)]
     for key, value in props.items():
         args.extend(['--build-property', f'{key}={value}'])
-    arduino(*args, str(ROOT / 'firmware' / 'servo_center'))
+    arduino(*args, str(ROOT / 'firmware' / sketch))
 
 
 def board_ports():
@@ -167,13 +170,15 @@ def upload(port):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['setup', 'build', 'ports', 'upload', 'monitor', 'check', 'test'])
+    parser.add_argument('action', choices=['setup', 'build', 'build-probe', 'ports', 'upload', 'monitor', 'check', 'test'])
     parser.add_argument('--port', help='Explicit XIAO serial port; auto-detects if exactly one is connected')
     args = parser.parse_args()
     if args.action == 'setup':
         setup_tools()
     elif args.action == 'build':
         build()
+    elif args.action == 'build-probe':
+        build('policy_probe')
     elif args.action == 'ports':
         print(json.dumps(board_ports(), indent=2))
     elif args.action == 'upload':

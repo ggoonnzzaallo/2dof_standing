@@ -3,10 +3,10 @@
   "mujoco_version": "3.2.6",
   "nq": 9,
   "nv": 8,
-  "robot_xml_sha256": "b03a8c08bc5e33bb5ca52e94c18b3a9163235e60c4f3acbb49d0774499d34d0e",
+  "robot_xml_sha256": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
   "moving_bodies": 3,
   "visual_parts": 9,
-  "collision_meshes": 294,
+  "collision_meshes": 337,
   "total_model_mass_g": 73.92156402418726,
   "mass_status": "Includes assumed 4 g board and 1.5 g small-hardware allowance; not weighed",
   "visual_aabb_max_error_m": 7.88204398971537e-09,
@@ -14,8 +14,10 @@
   "collision_hull_volume_sum_over_source": {
     "middle_link_servo_horn_bracket": 1.018842741544653,
     "base": 0.9998738513004404,
+    "upper_servo": 0.99986083235222,
     "top_link_servo_horn_bracket": 1.0115379027037903,
     "top_link_main_body": 1.0010075916602446,
+    "lower_servo": 0.9996915929619724,
     "middle_link_main_body": 1.0066236228957517
   },
   "contact_trials": [
@@ -242,7 +244,7 @@
   ],
   "physics_steps": 40000,
   "physics_timestep_s": 0.001,
-  "physics_wall_seconds": 1.5778379580006003,
+  "physics_wall_seconds": 1.858991708024405,
   "limitations": [
     "Adjacent body collisions excluded; mechanical stops and joint limits uncalibrated",
     "No proof of recovery; drop tests only establish finite contact dynamics",
