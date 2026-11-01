@@ -6,6 +6,30 @@ Recorded **1 November 2026**. Codex leads this work autonomously; physical obser
 
 [Watch the neural-controller animation](results/neural_recovery.gif), or compare the [searched waypoint motions](results/searched_recovery.gif). These use separate controllers: the neural animation evaluates the saved network in closed loop; the searched animation replays optimized open-loop target sequences.
 
+## Interactive mouse playground
+
+On this Mac, from the repository root:
+
+```sh
+.venv-sim/bin/mjpython sim/recovery/play.py
+```
+
+The saved neural actor runs continuously at the same 50 Hz policy period and uses the environment's finite-speed, torque-limited servo model. The camera follows the base. No physical robot connection is opened.
+
+- Double-click a robot part to select it, then hold **Control + right-drag** to apply a pulling force. Release to watch the controller respond.
+- **Control + left-drag** applies rotational perturbation; add **Shift** to change the interaction plane.
+- Drag without Control to move the camera; scroll to zoom.
+- **Space** pauses/resumes. **Enter** or **Backspace** restores the requested initial pose and resets the full controller command history.
+- Close the window to quit. **Tab** / **Shift+Tab** show the native side panels.
+
+These are the native [MuJoCo mouse controls](https://mujoco.readthedocs.io/en/stable/programming/samples.html#mouse). A mouse with a right button is convenient on macOS; use the Control key rather than Command.
+
+For a fallen starting request, add `--tilt 90 --azimuth 45`. `--randomize` enables the same exploratory parameter/noise randomization as training. Reset uses the supplied starting request, including its 0.8 s settling period.
+
+This playground continues beyond the original episode success and 10 s timeout, so repeated pushes and long-term holding are visible. The earlier 100-trial result required one stable second; it did not establish indefinite stationary holding or recovery from arbitrary mouse forces and joint configurations. Strong pulls can exceed the candidate's capabilities. The viewer preserves the selected controller rather than adding a new hold controller.
+
+`play.py --smoke-test` runs without a GUI, checks 700 continuous policy frames (past the training timeout), applies a brief external force through `xfrc_applied`, and checks that the force changes pose without numerical warnings. Native `viewer.sync()` transfers mouse perturbations into that same force channel during the interactive run.
+
 ## Results
 
 | Experiment | Result |
