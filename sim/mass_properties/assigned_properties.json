@@ -1,0 +1,269 @@
+{
+  "status": "Preliminary printed-part assignments; not installed in sim/robot.xml",
+  "step_sha256": "a1e8b9f62ebc51399e4eba8f90decf3a52301894228f108a6677a035fa2ee229",
+  "slicer_sha256": "5a7d87069f6ccd76245616a5b5ee09dacc69199ab5c99f142889f0e39d6b540b",
+  "coordinate_frame": "CAD assembly axes at exported upright pose, SI units. Rotate/translate into each MuJoCo body frame when building the new model.",
+  "wiring_mass": "Excluded by user; no future carrier PCB mass added",
+  "parts": [
+    {
+      "alias": "base",
+      "rigid_group": "base",
+      "mass_kg": 0.015659632608388773,
+      "center_of_mass_cad_m": [
+        0.0009528177558014785,
+        3.6444963891869175e-11,
+        0.002588641588893728
+      ],
+      "inertia_about_com_in_cad_axes_kg_m2": [
+        [
+          6.224770515498996e-06,
+          -2.9296869149745922e-15,
+          -2.1940771471620177e-07
+        ],
+        [
+          -2.9296869149745922e-15,
+          6.361380108190295e-06,
+          -1.573551836109904e-14
+        ],
+        [
+          -2.1940771471620177e-07,
+          -1.573551836109904e-14,
+          1.079287945555862e-05
+        ]
+      ],
+      "mass_source": "slicer_masses.json, supports excluded",
+      "distribution_assumption": "Uniform CAD density scaled to sliced mass. Does not resolve shell/infill distribution or true print COM."
+    },
+    {
+      "alias": "middle_link_main_body",
+      "rigid_group": "middle",
+      "mass_kg": 0.004789647018419836,
+      "center_of_mass_cad_m": [
+        0.0011545388495996845,
+        0.0059696540974197325,
+        0.048050325566020236
+      ],
+      "inertia_about_com_in_cad_axes_kg_m2": [
+        [
+          1.0482422274444079e-06,
+          1.0020365532039442e-07,
+          2.5450658337498653e-07
+        ],
+        [
+          1.0020365532039442e-07,
+          1.2230477706357468e-06,
+          -1.9695238064129429e-07
+        ],
+        [
+          2.5450658337498653e-07,
+          -1.9695238064129429e-07,
+          6.51613513372763e-07
+        ]
+      ],
+      "mass_source": "slicer_masses.json, supports excluded",
+      "distribution_assumption": "Uniform CAD density scaled to sliced mass. Does not resolve shell/infill distribution or true print COM."
+    },
+    {
+      "alias": "top_link_main_body",
+      "rigid_group": "upper",
+      "mass_kg": 0.005656754879046084,
+      "center_of_mass_cad_m": [
+        -0.0023499983171674185,
+        0.002658854683774,
+        0.10371749255230332
+      ],
+      "inertia_about_com_in_cad_axes_kg_m2": [
+        [
+          3.7399194305352384e-06,
+          -6.911695988610829e-16,
+          -2.7616908263887346e-13
+        ],
+        [
+          -6.911695988610829e-16,
+          3.4843253206465993e-06,
+          3.836373101056252e-07
+        ],
+        [
+          -2.7616908263887346e-13,
+          3.836373101056252e-07,
+          3.48056702016106e-07
+        ]
+      ],
+      "mass_source": "slicer_masses.json, supports excluded",
+      "distribution_assumption": "Uniform CAD density scaled to sliced mass. Does not resolve shell/infill distribution or true print COM."
+    },
+    {
+      "alias": "middle_link_servo_horn_bracket",
+      "rigid_group": "middle",
+      "mass_kg": 0.0009077647115416997,
+      "center_of_mass_cad_m": [
+        -0.021215915041433796,
+        7.55127239652623e-20,
+        0.0321622500137039
+      ],
+      "inertia_about_com_in_cad_axes_kg_m2": [
+        [
+          4.587268177536354e-08,
+          -2.8928924497013584e-25,
+          -7.572768110714357e-10
+        ],
+        [
+          -2.8928924497013584e-25,
+          3.9974760071993e-08,
+          -4.459956291524347e-25
+        ],
+        [
+          -7.572768110714357e-10,
+          -4.459956291524347e-25,
+          9.620887312029072e-09
+        ]
+      ],
+      "mass_source": "slicer_masses.json, supports excluded",
+      "distribution_assumption": "Uniform CAD density scaled to sliced mass. Does not resolve shell/infill distribution or true print COM."
+    },
+    {
+      "alias": "top_link_servo_horn_bracket",
+      "rigid_group": "upper",
+      "mass_kg": 0.0009077648067908619,
+      "center_of_mass_cad_m": [
+        -0.0023500000000000023,
+        -0.01814742209588878,
+        0.06971079328941442
+      ],
+      "inertia_about_com_in_cad_axes_kg_m2": [
+        [
+          3.507797458291618e-08,
+          -6.573853593341289e-24,
+          -2.6295414373365155e-23
+        ],
+        [
+          -6.573853593341289e-24,
+          4.0480459869837794e-08,
+          -4.1949451838896116e-10
+        ],
+        [
+          -2.6295414373365155e-23,
+          -4.1949451838896116e-10,
+          9.148000819148092e-09
+        ]
+      ],
+      "mass_source": "slicer_masses.json, supports excluded",
+      "distribution_assumption": "Uniform CAD density scaled to sliced mass. Does not resolve shell/infill distribution or true print COM."
+    }
+  ],
+  "printed_only_groups": [
+    {
+      "rigid_group": "base",
+      "scope": "PRINTED PARTS ONLY; hardware not included",
+      "mass_kg": 0.015659632608388773,
+      "center_of_mass_cad_m": [
+        0.0009528177558014785,
+        3.6444963891869175e-11,
+        0.002588641588893728
+      ],
+      "inertia_about_com_in_cad_axes_kg_m2": [
+        [
+          6.224770515498996e-06,
+          -2.9296869149745922e-15,
+          -2.1940771471620177e-07
+        ],
+        [
+          -2.9296869149745922e-15,
+          6.361380108190295e-06,
+          -1.573551836109904e-14
+        ],
+        [
+          -2.1940771471620177e-07,
+          -1.573551836109904e-14,
+          1.079287945555862e-05
+        ]
+      ]
+    },
+    {
+      "rigid_group": "middle",
+      "scope": "PRINTED PARTS ONLY; hardware not included",
+      "mass_kg": 0.005697411729961536,
+      "center_of_mass_cad_m": [
+        -0.0024097302581883176,
+        0.005018513195797631,
+        0.04551888936230418
+      ],
+      "inertia_about_com_in_cad_axes_kg_m2": [
+        [
+          1.3139483647200343e-06,
+          -1.707837274889808e-09,
+          -1.7485419532369192e-08
+        ],
+        [
+          -1.707837274889808e-09,
+          1.8375596929721451e-06,
+          -2.693325612978969e-07
+        ],
+        [
+          -1.7485419532369192e-08,
+          -2.693325612978969e-07,
+          1.0703291682927605e-06
+        ]
+      ]
+    },
+    {
+      "rigid_group": "upper",
+      "scope": "PRINTED PARTS ONLY; hardware not included",
+      "mass_kg": 0.006564519685836946,
+      "center_of_mass_cad_m": [
+        -0.0023499985498754107,
+        -0.0002183102460040647,
+        0.0990149269019064
+      ],
+      "inertia_about_com_in_cad_axes_kg_m2": [
+        [
+          5.018249320010421e-06,
+          -2.807997123433907e-14,
+          -3.2093455176031565e-13
+        ],
+        [
+          -2.807997123433907e-14,
+          4.429426869713498e-06,
+          -1.7025538735586754e-07
+        ],
+        [
+          -3.2093455176031565e-13,
+          -1.7025538735586754e-07,
+          6.958355285304642e-07
+        ]
+      ]
+    }
+  ],
+  "remaining_hardware": [
+    {
+      "alias": "battery",
+      "nominal_mass_g": 14.5,
+      "status": "Nominal estimate, not measured",
+      "source": "https://manuals.plus/m/12c0389d1bad51442e0f2c69f8a2cd04fbcebbebf7741695b6755793b37fda09",
+      "note": "Manufacturer-authored E-flite catalog, EFLB5001S25 entry. Model internals/COM not supplied."
+    },
+    {
+      "alias": "lower_servo",
+      "nominal_mass_g": 13.0,
+      "status": "Related 7465 MG-D family proxy; confirm exact purchased non-W unit",
+      "source": "https://www.ptkhobby.com/en/sys-pd/234.html"
+    },
+    {
+      "alias": "upper_servo",
+      "nominal_mass_g": 13.0,
+      "status": "Same family proxy as lower servo",
+      "source": "https://www.ptkhobby.com/en/sys-pd/234.html"
+    },
+    {
+      "alias": "controller_board",
+      "nominal_mass_g": null,
+      "status": "Bare classic Sense board mass not verified from manufacturer; headers/solder affect installed mass"
+    },
+    {
+      "alias": "unmodeled_hardware",
+      "nominal_mass_g": null,
+      "status": "Account for fitted OEM horns, screws and any other installed small hardware absent from STEP; avoid double counting"
+    }
+  ],
+  "limitations": "Slicer mass is estimated. Hardware COM and inertia cannot be inferred from datasheet mass alone. The two printed HORN copies share sliced mass but have slightly different STEP shapes. Wiring harness excluded; published assembly weights may already include factory leads/connectors, which have not been separately subtracted."
+}

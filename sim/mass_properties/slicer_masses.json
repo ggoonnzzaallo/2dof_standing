@@ -1,0 +1,220 @@
+{
+  "source": "source/robot_print.gcode.3mf",
+  "original_filename": "Ipad_Tablet_Stand_by_Pork_3D(2).gcode.3mf",
+  "source_sha256": "5a7d87069f6ccd76245616a5b5ee09dacc69199ab5c99f142889f0e39d6b540b",
+  "method": "G0/G1/G2/G3 extrusion after retract recovery, grouped by object start/stop and FEATURE comments. Filament flow ratio is already encoded; do not apply it again.",
+  "settings": {
+    "layer_height": "0.2",
+    "wall_loops": "2",
+    "top_shell_layers": "5",
+    "bottom_shell_layers": "3",
+    "sparse_infill_density": "12%",
+    "sparse_infill_pattern": "crosshatch"
+  },
+  "filament_profile": "Bambu PLA Matte @BBL X1C",
+  "filament_density_g_per_cm3": 1.32,
+  "filament_diameter_mm": 1.75,
+  "slicer_header_total_g": 29.92,
+  "slicer_header_total_filament_mm": 9423.62,
+  "labeled_deposited_filament_mm": 9392.220979999973,
+  "labeled_deposited_mass_g": 29.820039338746227,
+  "model_mass_g": 27.921564024187255,
+  "removable_mass_g": 1.898475314558971,
+  "header_minus_labeled_mass_g": 0.09996066125377467,
+  "net_extrusion_plus_remaining_retraction_mm": 9392.2209799986,
+  "outside_labels_after_machine_start_g": {},
+  "audit_note": "The approximately 0.10 g header remainder is not assigned to the robot. Header accounting includes material outside labeled objects; machine-start purge/prime commands are deliberately excluded from part masses. Do not treat the header as the net assembled plastic mass.",
+  "mapping_note": "BASE/LINK/TIP map by name and plate image to base/middle/top. The two HORN copies have identical feature masses; assignment of copy 223 to middle and 311 to upper is interchangeable. STEP bracket shapes differ slightly, so using the same sliced mass is approximate.",
+  "bounds_note": "Model extrusion path endpoint bounds, excluding supports. XY omits bead width and intermediate arc extrema; Z starts at the first layer, not zero. These are mapping sanity checks, not exact solid bounds.",
+  "limitations": "Slicer predictions, not scale measurements. Assumes the supplied job describes the installed parts and the configured filament density/diameter match the material. Supports removed. Wires excluded by user.",
+  "parts": [
+    {
+      "alias": "base",
+      "gcode_object_label": "201",
+      "slicer_name": "Part Studio 1 - BASE.stl",
+      "model_mass_g": 15.659632608388774,
+      "removable_mass_g": 0.7169320307003842,
+      "feature_mass_g": {
+        "Bottom surface": 1.1524954643395267,
+        "Bridge": 1.792429786748977,
+        "Floating vertical shell": 0.15363112028592157,
+        "Gap infill": 0.014553532248995865,
+        "Inner wall": 1.3768535960683181,
+        "Internal solid infill": 6.093597762932137,
+        "Outer wall": 1.3499473904633703,
+        "Overhang wall": 0.016067358934610563,
+        "Sparse infill": 2.4895123682788394,
+        "Support": 0.6824245292002334,
+        "Support interface": 0.03450750150015083,
+        "Top surface": 1.220544228088078
+      },
+      "model_toolpath_endpoint_bbox_mm": [
+        [
+          122.71,
+          115.06,
+          0.2
+        ],
+        [
+          192.29,
+          184.64,
+          37.0
+        ]
+      ],
+      "model_toolpath_xy_span_mm": [
+        69.58,
+        69.57999999999998
+      ],
+      "model_top_z_mm": 37.0
+    },
+    {
+      "alias": "middle_link_main_body",
+      "gcode_object_label": "245",
+      "slicer_name": "Part Studio 1 - LINK.stl",
+      "model_mass_g": 4.789647018419836,
+      "removable_mass_g": 1.1426222536762358,
+      "feature_mass_g": {
+        "Bottom surface": 0.034162286786378,
+        "Bridge": 0.33405421068151786,
+        "Floating vertical shell": 0.18194180653820707,
+        "Gap infill": 0.033011422908438344,
+        "Inner wall": 1.193185811210413,
+        "Internal solid infill": 1.0475922279828698,
+        "Outer wall": 1.216007256491579,
+        "Overhang wall": 0.016170863024272973,
+        "Sparse infill": 0.566871420511159,
+        "Support": 1.0654134097422787,
+        "Support interface": 0.0772088439339572,
+        "Top surface": 0.16664971228500047
+      },
+      "model_toolpath_endpoint_bbox_mm": [
+        [
+          75.01,
+          132.56,
+          0.2
+        ],
+        [
+          112.29,
+          184.638,
+          26.0
+        ]
+      ],
+      "model_toolpath_xy_span_mm": [
+        37.28,
+        52.078
+      ],
+      "model_top_z_mm": 26.0
+    },
+    {
+      "alias": "top_link_main_body",
+      "gcode_object_label": "267",
+      "slicer_name": "Part Studio 1 - TIP.stl",
+      "model_mass_g": 5.656754879046084,
+      "removable_mass_g": 0,
+      "feature_mass_g": {
+        "Bottom surface": 0.1500737545736103,
+        "Bridge": 0.33100376101078754,
+        "Floating vertical shell": 0.128914248425375,
+        "Gap infill": 0.011317441961007644,
+        "Inner wall": 1.2870214124089694,
+        "Internal solid infill": 1.009808663296309,
+        "Outer wall": 1.2357851100417137,
+        "Overhang wall": 0.0041482915150099445,
+        "Sparse infill": 1.2848384921081726,
+        "Top surface": 0.2138437037051295
+      },
+      "model_toolpath_endpoint_bbox_mm": [
+        [
+          98.212,
+          67.36,
+          0.2
+        ],
+        [
+          192.262,
+          104.64,
+          10.0
+        ]
+      ],
+      "model_toolpath_xy_span_mm": [
+        94.05,
+        37.28
+      ],
+      "model_top_z_mm": 10.0
+    },
+    {
+      "alias": "middle_link_servo_horn_bracket",
+      "gcode_object_label": "223",
+      "slicer_name": "Part Studio 1 - HORN.stl",
+      "model_mass_g": 0.9077647115416997,
+      "removable_mass_g": 0.019460546840896202,
+      "feature_mass_g": {
+        "Bottom surface": 0.023934018995882364,
+        "Bridge": 0.04872448670914008,
+        "Floating vertical shell": 0.029547814121517413,
+        "Gap infill": 0.020393036139480604,
+        "Inner wall": 0.20888547681365077,
+        "Internal solid infill": 0.1740668915495388,
+        "Outer wall": 0.24452406211571073,
+        "Overhang wall": 0.002509212181015421,
+        "Sparse infill": 0.10528689998226834,
+        "Support": 0.018920452341127082,
+        "Support interface": 0.0005400944997691202,
+        "Top surface": 0.04989281293349513
+      },
+      "model_toolpath_endpoint_bbox_mm": [
+        [
+          67.664,
+          112.56,
+          0.2
+        ],
+        [
+          91.734,
+          122.14,
+          5.0
+        ]
+      ],
+      "model_toolpath_xy_span_mm": [
+        24.069999999999993,
+        9.579999999999998
+      ],
+      "model_top_z_mm": 5.0
+    },
+    {
+      "alias": "top_link_servo_horn_bracket",
+      "gcode_object_label": "311",
+      "slicer_name": "Part Studio 1 - HORN.stl",
+      "model_mass_g": 0.9077648067908619,
+      "removable_mass_g": 0.019460483341454685,
+      "feature_mass_g": {
+        "Bottom surface": 0.023934018995882364,
+        "Bridge": 0.04872448670914008,
+        "Floating vertical shell": 0.029547814121517413,
+        "Gap infill": 0.020393067889201363,
+        "Inner wall": 0.20888547681365077,
+        "Internal solid infill": 0.1740668915495388,
+        "Outer wall": 0.24452406211571073,
+        "Overhang wall": 0.002509212181015421,
+        "Sparse infill": 0.10528696348170985,
+        "Support": 0.01892042059140632,
+        "Support interface": 0.0005400627500483647,
+        "Top surface": 0.04989281293349513
+      },
+      "model_toolpath_endpoint_bbox_mm": [
+        [
+          63.72,
+          92.56,
+          0.2
+        ],
+        [
+          87.79,
+          102.14,
+          5.0
+        ]
+      ],
+      "model_toolpath_xy_span_mm": [
+        24.070000000000007,
+        9.579999999999998
+      ],
+      "model_top_z_mm": 5.0
+    }
+  ]
+}

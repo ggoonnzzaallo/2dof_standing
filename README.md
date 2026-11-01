@@ -4,6 +4,7 @@
 
 The user-supplied final assembly and joint review are in [cad/onshape_import](cad/onshape_import/README.md). The corrected export is imported; a 0.57 mm residual servo-model offset is documented and the structural upper pivot remains the confirmed reference. The earlier generated CAD and simulation geometry require reconciliation before training.
 
+The supplied slicer job gives **27.922 g of printed parts after removing supports**. See [mass properties](sim/mass_properties/README.md) for individual masses, actual print settings, preliminary inertia and remaining hardware estimates. The requested future carrier PCB is tracked in the [hardware backlog](docs/HARDWARE_BACKLOG.md).
 
 Current purchased architecture: **XIAO nRF52840 Sense + two PTK 7465 MG servos + one 500 mAh, 1S LiPo**. The user reported all parts ordered on 1 October 2026; see [procurement status](docs/PROCUREMENT_STATUS.md). Train on a computer with MuJoCo and Stable-Baselines3 PPO; run the small exported actor on the XIAO. The **IMU and LiPo charger are already on the XIAO Sense board**, which is attached to the robot's base. **Rev B removes the Pololu switch:** battery power feeds both servos directly, D2 is unused, and two existing servo plugs provide manual isolation for USB charging/programming. No boost converter, external IMU, servo driver board, separate charger or replacement switch is planned.
 

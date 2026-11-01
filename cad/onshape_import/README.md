@@ -2,6 +2,8 @@
 
 The user's Onshape assembly is the final design source. Earlier generated CAD and sim/robot.xml remain provisional; the training model has not yet been rebuilt from this import.
 
+Slicer-derived printed masses and preliminary CAD-based inertia are now recorded in [sim/mass_properties](../../sim/mass_properties/README.md). Those records explicitly separate printed-only properties from the still-incomplete hardware model.
+
 ## Current status
 
 A whole-assembly STEP was received on 31 October 2026 and preserved as source/robot_onshape.step. The second export is source/robot_onshape_corrected.step; the third export, source/robot_onshape_third.step, is the current import. It contains nine placed instances. The same-named servo instances have distinct placements, so they are assigned lower_servo and upper_servo aliases by their vertical positions. Original names are retained in assembly_inspection.json.

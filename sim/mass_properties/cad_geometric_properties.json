@@ -1,0 +1,255 @@
+{
+  "source_sha256": "a1e8b9f62ebc51399e4eba8f90decf3a52301894228f108a6677a035fa2ee229",
+  "coordinate_frame": "exported assembly, mm",
+  "wiring_mass": "excluded by user",
+  "reference_filament_density_g_per_cm3": 1.32,
+  "density_source": "slicer_masses.json: user-supplied print job filament profile",
+  "warning": "Solid PLA figures are reference values, NOT infill-aware print predictions. Use slicer_masses.json for the supplied print job, which specifies PLA Matte at 1.32 g/cm3 and 12 percent infill.",
+  "uniform_density_conversion": "For assigned mass m_kg and CAD V_mm3, I_kg_m2 = unit_density_inertia_mm5 * (m_kg/V_mm3) * 1e-6. This preserves uniform-density CAD distribution, which may differ from shell/infill distribution.",
+  "parts": [
+    {
+      "alias": "controller_board",
+      "rigid_group": "base",
+      "printed": false,
+      "cad_brep_valid": false,
+      "note": "Detailed controller BRep invalid; use a simple board envelope for inertia, not this CAD solid."
+    },
+    {
+      "alias": "middle_link_servo_horn_bracket",
+      "rigid_group": "middle",
+      "printed": true,
+      "cad_brep_valid": true,
+      "cad_volume_mm3": 1015.9401882640301,
+      "uniform_solid_centroid_cad_mm": [
+        -21.215915041433796,
+        7.55127239652623e-17,
+        32.162250013703904
+      ],
+      "unit_density_inertia_about_centroid_mm5": [
+        [
+          51339.18554719887,
+          -3.2376293797384313e-13,
+          -847.5191161609255
+        ],
+        [
+          -3.2376293797384313e-13,
+          44738.42699214071,
+          -4.991435310109485e-13
+        ],
+        [
+          -847.5191161609255,
+          -4.991435310109485e-13,
+          10767.378311555833
+        ]
+      ],
+      "solid_reference_mass_g": 1.34104104850852
+    },
+    {
+      "alias": "battery",
+      "rigid_group": "base",
+      "printed": false,
+      "cad_brep_valid": true,
+      "cad_volume_mm3": 8447.927556283223,
+      "uniform_solid_centroid_cad_mm": [
+        -0.215324095778732,
+        20.712082214177098,
+        5.750000000000001
+      ],
+      "unit_density_inertia_about_centroid_mm5": [
+        [
+          292133.14355460426,
+          4.320099833421385e-12,
+          -9.91526860616432e-11
+        ],
+        [
+          4.320099833421385e-12,
+          2526306.749542923,
+          -1.6317613926730694e-11
+        ],
+        [
+          -9.91526860616432e-11,
+          -1.6317613926730694e-11,
+          2739708.166825873
+        ]
+      ]
+    },
+    {
+      "alias": "base",
+      "rigid_group": "base",
+      "printed": true,
+      "cad_brep_valid": true,
+      "cad_volume_mm3": 23177.28345942108,
+      "uniform_solid_centroid_cad_mm": [
+        0.9528177558014785,
+        3.644496389186917e-08,
+        2.588641588893728
+      ],
+      "unit_density_inertia_about_centroid_mm5": [
+        [
+          9213068.67890889,
+          -0.004336128807986734,
+          -324737.8099047516
+        ],
+        [
+          -0.004336128807986734,
+          9415259.837045394,
+          -0.023289599351184416
+        ],
+        [
+          -324737.8099047516,
+          -0.023289599351184416,
+          15974169.556879686
+        ]
+      ],
+      "solid_reference_mass_g": 30.594014166435826
+    },
+    {
+      "alias": "upper_servo",
+      "rigid_group": "middle",
+      "printed": false,
+      "cad_brep_valid": true,
+      "cad_volume_mm3": 6885.707185107114,
+      "uniform_solid_centroid_cad_mm": [
+        -1.7999999999999985,
+        -0.7742380725150166,
+        56.305699883190364
+      ],
+      "unit_density_inertia_about_centroid_mm5": [
+        [
+          677986.2798143898,
+          2.118436252758065e-11,
+          1.8652122106289835e-11
+        ],
+        [
+          2.118436252758065e-11,
+          410024.2519685768,
+          29161.829894249437
+        ],
+        [
+          1.8652122106289835e-11,
+          29161.829894249437,
+          424451.5144071373
+        ]
+      ]
+    },
+    {
+      "alias": "top_link_servo_horn_bracket",
+      "rigid_group": "upper",
+      "printed": true,
+      "cad_brep_valid": true,
+      "cad_volume_mm3": 1004.7163606667227,
+      "uniform_solid_centroid_cad_mm": [
+        -2.3500000000000023,
+        -18.14742209588878,
+        69.71079328941441
+      ],
+      "unit_density_inertia_about_centroid_mm5": [
+        [
+          38824.390083043836,
+          -7.275957614183426e-12,
+          -2.9103830456733704e-11
+        ],
+        [
+          -7.275957614183426e-12,
+          44803.87432326283,
+          -464.2975831211079
+        ],
+        [
+          -2.9103830456733704e-11,
+          -464.2975831211079,
+          10125.030207861098
+        ]
+      ],
+      "solid_reference_mass_g": 1.326225596080074
+    },
+    {
+      "alias": "top_link_main_body",
+      "rigid_group": "upper",
+      "printed": true,
+      "cad_brep_valid": true,
+      "cad_volume_mm3": 9552.21004291124,
+      "uniform_solid_centroid_cad_mm": [
+        -2.3499983171674184,
+        2.658854683774,
+        103.71749255230333
+      ],
+      "unit_density_inertia_about_centroid_mm5": [
+        [
+          6315369.272295907,
+          -0.001167135102150496,
+          -0.4663495486602187
+        ],
+        [
+          -0.001167135102150496,
+          5883763.400096804,
+          647824.4585072736
+        ],
+        [
+          -0.4663495486602187,
+          647824.4585072736,
+          587741.6991880456
+        ]
+      ],
+      "solid_reference_mass_g": 12.608917256642837
+    },
+    {
+      "alias": "lower_servo",
+      "rigid_group": "base",
+      "printed": false,
+      "cad_brep_valid": true,
+      "cad_volume_mm3": 6885.707185107116,
+      "uniform_solid_centroid_cad_mm": [
+        -3.77423807251502,
+        -1.4325575663494107e-15,
+        19.155699883190366
+      ],
+      "unit_density_inertia_about_centroid_mm5": [
+        [
+          410024.25196857686,
+          -5.6573071154905765e-11,
+          29161.829894249204
+        ],
+        [
+          -5.6573071154905765e-11,
+          677986.2798143897,
+          -9.284116718240338e-12
+        ],
+        [
+          29161.829894249204,
+          -9.284116718240338e-12,
+          424451.5144071381
+        ]
+      ]
+    },
+    {
+      "alias": "middle_link_main_body",
+      "rigid_group": "middle",
+      "printed": true,
+      "cad_brep_valid": true,
+      "cad_volume_mm3": 5587.6028281831495,
+      "uniform_solid_centroid_cad_mm": [
+        1.1545388495996844,
+        5.969654097419732,
+        48.050325566020234
+      ],
+      "unit_density_inertia_about_centroid_mm5": [
+        [
+          1222879.5174600836,
+          116897.5971943842,
+          296907.4129238166
+        ],
+        [
+          116897.5971943842,
+          1426807.6866470184,
+          -229764.6726066603
+        ],
+        [
+          296907.4129238166,
+          -229764.6726066603,
+          760172.4085724393
+        ]
+      ],
+      "solid_reference_mass_g": 7.375635733201757
+    }
+  ]
+}

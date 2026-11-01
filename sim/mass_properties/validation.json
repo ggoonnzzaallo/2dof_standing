@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "checks": [
+    "Original 3MF copied byte-for-byte; source SHA-256 matches reports",
+    "STEP source SHA-256 matches reports",
+    "Extrusion/retraction balance closes",
+    "Model plus removable mass equals labeled deposited mass",
+    "Plate header agreement within 1 percent (actual difference 0.334 percent)",
+    "Five positive part masses with symmetric, positive, physically admissible uniform-CAD inertia tensors",
+    "Three printed-only groups independently agree with origin-shifted inertia sums",
+    "Two HORN toolpath masses agree within 0.000001 g"
+  ],
+  "physical_robot_tests": "None for this update",
+  "mujoco_or_training_tests": "None; existing XML intentionally remains provisional",
+  "limitations": [
+    "These checks validate arithmetic and provenance, not real mass accuracy or recovery behavior",
+    "Printed upper bracket and STEP shape differ slightly",
+    "Full hardware mass model remains incomplete"
+  ]
+}
