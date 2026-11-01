@@ -72,6 +72,6 @@ The latter commands use the existing local CAD environment. They operate on file
 
 ## Next step and learning options
 
-Build the final three-body MuJoCo model from the imported assembly, using the confirmed structural axes, explicit hardware mass assumptions and simple collision geometry. Transform each part's moments into its rigid body's frame and include hardware via the parallel-axis theorem. Keep the old `sim/robot.xml` marked provisional until that replacement is validated with static poses, floor contacts and manual joint motion. Then calibrate IMU axes and real servo angle/dynamics before training.
+The final three-body exploratory [MuJoCo model](../onshape/README.md) now consumes these printed properties, combines hardware assumptions with the parallel-axis theorem and transforms moments into the joint/body frames. Geometry, inertia, contacts and the Gymnasium interface have offline checks. Next, calibrate IMU axes, real servo angle/dynamics and usable joint/contact limits before hardware-transfer training.
 
 For a small learning exercise, run the standard-library slicer parser and inspect one part's feature breakdown. For the mechanics step, either implement the parallel-axis aggregation yourself using the supplied per-part tensors, or review it together with Codex. These mass files already include the printed-only aggregation as a worked example. No ML training or physical motion was performed for this mass-property update.

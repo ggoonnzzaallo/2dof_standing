@@ -1,0 +1,34 @@
+{
+  "scope": "Offline placed-side numerical comparison used to select timestep/contact settings. Not measured physical compliance.",
+  "step_sha256": "a1e8b9f62ebc51399e4eba8f90decf3a52301894228f108a6677a035fa2ee229",
+  "tilt_degrees": 90,
+  "azimuth_degrees": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "seconds_per_trial": 2,
+  "controller": "Zero-target PD, kp=0.5 Nm/rad, kd=0.012 Nm s/rad, torque clipped to +/-0.07 Nm",
+  "results": [
+    {
+      "timestep_s": 0.002,
+      "contact_timeconstant_s": 0.004,
+      "worst_penetration_mm": 1.9650930065998962
+    },
+    {
+      "timestep_s": 0.001,
+      "contact_timeconstant_s": 0.002,
+      "worst_penetration_mm": 0.861029918611895
+    },
+    {
+      "timestep_s": 0.0005,
+      "contact_timeconstant_s": 0.002,
+      "worst_penetration_mm": 0.6594133994119767
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 # Final Onshape CAD import and joint review
 
-The user's Onshape assembly is the final design source. Earlier generated CAD and sim/robot.xml remain provisional; the training model has not yet been rebuilt from this import.
+The user's Onshape assembly is the final design source. The exploratory [MuJoCo model](../../sim/onshape/README.md) is now generated from this import. Earlier parametric CAD remains archived; hardware dynamics and physical joint mapping still require calibration.
 
-Slicer-derived printed masses and preliminary CAD-based inertia are now recorded in [sim/mass_properties](../../sim/mass_properties/README.md). Those records explicitly separate printed-only properties from the still-incomplete hardware model.
+Slicer-derived printed masses and preliminary CAD-based inertia are recorded in [sim/mass_properties](../../sim/mass_properties/README.md). The MuJoCo builder combines those records with explicit hardware mass/distribution assumptions; the full physical mass model is still unmeasured.
 
 ## Current status
 

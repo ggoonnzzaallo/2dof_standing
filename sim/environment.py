@@ -1,22 +1,27 @@
-"""Preliminary physics: replace approximate collisions and measured servo model before transfer."""
+"""Final-CAD exploratory environment; calibrate hardware and sensor model before transfer."""
 from pathlib import Path
 import numpy as np
 import gymnasium as gym
 from gymnasium import spaces
 import mujoco
+from model_geometry import neutral_collision_vertices, place_neutral_robot
 
 class SelfRightingEnv(gym.Env):
     metadata = {'render_modes': []}
-    def __init__(self, randomize=True):
-        self.model=mujoco.MjModel.from_xml_path(str(Path(__file__).with_name('robot.xml')))
+    def __init__(self, randomize=True, model_path=None):
+        self.model=mujoco.MjModel.from_xml_path(str(model_path or Path(__file__).with_name('robot.xml')))
         self.data=mujoco.MjData(self.model)
+        self.neutral_support=neutral_collision_vertices(self.model)
+        self.physics_dt=float(self.model.opt.timestep)
+        self.frame_skip=round(.02/self.physics_dt)
+        assert np.isclose(self.frame_skip*self.physics_dt,.02), 'Policy period must be 20 ms.'
         self.randomize=randomize
         self.mass0=self.model.body_mass.copy(); self.inertia0=self.model.body_inertia.copy()
         self.base_id=mujoco.mj_name2id(self.model,mujoco.mjtObj.mjOBJ_BODY,'base')
         self.floor_id=mujoco.mj_name2id(self.model,mujoco.mjtObj.mjOBJ_GEOM,'floor')
         self.action_space=spaces.Box(-1.,1.,(2,),dtype=np.float32)
         self.observation_space=spaces.Box(-1.,1.,(10,),dtype=np.float32)
-        self.limit=1.3963; self.steps=0; self.dwell=0
+        self.limit=float(np.min(self.model.jnt_range[-2:,1])); self.steps=0; self.dwell=0
 
     def _obs(self):
         R=self.data.xmat[self.base_id].reshape(3,3)
@@ -29,8 +34,8 @@ class SelfRightingEnv(gym.Env):
         return np.clip(np.r_[g,gyro/10,self.command/self.limit,self.previous],-1,1).astype(np.float32)
 
     def _physics(self, target):
-        for _ in range(10):
-            self.servo_target+=np.clip(target-self.servo_target,-self.speed*.002,self.speed*.002)
+        for _ in range(self.frame_skip):
+            self.servo_target+=np.clip(target-self.servo_target,-self.speed*self.physics_dt,self.speed*self.physics_dt)
             q=self.data.qpos[-2:]; v=self.data.qvel[-2:]
             requested=self.kp*(self.servo_target-q)-.012*v
             # Approximate motoring torque-speed envelope; braking is also bounded.
@@ -57,9 +62,7 @@ class SelfRightingEnv(gym.Env):
         # Axis in the horizontal plane covers cardinal/diagonal falls and inverted starts.
         az=float(options.get('azimuth',self.np_random.uniform(0,2*np.pi)))
         angle=float(options.get('tilt',self.np_random.choice([0.,.6,np.pi/2,2.2,np.pi])))
-        self.data.qpos[:3]=[0,0,.18]
-        self.data.qpos[3:7]=[np.cos(angle/2),np.sin(angle/2)*np.cos(az),np.sin(angle/2)*np.sin(az),0]
-        mujoco.mj_forward(self.model,self.data)
+        place_neutral_robot(self.model,self.data,angle,az,support_points=self.neutral_support)
         for _ in range(40): self._physics(np.zeros(2))
         return self._obs(),{}
 

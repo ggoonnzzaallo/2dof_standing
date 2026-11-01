@@ -1,5 +1,5 @@
 {
-  "status": "Preliminary printed-part assignments; not installed in sim/robot.xml",
+  "status": "Preliminary printed-part assignments; consumed by sim/onshape/build_model.py together with explicit hardware assumptions",
   "step_sha256": "a1e8b9f62ebc51399e4eba8f90decf3a52301894228f108a6677a035fa2ee229",
   "slicer_sha256": "5a7d87069f6ccd76245616a5b5ee09dacc69199ab5c99f142889f0e39d6b540b",
   "coordinate_frame": "CAD assembly axes at exported upright pose, SI units. Rotate/translate into each MuJoCo body frame when building the new model.",

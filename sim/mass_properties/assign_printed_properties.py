@@ -36,7 +36,7 @@ for group in ('base', 'middle', 'upper'):
                    'mass_kg': mass, 'center_of_mass_cad_m': center.tolist(),
                    'inertia_about_com_in_cad_axes_kg_m2': inertia.tolist()})
 result = {
-    'status': 'Preliminary printed-part assignments; not installed in sim/robot.xml',
+    'status': 'Preliminary printed-part assignments; consumed by sim/onshape/build_model.py together with explicit hardware assumptions',
     'step_sha256': cad['source_sha256'], 'slicer_sha256': slicer['source_sha256'],
     'coordinate_frame': 'CAD assembly axes at exported upright pose, SI units. Rotate/translate into each MuJoCo body frame when building the new model.',
     'wiring_mass': 'Excluded by user; no future carrier PCB mass added',

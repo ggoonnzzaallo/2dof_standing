@@ -1,0 +1,7 @@
+# Offline model generation, review and checks; tested with Python 3.12 on Apple Silicon.
+# No Torch/SB3 needed until training/export work resumes.
+mujoco==3.2.6
+gymnasium==1.0.0
+coacd==1.0.14
+numpy>=1.24,<3
+Pillow>=10.4,<13

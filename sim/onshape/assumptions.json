@@ -1,0 +1,33 @@
+{
+  "status": "Exploratory offline model. Values marked assumed are not measurements.",
+  "hardware_mass_g": {
+    "battery": 14.5,
+    "lower_servo": 13.0,
+    "upper_servo": 13.0,
+    "controller_board": 4.0
+  },
+  "hardware_mass_status": {
+    "battery": "Nominal manufacturer catalog mass; uniform CAD distribution assumed",
+    "lower_servo": "Related 7465 MG-D family mass proxy; uniform CAD distribution assumed",
+    "upper_servo": "Related 7465 MG-D family mass proxy; uniform CAD distribution assumed",
+    "controller_board": "ASSUMED 4 g placeholder carried over from earlier model; not a verified datasheet weight. Uniform CAD bounding box."
+  },
+  "small_hardware_allowance": [
+    {"group": "base", "mass_g": 0.5, "center_cad_mm": [0, 0, 24.4], "box_size_mm": [10, 10, 10]},
+    {"group": "middle", "mass_g": 0.5, "center_cad_mm": [-2.35, 0, 61.4], "box_size_mm": [10, 10, 10]},
+    {"group": "upper", "mass_g": 0.5, "center_cad_mm": [-2.35, 0, 61.4], "box_size_mm": [10, 10, 10]}
+  ],
+  "small_hardware_status": "ASSUMED 0.5 g per group for screws/OEM horn and other omitted hardware, lumped near each relevant pivot. Replace with actual inventory or weighing. Not printed bracket mass.",
+  "joint_limit_degrees": 80,
+  "joint_limit_status": "Exploratory symmetric limits from previous simulator; physical PWM mapping, travel and interference limits are uncalibrated.",
+  "servo_torque_limit_Nm": 0.07,
+  "joint_damping_Nm_s_per_rad": 0.001,
+  "joint_armature_kg_m2": 0.000002,
+  "actuator_status": "Inherited exploratory parameters, not measured PTK performance at 1S voltage.",
+  "floor_friction": [0.7, 0.01, 0.001],
+  "physics_timestep_s": 0.001,
+  "contact_timeconstant_s": 0.002,
+  "contact_status": "Numerically checked with placed side falls; floor compliance/friction not physically calibrated.",
+  "adjacent_body_collisions": "Excluded pending review of joint mating surfaces and physical stops. Base-upper collisions enabled.",
+  "wiring_mass": "Excluded by user. No additional harness mass or future PCB is modeled; vendor assembly masses may already include factory leads."
+}

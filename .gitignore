@@ -7,3 +7,4 @@ build/
 runs/
 *.zip
 *.log
+sim/onshape/assets/*_hulls.json

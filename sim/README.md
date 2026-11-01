@@ -1,23 +1,25 @@
 # Training and deployment pipeline
 
-**Final CAD update:** the user's corrected Onshape assembly is imported in [cad/onshape_import](../cad/onshape_import/README.md). Its structural pivots are at CAD Z=24.4 and 61.4 mm, unlike the provisional model below. The XML has not yet been rebuilt from that assembly; grouping, angle signs, measured masses and servo calibration remain to be reviewed.
+**Current model:** `robot.xml` is now built from the user's [final Onshape assembly](../cad/onshape_import/README.md), with structural pivots at CAD Z=24.4 and 61.4 mm, nine detailed visual parts, decomposed printed collision shapes and explicitly aggregated body inertia. See the [model review, animation and run instructions](onshape/README.md). Hardware masses, physical joint mapping, adjacent-link contact/clearance, servo dynamics and IMU filtering still need calibration before hardware transfer.
 
-**Mass-property update:** the supplied sliced print job yields **27.922 g of installed printed plastic**, excluding supports, at its actual 12% infill settings. Per-part masses, approximate CAD-derived inertia and remaining hardware assumptions are in [mass_properties](mass_properties/README.md). They have not yet replaced this starter XML's masses. Wiring mass is excluded by user request.
+**Mass properties:** the sliced print job yields **27.922 g of printed plastic**, excluding supports, at its actual 12% infill settings. The complete exploratory model totals **73.922 g**, including nominal battery/servo masses, an assumed 4 g board and 1.5 g small-hardware allowance. These assumptions are editable in [onshape/assumptions.json](onshape/assumptions.json). Wiring mass is excluded by user request. See [per-part mass records](mass_properties/README.md).
 
-**Electrical Rev B:** the real build is being simplified to omit the Pololu switch. Existing CAD/simulation component placeholders may still include its old envelope/mass; reweigh and update the model before training. See [current wiring](../electrical/README.md).
+**Electrical Rev B:** the physical build and the new simulation omit the Pololu switch. See [current wiring](../electrical/README.md).
 
-**Reference-layout PTK revision:** `robot.xml` places the battery below the deck, puts the joints at 42 and 87 mm, and extends the upper arm to the CAD's 170 mm tip. It still uses rough primitive contact geometry and placeholder masses from before the open-bridge CAD revision. Rebuild its mass distribution and contact shapes from printed and weighed parts before transfer training. Servo speed, torque, lag and current behavior at 1S voltage have **not** been measured; `environment.py` retains exploratory placeholder dynamics. Do not train a transfer policy from those numbers until the delivered servos and assembled geometry are characterized.
+The old 170 mm/42 mm/87 mm primitive model is preserved in [archive](archive/robot_before_onshape.xml). It is no longer the environment default. The final CAD spans 153 mm from base underside to tip.
 
 Use **MuJoCo + Gymnasium + Stable-Baselines3 PPO**. The two-action, small-MLP problem does not justify changing to a GPU robotics stack before basic recovery is demonstrated. SB3 recommends CPU operation for its MLP PPO workloads and supports multiple environments. [Official PPO documentation](https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html), [MuJoCo simulation documentation](https://mujoco.readthedocs.io/en/stable/computation/index.html).
 
 ## Supplied runnable starter
 
-- `robot.xml`: free-base, two perpendicular hinges, floor contacts, approximate component masses and primitive collision shapes. Its main joint, paddle, battery, board and switch positions track the centered CAD. The battery tunnel, bearing cheeks, adapters, fasteners and contact details are simplified; it is **not an exact digital twin**. Parent-child collision filtering and physical joint limits must be reviewed as the geometry is finalized.
-- `environment.py`: 2 ms physics, 20 ms policy steps; finite torque/speed/lag; command delay, mass, friction and IMU noise randomization; upright, side, diagonal and inverted resets.
+- `robot.xml`: generated final-CAD floating-base model, two perpendicular hinges, explicit body inertia and decomposed printed collisions. Current assumptions and contact exclusions are documented in [onshape](onshape/README.md); it is not a calibrated digital twin.
+- `environment.py`: 1 ms physics, 20 ms policy steps; finite torque/speed/lag; command delay, mass, friction and IMU noise randomization; upright, side, diagonal and inverted resets placed just above the floor.
+- `view.py`: interactive 3D MuJoCo review, optional slow joint motion and collision-shape display. On macOS use `mjpython`.
+- `onshape/check_model.py` and `onshape/check_environment.py`: current offline checks with no training or robot commands.
 - `train.py`: SB3 PPO with separate 64×64 tanh actor/critic, CPU and optional subprocess environments.
 - `export_actor.py`: actor-only C export, no neural-network runtime required.
 - `check.py`: environment validation, random rollout, short training smoke test, and compiled C-vs-SB3 parity test.
-- `validation.json`: actual check results. No useful trained controller has been produced.
+- `validation.json`: current environment check results; contact/geometry checks are in `onshape/validation.json`. Historical pre-Onshape smoke-training/export checks are preserved in `archive/software_validation_before_onshape.json`. No useful trained controller has been produced.
 
 From this package's root:
 
@@ -45,10 +47,10 @@ The 10 float32 inputs, in order, are:
 |---|---|
 | 0–2 | Unit DOWN vector in the base frame: `R_world_from_base.T @ [0,0,-1]`; upright is `[0,0,-1]` |
 | 3–5 | Base-frame gyro in rad/s divided by 10, clipped to ±1 |
-| 6–7 | Last commanded target angles divided by 1.3963 rad, clipped to ±1 |
+| 6–7 | Last commanded target angles divided by the configured joint limit (currently 80° ≈ 1.3962634 rad), clipped to ±1 |
 | 8–9 | Previous clipped policy action |
 
-Two outputs are clipped to ±1, multiplied by 0.06 rad and added to the stored joint targets each 20 ms. Clamp targets to ±1.3963 rad (±80°). Convert targets to calibrated servo pulse widths in firmware. Initial targets/actions are zero. Input scale/order, angle signs, timing and hidden-state initialization must match exactly.
+Two outputs are clipped to ±1, multiplied by 0.06 rad and added to the stored joint targets each 20 ms. Clamp targets to the configured limits (currently ±80°, exploratory). Convert targets to calibrated servo pulse widths in firmware. Initial targets/actions are zero. Input scale/order, angle signs, timing and hidden-state initialization must match exactly. The limits will need separate values for each joint once measured.
 
 There is no `VecNormalize` state to forget during export. The export preserves SB3's deterministic Gaussian mean and final action clipping; it does not introduce an extra output tanh. The actor contains 4,994 floats (19,976 bytes), about 4,864 multiply-accumulates per call plus tanh operations. It fits the proposed MCU comfortably in memory; measure worst-case execution time on the real firmware before committing to 50 Hz.
 
@@ -56,9 +58,9 @@ Actual joint angle and velocity are used for simulated servo dynamics and reward
 
 ## Real training sequence
 
-1. **Identify the hardware.** Weigh assemblies and measure COM. Record pulse-to-angle curves, sign, endpoints, no-load and loaded step responses, backlash, battery sag and current at 4.2/3.8/3.5 V. Fit servo dynamics and bound torque; stall torque is not continuous torque.
+1. **Identify the hardware.** Review the [calibration plan](../docs/SIM_CALIBRATION_PLAN.md). Audit mass and COM where practical. Record pulse-to-angle curves, sign, endpoints, no-load and loaded step responses, backlash, battery sag and current across normal operating battery voltages while retaining the firmware guard. Fit servo dynamics and bound torque; stall torque is not continuous torque.
 2. **Make a demonstrably recoverable mechanism.** Find slow scripted or short waypoint sequences for cardinal and diagonal falls. Search safe sequences in simulation, then test under supervision. If necessary change base width, paddle reach or contact shape. Preserve a simple scripted baseline.
-3. **Build the simulation fidelity that matters.** Replace primitive contacts with a sensible decomposition of measured printed parts; do not use a single convex hull that fills the arm's open spaces. Match joint stops, base edges, battery deck and bearing-cheek contacts. Retain the floating root. Confirm real and simulated step responses before policy optimization.
+3. **Build the simulation fidelity that matters.** The final printed CAD now has decomposed collision shapes and a floating root. Review adjacent-body exclusions and add calibrated joint stops or selective contacts so the simulated links cannot pass through each other in usable trajectories. Match real and simulated step responses and floor interactions before policy optimization.
 4. **Use curriculum if scratch PPO stalls.** Start near upright, then side falls, then inverted starts. Optionally behavior-clone successful scripted trajectories into the actor, then call PPO `.learn(...)` to optimize further. The source project's search/demo-pretrain workflow is useful, but its saved model is not interchangeable with our changed geometry and observations. [Reference repository](https://github.com/homemadegarbage/SelfRisingRobot).
 5. **Randomize within measured bounds.** The starter includes mass ±10%, floor friction 0.35–1.0, torque 0.045–0.070 N·m, speed 3–5 rad/s, gain, 0–40 ms command delay and sensor noise. These are placeholder ranges. Add measured backlash/deadband, COM uncertainty, battery-dependent behavior and observation delay before transfer. Avoid deliberately training on physically impossible torque.
 6. **Evaluate separate from training.** Use held-out seeds; four side falls, four diagonals, inverted starts and multiple initial joint states; test several surfaces and voltages. Log recovery success within 10 s, recovery time, peak current, stalls and peak contact loads. Require sustained base uprightness, near-home arm, low angular velocity and floor contact. Do not count an airborne or tip-balanced instant as success.
@@ -70,4 +72,4 @@ Actual joint angle and velocity are used for simulated servo dynamics and reward
 
 The 10-input starter has no history or battery observation. If real servo lag creates partial observability, add a short observation history first (and update the exporter), or a battery-voltage feature after calibrating the ADC. A recurrent policy is an option, but makes deployment and reset behavior more complicated. Do not change observation dimensions only on one side.
 
-Firmware board support, sensor filter, PWM calibration, battery sensing, arming, watchdog and servo-power sequencing remain to be implemented. The portable policy exporter is supplied and tested; a board-ready firmware image is not part of this prototype package.
+The bench firmware already provides board support, PWM motion, battery estimates and timeout/heartbeat guards. IMU acquisition/filtering, calibrated pulse-to-angle mapping and policy inference integration remain to be implemented. The portable policy exporter has historical software parity checks; it has not yet been deployed as a recovery controller.

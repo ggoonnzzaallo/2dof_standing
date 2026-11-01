@@ -1,0 +1,254 @@
+{
+  "status": "passed",
+  "mujoco_version": "3.2.6",
+  "nq": 9,
+  "nv": 8,
+  "robot_xml_sha256": "b03a8c08bc5e33bb5ca52e94c18b3a9163235e60c4f3acbb49d0774499d34d0e",
+  "moving_bodies": 3,
+  "visual_parts": 9,
+  "collision_meshes": 294,
+  "total_model_mass_g": 73.92156402418726,
+  "mass_status": "Includes assumed 4 g board and 1.5 g small-hardware allowance; not weighed",
+  "visual_aabb_max_error_m": 7.88204398971537e-09,
+  "inertia_and_serial_joint_transform_checks": "passed",
+  "collision_hull_volume_sum_over_source": {
+    "middle_link_servo_horn_bracket": 1.018842741544653,
+    "base": 0.9998738513004404,
+    "top_link_servo_horn_bracket": 1.0115379027037903,
+    "top_link_main_body": 1.0010075916602446,
+    "middle_link_main_body": 1.0066236228957517
+  },
+  "contact_trials": [
+    {
+      "case": "upright",
+      "reset_type": "placed",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.06010000000000043,
+      "final_base_upright_cosine": 0.9999999999996619,
+      "final_joint_degrees": [
+        -0.019625509200292136,
+        -3.795189454989733e-07
+      ]
+    },
+    {
+      "case": "side_0",
+      "reset_type": "placed",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.2777083087774541,
+      "final_base_upright_cosine": -0.18238810388732912,
+      "final_joint_degrees": [
+        -0.578203847492851,
+        -0.01322513867230334
+      ]
+    },
+    {
+      "case": "side_45",
+      "reset_type": "placed",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.40025532901274713,
+      "final_base_upright_cosine": -0.22970846569006526,
+      "final_joint_degrees": [
+        -0.010339628434629787,
+        -1.3400495804766366
+      ]
+    },
+    {
+      "case": "side_90",
+      "reset_type": "placed",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.516243323056725,
+      "final_base_upright_cosine": -0.22971028381982753,
+      "final_joint_degrees": [
+        -0.010333207086965203,
+        -1.3402425793645762
+      ]
+    },
+    {
+      "case": "side_135",
+      "reset_type": "placed",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.5370714898090504,
+      "final_base_upright_cosine": -0.17619856878961276,
+      "final_joint_degrees": [
+        0.5091858611189889,
+        -8.309987452118729e-05
+      ]
+    },
+    {
+      "case": "side_180",
+      "reset_type": "placed",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.1336783980802098,
+      "final_base_upright_cosine": -0.17619572738208622,
+      "final_joint_degrees": [
+        0.5089205450326645,
+        -8.092552347626581e-05
+      ]
+    },
+    {
+      "case": "side_225",
+      "reset_type": "placed",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.32185749858140883,
+      "final_base_upright_cosine": -0.17619961799349326,
+      "final_joint_degrees": [
+        0.5092838304859045,
+        -8.390277197597118e-05
+      ]
+    },
+    {
+      "case": "side_270",
+      "reset_type": "placed",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.861029918611895,
+      "final_base_upright_cosine": -0.19902723856450713,
+      "final_joint_degrees": [
+        -0.00396565746333985,
+        1.2696161954109917
+      ]
+    },
+    {
+      "case": "side_315",
+      "reset_type": "placed",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.6050702214849737,
+      "final_base_upright_cosine": -0.19902723979824377,
+      "final_joint_degrees": [
+        -0.003965650430823962,
+        1.269616323768416
+      ]
+    },
+    {
+      "case": "inverted",
+      "reset_type": "placed",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.7048100808271327,
+      "final_base_upright_cosine": -0.1761356804967152,
+      "final_joint_degrees": [
+        0.5033137488828919,
+        -3.4982344102824303e-05
+      ]
+    },
+    {
+      "case": "upright",
+      "reset_type": "drop_stress",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.267349969390008,
+      "final_base_upright_cosine": 0.9999999999996647,
+      "final_joint_degrees": [
+        -0.01962632161406642,
+        -4.957076340503449e-07
+      ]
+    },
+    {
+      "case": "side_0",
+      "reset_type": "drop_stress",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 1.087384975367248,
+      "final_base_upright_cosine": -0.18237657106491809,
+      "final_joint_degrees": [
+        -0.5771558403849741,
+        -0.013282876449108423
+      ]
+    },
+    {
+      "case": "side_45",
+      "reset_type": "drop_stress",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.4726102156044666,
+      "final_base_upright_cosine": -0.2297081325929683,
+      "final_joint_degrees": [
+        -0.010340796165155262,
+        -1.3400142214946955
+      ]
+    },
+    {
+      "case": "side_90",
+      "reset_type": "drop_stress",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 1.6488207853188035,
+      "final_base_upright_cosine": -0.22971155974749144,
+      "final_joint_degrees": [
+        -0.010328691136679464,
+        -1.3403780223177293
+      ]
+    },
+    {
+      "case": "side_135",
+      "reset_type": "drop_stress",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.7233114735733462,
+      "final_base_upright_cosine": -0.17619327762337633,
+      "final_joint_degrees": [
+        0.508691799363455,
+        -7.905090053745285e-05
+      ]
+    },
+    {
+      "case": "side_180",
+      "reset_type": "drop_stress",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.9531802298850475,
+      "final_base_upright_cosine": -0.17618917048304933,
+      "final_joint_degrees": [
+        0.5083082965896327,
+        -7.590805295112527e-05
+      ]
+    },
+    {
+      "case": "side_225",
+      "reset_type": "drop_stress",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 1.4670460099735962,
+      "final_base_upright_cosine": -0.17619643122975376,
+      "final_joint_degrees": [
+        0.5089862666943084,
+        -8.146413120889559e-05
+      ]
+    },
+    {
+      "case": "side_270",
+      "reset_type": "drop_stress",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 2.449418623943463,
+      "final_base_upright_cosine": -0.19902742991306663,
+      "final_joint_degrees": [
+        -0.0039645652257549275,
+        1.2696361032352215
+      ]
+    },
+    {
+      "case": "side_315",
+      "reset_type": "drop_stress",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 1.9550910917947635,
+      "final_base_upright_cosine": -0.19902697287675924,
+      "final_joint_degrees": [
+        -0.003967183734961697,
+        1.2695885533106885
+      ]
+    },
+    {
+      "case": "inverted",
+      "reset_type": "drop_stress",
+      "simulated_seconds": 2.0,
+      "deepest_contact_penetration_mm": 0.7255735870972456,
+      "final_base_upright_cosine": -0.1760892558477253,
+      "final_joint_degrees": [
+        0.49897900808993123,
+        5.290818440541626e-07
+      ]
+    }
+  ],
+  "physics_steps": 40000,
+  "physics_timestep_s": 0.001,
+  "physics_wall_seconds": 1.5778379580006003,
+  "limitations": [
+    "Adjacent body collisions excluded; mechanical stops and joint limits uncalibrated",
+    "No proof of recovery; drop tests only establish finite contact dynamics",
+    "Hardware mass/COM/inertia and servo/sensor dynamics still provisional",
+    "Collision decomposition is approximate; volume agreement is not a spatial coverage bound"
+  ],
+  "physical_robot_commands_sent": false,
+  "rl_training_performed": false
+}

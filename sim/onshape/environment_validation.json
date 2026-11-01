@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "scope": "Final Onshape exploratory model; no RL training or physical tests",
+  "robot_xml_sha256": "b03a8c08bc5e33bb5ca52e94c18b3a9163235e60c4f3acbb49d0774499d34d0e",
+  "gymnasium_version": "1.0.0",
+  "gymnasium_check": "passed",
+  "rollouts": [
+    {
+      "randomize": false,
+      "finite_steps": 1500
+    },
+    {
+      "randomize": true,
+      "finite_steps": 1500
+    }
+  ],
+  "policy_period_s": 0.02,
+  "physics_timestep_s": 0.001,
+  "wall_seconds": 2.0843334579840302,
+  "rl_training_performed": false,
+  "physical_robot_commands_sent": false,
+  "actor_C_parity": "Not rerun; historical pre-Onshape results preserved in archive/software_validation_before_onshape.json",
+  "model_validation": "onshape/validation.json"
+}
