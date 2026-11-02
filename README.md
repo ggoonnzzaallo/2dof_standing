@@ -1,5 +1,7 @@
 # Self-righting arm — design package
 
+**Using the assembled robot:** [Operating instructions](docs/OPERATING_INSTRUCTIONS.md) — disarm, check battery, charge and rearm from the Mac.
+
 ## Final Onshape CAD
 
 The user-supplied final assembly and joint review are in [cad/onshape_import](cad/onshape_import/README.md). The corrected export is imported; a 0.57 mm residual servo-model offset is documented and the structural upper pivot remains the confirmed reference. The [MuJoCo model](sim/onshape/README.md) now uses that assembly, with a [simulated motion preview](sim/onshape/joint_motion.gif), explicit body inertia and decomposed printed collision shapes. Physical joint mapping, contact limits and servo/IMU calibration remain before hardware transfer.
@@ -14,6 +16,8 @@ On **2 November 2026**, the [onboard controller](firmware/policy_control/README.
 
 ## Arm from the Mac
 
+For the full step-by-step procedure, see [Operating instructions](docs/OPERATING_INSTRUCTIONS.md).
+
 With the battery, both servos and USB connected, place the robot near straight on a clear surface. From this repository folder:
 
 ```sh
@@ -26,6 +30,7 @@ After the arm command confirms **“Armed. Unplug USB”**, unplug USB for batte
 
 ## Package
 
+- [Operating instructions: disarm, battery checks, charging and rearming](docs/OPERATING_INSTRUCTIONS.md)
 - [Current PTK parts list and fastener plan](BOM.md)
 - [Ordered-parts status and incoming checks](docs/PROCUREMENT_STATUS.md)
 - [Controller comparison and IMU location](docs/CONTROLLER_DECISION.md)
