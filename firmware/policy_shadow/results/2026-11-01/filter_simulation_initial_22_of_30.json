@@ -1,0 +1,408 @@
+{
+  "status": "Exploratory simulation with firmware filter, not physical recovery validation",
+  "episodes": 30,
+  "successes": 22,
+  "filter_unready_trials": 8,
+  "robot_xml_sha256": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+  "actor_sha256": "ccf63163ab02820a343b74ce28905d2dd313ac06e7a81f1aa290ac568ee9c971",
+  "filter_header_sha256": "51d163c3f282e94abb50479e6e31da5df4c9bea641a5bcbbec1a956b6166a616",
+  "sensor_model": "MuJoCo accelerometer specific force at base IMU site, 208 Hz sampling; measured mounting/bias; exploratory accel bias sigma .01 g, gyro bias sigma .003 rad/s; white noise .0015 g and .0015 rad/s.",
+  "limitations": [
+    "Mounting is treated as known exactly here; dynamic accelerometer/gyro calibration remains unverified.",
+    "No FIFO, sensor analog filtering, transport latency or clipping recovery calibration.",
+    "Truth orientation is used for scoring error only, not actor input."
+  ],
+  "physical_motor_commands_sent": false,
+  "trials": [
+    {
+      "seed": 19000,
+      "requested_pose": {
+        "tilt": 1.4377975261559899,
+        "azimuth": 1.8443454052294515
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 6.84,
+      "gravity_error_mean_deg": 5.275228300944864,
+      "gravity_error_max_deg": 26.730478679283713
+    },
+    {
+      "seed": 19001,
+      "requested_pose": {
+        "tilt": 2.8224477663246272,
+        "azimuth": 2.6846902770799757
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 4.68,
+      "gravity_error_mean_deg": 6.2338655913788275,
+      "gravity_error_max_deg": 18.51410806949084
+    },
+    {
+      "seed": 19002,
+      "requested_pose": {
+        "tilt": 3.123671175549402,
+        "azimuth": 1.2837311736242216
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 2.6,
+      "gravity_error_mean_deg": 1.8458096978010667,
+      "gravity_error_max_deg": 3.9194157265031238
+    },
+    {
+      "seed": 19003,
+      "requested_pose": {
+        "tilt": 0.2961904566072099,
+        "azimuth": 3.989582700015418
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 2.0,
+      "gravity_error_mean_deg": 1.066209004181646,
+      "gravity_error_max_deg": 1.472158335882536
+    },
+    {
+      "seed": 19004,
+      "requested_pose": {
+        "tilt": 1.6234124208592486,
+        "azimuth": 5.069867406523604
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 7.46,
+      "gravity_error_mean_deg": 11.947230126680592,
+      "gravity_error_max_deg": 62.94368503353262
+    },
+    {
+      "seed": 19005,
+      "requested_pose": {
+        "tilt": 1.9920451231122749,
+        "azimuth": 4.833820481265602
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 4.84,
+      "gravity_error_mean_deg": 18.111087434747752,
+      "gravity_error_max_deg": 62.28493282439465
+    },
+    {
+      "seed": 19006,
+      "requested_pose": {
+        "tilt": 2.1149108445027553,
+        "azimuth": 3.5662773232585248
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 5.46,
+      "gravity_error_mean_deg": 12.689673649321017,
+      "gravity_error_max_deg": 47.25523817054899
+    },
+    {
+      "seed": 19007,
+      "requested_pose": {
+        "tilt": 1.9424706979250168,
+        "azimuth": 4.86423905188254
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 5.2,
+      "gravity_error_mean_deg": 13.210086655593118,
+      "gravity_error_max_deg": 54.059115375775505
+    },
+    {
+      "seed": 19008,
+      "requested_pose": {
+        "tilt": 2.6038657155492966,
+        "azimuth": 5.0996522308311345
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 8.2,
+      "gravity_error_mean_deg": 14.436066498769359,
+      "gravity_error_max_deg": 80.61712197765324
+    },
+    {
+      "seed": 19009,
+      "requested_pose": {
+        "tilt": 0.7551675136800715,
+        "azimuth": 2.2900013196830895
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 1.0,
+      "gravity_error_mean_deg": 0.4739941421257515,
+      "gravity_error_max_deg": 0.7520181265973358
+    },
+    {
+      "seed": 19010,
+      "requested_pose": {
+        "tilt": 2.465807572351207,
+        "azimuth": 5.703807076649819
+      },
+      "success": false,
+      "filter_unready_during_control": true,
+      "mujoco_warnings": 0,
+      "seconds": 0.7000000000000001,
+      "gravity_error_mean_deg": 26.497171782034926,
+      "gravity_error_max_deg": 29.713940611872612
+    },
+    {
+      "seed": 19011,
+      "requested_pose": {
+        "tilt": 2.848149033963106,
+        "azimuth": 4.1316375922021304
+      },
+      "success": false,
+      "filter_unready_during_control": true,
+      "mujoco_warnings": 0,
+      "seconds": 2.68,
+      "gravity_error_mean_deg": 34.92682079426593,
+      "gravity_error_max_deg": 71.0872908944175
+    },
+    {
+      "seed": 19012,
+      "requested_pose": {
+        "tilt": 0.36027231401800275,
+        "azimuth": 2.602291634057968
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 3.6,
+      "gravity_error_mean_deg": 0.8434426289546535,
+      "gravity_error_max_deg": 1.858966108100126
+    },
+    {
+      "seed": 19013,
+      "requested_pose": {
+        "tilt": 0.01529296819206163,
+        "azimuth": 0.5331546893634633
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 1.0,
+      "gravity_error_mean_deg": 0.842243576742041,
+      "gravity_error_max_deg": 0.8924687923983575
+    },
+    {
+      "seed": 19014,
+      "requested_pose": {
+        "tilt": 2.0140878192378078,
+        "azimuth": 2.6560777681773056
+      },
+      "success": false,
+      "filter_unready_during_control": true,
+      "mujoco_warnings": 0,
+      "seconds": 0.58,
+      "gravity_error_mean_deg": 36.33923639752206,
+      "gravity_error_max_deg": 37.138170281914824
+    },
+    {
+      "seed": 19015,
+      "requested_pose": {
+        "tilt": 1.1319112359975354,
+        "azimuth": 1.4818042385071277
+      },
+      "success": false,
+      "filter_unready_during_control": true,
+      "mujoco_warnings": 0,
+      "seconds": 0.68,
+      "gravity_error_mean_deg": 14.193412100813745,
+      "gravity_error_max_deg": 16.036553029747
+    },
+    {
+      "seed": 19016,
+      "requested_pose": {
+        "tilt": 0.9073417568521916,
+        "azimuth": 2.9962058734934467
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 5.34,
+      "gravity_error_mean_deg": 5.440226852060105,
+      "gravity_error_max_deg": 21.468951349478537
+    },
+    {
+      "seed": 19017,
+      "requested_pose": {
+        "tilt": 2.140643591684764,
+        "azimuth": 6.178264819088507
+      },
+      "success": false,
+      "filter_unready_during_control": true,
+      "mujoco_warnings": 0,
+      "seconds": 0.62,
+      "gravity_error_mean_deg": 4.218250308054194,
+      "gravity_error_max_deg": 4.541453504323549
+    },
+    {
+      "seed": 19018,
+      "requested_pose": {
+        "tilt": 1.0725297172163193,
+        "azimuth": 2.5301840825710866
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 3.92,
+      "gravity_error_mean_deg": 3.0365394741017955,
+      "gravity_error_max_deg": 8.493515955644312
+    },
+    {
+      "seed": 19019,
+      "requested_pose": {
+        "tilt": 0.050350470066959,
+        "azimuth": 0.26962486944923253
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 4.1,
+      "gravity_error_mean_deg": 1.7197234558593733,
+      "gravity_error_max_deg": 5.638768711703918
+    },
+    {
+      "seed": 19020,
+      "requested_pose": {
+        "tilt": 2.7918702334874914,
+        "azimuth": 4.692560416348059
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 5.34,
+      "gravity_error_mean_deg": 17.692858493790133,
+      "gravity_error_max_deg": 70.47535854236736
+    },
+    {
+      "seed": 19021,
+      "requested_pose": {
+        "tilt": 0.5258318617536839,
+        "azimuth": 5.800769201571264
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 1.98,
+      "gravity_error_mean_deg": 1.2364117011033773,
+      "gravity_error_max_deg": 2.229733925900943
+    },
+    {
+      "seed": 19022,
+      "requested_pose": {
+        "tilt": 2.5747438675191394,
+        "azimuth": 0.13630858883059682
+      },
+      "success": false,
+      "filter_unready_during_control": true,
+      "mujoco_warnings": 0,
+      "seconds": 0.62,
+      "gravity_error_mean_deg": 3.556973752445521,
+      "gravity_error_max_deg": 4.117362785326338
+    },
+    {
+      "seed": 19023,
+      "requested_pose": {
+        "tilt": 1.1988534086244396,
+        "azimuth": 5.0223668102763375
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 3.86,
+      "gravity_error_mean_deg": 1.1796399159596995,
+      "gravity_error_max_deg": 3.5260275518833946
+    },
+    {
+      "seed": 19024,
+      "requested_pose": {
+        "tilt": 0.33726271595382024,
+        "azimuth": 5.508414335782249
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 1.96,
+      "gravity_error_mean_deg": 0.794780005705255,
+      "gravity_error_max_deg": 1.9227791745258536
+    },
+    {
+      "seed": 19025,
+      "requested_pose": {
+        "tilt": 2.2140444321387918,
+        "azimuth": 5.237751531991493
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 5.54,
+      "gravity_error_mean_deg": 2.068628658056539,
+      "gravity_error_max_deg": 6.494698794704618
+    },
+    {
+      "seed": 19026,
+      "requested_pose": {
+        "tilt": 2.7436270618599212,
+        "azimuth": 3.1028694738586102
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 4.08,
+      "gravity_error_mean_deg": 0.42714247181163945,
+      "gravity_error_max_deg": 1.3277330789810708
+    },
+    {
+      "seed": 19027,
+      "requested_pose": {
+        "tilt": 2.770576775297319,
+        "azimuth": 3.8110209019456116
+      },
+      "success": true,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 4.2,
+      "gravity_error_mean_deg": 8.037203928593081,
+      "gravity_error_max_deg": 22.466695156757226
+    },
+    {
+      "seed": 19028,
+      "requested_pose": {
+        "tilt": 1.770032579668003,
+        "azimuth": 4.721741595745457
+      },
+      "success": false,
+      "filter_unready_during_control": true,
+      "mujoco_warnings": 0,
+      "seconds": 1.3,
+      "gravity_error_mean_deg": 4.883841364307632,
+      "gravity_error_max_deg": 6.910102004969971
+    },
+    {
+      "seed": 19029,
+      "requested_pose": {
+        "tilt": 3.071537723499646,
+        "azimuth": 4.720206320230638
+      },
+      "success": false,
+      "filter_unready_during_control": true,
+      "mujoco_warnings": 0,
+      "seconds": 2.96,
+      "gravity_error_mean_deg": 37.420476872573815,
+      "gravity_error_max_deg": 81.66253889319331
+    }
+  ]
+}

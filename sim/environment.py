@@ -8,7 +8,7 @@ from model_geometry import neutral_collision_vertices, place_neutral_robot
 
 class SelfRightingEnv(gym.Env):
     metadata = {'render_modes': []}
-    def __init__(self, randomize=True, model_path=None):
+    def __init__(self, randomize=True, model_path=None, physics_observer=None):
         self.model=mujoco.MjModel.from_xml_path(str(model_path or Path(__file__).with_name('robot.xml')))
         self.data=mujoco.MjData(self.model)
         self.neutral_support=neutral_collision_vertices(self.model)
@@ -16,6 +16,7 @@ class SelfRightingEnv(gym.Env):
         self.frame_skip=round(.02/self.physics_dt)
         assert np.isclose(self.frame_skip*self.physics_dt,.02), 'Policy period must be 20 ms.'
         self.randomize=randomize
+        self.physics_observer=physics_observer
         self.mass0=self.model.body_mass.copy(); self.inertia0=self.model.body_inertia.copy()
         self.base_id=mujoco.mj_name2id(self.model,mujoco.mjtObj.mjOBJ_BODY,'base')
         self.floor_id=mujoco.mj_name2id(self.model,mujoco.mjtObj.mjOBJ_GEOM,'floor')
@@ -42,6 +43,8 @@ class SelfRightingEnv(gym.Env):
             ceiling=self.torque*np.clip(1-np.sign(requested)*v/self.speed,0,1)
             self.data.ctrl[:]=np.clip(requested,-ceiling,ceiling)
             mujoco.mj_step(self.model,self.data)
+            if self.physics_observer is not None:
+                self.physics_observer(self)
 
     def reset(self,seed=None,options=None):
         super().reset(seed=seed)

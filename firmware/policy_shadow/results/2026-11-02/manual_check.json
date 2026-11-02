@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-02",
+  "firmware": "ROBOT POLICY SHADOW 0.1",
+  "user_confirmation": "Battery and complete servo plugs disconnected; USB connected. User reported rotating the robot approximately three times during recording.",
+  "physical_motor_commands_sent": false,
+  "manual_frames": 1000,
+  "rest_frames": 250,
+  "observed_tilt_range_deg": [
+    1.6847904600718067,
+    173.62156320785905
+  ],
+  "manual_max_angular_rate_rad_s": 3.8623668276926533,
+  "filter_rejects_start_end": [
+    19,
+    19
+  ],
+  "post_motion_rest": {
+    "mean_estimated_tilt_deg": 1.4972881831327147,
+    "tilt_range_deg": [
+      1.4917143948088438,
+      1.5020232108691667
+    ],
+    "mean_angular_rate_rad_s": 0.001439736939030007,
+    "physical_pose": "Requested flat; not independently confirmed with an angle reference."
+  },
+  "qualitative_result": "Estimator followed large tilt/return movements without reset, saturation or I2C errors and was stable during a subsequent stationary recording. Actor numerical parity, virtual history and timing checks passed in both captures.",
+  "limitations": [
+    "No external orientation reference: dynamic angular accuracy, gyro scaling and timing latency are not established.",
+    "No robot actuation or physical recovery test.",
+    "BAT-node readings are USB/charger voltage with the battery absent, not cell voltage."
+  ],
+  "source_provenance": "../2026-11-01/commissioning.json",
+  "next_steps": [
+    "Measure servo PWM-to-angle signs, neutral and limits",
+    "Identify loaded dynamics/power and update simulation",
+    "Train/evaluate with the estimator pipeline and calibrated servo model before learned physical control"
+  ],
+  "capture_sha256": {
+    "2026-11-02_post_manual_rest_01.csv": "8fae3aa87b93742820eae8c772ad2cbda5fe7c748f0fca747d6094e7eca700f5",
+    "2026-11-02_manual_rotation_01.csv": "83f4d2a18f8288a900b000bbff06a14059e8ac33fff53a85aa7af917484f17f2",
+    "2026-11-02_post_manual_rest_01.json": "a6cc0f276c132a863eeed9c7d682e38a3a3c61bb3c2f90ed8f16863600cd6fa9",
+    "2026-11-02_manual_rotation_01.json": "6d185e350606101e381af04698b5b570ba6adfdb1c6301caa22d95ceeb10782d"
+  }
+}

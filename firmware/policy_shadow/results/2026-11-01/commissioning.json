@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-01",
+  "status": "Uploaded and verified through motor-disabled USB telemetry; physical recovery not tested",
+  "firmware_version": "ROBOT POLICY SHADOW 0.1",
+  "upload_acknowledgement": "Device programmed.",
+  "physical_setup": "User-confirmed battery and both complete three-pin servo plugs disconnected; USB connected. Board fixed to base. Initial shadow capture pose not independently confirmed.",
+  "flash_bytes": 82320,
+  "static_RAM_bytes": 7736,
+  "toolchain": {
+    "arduino_cli": "1.5.1",
+    "seeed_nrf52_core": "1.1.13",
+    "compiler": "Arm GNU 13.2.Rel1 native Apple Silicon",
+    "optimization": "-O2 (preserves finite-value checks)"
+  },
+  "source_sha256": {
+    "firmware/policy_shadow/policy_shadow.ino": "910cd39105ffec863b8e682a01377226a1f1684ca979083f1b6ee9069f17cf0b",
+    "firmware/policy_shadow/GravityFilter.h": "56a9f56320f34c741928b741b59f6deacd61c940d45438b712e1bb8d6de92279",
+    "firmware/policy_shadow/MicrosecondClock.h": "10fbb783a61c25b88d82c9455131fa4e1793ce66c4c0b2babce40aa00f29146e",
+    "firmware/policy_shadow/MountCalibration.h": "fba18cc088fb8676bde02659364169a6e2b92371eab94adedddf66257824c0a4",
+    "firmware/imu_bench/ImuBus.h": "175a406c4aa03c63a01f50d593997fa3a450e545c61f7b4a2fbf4e96e73f496d",
+    "firmware/imu_bench/Lsm6ds3.h": "536dc03cb659c0be6613e8e9a1ec16918a9077617709ce9ce6e553e8fcbb4b0e",
+    "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff",
+    "sim/recovery/results/policy_simulation_only.zip": "ccf63163ab02820a343b74ce28905d2dd313ac06e7a81f1aa290ac568ee9c971",
+    "sim/robot.xml": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+    "firmware/imu_bench/measurements/2026-11-01/mount_rotation_provisional.json": "c6193d09ebe129bcba7a20d5b2e5b82f212ab763397e7ce44d9a08c3a1e13e39",
+    "scripts/shadow.py": "01fc371bcca02e27f19a9bf355ab43df330cf2beba4929c0bef973be49854d13",
+    "scripts/generate_imu_mount.py": "a585056a8a2fa5a2dc5275fa8731b50f71ffdc6ded5965c5e7dc5d2b4f68992f",
+    "scripts/robot.py": "66565bf2ba5c0576295108099d00904af2646e998e181f7fe4eae48aa1b5f2c5",
+    "sim/recovery/evaluate_filter.py": "37e4b5b0460f5e710030c9d4a01505615942b076aa3479baa121f4c113adb9aa",
+    "sim/recovery/filter_runtime.py": "1caca1c8312dcf8340f446e2c02687bb3737b89d77d466ae20ccdac9d13fed8b",
+    "sim/environment.py": "f62fd6a930f4b79ca4956e80fc1099803ee69b516419e1eb8f1c3cf2b5e2b265"
+  },
+  "local_image_sha256": {
+    "policy_shadow.ino.zip": "f9adcd98a93e8fcdd838a9eda5857e17616a871d256bd09b24e4c97cfab9175c",
+    "policy_shadow.ino.elf": "99db8c11303e248ddc4dc5650b1ad71aace354077461234ee4253ff091d158cb",
+    "policy_shadow.ino.hex": "55bc75dfd385706444309ef18d4372dfac5cfa3fa9eaef40cd29d80909fd820b"
+  },
+  "timing_note": "Reported t_us is the most recent sensor sample, not policy invocation; 208 Hz sample age causes interval quantization.",
+  "physical_motor_commands_sent": false,
+  "pending": [
+    "Guided sensor-only dynamic rotation check",
+    "Physical pulse-to-angle sign/neutral/clearance mapping",
+    "Loaded servo dynamics and power characterization",
+    "Training/evaluation using calibrated estimator and actuator observations"
+  ],
+  "capture_timing": {
+    "sensor_elapsed_s": 9.981004,
+    "mean_sensor_timestamp_interval_us": 20002.012024048097,
+    "min_sensor_timestamp_interval_us": 17577,
+    "max_sensor_timestamp_interval_us": 23437,
+    "observed_frames_per_sensor_elapsed_s": 49.994970445858954,
+    "filter_rejects_start_end": [
+      19,
+      19
+    ],
+    "filter_rejects_note": "19 initial not-ready returns are the expected 20-sample startup, not 19 I2C faults."
+  }
+}

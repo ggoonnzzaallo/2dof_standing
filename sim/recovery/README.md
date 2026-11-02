@@ -117,3 +117,10 @@ The full search/collection commands are:
 ```
 
 Once sensing and actuator calibration are available, Codex will update the simulator/firmware contract, retrain or refine against those measurements, and compare real and simulated behavior. The user's help is needed for physical observations that the current three-wire servos and USB connection cannot provide, rather than for taking over implementation.
+
+
+## Onboard observation pipeline update — 1 November 2026
+
+The unchanged exported actor is now uploaded in [motor-disabled policy shadow firmware](../../firmware/policy_shadow/README.md). First hardware capture: 500 frames, 1.199 ms median inference, maximum MCU/host action error 2.32e-7, no I2C errors. Virtual targets do not test physical response.
+
+A fresh 30-case simulation evaluation with the actual firmware gravity filter and simulated accelerometer/gyro recovered **26/30**, versus **30/30** on the same seeds when only the actor’s gravity-direction input was replaced with exact orientation. The original ideal-orientation results above remain historical evidence for that observation model. The [new reports](../../firmware/policy_shadow/results/2026-11-01/paired_comparison.json) preserve failures and assumptions. Train/evaluate future candidates with the estimator pipeline after physical dynamic sensor and actuator checks; do not enable learned motor control solely from the earlier 100/100 result.

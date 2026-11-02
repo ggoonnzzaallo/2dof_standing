@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-01",
+  "method": "Paired diagnostic: identical seeds, randomized physical properties, initial poses, simulated IMU gyro/noise, actor and scoring; replace only actor DOWN input with truth in the diagnostic arm. Sensor filter still runs in both arms.",
+  "episodes": 30,
+  "filtered_successes": 26,
+  "truth_DOWN_successes": 30,
+  "failures_with_filtered_DOWN": [
+    {
+      "seed": 29001,
+      "requested_pose": {
+        "tilt": 1.2996656173477754,
+        "azimuth": 4.10014670640061
+      },
+      "success": false,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 10.0,
+      "gravity_error_mean_deg": 1.2995818759553917,
+      "gravity_error_max_deg": 1.844474939673077
+    },
+    {
+      "seed": 29012,
+      "requested_pose": {
+        "tilt": 0.9170601820045968,
+        "azimuth": 1.2555700828580143
+      },
+      "success": false,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 10.0,
+      "gravity_error_mean_deg": 0.8568888508110648,
+      "gravity_error_max_deg": 0.8712942927789141
+    },
+    {
+      "seed": 29023,
+      "requested_pose": {
+        "tilt": 2.7099401988172858,
+        "azimuth": 4.732336685090173
+      },
+      "success": false,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 10.0,
+      "gravity_error_mean_deg": 1.575381070641836,
+      "gravity_error_max_deg": 2.3430633367097418
+    },
+    {
+      "seed": 29026,
+      "requested_pose": {
+        "tilt": 2.024919392062705,
+        "azimuth": 4.059098970858227
+      },
+      "success": false,
+      "filter_unready_during_control": false,
+      "mujoco_warnings": 0,
+      "seconds": 10.0,
+      "gravity_error_mean_deg": 2.3042293150707676,
+      "gravity_error_max_deg": 2.9786140169374247
+    }
+  ],
+  "physical_recovery_tested": false,
+  "conclusion": "In these 30 simulated cases, changing DOWN input to exact orientation restores all four failures. This isolates an observation-estimation sensitivity in the tested model; it does not establish physical reliability."
+}

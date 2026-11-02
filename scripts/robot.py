@@ -111,11 +111,14 @@ def require_tools():
 
 def build(sketch='servo_center'):
     require_tools()
-    if sketch not in ('servo_center', 'policy_probe', 'imu_bench'):
+    if sketch not in ('servo_center', 'policy_probe', 'imu_bench', 'policy_shadow'):
         raise ValueError('Unknown project sketch.')
     build_path = ROOT / 'build' / sketch
     props = {'tools.nrfutil.cmd': str(UPLOADER),
              'tools.nrfutil.cmd.macosx': str(UPLOADER)}
+    if sketch == 'policy_shadow':
+        # Preserve finite-value guards in the estimator (the core defaults to Ofast).
+        props['compiler.optimization_flag'] = '-O2'
     if platform.system() == 'Darwin' and platform.machine() == 'arm64':
         props['compiler.path'] = str(NATIVE / 'bin') + '/'
     # Seeed 1.1.13 leaves the sketch include path unquoted. Our project folder
@@ -170,7 +173,7 @@ def upload(port, sketch='servo_center'):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['setup', 'build', 'build-probe', 'build-imu', 'ports', 'upload', 'upload-imu', 'monitor', 'check', 'test'])
+    parser.add_argument('action', choices=['setup', 'build', 'build-probe', 'build-imu', 'build-shadow', 'ports', 'upload', 'upload-imu', 'upload-shadow', 'monitor', 'check', 'test'])
     parser.add_argument('--port', help='Explicit XIAO serial port; auto-detects if exactly one is connected')
     args = parser.parse_args()
     if args.action == 'setup':
@@ -181,12 +184,16 @@ def main():
         build('policy_probe')
     elif args.action == 'build-imu':
         build('imu_bench')
+    elif args.action == 'build-shadow':
+        build('policy_shadow')
     elif args.action == 'ports':
         print(json.dumps(board_ports(), indent=2))
     elif args.action == 'upload':
         upload(args.port)
     elif args.action == 'upload-imu':
         upload(args.port, 'imu_bench')
+    elif args.action == 'upload-shadow':
+        upload(args.port, 'policy_shadow')
     elif args.action == 'monitor':
         run([PYTHON, '-m', 'serial.tools.miniterm', find_port(args.port), '115200', '--eol', 'LF', '--echo'])
     elif args.action == 'check':
@@ -205,6 +212,8 @@ def main():
         run([sys.executable, ROOT / 'firmware' / 'test_imu_bench.py'])
         run([sys.executable, ROOT / 'firmware' / 'test_imu_bus.py'])
         run([sys.executable, ROOT / 'firmware' / 'test_imu_logger.py'])
+        run([sys.executable, ROOT / 'firmware' / 'test_gravity_filter.py'])
+        run([sys.executable, ROOT / 'firmware' / 'test_policy_shadow.py'])
 
 
 if __name__ == '__main__':
