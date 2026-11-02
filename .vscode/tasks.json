@@ -2,6 +2,33 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Robot: arm for untethered use",
+      "type": "process",
+      "command": "${workspaceFolder}/robot",
+      "args": ["arm"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": [],
+      "presentation": {"focus": true, "panel": "dedicated"}
+    },
+    {
+      "label": "Robot: stop PWM",
+      "type": "process",
+      "command": "${workspaceFolder}/robot",
+      "args": ["stop"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": [],
+      "presentation": {"focus": true, "panel": "dedicated"}
+    },
+    {
+      "label": "Robot: read state without stopping",
+      "type": "process",
+      "command": "${workspaceFolder}/robot",
+      "args": ["status"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": [],
+      "presentation": {"focus": true, "panel": "dedicated"}
+    },
+    {
       "label": "Robot: set up tools",
       "type": "process",
       "command": "python3",

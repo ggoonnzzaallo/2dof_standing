@@ -1,0 +1,29 @@
+{
+  "created_utc": "2026-11-02T20:02:36.944058+00:00",
+  "action": "arm",
+  "firmware_banner": [
+    "ROBOT POLICY CONTROL 0.2",
+    "MODE: 0",
+    "IMU_READY: 1",
+    "FILTER_READY: 1",
+    "RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.",
+    "PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.",
+    "GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.",
+    "LAST_STOP: Operator stop or command.",
+    "REV_B: stop removes PWM only. Direct servo power remains connected.",
+    "Commands: arm, run, standalone, shadow (no PWM), keep, off, !, state (non-stopping), status, help",
+    "READY"
+  ],
+  "handoff_acknowledgement": "STANDALONE: running; USB may be unplugged. Disconnect battery to power off.",
+  "device_state": {
+    "mode": 4,
+    "mode_name": "STANDALONE",
+    "battery_mv": 4137,
+    "policy_frames": 11,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "Operator stop or command."
+  },
+  "continues_after_serial_close": true,
+  "status": "confirmed"
+}

@@ -87,7 +87,30 @@ int main(int argc,char** argv){
  for(int i=0;i<2;++i){target[i]=-CONTROL_LIMIT_RAD;action[i]=-1;}
  report();assert(!Serial.output.str().empty()&&Serial.output.str().size()<=256); // Maximal telemetry still fits board TX FIFO.
  resetFixture((1ULL<<32)-160000);send("arm\n");waitMs(1100);send("run\n");waitMs(100);assert(mode==RUN&&frames==5);
- std::cout<<"PASS: actual actor, 80-degree conversion, one-second neutral hold, 50 Hz target/PWM, shadow isolation, attach failures, battery/sensor/nonfinite/USB/heartbeat/deadline/session/input stops, nonblocking telemetry and clock rollover.\n";
+
+ // Standalone is an explicit transition: not boot, disconnect, keep or early command.
+ resetFixture();send("standalone\n");checkOff();
+ resetFixture();send("arm\n");send("standalone\n");checkOff();
+ resetFixture();send("arm\n");waitMs(1100);send("standalone\n");assert(mode==STANDALONE);
+ uint32_t before=frames;float priorTarget=target[0];
+ Serial.open=false;waitMs(200);assert(mode==STANDALONE&&frames>=before+10);
+ assert(motors[0].attached()&&motors[1].attached());
+ heartbeatAt=millis()-5000;runAt=millis()-65000;waitMs(100);
+ assert(mode==STANDALONE); // Neither USB heartbeat nor supervised trial deadline applies.
+ before=frames;waitMs(61000);assert(mode==STANDALONE&&frames>=before+3050);
+ Serial.open=true;before=frames;loop();assert(mode==STANDALONE&&frames>=before);
+ send("state\n");assert(mode==STANDALONE);waitMs(100);assert(frames>before);
+ send("off\n");checkOff();
+ resetFixture();send("arm\n");waitMs(1100);send("standalone\n");Serial.open=false;
+ adcRaw=1600;waitMs(250);checkOff();assert(std::string(lastStopReason).find("battery")!=std::string::npos);
+ waitMs(100);checkOff();Serial.open=true;loop();checkOff(); // Fault never automatically rearms.
+ resetFixture();send("arm\n");waitMs(1100);send("standalone\n");Serial.open=false;
+ Wire1.regs[0x1e]=0;waitMs(30);checkOff();
+ resetFixture();send("arm\n");waitMs(1100);send("standalone\n");Serial.open=false;
+ nextPolicy=clockUs.now()-10001;loop();checkOff();
+ resetFixture();send("arm\n");waitMs(1100);send("standalone\n");Serial.open=false;waitMs(200);
+ Serial.open=true;send("!\n");checkOff();
+ std::cout<<"PASS: actual actor, 80-degree conversion, one-second neutral hold, 50 Hz target/PWM, shadow isolation, attach failures, battery/sensor/nonfinite/USB/heartbeat/deadline/session/input stops, nonblocking telemetry, clock rollover and explicit standalone USB/heartbeat independence with battery/sensor/timing stops.\n";
 }
 '''
 with tempfile.TemporaryDirectory() as folder:

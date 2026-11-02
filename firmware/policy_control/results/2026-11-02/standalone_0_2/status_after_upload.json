@@ -1,0 +1,14 @@
+{
+  "created_utc": "2026-11-02T20:01:41.010172+00:00",
+  "action": "status",
+  "device_state": {
+    "mode": 0,
+    "mode_name": "OFF",
+    "battery_mv": 4139,
+    "policy_frames": 0,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "Boot disarmed."
+  },
+  "status": "confirmed"
+}

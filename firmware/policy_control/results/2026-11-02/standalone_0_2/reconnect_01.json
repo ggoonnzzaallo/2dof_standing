@@ -1,0 +1,14 @@
+{
+  "created_utc": "2026-11-02T20:02:43.930391+00:00",
+  "action": "status",
+  "device_state": {
+    "mode": 4,
+    "mode_name": "STANDALONE",
+    "battery_mv": 4140,
+    "policy_frames": 286,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "Operator stop or command."
+  },
+  "status": "confirmed"
+}

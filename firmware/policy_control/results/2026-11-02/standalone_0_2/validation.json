@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-02",
+  "firmware": "ROBOT POLICY CONTROL 0.2",
+  "status": "passed",
+  "checks": [
+    "Full firmware regression suite passed, including actual-sketch actor/PWM/guards and host telemetry analysis.",
+    "Five Mac-helper tests passed; helper is included in scripts/robot.py test.",
+    "Native board build and DFU upload succeeded; post-upload OFF state confirmed.",
+    "Hardware arm acknowledged mode 4 with frames advancing; later independent non-stopping status confirmed continued mode 4.",
+    "User confirmed recovery with USB physically unplugged.",
+    "Source, local image and capture hashes recorded; original actor/model unchanged."
+  ],
+  "limits": "Operator-observed untethered recovery, not a quantified reliability trial; no shaft feedback or unplugged telemetry. PWM stop cannot cut direct servo idle power.",
+  "artifact_sha256": {
+    "deployment.json": "7dcd71a49585d1169cd7417c1af8201b95408d008dfbaaac7a5738abdd2be122",
+    "operator_observation.json": "ced83ea8a98fff2016d8436c427662678ceed6e884d3a569279a7d7612080d04",
+    "status_after_upload.json": "071826844b195a049d343f7cbb66ff7fc5414400b4fe70b15a04d220a591c713",
+    "arm_01.json": "6d0ec00db9d750a50a23c4d82a8f2f9f6d3feaca717a83248d8c9b8afc0f3d87",
+    "reconnect_01.json": "2ad3ee9a932943490319ecbf27cd0b3d381266a912ccb99cf66ab0d071a3d583"
+  }
+}

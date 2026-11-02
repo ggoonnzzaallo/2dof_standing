@@ -10,7 +10,19 @@ Current purchased architecture: **XIAO nRF52840 Sense + two PTK 7465 MG servos +
 
 This is an assembled prototype, with both servo joints tested and Rev B wiring live. The final mechanical design is the user's Onshape assembly; earlier generated parts remain historical references. The simulator uses sliced printed masses and CAD geometry, while hardware mass/distribution, servo behavior and sensing still contain explicit assumptions. A [simulation-only neural recovery controller](sim/recovery/README.md) now passes 100/100 broader held-out simulated trials; its C actor was verified on the XIAO in [motor-disabled shadow firmware](firmware/policy_shadow/README.md), with virtual joint targets only. With the actual firmware gravity filter and simulated IMU readings, a newer fresh evaluation recovered in 26/30 trials. The first 500 hardware shadow frames matched host inference within 2.32e-7 and took about 1.2 ms per inference. Demonstration training outperformed the tested PPO refinement, so the earlier checkpoint is retained. The [bench firmware](firmware/README.md) provides terminal motion control, battery estimates, disarmed startup and timeout/heartbeat guards. In Rev B, stopping PWM cannot disconnect servo power or idle drain. See the firmware and electrical guides for charging/programming isolation and commissioning records.
 
-On **2 November 2026**, the [supervised onboard controller](firmware/policy_control/README.md) completed its first user-confirmed **unassisted sideways self-righting** trial, with additional manual disturbances during the 15-second run. It uses the unchanged actor at 50 Hz and the trained ±80° target range; inference peaked at 1.272 ms. Raw logs and operator observations are preserved. This is a first demonstration, not a reliability rate; the current firmware boots disarmed and requires USB heartbeat. The broad adjacent-body collision exclusions are explicitly scheduled for correction before the next training pass.
+On **2 November 2026**, the [onboard controller](firmware/policy_control/README.md) completed its first user-confirmed **unassisted sideways self-righting** trial, with additional manual disturbances during the 15-second run. It uses the unchanged actor at 50 Hz and the trained ±80° target range; inference peaked at 1.272 ms. Raw logs and operator observations are preserved. This is a first demonstration, not a reliability rate. The uploaded version 0.2 boots disarmed and adds explicit Mac arming; the user also confirmed **recovery on battery with USB unplugged**. [Standalone deployment records](firmware/policy_control/results/2026-11-02/standalone_0_2/deployment.json) preserve that observation. The broad adjacent-body collision exclusions are explicitly scheduled for correction before the next training pass.
+
+## Arm from the Mac
+
+With the battery, both servos and USB connected, place the robot near straight on a clear surface. From this repository folder:
+
+```sh
+./robot arm       # Moves to neutral, then starts onboard recovery
+./robot status    # Reads state without stopping motion
+./robot stop      # Stops PWM
+```
+
+After the arm command confirms **“Armed. Unplug USB”**, unplug USB for battery operation. Reconnect USB to use `status` or `stop`. With USB unplugged, disconnect the battery to stop. It boots disarmed after every reset/power cycle. The battery guard stops PWM but cannot cut servo idle power; disconnect the battery after use or a fault. See [standalone operation](firmware/policy_control/README.md#standalone-operation-02--arm-from-the-mac) for details and VS Code tasks.
 
 ## Package
 
@@ -27,7 +39,7 @@ On **2 November 2026**, the [supervised onboard controller](firmware/policy_cont
 - [Final Onshape assembly and 3D review](cad/onshape_import/README.md); [earlier parametric CAD and fit coupons](cad/README.md)
 - [VS Code setup, first power-up and servo centering](firmware/README.md) — disarmed USB-controlled bench program
 - [IMU commissioning and CSV logging](firmware/imu_bench/README.md) — first hardware-deployment stage, with servo outputs inactive
-- [Supervised onboard recovery controller](firmware/policy_control/README.md) — current uploaded firmware; disarmed boot, trained ±80° limits, USB-supervised trials
+- [Onboard recovery controller](firmware/policy_control/README.md) — current uploaded firmware; disarmed boot, trained ±80° limits, Mac arming and standalone operation
 - [Visual servo pulse-to-angle calibration](firmware/servo_calibration/README.md) — six measured visual references and signed PWM mapping
 - [Calibrated IMU filter and motor-disabled neural policy checks](firmware/policy_shadow/README.md) — measured sensor/filter/inference results
 - [Training and deployment pipeline](sim/README.md)

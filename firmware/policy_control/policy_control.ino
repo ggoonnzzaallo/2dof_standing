@@ -1,4 +1,4 @@
-// First supervised learned-control deployment. Boot is disarmed; USB heartbeat required.
+// Boot disarmed. USB-supervised trials or explicitly latched standalone operation.
 #include <Arduino.h>
 #include <Adafruit_TinyUSB.h>
 #include <string.h>
@@ -14,8 +14,9 @@
 #error "Use the classic XIAO nRF52840 Sense, Seeed non-mbed core."
 #endif
 
-enum Mode { OFF=0, HOLD=1, RUN=2, SHADOW=3 };
+enum Mode { OFF=0, HOLD=1, RUN=2, SHADOW=3, STANDALONE=4 };
 Mode mode=OFF;
+const char* lastStopReason="Boot disarmed.";
 Lsm6ds3 imu;
 GravityFilter attitude;
 MicrosecondClock clockUs;
@@ -45,19 +46,20 @@ void stop(){
   digitalWrite(D0,LOW);pinMode(D0,OUTPUT);digitalWrite(D1,LOW);pinMode(D1,OUTPUT);pinMode(D2,INPUT);
   mode=OFF;resetPolicy();
 }
-void halt(const char* reason){stop();Serial.print("OFF: ");Serial.println(reason);}
+void halt(const char* reason){stop();lastStopReason=reason;if(Serial){Serial.print("OFF: ");Serial.println(reason);}}
 bool fresh(){return imu.ready&&attitude.ready&&sampleAt&&uint32_t(clockUs.now()-sampleAt)<20000;}
 bool validStartBattery(){batteryMv=readBatteryMv();return batteryMv>=3700&&batteryMv<=4400;}
 void status(){
-  Serial.println("ROBOT POLICY CONTROL 0.1");
+  Serial.println("ROBOT POLICY CONTROL 0.2");
   Serial.print("MODE: ");Serial.println(int(mode));
   Serial.print("IMU_READY: ");Serial.println(imu.ready?1:0);
   Serial.print("FILTER_READY: ");Serial.println(attitude.ready?1:0);
   Serial.println("RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.");
   Serial.println("PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.");
-  Serial.println("GUARDS: 3 s heartbeat, 60 s trial, 20 ms sensor age, 10 ms deadline lateness, battery guard.");
+  Serial.println("GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.");
+  Serial.print("LAST_STOP: ");Serial.println(lastStopReason);
   Serial.println("REV_B: stop removes PWM only. Direct servo power remains connected.");
-  Serial.println("Commands: arm (1500 us both), run, shadow (no PWM), keep, off, !, status, help");
+  Serial.println("Commands: arm, run, standalone, shadow (no PWM), keep, off, !, state (non-stopping), status, help");
   Serial.println("READY");
 }
 void arm(){
@@ -71,7 +73,7 @@ void arm(){
   mode=HOLD;armedAt=clockUs.now();heartbeatAt=millis();lowCount=0;
   Serial.println("ARMED: both joints at nominal 1500 us. Wait one second, then run.");
 }
-void beginControl(bool shadow){
+void beginControl(bool shadow,bool standalone=false){
   if(!shadow && (mode!=HOLD||uint32_t(clockUs.now()-armedAt)<1000000)){
     halt("run requires arm and one-second neutral hold.");return;
   }
@@ -80,7 +82,8 @@ void beginControl(bool shadow){
   if(shadow)stop();
   // Print before starting policy deadlines: no blocking print during live control.
   Serial.println(HEADER);
-  if(shadow){mode=SHADOW;}else{mode=RUN;}
+  if(shadow){mode=SHADOW;}else{mode=standalone?STANDALONE:RUN;}
+  if(standalone)Serial.println("STANDALONE: running; USB may be unplugged. Disconnect battery to power off.");
   runAt=heartbeatAt=millis();nextPolicy=clockUs.now()+20000;lowCount=0;
 }
 bool appendInteger(char* row,size_t& n,long value){
@@ -94,6 +97,7 @@ bool appendUnsigned(char* row,size_t& n,uint32_t value){
   n+=size_t(count);return true;
 }
 void report(){
+  if(!Serial)return; // Intentional USB absence is not lost telemetry.
   char row[256];row[0]='D';size_t n=1;bool ok=true;
   ok &= appendUnsigned(row,n,uint32_t(frames));ok &= appendUnsigned(row,n,uint32_t(sampleAt));
   ok &= appendUnsigned(row,n,uint32_t(mode));
@@ -125,17 +129,27 @@ bool infer(){
   }
   for(int i=0;i<2;++i){
     previous[i]=action[i];
-    if(mode==RUN){pulses[i]=proposed[i];motors[i].writeMicroseconds(pulses[i]);}
+    if(mode==RUN||mode==STANDALONE){pulses[i]=proposed[i];motors[i].writeMicroseconds(pulses[i]);}
   }
   ++frames;return true;
+}
+void reportState(){
+  if(!Serial)return;
+  char row[256];
+  int n=snprintf(row,sizeof(row),"STATE,%d,%u,%lu,%d,%lu,%s\n",int(mode),unsigned(batteryMv),
+    static_cast<unsigned long>(frames),fresh()?1:0,static_cast<unsigned long>(imu.errors),lastStopReason);
+  if(n>0&&size_t(n)<sizeof(row)&&Serial.availableForWrite()>=n)
+    Serial.write(reinterpret_cast<const uint8_t*>(row),size_t(n));
 }
 void execute(){
   command[used]=0;
   if(!strcmp(command,"keep")){if(mode!=OFF)heartbeatAt=millis();}
   else if(!strcmp(command,"arm"))arm();
   else if(!strcmp(command,"run"))beginControl(false);
+  else if(!strcmp(command,"standalone"))beginControl(false,true);
+  else if(!strcmp(command,"state"))reportState();
   else if(!strcmp(command,"shadow"))beginControl(true);
-  else{stop();Serial.println("OFF. PWM stopped; direct servo power remains connected.");
+  else{stop();lastStopReason="Operator stop or command.";Serial.println("OFF. PWM stopped; direct servo power remains connected.");
     if(strcmp(command,"off"))status();}
 }
 void setup(){
@@ -155,28 +169,37 @@ void loop(){
       if(!attitude.update(accelBase,gyroBase,dt,gyroClip,accelClip))++filterRejects;
     }
   }
-  if(!Serial){stop();hadSerial=false;used=0;discard=false;delay(1);return;}
-  if(!hadSerial){status();hadSerial=true;}
+  const bool connected=bool(Serial);
+  if(!connected){
+    if(mode!=STANDALONE)stop();
+    hadSerial=false;used=0;discard=false;
+    if(mode!=STANDALONE){delay(1);return;}
+  }
+  if(connected&&!hadSerial){
+    // A USB/DTR reconnect must not reset targets or block an active standalone loop.
+    if(mode!=STANDALONE)status();
+    hadSerial=true;
+  }
   if(uint32_t(millis()-batteryAt)>=100){
     batteryAt=millis();batteryMv=readBatteryMv();
-    if(mode==HOLD||mode==RUN){
+    if(mode==HOLD||mode==RUN||mode==STANDALONE){
       if(batteryMv<3600)++lowCount;else lowCount=0;
       if(batteryMv<3400||batteryMv>4400||lowCount>=2)halt("battery guard. Disconnect battery and USB.");
     }
   }
-  for(int n=0;n<64&&Serial.available();++n){
+  for(int n=0;connected&&n<64&&Serial.available();++n){
     char c=Serial.read();
-    if(c=='!'){stop();used=0;discard=true;Serial.println("OFF. Emergency PWM stop.");}
+    if(c=='!'){stop();lastStopReason="Emergency PWM stop.";used=0;discard=true;Serial.println("OFF. Emergency PWM stop.");}
     else if(c=='\n'||c=='\r'){if(!discard&&used)execute();used=0;discard=false;}
     else if(!discard&&used<sizeof(command)-1)command[used++]=c;
     else if(!discard){stop();used=0;discard=true;Serial.println("OFF: command too long.");}
   }
   if(mode!=OFF){
     if(!fresh())halt("stale/invalid IMU/filter.");
-    else if(uint32_t(millis()-heartbeatAt)>=3000)halt("host heartbeat timeout.");
+    else if(mode!=STANDALONE&&uint32_t(millis()-heartbeatAt)>=3000)halt("host heartbeat timeout.");
     else if((mode==RUN||mode==SHADOW)&&uint32_t(millis()-runAt)>=60000)halt("trial duration limit.");
     else if(mode==HOLD&&uint32_t(clockUs.now()-armedAt)>=10000000)halt("armed hold timeout.");
-    else if(mode==RUN||mode==SHADOW){
+    else if(mode==RUN||mode==SHADOW||mode==STANDALONE){
       now=clockUs.now();
       if(int32_t(now-nextPolicy)>=0){
         lateUs=now-nextPolicy;

@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-02",
+  "firmware": "ROBOT POLICY CONTROL 0.2",
+  "question": "After unplugging USB, does the robot keep moving and recover when tipped?",
+  "user_report": "Yes—recovers with USB unplugged",
+  "physical_USB_unplug_validated": true,
+  "scope": "User-observed recovery on battery with USB physically unplugged. No telemetry while unplugged; no number of attempts, orientation breakdown or reliability rate measured.",
+  "end_state": "Standalone was left armed for user testing; user instructed to disconnect battery after use. Physical battery disconnection has not been confirmed."
+}

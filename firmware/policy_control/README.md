@@ -1,6 +1,6 @@
-# Supervised learned controller 0.1 — trained ±80° targets
+# Learned controller — trained ±80° targets
 
-This program runs the existing exported actor on the XIAO and can send its outputs to both servos. **Boot is disarmed.** It requires explicit arming, a one-second nominal-neutral hold, and a `run` command. The first deployment is USB-supervised; a host heartbeat is required. It does not yet provide battery-only autonomous arming.
+This program runs the existing exported actor on the XIAO and can send its outputs to both servos. **Boot is disarmed.** It requires explicit arming, a one-second nominal-neutral hold, and a `run` or `standalone` command. Version 0.2 also supports explicit Mac arming followed by USB-free operation; see [standalone operation](#standalone-operation-02--arm-from-the-mac). Supervised trials still require a host heartbeat.
 
 The user explicitly chose the trained **±80°** targets rather than restricting the policy to the measured ±45° range. The actor weights, observation normalization, **50 Hz** update rate and **0.06 radian incremental actions** are unchanged. There is no extra slow calibration slew limiter in the learned-control path: the training servo model already permits finite tracking speed/lag.
 
@@ -34,7 +34,7 @@ The serial interface also accepts `arm`, `run`, `shadow`, `keep`, `off`, `!`, `s
 
 The controller reuses the verified LSM6DS3TR-C transport, provisional sensor-to-CAD rotation, recorded gyro bias and portable gravity-direction filter. A dedicated polled 1 MHz TIMER4 counter schedules policy deadlines; the core's micros/DWT configuration is unchanged. Each tick uses DOWN, gyro/10, commanded target/80°, previous action, then clips the actor action to ±1 and integrates exactly 0.06 radians per tick within ±80°. Both hardware pulse widths are validated before either servo is updated.
 
-PWM is detached on stale/invalid IMU data (20 ms), USB disconnect, missing heartbeat (3 s), policy deadline lateness ≥10 ms, invalid numerical state, failed PWM attachment, time limit, input error or explicit stop. Arming requires an estimated BAT node between 3.7 and 4.4 V. While armed/running, ADC sampling every 100 ms stops on two readings below 3.6 V, one below 3.4 V or one above 4.4 V. This retains the prior approximate voltage guard and 100 mA charge selection; it does not measure current, fast brownout transients or net charging. USB-only BAT data with the cell absent is not cell voltage.
+PWM is detached on stale/invalid IMU data (20 ms), policy deadline lateness ≥10 ms, invalid numerical state, failed PWM attachment, input error or explicit stop. Supervised modes additionally stop on USB disconnect, missing heartbeat (3 s) or their time limit; explicit standalone mode continues without USB or heartbeat. Arming requires an estimated BAT node between 3.7 and 4.4 V. While armed/running, ADC sampling every 100 ms stops on two readings below 3.6 V, one below 3.4 V or one above 4.4 V. This retains the prior approximate voltage guard and 100 mA charge selection; it does not measure current, fast brownout transients or net charging. USB-only BAT data with the cell absent is not cell voltage.
 
 Telemetry rows are built into a fixed 256-byte integer-text buffer and written only when the USB FIFO has enough free space. A row is dropped rather than blocking control for host logging. The actor still evaluates at every policy tick. `dropped` records telemetry loss; if the host receives no rows for 500 ms it stops the trial. Fields ending `_u6` encode their dimensionless value multiplied by 1,000,000; `_urad` encodes target radians multiplied by 1,000,000. Pulse values are commanded PWM, not measured shaft positions. The host handles skipped-frame history checks and permits quantization error in numerical comparisons.
 
@@ -78,4 +78,29 @@ Estimated base tilt began at **98.6°** and ended at **1.52°**. The user explic
 
 [Raw logs](results/2026-11-02/live_sideways_01.json) and [operator observations](results/2026-11-02/sideways_observation.json) are preserved. Recreate the figure with `.venv-sim/bin/python scripts/plot_control.py firmware/policy_control/results/2026-11-02/live_sideways_01.csv --out build/control/sideways.png`. The figure shows estimated base orientation and commanded joint targets; no actual shaft angles are measured.
 
-This does not establish all-direction recovery, repeated-trial reliability, full compound clearance, low-battery operation or untethered autonomy. The present firmware deliberately requires USB heartbeat and boots disarmed. Battery-only arming/stop behavior is a separate next implementation step. The collision-model correction remains required before the next training run.
+This does not establish all-direction recovery, repeated-trial reliability, full compound clearance, low-battery operation or untethered autonomy. That first 0.1 firmware required USB heartbeat and booted disarmed. Version 0.2 adds explicit standalone arming while retaining disarmed boot; see below. The collision-model correction remains required before the next training run.
+
+## Standalone operation 0.2 — arm from the Mac
+
+Version 0.2 adds an explicit standalone mode. **Boot and power-cycle remain disarmed.** Connect the battery, servos and USB with the robot near straight and free to move. From the repository folder:
+
+```sh
+./robot arm
+```
+
+The Mac verifies ready firmware, commands nominal neutral, waits one second, starts the unchanged trained policy and confirms standalone mode with advancing policy frames. After **“Armed. Unplug USB”**, close the terminal or unplug USB: control continues on the XIAO. No Mac heartbeat or 60-second trial limit applies in this explicitly selected mode. Arming is not saved across a reset or power cycle.
+
+```sh
+./robot status
+./robot stop
+```
+
+`status` reads a short state packet without stopping/recentering a running standalone controller. Reconnect USB first if needed. `stop` requests and verifies PWM OFF; it works even if the IMU is not ready. With USB detached, disconnect the battery to stop and power off. A low-battery fault stops PWM but cannot disconnect servo idle drain, so unplug the battery after use or a fault.
+
+These commands are also available in VS Code **Tasks → Run Task → Robot: arm for untethered use / stop PWM / read state without stopping**. The executable uses the project's Python environment, so no activation or Arduino IDE is needed. It logs command confirmations under `build/arming/`. If the firmware refuses arming or the handoff fails, the helper requests stop; only a positively confirmed handoff omits the usual cleanup stop.
+
+Standalone retains the same ±80° range, 50 Hz policy, action increments, PWM mapping, sensor-age/finite-state checks, ≥10 ms late-deadline stop and battery thresholds. Those checks continue while USB is absent. A sensor/battery/timing fault stops and stays stopped; reconnecting USB cannot automatically rearm. The normal `scripts/control.py` supervised trials and no-PWM shadow mode keep their original heartbeat and duration limits. The raw serial `status`/`help` commands still stop before printing the full banner; `./robot status` instead uses the new non-stopping `state` command.
+
+Firmware tests cover more than a simulated minute of standalone inference with USB disconnected, heartbeat/normal-trial expiry ignored only in standalone, reconnect/history continuity, non-stopping state, explicit stop and untethered battery/sensor/timing faults. Mac-helper tests cover handoff success without accidental cleanup OFF, failed-handoff stop, non-stopping status, protocol checks, and stopping when the filter is unavailable. Historical 0.1 captures above remain unchanged.
+
+Version 0.2 was built and uploaded on 2 November 2026: **85,300 bytes flash / 7,880 bytes static RAM**. The full firmware regression suite and five Mac-helper tests passed. The first USB-only state check reported **OFF, zero policy frames, “Boot disarmed.”**; the BAT-node reading without a cell is not a battery measurement. Hardware arming confirmed standalone mode at frame 11; a separate status process then confirmed mode 4 at frame 286 without stopping it. The user subsequently confirmed **“Yes—recovers with USB unplugged.”** [Version 0.2 deployment, captures and observation](results/2026-11-02/standalone_0_2/deployment.json) are preserved. This establishes an observed battery-only recovery demonstration, not an all-orientation reliability rate.

@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-02",
+  "firmware": "ROBOT POLICY CONTROL 0.2",
+  "status": "Uploaded; hardware Mac arming, non-stopping reconnect and user-confirmed USB-unplugged battery recovery passed.",
+  "flash_bytes": 85300,
+  "static_RAM_bytes": 7880,
+  "optimization": "-O2",
+  "upload_acknowledgement": "Device programmed.",
+  "policy_hz": 50,
+  "trained_joint_limit_deg": [
+    -80,
+    80
+  ],
+  "action_increment_rad": 0.06,
+  "pulse_envelope_us": [
+    789,
+    2211
+  ],
+  "actor_and_XML_unchanged": true,
+  "standalone": {
+    "mode": 4,
+    "requires_explicit_Mac_arming": true,
+    "persists_across_reset": false,
+    "USB_or_heartbeat_required_after_handoff": false,
+    "session_time_limit": null,
+    "stop_conditions": "Explicit stop, invalid/stale IMU/filter, non-finite actor state, timing deadline, battery guard; battery disconnect removes power.",
+    "low_battery_stop_cuts_servo_power": false
+  },
+  "checks": [
+    "Full firmware regression suite passed",
+    "Five Mac-helper tests passed",
+    "Actual-sketch standalone ran beyond 60 seconds with simulated USB disconnected",
+    "Hardware USB-only state: OFF, zero frames, Boot disarmed.",
+    "Hardware arm acknowledged standalone mode with 11 advancing policy frames, 4.137 V BAT and zero I2C errors.",
+    "Separate status process after arming process closed: still standalone, 286 frames, 4.140 V BAT, zero I2C errors.",
+    "User confirmed recovery after physically unplugging USB: Yes—recovers with USB unplugged."
+  ],
+  "physical_USB_unplug_validated": true,
+  "source_sha256": {
+    "firmware/policy_control/policy_control.ino": "2989e83e4c7499f9b722f2148ffe0a40a7939ff71ab2cd8353d1c4c082dfeaae",
+    "firmware/policy_control/ServoProfile.h": "31c654bc83fb7f33c5efda7fb3c884172a9de2d7384dcde5feccb34879154fb1",
+    "firmware/policy_shadow/GravityFilter.h": "56a9f56320f34c741928b741b59f6deacd61c940d45438b712e1bb8d6de92279",
+    "firmware/policy_shadow/MountCalibration.h": "fba18cc088fb8676bde02659364169a6e2b92371eab94adedddf66257824c0a4",
+    "firmware/policy_shadow/MicrosecondClock.h": "10fbb783a61c25b88d82c9455131fa4e1793ce66c4c0b2babce40aa00f29146e",
+    "firmware/imu_bench/Lsm6ds3.h": "536dc03cb659c0be6613e8e9a1ec16918a9077617709ce9ce6e553e8fcbb4b0e",
+    "firmware/imu_bench/ImuBus.h": "175a406c4aa03c63a01f50d593997fa3a450e545c61f7b4a2fbf4e96e73f496d",
+    "firmware/servo_center/FineServo.h": "f40e2733640c9df9be8cffe396387a289df8746dc7edac3a3a771aadc591c830",
+    "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff",
+    "sim/recovery/results/policy_simulation_only.zip": "ccf63163ab02820a343b74ce28905d2dd313ac06e7a81f1aa290ac568ee9c971",
+    "sim/robot.xml": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+    "firmware/servo_calibration/results/2026-11-02/visual_mapping.json": "86efe1ad96d33a2604e01725fb68cf17f0e72f83b772513e936fd9fc6cc4ee09",
+    "scripts/control.py": "6d6f9155dc630ddc35cfce93e884a0c861f12fefe5c51483631514acc6b02554",
+    "scripts/robot.py": "55b35faa61a294b63cc93a64cac38974d65e408506d5f972b9a339ea31a1dfa4",
+    "robot": "24833a0e71be8da629a18ed6818131a77eb4b133f68b76531be34f799366512f",
+    "scripts/arm.py": "fe713eddc8495e33758e6852dc51c28276cb12a9e4d178bcff1555699c02ec63",
+    "scripts/test_arm.py": "90ee6035f0d55e79fadcd1be5a3b203b0c729a4dbaf5f9cd8a9ce108894a9959",
+    "firmware/test_policy_control.py": "0c04cf46175eeb3c11ee603ef7ca54e95ba6128378d9ae2fd82bb6710339d17f"
+  },
+  "local_image_sha256": {
+    "policy_control.ino.hex": "ce98d4abf0f6c070de8a17c3f150e7903159b31d65c446b52339263249315183",
+    "policy_control.ino.elf": "188ee519770beb51f531124d1e615b0587a1e75d4188f13cbe232d67a746dfea",
+    "policy_control.ino.zip": "55c44957cdc69f5b100ebdc58ec17a04fc6fc598a0324b385b6c22f50eb06ad2"
+  },
+  "capture_sha256": {
+    "operator_observation.json": "ced83ea8a98fff2016d8436c427662678ceed6e884d3a569279a7d7612080d04",
+    "status_after_upload.json": "071826844b195a049d343f7cbb66ff7fc5414400b4fe70b15a04d220a591c713",
+    "arm_01.json": "6d0ec00db9d750a50a23c4d82a8f2f9f6d3feaca717a83248d8c9b8afc0f3d87",
+    "reconnect_01.json": "2ad3ee9a932943490319ecbf27cd0b3d381266a912ccb99cf66ab0d071a3d583"
+  },
+  "historical_physical_recovery": "The 0.1 sideways recovery capture remains in the parent directory; its source hashes refer to that earlier deployment.",
+  "physical_recovery_scope": "User-observed recovery on battery with USB physically unplugged. No telemetry while unplugged; no number of attempts, orientation breakdown or reliability rate measured."
+}
