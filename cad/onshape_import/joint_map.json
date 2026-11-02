@@ -1,5 +1,5 @@
 {
-  "status": "rigid grouping and PWM signs awaiting user review",
+  "status": "Physical PWM signs and approximate straight/+/-45-degree references confirmed visually; wider travel, compound clearance and dynamics pending.",
   "units": "mm",
   "root": "base; free in world, not bolted to ground",
   "neutral": "exported upright pose; servo electrical offsets uncalibrated",
@@ -18,8 +18,14 @@
         0,
         0
       ],
-      "pwm_sign": null,
-      "limits_rad": null
+      "pwm_sign": -1,
+      "limits_rad": null,
+      "neutral_pulse_us": 1500,
+      "observed_visual_reference_range_rad": [
+        -0.7853981633974483,
+        0.7853981633974483
+      ],
+      "visual_mapping": "../../firmware/servo_calibration/results/2026-11-02/visual_mapping.json"
     },
     {
       "name": "upper",
@@ -41,8 +47,14 @@
         0
       ],
       "structural_axis_confirmed_by_user": true,
-      "pwm_sign": null,
-      "limits_rad": null
+      "pwm_sign": -1,
+      "limits_rad": null,
+      "neutral_pulse_us": 1500,
+      "observed_visual_reference_range_rad": [
+        -0.7853981633974483,
+        0.7853981633974483
+      ],
+      "visual_mapping": "../../firmware/servo_calibration/results/2026-11-02/visual_mapping.json"
     }
   ],
   "servo_visual_residual_offset_mm": {

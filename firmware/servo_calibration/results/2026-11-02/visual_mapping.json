@@ -1,0 +1,135 @@
+{
+  "date": "2026-11-02",
+  "status": "Provisional visual static pulse-to-angle mapping; not a full travel or dynamics calibration.",
+  "method": "User visually confirmed straight and approximately +/-45-degree poses while the unselected joint was supported. No angle gauge or encoder readback.",
+  "angle_convention": "CAD right-hand joint angles: lower +X, upper +Y; straight upright assembly = 0 degrees.",
+  "raw_session": "visual_session.json",
+  "raw_sha256": {
+    "visual_session.json": "b1a3eccc22b82c88170231c15e2ab5d8b7c069028917c8037739e384bd6af677",
+    "visual_session.csv": "2640787dba22f0c1db8a143664bdfa8901dd271c6db5f3ebc96e4a7b9536627e",
+    "visual_session.txt": "743854f6e4b8a7089ffa6ec489b3781b5a22dc6792a1b6229ca960a733bc1b7e"
+  },
+  "joints": {
+    "lower": {
+      "CAD_axis": [
+        1,
+        0,
+        0
+      ],
+      "CAD_pulse_sign": -1,
+      "sign_confirmed_from_user_direction": true,
+      "knots": [
+        {
+          "angle_deg": -45.0,
+          "pulse_us": 1900,
+          "sample_t_ms": 302950,
+          "battery_mv": 4138,
+          "note": "user-confirmed approximate 45-degree bend toward battery; negative CAD lower-X rotation"
+        },
+        {
+          "angle_deg": 0.0,
+          "pulse_us": 1500,
+          "sample_t_ms": 242800,
+          "battery_mv": 4139,
+          "note": "user-confirmed straight upright relative to base"
+        },
+        {
+          "angle_deg": 45.0,
+          "pulse_us": 1100,
+          "sample_t_ms": 402992,
+          "battery_mv": 4140,
+          "note": "user-confirmed approximate 45-degree bend toward XIAO; positive CAD lower-X rotation"
+        }
+      ],
+      "neutral_us": 1500,
+      "observed_reference_range_deg": [
+        -45,
+        45
+      ],
+      "observed_pulse_range_us": [
+        1100,
+        1900
+      ],
+      "linear_fit_us_per_degree": -8.88888888888889,
+      "linear_fit_us_per_radian": -509.29581789406507,
+      "formula": "pulse_us = 1500 - (400/45) * angle_deg",
+      "extrapolation_permitted": false,
+      "physical_endstops_confirmed": false,
+      "compound_clearance_confirmed": false
+    },
+    "upper": {
+      "CAD_axis": [
+        0,
+        1,
+        0
+      ],
+      "CAD_pulse_sign": -1,
+      "sign_confirmed_from_user_direction": true,
+      "knots": [
+        {
+          "angle_deg": -45.0,
+          "pulse_us": 1900,
+          "sample_t_ms": 520639,
+          "battery_mv": 4144,
+          "note": "user-confirmed approximate 45-degree bend toward XIAO edge; negative CAD upper-Y rotation"
+        },
+        {
+          "angle_deg": 0.0,
+          "pulse_us": 1500,
+          "sample_t_ms": 450439,
+          "battery_mv": 4134,
+          "note": "user-confirmed top link straight in line with middle link"
+        },
+        {
+          "angle_deg": 45.0,
+          "pulse_us": 1100,
+          "sample_t_ms": 601434,
+          "battery_mv": 4129,
+          "note": "user-confirmed approximate 45-degree bend away from XIAO edge; positive CAD upper-Y rotation"
+        }
+      ],
+      "neutral_us": 1500,
+      "observed_reference_range_deg": [
+        -45,
+        45
+      ],
+      "observed_pulse_range_us": [
+        1100,
+        1900
+      ],
+      "linear_fit_us_per_degree": -8.88888888888889,
+      "linear_fit_us_per_radian": -509.29581789406507,
+      "formula": "pulse_us = 1500 - (400/45) * angle_deg",
+      "extrapolation_permitted": false,
+      "physical_endstops_confirmed": false,
+      "compound_clearance_confirmed": false
+    }
+  },
+  "session_summary": {
+    "telemetry_rows": 10949,
+    "battery_estimate_min_mV": 4124,
+    "battery_estimate_max_mV": 4156,
+    "observed_pulse_min_us": 1100,
+    "observed_pulse_max_us": 1900,
+    "firmware_stop_events": [
+      "OFF. PWM stopped; direct power remains connected.",
+      "OFF. PWM stopped; direct power remains connected.",
+      "OFF: session or heartbeat timeout; direct power remains connected.",
+      "OFF: invalid set; active joint, window and <=50 us target change required.",
+      "OFF. PWM stopped; direct power remains connected.",
+      "OFF. PWM stopped; direct power remains connected."
+    ],
+    "last_upper_pulse_us": 1500,
+    "last_lower_pulse_us": 1500,
+    "last_telemetry_joint_before_stop": 1,
+    "final_PWM_state": "Stopped: OFF acknowledged after last DATA row; recorder then closed with another explicit stop request."
+  },
+  "limitations": [
+    "Visual estimates have unquantified angular uncertainty, not calibrated precision.",
+    "One observation per angle; backlash, hysteresis, load and battery dependence unmeasured.",
+    "Both joints individually visited +/-45 with the other link supported; simultaneous +/-45 combinations are not validated.",
+    "Do not extrapolate this map to the policy range of +/-80 deg or to +/-90 deg.",
+    "One 120-second session timeout stopped PWM during a return; later explicit reselect resumed calibration.",
+    "Uncalibrated BAT ADC values with USB attached do not quantify current, voltage sag or net charging."
+  ]
+}

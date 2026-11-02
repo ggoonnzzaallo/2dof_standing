@@ -29,9 +29,9 @@ Edit [assumptions.json](assumptions.json), then run the builder and checks below
 - The board is an **assumed 4 g**, carried over from the earlier model, not a verified manufacturer weight. Small hardware has an **assumed 0.5 g allowance per body**, distributed near the corresponding pivot. Neither is a physical measurement.
 - No separate wiring mass or future carrier PCB is added. Vendor battery/servo assembly masses may already include factory leads.
 - The identical sliced horn brackets are both assigned about 0.908 g, although the upper STEP bracket is slightly shorter.
-- Joint travel is provisionally ±80°, with mathematical positive directions following the right-hand rule. Physical pulse-to-angle mapping, signs and clearance limits are not calibrated.
+- Joint travel is provisionally ±80°, with mathematical positive directions following the right-hand rule. A later [visual static calibration](../../firmware/servo_calibration/results/2026-11-02/visual_mapping.json) identifies nominal 1500 µs zero and negative pulse-to-CAD-angle signs on both joints, with approximate ±45° references at 1100/1900 µs. Full travel and compound clearance remain unmeasured; do not extrapolate the visual map to the simulated ±80° limits.
 - The motors retain exploratory torque/speed/control parameters. A 0.07 N·m torque limit is not a measurement of the delivered servo at battery voltage.
-- The IMU site is at the board envelope center with axes aligned to the base. The actual chip location, sensor-axis transform and attitude filter still need calibration. Gravity observations currently use simulation truth plus optional noise.
+- The IMU site is at the board envelope center with axes aligned to the base. The physical chip location remains approximate. A provisional measured sensor-to-base transform and gravity filter are now tested in [policy shadow](../../firmware/policy_shadow/README.md). The default environment still uses truth plus simple noise; the filtered evaluator uses the same firmware C++ estimator and simulated specific force.
 
 ## Contacts and numerical checks
 

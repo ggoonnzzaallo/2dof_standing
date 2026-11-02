@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-02",
+  "status": "passed",
+  "checks": [
+    "Six observed poses match raw session and exact settled-PWM telemetry",
+    "Raw session JSON/CSV/transcript SHA-256 verified",
+    "Reviewed pulse signs and CAD joint axes agree",
+    "Offline interpolation tests: three passed",
+    "Requests outside +/-45 deg and non-finite/unreviewed inputs refused",
+    "XML and actor checksums unchanged; no new firmware upload"
+  ],
+  "robot_xml_sha256": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+  "actor_zip_sha256": "ccf63163ab02820a343b74ce28905d2dd313ac06e7a81f1aa290ac568ee9c971",
+  "artifact_sha256": {
+    "firmware/servo_calibration/results/2026-11-02/visual_mapping.json": "86efe1ad96d33a2604e01725fb68cf17f0e72f83b772513e936fd9fc6cc4ee09",
+    "scripts/servo_mapping.py": "5651b58f58b42ac0e717343ce5fe8a053752a19650a15140afe0a65687b21c12",
+    "scripts/test_servo_mapping.py": "d65f641bac0532e4e7f590481d68a6504351c1d51dbb205306e4c0ca5481e0dc",
+    "cad/onshape_import/joint_map.json": "d436dc3cd472de8523a16baeccc0ab3cdfe264455332be469095d3420f66123d"
+  },
+  "physical_recovery_tested": false,
+  "full_travel_validated": false
+}

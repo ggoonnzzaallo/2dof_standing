@@ -2,7 +2,7 @@
 
 **Future revision:** the user requests a custom carrier PCB to reduce loose wiring. Track this in [the hardware backlog](docs/HARDWARE_BACKLOG.md). Wiring mass is explicitly excluded from the first mass model at the user's request.
 
-**Hardware status (30 October 2026):** The PTK 7465 MG pair is in hand, both joints have passed supported small-motion checks on the earlier harness, and the horns are installed. Exact angle mapping, loaded current/torque and final CAD clearances remain to be characterized. The current Rev B design below removes the Pololu switch; the physical rewire is pending. See [procurement status](docs/PROCUREMENT_STATUS.md).
+**Hardware status (2 November 2026):** The PTK 7465 MG pair is assembled with horns installed and Rev B direct-battery wiring live. Both joints have been cycled and visually checked at nominal straight (1500 µs) and approximately ±45° (1100/1900 µs). The [reviewed static mapping](firmware/servo_calibration/results/2026-11-02/visual_mapping.json) identifies negative pulse-to-CAD-angle signs for both joints. Full travel, compound clearance, loaded dynamics and power margin remain unmeasured. See [procurement status](docs/PROCUREMENT_STATUS.md).
 
 The IMU is the LSM6DS3TR-C chip **on the XIAO nRF52840 Sense PCB**. Mount that PCB rigidly on the base, near the controller envelope shown in `cad/assembly.step`. There is no separate IMU module or IMU wire harness. The reference ATOM Matrix also contains its own IMU (MPU6886). See the [board comparison and parts-count options](docs/CONTROLLER_DECISION.md).
 
