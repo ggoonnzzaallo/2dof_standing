@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-02",
+  "firmware": "ROBOT POLICY CONTROL 0.1",
+  "status": "Uploaded; hardware shadow, upright live trial and user-confirmed unassisted sideways recovery completed.",
+  "flash_bytes": 84600,
+  "static_RAM_bytes": 7880,
+  "optimization": "-O2",
+  "upload_acknowledgement": "Device programmed.",
+  "trained_joint_limit_deg": [
+    -80,
+    80
+  ],
+  "policy_hz": 50,
+  "action_increment_rad": 0.06,
+  "pulse_envelope_us": [
+    789,
+    2211
+  ],
+  "measured_angle_references_deg": [
+    -45,
+    0,
+    45
+  ],
+  "extrapolation_authorization": "User explicitly instructed use of trained values instead of +/-45-degree cap.",
+  "collision_fix_timing": "User requested correction of broad adjacent-body exclusions at next training pass; current weights/XML unchanged.",
+  "source_sha256": {
+    "firmware/policy_control/policy_control.ino": "1ca1adda3c817834c870386631152a1c021fba9cb07c8477efc4a46e09ded917",
+    "firmware/policy_control/ServoProfile.h": "31c654bc83fb7f33c5efda7fb3c884172a9de2d7384dcde5feccb34879154fb1",
+    "firmware/policy_shadow/GravityFilter.h": "56a9f56320f34c741928b741b59f6deacd61c940d45438b712e1bb8d6de92279",
+    "firmware/policy_shadow/MountCalibration.h": "fba18cc088fb8676bde02659364169a6e2b92371eab94adedddf66257824c0a4",
+    "firmware/policy_shadow/MicrosecondClock.h": "10fbb783a61c25b88d82c9455131fa4e1793ce66c4c0b2babce40aa00f29146e",
+    "firmware/imu_bench/Lsm6ds3.h": "536dc03cb659c0be6613e8e9a1ec16918a9077617709ce9ce6e553e8fcbb4b0e",
+    "firmware/imu_bench/ImuBus.h": "175a406c4aa03c63a01f50d593997fa3a450e545c61f7b4a2fbf4e96e73f496d",
+    "firmware/servo_center/FineServo.h": "f40e2733640c9df9be8cffe396387a289df8746dc7edac3a3a771aadc591c830",
+    "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff",
+    "sim/recovery/results/policy_simulation_only.zip": "ccf63163ab02820a343b74ce28905d2dd313ac06e7a81f1aa290ac568ee9c971",
+    "sim/robot.xml": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+    "firmware/servo_calibration/results/2026-11-02/visual_mapping.json": "86efe1ad96d33a2604e01725fb68cf17f0e72f83b772513e936fd9fc6cc4ee09",
+    "scripts/control.py": "b947ac47187cf313003d922fed41164223d97a036826e776e89b9424f2fc30f2",
+    "scripts/robot.py": "f2f4f7d894afd54faab076e1edb95ffbe1999ee935e033a72974f8ba799b97d2"
+  },
+  "local_image_sha256": {
+    "policy_control.ino.hex": "180eb87296ecbaedc1d60189071f429bb06775af9321e63d2853392e7a1eba53",
+    "policy_control.ino.elf": "50d4b4de8396edbfaedaae7151cd79294cc37cf44601a0c9a0e1fbe0207b380e",
+    "policy_control.ino.zip": "ddb3f16312e133b6605c6a2dd4517553e496197d981806cb1d8591b2b9c65402"
+  },
+  "checks": [
+    "Full firmware regression suite passed",
+    "Actual-sketch telemetry passed supervisor analysis",
+    "500-frame hardware shadow: zero I2C errors, zero PWM, zero dropped telemetry",
+    "Off acknowledged after shadow capture",
+    "First live upright trial: 750 frames; user confirmed free movement and remained standing; OFF acknowledged.",
+    "Sideways trial: 750 frames, zero I2C errors/drops, full +/-80 targets used; user confirmed unassisted recovery and additional manual disturbances; OFF acknowledged."
+  ],
+  "physical_recovery_validated": true,
+  "hardware_observations": [
+    {
+      "capture": "live_upright_01.json",
+      "user_report": "Yes\u2014moved freely and stayed standing",
+      "starting_pose": "upright",
+      "physical_self_righting_test": false,
+      "maximum_commanded_angle_deg": 18.480810977724214
+    },
+    {
+      "capture": "live_sideways_01.json",
+      "operator_report": "Recovered without assistance; user disturbed/repositioned it again during the run.",
+      "starting_pose": "resting sideways, base vertical, lower horn side up",
+      "initial_estimated_tilt_deg": 98.5853776564855,
+      "final_estimated_tilt_deg": 1.52458651382643,
+      "full_target_limit_reached_deg": 79.99997699027486
+    }
+  ],
+  "physical_recovery_scope": "First user-confirmed sideways recovery trial, 15 seconds, with additional user disturbances. Other starting orientations/surfaces and battery-only autonomy not established."
+}

@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-02",
+  "status": "passed",
+  "checks": [
+    "Compiled/actual-sketch fake-hardware control regression passed",
+    "Actual test-sketch telemetry decoded and validated by host supervisor",
+    "Existing firmware regression suite passed",
+    "500 hardware shadow frames, 750 upright live frames, 750 sideways live frames",
+    "All raw CSV hashes and counts verified; no I2C errors or telemetry drops",
+    "Source hashes match uploaded build; original model/actor unchanged",
+    "OFF acknowledged after each trial",
+    "User confirmed upright motion and unassisted sideways recovery with later manual disturbances"
+  ],
+  "scope": "First supervised USB-tethered physical self-righting demonstration; not a reliability rate or full-envelope clearance proof.",
+  "artifact_sha256": {
+    "firmware/test_policy_control.py": "0f47aefc631312ccff3f54696eacdcd98e5b353c3f760388691f0a0a42dd1250",
+    "scripts/plot_control.py": "c403634ad33423d4ff277ebc333f3d69b85384479e56c0e091c2fe4326cb51fb",
+    "firmware/policy_control/results/2026-11-02/deployment.json": "b764262a26a8e1ee0145c9483ab390e2011b856f7cfcaa5467313ad74cc31887",
+    "firmware/policy_control/results/2026-11-02/sideways_observation.json": "c4dc9f0b17d5e68cd0eb71c51956331d54df3c8412dda320223d557e9859d2b2",
+    "firmware/policy_control/results/2026-11-02/live_sideways_01.png": "39917c4e3118f5221767163577e2dcde16ff986dbef1a925b3457bd947373189"
+  }
+}

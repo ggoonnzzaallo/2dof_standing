@@ -1,6 +1,6 @@
 # Rev B terminal control - direct battery power
 
-**Currently uploaded for hardware commissioning: [visual servo calibration 0.1](servo_calibration/README.md)**, disarmed on boot and controlled one joint at a time through `scripts/calibrate_servos.py`. Use `build-calibration` / `upload-calibration`. The preceding [policy shadow 0.1](policy_shadow/README.md) remains available via `upload-shadow`; it runs learned inference with virtual targets and motor outputs disabled. The servo bench 0.10 program documented below remains the default `upload` target.
+**Currently uploaded: [supervised learned controller 0.1](policy_control/README.md)**. It boots disarmed, uses the unchanged trained ±80° policy contract and measured negative PWM signs, and requires explicit arming/run plus USB heartbeat. Use `build-control` / `upload-control` and `scripts/control.py`. The first 500-frame no-PWM hardware check passed. The [visual calibration](servo_calibration/README.md) and [policy shadow](policy_shadow/README.md) remain available through their explicit upload targets. Ordinary `upload` still selects the servo bench 0.10 described below.
 
 **Current source: version 0.10, direct-powered servos with no Pololu.** D0/marked 0 controls the lower servo, D1/marked 1 controls the upper, and D2 is unused. Both PWM outputs stop on boot, timeout, USB serial disconnect, `off` or `!`. **None of these actions disconnects servo power.** Full OFF requires battery and USB unplugged.
 

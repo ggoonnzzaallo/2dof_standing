@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-02",
+  "capture": "live_sideways_01.json",
+  "starting_pose": "User confirmed resting sideways, base vertical, lower horn side up, USB cable slack.",
+  "initial_estimated_tilt_deg": 98.5853776564855,
+  "final_estimated_tilt_deg": 1.52458651382643,
+  "maximum_estimated_tilt_deg": 98.58943383393813,
+  "pulse_min_max_us": [
+    789,
+    2211
+  ],
+  "user_observation": {
+    "unassisted_recovery": "Yes\u2014without assistance",
+    "additional_manual_disturbances": "Yes\u2014I disturbed it again",
+    "specific_disturbance_times": "Not recorded by operator; do not infer exact intervention times from telemetry."
+  },
+  "physical_recovery_validated": true,
+  "limitations": [
+    "Orientation telemetry does not distinguish human assistance/repositioning from self-righting.",
+    "No shaft-angle, contact-force or position measurements.",
+    "Broad adjacent-body contact exclusions remain in the training model; correction deferred to next training pass per user request."
+  ],
+  "validation_scope": "One user-observed 15-second sideways-start trial with additional manual disturbances; not a reliability rate or full-envelope clearance test."
+}

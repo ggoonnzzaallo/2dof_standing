@@ -1,0 +1,50 @@
+{
+  "requested_seconds": 10.0,
+  "shadow": true,
+  "physical_motor_commands_requested": false,
+  "trained_range_deg": [
+    -80,
+    80
+  ],
+  "angle_mapping": "Linear extrapolation of visually measured +/-45 deg references, explicitly authorized by user.",
+  "actor_header_sha256": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff",
+  "firmware_banner": [
+    "ROBOT POLICY CONTROL 0.1",
+    "MODE: 0",
+    "IMU_READY: 1",
+    "FILTER_READY: 1",
+    "RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.",
+    "PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.",
+    "GUARDS: 3 s heartbeat, 60 s trial, 20 ms sensor age, 10 ms deadline lateness, battery guard.",
+    "REV_B: stop removes PWM only. Direct servo power remains connected.",
+    "Commands: arm (1500 us both), run, shadow (no PWM), keep, off, !, status, help",
+    "READY"
+  ],
+  "stop_acknowledgement": "OFF. Emergency PWM stop.",
+  "contract_checks": "passed",
+  "frames_logged": 500,
+  "last_frame": 500,
+  "mode": "no-PWM shadow",
+  "MCU_vs_host_max_action_error_from_quantized_observations": 1.284652709987455e-06,
+  "history_max_error": 8.22784697124268e-07,
+  "target_integration_max_error_rad": 1.1823279935929687e-06,
+  "unit_DOWN_max_norm_error": 6.005518196072757e-07,
+  "PWM_mapping_max_rounding_difference_us": 0.0,
+  "inference_median_us": 1217.0,
+  "inference_max_us": 1225,
+  "deadline_lateness_max_us": 1382,
+  "sample_age_max_us": 5169,
+  "i2c_errors_start_end": [
+    0,
+    0
+  ],
+  "dropped_telemetry": 0,
+  "battery_node_min_max_mv": [
+    4134,
+    4145
+  ],
+  "maximum_commanded_angle_deg": 17.47687432909599,
+  "limitation": "Telemetry confirms numerical commands, not actual shaft angles or physical recovery.",
+  "status": "completed",
+  "CSV_sha256": "464ebcd920030fb8fbaf543fd2dc10d16a23228d3b0f467f07af84cc36a02a0a"
+}

@@ -111,12 +111,12 @@ def require_tools():
 
 def build(sketch='servo_center'):
     require_tools()
-    if sketch not in ('servo_center', 'policy_probe', 'imu_bench', 'policy_shadow', 'servo_calibration'):
+    if sketch not in ('servo_center', 'policy_probe', 'imu_bench', 'policy_shadow', 'servo_calibration', 'policy_control'):
         raise ValueError('Unknown project sketch.')
     build_path = ROOT / 'build' / sketch
     props = {'tools.nrfutil.cmd': str(UPLOADER),
              'tools.nrfutil.cmd.macosx': str(UPLOADER)}
-    if sketch in ('policy_shadow', 'servo_calibration'):
+    if sketch in ('policy_shadow', 'servo_calibration', 'policy_control'):
         # Preserve finite-value guards in the estimator (the core defaults to Ofast).
         props['compiler.optimization_flag'] = '-O2'
     if platform.system() == 'Darwin' and platform.machine() == 'arm64':
@@ -173,7 +173,7 @@ def upload(port, sketch='servo_center'):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['setup', 'build', 'build-probe', 'build-imu', 'build-shadow', 'build-calibration', 'ports', 'upload', 'upload-imu', 'upload-shadow', 'upload-calibration', 'monitor', 'check', 'test'])
+    parser.add_argument('action', choices=['setup', 'build', 'build-probe', 'build-imu', 'build-shadow', 'build-calibration', 'build-control', 'ports', 'upload', 'upload-imu', 'upload-shadow', 'upload-calibration', 'upload-control', 'monitor', 'check', 'test'])
     parser.add_argument('--port', help='Explicit XIAO serial port; auto-detects if exactly one is connected')
     args = parser.parse_args()
     if args.action == 'setup':
@@ -188,6 +188,8 @@ def main():
         build('policy_shadow')
     elif args.action == 'build-calibration':
         build('servo_calibration')
+    elif args.action == 'build-control':
+        build('policy_control')
     elif args.action == 'ports':
         print(json.dumps(board_ports(), indent=2))
     elif args.action == 'upload':
@@ -198,6 +200,8 @@ def main():
         upload(args.port, 'policy_shadow')
     elif args.action == 'upload-calibration':
         upload(args.port, 'servo_calibration')
+    elif args.action == 'upload-control':
+        upload(args.port, 'policy_control')
     elif args.action == 'monitor':
         run([PYTHON, '-m', 'serial.tools.miniterm', find_port(args.port), '115200', '--eol', 'LF', '--echo'])
     elif args.action == 'check':
@@ -219,6 +223,7 @@ def main():
         run([sys.executable, ROOT / 'firmware' / 'test_gravity_filter.py'])
         run([sys.executable, ROOT / 'firmware' / 'test_policy_shadow.py'])
         run([sys.executable, ROOT / 'firmware' / 'test_servo_calibration.py'])
+        run([sys.executable, ROOT / 'firmware' / 'test_policy_control.py'])
 
 
 if __name__ == '__main__':

@@ -21,3 +21,8 @@ PCB design and component selection are deferred to a future hardware revision; t
 ## Current mass-model assumptions
 
 At the user's instruction, ignore wiring mass for the first simulation mass model. Keep that exclusion explicit in mass records. The current model must not add an imaginary carrier PCB mass; the PCB belongs to a later physical revision.
+
+
+## Simulation contact correction before next training — 2 November 2026
+
+At the user's request, replace the current base–middle and middle–upper whole-body contact exclusions with geometry/selective contact rules that allow intended pivot mating but detect real adjacent-link clashes. Audit the full joint envelope and dynamic motion, regenerate affected demonstrations, and retrain/evaluate with the real observation pipeline. Details are in [the calibration/training plan](SIM_CALIBRATION_PLAN.md#required-correction-at-the-next-training-pass--2-november-2026). This is explicitly deferred to the next training pass; it is not a claim that the present simulator has validated physical clearance.
