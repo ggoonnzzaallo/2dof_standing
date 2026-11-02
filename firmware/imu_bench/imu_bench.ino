@@ -28,12 +28,15 @@ uint16_t readBatteryMv() {
 }
 
 void status() {
-  Serial.println("ROBOT IMU BENCH 0.1");
+  Serial.println("ROBOT IMU BENCH 0.4");
   Serial.println("SENSOR_ONLY: D0/D1 LOW, no PWM; direct servo power is not disconnected.");
   Serial.print("IMU_READY: "); Serial.println(imu.ready ? 1 : 0);
   Serial.print("I2C_ADDRESS_DEC: "); Serial.println(imu.address);
   Serial.print("WHO_AM_I_DEC: "); Serial.println(imu.identity);
   Serial.println("IMU_CONFIG: sensor axes; 208 Hz; +/-8 g; +/-2000 deg/s; gyro output rad/s");
+  Serial.print("I2C_ERRORS: "); Serial.println(imu.errors);
+  Serial.print("I2C_LAST_ERROR: "); Serial.println(imu.bus.lastError);
+  Serial.print("I2C_HW_ERROR: "); Serial.println(imu.bus.hardwareError);
   Serial.print("BATTERY_MV: "); Serial.println(batteryMv);
   Serial.println("Battery is an uncalibrated BAT-node estimate; USB does not establish net charging.");
   Serial.println("Commands: status, sample, stream (50 Hz, max 30 s), off, !, help");
@@ -97,9 +100,12 @@ void loop() {
     else { streaming = false; used = 0; discard = true; }
   }
   if (streaming) {
-    if (uint32_t(now-streamAt) >= 30000) { streaming = false; Serial.println("OFF. 30 s sensor stream finished."); }
+    // A command above may start streaming after the loop-entry timestamp.
+    // Re-read time to avoid unsigned underflow looking like a 30 s timeout.
+    const uint32_t streamNow = millis();
+    if (uint32_t(streamNow-streamAt) >= 30000) { streaming = false; Serial.println("OFF. 30 s sensor stream finished."); }
     else if (!fresh()) { streaming = false; Serial.println("ERROR: IMU sample stale; stream stopped."); }
-    else if (uint32_t(now-reportAt) >= 20) { reportAt = now; report(); }
+    else if (uint32_t(streamNow-reportAt) >= 20) { reportAt = streamNow; report(); }
   }
   delay(1);
 }

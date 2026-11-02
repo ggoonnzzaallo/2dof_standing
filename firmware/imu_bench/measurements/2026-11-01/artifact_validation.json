@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "source_and_device_image_hashes": "matched",
+  "capture_hashes_and_quality": "matched/passed",
+  "rotation_recomputed_from_confirmed_poses": true,
+  "independent_inverted_error_deg": 2.4076854599302284,
+  "calibration_applied_to_firmware": false,
+  "physical_motor_commands_sent": false
+}

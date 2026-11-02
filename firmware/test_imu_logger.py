@@ -1,6 +1,7 @@
 """Check telemetry units/quality summaries without serial or hardware access."""
 import importlib.util
 from pathlib import Path
+from collections import deque
 
 path = Path(__file__).resolve().parents[1]/'scripts/imu.py'
 spec = importlib.util.spec_from_file_location('imu_logger',path)
@@ -36,4 +37,26 @@ try:
     raise AssertionError('Too-short recordings must fail')
 except ValueError:
     pass
+class FakeSerial:
+    def __init__(self, ready=True):
+        self.ready = ready
+        self.lines = deque([b'harging.\n', b'Commands: status, sample, stream\n'])
+        self.writes = []
+    def write(self, command):
+        self.writes.append(command)
+        self.lines.extend([b'OFF. Sensor stream stopped.\n', b'ROBOT IMU BENCH 0.4\n',
+                           b'IMU_READY: 1\n' if self.ready else b'IMU_READY: 0\n',
+                           b'Commands: status, sample, stream\n'])
+    def readline(self):
+        return self.lines.popleft() if self.lines else b''
+
+serial = FakeSerial()
+assert 'IMU_READY: 1' in logger.wait_ready(serial)
+assert all(command == b'off\nstatus\n' for command in serial.writes)
+try:
+    logger.wait_ready(FakeSerial(ready=False))
+    raise AssertionError('An unready sensor must fail the handshake')
+except RuntimeError:
+    pass
 print('PASS: stationary DOWN sign, gyro-motion rejection, timestamp rollover, I2C/saturation/dropout quality and minimum sample count.')
+print('PASS: partial USB startup banners are ignored; full ready status is required after stop acknowledgement.')

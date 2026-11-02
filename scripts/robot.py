@@ -203,6 +203,7 @@ def main():
         run([sys.executable, ROOT / 'firmware' / 'test_servo_center.py'])
         run([sys.executable, ROOT / 'firmware' / 'test_fine_servo.py'])
         run([sys.executable, ROOT / 'firmware' / 'test_imu_bench.py'])
+        run([sys.executable, ROOT / 'firmware' / 'test_imu_bus.py'])
         run([sys.executable, ROOT / 'firmware' / 'test_imu_logger.py'])
 
 

@@ -13,6 +13,33 @@ import time
 FIELDS = 't_us,ax_g,ay_g,az_g,gx_rad_s,gy_rad_s,gz_rad_s,acc_norm_g,battery_mv,sample_seq,i2c_errors,saturated,age_us'.split(',')
 
 
+def wait_ready(device, timeout=5.):
+    # Opening CDC can catch the tail of the automatic banner. Require a whole
+    # response beginning with a version line; retry status rather than trusting
+    # the first "Commands" line that happens to arrive.
+    deadline = time.monotonic()+timeout
+    next_request = 0.
+    banner = []
+    stopped = False
+    while time.monotonic() < deadline:
+        if time.monotonic() >= next_request:
+            device.write(b'off\nstatus\n')
+            next_request = time.monotonic()+.5
+        line = device.readline().decode('ascii', errors='replace').strip()
+        if line.startswith('OFF.'):
+            stopped = True
+            banner = []
+        elif line.startswith('ROBOT ') and stopped:
+            banner = [line]
+        elif line and banner:
+            banner.append(line)
+        if 'Commands: status, sample, stream' in line and banner:
+            break
+    if 'ROBOT IMU BENCH 0.4' not in banner or 'IMU_READY: 1' not in banner:
+        raise RuntimeError('Expected IMU firmware/ready sensor not found.\n'+'\n'.join(banner))
+    return banner
+
+
 def summarize(rows):
     if len(rows) < 20:
         raise ValueError('Need at least 20 valid samples.')
@@ -58,17 +85,7 @@ def record(port, seconds, out, label):
     rows = []
     with serial.Serial(port, 115200, timeout=.25, write_timeout=1) as device:
         try:
-            device.write(b'off\nstatus\n')
-            deadline = time.monotonic()+5
-            banner = []
-            while time.monotonic() < deadline:
-                line = device.readline().decode('ascii', errors='replace').strip()
-                if line:
-                    banner.append(line)
-                if 'Commands: status, sample, stream' in line:
-                    break
-            if 'ROBOT IMU BENCH 0.1' not in banner or 'IMU_READY: 1' not in banner:
-                raise RuntimeError('Expected IMU firmware/ready sensor not found.\n'+'\n'.join(banner))
+            banner = wait_ready(device)
             device.reset_input_buffer()
             device.write(b'stream\n')
             started = time.monotonic()
@@ -83,7 +100,7 @@ def record(port, seconds, out, label):
                     if line == ','.join(FIELDS):
                         got_header = True
                         continue
-                    if line.startswith(('ERROR:', 'OFF.')):
+                    if line.startswith('ERROR:') or (got_header and line.startswith('OFF.')):
                         raise RuntimeError(line)
                     if not got_header:
                         continue

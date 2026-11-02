@@ -14,7 +14,7 @@ The final-CAD exploratory simulator is runnable. The next work is to establish t
 | Recoverability baseline | Later, observe supported or supervised trials and note actual contact/slip behavior | Search short waypoint sequences in simulation, record successful demonstrations and compare them with real motion | Write a simple two-waypoint sequence and evaluate cardinal/diagonal starts before adding an optimizer |
 | RL and deployment | Review failure videos and help select representative initial poses/surfaces | Train demonstration-assisted/PPO policies, evaluate held-out cases, export actor C and verify MCU timing/parity | Own reward changes or evaluation scripts while Codex handles training infrastructure |
 
-The [sensor-only commissioning firmware and CSV recorder](../firmware/imu_bench/README.md) are now implemented and compiled for the XIAO. Physical identity, timing and axes checks remain pending. The existing servo bench program is still available; calibrated pulse-to-angle reporting, actuator identification and the dynamic IMU estimator remain to be implemented after measurements.
+The [sensor-only commissioning firmware and CSV recorder](../firmware/imu_bench/README.md) are implemented and uploaded to the XIAO. Sensor identity/configuration, clean telemetry and three known static poses are recorded. A two-pose mounting fit has 0.93° residual and an independent inverted check has 2.41° error; the provisional rotation/bias are saved but not applied to firmware. Dynamic gyro/attitude checks remain pending. The existing servo bench program is still available; calibrated pulse-to-angle reporting, actuator identification and the dynamic IMU estimator remain to be implemented.
 
 ## Concrete facts to record next
 

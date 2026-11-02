@@ -1,6 +1,6 @@
 #pragma once
 #include <Arduino.h>
-#include <Wire.h>
+#include "ImuBus.h"
 #include <math.h>
 
 // Classic XIAO Sense LSM6DS3TR-C; no external library or external I2C wires.
@@ -18,14 +18,18 @@ class Lsm6ds3 {
   uint32_t errors = 0, sequence = 0;
   bool ready = false;
   ImuSample sample;
+  ImuBus bus;
 
   bool begin() {
     ready = false;
-    digitalWrite(PIN_LSM6DS3TR_C_POWER, HIGH);
-    pinMode(PIN_LSM6DS3TR_C_POWER, OUTPUT);
+    // The IMU is powered directly by this GPIO. Match Seeed's high-drive
+    // setting; ordinary OUTPUT uses standard drive and can leave it underpowered.
+    pinMode(PIN_LSM6DS3TR_C_POWER, OUTPUT_H0H1);
+    digitalWrite(PIN_LSM6DS3TR_C_POWER, LOW);
     delay(20);
-    Wire1.begin();
-    Wire1.setClock(400000);
+    digitalWrite(PIN_LSM6DS3TR_C_POWER, HIGH);
+    delay(50);
+    bus.begin();
     const uint8_t candidates[] = {0x6a, 0x6b};
     for (uint8_t candidate : candidates) {
       address = candidate;
@@ -74,22 +78,13 @@ class Lsm6ds3 {
 
  private:
   bool write(uint8_t reg, uint8_t value) {
-    Wire1.beginTransmission(address);
-    Wire1.write(reg); Wire1.write(value);
-    if (Wire1.endTransmission() == 0) return true;
+    if (bus.write(address, reg, value)) return true;
     ++errors;
     return false;
   }
   bool read(uint8_t reg, uint8_t *out, size_t count) {
-    Wire1.beginTransmission(address);
-    Wire1.write(reg);
-    if (Wire1.endTransmission(false) != 0) { ++errors; return false; }
-    if (Wire1.requestFrom(address, count) != count) {
-      while (Wire1.available()) (void)Wire1.read();
-      ++errors;
-      return false;
-    }
-    for (size_t i=0; i<count; ++i) out[i] = Wire1.read();
-    return true;
+    if (bus.read(address, reg, out, count)) return true;
+    ++errors;
+    return false;
   }
 };

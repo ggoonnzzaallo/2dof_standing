@@ -1,0 +1,190 @@
+{
+  "status": "provisional static rotation; independent inverted check passed; dynamic validation pending",
+  "convention": "base_vector = R_sensor_to_base @ sensor_vector; column vectors",
+  "R_sensor_to_base": [
+    [
+      0.9964903978360434,
+      -0.06623058841845296,
+      0.05118980541385814
+    ],
+    [
+      0.07149661415941086,
+      0.9914658512159623,
+      -0.10901238478424213
+    ],
+    [
+      -0.043532989609071426,
+      0.11228969244927556,
+      0.992721463344751
+    ]
+  ],
+  "gyro_bias_candidate_sensor_rad_s": [
+    0.0031785369261477046,
+    -0.022638592814371257,
+    -0.006882845309381237
+  ],
+  "gyro_correction_order": "Subtract candidate bias in sensor axes, then rotate to base axes.",
+  "fit_angular_residual_deg": [
+    0.9326613011481432,
+    0.9326613011500972
+  ],
+  "pose_definitions": [
+    "Base flat and upright: accelerometer UP = base +Z.",
+    "Base vertical with lower output-horn side up: accelerometer UP = base -X."
+  ],
+  "captures": [
+    {
+      "file": "firmware/imu_bench/measurements/2026-11-01/upright.csv",
+      "sha256": "1b7967f10e4d61fe5599633192b927e01199afb2c3aeabc569a1db19c951a548",
+      "summary": {
+        "samples": 501,
+        "mean_accel_sensor_g": [
+          -0.027611449101796408,
+          0.11243627145708583,
+          1.004496862275449
+        ],
+        "accel_std_sensor_g": [
+          0.0010541197730353944,
+          0.0009641446479463923,
+          0.0009236612836933296
+        ],
+        "mean_gyro_sensor_rad_s": [
+          0.002855321357285429,
+          -0.022705662674650698,
+          -0.006903530938123752
+        ],
+        "gyro_std_sensor_rad_s": [
+          0.0009010873068260112,
+          0.0006817943326136059,
+          0.0006685753551701695
+        ],
+        "mean_accel_norm_g": 1.0111479600798403,
+        "median_sample_interval_s": 0.019531,
+        "duplicate_sample_rows": 0,
+        "sample_gaps_over_40ms": 0,
+        "sensor_quality_check": true,
+        "max_sample_age_us": 5859,
+        "saturated_rows": 0,
+        "i2c_error_count_start": 0,
+        "i2c_error_count_end": 0,
+        "battery_min_mv": 3745,
+        "battery_max_mv": 4153,
+        "rough_stationary_check": true,
+        "static_DOWN_sensor_estimate": [
+          0.027307057360767942,
+          -0.11119676127066302,
+          -0.9934231751379725
+        ],
+        "note": "Sensor axes only. Stationary heuristic is not calibration; acceleration during motion is not gravity."
+      }
+    },
+    {
+      "file": "firmware/imu_bench/measurements/2026-11-01/lower_horn_side_up.csv",
+      "sha256": "7e43555368661e478d8629dd491a2b8edc6d4bc1814a5c8a4a00fd421476ace4",
+      "summary": {
+        "samples": 501,
+        "mean_accel_sensor_g": [
+          -1.0026159680638722,
+          0.06484458283433134,
+          -0.06781300598802395
+        ],
+        "accel_std_sensor_g": [
+          0.0008685608136325537,
+          0.0012776978592862831,
+          0.0027645095351552093
+        ],
+        "mean_gyro_sensor_rad_s": [
+          0.00350175249500998,
+          -0.022571522954091816,
+          -0.006862159680638722
+        ],
+        "gyro_std_sensor_rad_s": [
+          0.003093701365455102,
+          0.005564204373131172,
+          0.0016376274626578226
+        ],
+        "mean_accel_norm_g": 1.0070011656686626,
+        "median_sample_interval_s": 0.019531,
+        "duplicate_sample_rows": 0,
+        "sample_gaps_over_40ms": 0,
+        "sensor_quality_check": true,
+        "max_sample_age_us": 5860,
+        "saturated_rows": 0,
+        "i2c_error_count_start": 0,
+        "i2c_error_count_end": 0,
+        "battery_min_mv": 3749,
+        "battery_max_mv": 4150,
+        "rough_stationary_check": true,
+        "static_DOWN_sensor_estimate": [
+          0.995649779746004,
+          -0.06439404185971484,
+          0.06734184037211466
+        ],
+        "note": "Sensor axes only. Stationary heuristic is not calibration; acceleration during motion is not gravity."
+      }
+    }
+  ],
+  "accelerometer_bias_and_scale_calibrated": false,
+  "dynamic_attitude_estimator_integrated": false,
+  "applied_to_firmware": false,
+  "limitation": "Two static poses fit mounting rotation, not full accelerometer calibration; manual placement and sensor bias affect the fit.",
+  "independent_inverted_check": {
+    "file": "firmware/imu_bench/measurements/2026-11-01/inverted_validation.csv",
+    "sha256": "c7ce0904fcbb9b553a201052a8cd5dc3531c2210bed4aa27ba0ddf025ec409ec",
+    "used_for_fitting_or_bias": false,
+    "measured_UP_in_base": [
+      0.01378605978182388,
+      -0.03968320954859457,
+      -0.9991172040534658
+    ],
+    "expected_UP_in_base": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "angle_error_deg": 2.4076854599302284,
+    "acceptance_threshold_deg": 5.0,
+    "status": "passed",
+    "summary": {
+      "samples": 501,
+      "mean_accel_sensor_g": [
+        0.054768015968063875,
+        -0.15349353293413173,
+        -0.9935801756487026
+      ],
+      "accel_std_sensor_g": [
+        0.014849946689188636,
+        0.016723488063362057,
+        0.010891181291351536
+      ],
+      "mean_gyro_sensor_rad_s": [
+        0.003923674650698603,
+        -0.020074443113772454,
+        -0.00874232135728543
+      ],
+      "gyro_std_sensor_rad_s": [
+        0.033673210979767526,
+        0.04756833208712764,
+        0.031131744885928302
+      ],
+      "mean_accel_norm_g": 1.0071063093812376,
+      "median_sample_interval_s": 0.019531,
+      "duplicate_sample_rows": 0,
+      "sample_gaps_over_40ms": 0,
+      "sensor_quality_check": true,
+      "max_sample_age_us": 5860,
+      "saturated_rows": 0,
+      "i2c_error_count_start": 0,
+      "i2c_error_count_end": 0,
+      "battery_min_mv": 3744,
+      "battery_max_mv": 4154,
+      "rough_stationary_check": true,
+      "static_DOWN_sensor_estimate": [
+        -0.05439501993718202,
+        0.15244816954934434,
+        0.9868134258344321
+      ],
+      "note": "Sensor axes only. Stationary heuristic is not calibration; acceleration during motion is not gravity."
+    }
+  }
+}

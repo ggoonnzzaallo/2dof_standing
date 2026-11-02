@@ -1,0 +1,44 @@
+{
+  "samples": 500,
+  "mean_accel_sensor_g": [
+    -0.028696352,
+    0.113380456,
+    1.00418932
+  ],
+  "accel_std_sensor_g": [
+    0.0012452711305065037,
+    0.0010335815583394853,
+    0.0011540410630260507
+  ],
+  "mean_gyro_sensor_rad_s": [
+    0.002826874,
+    -0.022658212,
+    -0.006902678
+  ],
+  "gyro_std_sensor_rad_s": [
+    0.0011204408621498729,
+    0.000713134251018665,
+    0.0006866252272684444
+  ],
+  "mean_accel_norm_g": 1.01097838,
+  "median_sample_interval_s": 0.019531,
+  "duplicate_sample_rows": 0,
+  "sample_gaps_over_40ms": 0,
+  "sensor_quality_check": true,
+  "max_sample_age_us": 5860,
+  "saturated_rows": 0,
+  "i2c_error_count_start": 0,
+  "i2c_error_count_end": 0,
+  "battery_min_mv": 3728,
+  "battery_max_mv": 4152,
+  "rough_stationary_check": true,
+  "static_DOWN_sensor_estimate": [
+    0.028384768128488627,
+    -0.11214937542800935,
+    -0.9932858715039691
+  ],
+  "note": "Sensor axes only. Stationary heuristic is not calibration; acceleration during motion is not gravity.",
+  "label": "initial_orientation_unconfirmed",
+  "requested_seconds": 10.0,
+  "physical_motor_commands_sent": false
+}

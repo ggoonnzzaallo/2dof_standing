@@ -1,5 +1,7 @@
 # Rev B terminal control - direct battery power
 
+**Currently uploaded for hardware commissioning: [IMU bench 0.4](imu_bench/README.md)**, with sensor-only logging and both servo signals held LOW. The servo bench 0.10 program documented below remains the default `upload` target; use `upload-imu` explicitly for the current sensor program.
+
 **Current source: version 0.10, direct-powered servos with no Pololu.** D0/marked 0 controls the lower servo, D1/marked 1 controls the upper, and D2 is unused. Both PWM outputs stop on boot, timeout, USB serial disconnect, `off` or `!`. **None of these actions disconnects servo power.** Full OFF requires battery and USB unplugged.
 
 The user confirmed Rev B wiring is live. Version 0.3 has also executed individual joint motions on this harness. Version 0.10 was successfully built and uploaded. It adds battery telemetry and guarded continuous faster dancing to the finer-PWM driver introduced in 0.7; commissioning details and physical observations are recorded separately in the [validation log](VALIDATION.md). Earlier 0.4 target builds were blocked by compiler subprocesses terminated with signal 9. Source defaults to `ROBOT_USE_POWER_SWITCH=0`; setting it to 1 is only for the archived Pololu Rev A harness.

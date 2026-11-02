@@ -3,3 +3,6 @@
 
 # PDF cross-reference records use significant trailing spaces; treat as binary.
 *.pdf binary
+
+# Preserve recorded CSV bytes/hashes, including the CSV writer's CRLF endings.
+firmware/imu_bench/measurements/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

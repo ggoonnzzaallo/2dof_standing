@@ -1,0 +1,32 @@
+{
+  "record_date": "2026-11-01",
+  "firmware_version": "0.4",
+  "upload_acknowledgement": "Device programmed.",
+  "device_status_file": "device_status.json",
+  "sensor_identity_hex": "0x6a",
+  "sensor_i2c_address_hex": "0x6a",
+  "configuration_readback_passed": true,
+  "setup_user_confirmed": "USB connected; battery and both complete three-pin servo plugs disconnected. XIAO fixed to base; base flat/still for upright recording.",
+  "captures": [
+    "initial_orientation_unconfirmed.csv",
+    "upright.csv",
+    "lower_horn_side_up.csv",
+    "inverted_validation.csv"
+  ],
+  "upright_pose_confirmed_by_user": true,
+  "sensor_to_base_rotation_status": "Provisional two-pose static fit; independent inverted check passed; dynamic validation pending.",
+  "gyro_bias_applied": false,
+  "policy_inference_enabled": false,
+  "servo_PWM_enabled": false,
+  "physical_motor_commands_sent": false,
+  "notes": [
+    "The initial capture pose was not confirmed and is not used as the upright reference.",
+    "BAT readings with the battery unplugged describe the charger/BAT node and do not measure a battery.",
+    "All captures are sensor axes; orientation mapping and dynamic attitude estimation remain pending."
+  ],
+  "confirmed_pose_samples": 1503,
+  "rotation_file": "mount_rotation_provisional.json",
+  "fit_residual_deg": 0.93266130115,
+  "independent_inverted_error_deg": 2.40768545993,
+  "sensor_calibration_applied": false
+}
