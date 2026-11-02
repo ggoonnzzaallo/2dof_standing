@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-02",
+  "firmware": "ROBOT SERVO CALIBRATION 0.1",
+  "status": "Built, uploaded and disarmed USB handshake verified. No motion executed in this deployment check.",
+  "flash_bytes": 48316,
+  "static_RAM_bytes": 7680,
+  "upload_acknowledgement": "Device programmed.",
+  "build_optimization": "-O2",
+  "source_sha256": {
+    "firmware/servo_calibration/servo_calibration.ino": "1a19e80b12b0e212b64184084bc825e2f6e2a4d8959a6ec3bc8d9be1d51de619",
+    "firmware/servo_center/FineServo.h": "f40e2733640c9df9be8cffe396387a289df8746dc7edac3a3a771aadc591c830",
+    "scripts/robot.py": "cf50a3724c22c5122f8bba32f2e08e4a917b54b090b4d10bdd985cbab5c7e8ea",
+    "scripts/calibrate_servos.py": "6d2935af5f6abe9a85c6eda495c8abf60485d2a0d0d949aebd2a4ac04d6bf12b",
+    "firmware/test_servo_calibration.py": "c63f5bfe29b1bf3c735efaa39758cae6517566a99a3a3c11b620c4fe62b46657"
+  },
+  "local_image_sha256": {
+    "servo_calibration.ino.zip": "e553177813b5072bb4ea49c732045e8f3cfa46335da7c128f4826da4e77d2f95",
+    "servo_calibration.ino.elf": "a973769065d33da69822b025c9842e35dca0a13b56daa9c26f211dbf7ecddfcf",
+    "servo_calibration.ino.hex": "5e0542ce89dd138931cddd613a84f2185e059b991270d4eec20970469be907b9"
+  },
+  "joint_angle_measurements": [],
+  "physical_motor_commands_sent_during_deployment_check": false,
+  "checks": {
+    "actual_sketch_fake_hardware": "passed",
+    "full_existing_firmware_regression_suite": "passed",
+    "Python_syntax": "passed",
+    "native_XIAO_build": "passed",
+    "upload_positive_acknowledgement": "passed",
+    "disarmed_USB_handshake": "passed",
+    "angle_reference_image": "rendered and visually inspected",
+    "physical_joint_angles": "pending user observations"
+  }
+}

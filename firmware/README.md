@@ -1,6 +1,6 @@
 # Rev B terminal control - direct battery power
 
-**Currently uploaded for hardware commissioning: [policy shadow 0.1](policy_shadow/README.md)**, which filters the calibrated IMU and logs neural actions with motor outputs disabled. It has no PWM driver; targets are virtual. Use `build-shadow` / `upload-shadow` and `scripts/shadow.py`. The earlier [IMU bench 0.4](imu_bench/README.md) remains available via `upload-imu`. The servo bench 0.10 program documented below remains the default `upload` target.
+**Currently uploaded for hardware commissioning: [visual servo calibration 0.1](servo_calibration/README.md)**, disarmed on boot and controlled one joint at a time through `scripts/calibrate_servos.py`. Use `build-calibration` / `upload-calibration`. The preceding [policy shadow 0.1](policy_shadow/README.md) remains available via `upload-shadow`; it runs learned inference with virtual targets and motor outputs disabled. The servo bench 0.10 program documented below remains the default `upload` target.
 
 **Current source: version 0.10, direct-powered servos with no Pololu.** D0/marked 0 controls the lower servo, D1/marked 1 controls the upper, and D2 is unused. Both PWM outputs stop on boot, timeout, USB serial disconnect, `off` or `!`. **None of these actions disconnects servo power.** Full OFF requires battery and USB unplugged.
 

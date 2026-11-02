@@ -1,0 +1,24 @@
+{
+  "created_utc": "2026-11-02T18:55:37.432341+00:00",
+  "firmware": "ROBOT SERVO CALIBRATION 0.1",
+  "method": "Approximate visual angles chosen by the operator, relative to parent link.",
+  "angle_convention": "Straight = 0 deg. Signed viewing direction provisional; CAD sign not confirmed.",
+  "CAD_sign_confirmed": {
+    "lower": false,
+    "upper": false
+  },
+  "physical_limits_confirmed": false,
+  "observations": [],
+  "events": [],
+  "firmware_banner": [
+    "ROBOT SERVO CALIBRATION 0.1",
+    "REV_B_DIRECT: PWM stop does not disconnect servo power.",
+    "ACTIVE_JOINT: -1",
+    "WINDOW_US: 1000,2000",
+    "CONTROL: one joint, 50 Hz PWM, 100 us/s commanded slew, heartbeat 5 s, maximum session 120 s.",
+    "START: first pulse is 1500 us; actual starting angle is unknown. Support both links.",
+    "Commands: lower, upper, set N, window MIN MAX (off only), keep, status, off, !, help",
+    "READY"
+  ],
+  "closed_utc": "2026-11-02T18:55:47.093287+00:00"
+}
