@@ -6,6 +6,8 @@
 
 The user-supplied final assembly and joint review are in [cad/onshape_import](cad/onshape_import/README.md). The corrected export is imported; a 0.57 mm residual servo-model offset is documented and the structural upper pivot remains the confirmed reference. The [MuJoCo model](sim/onshape/README.md) now uses that assembly, with a [simulated motion preview](sim/onshape/joint_motion.gif), explicit body inertia and decomposed printed collision shapes. Physical joint mapping, contact limits and servo/IMU calibration remain before hardware transfer.
 
+**Enclosure fit revision 2:** [new cup and thin lid](cad/electronics_pod/README.md) reduce the closed package from 24 to 14 mm, add XIAO stops and low PSA lands, move the one Pololu to the opposite front corner, and use two existing M2×10 self-tapping screws with the model’s proven 2.0 mm screw bores. Headers are removed. Physical fit of this revision is pending.
+
 The supplied slicer job gives **27.922 g of printed parts after removing supports**. See [mass properties](sim/mass_properties/README.md) for individual masses, actual print settings, preliminary inertia and remaining hardware estimates. The requested future carrier PCB is tracked in the [hardware backlog](docs/HARDWARE_BACKLOG.md).
 
 Current purchased architecture: **XIAO nRF52840 Sense + two PTK 7465 MG servos + one 500 mAh, 1S LiPo**. The user reported all parts ordered on 1 October 2026; see [procurement status](docs/PROCUREMENT_STATUS.md). Train on a computer with MuJoCo and Stable-Baselines3 PPO; run the small exported actor on the XIAO. The **IMU and LiPo charger are already on the XIAO Sense board**, which is attached to the robot's base. **Rev C is prepared with ONE existing Pololu as the battery master switch**, software PWM-off charging and an under-base enclosure. D0/D1 remain PWM; D2, Pololu ON and SW are unused. No second switch board, boost converter, external IMU, servo driver, separate charger or extra electronic components are added. Physical rewiring and firmware upload remain pending; the last confirmed live harness is Rev B.
@@ -32,7 +34,7 @@ After the arm command confirms **“Armed. Unplug USB”**, unplug USB for batte
 ## Package
 
 - [Operating instructions: disarm, battery checks, charging and rearming](docs/OPERATING_INSTRUCTIONS.md)
-- [One-piece under-base electronics cup and 3D layout](cad/electronics_pod/README.md) — [print-fit ZIP](cad/electronics_pod/rev_c_print_fit.zip), one Pololu, USB/slider access; print only the cup first
+- [One-piece under-base electronics cup and 3D layout](cad/electronics_pod/README.md) — [revised print-fit ZIP](cad/electronics_pod/rev_c2_print_fit.zip), lower cup + 2 mm lid, XIAO stops, corner switch and two M2 screws; no nuts or coupon
 - [Current PTK parts list and fastener plan](BOM.md)
 - [Ordered-parts status and incoming checks](docs/PROCUREMENT_STATUS.md)
 - [Controller comparison and IMU location](docs/CONTROLLER_DECISION.md)

@@ -7,5 +7,6 @@ build/
 runs/
 *.zip
 !cad/electronics_pod/rev_c_print_fit.zip
+!cad/electronics_pod/rev_c2_print_fit.zip
 *.log
 sim/onshape/assets/*_hulls.json

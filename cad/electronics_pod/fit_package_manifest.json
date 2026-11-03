@@ -1,23 +1,29 @@
 {
-  "revision": "Rev C, one Pololu, fit-print package",
+  "revision": "Rev C2, lower enclosure and thin lid, two M2x10 screws into plastic",
   "prepared_date": "2026-11-03",
   "print_first": "electronics_cup.stl",
+  "required_parts": [
+    "electronics_cup.stl",
+    "base_modified.stl"
+  ],
+  "fasteners": "Two M2 x 10 mm screws; 2.0 mm bores matching the user-proven printed bracket; no nuts or coupon",
   "units": "mm",
   "print_orientation": "floor down, open side up, Z=0 already",
   "physical_fit_verified": false,
   "electrical_commissioning_verified": false,
   "sha256": {
-    "electronics_cup.stl": "0d9248c089afde76a0850871bf623f9828ffd168d75671bb8fca4cfb7074cb6e",
-    "electronics_cup.step": "9c908b6c361b1cef4e7696559b5c477c9c8fbce1d575e4bbc67993a3d84f39d6",
-    "assembly_review.step": "a178127c7a51f1692d5774594f880f010fb90385ce45b02ee2d489c2ab0be5c8",
-    "base_modified.step": "b1fde994da007bcec707c09cd391bb08eee47f8fc14e30534e124caf29fa38bc",
-    "base_modified.stl": "2e231bb22fd94869e15cc8194eb46525c8015bcc3a3753eff61a4bcc19b15992",
-    "PRINT_FIT_CHECK.md": "5a2d182c6bfb0b52d4e3ded47acd88f83185fad8934a6058d4f6dd9323276d47",
-    "preview.png": "63b2433f25fb24efdb1476fce0c7f397d4f2e153d0f4504f388456edb49db2f1",
-    "layout.svg": "e093af4b12af1b27c22c2f3db015da1d9e67e8ba1521d083856283d686729c42",
-    "viewer.html": "de09e69909b4e80edf3288764d1aeb0a2d11e851609608c1f79ee522abeee195",
-    "geometry.json": "d6273372afc220517b986a3c85205f738efeaf0274962d0b5c94716286dcf6ce",
-    "validation.json": "8f7c2fa8e159770d9e6f99489dc64bc11f4bd124e2889c6fea1c767254bb1940",
-    "stl_validation.json": "c39351c6a5b7ce62a10d8feb46f86e99d9273908d2a45e55fec3d524bc4a9025"
+    "electronics_cup.stl": "960fc197c6c9c2dc18af98e8762c34d875c3d044cf08053712d15058cc9b1438",
+    "electronics_cup.step": "0641088867b5c5bf365f2b637d7c0142eb0eda224984bec889524ec745940c7a",
+    "assembly_review.step": "5e9fa776c61f5bdf53477c9e0b19455eff754ddc7fdab2aa5145eb72c5b7c95c",
+    "base_modified.step": "bcabbde0ac3cf1fb6bd98b9ee37e23865944868d9331eb9c69c0dcd2ae10e592",
+    "base_modified.stl": "f43627fae192a240b71a8441bd4778d4c1bc09980fa810a5f12579757334257d",
+    "PRINT_FIT_CHECK.md": "979526ccd0a32f4c92739cceb22947d92830d577962c6144c9c5dc9eb378a366",
+    "preview.png": "e5143127cdcc4e148b0603abd6a4678148ed6903fe6ea6816c2150e0546f0034",
+    "layout.svg": "9d723703eb6e834ca01705eefe953d1e31dd68ce417139a64672f213d9a5a0b9",
+    "viewer.html": "20285b644c44f1be4523224adf3af54133a844be28bd14b847989f9e9f58c194",
+    "geometry.json": "80a97c0381eddb7372a96a46716a58ece273a3bbfd35d62bb3d0c49f79368bd3",
+    "validation.json": "e2c103386f7c0fdefa1e28b0b3a73cbe5226247459b7e24ec0e3efd5dc443fbc",
+    "stl_validation.json": "7fd536dcee1e4a4c1e624a0f39327ab2527140536bfb63b4b463837e7027d39d",
+    "fit_revision_1_reference.json": "f019f19de7e3ec1d4172247884dce383ff3fe45864662d29a5c87c7df2bb3606"
   }
 }

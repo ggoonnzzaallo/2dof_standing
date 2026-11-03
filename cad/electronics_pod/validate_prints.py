@@ -10,7 +10,7 @@ from validate_stl import inspect
 
 cad = json.loads((OUT/'validation.json').read_text())
 result = {}
-for name in ('electronics_cup', 'base_modified'):
+for name in cad['printed_parts']:
     path = OUT/(name+'.stl')
     check = inspect(path)
     data = path.read_bytes()

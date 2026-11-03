@@ -2,7 +2,7 @@
 
 **Final geometry:** use the user-supplied [Onshape import and joint review](onshape_import/README.md). The generated CAD described below is historical/provisional and is not the final as-built geometry.
 
-**Packaging Rev C (prepared):** [one-piece under-base cup](electronics_pod/README.md) contains the XIAO, battery and **ONE Pololu battery master switch**. Print its [fit-check cup](electronics_pod/electronics_cup.stl) first. This is based on the final user Onshape export; older generated robot structures below are historical. Wiring/firmware installation and mechanical fit remain pending; see [Rev C wiring](../electrical/README.md).
+**Packaging Rev C (prepared):** [one-piece under-base cup](electronics_pod/README.md) contains the XIAO, battery and **ONE Pololu battery master switch**. The [new fit package](electronics_pod/rev_c2_print_fit.zip) contains the lower cup plus new 2 mm lid/servo mount, two M2×10 screws into the existing model’s 2.0 mm screw-bore baseline, no nuts or coupon. Headers are removed and both boards have low PSA lands. This is based on the final user Onshape export; older generated robot structures below are historical. Wiring/firmware installation and mechanical fit remain pending; see [Rev C wiring](../electrical/README.md).
 
 This revision follows the structure visible in the [reference photos](https://homemadegarbage.com/rl13) and [four reference STL parts](https://github.com/homemadegarbage/SelfRisingRobot/tree/main/3Dmodel): flat foot, lower exposed servo, stepped middle crank, upper exposed servo, and long straight upper arm. The previous rectangular cages and round arm disks are gone. The geometry here is newly parameterized in `build_cad.py`; it does not include or redistribute the source STL meshes.
 

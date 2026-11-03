@@ -19,7 +19,7 @@ Open the [complete schematic PDF](REV_C_WIRING.pdf), [SVG](REV_C_WIRING.svg), [P
 | Pololu **ON** and **SW** control pads | **No wires** | Operate only the board's physical slider. Do not connect D2 to ON. |
 | XIAO USB-C | Existing USB cable | Programming and onboard charging. No wire from 5V/VBUS or 3V3 to either servo. |
 
-Each existing servo plug still carries positive, ground and signal. The battery RCY and servo plugs remain **inside** the cup for service, with no routine need to reach them through a window. The [cup layout](../cad/electronics_pod/README.md) exposes only the USB port and one slider. The Pololu is supported on insulated tape and locating stops; never use its electrical pads as mounting holes.
+Each existing servo plug still carries positive, ground and signal. The battery RCY and servo plugs remain **inside** the cup for service, with no routine need to reach them through a window. The [cup layout](../cad/electronics_pod/README.md) exposes only the USB port and one slider. The Pololu is supported on low insulated PSA lands and locating stops in the corner; never use its electrical pads as mounting holes.
 
 ## Switch and software states
 

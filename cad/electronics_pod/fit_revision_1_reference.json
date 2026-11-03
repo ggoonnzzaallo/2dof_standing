@@ -1,0 +1,91 @@
+{
+  "revision": "Printed Rev C / f67ba5d",
+  "parameters": {
+    "width": 70.0,
+    "corner_radius": 5.0,
+    "wall": 1.8,
+    "roof_z": -2.0,
+    "floor_z": -20.0,
+    "floor_thickness": 2.0,
+    "mount_pitch": 59.0,
+    "m2_clearance": 2.4,
+    "battery_size": [
+      59.5,
+      19.0,
+      7.5
+    ],
+    "battery_center": [
+      0.0,
+      14.0,
+      -15.65
+    ],
+    "board_translation": [
+      -0.84944,
+      8.01904,
+      -19.5
+    ],
+    "header_bar_size": [
+      17.8,
+      2.5,
+      2.5
+    ],
+    "header_pin_length": 6.2,
+    "usb_window_size": [
+      8.0,
+      14.0,
+      8.0
+    ],
+    "usb_window_center": [
+      -34.0,
+      -15.5,
+      -14.645
+    ],
+    "pololu_translation": [
+      -7.0,
+      -34.7,
+      -17.0
+    ],
+    "switch_window_size": [
+      10.0,
+      6.0,
+      6.0
+    ],
+    "switch_window_center": [
+      0.62,
+      -34.3,
+      -15.25
+    ],
+    "pololu_edge_pocket_size": [
+      16.2,
+      6.0,
+      1.6
+    ],
+    "pololu_edge_pocket_center": [
+      0.62,
+      -34.3,
+      -16.49
+    ]
+  },
+  "printed_parts": {
+    "electronics_cup": {
+      "valid_brep": true,
+      "solids": 1,
+      "volume_mm3": 22963.82591879236,
+      "solid_reference_PLA_g_at_1_32": 30.312250212805917
+    },
+    "base_modified": {
+      "valid_brep": true,
+      "solids": 1,
+      "volume_mm3": 22638.638995424088,
+      "solid_reference_PLA_g_at_1_32": 29.883003473959796
+    }
+  },
+  "observations": [
+    "Battery locating fit accepted in user photos",
+    "XIAO needs locating stops",
+    "Switch access opening too tall",
+    "Lower board support lands requested for PSA",
+    "Headers removed; direct wires confirmed",
+    "Use two M2 x 10 screws into plastic; no nuts"
+  ]
+}

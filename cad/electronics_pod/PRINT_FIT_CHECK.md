@@ -1,20 +1,37 @@
-# Rev C enclosure — print this first
+# Enclosure fit revision 2 — Rev C2
 
-Prepared **3 November 2026** for the existing **70 × 70 mm Onshape base**, XIAO nRF52840 Sense with long header pins **up**, one E-flite 500 mAh cell and **ONE Pololu 2810**.
+Prepared **3 November 2026** from your fit photos. Uses your **M2 × 10 mm screws**, **no nuts**, and a **header-free XIAO** with directly soldered wires. Electrical Rev C remains unchanged; there is still only **ONE Pololu**.
 
-**Print `electronics_cup.stl` only for the first fit check.** It is one cup with its floor integrated, 70 × 70 × 20 mm overall. The original robot base forms the lid. There is no service panel, bottom cover or connector-access window. The front wall has the slider opening; the left wall has USB access.
+## What changed
 
-1. Import in **millimetres**, at **100% scale**. The STL already lies flat at Z=0; print **floor down, opening up**. Use PLA and your usual 0.2 mm profile; three wall lines are a reasonable fit-print starting point. Inspect the slicer around the USB opening, nut pockets and small wire-lacing bridges; use local support if your printer needs it. No claimed print weight is based on infill percentage alone.
-2. With battery and USB **unplugged**, test the empty cup against the existing base. For this check, rest the base on top without drilling or fastening anything.
-3. Place the **battery at the rear**, in its low locating stops. It must drop in without squeezing or scraping the pouch. The model leaves about 0.6 mm beneath it for thin insulating foam tape.
-4. Place the **XIAO on the left**, USB toward the left opening and long header pins upward. Keep its previous orientation. Check underside solder/BAT wires and the short lower header tails against the pads/floor. The installed header/socket/wire stack must clear the original base when placed on top. Do not force either board onto printed supports.
-5. Place **one Pololu at the front centre**, flat with components up and slider facing outward. Two rails under it accept about **0.4 mm insulating tape**; side/rear stops locate it without screws through its electrical pads. There is nominally **3 mm under the PCB** for solder and wire bends. Test actual board thickness and joints before adding tape permanently.
-6. Flip the slider through **both complete positions** from outside, using a fingertip/fingernail. The nominal actuator protrudes about **0.6 mm** beyond the wall; the opening also clears an extra ±2 mm lateral lever allowance in CAD. Real access and retention still need your fit test.
-7. Check USB insertion using your actual cable, then add the existing connectors/wires in the right-hand bay. The red blocks in the preview are only connector envelopes. Leave room to lift the original base for service; keep wires off the pouch, screw tips and moving joints.
-8. Rest the original base on top again and check pin/wire clearance. For permanent attachment only after approving the fit: four M2×10 screws and M2 nuts on a **59 × 59 mm square**, plus the **12 × 10 mm wire slot** at X=15, Y=−14. `base_modified.step/stl` provide the drill/print reference; they are not needed for the initial board fit check.
+- XIAO locating tabs around the PCB, with about 0.3 mm clearance per side. Short tabs leave the castellated solder-pad rows open.
+- Broad **0.6 mm-high PSA lands** under both boards instead of tall/narrow standoffs. Nominal 0.4 mm insulating PSA goes **on those lands**; the gaps between them relieve underside solder/wires. XIAO lands are two 4 × 8 mm strips; Pololu lands are two 12 × 3 mm strips. Check your actual tape and solder rather than forcing a board flat.
+- Pololu at the **opposite front corner**, away from the XIAO. Existing plugs lie flat in the central wire-routing bay.
+- Slider window **2.6 mm high**, down from 6 mm, plus the thin lower PCB-edge relief. Full slider motion and an extra ±2 mm lateral allowance clear in CAD.
+- Cup walls **1.2 mm**, floor **1.6 mm**. Cup body **12 mm deep**; four registration tabs extend another 0.8 mm into the lid.
+- Outside bottom edge has a **1 mm radius** to soften ground contact, with a flat central bottom.
+- New lid plate **2 mm**, down from 4 mm. The original servo frame/axes are unchanged; four small top-side gussets overlap and connect to its walls. The lid underside stays flat for printing.
+- **Two diagonal M2 × 10 screws** into blind plastic pilots. No nuts, nut pockets or two unused corner posts. Four shallow registration tabs/pockets locate the other edges.
 
-Useful feedback: does each board drop in, does the slider have full usable travel, does USB insert, do solder/wires clear, and does the original base sit flat? Please keep the slicer's predicted cup mass for the later simulation update.
+The closed electronics package is **14 mm tall rather than 24 mm**. Footprint stays **70 × 70 mm** to match the existing robot and retain the battery fit. Cup plus lid CAD solid volume is **43.5% lower**; actual printed mass depends on slicing and must be recorded separately.
 
-This is a **mechanical fit print**. The revised electrical harness is not installed, firmware 0.3 is not uploaded, and the enclosure's mass/contact changes are not yet in the trained model. The next electrical arrangement uses the Pololu as a battery master switch: **ON + USB + software PWM-off mode to charge; USB unplugged + OFF for storage**. Charge current and completion still need bench measurement.
+## Files to print
 
-See `preview.png`, `layout.svg`, `viewer.html` and `assembly_review.step` for placement. The controller/battery in the assembly are references, not printable solids. The printable STL is watertight and one connected component; selected CAD component-overlap checks passed. Actual solder joints, headers, cables, printing tolerances and fit remain unverified.
+1. **`electronics_cup.stl`** — revised lower cup. Millimetres, 100% scale, **floor down/open side up**. STL overall height is **12.8 mm including the register tabs**. PLA at 0.2 mm layers is suitable for the next fit check. Inspect USB-window bridging in the slicer.
+2. **`base_modified.stl`** — the **new thin lid with the existing servo frame**, flat underside down. It is a separate print, not another bottom cover. The old 4 mm lid is **not the matched lid** for this revision. Inspect the servo-frame bridges as for the original part.
+
+Cup and lid are each one connected watertight solid and already sit on Z=0 in their STL exports. STEP files keep the assembly coordinate frame. There is **no screw-fit coupon**. The blind screw bores copy the original printed horn-bracket holes: **2.0 mm nominal diameter** in the supplied Onshape export, which the user confirms works with the existing screws. The new lid's through-clearance holes remain 2.4 mm.
+
+## Unpowered fit sequence
+
+1. Unplug **battery and USB**. Test the empty cup and lid first: four small tabs should enter their underside pockets, the lid should seat on the rim, and the two diagonal screw holes should align. No clip forcing is needed.
+2. Put the battery in its accepted rear bay. Lateral stop locations are unchanged. Thin insulating tape under the pack should retain it without squeezing the pouch.
+3. Locate the **XIAO on the left**, USB outward and original orientation retained. Headers are omitted. Put PSA on the low lands, keeping pads/components and underside BAT solder clear. Check the direct wires have a route through the gaps; enlarge the local relief rather than bending the board or crushing a joint.
+4. Locate the **Pololu at the right front corner**, components up, slider out. PSA goes on its two low lands. **Solder VIN/VOUT/GND wires from the component side and route them upward**: there is now only about 1 mm under the board, not the previous 3 mm solder allowance. Do not use a through-hole solder mound as a mounting foot. ON/SW remain unwired.
+5. Test full slider travel from outside and USB insertion with the actual cable. The nominal lever projects about 0.6 mm beyond the wall; smaller vertical access needs your real check.
+6. Lay the existing battery/servo plugs flat and route wires in the centre. The red CAD blocks are conservative envelopes, not exact connector models. Check the lid closes without pressing solder or wires and that the 12 × 10 mm lid cable slot carries the servo leads without pinching.
+7. Install **two existing M2 × 10 mm self-tapping screws** into the diagonal bosses. The lid has 2.4 mm clearance holes; cup bores are **2.0 mm × 8.6 mm deep**, matching the proven screw-hole diameter elsewhere in the model and giving nominally 8 mm engagement plus 0.6 mm tip clearance. No nuts. Snug by hand as with the other printed joints; back-turn to find the formed thread when reopening. Retention of this new two-screw enclosure still needs a physical check.
+
+Please report board/PSA seating, slider motion, USB fit, direct-wire headroom, lid flatness and screw feel. Keep the slicer's cup and lid mass estimates for the later simulation update.
+
+This is still a **fit print**, not a structural load certificate or recovery validation. The previous photo fit confirmed the battery bay, but not this lower/wired package. No electrical rewire, firmware upload, robot movement, new training or IMU calibration is performed by these CAD changes.

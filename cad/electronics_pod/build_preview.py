@@ -7,9 +7,9 @@ from PIL import Image, ImageDraw, ImageFont
 OUT = Path(__file__).resolve().parent
 data = json.loads((OUT/'geometry.json').read_text())
 template = r'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Under-base electronics pod · CAD review</title><style>
+<title>Lower electronics pod · fit revision 2</title><style>
 *{box-sizing:border-box}body{margin:0;font:15px system-ui;color:#183644;background:#f3f6f8}main{height:100dvh;display:flex;flex-direction:column}header{padding:14px 18px;background:white}h1{font-size:20px;margin:0 0 8px}.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:8px 0}button{padding:7px 12px;border:1px solid #afc0c7;border-radius:5px;background:#f1f5f6;color:#183644}canvas{flex:1;width:100%;min-height:240px;touch-action:none;cursor:grab}footer{padding:9px 18px;background:white;font-size:13px}a{color:#166f91}.note{color:#96512a;font-size:13px}input[type=range]{width:110px;vertical-align:middle}
-</style><main><header><h1>Under-base electronics pod · first fit-review concept</h1><div class="row"><button id="pod">Focus enclosure</button><button id="robot">Whole robot</button><button id="top">Top layout</button><button id="front">Front switch</button><button id="cutaway">Open enclosure</button><label>Explode <input id="explode" type="range" min="0" max="35" value="0"></label></div><div class="row" id="toggles"></div><div class="note">70 × 70 mm footprint · adds 20 mm below current base · long header pins UP · USB at left; ONE Pololu master switch at front. Physical fit and changed recovery behavior are unverified.</div></header><canvas id="view"></canvas><footer>Drag to orbit · scroll to zoom · use visibility checkboxes to see the internals. <a href="layout.svg">Dimensioned layout</a> · <a href="PRINT_FIT_CHECK.md">Fit instructions</a> · <a href="assembly_review.step">STEP assembly</a>. No robot commands are sent by this viewer.</footer></main><script>
+</style><main><header><h1>Lower electronics pod · fit revision 2</h1><div class="row"><button id="pod">Focus enclosure</button><button id="robot">Whole robot</button><button id="top">Top layout</button><button id="front">Front switch</button><button id="lid">Thin lid</button><button id="cutaway">Open enclosure</button><label>Explode <input id="explode" type="range" min="0" max="35" value="0"></label></div><div class="row" id="toggles"></div><div class="note">70 × 70 mm footprint · 12 mm cup body + 2 mm lid · R1 bottom edge · connected frame ribs · headers removed · low PSA lands and XIAO stops · ONE Pololu in front corner · two M2×10 screws, no nuts. New fit and screw engagement unverified.</div></header><canvas id="view"></canvas><footer>Drag to orbit · scroll to zoom · use visibility checkboxes to see the internals. <a href="layout.svg">Dimensioned layout</a> · <a href="PRINT_FIT_CHECK.md">Fit instructions</a> · <a href="assembly_review.step">STEP assembly</a>. No robot commands are sent by this viewer.</footer></main><script>
 const data=__DATA__,canvas=document.getElementById('view'),gl=canvas.getContext('webgl',{antialias:true});if(!gl)throw Error('WebGL unavailable');
 const vs=`attribute vec3 pos,normal,color;uniform float yaw,pitch,zoom,aspect;uniform vec3 center,offset;varying vec3 shade;
 mat3 rx(float a){float c=cos(a),s=sin(a);return mat3(1.,0.,0.,0.,c,s,0.,-s,c);}mat3 rz(float a){float c=cos(a),s=sin(a);return mat3(c,s,0.,-s,c,0.,0.,0.,1.);}
@@ -19,16 +19,17 @@ function shader(kind,source){let s=gl.createShader(kind);gl.shaderSource(s,sourc
 let program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,vs));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));gl.useProgram(program);
 const attrs={},uni={},meshes=[];for(let k of ['pos','normal','color'])attrs[k]=gl.getAttribLocation(program,k);for(let k of ['yaw','pitch','zoom','aspect','center','offset'])uni[k]=gl.getUniformLocation(program,k);
 for(let [id,p] of Object.entries(data.parts)){let flat=[];for(let t of p.triangles){let [a,b,c]=t.map(i=>p.vertices[i]),u=b.map((v,i)=>v-a[i]),v=c.map((v,i)=>v-a[i]),n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],l=Math.hypot(...n)||1;n=n.map(x=>x/l);for(let i of t)flat.push(...p.vertices[i],...n,...p.color);}let buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(flat),gl.STATIC_DRAW);meshes.push({id,group:p.group,buffer,count:flat.length/9});}
-const groups={original:'Existing base',arm:'Arm',cup:'One-piece cup',electronics:'Electronics / headers'};
+const groups={original:'Thin lid / servo mount',arm:'Arm',cup:'One-piece cup',electronics:'Electronics (no headers)'};
 for(let [key,label] of Object.entries(groups)){let l=document.createElement('label'),i=document.createElement('input');i.type='checkbox';i.id=key;i.checked=!(key==='arm'||key==='original');i.onchange=render;l.append(i,' '+label);document.getElementById('toggles').append(l);}
-let yaw=-.65,pitch=.6,zoom=53,center=[0,0,-10],drag=false,lastX=0,lastY=0;
+let yaw=-.65,pitch=.6,zoom=53,center=[0,0,-6],drag=false,lastX=0,lastY=0;
 function render(){let dpr=Math.min(devicePixelRatio||1,2),w=Math.round(canvas.clientWidth*dpr),h=Math.round(canvas.clientHeight*dpr);canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);gl.clearColor(.953,.965,.973,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);for(let [k,v] of Object.entries({yaw,pitch,zoom,aspect:w/h}))gl.uniform1f(uni[k],v);gl.uniform3fv(uni.center,center);let e=+document.getElementById('explode').value;for(let m of meshes){if(!document.getElementById(m.group).checked)continue;let offset=m.group==='cup'?[0,0,-e]:m.group==='arm'||m.group==='original'?[0,0,e]:[0,0,0];gl.uniform3fv(uni.offset,offset);gl.bindBuffer(gl.ARRAY_BUFFER,m.buffer);for(let [k,o] of [['pos',0],['normal',3],['color',6]]){gl.enableVertexAttribArray(attrs[k]);gl.vertexAttribPointer(attrs[k],3,gl.FLOAT,false,36,o*4);}gl.drawArrays(gl.TRIANGLES,0,m.count);}}
 function visibility(values){for(let [k,v] of Object.entries(values))document.getElementById(k).checked=v;}
-document.getElementById('pod').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});document.getElementById('explode').value=0;center=[0,0,-10];zoom=53;yaw=-.65;pitch=.6;render();};
+document.getElementById('pod').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});document.getElementById('explode').value=0;center=[0,0,-6];zoom=53;yaw=-.65;pitch=.6;render();};
 document.getElementById('robot').onclick=()=>{visibility({arm:true,original:true,cup:true,electronics:true});center=[0,0,65];zoom=106;pitch=.25;document.getElementById('explode').value=0;render();};
-document.getElementById('top').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});center=[0,0,-11];zoom=43;yaw=0;pitch=Math.PI/2;document.getElementById('explode').value=0;render();};
-document.getElementById('front').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});center=[0,0,-12];zoom=43;yaw=0;pitch=0;document.getElementById('explode').value=0;render();};
-document.getElementById('cutaway').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});center=[0,0,-11];zoom=48;yaw=-.65;pitch=.8;render();};
+document.getElementById('top').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});center=[0,0,-6];zoom=43;yaw=0;pitch=Math.PI/2;document.getElementById('explode').value=0;render();};
+document.getElementById('front').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});center=[0,0,-6];zoom=43;yaw=0;pitch=0;document.getElementById('explode').value=0;render();};
+document.getElementById('lid').onclick=()=>{visibility({arm:false,original:true,cup:false,electronics:false});center=[0,0,12];zoom=48;yaw=-.65;pitch=.6;document.getElementById('explode').value=0;render();};
+document.getElementById('cutaway').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});center=[0,0,-6];zoom=48;yaw=-.65;pitch=.8;render();};
 document.getElementById('explode').oninput=render;canvas.onpointerdown=e=>{drag=true;lastX=e.clientX;lastY=e.clientY;canvas.setPointerCapture(e.pointerId);};canvas.onpointermove=e=>{if(!drag)return;yaw+=(e.clientX-lastX)*.008;pitch=Math.max(-Math.PI/2,Math.min(Math.PI/2,pitch+(e.clientY-lastY)*.008));lastX=e.clientX;lastY=e.clientY;render();};canvas.onpointerup=()=>drag=false;canvas.onpointercancel=()=>drag=false;canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(20,Math.min(240,zoom*Math.exp(e.deltaY*.001)));render();},{passive:false});addEventListener('resize',render);render();
 </script></html>'''
 (OUT/'viewer.html').write_text(template.replace('__DATA__', json.dumps(data, separators=(',', ':')).replace('</','<\\/')))
@@ -77,55 +78,57 @@ def render_region(region, anchor, center, yaw, pitch, scale, include):
 
 
 draw.text((55,35),'UNDER-BASE ELECTRONICS POD',font=font(36),fill='#183644')
-draw.text((55,85),'Rev C fit-review concept | ONE Pololu master switch + software PWM-off charge mode',font=font(23),fill='#526b78')
+draw.text((55,85),'FIT REVISION 2 | lower profile, R1 bottom edge, connected frame ribs and two screws into plastic',font=font(23),fill='#526b78')
 render_region((30,145,660,970),(345,570),(0,0,63),-.67,.28,4.3,{'original','arm','cup','electronics'})
-render_region((700,170,1770,880),(1225,535),(0,0,-12),-.65,.85,8.,{'cup','electronics'})
-draw.text((90,150),'Assembled: 20 mm added below base',font=font(24),fill='#183644')
-draw.text((780,150),'One printed cup: electronics + ONE Pololu',font=font(24),fill='#183644')
+render_region((700,170,1770,880),(1225,535),(0,0,-6),-.65,.85,8.,{'cup','electronics'})
+draw.text((90,150),'Assembled: 12 mm cup + 2 mm lid',font=font(24),fill='#183644')
+draw.text((780,150),'Lower cup: XIAO stops + corner switch',font=font(24),fill='#183644')
 draw.text((760,880),'Battery: 59.5 × 19 × 7.5 mm | low stops + thin foam tape',font=font(22),fill='#6d572c')
-draw.text((760,920),'XIAO: original orientation; long header pins point UP',font=font(22),fill='#285e43')
-draw.text((760,960),'Front slider access; internal connectors stay enclosed',font=font(22),fill='#8d4038')
+draw.text((760,920),'Both boards: 0.6 mm PSA lands; no pin headers',font=font(22),fill='#285e43')
+draw.text((760,960),'Two M2 screws into proven-size holes; 2.6 mm-high slider opening',font=font(22),fill='#8d4038')
 draw.line((55,1010,1745,1010),fill='#c5d3d8',width=2)
-draw.text((55,1034),'Not yet fit-tested. Enclosure, new masses and contact geometry must be checked before recovery use.',font=font(22),fill='#96512a')
+draw.text((55,1034),'New fit, direct-wire clearance and screw engagement need checking; model/recovery update follows fit approval.',font=font(22),fill='#96512a')
 im.save(OUT/'preview.png')
 
 # True-scale dimensioned top plan, with enough space for readable callouts.
 svg=['<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="950" viewBox="0 0 1200 950">',
      '<rect width="1200" height="950" fill="#f3f6f8"/>',
      '<style>text{font-family:Arial,sans-serif;fill:#183644}.label{font-size:20px}.small{font-size:16px}.dim{font-size:18px;fill:#526b78}</style>',
-     '<text x="45" y="48" font-size="30">Electronics pod — top layout</text>',
-     '<text x="45" y="82" class="label">Base and arm hidden · dimensions in mm · header pins point toward you</text>']
+     '<text x="45" y="48" font-size="30">Lower electronics pod — fit revision 2</text>',
+     '<text x="45" y="82" class="label">Lid and arm hidden · dimensions in mm · no headers; direct solder wiring</text>']
 S=8.; OX=420.; OY=460.
 def rect(x,y,w,h,fill,stroke='#526b78',radius=0):
     return f'<rect x="{OX+(x-w/2)*S}" y="{OY-(y+h/2)*S}" width="{w*S}" height="{h*S}" rx="{radius*S}" fill="{fill}" stroke="{stroke}" stroke-width="2"/>'
 def line(points,color='#526b78',dashed=False):
     return '<polyline points="'+' '.join(f'{OX+x*S},{OY-y*S}' for x,y in points)+f'" fill="none" stroke="{color}" stroke-width="2"'+(' stroke-dasharray="7 5"' if dashed else '')+'/>'
-svg += [rect(0,0,70,70,'#c3d1d6',radius=5),rect(0,0,66.4,66.4,'#edf2f4',radius=3.2),
+svg += [rect(0,0,70,70,'#c3d1d6',radius=5),rect(0,0,67.6,67.6,'#edf2f4',radius=3.8),
         rect(0,14,61.5,21.5,'#f4e8c6'),rect(0,14,59.5,19,'#d5b45e'),
-        rect(-22.21802,-15.5,21.,17.78,'#6c9c7a'),
-        rect(-32.7,-15.5,3.,9.1,'#c0c4c3'),
-        rect(-22.2,-23.12,17.8,2.5,'#343c3f'),rect(-22.2,-7.88,17.8,2.5,'#343c3f'),
-        rect(18,-5,13,7,'#bf7767'),rect(17,-16,9,5,'#bf7767'),rect(27,-16,9,5,'#bf7767'),
-        rect(.62,-27.08,15.24,15.24,'#43854a'),rect(1.37,-34.83,1.3,1.5,'#343c3f'),
-        rect(-34.1,-15.5,1.8,14,'#f3f6f8','#197eab'),rect(.62,-34.1,10,1.8,'#f3f6f8','#b56940')]
-for x in (-29.5,29.5):
-    for y in (-29.5,29.5):
-        svg.append(f'<circle cx="{OX+x*S}" cy="{OY-y*S}" r="{4.8*S}" fill="#c3d1d6" stroke="#526b78" stroke-width="2"/>')
-        svg.append(f'<circle cx="{OX+x*S}" cy="{OY-y*S}" r="{1.2*S}" fill="white" stroke="#526b78" stroke-width="2"/>')
+        rect(-22.21802,-15.5,21.,17.78,'#6c9c7a'),rect(-32.7,-15.5,3.,9.1,'#c0c4c3'),
+        rect(10,-4.5,13,7,'#bf7767'),rect(0,-21,9,12,'#bf7767'),rect(10,-21,9,12,'#bf7767'),
+        rect(23.62,-27.08,15.24,15.24,'#43854a'),rect(24.37,-34.83,1.3,1.5,'#343c3f'),
+        rect(-34.1,-15.5,1.2,14,'#f3f6f8','#197eab'),rect(23.62,-34.1,10,1.2,'#f3f6f8','#b56940')]
+for x in (-31.6,-12.6):
+    for y in (-25.14,-5.86):svg.append(rect(x,y,2.,.9,'#c3d1d6'))
+svg += [rect(-10.96802,-15.5,.9,8.,'#c3d1d6')]
+for x,y in [(-29.5,-29.5),(29.5,29.5)]:
+    svg.append(f'<circle cx="{OX+x*S}" cy="{OY-y*S}" r="{3.8*S}" fill="#c3d1d6" stroke="#526b78" stroke-width="2"/>')
+    svg.append(f'<circle cx="{OX+x*S}" cy="{OY-y*S}" r="{1.0*S}" fill="white" stroke="#526b78" stroke-width="2"/>')
 svg += [line([(-35,39),(35,39)]),line([(-35,36),(-35,41)]),line([(35,36),(35,41)]),
         '<text x="395" y="140" class="dim">70</text>',
         line([(39,-35),(39,35)]),line([(36,-35),(41,-35)]),line([(36,35),(41,35)]),
         '<text x="744" y="465" class="dim">70</text>',
-        line([(20,14),(44,22),(49,22)]),'<text x="825" y="275" class="label">500 mAh battery</text>',
-        '<text x="825" y="304" class="small">59.5 × 19 × 7.5</text>',
-        line([(-24,-15.5),(-43,-11),(-46,-11)]),' <text x="25" y="520" class="label">XIAO</text>',
+        line([(20,14),(44,22),(49,22)]),'<text x="825" y="275" class="label">Battery fit retained</text>',
+        '<text x="825" y="304" class="small">59.5 × 19 × 7.5 mm</text>',
+        line([(-24,-15.5),(-43,-11),(-46,-11)]),'<text x="25" y="520" class="label">XIAO stops</text>',
         '<text x="25" y="547" class="small">USB on left wall</text>',
-        line([(20,-15),(44,-8),(49,-8)]),'<text x="825" y="515" class="label">Wire / connector bay</text>',
-        '<text x="825" y="544" class="small">Existing RCY + two servo plugs</text>',
-        line([(.62,-35),(.62,-42),(20,-42)]),'<text x="600" y="813" class="label">ONE Pololu 2810 + slider window</text>',
-        '<text x="600" y="842" class="small">No connector access window or service panel</text>',
-        '<text x="45" y="894" class="small">18 mm internal height + 2 mm integral floor = 20 mm below the existing base</text>',
-        '<text x="45" y="926" class="small">Four 2.4 mm mounting holes on a 59 × 59 mm square; USB/header/wire fit is provisional.</text>',
+        line([(12,-7),(44,-8),(49,-8)]),'<text x="825" y="515" class="label">Clear wire-routing bay</text>',
+        '<text x="825" y="544" class="small">Existing plugs laid flat</text>',
+        line([(23.62,-31),(44,-24),(49,-24)]),'<text x="825" y="645" class="label">ONE Pololu at corner</text>',
+        '<text x="825" y="674" class="small">Low PSA lands + stops</text>',
+        line([(23.62,-35),(23.62,-42),(20,-42)]),'<text x="510" y="813" class="label">Slider opening 2.6 mm high (was 6)</text>',
+        '<text x="510" y="842" class="small">Thin PCB-edge relief below opening</text>',
+        '<text x="45" y="894" class="small">12 mm cup body + 2 mm lid = 14 mm closed package; registration tabs fit into lid pockets.</text>',
+        '<text x="45" y="926" class="small">Two M2×10 screws into 2.0 mm blind holes matching the proven printed-model screw fit. No nuts.</text>',
         '</svg>']
 (OUT/'layout.svg').write_text('\n'.join(svg)+'\n')
 print('Wrote viewer.html, preview.png and layout.svg')
