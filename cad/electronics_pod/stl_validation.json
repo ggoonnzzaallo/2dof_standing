@@ -1,0 +1,38 @@
+{
+  "electronics_cup": {
+    "watertight": true,
+    "components": 1,
+    "volume_mm3": 21958.8,
+    "triangles": 3366,
+    "bounds_mm": [
+      [
+        -35.0,
+        -35.0,
+        0.0
+      ],
+      [
+        35.0,
+        35.0,
+        20.0
+      ]
+    ]
+  },
+  "base_modified": {
+    "watertight": true,
+    "components": 1,
+    "volume_mm3": 22636.9,
+    "triangles": 16608,
+    "bounds_mm": [
+      [
+        -35.0,
+        -35.0,
+        1.0000000116860974e-07
+      ],
+      [
+        35.0,
+        35.0,
+        37.0
+      ]
+    ]
+  }
+}

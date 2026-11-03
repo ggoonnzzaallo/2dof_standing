@@ -59,7 +59,8 @@ def inspect(path):
     }
 
 
-results = {name: inspect(OUT / name) for name in NAMES}
-assert all(item['watertight'] and item['components'] == 1 for item in results.values())
-(OUT / 'stl_validation.json').write_text(json.dumps(results, indent=2) + '\n')
-print(json.dumps(results, indent=2))
+if __name__ == '__main__':
+    results = {name: inspect(OUT / name) for name in NAMES}
+    assert all(item['watertight'] and item['components'] == 1 for item in results.values())
+    (OUT / 'stl_validation.json').write_text(json.dumps(results, indent=2) + '\n')
+    print(json.dumps(results, indent=2))

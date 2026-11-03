@@ -31,6 +31,7 @@ After the arm command confirms **“Armed. Unplug USB”**, unplug USB for batte
 ## Package
 
 - [Operating instructions: disarm, battery checks, charging and rearming](docs/OPERATING_INSTRUCTIONS.md)
+- [One-piece under-base electronics cup and 3D layout](cad/electronics_pod/README.md) — STL for fit printing; USB and disconnect access; simulation update follows fit approval
 - [Current PTK parts list and fastener plan](BOM.md)
 - [Ordered-parts status and incoming checks](docs/PROCUREMENT_STATUS.md)
 - [Controller comparison and IMU location](docs/CONTROLLER_DECISION.md)

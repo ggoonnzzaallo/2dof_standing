@@ -1,0 +1,93 @@
+{
+  "status": "CAD review concept; not physical-fit or recovery validated",
+  "parameters": {
+    "width": 70.0,
+    "corner_radius": 5.0,
+    "wall": 1.8,
+    "roof_z": -2.0,
+    "floor_z": -20.0,
+    "floor_thickness": 2.0,
+    "mount_pitch": 59.0,
+    "m2_clearance": 2.4,
+    "battery_size": [
+      59.5,
+      19.0,
+      7.5
+    ],
+    "battery_center": [
+      0.0,
+      14.0,
+      -15.65
+    ],
+    "board_translation": [
+      -0.84944,
+      8.01904,
+      -19.5
+    ],
+    "header_bar_size": [
+      17.8,
+      2.5,
+      2.5
+    ],
+    "header_pin_length": 6.2,
+    "usb_window_size": [
+      8.0,
+      14.0,
+      8.0
+    ],
+    "usb_window_center": [
+      -34.0,
+      -15.5,
+      -14.645
+    ],
+    "service_width": 34.0,
+    "service_height": 15.0,
+    "service_x": 8.0,
+    "service_bottom_z": -17.0
+  },
+  "base_confirmed_unchanged_by_user": true,
+  "header_direction_confirmed_by_user": "long pins on USB/component side, upward",
+  "source_sha256": "a1e8b9f62ebc51399e4eba8f90decf3a52301894228f108a6677a035fa2ee229",
+  "printed_parts": {
+    "electronics_cup": {
+      "valid_brep": true,
+      "solids": 1,
+      "volume_mm3": 21964.924656106898,
+      "solid_reference_PLA_g_at_1_32": 28.993700546061106
+    },
+    "base_modified": {
+      "valid_brep": true,
+      "solids": 1,
+      "volume_mm3": 22638.638995424088,
+      "solid_reference_PLA_g_at_1_32": 29.883003473959796
+    }
+  },
+  "rigid_overlap_volume_mm3": {
+    "electronics_cup / base_modified": 0.0,
+    "electronics_cup / battery": 0.0,
+    "electronics_cup / board_CAD_envelope": 0.0,
+    "battery / board_CAD_envelope": 0.0,
+    "base_modified / board_CAD_envelope": 0.0,
+    "electronics_cup / provisional_headers": 0.0,
+    "battery / provisional_headers": 0.0,
+    "base_modified / provisional_headers": 0.0,
+    "electronics_cup / provisional_connectors": 0.0,
+    "battery / provisional_connectors": 0.0,
+    "base_modified / provisional_connectors": 0.0
+  },
+  "construction": "One printed cup with integral floor; no service panel. Existing base is the lid.",
+  "mounting_hardware": "Four M2x10 screws and four M2 nuts; no bottom-cover fasteners.",
+  "added_height_mm": 20.0,
+  "new_ground_z_mm": -22.0,
+  "new_overall_height_mm": 173.0,
+  "board_rotation_changed": false,
+  "existing_base_removed_volume_mm3": 538.6444639969923,
+  "unverified": [
+    "Actual header/wire stack and backside solder clearance",
+    "USB cable overmold and reset access",
+    "Connector sizes, installed wire lengths and grip through open access notch",
+    "Screw/nut fit",
+    "Changed contact geometry, mass/inertia and recovery behavior"
+  ],
+  "note": "No original STEP, simulator, firmware, electrical wiring or purchased BOM was changed."
+}

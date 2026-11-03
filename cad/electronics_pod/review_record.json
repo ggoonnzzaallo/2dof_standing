@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-02",
+  "revision": "One-piece cup, no service panel",
+  "user_confirmed_base": "Same 70 x 70 mm final Onshape export",
+  "user_confirmed_headers": "Long pins on the USB/component side; modeled upward",
+  "checks": [
+    "New cup and modified base are valid single-solid CAD exports",
+    "Selected cup/base/battery/PCB envelope/header/connector overlap checks passed",
+    "Full through-cuts limited to original 4 mm plate material",
+    "Binary STLs watertight, single connected components, and volumes within 0.2 percent of BRep",
+    "Cup STL bounds exactly 70 x 70 x 20 mm with floor on Z=0",
+    "Browser 3D and top/whole-robot controls visually checked; no warning/error console logs",
+    "Local README links and generator syntax checked"
+  ],
+  "physical_fit_validated": false,
+  "simulation_updated": false,
+  "training_started": false,
+  "next_step": "User prints and dry-fits cup; collect fit corrections and sliced/actual mass before model evaluation or training.",
+  "artifact_sha256": {
+    "README.md": "603b449e6d95373a8f8ec4c702377f16af3b7be8be6449389c6ce8d724f319d7",
+    "assembly_review.step": "df31230853b202bf4f27d1583656fc32469531edf89afd1c92e5f2fe69a558e7",
+    "base_modified.step": "b1fde994da007bcec707c09cd391bb08eee47f8fc14e30534e124caf29fa38bc",
+    "base_modified.stl": "2e231bb22fd94869e15cc8194eb46525c8015bcc3a3753eff61a4bcc19b15992",
+    "build_pod.py": "e06f64767d4b17e65b2978be336c12a4b13aff367ce69d30ccd690b9070fb449",
+    "build_preview.py": "e4da78c2ebb35fe6fff157009bfe879a41d837ed4badb1252b32cffb13cc4834",
+    "electronics_cup.step": "1642e1bc17d9c6ac5c3f8d3632eb8b03bded68a536ca1c822474cbf4fa817b7b",
+    "electronics_cup.stl": "914522297e679b1c6200c01036ef1dbdf2c1e73722f8c033f58925aa30df8331",
+    "geometry.json": "cfe1dc2b561889a2ec06169cb1e2ff88f7123ce585817f9a035efbed204a1a86",
+    "layout.svg": "e93c57b2a9c34c6e60c09c049fa0ab07b60b18e2d857494d44551c36dfbe1591",
+    "preview.png": "334e98a2131a6f2a37c9b76ec6e33be9beb1bf7927c336389ddc5b8e9cd04b7e",
+    "stl_validation.json": "c183a40c66207741d2c5e3d66b6efaee13bf3dd4d42d8c695dba437324ada67f",
+    "validate_prints.py": "017cec81c288f4f69a8271291b9b6588a205be710ab230415515c05f6734a048",
+    "validation.json": "47ab2c30556068f4afa6ec682a90e8f33eba899e4e8a2b0568e42b365fa1b80a",
+    "viewer.html": "b6d6687ab39fd052d1facc1add450fa6dbbffe496ac6cb4aacd1c342cee48d46"
+  },
+  "unchanged_runtime_sha256": {
+    "firmware/policy_control/policy_control.ino": "2989e83e4c7499f9b722f2148ffe0a40a7939ff71ab2cd8353d1c4c082dfeaae",
+    "sim/robot.xml": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+    "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff"
+  }
+}
