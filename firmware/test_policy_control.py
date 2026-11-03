@@ -110,7 +110,22 @@ int main(int argc,char** argv){
  nextPolicy=clockUs.now()-10001;loop();checkOff();
  resetFixture();send("arm\n");waitMs(1100);send("standalone\n");Serial.open=false;waitMs(200);
  Serial.open=true;send("!\n");checkOff();
- std::cout<<"PASS: actual actor, 80-degree conversion, one-second neutral hold, 50 Hz target/PWM, shadow isolation, attach failures, battery/sensor/nonfinite/USB/heartbeat/deadline/session/input stops, nonblocking telemetry, clock rollover and explicit standalone USB/heartbeat independence with battery/sensor/timing stops.\n";
+ // Charging stops active PWM immediately and stays latched without USB/DTR,
+ // heartbeat, sensor readiness or the normal trial timeout. It does not arm.
+ running();send("charge\n");assert(mode==CHARGE);
+ assert(!motors[0].attached()&&!motors[1].attached()&&levels[D0]==LOW&&levels[D1]==LOW);
+ assert(frames==0&&pulses[0]==0&&pulses[1]==0);
+ assert(levels[PIN_CHARGING_CURRENT]==LOW);
+ Wire1.regs[0x1e]=0;Serial.open=false;waitMs(61000);
+ assert(mode==CHARGE&&frames==0&&!motors[0].attached()&&!motors[1].attached());
+ Serial.open=true;send("state\nstatus\nhelp\nkeep\n");assert(mode==CHARGE);
+ send("run\nstandalone\nshadow\n");assert(mode==CHARGE&&frames==0);
+ send("off\n");checkOff();
+ resetFixture();adcRaw=0;attitude=GravityFilter();send("charge\n");assert(mode==CHARGE);
+ send("!\n");checkOff(); // Emergency stop remains available during charge.
+ resetFixture();send("charge\n");send("arm\n");assert(mode==HOLD);
+ waitMs(1100);send("standalone\n");assert(mode==STANDALONE);send("off\n");checkOff();
+ std::cout<<"PASS: actual actor, 80-degree conversion, one-second neutral hold, 50 Hz target/PWM, shadow isolation, attach failures, battery/sensor/nonfinite/USB/heartbeat/deadline/session/input stops, nonblocking telemetry, clock rollover, standalone operation and latched no-PWM charging/rearming.\n";
 }
 '''
 with tempfile.TemporaryDirectory() as folder:

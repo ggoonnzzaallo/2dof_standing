@@ -15,7 +15,8 @@ from shadow import HostActor
 
 ROOT = Path(__file__).resolve().parents[1]
 LIMIT = 1.3962634016
-BANNER = 'ROBOT POLICY CONTROL 0.2'
+BANNER = 'ROBOT POLICY CONTROL 0.3'
+SUPPORTED_BANNERS = {BANNER, 'ROBOT POLICY CONTROL 0.2'}
 
 
 def handshake(device):
@@ -31,11 +32,11 @@ def handshake(device):
         if line.startswith('OFF.'):
             stopped = True
             lines = []
-        elif line == BANNER and stopped:
+        elif line in SUPPORTED_BANNERS and stopped:
             lines = [line]
         elif lines and line:
             lines.append(line)
-        if line == 'READY' and all(v in lines for v in [BANNER, 'MODE: 0', 'IMU_READY: 1', 'FILTER_READY: 1']):
+        if line == 'READY' and lines and lines[0] in SUPPORTED_BANNERS and all(v in lines for v in ['MODE: 0', 'IMU_READY: 1', 'FILTER_READY: 1']):
             return lines
     raise RuntimeError('Expected a ready, disarmed learned controller.\n' + '\n'.join(lines))
 

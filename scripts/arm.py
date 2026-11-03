@@ -1,4 +1,4 @@
-"""Mac controls: arm for untethered operation, stop, or inspect without stopping."""
+"""Mac controls: arm, stop, latch no-PWM charging mode, or inspect state."""
 import argparse
 from datetime import datetime, timezone
 import json
@@ -7,7 +7,7 @@ import time
 from control import handshake
 
 ROOT = Path(__file__).resolve().parents[1]
-MODES = {0: 'OFF', 1: 'NEUTRAL HOLD', 2: 'USB TRIAL', 3: 'SHADOW', 4: 'STANDALONE'}
+MODES = {0: 'OFF', 1: 'NEUTRAL HOLD', 2: 'USB TRIAL', 3: 'SHADOW', 4: 'STANDALONE', 5: 'CHARGE / PWM OFF'}
 
 
 def parse_state(line):
@@ -28,7 +28,7 @@ def stop_pwm(device, clock=time.monotonic):
         line = device.readline().decode('ascii', errors='replace').strip()
         if line.startswith('OFF'):
             return line
-    raise RuntimeError('Stop not acknowledged. Disconnect battery and USB for full power-off.')
+    raise RuntimeError('Stop not acknowledged. Unplug USB and isolate battery (Rev C: slide OFF).')
 
 
 def query_state(device, clock=time.monotonic, running=False):
@@ -61,6 +61,34 @@ def operate(device, action, clock=time.monotonic):
     if action == 'status':
         result['device_state'] = query_state(device, clock)
         return result
+    if action == 'charge':
+        try:
+            result['stop_acknowledgement'] = stop_pwm(device, clock)
+            if query_state(device, clock)['mode'] != 0:
+                raise RuntimeError('PWM stop was not confirmed before charge mode.')
+            device.write(b'charge\n')
+            deadline = clock() + 3
+            while clock() < deadline:
+                line = device.readline().decode('ascii', errors='replace').strip()
+                if line.startswith('CHARGE:'):
+                    result['charge_acknowledgement'] = line
+                    break
+                if line.startswith(('OFF', 'REFUSED', 'ERROR')):
+                    raise RuntimeError(line + ' Charge mode requires controller firmware 0.3 or newer.')
+            else:
+                raise RuntimeError('Charge mode was not acknowledged; firmware 0.3 or newer is required.')
+            result['device_state'] = query_state(device, clock)
+            if result['device_state']['mode'] != 5:
+                raise RuntimeError('Device did not remain in no-PWM charge mode.')
+            result['continues_after_serial_close'] = True
+            result['net_charging_verified'] = False
+            return result
+        except BaseException:
+            try:
+                stop_pwm(device, clock)
+            except (OSError, RuntimeError):
+                pass
+            raise
     handed_over = False
     try:
         result['firmware_banner'] = handshake(device)  # Explicitly disarms before new arming.
@@ -118,7 +146,7 @@ def operate(device, action, clock=time.monotonic):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['arm', 'stop', 'status'])
+    parser.add_argument('action', choices=['arm', 'stop', 'charge', 'status'])
     parser.add_argument('--port')
     parser.add_argument('--out', type=Path)
     args = parser.parse_args()
@@ -148,9 +176,16 @@ def main():
     print(f"{state['mode_name']} | BAT {state['battery_mv']/1000:.3f} V | frames {state['policy_frames']}")
     if args.action == 'arm':
         print('Armed. Unplug USB: the robot will keep running on battery.')
-        print('Stop by disconnecting the battery, or reconnect USB and run ./robot stop.')
+        print('Stop via ./robot stop. Rev C full OFF: unplug USB and slide the master switch OFF.')
+        print('Before the Rev C rewire, disconnect battery and USB for full OFF.')
     elif args.action == 'stop':
-        print('PWM stopped. Disconnect battery and USB for full power-off.')
+        print('PWM stopped. Rev C full OFF: unplug USB and slide the master switch OFF.')
+        print('Before the Rev C rewire, disconnect battery and USB for full OFF.')
+    elif args.action == 'charge':
+        print('Charge mode latched; PWM is OFF. Servos still receive power.')
+        print('Rev C: keep the master switch ON and USB connected for charging.')
+        print('This confirms PWM shutdown, not positive battery current or a full battery.')
+        print('After charging: unplug USB and slide the master switch OFF for storage.')
     else:
         print('Last stop: ' + state['last_stop'])
         print('Status check did not request a stop.')

@@ -14,7 +14,7 @@
 #error "Use the classic XIAO nRF52840 Sense, Seeed non-mbed core."
 #endif
 
-enum Mode { OFF=0, HOLD=1, RUN=2, SHADOW=3, STANDALONE=4 };
+enum Mode { OFF=0, HOLD=1, RUN=2, SHADOW=3, STANDALONE=4, CHARGE=5 };
 Mode mode=OFF;
 const char* lastStopReason="Boot disarmed.";
 Lsm6ds3 imu;
@@ -47,10 +47,17 @@ void stop(){
   mode=OFF;resetPolicy();
 }
 void halt(const char* reason){stop();lastStopReason=reason;if(Serial){Serial.print("OFF: ");Serial.println(reason);}}
+void beginCharge(){
+  stop(); // Detach both hardware PWM outputs before acknowledging this mode.
+  digitalWrite(PIN_CHARGING_CURRENT,LOW);pinMode(PIN_CHARGING_CURRENT,OUTPUT);
+  batteryMv=readBatteryMv();mode=CHARGE;
+  lastStopReason="Charge mode: PWM off; servo power remains connected.";
+  Serial.println("CHARGE: PWM stopped and held LOW. Switch ON + USB required to charge; net charging not measured.");
+}
 bool fresh(){return imu.ready&&attitude.ready&&sampleAt&&uint32_t(clockUs.now()-sampleAt)<20000;}
 bool validStartBattery(){batteryMv=readBatteryMv();return batteryMv>=3700&&batteryMv<=4400;}
 void status(){
-  Serial.println("ROBOT POLICY CONTROL 0.2");
+  Serial.println("ROBOT POLICY CONTROL 0.3");
   Serial.print("MODE: ");Serial.println(int(mode));
   Serial.print("IMU_READY: ");Serial.println(imu.ready?1:0);
   Serial.print("FILTER_READY: ");Serial.println(attitude.ready?1:0);
@@ -58,8 +65,8 @@ void status(){
   Serial.println("PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.");
   Serial.println("GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.");
   Serial.print("LAST_STOP: ");Serial.println(lastStopReason);
-  Serial.println("REV_B: stop removes PWM only. Direct servo power remains connected.");
-  Serial.println("Commands: arm, run, standalone, shadow (no PWM), keep, off, !, state (non-stopping), status, help");
+  Serial.println("POWER: stop/charge remove PWM only. Rev C master switch OFF + USB unplugged is full OFF.");
+  Serial.println("Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state (non-stopping), status, help");
   Serial.println("READY");
 }
 void arm(){
@@ -83,7 +90,7 @@ void beginControl(bool shadow,bool standalone=false){
   // Print before starting policy deadlines: no blocking print during live control.
   Serial.println(HEADER);
   if(shadow){mode=SHADOW;}else{mode=standalone?STANDALONE:RUN;}
-  if(standalone)Serial.println("STANDALONE: running; USB may be unplugged. Disconnect battery to power off.");
+  if(standalone)Serial.println("STANDALONE: running; USB may be unplugged. Rev C: switch OFF after unplugging USB for full OFF.");
   runAt=heartbeatAt=millis();nextPolicy=clockUs.now()+20000;lowCount=0;
 }
 bool appendInteger(char* row,size_t& n,long value){
@@ -144,12 +151,17 @@ void reportState(){
 void execute(){
   command[used]=0;
   if(!strcmp(command,"keep")){if(mode!=OFF)heartbeatAt=millis();}
+  else if(!strcmp(command,"charge"))beginCharge();
+  else if(mode==CHARGE&&(!strcmp(command,"run")||!strcmp(command,"standalone")||!strcmp(command,"shadow"))){
+    Serial.println("REFUSED: charge mode is latched; explicitly arm to leave charge mode.");
+  }
   else if(!strcmp(command,"arm"))arm();
   else if(!strcmp(command,"run"))beginControl(false);
   else if(!strcmp(command,"standalone"))beginControl(false,true);
   else if(!strcmp(command,"state"))reportState();
+  else if(mode==CHARGE&&(!strcmp(command,"status")||!strcmp(command,"help")))status();
   else if(!strcmp(command,"shadow"))beginControl(true);
-  else{stop();lastStopReason="Operator stop or command.";Serial.println("OFF. PWM stopped; direct servo power remains connected.");
+  else{stop();lastStopReason="Operator stop or command.";Serial.println("OFF. PWM stopped; servo supply may remain powered.");
     if(strcmp(command,"off"))status();}
 }
 void setup(){
@@ -171,9 +183,9 @@ void loop(){
   }
   const bool connected=bool(Serial);
   if(!connected){
-    if(mode!=STANDALONE)stop();
+    if(mode!=STANDALONE&&mode!=CHARGE)stop();
     hadSerial=false;used=0;discard=false;
-    if(mode!=STANDALONE){delay(1);return;}
+    if(mode!=STANDALONE&&mode!=CHARGE){delay(1);return;}
   }
   if(connected&&!hadSerial){
     // A USB/DTR reconnect must not reset targets or block an active standalone loop.
@@ -184,7 +196,7 @@ void loop(){
     batteryAt=millis();batteryMv=readBatteryMv();
     if(mode==HOLD||mode==RUN||mode==STANDALONE){
       if(batteryMv<3600)++lowCount;else lowCount=0;
-      if(batteryMv<3400||batteryMv>4400||lowCount>=2)halt("battery guard. Disconnect battery and USB.");
+      if(batteryMv<3400||batteryMv>4400||lowCount>=2)halt("battery guard. Unplug USB and isolate battery (Rev C: slide OFF).");
     }
   }
   for(int n=0;connected&&n<64&&Serial.available();++n){
@@ -194,7 +206,7 @@ void loop(){
     else if(!discard&&used<sizeof(command)-1)command[used++]=c;
     else if(!discard){stop();used=0;discard=true;Serial.println("OFF: command too long.");}
   }
-  if(mode!=OFF){
+  if(mode!=OFF&&mode!=CHARGE){
     if(!fresh())halt("stale/invalid IMU/filter.");
     else if(mode!=STANDALONE&&uint32_t(millis()-heartbeatAt)>=3000)halt("host heartbeat timeout.");
     else if((mode==RUN||mode==SHADOW)&&uint32_t(millis()-runAt)>=60000)halt("trial duration limit.");

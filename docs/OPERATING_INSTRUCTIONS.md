@@ -1,98 +1,59 @@
 # Operating instructions
 
-For the current Rev B wiring (no Pololu switch), XIAO nRF52840 Sense and recovery firmware **0.2**. Recovery with USB unplugged was confirmed on 2 November 2026.
+**Rev C instructions, prepared 3 November 2026:** one Pololu battery master switch and controller firmware **0.3**. The enclosure and software are prepared, but wiring is not yet installed and firmware is not uploaded. Complete the [wiring and commissioning checks](../electrical/README.md) first.
 
-The robot starts **disarmed after every reset or power cycle**. Arming briefly centers both joints, then starts the onboard recovery policy. Disconnecting USB or closing the terminal after successful arming leaves recovery running.
+**Until the rewire:** the last confirmed Rev B hardware still needs battery **and USB unplugged** for full OFF, and both complete servo plugs unplugged for routine charging. The uploaded firmware remains 0.2; the new `charge` command needs 0.3. Existing arm/stop/status commands remain compatible with 0.2.
 
-## Terminal setup
-
-Open a terminal in the repository folder. On the current Mac:
+## Terminal
 
 ```sh
 cd "/Users/super23/Documents/BLDC Motor Build/2dof_standing"
+./robot status   # Read state without stopping or recentering
+./robot stop     # Stop PWM; power remains connected
+./robot charge   # Firmware 0.3: latch PWM-off charging mode
+./robot arm      # Centre both joints, then start onboard recovery
 ```
 
-The `./robot` command uses the project's installed Python environment; no environment activation or Arduino IDE is needed. If tools have not been installed on another computer, run `python3 scripts/robot.py setup` first.
+The helper uses the installed project Python; no Arduino IDE or environment activation is needed. On a new Mac, install tools using `python3 scripts/robot.py setup` first. Records are saved in `build/arming/`. VS Code has matching arm, status, stop and **Robot: charge mode (PWM off)** tasks.
 
-## Disarm and turn off
+## Stop and store
 
-**With USB connected:** support the robot and run:
+Support the arm and run **`./robot stop`** with USB connected. Wait for OFF confirmation. This detaches PWM and drives D0/D1 LOW, but does not physically cut servo power or idle drain.
 
-```sh
-./robot stop
-```
+For complete Rev C OFF, **unplug USB and slide the Pololu OFF**. No battery connector needs reaching. The robot boots disarmed after every reset or power cycle and never automatically rearms after a fault.
 
-Wait for **`OFF`** and the PWM-stopped confirmation. This stops control pulses; the servos still receive power and can draw idle current or retain holding torque.
+With USB connected, OFF disconnects the cell but USB may still power the XIAO and shared servo rail through the charger. Therefore OFF + USB is neither full OFF nor battery charging. Before soldering or servicing, unplug the battery **and** USB rather than relying on the switch alone.
 
-**With USB unplugged:** disconnect the battery to turn the robot off.
+## Charge
 
-For complete power-off or storage, disconnect **both battery and USB**. Removing the battery while USB remains connected does not guarantee that the servo supply is unpowered, because the XIAO charger feeds the shared battery bus.
+1. Support the links so they can relax when PWM stops. Leave the battery and servo connectors connected inside the enclosure.
+2. Slide **ON** and connect USB-C to the Mac. Connecting USB alone does not stop an already-running policy.
+3. Run **`./robot charge`** and wait for **CHARGE / PWM OFF**, device mode **5**.
+4. Keep **ON + USB** while charging. Both PWM outputs remain detached and LOW; the servos remain electrically powered. Closing the terminal, reading status or losing USB serial does not resume motion. You may transfer the cable to a USB supply while leaving the switch ON; a reset instead boots disarmed with PWM off.
+5. After charging, **unplug USB and slide OFF** for storage. To run again, leave ON, connect the Mac and explicitly arm.
 
-## Check the battery and decide when to charge
+The charger starts automatically when USB and battery are electrically connected. `charge` stops motion; it does not enable the charger hardware, measure charging current or indicate a full cell. The approximately **100 mA** setting is unchanged. Servo idle current and the switch LED leave less current for the cell; movement can exceed charger output and discharge it despite USB. More than five hours may be needed for a depleted 500 mAh pack, depending on idle load and taper.
 
-Connect USB and run:
+**Before treating this as validated charging, measure through-switch battery current, no-PWM servo consumption and complete-cycle termination with the new harness.** The board's red charge LED indicates charger activity, not guaranteed net battery charging. Idle load may affect termination/LED behavior. No connector access or extra charger is part of the selected workflow; if idle load prevents completion, the design needs reconsideration rather than a software claim of success. See [electrical checks](../electrical/README.md#rewire-and-commissioning) and [TI charger limitations](https://www.ti.com/product/BQ25101).
 
-```sh
-./robot status
-```
+## Battery checks
 
-This reads state without stopping or recentering a running controller. Reconnecting USB does not disarm it. Example:
+With switch **ON**, connect USB and run `./robot status`. It does not stop a running policy or exit charging mode. Voltage is approximate and affected by load, charger output and wiring. With the switch OFF, the ADC reads the isolated BAT/charger node, **not the cell**. There is no current sensor, switch-position sensor or battery-percentage measurement.
 
-```text
-STANDALONE | BAT 3.850 V | frames 1234
-```
+| Reading with switch ON | Action |
+|---|---|
+| Around 4.2 V | Near full; verify charge completion rather than relying on voltage alone. |
+| Around 3.7 V | Recharge before further testing. Arming requires at least 3.7 V. |
+| Below 3.6 V during operation | PWM stops after two consecutive readings; unplug USB and slide OFF promptly. |
 
-| Reading | What to do |
-| --- | --- |
-| Around **4.2 V** | Near full charge. |
-| Around **3.7 V** | Recharge before more testing. Arming requires at least 3.7 V. |
-| Below **3.6 V during operation** | The firmware stops PWM after two consecutive low readings; disconnect the battery promptly. |
+Sampling is about every 100 ms. One reading below 3.4 V or above 4.4 V also stops PWM; arming accepts 3.7–4.4 V. The guard cannot turn the physical slider OFF. A forgotten ON robot can continue draining its pack after a software stop. The battery-status RGB light remains a [future idea](HARDWARE_BACKLOG.md); it is separate from the charger LED.
 
-These readings are uncalibrated voltage estimates, not a battery percentage. Motion causes voltage sag, and connecting USB can raise the reading as charging begins. A USB-only reading with no battery attached is not a cell-voltage measurement. USB connected while the robot moves does not prove that the battery is gaining charge.
+## Arm and recover
 
-The firmware samples approximately every 100 ms. It also stops PWM on a single reading below **3.4 V** or above **4.4 V**; arming accepts only **3.7–4.4 V**. These guards cannot cut the direct servo supply or prevent a forgotten connected battery from continuing to drain.
+1. Leave the internal battery/servo connectors connected; slide **ON** and connect USB.
+2. Put the robot upright, links near straight, on a clear surface with room to move. Keep the base briefly still for the IMU.
+3. Run **`./robot arm`**. Both joints briefly centre at nominal 1500 µs, then onboard recovery starts. This moves the robot.
+4. Wait for **Armed. Unplug USB** before removing the cable. Standalone recovery continues on battery; reconnect USB for stop, charge or status commands.
+5. At the end, unplug USB and slide OFF. After a fault, check the reported reason and explicitly rearm only after resolving it; do not repeatedly rearm a low battery.
 
-**There is currently no low-battery warning light.** The proposed battery-status RGB LED remains a [future development idea](HARDWARE_BACKLOG.md). A stopped robot is not proof of low battery: sensor or timing faults can also stop it. With USB connected, `./robot status` reports the last stop reason; it does not automatically rearm.
-
-## Charge through the XIAO USB-C port
-
-1. If USB is connected, run `./robot stop` and wait for `OFF`.
-2. Disconnect **USB and the battery** before changing connectors.
-3. Unplug **both complete three-pin servo connectors**. Leave them disconnected throughout charging.
-4. Reconnect the battery to its existing harness. It can stay physically mounted in the robot.
-5. Connect USB-C to the Mac or a USB power supply. Charging starts through the XIAO's onboard charger; no terminal command or separate charger is needed.
-6. Monitor charging while you are around. Disconnect USB and battery when finished if putting the robot away.
-
-The uploaded firmware already selects approximately **100 mA** charging. For a depleted **500 mAh** battery, allow more than five hours: the ideal capacity/current calculation is five hours, with extra time for taper and board consumption. A partially discharged battery takes less time.
-
-The board's separate **red charging LED** lights during charging and goes out when charging finishes or is inactive. An unlit LED alone does not prove a full battery; check for a reading near 4.2 V as well. This LED is separate from the proposed RGB battery-health indicator. See [Seeed's charging documentation](https://wiki.seeedstudio.com/XIAO_BLE/#battery-charging-current) and the [hardware charging details](../HARDWARE.md#battery-monitoring-and-charging).
-
-Both servo plugs must be removed for routine charging: stopping PWM does not isolate their power, and the onboard charger is not a motor supply.
-
-## Rearm after stopping or charging
-
-1. Disconnect **USB and the battery**.
-2. Reconnect both complete servo plugs, checking their orientation.
-3. Reconnect the battery, then USB.
-4. Place the robot upright with both links near straight, on a clear surface with room to move. Leave the base briefly still for the IMU to initialize.
-5. Run:
-
-   ```sh
-   ./robot arm
-   ```
-
-6. Both joints briefly center, then the policy starts. Wait for **“Armed. Unplug USB”** before unplugging USB for battery operation.
-
-If it is already connected and you only used `./robot stop`, leave the connections in place, put it near straight and run `./robot arm` again. Charge first if voltage is low; do not repeatedly rearm after a battery stop.
-
-After a sensor, timing or battery fault, the controller stays stopped until explicitly rearmed. Resetting or cycling power also requires a new Mac arming command. With USB unplugged, disconnect the battery when testing is finished.
-
-## VS Code and further details
-
-The same commands are available through **Tasks → Run Task**:
-
-- **Robot: arm for untethered use**
-- **Robot: read state without stopping**
-- **Robot: stop PWM**
-
-Command records are saved under `build/arming/`. For firmware behavior, deployment records and limits, see the [recovery controller guide](../firmware/policy_control/README.md). For connector and bus wiring, see the [electrical guide](../electrical/README.md).
+The existing ±80° policy and timing/battery/sensor guards are unchanged. The new enclosure changes floor contacts, mass distribution and IMU position, so its physical recovery performance needs a model update and supervised evaluation after mechanical fit approval. See the [controller guide](../firmware/policy_control/README.md) and [enclosure fit instructions](../cad/electronics_pod/PRINT_FIT_CHECK.md).

@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-03",
+  "revision": "policy_control 0.3 / Rev C preparation",
+  "native_build": {
+    "flash_bytes": 85900,
+    "static_ram_bytes": 7880,
+    "board": "Seeeduino:nrf52:xiaonRF52840Sense",
+    "status": "passed"
+  },
+  "actual_sketch_fake_hardware_regression": "passed, including charging and rearming",
+  "mac_helper_tests": {
+    "passed": 8
+  },
+  "uploaded": false,
+  "hardware_commands_sent": false,
+  "physical_rewire_confirmed": false,
+  "charging_current_and_completion_verified": false,
+  "policy_weights_changed": false,
+  "commands": [
+    "python3 scripts/robot.py build-control",
+    ".tools/arduino/python/bin/python firmware/test_policy_control.py",
+    ".tools/arduino/python/bin/python -m unittest discover -s scripts -p test_arm.py"
+  ],
+  "sha256": {
+    "firmware/policy_control/policy_control.ino": "d276da59e1cb74129076f9d2936c3115acb9cd73f5ff6b356d86cfdbc40ae1d9",
+    "scripts/arm.py": "8527cd5a035c3444e4d795ba2c31e5f86598a8445e3c3123756e13d8640abcd5",
+    "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff"
+  }
+}

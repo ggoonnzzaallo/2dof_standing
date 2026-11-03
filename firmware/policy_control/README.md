@@ -1,6 +1,6 @@
 # Learned controller — trained ±80° targets
 
-This program runs the existing exported actor on the XIAO and can send its outputs to both servos. **Boot is disarmed.** It requires explicit arming, a one-second nominal-neutral hold, and a `run` or `standalone` command. Version 0.2 also supports explicit Mac arming followed by USB-free operation; see [standalone operation](#standalone-operation-02--arm-from-the-mac). Supervised trials still require a host heartbeat.
+This program runs the existing exported actor on the XIAO and can send its outputs to both servos. **Boot is disarmed.** It requires explicit arming, a one-second nominal-neutral hold, and a `run` or `standalone` command. Version 0.3 adds a latched no-PWM charging mode, prepared but not uploaded. Version 0.2 supports explicit Mac arming followed by USB-free operation; see [standalone operation](#standalone-operation-02--arm-from-the-mac). Supervised trials still require a host heartbeat.
 
 The user explicitly chose the trained **±80°** targets rather than restricting the policy to the measured ±45° range. The actor weights, observation normalization, **50 Hz** update rate and **0.06 radian incremental actions** are unchanged. There is no extra slow calibration slew limiter in the learned-control path: the training servo model already permits finite tracking speed/lag.
 
@@ -99,8 +99,30 @@ The Mac verifies ready firmware, commands nominal neutral, waits one second, sta
 
 These commands are also available in VS Code **Tasks → Run Task → Robot: arm for untethered use / stop PWM / read state without stopping**. The executable uses the project's Python environment, so no activation or Arduino IDE is needed. It logs command confirmations under `build/arming/`. If the firmware refuses arming or the handoff fails, the helper requests stop; only a positively confirmed handoff omits the usual cleanup stop.
 
-Standalone retains the same ±80° range, 50 Hz policy, action increments, PWM mapping, sensor-age/finite-state checks, ≥10 ms late-deadline stop and battery thresholds. Those checks continue while USB is absent. A sensor/battery/timing fault stops and stays stopped; reconnecting USB cannot automatically rearm. The normal `scripts/control.py` supervised trials and no-PWM shadow mode keep their original heartbeat and duration limits. The raw serial `status`/`help` commands still stop before printing the full banner; `./robot status` instead uses the new non-stopping `state` command.
+Standalone retains the same ±80° range, 50 Hz policy, action increments, PWM mapping, sensor-age/finite-state checks, ≥10 ms late-deadline stop and battery thresholds. Those checks continue while USB is absent. A sensor/battery/timing fault stops and stays stopped; reconnecting USB cannot automatically rearm. The normal `scripts/control.py` supervised trials and no-PWM shadow mode keep their original heartbeat and duration limits. The raw serial `status`/`help` commands still stop active motion before printing the full banner (0.3 preserves already-latched charging mode); `./robot status` instead uses the new non-stopping `state` command.
 
 Firmware tests cover more than a simulated minute of standalone inference with USB disconnected, heartbeat/normal-trial expiry ignored only in standalone, reconnect/history continuity, non-stopping state, explicit stop and untethered battery/sensor/timing faults. Mac-helper tests cover handoff success without accidental cleanup OFF, failed-handoff stop, non-stopping status, protocol checks, and stopping when the filter is unavailable. Historical 0.1 captures above remain unchanged.
 
 Version 0.2 was built and uploaded on 2 November 2026: **85,300 bytes flash / 7,880 bytes static RAM**. The full firmware regression suite and five Mac-helper tests passed. The first USB-only state check reported **OFF, zero policy frames, “Boot disarmed.”**; the BAT-node reading without a cell is not a battery measurement. Hardware arming confirmed standalone mode at frame 11; a separate status process then confirmed mode 4 at frame 286 without stopping it. The user subsequently confirmed **“Yes—recovers with USB unplugged.”** [Version 0.2 deployment, captures and observation](results/2026-11-02/standalone_0_2/deployment.json) are preserved. This establishes an observed battery-only recovery demonstration, not an all-orientation reliability rate.
+
+## Charging mode (0.3)
+
+Prepared **3 November 2026**, not uploaded or physically commissioned. No policy weights, PWM calibration or trained target range changed. With the selected [Rev C master-switch harness](../../electrical/README.md), keep the switch **ON** and USB connected, support the arm and run:
+
+```sh
+./robot charge
+./robot status
+```
+
+The helper first stops/acknowledges PWM OFF, then requests `charge` and confirms mode **5**. It sends no arm or servo-motion command. Both PWM channels detach and D0/D1 go LOW; approximately 100 mA charge configuration remains selected. Charge mode is latched across terminal close, USB/DTR loss/reconnect and status/help/state requests. It requires no heartbeat or healthy IMU. Sensor faults and trial deadlines cannot resume PWM. `run`, `standalone` and `shadow` are refused while charge mode is latched; explicit `arm` acquires neutral again. `off`/`!` remain available and also leave PWM off. Reset boots disarmed rather than resuming charge or motion.
+
+The charger itself operates automatically on USB; mode 5 confirms **PWM inhibition**, not positive battery current or a full cell. Servo power remains present. In Rev C, **USB unplugged + switch OFF** isolates the cell for storage; OFF + USB cannot charge the isolated cell and can still power the shared rail from the charger. There is no switch-position or battery-current sensor. Reverse-path charging, no-PWM servo idle load, charging termination and enclosure fit remain physical acceptance checks.
+
+Build/upload before closing the new enclosure, initially with battery and complete servo plugs unplugged:
+
+```sh
+python3 scripts/robot.py build-control
+python3 scripts/robot.py upload-control
+```
+
+Native build passed: **85,900 bytes flash / 7,880 bytes static RAM**. The actual-sketch fake-hardware regression passed, including charge entry from active motion, no pulses/frames for over a minute with no USB and stale IMU, retained mode after status/reconnect, refusal of run/standalone/shadow, emergency stop and explicit rearm. **Eight** Mac-helper tests passed, including no-motion charging without a ready filter, serial-close persistence, status preserving charge and old firmware failing stopped. The helper still accepts controller 0.2 for existing arm/stop/status; new charge mode reports that 0.3 is required. No hardware commands were sent during this preparation.

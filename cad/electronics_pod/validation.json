@@ -40,20 +40,54 @@
       -15.5,
       -14.645
     ],
-    "service_width": 34.0,
-    "service_height": 15.0,
-    "service_x": 8.0,
-    "service_bottom_z": -17.0
+    "pololu_translation": [
+      -7.0,
+      -34.7,
+      -17.0
+    ],
+    "switch_window_size": [
+      10.0,
+      6.0,
+      6.0
+    ],
+    "switch_window_center": [
+      0.62,
+      -34.3,
+      -15.25
+    ],
+    "pololu_edge_pocket_size": [
+      16.2,
+      6.0,
+      1.6
+    ],
+    "pololu_edge_pocket_center": [
+      0.62,
+      -34.3,
+      -16.49
+    ]
   },
   "base_confirmed_unchanged_by_user": true,
   "header_direction_confirmed_by_user": "long pins on USB/component side, upward",
   "source_sha256": "a1e8b9f62ebc51399e4eba8f90decf3a52301894228f108a6677a035fa2ee229",
+  "pololu_source_sha256": "a493fb469d2083553aef1071b1cb64386c307cbe91bc4df79b09e3cbb5ab6123",
+  "pololu_count": 1,
+  "pololu_bounds_mm": [
+    -7.0000001,
+    -35.595000000000155,
+    -17.000000100056845,
+    8.2400001,
+    -19.4599999,
+    -14.584
+  ],
+  "pololu_retention": "Insulated foam tape on two rails; side/rear locating stops, no pad screws.",
+  "slider_protrusion_beyond_front_mm": 0.5950000000001552,
+  "slider_access_extra_lateral_allowance_mm": 2.0,
   "printed_parts": {
     "electronics_cup": {
       "valid_brep": true,
       "solids": 1,
-      "volume_mm3": 21964.924656106898,
-      "solid_reference_PLA_g_at_1_32": 28.993700546061106
+      "volume_mm3": 22963.82591879236,
+      "solid_reference_PLA_g_at_1_32": 30.312250212805917
     },
     "base_modified": {
       "valid_brep": true,
@@ -73,9 +107,15 @@
     "base_modified / provisional_headers": 0.0,
     "electronics_cup / provisional_connectors": 0.0,
     "battery / provisional_connectors": 0.0,
-    "base_modified / provisional_connectors": 0.0
+    "base_modified / provisional_connectors": 0.0,
+    "pololu_2810 / electronics_cup": 0.0,
+    "pololu_2810 / base_modified": 0.0,
+    "pololu_2810 / battery": 0.0,
+    "pololu_2810 / controller_envelope": 0.0,
+    "pololu_2810 / headers": 0.0,
+    "pololu_2810 / connectors": 0.0
   },
-  "construction": "One printed cup with integral floor; no service panel. Existing base is the lid.",
+  "construction": "One printed cup with integral floor; no service panel or connector window. One Pololu slider window. Existing base is the lid.",
   "mounting_hardware": "Four M2x10 screws and four M2 nuts; no bottom-cover fasteners.",
   "added_height_mm": 20.0,
   "new_ground_z_mm": -22.0,
@@ -85,9 +125,10 @@
   "unverified": [
     "Actual header/wire stack and backside solder clearance",
     "USB cable overmold and reset access",
-    "Connector sizes, installed wire lengths and grip through open access notch",
+    "Connector sizes and installed wire bend/strain-relief clearance",
     "Screw/nut fit",
+    "Pololu slider full travel/fingernail access and underside solder clearance",
     "Changed contact geometry, mass/inertia and recovery behavior"
   ],
-  "note": "No original STEP, simulator, firmware, electrical wiring or purchased BOM was changed."
+  "note": "Rev C packaging proposal; source Onshape geometry and simulator unchanged. Wiring and firmware require separate installation/verification."
 }

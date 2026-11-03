@@ -2,6 +2,15 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Robot: charge mode (PWM off)",
+      "type": "process",
+      "command": "${workspaceFolder}/robot",
+      "args": ["charge"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": [],
+      "presentation": {"focus": true, "panel": "dedicated"}
+    },
+    {
       "label": "Robot: arm for untethered use",
       "type": "process",
       "command": "${workspaceFolder}/robot",

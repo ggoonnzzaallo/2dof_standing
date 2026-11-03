@@ -9,7 +9,7 @@ data = json.loads((OUT/'geometry.json').read_text())
 template = r'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Under-base electronics pod · CAD review</title><style>
 *{box-sizing:border-box}body{margin:0;font:15px system-ui;color:#183644;background:#f3f6f8}main{height:100dvh;display:flex;flex-direction:column}header{padding:14px 18px;background:white}h1{font-size:20px;margin:0 0 8px}.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:8px 0}button{padding:7px 12px;border:1px solid #afc0c7;border-radius:5px;background:#f1f5f6;color:#183644}canvas{flex:1;width:100%;min-height:240px;touch-action:none;cursor:grab}footer{padding:9px 18px;background:white;font-size:13px}a{color:#166f91}.note{color:#96512a;font-size:13px}input[type=range]{width:110px;vertical-align:middle}
-</style><main><header><h1>Under-base electronics pod · first fit-review concept</h1><div class="row"><button id="pod">Focus enclosure</button><button id="robot">Whole robot</button><button id="top">Top layout</button><button id="cutaway">Open enclosure</button><label>Explode <input id="explode" type="range" min="0" max="35" value="0"></label></div><div class="row" id="toggles"></div><div class="note">70 × 70 mm footprint · adds 20 mm below current base · long header pins UP · USB at left; open access slot for battery and servo disconnects. Physical fit and changed recovery behavior are unverified.</div></header><canvas id="view"></canvas><footer>Drag to orbit · scroll to zoom · use visibility checkboxes to see the internals. <a href="layout.svg">Dimensioned layout</a> · <a href="README.md">Assembly notes</a> · <a href="assembly_review.step">STEP assembly</a>. No robot commands are sent by this viewer.</footer></main><script>
+</style><main><header><h1>Under-base electronics pod · first fit-review concept</h1><div class="row"><button id="pod">Focus enclosure</button><button id="robot">Whole robot</button><button id="top">Top layout</button><button id="front">Front switch</button><button id="cutaway">Open enclosure</button><label>Explode <input id="explode" type="range" min="0" max="35" value="0"></label></div><div class="row" id="toggles"></div><div class="note">70 × 70 mm footprint · adds 20 mm below current base · long header pins UP · USB at left; ONE Pololu master switch at front. Physical fit and changed recovery behavior are unverified.</div></header><canvas id="view"></canvas><footer>Drag to orbit · scroll to zoom · use visibility checkboxes to see the internals. <a href="layout.svg">Dimensioned layout</a> · <a href="PRINT_FIT_CHECK.md">Fit instructions</a> · <a href="assembly_review.step">STEP assembly</a>. No robot commands are sent by this viewer.</footer></main><script>
 const data=__DATA__,canvas=document.getElementById('view'),gl=canvas.getContext('webgl',{antialias:true});if(!gl)throw Error('WebGL unavailable');
 const vs=`attribute vec3 pos,normal,color;uniform float yaw,pitch,zoom,aspect;uniform vec3 center,offset;varying vec3 shade;
 mat3 rx(float a){float c=cos(a),s=sin(a);return mat3(1.,0.,0.,0.,c,s,0.,-s,c);}mat3 rz(float a){float c=cos(a),s=sin(a);return mat3(c,s,0.,-s,c,0.,0.,0.,1.);}
@@ -27,6 +27,7 @@ function visibility(values){for(let [k,v] of Object.entries(values))document.get
 document.getElementById('pod').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});document.getElementById('explode').value=0;center=[0,0,-10];zoom=53;yaw=-.65;pitch=.6;render();};
 document.getElementById('robot').onclick=()=>{visibility({arm:true,original:true,cup:true,electronics:true});center=[0,0,65];zoom=106;pitch=.25;document.getElementById('explode').value=0;render();};
 document.getElementById('top').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});center=[0,0,-11];zoom=43;yaw=0;pitch=Math.PI/2;document.getElementById('explode').value=0;render();};
+document.getElementById('front').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});center=[0,0,-12];zoom=43;yaw=0;pitch=0;document.getElementById('explode').value=0;render();};
 document.getElementById('cutaway').onclick=()=>{visibility({arm:false,original:false,cup:true,electronics:true});center=[0,0,-11];zoom=48;yaw=-.65;pitch=.8;render();};
 document.getElementById('explode').oninput=render;canvas.onpointerdown=e=>{drag=true;lastX=e.clientX;lastY=e.clientY;canvas.setPointerCapture(e.pointerId);};canvas.onpointermove=e=>{if(!drag)return;yaw+=(e.clientX-lastX)*.008;pitch=Math.max(-Math.PI/2,Math.min(Math.PI/2,pitch+(e.clientY-lastY)*.008));lastX=e.clientX;lastY=e.clientY;render();};canvas.onpointerup=()=>drag=false;canvas.onpointercancel=()=>drag=false;canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(20,Math.min(240,zoom*Math.exp(e.deltaY*.001)));render();},{passive:false});addEventListener('resize',render);render();
 </script></html>'''
@@ -76,14 +77,14 @@ def render_region(region, anchor, center, yaw, pitch, scale, include):
 
 
 draw.text((55,35),'UNDER-BASE ELECTRONICS POD',font=font(36),fill='#183644')
-draw.text((55,85),'Fit-review concept for the existing Onshape base | no electrical or firmware changes',font=font(23),fill='#526b78')
+draw.text((55,85),'Rev C fit-review concept | ONE Pololu master switch + software PWM-off charge mode',font=font(23),fill='#526b78')
 render_region((30,145,660,970),(345,570),(0,0,63),-.67,.28,4.3,{'original','arm','cup','electronics'})
 render_region((700,170,1770,880),(1225,535),(0,0,-12),-.65,.85,8.,{'cup','electronics'})
 draw.text((90,150),'Assembled: 20 mm added below base',font=font(24),fill='#183644')
-draw.text((780,150),'One printed cup: electronics and header layout',font=font(24),fill='#183644')
+draw.text((780,150),'One printed cup: electronics + ONE Pololu',font=font(24),fill='#183644')
 draw.text((760,880),'Battery: 59.5 × 19 × 7.5 mm | low stops + thin foam tape',font=font(22),fill='#6d572c')
 draw.text((760,920),'XIAO: original orientation; long header pins point UP',font=font(22),fill='#285e43')
-draw.text((760,960),'Open front slot keeps the existing disconnects reachable',font=font(22),fill='#8d4038')
+draw.text((760,960),'Front slider access; internal connectors stay enclosed',font=font(22),fill='#8d4038')
 draw.line((55,1010,1745,1010),fill='#c5d3d8',width=2)
 draw.text((55,1034),'Not yet fit-tested. Enclosure, new masses and contact geometry must be checked before recovery use.',font=font(22),fill='#96512a')
 im.save(OUT/'preview.png')
@@ -104,8 +105,9 @@ svg += [rect(0,0,70,70,'#c3d1d6',radius=5),rect(0,0,66.4,66.4,'#edf2f4',radius=3
         rect(-22.21802,-15.5,21.,17.78,'#6c9c7a'),
         rect(-32.7,-15.5,3.,9.1,'#c0c4c3'),
         rect(-22.2,-23.12,17.8,2.5,'#343c3f'),rect(-22.2,-7.88,17.8,2.5,'#343c3f'),
-        rect(22,-21,13,7,'#bf7767'),rect(-1,-25,9,5,'#bf7767'),rect(10,-25,9,5,'#bf7767'),
-        rect(-34.1,-15.5,1.8,14,'#f3f6f8','#197eab'),rect(8,-34.1,34,1.8,'#f3f6f8','#b56940')]
+        rect(18,-5,13,7,'#bf7767'),rect(17,-16,9,5,'#bf7767'),rect(27,-16,9,5,'#bf7767'),
+        rect(.62,-27.08,15.24,15.24,'#43854a'),rect(1.37,-34.83,1.3,1.5,'#343c3f'),
+        rect(-34.1,-15.5,1.8,14,'#f3f6f8','#197eab'),rect(.62,-34.1,10,1.8,'#f3f6f8','#b56940')]
 for x in (-29.5,29.5):
     for y in (-29.5,29.5):
         svg.append(f'<circle cx="{OX+x*S}" cy="{OY-y*S}" r="{4.8*S}" fill="#c3d1d6" stroke="#526b78" stroke-width="2"/>')
@@ -119,9 +121,9 @@ svg += [line([(-35,39),(35,39)]),line([(-35,36),(-35,41)]),line([(35,36),(35,41)
         line([(-24,-15.5),(-43,-11),(-46,-11)]),' <text x="25" y="520" class="label">XIAO</text>',
         '<text x="25" y="547" class="small">USB on left wall</text>',
         line([(20,-15),(44,-8),(49,-8)]),'<text x="825" y="515" class="label">Wire / connector bay</text>',
-        '<text x="825" y="544" class="small">No extra electronics</text>',
-        line([(8,-35),(8,-42),(20,-42)]),'<text x="600" y="813" class="label">Open access slot — no panel</text>',
-        '<text x="600" y="842" class="small">Battery + both servo disconnects</text>',
+        '<text x="825" y="544" class="small">Existing RCY + two servo plugs</text>',
+        line([(.62,-35),(.62,-42),(20,-42)]),'<text x="600" y="813" class="label">ONE Pololu 2810 + slider window</text>',
+        '<text x="600" y="842" class="small">No connector access window or service panel</text>',
         '<text x="45" y="894" class="small">18 mm internal height + 2 mm integral floor = 20 mm below the existing base</text>',
         '<text x="45" y="926" class="small">Four 2.4 mm mounting holes on a 59 × 59 mm square; USB/header/wire fit is provisional.</text>',
         '</svg>']

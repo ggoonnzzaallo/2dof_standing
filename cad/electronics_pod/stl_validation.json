@@ -2,8 +2,8 @@
   "electronics_cup": {
     "watertight": true,
     "components": 1,
-    "volume_mm3": 21958.8,
-    "triangles": 3366,
+    "volume_mm3": 22957.5,
+    "triangles": 3468,
     "bounds_mm": [
       [
         -35.0,

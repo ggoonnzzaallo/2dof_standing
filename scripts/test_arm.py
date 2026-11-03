@@ -5,9 +5,9 @@ from arm import operate, parse_state
 
 
 class Device:
-    def __init__(self, refuse=False, ready=True):
+    def __init__(self, refuse=False, ready=True, charge_supported=True):
         self.time=0.;self.mode=0;self.frames=0;self.ready=ready;self.refuse=refuse
-        self.lines=deque();self.commands=[];self.armed_at=0;self.closed=False
+        self.lines=deque();self.commands=[];self.armed_at=0;self.closed=False;self.charge_supported=charge_supported
     def now(self):return self.time
     def reset_input_buffer(self):self.lines.clear()
     def write(self,data):
@@ -19,6 +19,11 @@ class Device:
                 self.lines.extend(['ROBOT POLICY CONTROL 0.2','MODE: 0','IMU_READY: 1','FILTER_READY: 1','READY'])
             elif command=='arm':
                 self.mode=1;self.armed_at=self.time;self.lines.append('ARMED: nominal neutral.')
+            elif command=='charge':
+                if self.charge_supported:
+                    self.mode=5;self.lines.append('CHARGE: PWM stopped and held LOW.')
+                else:
+                    self.mode=0;self.lines.append('OFF. Unknown command on old firmware.')
             elif command=='standalone':
                 if self.refuse:
                     self.mode=0;self.lines.append('REFUSED: test rejection.')
@@ -66,6 +71,27 @@ class ArmingTests(unittest.TestCase):
     def test_state_parser_validates_protocol(self):
         self.assertIsNone(parse_state('D,irrelevant telemetry'))
         with self.assertRaises(ValueError):parse_state('STATE,99,4100,10,1,0,test')
+    def test_charge_disarms_and_survives_close_without_sensor_readiness(self):
+        device=Device(ready=False);device.mode=4;device.frames=100
+        result=operate(device,'charge',device.now)
+        device.close()
+        self.assertEqual(result['device_state']['mode'],5)
+        self.assertEqual(device.mode,5)
+        self.assertNotIn('arm',device.commands)
+        self.assertFalse(result['net_charging_verified'])
+        tail=device.commands[device.commands.index('charge')+1:]
+        self.assertNotIn('off',tail);self.assertNotIn('!',tail)
+    def test_charge_on_old_firmware_fails_stopped(self):
+        device=Device(charge_supported=False);device.mode=4
+        with self.assertRaisesRegex(RuntimeError,'0.3'):
+            operate(device,'charge',device.now)
+        self.assertEqual(device.mode,0)
+        self.assertNotIn('arm',device.commands)
+    def test_status_preserves_charge(self):
+        device=Device();device.mode=5
+        result=operate(device,'status',device.now)
+        self.assertEqual(result['device_state']['mode'],5)
+        self.assertEqual(device.commands,['state'])
 
 
 if __name__=='__main__':unittest.main()

@@ -1,7 +1,7 @@
 """Review concept: under-base electronics pod for the final Onshape robot.
 
 All coordinates are the existing assembly frame, in mm. No firmware/model changes.
-Header, connector and wire envelopes require physical fit checks before printing.
+Header, connector, switch access and wire envelopes need physical fit checks.
 """
 from pathlib import Path
 import hashlib
@@ -27,13 +27,16 @@ sys.path.insert(0, str(ROOT / 'cad/onshape_import'))
 from import_assembly import name
 
 SOURCE = ROOT / 'cad/onshape_import/source/robot_onshape_third.step'
+POLOLU_SOURCE = OUT / 'source/pololu_2810.step'
 P = dict(width=70., corner_radius=5., wall=1.8, roof_z=-2., floor_z=-20.,
          floor_thickness=2., mount_pitch=59., m2_clearance=2.4,
          battery_size=[59.5, 19., 7.5], battery_center=[0., 14., -15.65],
          board_translation=[-.84944, 8.01904, -19.5],
          header_bar_size=[17.8, 2.5, 2.5], header_pin_length=6.2,
          usb_window_size=[8., 14., 8.], usb_window_center=[-34., -15.5, -14.645],
-         service_width=34., service_height=15., service_x=8., service_bottom_z=-17.)
+         pololu_translation=[-7., -34.7, -17.],
+         switch_window_size=[10., 6., 6.], switch_window_center=[.62, -34.3, -15.25],
+         pololu_edge_pocket_size=[16.2, 6., 1.6], pololu_edge_pocket_center=[.62, -34.3, -16.49])
 
 
 def box(size, center):
@@ -115,11 +118,10 @@ def main():
             shell = shell.cut(pocket)
 
     shell = shell.cut(box(P['usb_window_size'], P['usb_window_center']))
-    # Open-top access notch avoids a long printed bridge; the existing base
-    # closes its upper edge when assembled. No service panel or extra fasteners.
-    notch_height = roof - P['service_bottom_z'] + 1.
-    shell = shell.cut(box((P['service_width'], 8., notch_height),
-                          (P['service_x'], -34., P['service_bottom_z']+notch_height/2)))
+    # Close the former connector-access notch. Only the existing slider is
+    # exposed; connector servicing is by lifting the original base off the cup.
+    shell = shell.cut(box(P['switch_window_size'], P['switch_window_center']))
+    shell = shell.cut(box(P['pololu_edge_pocket_size'], P['pololu_edge_pocket_center']))
 
     lid = rounded_xy(70, 70, P['floor_thickness'], floor-P['floor_thickness'], 5)
     # Smooth, low battery stops: clearance rather than a compression clamp.
@@ -131,6 +133,14 @@ def main():
     # foam tape; installed backside components and solder must be checked first.
     for x in (-30.2, -13.7):
         lid = lid.union(box((1.6, 8., 2.3), (x, -15.5, floor+1.15)))
+    # One Pololu 2810 only: PCB horizontal, components up, slider toward -Y.
+    # Two insulated support rails leave 3 mm below the PCB for solder/lead bends.
+    # Thin foam tape fills the 0.4 mm rail-to-PCB gap; no screws through pads.
+    for y in (-31.2, -23.2):
+        lid = lid.union(box((12., 1.4, 2.6), (.62, y, floor+1.3)))
+    for x in (-7.85, 9.09):
+        lid = lid.union(box((1.1, 6., 4.5), (x, -25., floor+2.25)))
+    lid = lid.union(box((12., 1.2, 4.5), (.62, -18.56, floor+2.25)))
     # Two wire-lacing rails keep the harness in its bay, clear of the battery.
     for x in (4., 21.):
         rail = box((2., 12., 3.5), (x, -13., floor+1.75))
@@ -150,6 +160,9 @@ def main():
     battery_delta = np.array(P['battery_center']) - battery_old
     battery = source['battery'].translate(tuple(battery_delta))
     board = source['controller_board'].translate(tuple(P['board_translation']))
+    pololu_original = cq.importers.importStep(str(POLOLU_SOURCE)).val()
+    assert pololu_original.isValid() and len(pololu_original.Solids()) == 1
+    pololu = pololu_original.translate(tuple(P['pololu_translation']))
     # Header representation is a measured-fit placeholder, pins UP as confirmed.
     headers = []
     for y in (-23.12, -7.88):
@@ -157,11 +170,11 @@ def main():
         for x in np.linspace(-29.82, -14.58, 7):
             headers.append(box((.65, .65, 6.2), (float(x), y, -10.65)).val())
     header_shape = cq.Compound.makeCompound(headers)
-    # Serviceable harness envelopes, not a new circuit board or extra hardware.
+    # Existing connectors stay inside, away from the one exposed switch.
     connectors = cq.Compound.makeCompound([
-        box((13., 7., 6.), (22., -21., -13.5)).val(),  # Existing battery RCY pair.
-        box((9., 5., 9.), (-1., -25., -12.)).val(),
-        box((9., 5., 9.), (10., -25., -12.)).val(),
+        box((13., 7., 6.), (18., -5., -13.5)).val(),  # Existing battery RCY pair.
+        box((9., 5., 9.), (17., -16., -12.)).val(),
+        box((9., 5., 9.), (27., -16., -12.)).val(),
     ])
 
     pieces = {
@@ -170,6 +183,7 @@ def main():
         'battery': (battery, 'electronics', [.83, .68, .31]),
         'controller_board': (board, 'electronics', [.21, .42, .31]),
         'headers_pins_up': (header_shape, 'electronics', [.23, .25, .27]),
+        'pololu_2810_master_switch': (pololu, 'electronics', [.22, .52, .29]),
         'existing_connectors_envelope': (connectors, 'electronics', [.63, .29, .26]),
     }
     for alias, shape in source.items():
@@ -227,19 +241,41 @@ def main():
     for i, a in enumerate(connectors.Solids()):
         for b in connectors.Solids()[i+1:]:
             assert a.intersect(b).Volume() < 1e-4
+    for alias, shape in [('electronics_cup', cup.val()), ('base_modified', base.val()),
+                         ('battery', battery), ('controller_envelope', board_envelope),
+                         ('headers', header_shape), ('connectors', connectors)]:
+        volume = pololu.intersect(shape).Volume()
+        overlaps['pololu_2810 / '+alias] = volume
+        assert volume < 1e-4, ('pololu_2810', alias, volume)
+    switch_bounds = Bnd_Box()
+    BRepBndLib.AddOptimal_s(pololu.wrapped, switch_bounds, False, False)
+    assert sum(alias.startswith('pololu_2810') for alias in pieces) == 1
+    # The supplier STEP depicts one slider position. Check an extra +/-2 mm
+    # lateral allowance on its externally projecting lever, not the entire PCB.
+    lever = pololu_original.intersect(box((6., 2., 2.), (7.62, -1., 1.8)).val())
+    assert lever.Volume() > .1
+    for dx in (-2., 2.):
+        pose = lever.translate(tuple(np.array(P['pololu_translation']) + [dx, 0., 0.]))
+        assert pose.intersect(cup.val()).Volume() < 1e-4, ('slider opening allowance', dx)
     report = {'status': 'CAD review concept; not physical-fit or recovery validated', 'parameters': P,
               'base_confirmed_unchanged_by_user': True, 'header_direction_confirmed_by_user': 'long pins on USB/component side, upward',
               'source_sha256': hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
+              'pololu_source_sha256': hashlib.sha256(POLOLU_SOURCE.read_bytes()).hexdigest(),
+              'pololu_count': 1, 'pololu_bounds_mm': list(switch_bounds.Get()),
+              'pololu_retention': 'Insulated foam tape on two rails; side/rear locating stops, no pad screws.',
+              'slider_protrusion_beyond_front_mm': -35.-switch_bounds.Get()[1],
+              'slider_access_extra_lateral_allowance_mm': 2.,
               'printed_parts': checks, 'rigid_overlap_volume_mm3': overlaps,
-              'construction': 'One printed cup with integral floor; no service panel. Existing base is the lid.',
+              'construction': 'One printed cup with integral floor; no service panel or connector window. One Pololu slider window. Existing base is the lid.',
               'mounting_hardware': 'Four M2x10 screws and four M2 nuts; no bottom-cover fasteners.',
               'added_height_mm': 20., 'new_ground_z_mm': -22., 'new_overall_height_mm': 173.,
               'board_rotation_changed': False,
               'existing_base_removed_volume_mm3': removed,
               'unverified': ['Actual header/wire stack and backside solder clearance', 'USB cable overmold and reset access',
-                             'Connector sizes, installed wire lengths and grip through open access notch', 'Screw/nut fit',
+                             'Connector sizes and installed wire bend/strain-relief clearance', 'Screw/nut fit',
+                             'Pololu slider full travel/fingernail access and underside solder clearance',
                              'Changed contact geometry, mass/inertia and recovery behavior'],
-              'note': 'No original STEP, simulator, firmware, electrical wiring or purchased BOM was changed.'}
+              'note': 'Rev C packaging proposal; source Onshape geometry and simulator unchanged. Wiring and firmware require separate installation/verification.'}
     (OUT/'geometry.json').write_text(json.dumps(geometry, separators=(',', ':'))+'\n')
     (OUT/'validation.json').write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps(checks, indent=2))

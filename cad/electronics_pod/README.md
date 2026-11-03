@@ -1,88 +1,55 @@
-# Under-base electronics cup — fit-print revision
+# Rev C — one-piece enclosure with ONE Pololu
 
-One **70 × 70 × 20 mm printed cup** hides the battery, XIAO and harness beneath the user's final Onshape base. The floor and walls are one solid; there is **no separate bottom cover or service panel**. The existing robot base acts as the lid. This revision follows the user's 2 November 2026 fit-review feedback.
+**Fit-print revision, 3 November 2026.** Packages the existing XIAO Sense, 500 mAh battery and **one** purchased Pololu 2810 beneath the confirmed 70 × 70 mm Onshape base. The Pololu will be the battery master switch; no second switch board or additional electronic components are included.
 
-The battery and servo disconnects remain reachable through a permanent front access slot, and USB-C remains accessible through the left wall. This retains the current charging and manual power-off procedure without extra electrical parts.
+**Start here:** [print and fit-check instructions](PRINT_FIT_CHECK.md). Print only [electronics_cup.stl](electronics_cup.stl) for the first unpowered board fit. The original base can rest on top without drilling for this check.
 
-**Status: CAD checks passed; ready for a physical fit print, not yet a validated recovery configuration.** No training, firmware, electrical circuit, simulator, original STEP or purchased-BOM change is included. Test fit first, then update/evaluate the simulation before deciding how much retraining is needed.
+![Revised enclosure and layout](preview.png)
 
-## Files to use
+## Files
 
-- **[electronics_cup.stl](electronics_cup.stl)** — the single new part to slice and test fit. Its flat outside floor is already at Z=0, with the open side upward.
-- **[electronics_cup.step](electronics_cup.step)** — editable solid for Onshape import.
-- [Complete STEP assembly](assembly_review.step) — modified original base, cup, relocated electronics, arm and provisional header/connector envelopes. STEP preserves placed geometry, not native Onshape features/mates.
-- [Modified original base: STEP](base_modified.step) / [STL](base_modified.stl) — four mounting holes and a rounded cable slot. Drill/machine the existing base using this reference, or print this replacement.
-- [Interactive 3D viewer](viewer.html) — orbit, top layout, whole robot, visibility toggles and exploded view. Open the downloaded HTML in a browser; GitHub's file page does not execute it.
-- [Dimensioned layout](layout.svg) and [CAD validation](validation.json).
+- [Print-fit package ZIP](rev_c_print_fit.zip) — cup STL/STEP, assembly STEP, layout, preview and fit instructions.
+- [Cup STL](electronics_cup.stl) and [editable solid STEP](electronics_cup.step).
+- [Interactive 3D viewer](viewer.html): orbit, top layout, front-switch view, whole robot, visibility and explode controls.
+- [Dimensioned top layout](layout.svg) and [assembled STEP](assembly_review.step).
+- [Modified original base STEP](base_modified.step) / [STL](base_modified.stl): mounting holes and cable-slot reference for later installation.
+- [BRep/packaging checks](validation.json) and [STL checks](stl_validation.json).
 
-![One-piece cup under the existing robot and its internal layout](preview.png)
+## Packaging
 
-## Layout and interfaces
+| Item | Position / allowance |
+|---|---|
+| Cup | **70 × 70 × 20 mm**, one printed part with 1.8 mm walls and 2 mm integral floor. Existing base is the lid. No service panel or connector-access notch. |
+| Battery | Rear bay, nominal 59.5 × 19 × 7.5 mm. Low stops and thin insulating tape; never compress the pouch. |
+| XIAO Sense | Left bay, USB through left wall. Original orientation retained; long header pins point **up** as confirmed. Installed header/socket/wire height needs checking. |
+| Pololu 2810 | **One**, front-centre, PCB horizontal with components up. Supplier STEP PCB is 15.24 mm square. Side/rear locating stops, insulated tape on two support rails, nominal 3 mm underside solder space. No screws through electrical pads. |
+| Slider access | Front opening 10 × 6 mm plus a shallow PCB-edge clearance. Actuator extends about 0.6 mm beyond the outer wall. Extra ±2 mm lateral lever clearance checked in CAD; full travel and fingernail access need real testing. |
+| USB opening | 14 mm wide × 8 mm high on the left wall. Check the actual cable overmould and reset access. |
+| Connectors / wires | Existing RCY and two servo plugs in the right-hand bay. Internal service only by lifting the base; no routine connector handling for the selected charge workflow. |
 
-| Item | Proposed arrangement |
-| --- | --- |
-| Cup | 70 × 70 mm footprint, 20 mm tall, 5 mm vertical corner radii. |
-| Walls / floor | 1.8 mm walls, 2 mm integral floor; no bottom fasteners or seam. |
-| Internal height | 18 mm from the floor surface to the original base underside. |
-| Total robot height | Approximately 173 mm, up from 153 mm. |
-| Battery | Existing 59.5 × 19 × 7.5 mm envelope across the rear/+Y side; low stops leave clearance rather than compressing the pouch. |
-| XIAO | Left side with USB-C toward the −X wall. Translation only; retain the board's original orientation relative to the base. |
-| Headers | Two rows of seven long pins pointing upward, toward the USB/component side, as confirmed by the user. Provisional 2.5 mm plastic bodies plus 6.2 mm exposed pins. |
-| Wiring | Front/right bay, two lacing rails and envelopes for the existing RCY connection and both servo plugs. |
-| USB window | 14 × 8 mm, centered on the socket; actual cable-overmold fit needs checking. |
-| Front access | Open 34 × 15 mm notch, closed along its top by the original base when assembled. No removable panel. The open-top notch avoids printing a long bridge. |
+Cup mounting remains four **M2×10 screws and four M2 nuts**, with 2.4 mm through-holes on a **59 × 59 mm square**. Top-loaded screws pass through the original 4 mm base plate into cup nut pockets; there are no bottom-cover screws. The 12 × 10 mm rounded cable slot is at CAD X=15, Y=−14 mm. Use the modified base as a reference only after the first fit approval.
 
-The two servo leads still need external slack at the moving joints; the cup organizes existing wires rather than eliminating them. Keep wire coils and solder joints off the battery pouch and away from screw tips.
+The STL is already positioned floor-down at Z=0. CAD STEP files retain the existing assembly frame (cup floor underside Z=−22, original base underside Z=−2). Overall robot height becomes about 173 mm. The revised cup's **solid-PLA reference** is 30.3 g at 1.32 g/cm³; this is not a sliced 20%-infill print-weight estimate.
 
-## Mounting and hardware
+## Wiring and software status
 
-The cup attaches with **four M2×10 pan/socket-head screws and four M2 nuts**. Nuts slide into side-access pockets near the top of each corner boss. Check the actual nut fit before loading electronics. Thin insulating foam tape retains the battery and board; one existing small cable tie can retain the harness on the printed lacing rails. These are proposed mounting supplies, not changes to the purchased BOM.
+See the [complete Rev C schematic](../../electrical/README.md). Battery positive goes to Pololu VIN; VOUT feeds the common XIAO BAT+/servo-positive bus. Ground is common, D0/D1 remain PWM and D2/ON/SW are unconnected. The physical slider is the only switch control.
 
-Mounting holes are **2.4 mm diameter on a 59 × 59 mm square**, centered on the base. The rounded **12 × 10 mm cable slot** is centered at CAD (X=15, Y=−14) mm. The original plate is 4 mm thick, CAD Z=−2 to +2. The builder verifies full through-cuts remove only that plate material, leaving servo supports intact.
+The chosen behavior is **ON + USB + `./robot charge` to charge**, with PWM stopped but servo power still present; **USB unplugged + OFF for storage**. Firmware 0.3 is built and tested offline, not uploaded. Rev C wiring, through-switch charging, servo idle current and charge termination are not physically verified. The last confirmed live harness remains Rev B. Do not mistake a mechanical fit approval for electrical commissioning.
 
-Use the modified STEP to orient the drilling/slot reference against the actual part. Do not drill with electronics or battery attached. Do not use the STEP assembly's negative Z coordinates for print-bed placement: the individual STL exports are shifted to put their lowest face at Z=0.
+## Validation and reproduction
 
-The cup's outside bottom is flat. All mounting screws enter from above through the original base. For major repairs, remove those four screws and lift the original base/arm away from the cup. Leave sufficient lead slack for separation while fully powered off.
-
-## First fit-print sequence
-
-1. Slice **electronics_cup.stl** with its floor flat and open side up. Review bridging/support at the 14 mm USB opening, nut pockets and lacing rails. PLA is suitable for this initial fit check. Record the slicer's predicted part mass; CAD solid-reference mass is not an infill-aware print prediction.
-2. With battery and USB disconnected, test the nuts and check that the cup sits square against the original base. You can rest the unmodified base loosely on top for this first clearance check; drill the mounting holes/cable slot only after approving fit, or use the modified-base print.
-3. Fit the battery without squeezing it. Thin foam tape underneath provides retention; low printed stops should not bite into its wrapper or lead exit.
-4. Fit the XIAO on its small support pads with insulating tape, **keeping its previous orientation**. Check backside components, solder and BAT-pad wires clear the pads. Verify the pins and attached wire bends clear the original base above them, especially if sockets are fitted over the pins.
-5. Route servo leads through the rounded slot with joint-motion slack, secure the harness in its bay and keep both complete servo plugs and the battery RCY pair reachable through the front notch.
-6. Before closing the base, confirm you can physically disconnect the battery and both servos through that notch. Reposition leads or enlarge the notch if grip is difficult; do not rely on pulling individual wires.
-7. Check USB plug insertion, access for reset/service, corner-screw tips and clearance through the joints' intended travel. Share any fit issues and the slicer/actual part mass before changing the simulation.
-
-For routine charging, power off before changing connectors, disconnect both complete servo plugs through the front notch, then reconnect the battery and USB. Both servos stay unplugged while charging. With USB absent, battery disconnection is full OFF. This cup adds no electrical cutoff; follow the [operating instructions](../../docs/OPERATING_INSTRUCTIONS.md).
-
-## Simulation and retraining after fit approval
-
-**Expect a model update and possibly fine-tuning/retraining; a fit print comes first.** The original ground plane relative to the robot changes from CAD Z=−2 to Z=−22 mm. This changes resting poses, leverage against the floor and joint heights above it. Added plastic and relocated hardware change mass, center of gravity and inertia. Moving the IMU also changes the rotational acceleration measured at its position.
-
-Keeping the XIAO's orientation unchanged preserves the existing axis mapping, but static sensor signs should still be rechecked after installation. A translation alone does not require learning a new axis rotation. There is no need to assume the policy must be trained from scratch: update the model, evaluate the current checkpoint, and fine-tune/retrain if its recovery performance is insufficient.
-
-After the user approves fit and supplies the slicer/part mass:
-
-1. Update MuJoCo collision geometry, floor contacts, mass/inertia, battery/board placement and simulated IMU location.
-2. Correct the already-recorded [broad adjacent-body collision exclusions](../../docs/HARDWARE_BACKLOG.md) while updating the model.
-3. Evaluate the existing policy over representative falls, disturbances and actuator uncertainty; retain results for comparison.
-4. Fine-tune or retrain if needed, then repeat supervised physical recovery tests before battery-only use.
-
-The successful trials with the old base do not validate this configuration. None of these model/training steps has been run for the cup yet.
-
-## CAD checks and reproduction
-
-The builder checks valid single-solid BReps, plate-cut volume, housing/base/battery overlaps, provisional headers and connector clearances, and a conservative PCB/socket envelope containing every imported board mesh vertex. The detailed source board BRep is invalid, so that enclosure clearance check uses a verified containing envelope instead of claiming exact solid validity for the electronics. Actual wire and connector dimensions still require physical inspection.
-
-At uniform solid PLA density 1.32 g/cm³, the cup's CAD reference mass is about **29.0 g**. Slice the new part to get a print estimate; wall/floor count matters, so multiplying this value by infill percentage is incorrect. Hardware and wiring also contribute to the installed mass.
-
-Using the existing CAD environment:
+The cup and modified base are valid single-solid BReps and export as watertight, one-component STLs. The builder checks selected rigid overlaps, a containing envelope for the invalid detailed controller BRep, provisional headers/connectors, one actual Pololu solid and the projected slider-access allowance. Wire bends, solder, connector dimensions, adhesive retention and printing tolerance still require your fit test.
 
 ```sh
 .venv-cad/bin/python cad/electronics_pod/build_pod.py
 .venv-cad/bin/python cad/electronics_pod/build_preview.py
 python3 cad/electronics_pod/validate_prints.py
+python3 cad/electronics_pod/package_fit.py
 ```
 
-The source is `cad/onshape_import/source/robot_onshape_third.step`. The builder does not rewrite the authoritative import artifacts. Header and connector models are packaging placeholders, not manufacturer CAD.
+The original Onshape geometry remains untouched. The Pololu source is the user-supplied `mini-mosfet-slide-switch-with-reverse-voltage-protection.step`, copied to [source/pololu_2810.step](source/pololu_2810.step); see [manufacturer documentation](https://www.pololu.com/product/2810). Source hashes and tested offsets are recorded in validation.json.
+
+## After fit approval
+
+Record sliced/actual cup mass, confirm the XIAO orientation and update the simulation's floor contacts, masses/inertias and IMU position. Correct the [known collision exclusions](../../docs/HARDWARE_BACKLOG.md) during that model update, evaluate the current policy, then fine-tune/retrain if needed. No simulation or model weights were changed for this fit-print revision.
