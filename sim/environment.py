@@ -1,21 +1,26 @@
 """Final-CAD exploratory environment; calibrate hardware and sensor model before transfer."""
 from pathlib import Path
+import os
 import numpy as np
 import gymnasium as gym
 from gymnasium import spaces
 import mujoco
 from model_geometry import neutral_collision_vertices, place_neutral_robot
 
+MODEL_PATH=Path(os.environ.get('ROBOT_MODEL_PATH',Path(__file__).with_name('robot.xml'))).resolve()
+
 class SelfRightingEnv(gym.Env):
     metadata = {'render_modes': []}
     def __init__(self, randomize=True, model_path=None, physics_observer=None):
-        self.model=mujoco.MjModel.from_xml_path(str(model_path or Path(__file__).with_name('robot.xml')))
+        self.model=mujoco.MjModel.from_xml_path(str(model_path or MODEL_PATH))
         self.data=mujoco.MjData(self.model)
         self.neutral_support=neutral_collision_vertices(self.model)
         self.physics_dt=float(self.model.opt.timestep)
         self.frame_skip=round(.02/self.physics_dt)
         assert np.isclose(self.frame_skip*self.physics_dt,.02), 'Policy period must be 20 ms.'
         self.randomize=randomize
+        self.success_bonus=float(os.environ.get('ROBOT_SUCCESS_BONUS','20'))
+        assert np.isfinite(self.success_bonus) and self.success_bonus>=0
         self.physics_observer=physics_observer
         self.mass0=self.model.body_mass.copy(); self.inertia0=self.model.body_inertia.copy()
         self.base_id=mujoco.mj_name2id(self.model,mujoco.mjtObj.mjOBJ_BODY,'base')
@@ -45,6 +50,9 @@ class SelfRightingEnv(gym.Env):
             mujoco.mj_step(self.model,self.data)
             if self.physics_observer is not None:
                 self.physics_observer(self)
+                if getattr(self,'stop_requested',False):
+                    self.data.ctrl[:]=0
+                    break
 
     def reset(self,seed=None,options=None):
         super().reset(seed=seed)
@@ -66,6 +74,7 @@ class SelfRightingEnv(gym.Env):
         az=float(options.get('azimuth',self.np_random.uniform(0,2*np.pi)))
         angle=float(options.get('tilt',self.np_random.choice([0.,.6,np.pi/2,2.2,np.pi])))
         place_neutral_robot(self.model,self.data,angle,az,support_points=self.neutral_support)
+        if hasattr(self,'before_settle'):self.before_settle()
         for _ in range(40): self._physics(np.zeros(2))
         return self._obs(),{}
 
@@ -86,7 +95,7 @@ class SelfRightingEnv(gym.Env):
         success=self.dwell>=50
         reward=1.5*upright + .5*np.exp(-4*np.sum(q*q))*max(upright,0) + .5*good
         reward-=.02*float(action@action)+.04*float((action-old)@(action-old))+.002*float(gyro@gyro)
-        if success: reward+=20
+        if success: reward+=self.success_bonus
         invalid=not np.all(np.isfinite(self.data.qpos)) or np.linalg.norm(self.data.qpos[:2])>1.
         if invalid: reward-=20
         return self._obs(),float(reward),bool(success or invalid),self.steps>=500,{'is_success':success,'upright':upright}

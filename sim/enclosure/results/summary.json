@@ -1,0 +1,73 @@
+{
+  "status": "Offline enclosure experiments complete; hardware deployment not approved by offline metrics alone",
+  "date": "2026-11-03",
+  "selected_experiment": "normalized",
+  "selected_ppo_steps": 67584,
+  "selection": "Most successes on ten nominal plus ten development trials; ties prefer first experiment. Held-out trials excluded from selection.",
+  "nominal_successes": 7,
+  "development_successes": 9,
+  "held_out_scripted_successes": 19,
+  "held_out_scripted_episodes": 30,
+  "demonstrations": 52,
+  "robot_xml_sha256": "4083971406b38077052393d5fe6de4782f46a512ce49ea9b7cf77df960cb1129",
+  "actor_sha256": "55619f4b267ee6bbef40d47c16f80ce035e99d77260aa3a98303b23b5302b1fb",
+  "experiments": [
+    {
+      "name": "clone",
+      "selected_steps": 16896,
+      "actual_ppo_steps": 67584,
+      "nominal_successes": 5,
+      "development_successes": 4,
+      "success_bonus": 20,
+      "normalized_rewards": false
+    },
+    {
+      "name": "warm",
+      "selected_steps": 16896,
+      "actual_ppo_steps": 67584,
+      "nominal_successes": 3,
+      "development_successes": 2,
+      "success_bonus": 300.0,
+      "normalized_rewards": false
+    },
+    {
+      "name": "normalized",
+      "selected_steps": 67584,
+      "actual_ppo_steps": 67584,
+      "nominal_successes": 7,
+      "development_successes": 9,
+      "success_bonus": 300.0,
+      "normalized_rewards": true
+    }
+  ],
+  "ready_for_hardware_deployment": false,
+  "firmware_uploaded": false,
+  "physical_robot_commands_sent": false,
+  "mesh_assets_sha256": "ea18327dbdf1051daa5e5d03c2692ed645696d9e2ff0971f98cbbb50e283b4a3",
+  "total_ppo_transitions_across_experiments": 202752,
+  "selected_policy_ancestry": "3000 BC updates, selected after 16896 PPO steps in clone run; actor-only transfer then 67584 additional PPO steps with normalized rewards and fresh critic.",
+  "next_training_focus": "Persistent recovery through failed attempts and post-recovery disturbances; trapped-start and varied-joint-state coverage; stable base recovery primary, neutral arm a soft preference; retain historical strict metrics.",
+  "fresh_randomized_comparison": {
+    "episodes": 30,
+    "first_seed": 33000,
+    "candidate_successes": 18,
+    "old_actor_successes": 8,
+    "selection_used_these_trials": false
+  },
+  "persistence_diagnostic": {
+    "episodes": 20,
+    "horizon_seconds": 60.0,
+    "base_only_stable_at_10_30_60s": [
+      16,
+      16,
+      16
+    ],
+    "strict_success_at_10_30_60s": [
+      16,
+      16,
+      16
+    ],
+    "weights_or_reward_changed": false,
+    "source": "persistence_evaluation.json"
+  }
+}

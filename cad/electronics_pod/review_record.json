@@ -21,13 +21,13 @@
     "Browser thin-lid and front-switch views checked; no error/warning logs",
     "ZIP CRC/hash checks passed; no coupon; two required printable parts"
   ],
-  "new_physical_fit_validated": false,
+  "new_physical_fit_validated": true,
   "screw_baseline_validated_by_user": true,
   "electrical_rewire_installed": false,
   "firmware_uploaded_this_revision": false,
-  "simulation_updated": false,
-  "training_started": false,
-  "next_step": "Print cup and matched thin lid; test low PSA seating, underside BAT wire relief, slider travel, USB, lid registration and two-screw retention.",
+  "simulation_updated": true,
+  "training_started": true,
+  "next_step": "Complete Rev C wiring/charging commissioning; revised offline model/training tracked in sim/enclosure.",
   "artifact_sha256": {
     "base_modified.step": "bcabbde0ac3cf1fb6bd98b9ee37e23865944868d9331eb9c69c0dcd2ae10e592",
     "geometry.json": "80a97c0381eddb7372a96a46716a58ece273a3bbfd35d62bb3d0c49f79368bd3",
@@ -41,7 +41,7 @@
     "build_preview.py": "c7562064c55b87d54840bfd4061dd6ce72434106cc9256cdad6c02705a3dc0d5",
     "fit_revision_1_reference.json": "f019f19de7e3ec1d4172247884dce383ff3fe45864662d29a5c87c7df2bb3606",
     "base_modified.stl": "f43627fae192a240b71a8441bd4778d4c1bc09980fa810a5f12579757334257d",
-    "README.md": "f58bc397cb073f618df7f8c426edcb17f58eb63406848cfa0843757f647b3ee0",
+    "README.md": "e83db6620d7a898b886dbef31611062153977e3cd77e9743ce81d82f88594bc6",
     "PRINT_FIT_CHECK.md": "979526ccd0a32f4c92739cceb22947d92830d577962c6144c9c5dc9eb378a366",
     "viewer.html": "20285b644c44f1be4523224adf3af54133a844be28bd14b847989f9e9f58c194",
     "validation.json": "e2c103386f7c0fdefa1e28b0b3a73cbe5226247459b7e24ec0e3efd5dc443fbc",
@@ -55,5 +55,8 @@
     "firmware/policy_control/policy_control.ino": "d276da59e1cb74129076f9d2936c3115acb9cd73f5ff6b356d86cfdbc40ae1d9",
     "sim/robot.xml": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
     "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff"
-  }
+  },
+  "fit_approval_date": "2026-11-03",
+  "fit_approval_evidence": "User: The new 3D prints pass the fit check",
+  "simulation_results": "../../sim/enclosure/results/summary.json"
 }

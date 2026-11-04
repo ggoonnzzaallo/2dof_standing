@@ -18,15 +18,16 @@ import numpy as np
 import torch
 from stable_baselines3 import PPO
 import search
+from evaluate_filter import FilteredEnv
 
 
 class Playground:
     """Use the training observation, action integration and servo physics unchanged."""
 
-    def __init__(self, model_path, tilt=0., azimuth=0., randomize=False):
+    def __init__(self, model_path, tilt=0., azimuth=0., randomize=False, filtered=False):
         torch.set_num_threads(1)
         self.actor = PPO.load(model_path, device='cpu')
-        self.env = search.SelfRightingEnv(randomize=randomize)
+        self.env = (FilteredEnv if filtered else search.SelfRightingEnv)(randomize=randomize)
         self.start = {'tilt': np.deg2rad(tilt), 'azimuth': np.deg2rad(azimuth)}
         self.reset()
 
@@ -45,6 +46,7 @@ class Playground:
         action = self.actor.predict(self.observation, deterministic=True)[0]
         self.observation, _, _, _, info = self.env.step(action)
         self.previous_time = self.env.data.time
+        if info.get('filter_fault',False):return False
         # Episode success/10 s timeout must not stop control or reset the robot.
         # User perturbations can happen at any time, including after recovery.
         recovered = bool(info['is_success'])
@@ -55,12 +57,16 @@ class Playground:
         return bool(valid and not any(w.number for w in self.env.data.warning))
 
 
-def verify_saved_model(path):
+def verify_saved_model(path,filtered=False):
     """Reject stale default assets rather than silently playing a different model."""
     report = json.loads((search.HERE/'results/summary.json').read_text())
     if path.resolve() == (search.HERE/'results/policy_simulation_only.zip').resolve():
         assert hashlib.sha256(path.read_bytes()).hexdigest() == report['model_sha256']
-        assert hashlib.sha256((search.HERE.parent/'robot.xml').read_bytes()).hexdigest() == report['robot_xml_sha256']
+        assert hashlib.sha256(search.MODEL_PATH.read_bytes()).hexdigest() == report['robot_xml_sha256']
+    elif (path.parent/'training_report.json').exists():
+        training=json.loads((path.parent/'training_report.json').read_text())
+        assert hashlib.sha256(search.MODEL_PATH.read_bytes()).hexdigest()==training['robot_xml_sha256'], 'Actor and geometry differ'
+        assert filtered==training['config'].get('filtered',False), 'Actor and observation pipeline differ'
 
 
 def main():
@@ -69,10 +75,11 @@ def main():
     parser.add_argument('--tilt', type=float, default=0., help='Requested starting tilt in degrees, before 0.8 s settling')
     parser.add_argument('--azimuth', type=float, default=0., help='Horizontal starting rotation-axis angle, degrees')
     parser.add_argument('--randomize', action='store_true', help='Use exploratory parameter/noise randomization')
+    parser.add_argument('--filtered', action='store_true', help='Use the firmware gravity filter rather than truth orientation')
     parser.add_argument('--smoke-test', action='store_true', help='Headless continuous-control and applied-force check')
     args = parser.parse_args()
-    verify_saved_model(args.model)
-    play = Playground(args.model, args.tilt, args.azimuth, args.randomize)
+    verify_saved_model(args.model,args.filtered)
+    play = Playground(args.model, args.tilt, args.azimuth, args.randomize,args.filtered)
     env = play.env
     if args.smoke_test:
         # Continue past both success and the original 500-frame episode timeout.
@@ -137,7 +144,7 @@ def main():
             viewer.sync()
             if not paused and not play.step():
                 paused = True
-                print('Numerical warning: paused. Press Enter to reset, Space to resume.', flush=True)
+                print('Sensor or numerical fault: paused. Press Enter to reset, Space to resume.', flush=True)
             time.sleep(max(0., .02-(time.monotonic()-start)))
     env.close()
 

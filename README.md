@@ -6,9 +6,9 @@
 
 The user-supplied final assembly and joint review are in [cad/onshape_import](cad/onshape_import/README.md). The corrected export is imported; a 0.57 mm residual servo-model offset is documented and the structural upper pivot remains the confirmed reference. The [MuJoCo model](sim/onshape/README.md) now uses that assembly, with a [simulated motion preview](sim/onshape/joint_motion.gif), explicit body inertia and decomposed printed collision shapes. Physical joint mapping, contact limits and servo/IMU calibration remain before hardware transfer.
 
-**Enclosure fit revision 2:** [new cup and thin lid](cad/electronics_pod/README.md) reduce the closed package from 24 to 14 mm, add XIAO stops and low PSA lands, move the one Pololu to the opposite front corner, and use two existing M2×10 self-tapping screws with the model’s proven 2.0 mm screw bores. Headers are removed. Physical fit of this revision is pending.
+**Enclosure fit revision 2:** [new cup and thin lid](cad/electronics_pod/README.md) reduce the closed package from 24 to 14 mm, add XIAO stops and low PSA lands, move the one Pololu to the opposite front corner, and use two existing M2×10 self-tapping screws with the model’s proven 2.0 mm screw bores. Headers are removed. The user confirms physical fit. The [revised MuJoCo model and joint controls](sim/enclosure/README.md) use the new slicer masses and IMU location; initial retraining and checkpoints are saved. The new candidate improves fresh randomized simulation recovery from 8/30 to 18/30, and remains offline pending further improvement and hardware validation.
 
-The supplied slicer job gives **27.922 g of printed parts after removing supports**. See [mass properties](sim/mass_properties/README.md) for individual masses, actual print settings, preliminary inertia and remaining hardware estimates. The requested future carrier PCB is tracked in the [hardware backlog](docs/HARDWARE_BACKLOG.md).
+The original arm slicer job gives **27.922 g of printed parts after removing supports**. The new cup/lid job gives **29.125 g** for those two replacement pieces; see the [enclosure mass report](sim/enclosure/README.md#geometry-and-mass) and [original mass properties](sim/mass_properties/README.md). The requested future carrier PCB is tracked in the [hardware backlog](docs/HARDWARE_BACKLOG.md).
 
 Current purchased architecture: **XIAO nRF52840 Sense + two PTK 7465 MG servos + one 500 mAh, 1S LiPo**. The user reported all parts ordered on 1 October 2026; see [procurement status](docs/PROCUREMENT_STATUS.md). Train on a computer with MuJoCo and Stable-Baselines3 PPO; run the small exported actor on the XIAO. The **IMU and LiPo charger are already on the XIAO Sense board**, which is attached to the robot's base. **Rev C is prepared with ONE existing Pololu as the battery master switch**, software PWM-off charging and an under-base enclosure. D0/D1 remain PWM; D2, Pololu ON and SW are unused. No second switch board, boost converter, external IMU, servo driver, separate charger or extra electronic components are added. Physical rewiring and firmware upload remain pending; the last confirmed live harness is Rev B.
 
@@ -42,7 +42,7 @@ After the arm command confirms **“Armed. Unplug USB”**, unplug USB for batte
 - [Historical AliExpress shopping plan](docs/ALIEXPRESS_SOURCING.md)
 - [Historical DigiKey sourcing audit](docs/DIGIKEY_SOURCING.md)
 - [Wiring, commissioning, and design rationale](HARDWARE.md)
-- [One-page electrical schematic](electrical/REV_C_WIRING.pdf) ([SVG](electrical/REV_C_WIRING.svg), [PNG](electrical/REV_C_WIRING.png)) and [pin-by-pin wiring guide](electrical/README.md)
+- [Complete wiring from scratch: twelve branches and both buses](electrical/FROM_SCRATCH.md), [one-page schematic PDF](electrical/REV_C_WIRING.pdf) ([PNG](electrical/REV_C_WIRING.png), [phone map](electrical/REV_C_PHONE_WIRING.png)) and [commissioning guide](electrical/README.md)
 - [Onboard voltage monitoring and USB-C charging plan](HARDWARE.md#battery-monitoring-and-charging)
 - [Power budget and brownout acceptance test](HARDWARE.md#power-budget-and-brownout-check)
 - [Final Onshape assembly and 3D review](cad/onshape_import/README.md); [earlier parametric CAD and fit coupons](cad/README.md)
@@ -52,7 +52,8 @@ After the arm command confirms **“Armed. Unplug USB”**, unplug USB for batte
 - [Visual servo pulse-to-angle calibration](firmware/servo_calibration/README.md) — six measured visual references and signed PWM mapping
 - [Calibrated IMU filter and motor-disabled neural policy checks](firmware/policy_shadow/README.md) — measured sensor/filter/inference results
 - [Training and deployment pipeline](sim/README.md)
-- [Neural recovery animation, experiment results and saved actor](sim/recovery/README.md)
+- [Current enclosure model, checkpoints and initial retraining results](sim/enclosure/README.md), [joint sliders](sim/enclosure/joints.html) and [persistent recovery/personality goals](docs/RECOVERY_BEHAVIOR.md)
+- [Original-geometry neural recovery animation, results and saved actor](sim/recovery/README.md)
 - [Current model checks](sim/onshape/validation.json), [Gymnasium checks](sim/validation.json), and [calibration/learning plan](docs/SIM_CALIBRATION_PLAN.md)
 
 ## Design decisions

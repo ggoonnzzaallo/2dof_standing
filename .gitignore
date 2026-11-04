@@ -10,3 +10,7 @@ runs/
 !cad/electronics_pod/rev_c2_print_fit.zip
 *.log
 sim/onshape/assets/*_hulls.json
+sim/enclosure/assets/*_hulls.json
+
+!sim/enclosure/results/best.zip
+!sim/enclosure/results/checkpoints/*.zip

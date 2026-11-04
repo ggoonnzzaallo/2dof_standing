@@ -1,3 +1,5 @@
+**New enclosure variant:** the fit-approved Rev C2 robot is now modeled separately in [sim/enclosure](../enclosure/README.md). This page and `sim/robot.xml` preserve the pre-enclosure model used by the currently deployed actor.
+
 # Final Onshape assembly in MuJoCo
 
 The current `sim/robot.xml` is generated from the user's third STEP export and slicer-derived printed masses. It replaces the earlier primitive-only robot. This is an exploratory physics model, with hardware and actuator assumptions still awaiting calibration; it is not a trained recovery controller.

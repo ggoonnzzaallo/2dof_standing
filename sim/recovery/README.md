@@ -1,3 +1,5 @@
+**Enclosure retraining:** the fit-approved Rev C2 geometry and sensor-aware experiment are documented in [sim/enclosure](../enclosure/README.md). The results below remain the historical pre-enclosure experiment; the currently uploaded actor is preserved.
+
 # Simulation recovery controller
 
 Recorded **1 November 2026**. Codex leads this work autonomously; physical observations will be requested when required for calibration. The current result is a **demonstration-trained neural controller that recovers in the tested simulator**. It has not been flashed to the robot.

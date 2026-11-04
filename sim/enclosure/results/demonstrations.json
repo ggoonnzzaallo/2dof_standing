@@ -1,0 +1,2322 @@
+{
+  "robot_xml_sha256": "4083971406b38077052393d5fe6de4782f46a512ce49ea9b7cf77df960cb1129",
+  "source_report_sha256": "5bc7344342593fa89d7901c750bb76e366ca67ef4fd6653c81f474a4936e6607",
+  "filtered_observations": true,
+  "filtered_environment_sha256": "94df105239f3dc1c49f08d86976154c398aad7bae43c8be3567573e002ae5b15",
+  "filter_header_sha256": "56a9f56320f34c741928b741b59f6deacd61c940d45438b712e1bb8d6de92279",
+  "accepted_episodes": 52,
+  "frames": 10249,
+  "attempts": [
+    {
+      "case": "side_000",
+      "seed": 1000,
+      "randomized": false,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.0
+      },
+      "result": {
+        "score": 58.007362029152105,
+        "success": true,
+        "invalid": false,
+        "steps": 223,
+        "final_upright": 0.9999999960618138,
+        "best_smoothed_upright": 0.9999999997927852,
+        "final_joint_degrees": [
+          -0.0303792651353869,
+          -0.002231324299192338
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 224,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_000",
+      "seed": 1001,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6022387623883922,
+        "azimuth": -0.1352419424384551
+      },
+      "result": {
+        "score": 7.93565445382954,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.999999999462365,
+        "best_smoothed_upright": 0.9999999950601806,
+        "final_joint_degrees": [
+          -0.02244849644467554,
+          -0.0014232685093545445
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_000",
+      "seed": 1002,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.537515316143235,
+        "azimuth": -0.039880260233532944
+      },
+      "result": {
+        "score": 57.986124798870755,
+        "success": true,
+        "invalid": false,
+        "steps": 232,
+        "final_upright": 0.9999999928539777,
+        "best_smoothed_upright": 0.9999999968086901,
+        "final_joint_degrees": [
+          -0.01913893820443167,
+          -0.0005133702483812566
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 233,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_000",
+      "seed": 1003,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4836017349740251,
+        "azimuth": -0.06794055460245595
+      },
+      "result": {
+        "score": 57.98559015506745,
+        "success": true,
+        "invalid": false,
+        "steps": 219,
+        "final_upright": 0.9999999848579937,
+        "best_smoothed_upright": 0.9999999999835366,
+        "final_joint_degrees": [
+          -0.023195124072442133,
+          -0.0010189542287001422
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 220,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_000",
+      "seed": 1004,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4314158554230891,
+        "azimuth": -0.10328123740085846
+      },
+      "result": {
+        "score": 57.997760584743055,
+        "success": true,
+        "invalid": false,
+        "steps": 218,
+        "final_upright": 0.9999999975661964,
+        "best_smoothed_upright": 0.9999999999844672,
+        "final_joint_degrees": [
+          -0.010626310410656379,
+          0.0011925434513140063
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 219,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_000",
+      "seed": 1005,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.454129911088179,
+        "azimuth": 0.12023560438068039
+      },
+      "result": {
+        "score": 57.97630963122332,
+        "success": true,
+        "invalid": false,
+        "steps": 220,
+        "final_upright": 0.9999999848277652,
+        "best_smoothed_upright": 0.9999999998754565,
+        "final_joint_degrees": [
+          -0.023585241646684987,
+          -0.0014135551797694026
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 221,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_000",
+      "seed": 1006,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.5252562000175125,
+        "azimuth": 0.02816457188484571
+      },
+      "result": {
+        "score": 57.9642279387646,
+        "success": true,
+        "invalid": false,
+        "steps": 220,
+        "final_upright": 0.9999999966661326,
+        "best_smoothed_upright": 0.9999999983887708,
+        "final_joint_degrees": [
+          -0.03138599342138397,
+          -0.0022611678275830586
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 221,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_000",
+      "seed": 1007,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4510597413268622,
+        "azimuth": 0.08823835831909277
+      },
+      "result": {
+        "score": 57.987611665050785,
+        "success": true,
+        "invalid": false,
+        "steps": 218,
+        "final_upright": 0.9999999971353046,
+        "best_smoothed_upright": 0.999999999465677,
+        "final_joint_degrees": [
+          -0.01904953395072817,
+          0.0013322880757696436
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 219,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_045",
+      "seed": 1100,
+      "randomized": false,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.7853981633974483
+      },
+      "result": {
+        "score": 57.97001901139491,
+        "success": true,
+        "invalid": false,
+        "steps": 217,
+        "final_upright": 0.9999999912722303,
+        "best_smoothed_upright": 0.9999999977759788,
+        "final_joint_degrees": [
+          -0.01978720051471652,
+          -0.00021709491956139858
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 218,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_045",
+      "seed": 1101,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6791907766192948,
+        "azimuth": 0.6655889256803899
+      },
+      "result": {
+        "score": -0.5771327748036447,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.17837681581091105,
+        "best_smoothed_upright": 0.4371206635013227,
+        "final_joint_degrees": [
+          -0.2035216400410862,
+          0.0005615391375575522
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_045",
+      "seed": 1102,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.5829471147660548,
+        "azimuth": 0.6604590699718441
+      },
+      "result": {
+        "score": -0.5854678990631746,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.17895865682610038,
+        "best_smoothed_upright": 0.43479132916991586,
+        "final_joint_degrees": [
+          -0.25637952682099663,
+          -0.0006365764129967298
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_045",
+      "seed": 1103,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4949971836694305,
+        "azimuth": 0.8536213191642588
+      },
+      "result": {
+        "score": 57.946212456835056,
+        "success": true,
+        "invalid": false,
+        "steps": 219,
+        "final_upright": 0.9999999973670252,
+        "best_smoothed_upright": 0.9999999993793307,
+        "final_joint_degrees": [
+          -0.011208374924491893,
+          0.0012524004988427508
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 220,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_045",
+      "seed": 1104,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4513621024921768,
+        "azimuth": 0.6492747723216477
+      },
+      "result": {
+        "score": -0.5844775404126423,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.17831832837259173,
+        "best_smoothed_upright": 0.43041107373731285,
+        "final_joint_degrees": [
+          -0.19821193982348814,
+          0.0006363283639240165
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_045",
+      "seed": 1105,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6134408382765584,
+        "azimuth": 0.7935258416422396
+      },
+      "result": {
+        "score": 57.969498754147324,
+        "success": true,
+        "invalid": false,
+        "steps": 218,
+        "final_upright": 0.9999999853172923,
+        "best_smoothed_upright": 0.9999999967893254,
+        "final_joint_degrees": [
+          -0.02991334248363036,
+          -0.0012124671093949094
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 219,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_045",
+      "seed": 1106,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6499597911127817,
+        "azimuth": 0.8981891576417953
+      },
+      "result": {
+        "score": 57.97461333277642,
+        "success": true,
+        "invalid": false,
+        "steps": 228,
+        "final_upright": 0.9999999975474901,
+        "best_smoothed_upright": 0.999999997394785,
+        "final_joint_degrees": [
+          -0.007509462415773303,
+          0.001366300583795321
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 229,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_045",
+      "seed": 1107,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6358604681609181,
+        "azimuth": 0.7875285709761383
+      },
+      "result": {
+        "score": 57.9505811624311,
+        "success": true,
+        "invalid": false,
+        "steps": 219,
+        "final_upright": 0.9999999912945637,
+        "best_smoothed_upright": 0.9999999952696267,
+        "final_joint_degrees": [
+          -0.014464244352632282,
+          -5.0616499285424045e-05
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 220,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_090",
+      "seed": 1200,
+      "randomized": false,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 1.5707963267948966
+      },
+      "result": {
+        "score": 57.819188425914724,
+        "success": true,
+        "invalid": false,
+        "steps": 220,
+        "final_upright": 0.9999999946693143,
+        "best_smoothed_upright": 0.9999999963130279,
+        "final_joint_degrees": [
+          -0.01614813827683291,
+          0.0007837519049795927
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 221,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_090",
+      "seed": 1201,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.5554031990570725,
+        "azimuth": 1.4864844376572002
+      },
+      "result": {
+        "score": 57.84559194542651,
+        "success": true,
+        "invalid": false,
+        "steps": 225,
+        "final_upright": 0.9999999805751142,
+        "best_smoothed_upright": 0.9999999985420658,
+        "final_joint_degrees": [
+          -0.015541818633285694,
+          0.0012431531759396566
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 226,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_090",
+      "seed": 1202,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4440526706558345,
+        "azimuth": 1.5273316395629515
+      },
+      "result": {
+        "score": 57.84362026261235,
+        "success": true,
+        "invalid": false,
+        "steps": 227,
+        "final_upright": 0.9999999972674157,
+        "best_smoothed_upright": 0.9999999968558452,
+        "final_joint_degrees": [
+          -0.0152687953540952,
+          0.001161163207211997
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 228,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_090",
+      "seed": 1203,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4480695761042752,
+        "azimuth": 1.5991757033648768
+      },
+      "result": {
+        "score": 57.81797451863659,
+        "success": true,
+        "invalid": false,
+        "steps": 227,
+        "final_upright": 0.999999996864307,
+        "best_smoothed_upright": 0.9999999957174206,
+        "final_joint_degrees": [
+          -0.016258685443674325,
+          0.0014119666346352746
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 228,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_090",
+      "seed": 1204,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6224334619457776,
+        "azimuth": 1.4750757111196604
+      },
+      "result": {
+        "score": 57.806891926909145,
+        "success": true,
+        "invalid": false,
+        "steps": 222,
+        "final_upright": 0.9999999974408983,
+        "best_smoothed_upright": 0.9999999961678457,
+        "final_joint_degrees": [
+          -0.009314218418151072,
+          0.0011973164178702477
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 223,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_090",
+      "seed": 1205,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.655440363231644,
+        "azimuth": 1.4680258377355768
+      },
+      "result": {
+        "score": 57.808912573342745,
+        "success": true,
+        "invalid": false,
+        "steps": 222,
+        "final_upright": 0.9999999906825284,
+        "best_smoothed_upright": 0.9999999966275914,
+        "final_joint_degrees": [
+          -0.018019428241630685,
+          -4.3919896679851495e-05
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 223,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_090",
+      "seed": 1206,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4802002791765203,
+        "azimuth": 1.6780797373352256
+      },
+      "result": {
+        "score": 7.644651354632793,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999251486146,
+        "best_smoothed_upright": 0.9999999947189684,
+        "final_joint_degrees": [
+          -0.04473979626216058,
+          0.0008637089839544965
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_090",
+      "seed": 1207,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4808004999899342,
+        "azimuth": 1.5560671925694762
+      },
+      "result": {
+        "score": 7.801226584877222,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999913115988,
+        "best_smoothed_upright": 0.9999999939605743,
+        "final_joint_degrees": [
+          -0.013842431758587301,
+          0.0017423787009684377
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_135",
+      "seed": 1300,
+      "randomized": false,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 2.356194490192345
+      },
+      "result": {
+        "score": 57.98262832823768,
+        "success": true,
+        "invalid": false,
+        "steps": 220,
+        "final_upright": 0.9999999959075323,
+        "best_smoothed_upright": 0.9999999973150275,
+        "final_joint_degrees": [
+          -0.03089916281209562,
+          -0.0022183342653666047
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 221,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_135",
+      "seed": 1301,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.439579081825213,
+        "azimuth": 2.4549491461450152
+      },
+      "result": {
+        "score": 7.769147160954138,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999482403893,
+        "best_smoothed_upright": 0.999999996377114,
+        "final_joint_degrees": [
+          0.019584545902845602,
+          -0.0007935013054453492
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_135",
+      "seed": 1302,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.5733927014154683,
+        "azimuth": 2.406564317177326
+      },
+      "result": {
+        "score": 57.869510225060864,
+        "success": true,
+        "invalid": false,
+        "steps": 185,
+        "final_upright": 0.9999999963778049,
+        "best_smoothed_upright": 0.9999999970870419,
+        "final_joint_degrees": [
+          -0.03368404029042691,
+          -0.002502483505610248
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 186,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_135",
+      "seed": 1303,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6155806191371067,
+        "azimuth": 2.2546842830461555
+      },
+      "result": {
+        "score": -1.6677401088675443,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.22774972931532805,
+        "best_smoothed_upright": -0.10708174248396203,
+        "final_joint_degrees": [
+          0.08580458373194501,
+          -1.131330661953881
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_135",
+      "seed": 1304,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4938341140283535,
+        "azimuth": 2.4747516029525705
+      },
+      "result": {
+        "score": 57.98833122893335,
+        "success": true,
+        "invalid": false,
+        "steps": 216,
+        "final_upright": 0.9999999974748108,
+        "best_smoothed_upright": 0.9999999953106384,
+        "final_joint_degrees": [
+          -0.009097963552824353,
+          0.001360764158555234
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 217,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_135",
+      "seed": 1305,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.7092120269913835,
+        "azimuth": 2.458833570476492
+      },
+      "result": {
+        "score": 7.927100031898247,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999760575807,
+        "best_smoothed_upright": 0.9999999982655898,
+        "final_joint_degrees": [
+          -0.012128311810819858,
+          0.004402528475797555
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_135",
+      "seed": 1306,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4556420842255098,
+        "azimuth": 2.2807509489335556
+      },
+      "result": {
+        "score": -1.6931463559550062,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.23072189256855996,
+        "best_smoothed_upright": -0.11033214379565867,
+        "final_joint_degrees": [
+          0.1500742221051475,
+          -1.4484581947787494
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_135",
+      "seed": 1307,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6357407096822618,
+        "azimuth": 2.416160274780738
+      },
+      "result": {
+        "score": 57.96926492429591,
+        "success": true,
+        "invalid": false,
+        "steps": 228,
+        "final_upright": 0.9999999966868832,
+        "best_smoothed_upright": 0.9999999957763497,
+        "final_joint_degrees": [
+          -0.02664332796054462,
+          -0.0021026870100605906
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 229,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_180",
+      "seed": 1400,
+      "randomized": false,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 3.141592653589793
+      },
+      "result": {
+        "score": 57.98615078379235,
+        "success": true,
+        "invalid": false,
+        "steps": 224,
+        "final_upright": 0.9999999961153762,
+        "best_smoothed_upright": 0.999999995197132,
+        "final_joint_degrees": [
+          -0.030390844280250795,
+          -0.0022327917293685053
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 225,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_180",
+      "seed": 1401,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6413690102509824,
+        "azimuth": 3.0877893688411056
+      },
+      "result": {
+        "score": 57.92776334760052,
+        "success": true,
+        "invalid": false,
+        "steps": 211,
+        "final_upright": 0.9999999850688952,
+        "best_smoothed_upright": 0.9999999956688744,
+        "final_joint_degrees": [
+          -0.01983523260293421,
+          -0.0011518528469982709
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 212,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_180",
+      "seed": 1402,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.5580897807686696,
+        "azimuth": 3.1222223270297103
+      },
+      "result": {
+        "score": 7.920564737752388,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999999096312,
+        "best_smoothed_upright": 0.9999999944344331,
+        "final_joint_degrees": [
+          -0.042826394761836875,
+          -0.0010705287728809284
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_180",
+      "seed": 1403,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.5401442023174767,
+        "azimuth": 3.041760947462849
+      },
+      "result": {
+        "score": 57.944994614112176,
+        "success": true,
+        "invalid": false,
+        "steps": 210,
+        "final_upright": 0.9999999914587016,
+        "best_smoothed_upright": 0.9999999979376005,
+        "final_joint_degrees": [
+          -0.024584993475769864,
+          -0.00012814271944535286
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 211,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_180",
+      "seed": 1404,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4903911886566186,
+        "azimuth": 3.1485684516767525
+      },
+      "result": {
+        "score": 7.932758150826126,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999629313617,
+        "best_smoothed_upright": 0.9999999983092527,
+        "final_joint_degrees": [
+          -0.046013282584452475,
+          -0.0009364655600027229
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_180",
+      "seed": 1405,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.526475357486582,
+        "azimuth": 3.0689914759856793
+      },
+      "result": {
+        "score": 57.95651580498026,
+        "success": true,
+        "invalid": false,
+        "steps": 222,
+        "final_upright": 0.9999999912401376,
+        "best_smoothed_upright": 0.9999999970890316,
+        "final_joint_degrees": [
+          -0.02596448968440649,
+          -0.0001678194279994265
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 223,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_180",
+      "seed": 1406,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4446677095815532,
+        "azimuth": 3.1701989007214904
+      },
+      "result": {
+        "score": 57.95326738557317,
+        "success": true,
+        "invalid": false,
+        "steps": 222,
+        "final_upright": 0.9999999975890048,
+        "best_smoothed_upright": 0.9999999945117317,
+        "final_joint_degrees": [
+          -0.008345154672789084,
+          0.0012821591432882718
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 223,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_180",
+      "seed": 1407,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.593050672609608,
+        "azimuth": 3.2725607241481307
+      },
+      "result": {
+        "score": 57.94292342821415,
+        "success": true,
+        "invalid": false,
+        "steps": 217,
+        "final_upright": 0.9999999973228233,
+        "best_smoothed_upright": 0.9999999952194188,
+        "final_joint_degrees": [
+          -0.010762169631414551,
+          0.0013706499992090996
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 218,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_225",
+      "seed": 1500,
+      "randomized": false,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 3.9269908169872414
+      },
+      "result": {
+        "score": 58.161955590921366,
+        "success": true,
+        "invalid": false,
+        "steps": 213,
+        "final_upright": 0.9999999964794051,
+        "best_smoothed_upright": 0.9999999982739255,
+        "final_joint_degrees": [
+          -0.030368232160650953,
+          -0.002420650294742945
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 214,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_225",
+      "seed": 1501,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4761438527712731,
+        "azimuth": 4.061684214836067
+      },
+      "result": {
+        "score": -1.287690581516341,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.19599353580603204,
+        "best_smoothed_upright": -0.037272626769937665,
+        "final_joint_degrees": [
+          0.026407991079717464,
+          0.9521763349646953
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_225",
+      "seed": 1502,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.611696603401665,
+        "azimuth": 3.940818411946465
+      },
+      "result": {
+        "score": -1.2892635939393642,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.19615700030896627,
+        "best_smoothed_upright": -0.03689294270795052,
+        "final_joint_degrees": [
+          0.08626712101455664,
+          0.9694498907777168
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_225",
+      "seed": 1503,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6887888246623108,
+        "azimuth": 3.967107523873895
+      },
+      "result": {
+        "score": -1.3022650061901122,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.19777947581384914,
+        "best_smoothed_upright": -0.03760996007169579,
+        "final_joint_degrees": [
+          0.16571442961508626,
+          1.1396003013533493
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_225",
+      "seed": 1504,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.5944393227008715,
+        "azimuth": 3.9280283423285405
+      },
+      "result": {
+        "score": 58.183740014827094,
+        "success": true,
+        "invalid": false,
+        "steps": 228,
+        "final_upright": 0.9999999953187845,
+        "best_smoothed_upright": 0.999999996379427,
+        "final_joint_degrees": [
+          -0.02170410915093752,
+          0.00116040061528755
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 229,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_225",
+      "seed": 1505,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.696482156708383,
+        "azimuth": 3.9393320995800893
+      },
+      "result": {
+        "score": 58.10914953638907,
+        "success": true,
+        "invalid": false,
+        "steps": 188,
+        "final_upright": 0.9999999953236732,
+        "best_smoothed_upright": 0.9999999974576028,
+        "final_joint_degrees": [
+          -0.015119380687897858,
+          0.0007469836359576364
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 189,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_225",
+      "seed": 1506,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4539734322279412,
+        "azimuth": 4.047077100559895
+      },
+      "result": {
+        "score": -1.3418472181366152,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.20230619740817335,
+        "best_smoothed_upright": -0.04202311652215559,
+        "final_joint_degrees": [
+          0.3729681200653976,
+          1.6149492075274217
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_225",
+      "seed": 1507,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6655594124176378,
+        "azimuth": 3.893262402096624
+      },
+      "result": {
+        "score": 58.10951587447958,
+        "success": true,
+        "invalid": false,
+        "steps": 190,
+        "final_upright": 0.9999999839588707,
+        "best_smoothed_upright": 0.9999999984292891,
+        "final_joint_degrees": [
+          -0.021484786165887244,
+          -0.001098058723167747
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 191,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_270",
+      "seed": 1600,
+      "randomized": false,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 4.71238898038469
+      },
+      "result": {
+        "score": 57.950011976517786,
+        "success": true,
+        "invalid": false,
+        "steps": 225,
+        "final_upright": 0.9999999818926535,
+        "best_smoothed_upright": 0.9999999980299132,
+        "final_joint_degrees": [
+          -0.02441931007061615,
+          -0.000999609855591502
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 226,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_270",
+      "seed": 1601,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4944049146438865,
+        "azimuth": 4.777398458304184
+      },
+      "result": {
+        "score": 57.89372826524682,
+        "success": true,
+        "invalid": false,
+        "steps": 214,
+        "final_upright": 0.9999999968753248,
+        "best_smoothed_upright": 0.9999999962761102,
+        "final_joint_degrees": [
+          -0.01607485729030842,
+          0.0013531404631526337
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 215,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_270",
+      "seed": 1602,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.7072046229490896,
+        "azimuth": 4.612830093473932
+      },
+      "result": {
+        "score": 57.92066824442467,
+        "success": true,
+        "invalid": false,
+        "steps": 212,
+        "final_upright": 0.9999999899446874,
+        "best_smoothed_upright": 0.9999999961593242,
+        "final_joint_degrees": [
+          -0.016651947751454368,
+          -4.632402757695125e-05
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 213,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_270",
+      "seed": 1603,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4585853764971894,
+        "azimuth": 4.599569803305349
+      },
+      "result": {
+        "score": 57.91209366924242,
+        "success": true,
+        "invalid": false,
+        "steps": 213,
+        "final_upright": 0.9999999894530597,
+        "best_smoothed_upright": 0.9999999976448412,
+        "final_joint_degrees": [
+          -0.02165364076012024,
+          -0.00012636576638747377
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 214,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_270",
+      "seed": 1604,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6899895478072484,
+        "azimuth": 4.779268075840725
+      },
+      "result": {
+        "score": 7.868589493492206,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999482703488,
+        "best_smoothed_upright": 0.9999999950186119,
+        "final_joint_degrees": [
+          0.0031711047148191953,
+          5.1051232146481505e-05
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_270",
+      "seed": 1605,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6676637029746066,
+        "azimuth": 4.790470755016809
+      },
+      "result": {
+        "score": 7.766460333091887,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.999999996047726,
+        "best_smoothed_upright": 0.9999999960471093,
+        "final_joint_degrees": [
+          -0.002546572476018258,
+          -0.0002595024572930509
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_270",
+      "seed": 1606,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4701408487727017,
+        "azimuth": 4.750789819155718
+      },
+      "result": {
+        "score": 57.918727972144886,
+        "success": true,
+        "invalid": false,
+        "steps": 213,
+        "final_upright": 0.9999999974150461,
+        "best_smoothed_upright": 0.9999999971900018,
+        "final_joint_degrees": [
+          -0.007966964941903252,
+          0.0013656804208344016
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 214,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_270",
+      "seed": 1607,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.5776657428984995,
+        "azimuth": 4.68070546993235
+      },
+      "result": {
+        "score": 57.91077511738099,
+        "success": true,
+        "invalid": false,
+        "steps": 213,
+        "final_upright": 0.9999999951621545,
+        "best_smoothed_upright": 0.9999999968350581,
+        "final_joint_degrees": [
+          -0.012283870900021119,
+          0.0006526038219615847
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 214,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_315",
+      "seed": 1700,
+      "randomized": false,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 5.497787143782138
+      },
+      "result": {
+        "score": 57.89220070136884,
+        "success": true,
+        "invalid": false,
+        "steps": 226,
+        "final_upright": 0.9999999969265734,
+        "best_smoothed_upright": 0.9999999967126023,
+        "final_joint_degrees": [
+          -0.01258538177377071,
+          0.0011464491295401344
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 227,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_315",
+      "seed": 1701,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.5434500327477034,
+        "azimuth": 5.443509668984053
+      },
+      "result": {
+        "score": 57.86611108852811,
+        "success": true,
+        "invalid": false,
+        "steps": 222,
+        "final_upright": 0.9999999847230413,
+        "best_smoothed_upright": 0.9999999978888369,
+        "final_joint_degrees": [
+          -0.03268909676768307,
+          -0.0008937945755568674
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 223,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_315",
+      "seed": 1702,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6197877328972985,
+        "azimuth": 5.369692030365563
+      },
+      "result": {
+        "score": 7.71837392388872,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999998938583711,
+        "best_smoothed_upright": 0.9999999968661497,
+        "final_joint_degrees": [
+          -0.04484921273120122,
+          0.00020718526816282325
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_315",
+      "seed": 1703,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6855331469368025,
+        "azimuth": 5.466315245557812
+      },
+      "result": {
+        "score": 57.903078686797656,
+        "success": true,
+        "invalid": false,
+        "steps": 234,
+        "final_upright": 0.9999999883516152,
+        "best_smoothed_upright": 0.9999999963010898,
+        "final_joint_degrees": [
+          -0.01913371136351306,
+          -0.0009473508186476311
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 235,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_315",
+      "seed": 1704,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.57919177867542,
+        "azimuth": 5.599395377572658
+      },
+      "result": {
+        "score": 7.735323191919612,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.999999985547498,
+        "best_smoothed_upright": 0.9999999946690373,
+        "final_joint_degrees": [
+          0.0009776808562191421,
+          0.0005404759478362697
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "side_315",
+      "seed": 1705,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.5493766091131533,
+        "azimuth": 5.633797781056902
+      },
+      "result": {
+        "score": 57.89609830936298,
+        "success": true,
+        "invalid": false,
+        "steps": 222,
+        "final_upright": 0.9999999952799332,
+        "best_smoothed_upright": 0.9999999969276956,
+        "final_joint_degrees": [
+          -0.01524790487145922,
+          0.0008592432920783561
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 223,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_315",
+      "seed": 1706,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.4319304663459376,
+        "azimuth": 5.591559372385
+      },
+      "result": {
+        "score": 57.91044320594227,
+        "success": true,
+        "invalid": false,
+        "steps": 233,
+        "final_upright": 0.9999999942974449,
+        "best_smoothed_upright": 0.99999999789983,
+        "final_joint_degrees": [
+          -0.023402302676816335,
+          0.0013113597004990008
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 234,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "side_315",
+      "seed": 1707,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 1.6725397381298994,
+        "azimuth": 5.485604294078815
+      },
+      "result": {
+        "score": 7.842765849259824,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999902454135,
+        "best_smoothed_upright": 0.9999999970610425,
+        "final_joint_degrees": [
+          -0.009590878792075612,
+          0.0011351430282607357
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "inverted",
+      "seed": 1800,
+      "randomized": false,
+      "requested_start": {
+        "tilt": 3.141592653589793,
+        "azimuth": 0.0
+      },
+      "result": {
+        "score": 57.94620836082915,
+        "success": true,
+        "invalid": false,
+        "steps": 213,
+        "final_upright": 0.9999999907141586,
+        "best_smoothed_upright": 0.9999999955061009,
+        "final_joint_degrees": [
+          -0.019668663975739617,
+          -0.00016464598954394827
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 214,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "inverted",
+      "seed": 1801,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 3.1813661189583846,
+        "azimuth": -0.12205663613075472
+      },
+      "result": {
+        "score": 57.967376868180764,
+        "success": true,
+        "invalid": false,
+        "steps": 231,
+        "final_upright": 0.9999999996498443,
+        "best_smoothed_upright": 0.9999999972534209,
+        "final_joint_degrees": [
+          -0.038153399069989255,
+          -0.0019661175161789016
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 232,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "inverted",
+      "seed": 1802,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 3.264053835508925,
+        "azimuth": -0.008647507866455982
+      },
+      "result": {
+        "score": 7.887888161525678,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999836727365,
+        "best_smoothed_upright": 0.9999999932294996,
+        "final_joint_degrees": [
+          -0.01957151796951411,
+          0.0024278605844393498
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "inverted",
+      "seed": 1803,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 3.117565772683575,
+        "azimuth": 0.0722111788704549
+      },
+      "result": {
+        "score": -1.273093598099444,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.18058819878056792,
+        "best_smoothed_upright": 0.03373229800396757,
+        "final_joint_degrees": [
+          -0.4041142190592133,
+          0.0061160461875250545
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "inverted",
+      "seed": 1804,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 3.03518017975073,
+        "azimuth": -0.07207847311392458
+      },
+      "result": {
+        "score": -1.2926297838790886,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.18266361951682528,
+        "best_smoothed_upright": 0.02919188353669185,
+        "final_joint_degrees": [
+          -0.5928128995655941,
+          0.009887167762325039
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "inverted",
+      "seed": 1805,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 3.098000070859875,
+        "azimuth": 0.00751965750074322
+      },
+      "result": {
+        "score": -1.3052046494902454,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.1837348914344173,
+        "best_smoothed_upright": 0.024611926202927455,
+        "final_joint_degrees": [
+          -0.690229197713071,
+          0.009165355547839845
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "inverted",
+      "seed": 1806,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 3.0632886907260595,
+        "azimuth": -0.03182695356689079
+      },
+      "result": {
+        "score": -1.282707999589185,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.18130296012363095,
+        "best_smoothed_upright": 0.032840396328242115,
+        "final_joint_degrees": [
+          -0.46910647336387845,
+          0.008889727456304503
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "inverted",
+      "seed": 1807,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 3.1150343988634592,
+        "azimuth": -0.0012574789772280724
+      },
+      "result": {
+        "score": -1.2896341422686797,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": -0.1813436025237657,
+        "best_smoothed_upright": 0.03259475469961102,
+        "final_joint_degrees": [
+          -0.47279918427887563,
+          0.009606718435159693
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "upright",
+      "seed": 1900,
+      "randomized": false,
+      "requested_start": {
+        "tilt": 0.0,
+        "azimuth": 0.0
+      },
+      "result": {
+        "score": 58.899852598243534,
+        "success": true,
+        "invalid": false,
+        "steps": 50,
+        "final_upright": 0.9999999973136952,
+        "best_smoothed_upright": 0.9999999928693578,
+        "final_joint_degrees": [
+          -0.012631505364998463,
+          0.001248091996272772
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 51,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "upright",
+      "seed": 1901,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 0.05974638722736482,
+        "azimuth": 0.0006483392182653247
+      },
+      "result": {
+        "score": 8.449695891347519,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999836612626,
+        "best_smoothed_upright": 0.9999999946961192,
+        "final_joint_degrees": [
+          -0.02266605742167808,
+          0.0024535097228356767
+        ]
+      },
+      "adjacent_audit": null,
+      "accepted": false
+    },
+    {
+      "case": "upright",
+      "seed": 1902,
+      "randomized": true,
+      "requested_start": {
+        "tilt": -0.0032526674115329,
+        "azimuth": -0.05246042382302495
+      },
+      "result": {
+        "score": 58.63127739407403,
+        "success": true,
+        "invalid": false,
+        "steps": 110,
+        "final_upright": 0.9999999823112249,
+        "best_smoothed_upright": 0.9999999955712472,
+        "final_joint_degrees": [
+          -0.044128038153924964,
+          -0.0009629786525977175
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 111,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "upright",
+      "seed": 1903,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 0.0032355520543988245,
+        "azimuth": -0.0980513358853293
+      },
+      "result": {
+        "score": 58.89975367583539,
+        "success": true,
+        "invalid": false,
+        "steps": 50,
+        "final_upright": 0.9999999845464974,
+        "best_smoothed_upright": 0.9999999929598269,
+        "final_joint_degrees": [
+          -0.024147128893874666,
+          -0.0010709146764799108
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 51,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "upright",
+      "seed": 1904,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 0.04874567167309414,
+        "azimuth": -0.07159914262110822
+      },
+      "result": {
+        "score": 58.899857531718595,
+        "success": true,
+        "invalid": false,
+        "steps": 50,
+        "final_upright": 0.9999999954229172,
+        "best_smoothed_upright": 0.9999999929908199,
+        "final_joint_degrees": [
+          -0.012619007234323689,
+          0.0006822252785442182
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 51,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "upright",
+      "seed": 1905,
+      "randomized": true,
+      "requested_start": {
+        "tilt": -0.04621584244214239,
+        "azimuth": -0.11984317995077731
+      },
+      "result": {
+        "score": 58.899759467641275,
+        "success": true,
+        "invalid": false,
+        "steps": 50,
+        "final_upright": 0.999999996642649,
+        "best_smoothed_upright": 0.9999999953020182,
+        "final_joint_degrees": [
+          -0.024971680415666955,
+          -0.0022400649146697292
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 51,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "upright",
+      "seed": 1906,
+      "randomized": true,
+      "requested_start": {
+        "tilt": -0.1165928869735759,
+        "azimuth": -0.05255446487911615
+      },
+      "result": {
+        "score": 58.89982661401062,
+        "success": true,
+        "invalid": false,
+        "steps": 50,
+        "final_upright": 0.9999999975469485,
+        "best_smoothed_upright": 0.9999999930420889,
+        "final_joint_degrees": [
+          -0.015666718089270434,
+          0.0013495403902249084
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 51,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    },
+    {
+      "case": "upright",
+      "seed": 1907,
+      "randomized": true,
+      "requested_start": {
+        "tilt": 0.09576641570587066,
+        "azimuth": 0.08493848758594598
+      },
+      "result": {
+        "score": 58.89978394409683,
+        "success": true,
+        "invalid": false,
+        "steps": 50,
+        "final_upright": 0.9999999850229827,
+        "best_smoothed_upright": 0.9999999931730928,
+        "final_joint_degrees": [
+          -0.020301426536463267,
+          -0.0014504567687316668
+        ]
+      },
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 51,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "accepted": true
+    }
+  ],
+  "dataset_sha256": "82cf7d437d10f6707e851263a99c59f15285fa85df4658684271c215c23d518b",
+  "status": "Exploratory simulated demonstrations, including uncalibrated parameter randomization; not physical demonstrations",
+  "physical_robot_commands_sent": false
+}

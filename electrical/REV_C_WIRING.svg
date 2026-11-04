@@ -11,8 +11,8 @@
 	<g id="group" transform="scale(1,-1) translate(0,-1080)" style="clip-path: url(#clip)">
 		<g transform="">
 			<rect x="0" y="0" width="1200" height="1080" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
-			<text x="35" y="1032" style="font-family: Helvetica-Bold; font-size: 32px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,2064) scale(1,-1)">Rev C | ONE Pololu battery master switch</text>
-			<text x="35" y="999" style="font-family: Helvetica; font-size: 18px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1998) scale(1,-1)">Prepared design: rewire and bench checks pending. No additional electronic components.</text>
+			<text x="35" y="1032" style="font-family: Helvetica-Bold; font-size: 32px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,2064) scale(1,-1)">Rev C | COMPLETE ROBOT WIRING</text>
+			<text x="35" y="999" style="font-family: Helvetica; font-size: 18px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1998) scale(1,-1)">One Pololu 2810 LV master switch. Fresh-build harness; physical commissioning pending.</text>
 			<text x="35" y="957" style="font-family: Helvetica-Bold; font-size: 20px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1914) scale(1,-1)">POSITIVE | servo current passes through the Pololu, never through the XIAO</text>
 			<rect x="35" y="852" width="220" height="70" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
 			<text x="48" y="897" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1794) scale(1,-1)">Battery RCY + / red</text>
@@ -44,7 +44,7 @@
 			<text x="868" y="740" style="font-family: Helvetica; font-size: 14px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1480) scale(1,-1)">Red wire in existing 3-pin plug</text>
 			<text x="35" y="808" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1616) scale(1,-1)">ON / SW control pads: NO wires.</text>
 			<text x="35" y="780" style="font-family: Helvetica; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1560) scale(1,-1)">Use the physical slide only. No D2 override.</text>
-			<text x="35" y="717" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1434) scale(1,-1)">Charging (switch ON): USB -&gt; XIAO charger -&gt; J1 -&gt; Pololu VOUT -&gt; VIN -&gt; battery.</text>
+			<text x="35" y="717" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1434) scale(1,-1)">Planned charging path (verify): USB -&gt; XIAO charger -&gt; J1 -&gt; VOUT -&gt; VIN -&gt; battery.</text>
 			<text x="35" y="664" style="font-family: Helvetica-Bold; font-size: 20px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1328) scale(1,-1)">GROUND | one common return, including the Pololu</text>
 			<rect x="35" y="495" width="220" height="60" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
 			<text x="48" y="518.0" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1036) scale(1,-1)">Battery RCY - / black</text>
@@ -89,7 +89,7 @@
 			<text x="52" y="111" style="font-family: Helvetica; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,222) scale(1,-1)">Charge mode stops PWM, not servo power; idle current and charging completion need measurement.</text>
 			<text x="52" y="81" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,162) scale(1,-1)">STORAGE OFF: unplug USB AND slide OFF. OFF + USB isolates the cell but may power the servos.</text>
 			<text x="52" y="53" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,106) scale(1,-1)">No routine connector access. Disconnect battery AND USB before soldering or servicing.</text>
-			<text x="35" y="16" style="font-family: Helvetica; font-size: 13px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,32) scale(1,-1)">Connection map, not a physical pad layout. Verify board labels. Steps and sources: electrical/README.md</text>
+			<text x="35" y="16" style="font-family: Helvetica; font-size: 13px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,32) scale(1,-1)">Not a physical pad layout. Verify board labels. Numbered assembly steps: electrical/FROM_SCRATCH.md</text>
 		</g>
 	</g>
 </svg>

@@ -1,5 +1,6 @@
 """Render native MuJoCo images and a short simulated joint-motion GIF."""
 from pathlib import Path
+import argparse
 import sys
 import mujoco
 import numpy as np
@@ -11,7 +12,11 @@ from model_geometry import place_neutral_robot
 
 
 def main():
-    model = mujoco.MjModel.from_xml_path(str(HERE.parent/'robot.xml'))
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--model',type=Path,default=HERE.parent/'robot.xml')
+    parser.add_argument('--out',type=Path,default=HERE)
+    args=parser.parse_args();args.out.mkdir(parents=True,exist_ok=True)
+    model = mujoco.MjModel.from_xml_path(str(args.model))
     data = mujoco.MjData(model)
     place_neutral_robot(model,data,0.,0.)
     option = mujoco.MjvOption()
@@ -31,7 +36,7 @@ def main():
             preview.paste(panel,(i*640,0))
             draw.text((i*640+20,490),'Detailed CAD visuals' if i==0 else 'Convex collision pieces / hardware boxes',font=font,fill='#142c3d')
         draw.text((20,520),'Exploratory model: masses, joint limits and servo dynamics still require physical calibration.',font=ImageFont.load_default(size=17),fill='#455764')
-        preview.save(HERE/'preview.png')
+        preview.save(args.out/'preview.png')
         option.geomgroup[1] = 1
         option.geomgroup[3] = 0
         for frame in range(80):
@@ -46,8 +51,8 @@ def main():
             draw.rectangle((0,0,640,32),fill='#f3f5f7')
             draw.text((12,6),'MuJoCo joint-motion check (simulation only)',font=ImageFont.load_default(size=17),fill='#142c3d')
             frames.append(image)
-        frames[0].save(HERE/'joint_motion.gif',save_all=True,append_images=frames[1:],duration=50,loop=0,optimize=True)
-        frames[12].save(HERE/'motion_frame.png')
+        frames[0].save(args.out/'joint_motion.gif',save_all=True,append_images=frames[1:],duration=50,loop=0,optimize=True)
+        frames[12].save(args.out/'motion_frame.png')
     print('Rendered preview.png, joint_motion.gif and motion_frame.png',flush=True)
 
 

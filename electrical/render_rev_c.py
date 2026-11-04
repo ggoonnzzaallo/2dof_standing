@@ -41,8 +41,8 @@ def dot(x, y, color):
 
 
 d.add(Rect(0, 0, W, H, fillColor=colors.white, strokeColor=None))
-text(35, 48, 'Rev C | ONE Pololu battery master switch', 32, True)
-text(35, 81, 'Prepared design: rewire and bench checks pending. No additional electronic components.', 18, color=MUTED)
+text(35, 48, 'Rev C | COMPLETE ROBOT WIRING', 32, True)
+text(35, 81, 'One Pololu 2810 LV master switch. Fresh-build harness; physical commissioning pending.', 18, color=MUTED)
 text(35, 123, 'POSITIVE | servo current passes through the Pololu, never through the XIAO', 20, True)
 box(35, 158, 220, 70, 'Battery RCY + / red', 'Raw battery + goes ONLY to VIN')
 wire([(255, 193), (300, 193)], RED)
@@ -58,7 +58,7 @@ for y, title, detail in [
     box(855, y-30, 310, 60, title, detail)
 text(35, 272, 'ON / SW control pads: NO wires.', 19, True)
 text(35, 300, 'Use the physical slide only. No D2 override.', 17)
-text(35, 363, 'Charging (switch ON): USB -> XIAO charger -> J1 -> Pololu VOUT -> VIN -> battery.', 17, True)
+text(35, 363, 'Planned charging path (verify): USB -> XIAO charger -> J1 -> VOUT -> VIN -> battery.', 17, True)
 
 text(35, 416, 'GROUND | one common return, including the Pololu', 20, True)
 box(35, 525, 220, 60, 'Battery RCY - / black')
@@ -84,7 +84,7 @@ text(52, 939, 'CHARGE: switch ON + USB connected + ./robot charge (firmware 0.3)
 text(52, 969, 'Charge mode stops PWM, not servo power; idle current and charging completion need measurement.', 17)
 text(52, 999, 'STORAGE OFF: unplug USB AND slide OFF. OFF + USB isolates the cell but may power the servos.', 17, True)
 text(52, 1027, 'No routine connector access. Disconnect battery AND USB before soldering or servicing.', 16)
-text(35, 1064, 'Connection map, not a physical pad layout. Verify board labels. Steps and sources: electrical/README.md', 13, color=MUTED)
+text(35, 1064, 'Not a physical pad layout. Verify board labels. Numbered assembly steps: electrical/FROM_SCRATCH.md', 13, color=MUTED)
 
 renderSVG.drawToFile(d, str(OUT/'REV_C_WIRING.svg'))
 pdf = OUT/'REV_C_WIRING.pdf'
@@ -116,11 +116,11 @@ def card(draw, y, title, rows, color=INK):
 
 im = Image.new('RGB', (1000, 1740), '#F6F8FA'); draw = ImageDraw.Draw(im)
 phone_text(draw, 40, 52, 'REV C - ONE POLOLU', 43, True)
-phone_text(draw, 40, 105, 'Proposed rewire; check before applying power.', 29)
+phone_text(draw, 40, 105, 'Complete fresh-build wiring; commissioning pending.', 29)
 y = card(draw, 145, '1  RAW BATTERY POSITIVE', ['Battery +  ->  Pololu VIN only'], RED)
 y = card(draw, y, '2  SWITCHED POSITIVE BUS / J1', ['Join: Pololu VOUT', '       XIAO underside BAT+', '       Lower servo red / +', '       Upper servo red / +'], RED)
 y = card(draw, y, '3  COMMON GROUND BUS / J2', ['Join: battery negative', '       Pololu GND', '       XIAO GND or BAT- (one connection)', '       Lower servo ground', '       Upper servo ground'], GROUND)
-y = card(draw, y, '4  ONLY TWO SIGNAL WIRES', ['XIAO D0 / 0  ->  lower servo signal', 'XIAO D1 / 1  ->  upper servo signal', 'D2, Pololu ON and SW: no wires'], BLUE)
+y = card(draw, y, '4  ONLY TWO SIGNAL WIRES', ['XIAO D0 / 0  ->  lower servo signal', 'XIAO D1 / 1  ->  upper servo signal', 'D2, Pololu ON and SW: no wires', 'XIAO 3V3 and 5V: no wires'], BLUE)
 y = card(draw, y, 'OPERATING RULE', ['Charge: ON + USB + ./robot charge', 'PWM OFF; servo power stays connected.', 'Storage: USB unplugged + switch OFF.', 'USB alone does not prove net charging.'])
 assert y < 1740
 im.save(OUT/'REV_C_PHONE_WIRING.png')

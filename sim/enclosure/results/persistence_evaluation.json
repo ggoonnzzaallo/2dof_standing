@@ -1,0 +1,489 @@
+{
+  "status": "Offline diagnostic; does not retrain, select or upload weights",
+  "actor_sha256": "55619f4b267ee6bbef40d47c16f80ce035e99d77260aa3a98303b23b5302b1fb",
+  "robot_xml_sha256": "4083971406b38077052393d5fe6de4782f46a512ce49ea9b7cf77df960cb1129",
+  "horizon_seconds": 60.0,
+  "episodes": 20,
+  "metrics_at_seconds": {
+    "10": {
+      "base_only_stable": 16,
+      "strict_success": 16
+    },
+    "30": {
+      "base_only_stable": 16,
+      "strict_success": 16
+    },
+    "60": {
+      "base_only_stable": 16,
+      "strict_success": 16
+    }
+  },
+  "base_only_goal": "Base tilt <10 deg, base-floor contact, base angular speed <0.4 rad/s for 1 continuous second; joints unrestricted",
+  "strict_goal": "Same base goal plus both joints <0.18 rad from neutral for 1 continuous second",
+  "control": "Unchanged deterministic actor; no reset, forced retry, altered observation or added exploration at 10 s. Stop at strict success or a fault, otherwise continue to horizon.",
+  "time_origin": "Policy start after sensor initialization and 0.8 s free settling",
+  "interpretation": "Finite-horizon results cannot prove eventual recovery or intent to give up. Joint travel is a motion diagnostic, not a recovery attempt count.",
+  "physical_robot_commands_sent": false,
+  "trials": [
+    {
+      "mode": "nominal",
+      "case": "side_000",
+      "seed": 100,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.0
+      },
+      "first_base_only_stable_s": null,
+      "first_strict_success_s": null,
+      "controlled_seconds": 60.0,
+      "termination": "horizon",
+      "final_base_tilt_deg": 50.617747362097965,
+      "final_joint_angles_deg": [
+        60.42301592992406,
+        -3.94180230797621
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        310.3228676010413,
+        145.41361395467925
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "nominal",
+      "case": "side_045",
+      "seed": 200,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.7853981633974483
+      },
+      "first_base_only_stable_s": null,
+      "first_strict_success_s": null,
+      "controlled_seconds": 60.0,
+      "termination": "horizon",
+      "final_base_tilt_deg": 57.74433056008926,
+      "final_joint_angles_deg": [
+        37.91101184333857,
+        75.48441758343739
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        490.0328351588473,
+        268.3517495172263
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "nominal",
+      "case": "side_090",
+      "seed": 300,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 1.5707963267948966
+      },
+      "first_base_only_stable_s": null,
+      "first_strict_success_s": null,
+      "controlled_seconds": 60.0,
+      "termination": "horizon",
+      "final_base_tilt_deg": 68.18348841414843,
+      "final_joint_angles_deg": [
+        7.99413803243721,
+        63.57408817039549
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        485.03704914925817,
+        268.75468530001984
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "nominal",
+      "case": "side_135",
+      "seed": 400,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 2.356194490192345
+      },
+      "first_base_only_stable_s": 1.6400000000000001,
+      "first_strict_success_s": 2.16,
+      "controlled_seconds": 2.16,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.006132866899099707,
+      "final_joint_angles_deg": [
+        -6.0805000300544725,
+        -3.4408336424791393
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        134.5915176155932,
+        50.50794595746979
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "nominal",
+      "case": "side_180",
+      "seed": 500,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 3.141592653589793
+      },
+      "first_base_only_stable_s": 2.04,
+      "first_strict_success_s": 2.1,
+      "controlled_seconds": 2.1,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.005539693446815999,
+      "final_joint_angles_deg": [
+        -4.452391884853315,
+        -3.953553809308007
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        136.66788339759998,
+        51.94502809554074
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "nominal",
+      "case": "side_225",
+      "seed": 600,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 3.9269908169872414
+      },
+      "first_base_only_stable_s": 1.6400000000000001,
+      "first_strict_success_s": 2.12,
+      "controlled_seconds": 2.12,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.009750226668276768,
+      "final_joint_angles_deg": [
+        -5.625032881995688,
+        -3.0909339870679493
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        135.65530445356183,
+        52.47501220421477
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "nominal",
+      "case": "side_270",
+      "seed": 700,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 4.71238898038469
+      },
+      "first_base_only_stable_s": 3.44,
+      "first_strict_success_s": 3.44,
+      "controlled_seconds": 3.44,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.007925388311272985,
+      "final_joint_angles_deg": [
+        -4.142562035252347,
+        -3.7810808736525607
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        116.07240451485951,
+        118.12983215432558
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "nominal",
+      "case": "side_315",
+      "seed": 800,
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 5.497787143782138
+      },
+      "first_base_only_stable_s": 1.78,
+      "first_strict_success_s": 2.44,
+      "controlled_seconds": 2.44,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.004810380148612102,
+      "final_joint_angles_deg": [
+        -4.149576888497623,
+        -3.8673460577664005
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        117.77700799713125,
+        118.3133720975278
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "nominal",
+      "case": "inverted",
+      "seed": 900,
+      "requested_start": {
+        "tilt": 3.141592653589793,
+        "azimuth": 0.0
+      },
+      "first_base_only_stable_s": 1.8800000000000001,
+      "first_strict_success_s": 2.22,
+      "controlled_seconds": 2.22,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.0031837005199059883,
+      "final_joint_angles_deg": [
+        -7.087352724098954,
+        -7.745498270750088
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        137.06891877975178,
+        53.56992387615473
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "nominal",
+      "case": "upright",
+      "seed": 1000,
+      "requested_start": {
+        "tilt": 0.0,
+        "azimuth": 0.0
+      },
+      "first_base_only_stable_s": 1.0,
+      "first_strict_success_s": 1.0,
+      "controlled_seconds": 1.0,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.005260895363173259,
+      "final_joint_angles_deg": [
+        -5.582493663118017,
+        -4.8109975183905
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        5.464554891265002,
+        4.748447249110488
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "development",
+      "case": "side_000",
+      "seed": 3000,
+      "requested_start": {
+        "tilt": 1.5486360337961915,
+        "azimuth": -0.06001153674393412
+      },
+      "first_base_only_stable_s": 7.74,
+      "first_strict_success_s": 7.74,
+      "controlled_seconds": 7.74,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.009378939746890719,
+      "final_joint_angles_deg": [
+        -4.090168205534337,
+        -2.7954274255437546
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        73.97913817333834,
+        17.629019577412485
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "development",
+      "case": "side_045",
+      "seed": 3100,
+      "requested_start": {
+        "tilt": 1.6995032568228667,
+        "azimuth": 0.734762126318194
+      },
+      "first_base_only_stable_s": 4.76,
+      "first_strict_success_s": 4.96,
+      "controlled_seconds": 4.96,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.009848232243462334,
+      "final_joint_angles_deg": [
+        -5.264965273730391,
+        -3.9654013670015313
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        304.7036897001,
+        124.59518223083127
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "development",
+      "case": "side_090",
+      "seed": 3200,
+      "requested_start": {
+        "tilt": 1.67676229825521,
+        "azimuth": 1.5517357663165834
+      },
+      "first_base_only_stable_s": null,
+      "first_strict_success_s": null,
+      "controlled_seconds": 60.0,
+      "termination": "horizon",
+      "final_base_tilt_deg": 65.0827573536646,
+      "final_joint_angles_deg": [
+        31.345171657127985,
+        64.91807235624967
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        524.0740570901833,
+        285.3125787792318
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "development",
+      "case": "side_135",
+      "seed": 3300,
+      "requested_start": {
+        "tilt": 1.664200671265426,
+        "azimuth": 2.4456686672611365
+      },
+      "first_base_only_stable_s": 1.6400000000000001,
+      "first_strict_success_s": 4.82,
+      "controlled_seconds": 4.82,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.008093507589690773,
+      "final_joint_angles_deg": [
+        0.5464163992117875,
+        -5.0155873381335585
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        150.578700746025,
+        56.76654819230107
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "development",
+      "case": "side_180",
+      "seed": 3400,
+      "requested_start": {
+        "tilt": 1.6039321420196078,
+        "azimuth": 3.029148366760352
+      },
+      "first_base_only_stable_s": 2.14,
+      "first_strict_success_s": 2.2600000000000002,
+      "controlled_seconds": 2.2600000000000002,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.004098901833659827,
+      "final_joint_angles_deg": [
+        -7.328769926312829,
+        -5.269406887253866
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        142.44108372627375,
+        55.94403707136929
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "development",
+      "case": "side_225",
+      "seed": 3500,
+      "requested_start": {
+        "tilt": 1.4839131563158514,
+        "azimuth": 4.043973659527744
+      },
+      "first_base_only_stable_s": 6.82,
+      "first_strict_success_s": 6.82,
+      "controlled_seconds": 6.82,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.010820489983104349,
+      "final_joint_angles_deg": [
+        -4.9583302134345715,
+        -3.364300352344744
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        5.1772181942841415,
+        4.390462191546945
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "development",
+      "case": "side_270",
+      "seed": 3600,
+      "requested_start": {
+        "tilt": 1.469720019185694,
+        "azimuth": 4.724497303062579
+      },
+      "first_base_only_stable_s": 1.8,
+      "first_strict_success_s": 2.58,
+      "controlled_seconds": 2.58,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.00571528571749847,
+      "final_joint_angles_deg": [
+        -3.103756340155996,
+        -5.050986327684881
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        114.16550422317755,
+        117.80401683054028
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "development",
+      "case": "side_315",
+      "seed": 3700,
+      "requested_start": {
+        "tilt": 1.6428944262786722,
+        "azimuth": 5.650982851719008
+      },
+      "first_base_only_stable_s": 3.68,
+      "first_strict_success_s": 3.86,
+      "controlled_seconds": 3.86,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.005847290579539096,
+      "final_joint_angles_deg": [
+        -3.9819497911702313,
+        -2.9668888978403363
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        220.23349217492282,
+        91.8087085689082
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "development",
+      "case": "inverted",
+      "seed": 3800,
+      "requested_start": {
+        "tilt": 3.2024767218516197,
+        "azimuth": 0.07256656785257394
+      },
+      "first_base_only_stable_s": 1.6400000000000001,
+      "first_strict_success_s": 8.52,
+      "controlled_seconds": 8.52,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.010318468542370328,
+      "final_joint_angles_deg": [
+        -2.860870036563594,
+        -5.429324551800766
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        7.861847030867997,
+        2.13877481526537
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "mode": "development",
+      "case": "upright",
+      "seed": 3900,
+      "requested_start": {
+        "tilt": 0.05704866836359514,
+        "azimuth": 0.12265581792746924
+      },
+      "first_base_only_stable_s": 4.5,
+      "first_strict_success_s": 4.5,
+      "controlled_seconds": 4.5,
+      "termination": "strict_goal_reached",
+      "final_base_tilt_deg": 0.006953040271789645,
+      "final_joint_angles_deg": [
+        -4.065776941163368,
+        -1.9779381252896202
+      ],
+      "last_up_to_5s_joint_travel_deg": [
+        7.983262891773498,
+        4.267944248685908
+      ],
+      "mujoco_warnings": 0
+    }
+  ]
+}

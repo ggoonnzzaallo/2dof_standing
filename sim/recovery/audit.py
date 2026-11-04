@@ -10,18 +10,22 @@ import json
 import xml.etree.ElementTree as ET
 import mujoco
 import numpy as np
+from search import MODEL_PATH
 
 HERE = Path(__file__).resolve().parent
 
 
 class AdjacentAudit:
     def __init__(self):
-        root = ET.parse(HERE.parent/'robot.xml').getroot()
-        root.find('compiler').set('meshdir',str((HERE.parent/'onshape/assets').resolve()))
+        root = ET.parse(MODEL_PATH).getroot()
+        compiler=root.find('compiler')
+        compiler.set('meshdir',str((MODEL_PATH.parent/compiler.get('meshdir','.')).resolve()))
         contact = root.find('contact')
         for exclusion in list(contact.findall('exclude')):
             contact.remove(exclusion)
-        ET.SubElement(root.find('option'),'flag',filterparent='disable')
+        option=root.find('option');flag=option.find('flag')
+        if flag is None:flag=ET.SubElement(option,'flag')
+        flag.set('filterparent','disable')
         self.model = mujoco.MjModel.from_xml_string(ET.tostring(root,encoding='unicode'))
         self.data = mujoco.MjData(self.model)
         self.pairs = {

@@ -4,13 +4,15 @@
 
 Open the [complete schematic PDF](REV_C_WIRING.pdf), [SVG](REV_C_WIRING.svg), [PNG](REV_C_WIRING.png), or [large-text phone map](REV_C_PHONE_WIRING.png). These are connection maps; use the physical board's printed pad labels, not drawing positions.
 
+**Starting with loose components? Follow the [complete from-scratch assembly guide](FROM_SCRATCH.md): two buses and twelve numbered wire branches, including PWM.**
+
 ![Rev C complete wiring](REV_C_WIRING.png)
 
 ## Every connection
 
 | Physical net / wire | Join these points | Purpose |
 |---|---|---|
-| Raw battery positive | Battery RCY pigtail **+ → Pololu VIN only** | The battery is isolated from every load when the switch is OFF and USB is absent. Remove the former direct battery-to-J1 wire. |
+| Raw battery positive | Battery RCY pigtail **+ → Pololu VIN only** | The battery is isolated from every load when the switch is OFF and USB is absent. |
 | **J1 SWITCHED+, 4-way bus** | Pololu **VOUT**, XIAO underside **BAT+**, lower servo red, upper servo red | Powers the controller and both servos through one switch. Each servo draws through the bus, not through XIAO traces or the BAT pad. |
 | **J2 common GND, 5-way bus** | Battery negative, Pololu **GND**, one XIAO **GND or BAT−**, both servo grounds | Common return. Negative is not switched. |
 | XIAO **D0 / marked 0** | Lower servo signal | Lower PWM. |
@@ -32,11 +34,11 @@ Each existing servo plug still carries positive, ground and signal. The battery 
 
 **Storage OFF = unplug USB + slide OFF. Charging = slide ON + USB + software charge mode.** Software mode 5 indicates PWM inhibition, not measured positive battery current, a physical servo cutoff or a fuel-gauge result. The charger operates automatically when USB is present; the command stops motion rather than enabling the charger IC.
 
-## Rewire and commissioning
+## Commissioning the new harness
 
 1. Unplug **battery and USB**. Open the cup/base and unplug the servo plugs while soldering and doing the first USB-only firmware upload.
-2. Break the existing battery-positive-to-J1 connection. Route battery positive to **VIN**, then **VOUT** to the existing J1 positive bus. Leave the existing J1 branches to BAT+ and servo red wires in place. Do not bypass the Pololu with a second battery-to-BAT+ connection.
-3. Add one Pololu GND branch to J2. Keep D0/D1 unchanged and D2/ON/SW unconnected. Insulate joints separately and leave solder/lead bends clear beneath the PCB.
+2. Follow the [twelve-branch wiring table](FROM_SCRATCH.md#connect-these-twelve-wire-branches). Battery positive goes to **VIN only**, and **VOUT** feeds J1. J1 branches to BAT+ and both servo positives. Do not bypass the Pololu with another battery-positive connection.
+3. J2 joins battery negative, Pololu GND, XIAO GND and both servo grounds. Connect D0/D1 to the lower/upper signal wires; leave D2/ON/SW unconnected. Insulate joints separately and leave solder/lead bends clear beneath the PCB.
 4. With all power absent, check polarity, common-ground continuity and absence of a low-resistance positive-to-ground short. A MOSFET switch is not an ordinary mechanical contact; resistance across VIN/VOUT by itself is not a definitive on/off test.
 5. Build/upload controller **0.3** as described in the [firmware guide](../firmware/policy_control/README.md#charging-mode-03). The current task built it but did **not** upload or move the robot.
 6. Before closing the enclosure, verify battery-only OFF shuts the XIAO down and ON boots it **disarmed**. Check both servos remain still with no PWM. Then use `./robot charge` with USB and switch ON; confirm mode 5 and no servo pulses.

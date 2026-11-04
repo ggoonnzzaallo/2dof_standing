@@ -1,0 +1,73 @@
+{
+  "status": "Neural controller replay in simulation only",
+  "model_sha256": "55619f4b267ee6bbef40d47c16f80ce035e99d77260aa3a98303b23b5302b1fb",
+  "filtered_observations": true,
+  "robot_xml_sha256": "4083971406b38077052393d5fe6de4782f46a512ce49ea9b7cf77df960cb1129",
+  "physical_robot_commands_sent": false,
+  "results": [
+    {
+      "case": "side_000",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.0
+      },
+      "control_start_qpos": [
+        1.1111940726931696e-05,
+        -0.006113964996767382,
+        0.03463508704420181,
+        0.6412194695243897,
+        0.7673575280318559,
+        -8.825561166071118e-05,
+        -9.103102034552021e-05,
+        -0.002439681208478711,
+        -4.6866140224117347e-05
+      ],
+      "settle_seconds_before_control": 0.8,
+      "success": false,
+      "seconds": 10.0,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 501,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "side_000.npz"
+    },
+    {
+      "case": "inverted",
+      "requested_start": {
+        "tilt": 3.141592653589793,
+        "azimuth": 0.0
+      },
+      "control_start_qpos": [
+        0.04678579047502041,
+        -0.15324819056614014,
+        0.034668755304496035,
+        -0.6418904223276517,
+        0.7628858779005391,
+        0.059177314342281954,
+        -0.04979827799419761,
+        0.000230315582409136,
+        0.0008687784453641106
+      ],
+      "settle_seconds_before_control": 0.8,
+      "success": true,
+      "seconds": 2.14,
+      "adjacent_audit": {
+        "status": "passed",
+        "sampled_frames": 108,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "inverted.npz"
+    }
+  ]
+}

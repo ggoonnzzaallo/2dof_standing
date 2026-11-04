@@ -2,6 +2,33 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Robot: inspect enclosure joints (simulation)",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv-cad/bin/mjpython",
+      "args": [
+        "sim/view.py",
+        "--model",
+        "sim/enclosure/robot.xml",
+        "--manual"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Robot: enclosure recovery playground (simulation)",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv-sim/bin/mjpython",
+      "args": [
+        "sim/enclosure/play.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Robot: charge mode (PWM off)",
       "type": "process",
       "command": "${workspaceFolder}/robot",

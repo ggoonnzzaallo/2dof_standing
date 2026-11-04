@@ -10,6 +10,7 @@ import torch
 from stable_baselines3 import PPO
 import search
 from audit import AdjacentAudit
+from evaluate_filter import FilteredEnv
 
 
 def main():
@@ -17,6 +18,7 @@ def main():
     parser.add_argument('model',type=Path)
     parser.add_argument('--cases',nargs='+',choices=list(search.CASES),default=['side_000','inverted'])
     parser.add_argument('--out',type=Path,default=Path('runs/neural_replay'))
+    parser.add_argument('--filtered',action='store_true',help='Use the firmware IMU filter')
     args = parser.parse_args()
     torch.set_num_threads(1)
     model = PPO.load(args.model,device='cpu')
@@ -24,7 +26,7 @@ def main():
     args.out.mkdir(parents=True,exist_ok=True)
     results = []
     for case in args.cases:
-        env = search.SelfRightingEnv(randomize=False)
+        env = (FilteredEnv if args.filtered else search.SelfRightingEnv)(randomize=False)
         obs,_ = env.reset(seed=17,options=search.CASES[case])
         trace = {k:[] for k in ['qpos','qvel','observation','action']}
         for _ in range(500):
@@ -44,7 +46,8 @@ def main():
                         'trace_file':f'{case}.npz'})
         env.close()
     report = {'status':'Neural controller replay in simulation only','model_sha256':hashlib.sha256(args.model.read_bytes()).hexdigest(),
-              'robot_xml_sha256':hashlib.sha256((search.HERE.parent/'robot.xml').read_bytes()).hexdigest(),
+              'filtered_observations':args.filtered,
+              'robot_xml_sha256':hashlib.sha256(search.MODEL_PATH.read_bytes()).hexdigest(),
               'physical_robot_commands_sent':False,'results':results}
     (args.out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2),flush=True)

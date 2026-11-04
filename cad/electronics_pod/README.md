@@ -1,3 +1,5 @@
+**Fit approved by the user on 3 November 2026.** New slicer masses and physics are in [the enclosure MuJoCo model](../../sim/enclosure/README.md). Wiring/charging commissioning remains pending.
+
 # Lower enclosure — fit revision 2 (Rev C2)
 
 **Prepared 3 November 2026 after the first physical fit.** The battery fit is retained; the XIAO now has locating stops and both boards have low PSA lands. The Pololu moves to the opposite front corner. The user confirmed **headers removed** and **M2 × 10 mm screws into plastic, no nuts**. Electrical wiring remains Rev C and packages **ONE Pololu**.

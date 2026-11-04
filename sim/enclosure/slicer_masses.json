@@ -1,0 +1,106 @@
+{
+  "source": "source/enclosure_print.gcode.3mf",
+  "original_filename": "Untitled.gcode.3mf",
+  "source_sha256": "64934b79c31bb78c4d7a18db40021734f02304241c9ea5a4d33d03c411e5367a",
+  "method": "G0/G1/G2/G3 extrusion after retract recovery, grouped by object start/stop and FEATURE comments. Filament flow ratio is already encoded; do not apply it again.",
+  "settings": {
+    "layer_height": "0.2",
+    "wall_loops": "2",
+    "top_shell_layers": "5",
+    "bottom_shell_layers": "3",
+    "sparse_infill_density": "15%",
+    "sparse_infill_pattern": "grid"
+  },
+  "filament_profile": "Bambu PLA Matte @BBL X1C",
+  "filament_density_g_per_cm3": 1.32,
+  "filament_diameter_mm": 1.75,
+  "slicer_header_total_g": 30.05,
+  "slicer_header_total_filament_mm": 9463.42,
+  "labeled_deposited_filament_mm": 9432.022279999996,
+  "labeled_deposited_mass_g": 29.94640735481626,
+  "model_mass_g": 29.125264168172244,
+  "removable_mass_g": 0.8211431866440161,
+  "header_minus_labeled_mass_g": 0.1035926451837419,
+  "net_extrusion_plus_remaining_retraction_mm": 9432.022279997629,
+  "outside_labels_after_machine_start_g": {},
+  "audit_note": "Header remainder is unassigned; use deposited model material only. Support/interface removed from assigned mass.",
+  "mapping_note": "Objects 157=base_modified.stl (35 mm tall) and 197=electronics_cup.stl (12.8 mm tall), confirmed by names, plate image and toolpath heights.",
+  "bounds_note": "Model extrusion path endpoint bounds, excluding supports. XY omits bead width and intermediate arc extrema; Z starts at the first layer, not zero. These are mapping sanity checks, not exact solid bounds.",
+  "limitations": "Slicer predictions, not scale measurements. Assumes the supplied job describes the installed parts and the configured filament density/diameter match the material. Supports removed. Wires excluded by user.",
+  "parts": [
+    {
+      "alias": "base_modified",
+      "gcode_object_label": "157",
+      "slicer_name": "base_modified.stl",
+      "model_mass_g": 13.551740771186957,
+      "removable_mass_g": 0.8211431866440161,
+      "feature_mass_g": {
+        "Bottom surface": 1.1341892738458539,
+        "Bridge": 1.7509162013686272,
+        "Floating vertical shell": 0.16012781164632148,
+        "Gap infill": 0.03901145338706212,
+        "Inner wall": 1.1644181829770137,
+        "Internal solid infill": 5.885321976006215,
+        "Outer wall": 1.2056124296660191,
+        "Overhang wall": 0.019174767604377373,
+        "Sparse infill": 1.0169767977512263,
+        "Support": 0.7850484531038642,
+        "Support interface": 0.03609473354015187,
+        "Top surface": 1.175991876934241
+      },
+      "model_toolpath_endpoint_bbox_mm": [
+        [
+          93.21,
+          138.21,
+          0.2
+        ],
+        [
+          162.79,
+          207.79,
+          35.0
+        ]
+      ],
+      "model_toolpath_xy_span_mm": [
+        69.58,
+        69.57999999999998
+      ],
+      "model_top_z_mm": 35.0
+    },
+    {
+      "alias": "electronics_cup",
+      "gcode_object_label": "197",
+      "slicer_name": "electronics_cup.stl",
+      "model_mass_g": 15.573523396985285,
+      "removable_mass_g": 0,
+      "feature_mass_g": {
+        "Bottom surface": 1.153019207733112,
+        "Bridge": 0.02256770151289698,
+        "Floating vertical shell": 0.01826971006452561,
+        "Gap infill": 1.5818811008135516,
+        "Inner wall": 0.5391949666806767,
+        "Internal solid infill": 7.242016309128945,
+        "Outer wall": 3.5487932242081115,
+        "Overhang wall": 0.0061912907964539275,
+        "Sparse infill": 0.1717954530272605,
+        "Top surface": 1.2897944330197515
+      },
+      "model_toolpath_endpoint_bbox_mm": [
+        [
+          93.21,
+          44.21,
+          0.2
+        ],
+        [
+          162.79,
+          113.79,
+          12.8
+        ]
+      ],
+      "model_toolpath_xy_span_mm": [
+        69.58,
+        69.58000000000001
+      ],
+      "model_top_z_mm": 12.8
+    }
+  ]
+}

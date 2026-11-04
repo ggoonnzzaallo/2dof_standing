@@ -2,9 +2,11 @@
 from pathlib import Path
 import argparse
 import json
+import hashlib
 import mujoco
 import numpy as np
 from PIL import Image,ImageDraw,ImageFont
+from search import MODEL_PATH
 
 HERE = Path(__file__).resolve().parent
 
@@ -17,8 +19,9 @@ def main():
     parser.add_argument('--title',default='Searched recovery motions / simulation only; starts shown after settling')
     args = parser.parse_args()
     report = json.loads(args.report.read_text())
+    assert report['robot_xml_sha256']==hashlib.sha256(MODEL_PATH.read_bytes()).hexdigest(), 'Replay and geometry differ'
     traces = [np.load(args.report.parent/next(x['trace_file'] for x in report['results'] if x['case']==case)) for case in args.cases]
-    model = mujoco.MjModel.from_xml_path(str(HERE.parent/'robot.xml'))
+    model = mujoco.MjModel.from_xml_path(str(MODEL_PATH))
     data = mujoco.MjData(model)
     camera = mujoco.MjvCamera();camera.type=mujoco.mjtCamera.mjCAMERA_FREE
     camera.distance=.40;camera.elevation=-22;camera.azimuth=135

@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-03",
+  "model_checks": "validation.json passed; geometry, inertia, contact masks, 10 placed falls and 1000 random-action steps",
+  "filtered_gymnasium_checker": "passed",
+  "held_still_filtered_observation": "passed",
+  "simulated_filter_fault_stops_control": "passed",
+  "legacy_playground": {
+    "continuous_frames": 700,
+    "external_force_changed_pose": true,
+    "warnings": 0,
+    "final_stable": true
+  },
+  "candidate_playground": {
+    "continuous_frames": 700,
+    "external_force_changed_pose": true,
+    "warnings": 0,
+    "final_stable": true
+  },
+  "host_C_parity": "2000 vectors; 4.172325134277344e-7 maximum output error",
+  "native_manual_viewer_opened": true,
+  "browser_joint_sliders_tested": [
+    25,
+    -20
+  ],
+  "browser_warning_error_logs": [],
+  "physical_robot_commands_sent": false,
+  "firmware_uploaded": false,
+  "persistence_diagnostic": "20 cases, unchanged actor; 16/20 at 10, 30 and 60 s; base-only and strict goals agree; no filter/numerical faults"
+}

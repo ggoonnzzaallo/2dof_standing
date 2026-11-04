@@ -1,9 +1,17 @@
 """Create a self-contained, read-only assembly/joint review from imported STEP meshes."""
 from pathlib import Path
 import json
+import argparse
 import html as html_module
 ROOT=Path(__file__).resolve().parent
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--enclosure',action='store_true',help='Review fit-approved cup/lid with unchanged serial axes')
+args=parser.parse_args()
 geometry=json.loads((ROOT/'geometry.json').read_text())
+if args.enclosure:
+    pod=json.loads((ROOT.parent/'electronics_pod/geometry.json').read_text())
+    original=geometry['parts']
+    geometry['parts']={k:{**v,'group':original[k]['group'] if k in original else 'base'} for k,v in pod['parts'].items() if k!='existing_connectors_envelope'}
 alignment=geometry['joint_alignment']['upper']
 upper=geometry['candidate_joints'][1]['origin_mm']
 shaft=geometry['candidate_joints'][2]['origin_mm']
@@ -31,5 +39,12 @@ let yaw=-.73,pitch=.28,zoom=1.1,drag=false,lastX=0,lastY=0;
 function render(){const dpr=Math.min(devicePixelRatio||1,2),w=Math.round(canvas.clientWidth*dpr),h=Math.round(canvas.clientHeight*dpr);canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);gl.clearColor(.957,.965,.973,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);for(let [k,v] of Object.entries({yaw,pitch,zoom,aspect:w/h,q1:+document.getElementById('q1').value*Math.PI/180,q2:+document.getElementById('q2').value*Math.PI/180}))gl.uniform1f(uniforms[k],v);for(let m of meshes){let name=['base','middle','upper'][m.group];if(!document.getElementById(name).checked)continue;if(m.mode===gl.LINES)gl.disable(gl.DEPTH_TEST);else gl.enable(gl.DEPTH_TEST);gl.uniform1f(uniforms.group,m.group);gl.bindBuffer(gl.ARRAY_BUFFER,m.buffer);for(let [k,offset] of [['pos',0],['normal',3],['color',6]]){gl.enableVertexAttribArray(attrs[k]);gl.vertexAttribPointer(attrs[k],3,gl.FLOAT,false,36,offset*4);}gl.drawArrays(m.mode,0,m.count);}}
 canvas.addEventListener('pointerdown',e=>{drag=true;lastX=e.clientX;lastY=e.clientY;canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw+=(e.clientX-lastX)*.008;pitch=Math.max(-1.4,Math.min(1.4,pitch+(e.clientY-lastY)*.008));lastX=e.clientX;lastY=e.clientY;render();});canvas.addEventListener('pointerup',()=>drag=false);canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(.5,Math.min(3,zoom*Math.exp(e.deltaY*.001)));render();},{passive:false});for(let k of ['base','middle','upper','q1','q2'])document.getElementById(k).addEventListener('input',()=>{for(let n of [1,2])document.getElementById('a'+n).value=document.getElementById('q'+n).value+'°';render();});document.getElementById('reset').onclick=()=>{yaw=-.73;pitch=.28;zoom=1.1;for(let n of [1,2]){document.getElementById('q'+n).value=0;document.getElementById('a'+n).value='0°';}render();};addEventListener('resize',render);render();
 </script></html>'''
-(ROOT/'review.html').write_text(html.replace('__DATA__',json.dumps(geometry,separators=(',',':')).replace('</','<\\/')).replace('__ALIGNMENT_NOTE__',html_module.escape(note)).replace('__STRUCT_Z__',str(upper[2])).replace('__SHAFT_Z__',str(shaft[2])).replace('__SHAFT_X__',str(shaft[0])))
-print('Wrote review.html')
+if args.enclosure:
+    html=html.replace('Final Onshape assembly — joint review','Rev C2 enclosure — joint review').replace('Final Onshape assembly · proposed rigid groups','Fit-approved enclosure · training geometry review')
+    html=html.replace('min="-35" max="35"','min="-80" max="80"')
+    html=html.replace('vec3(0.,0.,74.5)','vec3(0.,0.,69.5)').replace('zoom=1.1','zoom=1.2').replace('pitch=.28','pitch=-.28')
+    html=html.replace('Review only: axes, signs and travel limits are unconfirmed.','Kinematic preview only; sliders do not enforce contact or drive hardware. ±80° is the provisional simulation range.')
+    html=html.replace('Exact imported placements; no alignment correction applied.','Revised cup/lid, relocated battery/XIAO and one Pololu; same joint axes as training. CAD bottom Z=-12 mm.')
+output=(ROOT.parents[1]/'sim/enclosure/joints.html') if args.enclosure else ROOT/'review.html'
+output.write_text(html.replace('__DATA__',json.dumps(geometry,separators=(',',':')).replace('</','<\\/')).replace('__ALIGNMENT_NOTE__',html_module.escape(note)).replace('__STRUCT_Z__',str(upper[2])).replace('__SHAFT_Z__',str(shaft[2])).replace('__SHAFT_X__',str(shaft[0])))
+print('Wrote',output)

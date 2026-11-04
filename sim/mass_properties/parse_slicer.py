@@ -28,13 +28,14 @@ ALIAS = {
 }
 
 
-def parse(source):
+def parse(source, aliases=None):
+    aliases = ALIAS if aliases is None else aliases
     with zipfile.ZipFile(source) as archive:
         settings = json.loads(archive.read('Metadata/project_settings.config'))
         info = ET.fromstring(archive.read('Metadata/slice_info.config'))
         names = {o.attrib['identify_id']: o.attrib['name'] for o in info.iter('object')}
         gcode = archive.read('Metadata/plate_1.gcode').decode('utf-8')
-    assert set(names) == set(ALIAS), 'Review object-to-CAD mapping for a different print job.'
+    assert set(names) == set(aliases), 'Review object-to-CAD mapping for a different print job.'
     density = float(settings['filament_density'][0])
     diameter = float(settings['filament_diameter'][0])
     grams_per_mm = math.pi * (diameter / 2) ** 2 * density / 1000
@@ -105,7 +106,7 @@ def parse(source):
 
     assert obj is None, 'Unclosed object label.'
     parts = []
-    for label, alias in ALIAS.items():
+    for label, alias in aliases.items():
         features = {f: v * grams_per_mm for f, v in sorted(lengths[label].items())}
         parts.append({
             'alias': alias, 'gcode_object_label': label, 'slicer_name': names[label],

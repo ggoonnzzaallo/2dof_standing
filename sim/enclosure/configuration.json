@@ -1,0 +1,15 @@
+{
+  "revision": "Fit-approved enclosure Rev C2",
+  "fit_approved_by_user": true,
+  "fit_approval_date": "2026-11-03",
+  "printed_mass_g": {
+    "base_modified": 13.551740771186957,
+    "electronics_cup": 15.573523396985285
+  },
+  "mass_fallback": "Full-solid PLA reference at 1.32 g/cm3; conservative placeholder, not a slicer estimate. Replace before final training.",
+  "imu_orientation_confirmed": true,
+  "imu_orientation_assumption": "Original CAD orientation, USB/component side up, USB facing enclosure opening; no rotation, board translation only",
+  "hardware_position_assumption": "Components seated in approved locating stops with nominal 0.4 mm PSA",
+  "wiring_mass": "Excluded per user's earlier instruction",
+  "printed_mass_source": "slicer_masses.json; user-provided Untitled.gcode.3mf, support material excluded"
+}

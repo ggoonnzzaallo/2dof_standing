@@ -16,7 +16,7 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent))
-from environment import SelfRightingEnv
+from environment import SelfRightingEnv, MODEL_PATH
 
 CASES = {
     **{f'side_{angle:03d}': {'tilt':float(np.pi/2),'azimuth':float(np.deg2rad(angle))} for angle in range(0,360,45)},
@@ -150,7 +150,7 @@ def main():
     initialize()
     start = time.monotonic()
     report = {'status':'Exploratory open-loop trajectory search; not a policy or hardware validation',
-              'robot_xml_sha256':hashlib.sha256((HERE.parent/'robot.xml').read_bytes()).hexdigest(),
+              'robot_xml_sha256':hashlib.sha256(MODEL_PATH.read_bytes()).hexdigest(),
               'config':{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},
               'success_definition':'Environment requires base upright within 10 degrees, joints near neutral, low angular rate and floor contact for one second',
               'adjacent_collision_audit':'Pending; candidates are not validated demonstrations for hardware transfer',

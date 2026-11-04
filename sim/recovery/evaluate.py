@@ -45,7 +45,7 @@ def main():
         env.close()
     report = {'status':'Exploratory simulation evaluation; not physical validation',
               'model_sha256':hashlib.sha256(args.model.read_bytes()).hexdigest(),
-              'robot_xml_sha256':hashlib.sha256((search.HERE.parent/'robot.xml').read_bytes()).hexdigest(),
+              'robot_xml_sha256':hashlib.sha256(search.MODEL_PATH.read_bytes()).hexdigest(),
               'episodes':len(rows),'successes':sum(r['success'] for r in rows),
               'successful_and_audit_passed':sum(r['success'] and r['adjacent_audit']['status']=='passed' for r in rows),
               'pose_sampling':'Requested tilt uniform [0, pi], rotation-axis azimuth uniform [0, 2pi]; not uniform SO(3). Each reset then settles for 0.8 seconds.',

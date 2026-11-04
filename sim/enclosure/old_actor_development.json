@@ -1,0 +1,236 @@
+{
+  "nominal": {
+    "mode": "nominal",
+    "successes": 1,
+    "episodes": 10,
+    "trials": [
+      {
+        "case": "side_000",
+        "seed": 100,
+        "requested_start": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 0.0
+        },
+        "success": true,
+        "seconds": 3.2600000000000002,
+        "final_upright": 0.9999999925634647
+      },
+      {
+        "case": "side_045",
+        "seed": 200,
+        "requested_start": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 0.7853981633974483
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.9999999976396152
+      },
+      {
+        "case": "side_090",
+        "seed": 300,
+        "requested_start": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 1.5707963267948966
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.9999999999906775
+      },
+      {
+        "case": "side_135",
+        "seed": 400,
+        "requested_start": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 2.356194490192345
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.9999999936312587
+      },
+      {
+        "case": "side_180",
+        "seed": 500,
+        "requested_start": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 3.141592653589793
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.9999999925882141
+      },
+      {
+        "case": "side_225",
+        "seed": 600,
+        "requested_start": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 3.9269908169872414
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.999999966758093
+      },
+      {
+        "case": "side_270",
+        "seed": 700,
+        "requested_start": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 4.71238898038469
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.6409265054362484
+      },
+      {
+        "case": "side_315",
+        "seed": 800,
+        "requested_start": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 5.497787143782138
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.6431162355281141
+      },
+      {
+        "case": "inverted",
+        "seed": 900,
+        "requested_start": {
+          "tilt": 3.141592653589793,
+          "azimuth": 0.0
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.9999999996580408
+      },
+      {
+        "case": "upright",
+        "seed": 1000,
+        "requested_start": {
+          "tilt": 0.0,
+          "azimuth": 0.0
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.999999956577502
+      }
+    ]
+  },
+  "development": {
+    "mode": "development",
+    "successes": 3,
+    "episodes": 10,
+    "trials": [
+      {
+        "case": "side_000",
+        "seed": 3000,
+        "requested_start": {
+          "tilt": 1.5486360337961915,
+          "azimuth": -0.06001153674393412
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.9999999675334703
+      },
+      {
+        "case": "side_045",
+        "seed": 3100,
+        "requested_start": {
+          "tilt": 1.6995032568228667,
+          "azimuth": 0.734762126318194
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.9999999999757988
+      },
+      {
+        "case": "side_090",
+        "seed": 3200,
+        "requested_start": {
+          "tilt": 1.67676229825521,
+          "azimuth": 1.5517357663165834
+        },
+        "success": true,
+        "seconds": 2.66,
+        "final_upright": 0.9999999434529753
+      },
+      {
+        "case": "side_135",
+        "seed": 3300,
+        "requested_start": {
+          "tilt": 1.664200671265426,
+          "azimuth": 2.4456686672611365
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.9999999995416172
+      },
+      {
+        "case": "side_180",
+        "seed": 3400,
+        "requested_start": {
+          "tilt": 1.6039321420196078,
+          "azimuth": 3.029148366760352
+        },
+        "success": true,
+        "seconds": 4.36,
+        "final_upright": 0.9999999822466922
+      },
+      {
+        "case": "side_225",
+        "seed": 3500,
+        "requested_start": {
+          "tilt": 1.4839131563158514,
+          "azimuth": 4.043973659527744
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.64137218379246
+      },
+      {
+        "case": "side_270",
+        "seed": 3600,
+        "requested_start": {
+          "tilt": 1.469720019185694,
+          "azimuth": 4.724497303062579
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.6337887531155579
+      },
+      {
+        "case": "side_315",
+        "seed": 3700,
+        "requested_start": {
+          "tilt": 1.6428944262786722,
+          "azimuth": 5.650982851719008
+        },
+        "success": true,
+        "seconds": 3.2,
+        "final_upright": 0.9999999988766208
+      },
+      {
+        "case": "inverted",
+        "seed": 3800,
+        "requested_start": {
+          "tilt": 3.2024767218516197,
+          "azimuth": 0.07256656785257394
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.9999999962417304
+      },
+      {
+        "case": "upright",
+        "seed": 3900,
+        "requested_start": {
+          "tilt": 0.05704866836359514,
+          "azimuth": 0.12265581792746924
+        },
+        "success": false,
+        "seconds": 10.0,
+        "final_upright": 0.9999999954825881
+      }
+    ]
+  }
+}
