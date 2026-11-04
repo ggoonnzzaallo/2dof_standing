@@ -38,6 +38,7 @@ After the arm command confirms **“Armed. Unplug USB”**, unplug USB for batte
 - [Current PTK parts list and fastener plan](BOM.md)
 - [Ordered-parts status and incoming checks](docs/PROCUREMENT_STATUS.md)
 - [Controller comparison and IMU location](docs/CONTROLLER_DECISION.md)
+- [Future integrated controller/power PCB: replace XIAO and Pololu](docs/INTEGRATED_CONTROLLER_PCB.md) — feasibility, clean charging/OFF behavior and provisional cost targets
 - [Servo choice versus SO-100 smart servos](docs/SERVO_DECISION.md)
 - [Historical AliExpress shopping plan](docs/ALIEXPRESS_SOURCING.md)
 - [Historical DigiKey sourcing audit](docs/DIGIKEY_SOURCING.md)

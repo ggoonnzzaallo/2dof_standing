@@ -10,7 +10,11 @@ Candidate behavior: green for adequate voltage, amber for getting low, and red/b
 
 Reserve higher-priority indications for faults or other essential robot states if needed. Keep bootloader behavior and the charger LED's existing function intact. Voltage indicates approximate charge/low-voltage status, not battery aging, capacity or precise state of charge; USB charging also affects the reading. The indicator supplements the existing motion guard and does not disconnect battery power.
 
-## Custom carrier PCB — user priority
+## Integrated controller and power PCB — user priority
+
+**Expanded 3 November 2026:** replace the XIAO and Pololu modules with one custom PCB, including a lower-cost processor, onboard IMU, USB charging, genuine power isolation and direct servo connectors. See the [feasibility, cost targets and future development plan](INTEGRATED_CONTROLLER_PCB.md). This is a future iteration, not a change to the current Rev C wiring or purchasing BOM.
+
+### Earlier carrier-only concept
 
 Requested 31 October 2026. The user strongly prefers eliminating loose wiring and wants a custom PCB in a future hardware revision.
 
