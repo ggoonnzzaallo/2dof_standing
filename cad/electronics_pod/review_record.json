@@ -1,62 +1,56 @@
 {
   "date": "2026-11-03",
-  "revision": "Rev C2, second fit print after user photos",
-  "user_feedback": {
-    "battery_fit": "Accepted; lateral locating dimensions retained",
-    "headers": "Removed, direct solder wires",
-    "screws": "Two existing M2 x 10 self tapping; reuse working model bore, no coupon or nuts",
-    "ribs": "Fixed gaps: each root overlaps actual frame walls above lid, not just plate",
-    "ground_edge": "R1 mm fillet on external bottom perimeter, flat central bottom retained"
-  },
-  "checks": [
-    "Valid single-solid cup/lid STEP exports",
-    "Both STLs watertight, single connected component, print floor Z=0",
-    "Cup/lid/battery/XIAO-envelope/Pololu/connector pairwise overlaps checked",
-    "Original servo frame geometry retained; root gussets clear source solids at neutral",
-    "All four gussets overlap original frame above plate by >3.67 mm3 each; no gusset truncated by cable opening",
-    "R1 mm external bottom-edge fillet built into cup STEP/STL; front view checked",
-    "One Pololu and no header geometry",
-    "Slider model and additional +/-2 mm lateral allowance clear reduced window",
-    "2.0 mm screw bores verified against original printed horn-bracket cylinder radius",
-    "Browser thin-lid and front-switch views checked; no error/warning logs",
-    "ZIP CRC/hash checks passed; no coupon; two required printable parts"
-  ],
-  "new_physical_fit_validated": true,
-  "screw_baseline_validated_by_user": true,
+  "revision": "Rev C3, USB and battery cup-only revision",
+  "previous_fit_approval": "C2 approved by user; archived in fit_revision_2_reference.json",
+  "new_physical_fit_validated": false,
   "electrical_rewire_installed": false,
   "firmware_uploaded_this_revision": false,
-  "simulation_updated": true,
-  "training_started": true,
-  "next_step": "Complete Rev C wiring/charging commissioning; revised offline model/training tracked in sim/enclosure.",
-  "artifact_sha256": {
-    "base_modified.step": "bcabbde0ac3cf1fb6bd98b9ee37e23865944868d9331eb9c69c0dcd2ae10e592",
-    "geometry.json": "80a97c0381eddb7372a96a46716a58ece273a3bbfd35d62bb3d0c49f79368bd3",
-    "rev_c_print_fit.zip": "fbe2564601bdbaf07da04846b2bffa147cf46ec781a19399491b443c16fad733",
-    "preview.png": "e5143127cdcc4e148b0603abd6a4678148ed6903fe6ea6816c2150e0546f0034",
-    "rev_c2_print_fit.zip": "fbe2564601bdbaf07da04846b2bffa147cf46ec781a19399491b443c16fad733",
-    "stl_validation.json": "7fd536dcee1e4a4c1e624a0f39327ab2527140536bfb63b4b463837e7027d39d",
-    "electronics_cup.stl": "960fc197c6c9c2dc18af98e8762c34d875c3d044cf08053712d15058cc9b1438",
-    "validate_prints.py": "0a69a2b11c714eeac7bbbdc5e753c4a9c39cada50b56443fb887ef2c4940b4f6",
-    "package_fit.py": "cef240fb563bebfcb8c9dcecf7245013473729251aae23b06ce1cd220ff19c91",
-    "build_preview.py": "c7562064c55b87d54840bfd4061dd6ce72434106cc9256cdad6c02705a3dc0d5",
-    "fit_revision_1_reference.json": "f019f19de7e3ec1d4172247884dce383ff3fe45864662d29a5c87c7df2bb3606",
-    "base_modified.stl": "f43627fae192a240b71a8441bd4778d4c1bc09980fa810a5f12579757334257d",
-    "README.md": "e83db6620d7a898b886dbef31611062153977e3cd77e9743ce81d82f88594bc6",
-    "PRINT_FIT_CHECK.md": "979526ccd0a32f4c92739cceb22947d92830d577962c6144c9c5dc9eb378a366",
-    "viewer.html": "20285b644c44f1be4523224adf3af54133a844be28bd14b847989f9e9f58c194",
-    "validation.json": "e2c103386f7c0fdefa1e28b0b3a73cbe5226247459b7e24ec0e3efd5dc443fbc",
-    "build_pod.py": "29bf4b5913ae8b7ea5ce13e691c851513229387631e229b3ea76ec47269f6769",
-    "assembly_review.step": "5e9fa776c61f5bdf53477c9e0b19455eff754ddc7fdab2aa5145eb72c5b7c95c",
-    "fit_package_manifest.json": "378867396cb05b9636ee73ca50b8c1c0d9dfd1b73fe92d38d56932c4995fcf86",
-    "electronics_cup.step": "0641088867b5c5bf365f2b637d7c0142eb0eda224984bec889524ec745940c7a",
-    "layout.svg": "9d723703eb6e834ca01705eefe953d1e31dd68ce417139a64672f213d9a5a0b9"
-  },
+  "simulation_updated": false,
+  "training_started": false,
+  "changes": [
+    "USB aperture 14 x 7 -> 9.8 x 4.1 mm, R0.6 corners",
+    "Battery shifted [-3.65,+7.3,0] mm; left wall replaces end stop; rear rail attached to rear wall",
+    "Battery-side boss relief retains 2.1 mm pilot wall; full 6 mm screw collar checked"
+  ],
+  "checks": [
+    "CAD valid single solids and hardware envelope non-overlap",
+    "STLs watertight, one connected component, bed Z=0",
+    "C2 lid STL byte-identical; screw axes and bore unchanged",
+    "Actual USB shell contained by corrected envelope",
+    "Battery clears cup at +/-0.25 mm individual X/Y shifts",
+    "Frozen C2 geometry hash matches saved training provenance"
+  ],
+  "next_step": "Reprint cup only and test actual USB cable and battery/boss fit; then incorporate battery translation/new cup mass into a separate simulation revision",
   "unchanged_runtime_sha256": {
     "firmware/policy_control/policy_control.ino": "d276da59e1cb74129076f9d2936c3115acb9cd73f5ff6b356d86cfdbc40ae1d9",
     "sim/robot.xml": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
-    "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff"
+    "sim/enclosure/robot.xml": "4083971406b38077052393d5fe6de4782f46a512ce49ea9b7cf77df960cb1129",
+    "sim/enclosure/results/best.zip": "55619f4b267ee6bbef40d47c16f80ce035e99d77260aa3a98303b23b5302b1fb"
   },
-  "fit_approval_date": "2026-11-03",
-  "fit_approval_evidence": "User: The new 3D prints pass the fit check",
-  "simulation_results": "../../sim/enclosure/results/summary.json"
+  "browser_checks": {
+    "top_layout": "visually checked",
+    "USB_aperture": "visually checked",
+    "warning_error_logs": []
+  },
+  "artifact_sha256": {
+    "electronics_cup.stl": "7696ec8885aaad328ef29a85eac67f1f9e850c03424d3a03ffff8ba9506cee60",
+    "electronics_cup.step": "720585c54265007d6d9194e92b0be2830286581f696b0706e125d71dce1ebc70",
+    "base_modified.stl": "f43627fae192a240b71a8441bd4778d4c1bc09980fa810a5f12579757334257d",
+    "base_modified.step": "bcabbde0ac3cf1fb6bd98b9ee37e23865944868d9331eb9c69c0dcd2ae10e592",
+    "assembly_review.step": "478eb1b0531bc97c529a59f0af5d5ec5bca0e2286f89e335b5ba6337f7494c57",
+    "geometry.json": "a9a52b9f3d3e15688ad8fd6aca4f893c672836a529a02bef8ad00ea3b6189da9",
+    "validation.json": "5bce5dbe236a5faaae15689d142012ff5ddda5bcc63bcdaa7a9d8cfed21db99c",
+    "stl_validation.json": "f6b7f129c1511681d8a71b4eb4838f0ebb7b2676b57d1b84838c42440209445f",
+    "viewer.html": "f1159338623b4d5f7eb01cb48a6236bac69b39a6c082c61b668812faf8165c34",
+    "layout.svg": "e6ed5e4386c5f58765ced8a6b8499d1bdf1ded1e826c5c68bbcbe91330e44b85",
+    "preview.png": "ee4de0821c393d9a0f0314b8cf36c4abb4f33edeb2e237283e8c7eedf5493523",
+    "PRINT_FIT_CHECK.md": "7b24150e9a22d7453802305e0ff82b3c53c1aa1c3c77f8f842e2dfefe665d1f7",
+    "README.md": "8ade3e7d13f22b777fca308dfbe3e4c09c456beeefda267d76b7cf4f346473b1",
+    "rev_c3_print_fit.zip": "8edb41d4e8c879095548d97452f6d5c22dacd04ae56a842012414b930d12a36e",
+    "rev_c_print_fit.zip": "8edb41d4e8c879095548d97452f6d5c22dacd04ae56a842012414b930d12a36e",
+    "fit_package_manifest.json": "fff4835767742a9bffa88359d6632fb6276c4be1867e55e4909665f2228ae3d5",
+    "build_pod.py": "23e613e812a97cc614291f16114a5eaf29ef55b713456e07d6a552c42b8f9f24",
+    "build_preview.py": "ac756acd3ee428adbf15d61366a5780cab16b46653bbeb62681475c7a1751491",
+    "package_fit.py": "d1c653865f3c4036aac54433b11b02dda3efc6a20007e6f1a6f39637a4330991"
+  }
 }

@@ -9,7 +9,7 @@ parser.add_argument('--enclosure',action='store_true',help='Review fit-approved 
 args=parser.parse_args()
 geometry=json.loads((ROOT/'geometry.json').read_text())
 if args.enclosure:
-    pod=json.loads((ROOT.parent/'electronics_pod/geometry.json').read_text())
+    pod=json.loads((ROOT.parents[1]/'sim/enclosure/source/fit_approved_c2/geometry.json').read_text())
     original=geometry['parts']
     geometry['parts']={k:{**v,'group':original[k]['group'] if k in original else 'base'} for k,v in pod['parts'].items() if k!='existing_connectors_envelope'}
 alignment=geometry['joint_alignment']['upper']

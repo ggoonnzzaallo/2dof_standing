@@ -1,5 +1,7 @@
 # Fit-approved enclosure model
 
+**CAD revision note:** the [C3 printable cup](../../cad/electronics_pod/README.md) now has a tighter USB opening and shifted battery. This saved model/results remain C2. Its exact CAD inputs are frozen in [source/fit_approved_c2](source/fit_approved_c2); the model builder and joint viewer use that snapshot. C3 has not silently replaced training geometry, masses or checkpoints.
+
 Updated 3 November 2026. The user confirms the Rev C2 cup/lid fit and the XIAO sits in the modeled orientation. Initial retraining experiments are complete. **The candidate is not yet reliable enough for hardware promotion.** This model uses the approved printed geometry, relocated battery/XIAO and one Pololu 2810. The original `sim/robot.xml` and deployed actor remain unchanged for comparison. No hardware commands or firmware uploads are part of this model/training work.
 
 ![Revised MuJoCo visuals and collision geometry](preview.png)

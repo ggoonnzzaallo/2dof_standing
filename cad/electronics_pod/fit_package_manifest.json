@@ -1,29 +1,30 @@
 {
-  "revision": "Rev C2, lower enclosure and thin lid, two M2x10 screws into plastic",
+  "revision": "Rev C3, tighter USB opening and outward battery; existing C2 lid compatible",
   "prepared_date": "2026-11-03",
   "print_first": "electronics_cup.stl",
   "required_parts": [
-    "electronics_cup.stl",
-    "base_modified.stl"
+    "electronics_cup.stl"
   ],
+  "compatible_existing_lid": "Rev C2 base_modified.stl; supplied again for new builds, no reprint needed",
   "fasteners": "Two M2 x 10 mm screws; 2.0 mm bores matching the user-proven printed bracket; no nuts or coupon",
   "units": "mm",
   "print_orientation": "floor down, open side up, Z=0 already",
   "physical_fit_verified": false,
   "electrical_commissioning_verified": false,
   "sha256": {
-    "electronics_cup.stl": "960fc197c6c9c2dc18af98e8762c34d875c3d044cf08053712d15058cc9b1438",
-    "electronics_cup.step": "0641088867b5c5bf365f2b637d7c0142eb0eda224984bec889524ec745940c7a",
-    "assembly_review.step": "5e9fa776c61f5bdf53477c9e0b19455eff754ddc7fdab2aa5145eb72c5b7c95c",
+    "electronics_cup.stl": "7696ec8885aaad328ef29a85eac67f1f9e850c03424d3a03ffff8ba9506cee60",
+    "electronics_cup.step": "720585c54265007d6d9194e92b0be2830286581f696b0706e125d71dce1ebc70",
+    "assembly_review.step": "478eb1b0531bc97c529a59f0af5d5ec5bca0e2286f89e335b5ba6337f7494c57",
     "base_modified.step": "bcabbde0ac3cf1fb6bd98b9ee37e23865944868d9331eb9c69c0dcd2ae10e592",
     "base_modified.stl": "f43627fae192a240b71a8441bd4778d4c1bc09980fa810a5f12579757334257d",
-    "PRINT_FIT_CHECK.md": "979526ccd0a32f4c92739cceb22947d92830d577962c6144c9c5dc9eb378a366",
-    "preview.png": "e5143127cdcc4e148b0603abd6a4678148ed6903fe6ea6816c2150e0546f0034",
-    "layout.svg": "9d723703eb6e834ca01705eefe953d1e31dd68ce417139a64672f213d9a5a0b9",
-    "viewer.html": "20285b644c44f1be4523224adf3af54133a844be28bd14b847989f9e9f58c194",
-    "geometry.json": "80a97c0381eddb7372a96a46716a58ece273a3bbfd35d62bb3d0c49f79368bd3",
-    "validation.json": "e2c103386f7c0fdefa1e28b0b3a73cbe5226247459b7e24ec0e3efd5dc443fbc",
-    "stl_validation.json": "7fd536dcee1e4a4c1e624a0f39327ab2527140536bfb63b4b463837e7027d39d",
-    "fit_revision_1_reference.json": "f019f19de7e3ec1d4172247884dce383ff3fe45864662d29a5c87c7df2bb3606"
+    "PRINT_FIT_CHECK.md": "7b24150e9a22d7453802305e0ff82b3c53c1aa1c3c77f8f842e2dfefe665d1f7",
+    "preview.png": "ee4de0821c393d9a0f0314b8cf36c4abb4f33edeb2e237283e8c7eedf5493523",
+    "layout.svg": "e6ed5e4386c5f58765ced8a6b8499d1bdf1ded1e826c5c68bbcbe91330e44b85",
+    "viewer.html": "f1159338623b4d5f7eb01cb48a6236bac69b39a6c082c61b668812faf8165c34",
+    "geometry.json": "a9a52b9f3d3e15688ad8fd6aca4f893c672836a529a02bef8ad00ea3b6189da9",
+    "validation.json": "5bce5dbe236a5faaae15689d142012ff5ddda5bcc63bcdaa7a9d8cfed21db99c",
+    "stl_validation.json": "f6b7f129c1511681d8a71b4eb4838f0ebb7b2676b57d1b84838c42440209445f",
+    "fit_revision_1_reference.json": "f019f19de7e3ec1d4172247884dce383ff3fe45864662d29a5c87c7df2bb3606",
+    "fit_revision_2_reference.json": "8f3cdc8f51897de8eb951a6ca730d53b5cd6ea7f6f6c767ead25fcc30ae60ef7"
   }
 }

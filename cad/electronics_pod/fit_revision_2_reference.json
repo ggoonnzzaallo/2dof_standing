@@ -1,0 +1,267 @@
+{
+  "revision": "Rev C2, fit approved by user 3 November 2026",
+  "validation": {
+    "status": "Second fit-print revision; wired fit, screw fit and recovery unverified",
+    "date": "2026-11-03",
+    "parameters": {
+      "revision": "Rev C2 fit revision",
+      "width": 70.0,
+      "corner_radius": 5.0,
+      "ground_edge_radius": 1.0,
+      "wall": 1.2,
+      "roof_z": 0.0,
+      "floor_z": -10.4,
+      "floor_thickness": 1.6,
+      "lid_plate_thickness": 2.0,
+      "mount_centers": [
+        [
+          -29.5,
+          -29.5
+        ],
+        [
+          29.5,
+          29.5
+        ]
+      ],
+      "m2_clearance": 2.4,
+      "m2_pilot": 2.0,
+      "m2_blind_depth": 8.6,
+      "boss_diameter": 7.6,
+      "locating_tab_height": 0.8,
+      "board_pad_height": 0.6,
+      "psa_allowance": 0.4,
+      "battery_size": [
+        59.5,
+        19.0,
+        7.5
+      ],
+      "battery_center": [
+        0.0,
+        14.0,
+        -6.15
+      ],
+      "board_translation": [
+        -0.84944,
+        8.01904,
+        -11.4
+      ],
+      "headers_removed": true,
+      "usb_window_size": [
+        8.0,
+        14.0,
+        7.0
+      ],
+      "usb_window_center": [
+        -34.0,
+        -15.5,
+        -6.545
+      ],
+      "pololu_translation": [
+        16.0,
+        -34.7,
+        -9.4
+      ],
+      "switch_window_size": [
+        10.0,
+        6.0,
+        2.6
+      ],
+      "switch_window_center": [
+        23.62,
+        -34.3,
+        -7.734
+      ],
+      "pololu_edge_pocket_size": [
+        16.2,
+        6.0,
+        1.4
+      ],
+      "pololu_edge_pocket_center": [
+        23.62,
+        -34.3,
+        -8.892
+      ]
+    },
+    "pololu_count": 1,
+    "headers_removed_confirmed_by_user": true,
+    "fastener_confirmed_by_user": "M2 x 10 mm, reuse proven printed-model screw fit, no nuts, no coupon",
+    "fastener_bore_baseline": {
+      "source_part": "top_link_servo_horn_bracket",
+      "diameter_mm": 2.0,
+      "source": "cad/onshape_import/assembly_inspection.json"
+    },
+    "source_sha256": "a1e8b9f62ebc51399e4eba8f90decf3a52301894228f108a6677a035fa2ee229",
+    "pololu_source_sha256": "a493fb469d2083553aef1071b1cb64386c307cbe91bc4df79b09e3cbb5ab6123",
+    "printed_parts": {
+      "electronics_cup": {
+        "valid_brep": true,
+        "solids": 1,
+        "volume_mm3": 12488.20717911258,
+        "solid_reference_PLA_g_at_1_32": 16.484433476428606,
+        "cad_bounds_mm": [
+          -35.0,
+          -35.0,
+          -12.0,
+          35.0000001,
+          35.0,
+          0.8
+        ]
+      },
+      "base_modified": {
+        "valid_brep": true,
+        "solids": 1,
+        "volume_mm3": 13274.419468324097,
+        "solid_reference_PLA_g_at_1_32": 17.522233698187808,
+        "cad_bounds_mm": [
+          -35.000000000000014,
+          -35.0,
+          0.0,
+          35.00000000000001,
+          35.0,
+          35.0000001
+        ]
+      }
+    },
+    "rigid_overlap_volume_mm3": {
+      "cup / lid": 0.0,
+      "cup / battery": 0.0,
+      "cup / xiao_envelope": 0.0,
+      "cup / pololu": 0.0,
+      "cup / connectors": 0.0,
+      "lid / battery": 0.0,
+      "lid / xiao_envelope": 0.0,
+      "lid / pololu": 0.0,
+      "lid / connectors": 0.0,
+      "battery / xiao_envelope": 0.0,
+      "battery / pololu": 0.0,
+      "battery / connectors": 0.0,
+      "xiao_envelope / pololu": 0.0,
+      "xiao_envelope / connectors": 0.0,
+      "pololu / connectors": 0.0,
+      "new_lid_gussets / middle_link_servo_horn_bracket": 0.0,
+      "new_lid_gussets / upper_servo": 0.0,
+      "new_lid_gussets / top_link_servo_horn_bracket": 0.0,
+      "new_lid_gussets / top_link_main_body": 0.0,
+      "new_lid_gussets / lower_servo": 0.0,
+      "new_lid_gussets / middle_link_main_body": 0.0
+    },
+    "mounting_hardware": "TWO M2x10 screws; 2.0 mm blind holes copied from proven model screw-bore diameter, 8.6 mm deep. No nuts.",
+    "cup_body_depth_mm": 12.0,
+    "cup_with_register_tabs_height_mm": 12.8,
+    "closed_electronics_package_height_mm": 14.0,
+    "previous_closed_package_height_mm": 24.0,
+    "new_ground_z_mm": -12.0,
+    "new_overall_height_mm": 163.0,
+    "psa_mounting": "0.6 mm broad lands + nominal 0.4 mm insulating PSA; open underside lead relief between lands",
+    "xiao_locating_clearance_each_side_mm": 0.3,
+    "slider_extra_lateral_allowance_mm": 2.0,
+    "slider_protrusion_mm": 0.595,
+    "original_servo_frame_preserved": true,
+    "gusset_frame_connections": [
+      {
+        "x_mm": -5.0,
+        "side": -1.0,
+        "frame_overlap_mm3": 3.6781301370680706,
+        "removed_by_lid_cuts_mm3": 0.0
+      },
+      {
+        "x_mm": -5.0,
+        "side": 1.0,
+        "frame_overlap_mm3": 3.678130137068068,
+        "removed_by_lid_cuts_mm3": 0.0
+      },
+      {
+        "x_mm": 6.5,
+        "side": -1.0,
+        "frame_overlap_mm3": 3.6781301370680692,
+        "removed_by_lid_cuts_mm3": 0.0
+      },
+      {
+        "x_mm": 6.5,
+        "side": 1.0,
+        "frame_overlap_mm3": 3.6781301370680692,
+        "removed_by_lid_cuts_mm3": 0.0
+      }
+    ],
+    "ground_contact_edge": "R1 mm fillet around outside bottom perimeter; central bottom remains flat",
+    "base_plate_thinning_removed_volume_mm3": 9699.134544841274,
+    "comparison_to_first_fit": {
+      "cup_and_lid_before_mm3": 45602.46491421645,
+      "cup_and_lid_after_mm3": 25762.62664743668,
+      "solid_volume_reduction_percent": 43.50606552540705
+    },
+    "unverified": [
+      "Wired header-free XIAO, underside BAT solder and PSA seating",
+      "Real slider travel and smaller window",
+      "Two-screw enclosure retention in the new geometry",
+      "Lid stiffness and retention in falls; no structural load test or FEA",
+      "Actual connector/wire bends in the lower package",
+      "USB cable fit and print tolerance",
+      "Changed mass/inertia, floor contacts and IMU height in recovery"
+    ],
+    "note": "Only mechanical packaging revised; source Onshape, firmware, wiring and training are unchanged."
+  },
+  "review_record": {
+    "date": "2026-11-03",
+    "revision": "Rev C2, second fit print after user photos",
+    "user_feedback": {
+      "battery_fit": "Accepted; lateral locating dimensions retained",
+      "headers": "Removed, direct solder wires",
+      "screws": "Two existing M2 x 10 self tapping; reuse working model bore, no coupon or nuts",
+      "ribs": "Fixed gaps: each root overlaps actual frame walls above lid, not just plate",
+      "ground_edge": "R1 mm fillet on external bottom perimeter, flat central bottom retained"
+    },
+    "checks": [
+      "Valid single-solid cup/lid STEP exports",
+      "Both STLs watertight, single connected component, print floor Z=0",
+      "Cup/lid/battery/XIAO-envelope/Pololu/connector pairwise overlaps checked",
+      "Original servo frame geometry retained; root gussets clear source solids at neutral",
+      "All four gussets overlap original frame above plate by >3.67 mm3 each; no gusset truncated by cable opening",
+      "R1 mm external bottom-edge fillet built into cup STEP/STL; front view checked",
+      "One Pololu and no header geometry",
+      "Slider model and additional +/-2 mm lateral allowance clear reduced window",
+      "2.0 mm screw bores verified against original printed horn-bracket cylinder radius",
+      "Browser thin-lid and front-switch views checked; no error/warning logs",
+      "ZIP CRC/hash checks passed; no coupon; two required printable parts"
+    ],
+    "new_physical_fit_validated": true,
+    "screw_baseline_validated_by_user": true,
+    "electrical_rewire_installed": false,
+    "firmware_uploaded_this_revision": false,
+    "simulation_updated": true,
+    "training_started": true,
+    "next_step": "Complete Rev C wiring/charging commissioning; revised offline model/training tracked in sim/enclosure.",
+    "artifact_sha256": {
+      "base_modified.step": "bcabbde0ac3cf1fb6bd98b9ee37e23865944868d9331eb9c69c0dcd2ae10e592",
+      "geometry.json": "80a97c0381eddb7372a96a46716a58ece273a3bbfd35d62bb3d0c49f79368bd3",
+      "rev_c_print_fit.zip": "fbe2564601bdbaf07da04846b2bffa147cf46ec781a19399491b443c16fad733",
+      "preview.png": "e5143127cdcc4e148b0603abd6a4678148ed6903fe6ea6816c2150e0546f0034",
+      "rev_c2_print_fit.zip": "fbe2564601bdbaf07da04846b2bffa147cf46ec781a19399491b443c16fad733",
+      "stl_validation.json": "7fd536dcee1e4a4c1e624a0f39327ab2527140536bfb63b4b463837e7027d39d",
+      "electronics_cup.stl": "960fc197c6c9c2dc18af98e8762c34d875c3d044cf08053712d15058cc9b1438",
+      "validate_prints.py": "0a69a2b11c714eeac7bbbdc5e753c4a9c39cada50b56443fb887ef2c4940b4f6",
+      "package_fit.py": "cef240fb563bebfcb8c9dcecf7245013473729251aae23b06ce1cd220ff19c91",
+      "build_preview.py": "c7562064c55b87d54840bfd4061dd6ce72434106cc9256cdad6c02705a3dc0d5",
+      "fit_revision_1_reference.json": "f019f19de7e3ec1d4172247884dce383ff3fe45864662d29a5c87c7df2bb3606",
+      "base_modified.stl": "f43627fae192a240b71a8441bd4778d4c1bc09980fa810a5f12579757334257d",
+      "README.md": "e83db6620d7a898b886dbef31611062153977e3cd77e9743ce81d82f88594bc6",
+      "PRINT_FIT_CHECK.md": "979526ccd0a32f4c92739cceb22947d92830d577962c6144c9c5dc9eb378a366",
+      "viewer.html": "20285b644c44f1be4523224adf3af54133a844be28bd14b847989f9e9f58c194",
+      "validation.json": "e2c103386f7c0fdefa1e28b0b3a73cbe5226247459b7e24ec0e3efd5dc443fbc",
+      "build_pod.py": "29bf4b5913ae8b7ea5ce13e691c851513229387631e229b3ea76ec47269f6769",
+      "assembly_review.step": "5e9fa776c61f5bdf53477c9e0b19455eff754ddc7fdab2aa5145eb72c5b7c95c",
+      "fit_package_manifest.json": "378867396cb05b9636ee73ca50b8c1c0d9dfd1b73fe92d38d56932c4995fcf86",
+      "electronics_cup.step": "0641088867b5c5bf365f2b637d7c0142eb0eda224984bec889524ec745940c7a",
+      "layout.svg": "9d723703eb6e834ca01705eefe953d1e31dd68ce417139a64672f213d9a5a0b9"
+    },
+    "unchanged_runtime_sha256": {
+      "firmware/policy_control/policy_control.ino": "d276da59e1cb74129076f9d2936c3115acb9cd73f5ff6b356d86cfdbc40ae1d9",
+      "sim/robot.xml": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+      "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff"
+    },
+    "fit_approval_date": "2026-11-03",
+    "fit_approval_evidence": "User: The new 3D prints pass the fit check",
+    "simulation_results": "../../sim/enclosure/results/summary.json"
+  },
+  "base_modified_stl_sha256": "f43627fae192a240b71a8441bd4778d4c1bc09980fa810a5f12579757334257d"
+}

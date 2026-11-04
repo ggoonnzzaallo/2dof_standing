@@ -6,7 +6,7 @@
 
 The user-supplied final assembly and joint review are in [cad/onshape_import](cad/onshape_import/README.md). The corrected export is imported; a 0.57 mm residual servo-model offset is documented and the structural upper pivot remains the confirmed reference. The [MuJoCo model](sim/onshape/README.md) now uses that assembly, with a [simulated motion preview](sim/onshape/joint_motion.gif), explicit body inertia and decomposed printed collision shapes. Physical joint mapping, contact limits and servo/IMU calibration remain before hardware transfer.
 
-**Enclosure fit revision 2:** [new cup and thin lid](cad/electronics_pod/README.md) reduce the closed package from 24 to 14 mm, add XIAO stops and low PSA lands, move the one Pololu to the opposite front corner, and use two existing M2×10 self-tapping screws with the model’s proven 2.0 mm screw bores. Headers are removed. The user confirms physical fit. The [revised MuJoCo model and joint controls](sim/enclosure/README.md) use the new slicer masses and IMU location; initial retraining and checkpoints are saved. The new candidate improves fresh randomized simulation recovery from 8/30 to 18/30, and remains offline pending further improvement and hardware validation.
+**Enclosure fit revision 3:** [latest cup](cad/electronics_pod/README.md) tightens the USB opening to 9.8 × 4.1 mm and moves the battery 7.3 mm rearward / 3.65 mm left, using the wall as an end stop with local screw-boss relief. **[Print the C3 cup only](cad/electronics_pod/rev_c3_print_fit.zip); the fit-approved C2 lid is unchanged.** The 70 mm footprint, 14 mm closed package, XIAO/Pololu positions and two M2×10 screws remain. The [MuJoCo model and joint controls](sim/enclosure/README.md) remain frozen to approved C2 geometry/masses; the C3 battery shift awaits its fit/model update. Initial C2 retraining improves fresh randomized simulation recovery from 8/30 to 18/30; the candidate remains offline pending further improvement and hardware validation.
 
 The original arm slicer job gives **27.922 g of printed parts after removing supports**. The new cup/lid job gives **29.125 g** for those two replacement pieces; see the [enclosure mass report](sim/enclosure/README.md#geometry-and-mass) and [original mass properties](sim/mass_properties/README.md). The requested future carrier PCB is tracked in the [hardware backlog](docs/HARDWARE_BACKLOG.md).
 
@@ -34,7 +34,7 @@ After the arm command confirms **“Armed. Unplug USB”**, unplug USB for batte
 ## Package
 
 - [Operating instructions: disarm, battery checks, charging and rearming](docs/OPERATING_INSTRUCTIONS.md)
-- [One-piece under-base electronics cup and 3D layout](cad/electronics_pod/README.md) — [revised print-fit ZIP](cad/electronics_pod/rev_c2_print_fit.zip), lower cup + 2 mm lid, XIAO stops, corner switch and two M2 screws; no nuts or coupon
+- [One-piece under-base electronics cup and 3D layout](cad/electronics_pod/README.md) — [C3 print-fit ZIP](cad/electronics_pod/rev_c3_print_fit.zip), tighter USB and outward battery; reprint cup only, retain C2 lid
 - [Current PTK parts list and fastener plan](BOM.md)
 - [Ordered-parts status and incoming checks](docs/PROCUREMENT_STATUS.md)
 - [Controller comparison and IMU location](docs/CONTROLLER_DECISION.md)

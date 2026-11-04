@@ -1,50 +1,44 @@
-**Fit approved by the user on 3 November 2026.** New slicer masses and physics are in [the enclosure MuJoCo model](../../sim/enclosure/README.md). Wiring/charging commissioning remains pending.
+# Lower enclosure — fit revision 3 (Rev C3)
 
-# Lower enclosure — fit revision 2 (Rev C2)
+**USB and battery refinements, 3 November 2026.** The previous C2 prints passed the user's fit check. This revision tightens the USB-C aperture and moves the battery outward, with the side wall replacing an end stop and a small flat relief on the rear screw boss. The new cup requires a fit check; the previous C2 approval does not automatically apply to these changes.
 
-**Prepared 3 November 2026 after the first physical fit.** The battery fit is retained; the XIAO now has locating stops and both boards have low PSA lands. The Pololu moves to the opposite front corner. The user confirmed **headers removed** and **M2 × 10 mm screws into plastic, no nuts**. Electrical wiring remains Rev C and packages **ONE Pololu**.
+**[Download Rev C3 print package](rev_c3_print_fit.zip)** · [Cup STL](electronics_cup.stl) · [Cup STEP](electronics_cup.step) · [Interactive viewer](viewer.html) · [Fit instructions](PRINT_FIT_CHECK.md)
 
-**[Download the new print package](rev_c2_print_fit.zip)** and follow the [fit instructions](PRINT_FIT_CHECK.md). The new matched prints are **[cup STL](electronics_cup.stl)** and **[thin lid / servo mount STL](base_modified.stl)**. `rev_c_print_fit.zip` is a backward-compatible alias of the latest package, not the old print.
+**Reprint the cup only. The C2 lid/servo mount is unchanged and still fits.** Its STL is byte-identical to the approved C2 file. The package includes it for new builds, but you do not need to print it again. The original [C2 ZIP](rev_c2_print_fit.zip) is retained; `rev_c_print_fit.zip` is an alias of the latest C3 package.
 
-![Revised enclosure and layout](preview.png)
+![Rev C3 enclosure and layout](preview.png)
 
-## Geometry
+## Requested changes
 
-| Feature | New revision | Previous fit |
+| Feature | Rev C3 | Approved Rev C2 |
 |---|---|---|
-| Footprint | 70 × 70 mm; retained battery stop XY positions | 70 × 70 mm |
-| Cup body depth | **12 mm**, plus 0.8 mm register tabs entering lid pockets | 20 mm |
-| Lid plate | **2 mm**; original servo frame retained, root gussets added | 4 mm |
-| Closed electronics package | **14 mm** | 24 mm |
-| Cup walls / floor | **1.2 / 1.6 mm** | 1.8 / 2.0 mm |
-| Outside ground-contact edge | **1 mm radius**, flat central bottom retained | Square bottom edge |
-| Board retention | Locating stops + **0.6 mm broad PSA lands**, nominal 0.4 mm insulating tape | Tall/narrow supports; no XIAO stops |
-| Switch opening height | **2.6 mm**, plus shallow PCB-edge relief | 6 mm |
-| Lid fasteners | **Two diagonal M2 × 10 screws**, blind 2.0 mm bores matched to the working model, no nuts | Four screws + four nuts |
-| Header accommodation | None; direct solder wires | Tall pin headers |
+| USB opening, width × height | **9.8 × 4.1 mm**, R0.6 corners | 14 × 7 mm |
+| Opening allowance around CAD USB shell | About **0.43 mm per side / 0.445 mm top and bottom** | Much larger opening |
+| Battery position | **7.3 mm rearward and 3.65 mm left**, same height/orientation | Centre `(0,14,-6.15)` mm |
+| Battery end stop | Left cup wall, nominal **0.4 mm** gap | Separate free-standing stop |
+| Other battery stops | Relocated front/right stops; rear rail joins rear wall | Original inboard rails |
+| Rear-right screw boss | Small battery-side flat; **2.1 mm pilot wall** remains on that side | Full 7.6 mm round boss, 2.8 mm pilot wall |
+| Screw axes, lid and servo frame | **Unchanged** | Two diagonal M2 × 10 mm screws |
 
-The four small cup registration tabs enter shallow pockets under the lid, helping locate edges with only two screws. They do not require flexing snap clips. The two screw bosses have 8.6 mm blind pilots; nominal screw engagement is 8 mm through the 2 mm plate. The bore diameter is copied from the existing printed horn-bracket screw holes (1.0 mm cylindrical radius, 2.0 mm nominal diameter) in the user-supplied Onshape export. The user confirms these fit the screws in use, so **no new coupon or alternate pilot-size trial is included**. No nuts, inserts or extra electronic hardware are added.
+The tighter opening is centred on the actual imported USB shell at CAD Y=−15.50733, Z=−6.545 mm. A corrected USB-only clearance envelope contains all source board mesh vertices while avoiding the old overly tall USB envelope. The PCB itself retains its previous containing envelope and locating stops. The actual USB plug overmould and printing tolerance still need a physical insertion test.
 
-All four lid gussets now overlap the actual servo-frame walls above the plate. The build checks each connection separately and verifies that the cable opening does not cut any gusset away. The cup's outside bottom perimeter has a **1 mm fillet**, including the rounded corners; most of the bottom remains flat.
+The battery centre is now `(-3.65,21.3,-6.15)` mm. Its 59.5 × 19 × 7.5 mm envelope clears the curved enclosure corner and the relieved boss. Checks also move the envelope ±0.25 mm in X and Y individually without interference. The boss relief removes only about 0.7 mm from its battery-side outer radius; the screw axis, 2.0 mm blind pilot and 8.6 mm depth are retained. A complete 6 mm-diameter structural collar around the entry/bore is checked over the full engagement depth. Do not tighten against or compress the battery pouch.
 
-The lower cup leaves less space beneath boards. PSA attaches to broad low lands, with relief gaps for underside joints. Route Pololu wires **from its upper/component side**; do not count on the old 3 mm underside allowance. Check XIAO BAT solder and tape thickness before seating it. Internal plugs are arranged flat in the central bay; no routine connector-access window or separate service panel is added.
+## Retained dimensions and features
 
-## Review and editable files
+The footprint remains **70 × 70 mm**, cup body depth **12 mm**, lid plate **2 mm**, closed package **14 mm**. Four shallow registration tabs enter the existing lid pockets. Cup walls/floor remain **1.2/1.6 mm**, with **R1 on the outside ground-contact edge**. The two existing M2 × 10 screws self-tap into the proven 2.0 mm blind bores; no nuts, inserts or coupon.
 
-- [Interactive 3D viewer](viewer.html): whole robot, top layout, front switch and thin-lid-only views; visibility and explode controls.
-- [Dimensioned layout](layout.svg), [complete STEP assembly](assembly_review.step).
-- Editable [cup STEP](electronics_cup.step), [lid STEP](base_modified.step).
-- [CAD checks](validation.json), [watertight STL checks](stl_validation.json), [first-fit reference](fit_revision_1_reference.json).
+XIAO and Pololu positions are unchanged. Both boards keep their low **0.6 mm PSA lands**, nominal 0.4 mm insulating tape, locating stops and underside lead relief. Headers remain removed, with direct wires soldered to the boards. The switch window remains 2.6 mm high with its shallow PCB-edge relief. Only one Pololu is packaged. Wiring is still [Rev C](../../electrical/FROM_SCRATCH.md).
 
-Cup and lid CAD volume totals **25,763 mm³ instead of 45,602 mm³**, a **43.5% solid-volume reduction**. At uniform solid PLA density 1.32 g/cm³ the reference masses are 16.5 g cup and 17.5 g lid; these are **not slicer estimates**. Use actual slice/scale results for model inertia.
+## Files and checks
 
-The lid upper face and servo-frame/axis coordinates are retained; the lower side of the old plate is removed. Gussets have no overlap with imported servo/link solids in the neutral assembly. This is not a continuous motion/impact test. New ground is CAD Z=−12 mm, upright tip Z=151 mm, overall height about 163 mm. The cup STL is 12.8 mm high because of its registration tabs; the matched lid recesses receive those tabs. The lid STL remains 35 mm tall including the servo frame, despite the plate being only 2 mm.
+- [Dimensioned top layout](layout.svg), [STEP assembly](assembly_review.step), [cup STEP](electronics_cup.step), [unchanged lid STEP](base_modified.step).
+- [CAD validation](validation.json), [STL validation](stl_validation.json), [package manifest](fit_package_manifest.json), [review record](review_record.json).
+- [C2 geometry/fit reference](fit_revision_2_reference.json) and [original first-fit reference](fit_revision_1_reference.json).
 
-## Checks and limits
+Cup and lid are valid single BRep solids and watertight, single-component STLs. Both STLs sit on the print bed at Z=0. Pairwise cup/lid/battery/board/Pololu/connector checks, USB envelope, slider travel, screw collar and battery-offset allowances pass. Existing frame gussets remain connected and unchanged. These are geometry checks, not a screw pullout, impact or printed cable-fit test.
 
-Both prints are valid single-solid BReps and watertight single-component STLs. Pairwise cup/lid/battery/XIAO-envelope/Pololu/connector checks passed. The detailed controller BRep is invalid in the user source, so clearance uses a containing envelope verified against every source mesh vertex. Slider travel has an extra ±2 mm lateral CAD allowance. Actual PSA, underside chips/solder, cable overmoulds, direct-wire bends, screw torque/pullout and lid stiffness must be checked physically.
-
-Source Onshape geometry and model weights are unchanged; derived lid/cup geometry lives here. The new IMU height, mass distribution and contact shape still require a later model update and recovery evaluation after fit approval. No firmware or robot motion changed in this mechanical revision. Existing [Rev C wiring and charging limitations](../../electrical/README.md) still apply.
+The old C2 model, masses and trained actors remain unchanged. Its reproducible CAD inputs are frozen under [sim/enclosure/source/fit_approved_c2](../../sim/enclosure/source/fit_approved_c2), so generating a C2 simulator or joint view cannot silently pick up C3 geometry. Incorporate the battery translation and new sliced cup mass in the next simulation revision after fit confirmation. No firmware or physical robot commands are part of this CAD update.
 
 ## Reproduce
 
@@ -55,4 +49,4 @@ python3 cad/electronics_pod/validate_prints.py
 python3 cad/electronics_pod/package_fit.py
 ```
 
-Pololu uses the user-supplied manufacturer STEP in [source/pololu_2810.step](source/pololu_2810.step). File hashes and offsets are in validation.json. Bore-size provenance is recorded in validation.json.
+Source Onshape and Pololu STEP files remain unchanged. The historical C2 ZIP is not overwritten by this generator.

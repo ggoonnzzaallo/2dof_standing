@@ -21,6 +21,7 @@ from prepare_assets import write_obj,PARAMETERS
 sys.path.insert(0,str(ROOT/'cad/electronics_pod'))
 from build_pod import rounded_xy
 POD=ROOT/'cad/electronics_pod'
+POD_CAD=HERE/'source/fit_approved_c2'
 
 def digest(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 
@@ -39,7 +40,7 @@ def mesh_arrays(part):
 
 def main():
     config=json.loads((HERE/'configuration.json').read_text())
-    geometry=json.loads((POD/'geometry.json').read_text())
+    geometry=json.loads((POD_CAD/'geometry.json').read_text())
     params=geometry['parameters']
     old=json.loads((ROOT/'sim/onshape/body_properties.json').read_text())
     tree=ET.parse(ROOT/'sim/robot.xml');xml=tree.getroot()
@@ -55,7 +56,7 @@ def main():
         if any(m.get('name','').startswith(a+'_') for a in remove): assets.remove(m)
     components=[p for p in old['component_masses'] if p['alias'] not in remove]
     for alias in ('electronics_cup','base_modified'):
-        shape=cq.importers.importStep(str(POD/(alias+'.step'))).val()
+        shape=cq.importers.importStep(str(POD_CAD/(alias+'.step'))).val()
         mass=config['printed_mass_g'][alias]
         status=config.get('printed_mass_source','User mass') if mass is not None else 'PROVISIONAL full-solid PLA reference; replace with new slicer or scale mass'
         if mass is None:mass=shape.Volume()*.00132
@@ -79,7 +80,7 @@ def main():
     base.set('pos',numbers([0,0,height]));xml.find('.//keyframe/key').set('qpos',numbers([0,0,height,1,0,0,0,0,0]))
     board=next(p for p in components if p['alias']=='controller_board')
     base.find("site[@name='imu']").set('pos',numbers(board['com_cad_m']))
-    provenance={'original_model_sha256':digest(ROOT/'sim/robot.xml'),'pod_geometry_sha256':digest(POD/'geometry.json'),
+    provenance={'original_model_sha256':digest(ROOT/'sim/robot.xml'),'pod_geometry_sha256':digest(POD_CAD/'geometry.json'),
         'configuration_sha256':digest(HERE/'configuration.json'),'date':'2026-11-03',
         'fit_check':'User reports new cup and lid pass physical fit',
         'imu_mount':'CAD orientation retained; physical confirmation pending' if not config['imu_orientation_confirmed'] else 'User confirmed CAD orientation',

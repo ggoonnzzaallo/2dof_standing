@@ -1,8 +1,8 @@
 {
-  "status": "Second fit-print revision; wired fit, screw fit and recovery unverified",
+  "status": "Rev C3 cup-only revision; C2 lid retained; new USB/battery fit pending",
   "date": "2026-11-03",
   "parameters": {
-    "revision": "Rev C2 fit revision",
+    "revision": "Rev C3 USB and battery fit revision",
     "width": 70.0,
     "corner_radius": 5.0,
     "ground_edge_radius": 1.0,
@@ -34,10 +34,11 @@
       7.5
     ],
     "battery_center": [
-      0.0,
-      14.0,
+      -3.65,
+      21.3,
       -6.15
     ],
+    "battery_clearance": 0.3,
     "board_translation": [
       -0.84944,
       8.01904,
@@ -46,14 +47,15 @@
     "headers_removed": true,
     "usb_window_size": [
       8.0,
-      14.0,
-      7.0
+      9.8,
+      4.1
     ],
     "usb_window_center": [
       -34.0,
-      -15.5,
+      -15.50733,
       -6.545
     ],
+    "usb_window_corner_radius": 0.6,
     "pololu_translation": [
       16.0,
       -34.7,
@@ -94,8 +96,8 @@
     "electronics_cup": {
       "valid_brep": true,
       "solids": 1,
-      "volume_mm3": 12488.20717911258,
-      "solid_reference_PLA_g_at_1_32": 16.484433476428606,
+      "volume_mm3": 12628.5481558498,
+      "solid_reference_PLA_g_at_1_32": 16.669683565721737,
       "cad_bounds_mm": [
         -35.0,
         -35.0,
@@ -181,12 +183,49 @@
       "removed_by_lid_cuts_mm3": 0.0
     }
   ],
+  "usb_opening_mm": [
+    9.8,
+    4.1
+  ],
+  "usb_previous_opening_mm": [
+    14.0,
+    7.0
+  ],
+  "usb_shell_face_bounds_mm": [
+    -19.97733,
+    -11.03733,
+    -8.15,
+    -4.94
+  ],
+  "usb_shell_nominal_clearance_each_side_mm": [
+    0.43,
+    0.445
+  ],
+  "battery_shift_from_C2_mm": [
+    -3.65,
+    7.3,
+    0.0
+  ],
+  "battery_left_wall_gap_mm": 0.4,
+  "battery_locating": "Left cup wall is the end stop; relocated right/front stops; rear rail joins rear wall",
+  "battery_side_boss_relief": [
+    {
+      "center_mm": [
+        29.5,
+        29.5
+      ],
+      "removed_volume_mm3": 20.6061963305446,
+      "minimum_pilot_wall_mm": 2.099999999999998
+    }
+  ],
+  "retained_screw_collar_outer_diameter_mm": 6.0,
+  "C2_lid_compatible": true,
   "ground_contact_edge": "R1 mm fillet around outside bottom perimeter; central bottom remains flat",
   "base_plate_thinning_removed_volume_mm3": 9699.134544841274,
   "comparison_to_first_fit": {
     "cup_and_lid_before_mm3": 45602.46491421645,
-    "cup_and_lid_after_mm3": 25762.62664743668,
-    "solid_volume_reduction_percent": 43.50606552540705
+    "cup_and_lid_after_mm3": 25902.967624173896,
+    "solid_volume_reduction_percent": 43.19831686094074
   },
   "unverified": [
     "Wired header-free XIAO, underside BAT solder and PSA seating",

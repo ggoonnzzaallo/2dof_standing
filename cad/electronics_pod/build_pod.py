@@ -28,14 +28,14 @@ from import_assembly import name
 
 SOURCE = ROOT / 'cad/onshape_import/source/robot_onshape_third.step'
 POLOLU_SOURCE = OUT / 'source/pololu_2810.step'
-P = dict(revision='Rev C2 fit revision', width=70., corner_radius=5., ground_edge_radius=1., wall=1.2,
+P = dict(revision='Rev C3 USB and battery fit revision', width=70., corner_radius=5., ground_edge_radius=1., wall=1.2,
          roof_z=0., floor_z=-10.4, floor_thickness=1.6, lid_plate_thickness=2.,
          mount_centers=[[-29.5, -29.5], [29.5, 29.5]], m2_clearance=2.4,
          m2_pilot=2.0, m2_blind_depth=8.6, boss_diameter=7.6,
          locating_tab_height=.8, board_pad_height=.6, psa_allowance=.4,
-         battery_size=[59.5, 19., 7.5], battery_center=[0., 14., -6.15],
+         battery_size=[59.5, 19., 7.5], battery_center=[-3.65, 21.3, -6.15], battery_clearance=.3,
          board_translation=[-.84944, 8.01904, -11.4], headers_removed=True,
-         usb_window_size=[8., 14., 7.], usb_window_center=[-34., -15.5, -6.545],
+         usb_window_size=[8., 9.8, 4.1], usb_window_center=[-34., -15.50733, -6.545], usb_window_corner_radius=.6,
          pololu_translation=[16., -34.7, -9.4],
          switch_window_size=[10., 6., 2.6], switch_window_center=[23.62, -34.3, -7.734],
          pololu_edge_pocket_size=[16.2, 6., 1.4], pololu_edge_pocket_center=[23.62, -34.3, -8.892])
@@ -115,20 +115,38 @@ def main():
     print('Building lower cup, PSA lands and two blind screw bosses...', flush=True)
     outer = rounded_xy(70, 70, roof-bottom, bottom, 5).edges('<Z').fillet(P['ground_edge_radius'])
     cup = outer.cut(rounded_xy(70-2*wall, 70-2*wall, roof-floor+1, floor, 5-wall))
+    battery_keepout=box((P['battery_size'][0]+2*P['battery_clearance'],
+                         P['battery_size'][1]+2*P['battery_clearance'],roof-floor+2),
+                        (*P['battery_center'][:2],(roof+floor)/2))
+    boss_relief=[]
     for x, y in mounts:
-        cup = cup.union(cylinder(x, y, floor, P['boss_diameter'], roof-floor))
+        boss=cylinder(x, y, floor, P['boss_diameter'], roof-floor)
+        if x>0:
+            removed=boss.val().intersect(battery_keepout.val()).Volume()
+            boss=boss.cut(battery_keepout)
+            boss_relief.append({'center_mm':[x,y], 'removed_volume_mm3':removed,
+                'minimum_pilot_wall_mm':x-(P['battery_center'][0]+P['battery_size'][0]/2+P['battery_clearance'])-P['m2_pilot']/2})
+            assert boss_relief[-1]['minimum_pilot_wall_mm']>=2., 'Retain screw boss wall'
+        cup = cup.union(boss)
         # Small webs connect each boss to its two adjacent walls.
         sx, sy = (1 if x>0 else -1), (1 if y>0 else -1)
         cup = cup.union(box((5.5, 1.2, roof-floor), (sx*32.25, y, (roof+floor)/2)))
         cup = cup.union(box((1.2, 5.5, roof-floor), (x, sy*32.25, (roof+floor)/2)))
-    cup = cup.cut(box(P['usb_window_size'], P['usb_window_center']))
+    usb_cut=box(P['usb_window_size'],P['usb_window_center']).edges('|X').fillet(P['usb_window_corner_radius'])
+    cup = cup.cut(usb_cut)
     cup = cup.cut(box(P['switch_window_size'], P['switch_window_center']))
     cup = cup.cut(box(P['pololu_edge_pocket_size'], P['pololu_edge_pocket_center']))
-    # Battery footprint/clearance accepted by the first fit, retained unchanged.
-    for x in (-31.45, 31.45):
-        cup = cup.union(box((1.4, 15., 3.), (x, 14., floor+1.5)))
-    for y in (2.8, 25.2):
-        cup = cup.union(box((42., 1.4, 3.), (0., y, floor+1.5)))
+    # Move the battery rearward and left. The existing left side wall replaces
+    # the left end stop; do not squeeze the pouch against the rounded corner.
+    bx,by,_=P['battery_center'];gap=P['battery_clearance']
+    right_stop=bx+P['battery_size'][0]/2+gap+.7
+    front_stop=by-P['battery_size'][1]/2-gap-.7
+    rear_face=by+P['battery_size'][1]/2+gap
+    cup=cup.union(box((1.4,15.,3.),(right_stop,by,floor+1.5)))
+    cup=cup.union(box((42.,1.4,3.),(bx,front_stop,floor+1.5)))
+    # Rear rail is integrated into the rear wall instead of floating inboard.
+    rear_end=35-wall+.2
+    cup=cup.union(box((42.,rear_end-rear_face,3.),(bx,(rear_face+rear_end)/2,floor+1.5)))
     # Broad, low PSA lands replace narrow/tall standoffs. Open space between
     # them provides a relief route for underside BAT solder and direct wires.
     for x in (-30.2, -14.2):
@@ -220,11 +238,11 @@ def main():
             pieces[alias]=(shape,'arm',[.64,.66,.69])
     # Source board BRep is invalid; keep a conservative, vertex-checked envelope.
     board_envelope=box((21.,17.78,4.46),(-22.21802,-15.5,-7.17))
-    board_envelope=board_envelope.union(box((3.,9.1,4.46),(-32.7,-15.5,-7.17))).val()
+    board_envelope=board_envelope.union(box((3.,9.1,3.21),(-32.7,-15.50733,-6.545))).val()
     vertices=np.array(json.loads((ROOT/'cad/onshape_import/geometry.json').read_text())['parts']['controller_board']['vertices'])
     vertices+=np.array(P['board_translation'])
     in_pcb=np.all(np.abs(vertices-np.array([-22.21802,-15.5,-7.17]))<=np.array([10.5,8.89,2.23])+.002,axis=1)
-    in_usb=np.all(np.abs(vertices-np.array([-32.7,-15.5,-7.17]))<=np.array([1.5,4.55,2.23])+.002,axis=1)
+    in_usb=np.all(np.abs(vertices-np.array([-32.7,-15.50733,-6.545]))<=np.array([1.5,4.55,1.605])+.002,axis=1)
     assert np.all(in_pcb|in_usb), 'Envelope must contain source board vertices'
     overlaps={}
     checks=[('cup',cup.val()),('lid',base.val()),('battery',battery),
@@ -247,7 +265,16 @@ def main():
     for dx in (-2.,2.):
         pose=lever.translate(tuple(np.array(P['pololu_translation'])+[dx,0.,0.]))
         assert pose.intersect(cup.val()).Volume()<1e-4,('slider access',dx)
-    assembly=cq.Assembly(name='under_base_pod_C2_review')
+    # Independently verify a full-height collar still surrounds the screw bore,
+    # including the larger entry lead-in, after the battery-side relief.
+    collar=cylinder(29.5,29.5,-P['m2_blind_depth'],6.0,P['m2_blind_depth'])
+    collar=collar.cut(cylinder(29.5,29.5,-P['m2_blind_depth']-.1,2.2,P['m2_blind_depth']+.2)).val()
+    assert collar.cut(cup.val()).Volume()<1e-4, 'Battery relief compromises screw collar'
+    # A 0.3 mm rounded footprint envelope clears the curved enclosure corner.
+    battery_clearance=box((P['battery_size'][0],P['battery_size'][1],7.5),P['battery_center']).edges('|Z').fillet(.01)
+    for dx,dy in ((-.25,0),(.25,0),(0,-.25),(0,.25)):
+        assert battery_clearance.translate((dx,dy,0)).val().intersect(cup.val()).Volume()<1e-4, ('Battery allowance',dx,dy)
+    assembly=cq.Assembly(name='under_base_pod_C3_review')
     geometry={'units':'mm','parameters':P,'parts':{}}
     for alias,(shape,group,color) in pieces.items():
         assembly.add(shape,name=alias,color=cq.Color(*color))
@@ -268,7 +295,7 @@ def main():
     reference=json.loads((OUT/'fit_revision_1_reference.json').read_text())
     before=sum(reference['printed_parts'][n]['volume_mm3'] for n in ('electronics_cup','base_modified'))
     after=sum(print_checks[n]['volume_mm3'] for n in ('electronics_cup','base_modified'))
-    report={'status':'Second fit-print revision; wired fit, screw fit and recovery unverified',
+    report={'status':'Rev C3 cup-only revision; C2 lid retained; new USB/battery fit pending',
             'date':'2026-11-03','parameters':P,'pololu_count':1,'headers_removed_confirmed_by_user':True,
             'fastener_confirmed_by_user':'M2 x 10 mm, reuse proven printed-model screw fit, no nuts, no coupon',
             'fastener_bore_baseline':{'source_part':'top_link_servo_horn_bracket','diameter_mm':P['m2_pilot'],'source':'cad/onshape_import/assembly_inspection.json'},
@@ -283,6 +310,15 @@ def main():
             'xiao_locating_clearance_each_side_mm':.3,'slider_extra_lateral_allowance_mm':2.,
             'slider_protrusion_mm':.595,'original_servo_frame_preserved':True,
             'gusset_frame_connections':gusset_checks,
+            'usb_opening_mm':[9.8,4.1], 'usb_previous_opening_mm':[14.,7.],
+            'usb_shell_face_bounds_mm':[-19.97733,-11.03733,-8.15,-4.94],
+            'usb_shell_nominal_clearance_each_side_mm':[.43,.445],
+            'battery_shift_from_C2_mm':[-3.65,7.3,0.],
+            'battery_left_wall_gap_mm':.4,
+            'battery_locating':'Left cup wall is the end stop; relocated right/front stops; rear rail joins rear wall',
+            'battery_side_boss_relief':boss_relief,
+            'retained_screw_collar_outer_diameter_mm':6.,
+            'C2_lid_compatible':True,
             'ground_contact_edge':'R1 mm fillet around outside bottom perimeter; central bottom remains flat',
             'base_plate_thinning_removed_volume_mm3':thinning_removed,
             'comparison_to_first_fit':{'cup_and_lid_before_mm3':before,'cup_and_lid_after_mm3':after,
