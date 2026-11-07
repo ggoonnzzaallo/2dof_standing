@@ -246,3 +246,10 @@ The native controller build passes at **85,940 bytes flash / 7,880 bytes static 
 This is an offline build/source change: **no upload, serial commands or physical joint test**. See [controller 0.4 instructions](policy_control/README.md#signal-pin-reroute-04--7-november-2026) and [build/provenance record](policy_control/results/2026-11-07/pin_routing_0_4.json).
 
 Native target builds also pass for all maintained auxiliary sketches: servo bench, servo calibration, IMU bench, policy shadow and arithmetic probe. Pin-update record includes flash/RAM sizes for all six targets.
+
+
+## 7 November 2026 — controller 0.4 uploaded and running
+
+After the user explicitly requested connected-harness upload, the existing controller acknowledged PWM OFF and DFU acknowledged **Device programmed.**. The disarmed 0.4 banner confirms lower D8 / upper D7. The no-PWM check passed **150/150 frames**, zero I2C errors/dropped rows, **1,200/1,206 µs median/max inference**, and **1.21e-6** action parity error. Both PWM fields stayed zero; OFF was acknowledged.
+
+Standalone arming was confirmed; a subsequent non-stopping state read reached frame **1,231**, mode 4, ready sensors, zero I2C errors and USB-connected BAT estimate **4.137 V**. The user confirms both joints respond normally, without binding or sustained buzzing. Control was left running at the user's request. No new unassisted recovery score, isolated angle verification or charging-cycle result is inferred. [Deployment record and captures](policy_control/results/2026-11-07/deployment_0_4.json).

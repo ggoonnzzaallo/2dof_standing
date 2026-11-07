@@ -1,0 +1,30 @@
+{
+  "created_utc": "2026-11-07T19:38:05.757065+00:00",
+  "action": "arm",
+  "firmware_banner": [
+    "ROBOT POLICY CONTROL 0.4",
+    "MODE: 0",
+    "IMU_READY: 1",
+    "FILTER_READY: 1",
+    "SERVO_PINS: lower=D8 (8), upper=D7 (7).",
+    "RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.",
+    "PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.",
+    "GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.",
+    "LAST_STOP: Operator stop or command.",
+    "POWER: stop/charge remove PWM only. Rev C master switch OFF + USB unplugged is full OFF.",
+    "Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state (non-stopping), status, help",
+    "READY"
+  ],
+  "handoff_acknowledgement": "STANDALONE: running; USB may be unplugged. Rev C: switch OFF after unplugging USB for full OFF.",
+  "device_state": {
+    "mode": 4,
+    "mode_name": "STANDALONE",
+    "battery_mv": 4141,
+    "policy_frames": 10,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "Operator stop or command."
+  },
+  "continues_after_serial_close": true,
+  "status": "confirmed"
+}

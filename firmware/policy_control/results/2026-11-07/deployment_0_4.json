@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-07",
+  "firmware": "ROBOT POLICY CONTROL 0.4",
+  "source_git_revision": "c5bceb0",
+  "upload_acknowledgement": "Device programmed.",
+  "upload_port": "/dev/cu.usbmodem1101",
+  "firmware_uploaded": true,
+  "upload_setup": "Battery/servo harness remained connected at the user's explicit request. Existing controller acknowledged PWM OFF before upload. New firmware booted disarmed.",
+  "pin_assignment": {
+    "lower": "D8 / printed 8",
+    "upper": "D7 / printed 7"
+  },
+  "shadow": {
+    "status": "passed",
+    "frames": 150,
+    "inference_median_us": 1200.0,
+    "inference_max_us": 1206,
+    "i2c_errors_start_end": [
+      0,
+      0
+    ],
+    "dropped_telemetry": 0,
+    "PWM_outputs": 0,
+    "actor_vs_host_max_action_error": 1.2043598890312118e-06
+  },
+  "standalone_arm_acknowledged": true,
+  "arm_state": {
+    "mode": 4,
+    "mode_name": "STANDALONE",
+    "battery_mv": 4141,
+    "policy_frames": 10,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "Operator stop or command."
+  },
+  "later_nonstopping_state": {
+    "mode": 4,
+    "mode_name": "STANDALONE",
+    "battery_mv": 4137,
+    "policy_frames": 1231,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "Operator stop or command."
+  },
+  "continues_after_host_close": true,
+  "physical_observation": {
+    "confirmed_by_user": true,
+    "observation": "Both joints respond normally, without binding or sustained buzzing",
+    "unassisted_recovery_demonstrated_this_session": false,
+    "isolated_joint_mapping_test_performed": false
+  },
+  "through_switch_charging_validated": false,
+  "remaining_limits": "USB-connected BAT-node estimate is not a current/charging measurement. This session establishes upload, no-PWM arithmetic/timing and standalone command/normal joint response; no new all-direction recovery rate, actual shaft-angle feedback or charging acceptance test.",
+  "source_sha256": {
+    "firmware/policy_control/policy_control.ino": "0562591685c3af5b8e8b38500cccd7a36f60f97b95d7f3b724461ac2ad5adad7",
+    "firmware/policy_control/ServoProfile.h": "31c654bc83fb7f33c5efda7fb3c884172a9de2d7384dcde5feccb34879154fb1",
+    "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff",
+    "build/policy_control/policy_control.ino.hex": "c4c2ba50a1079d2195bc93fbbea09316a9a1e70b570da98cf1a06cf378175402",
+    "build/policy_control/policy_control.ino.zip": "06c3c4e466e430025f219bcafa370f445175464331f5fb2c2ee1c1e3e3ceb0f2"
+  },
+  "capture_sha256": {
+    "shadow_0_4.txt": "47dc523a1042463b122e02ec2d091a60a78bd45e727b5d9203d57fe4252e6ce9",
+    "shadow_0_4.json": "dae21309b49e99d89efc0b75adcf8021f96eb01f5c682e3d4c1fed9ec366d2ad",
+    "status_0_4.json": "397de8b8827c00eedcd0e3e593c73d2613a635e3a305c3538219b3579a26a033",
+    "arm_0_4.json": "be2b713c536e451fe14984ad23bea9129641f7f13628598c5679d1e401216231",
+    "shadow_0_4.csv": "6edc84ff2f167548821c2f2e5263135e6364d8f73d720573a565351592b3a5a4"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "requested_seconds": 3.0,
+  "shadow": true,
+  "physical_motor_commands_requested": false,
+  "trained_range_deg": [
+    -80,
+    80
+  ],
+  "angle_mapping": "Linear extrapolation of visually measured +/-45 deg references, explicitly authorized by user.",
+  "actor_header_sha256": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff",
+  "firmware_banner": [
+    "ROBOT POLICY CONTROL 0.4",
+    "MODE: 0",
+    "IMU_READY: 1",
+    "FILTER_READY: 1",
+    "SERVO_PINS: lower=D8 (8), upper=D7 (7).",
+    "RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.",
+    "PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.",
+    "GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.",
+    "LAST_STOP: Operator stop or command.",
+    "POWER: stop/charge remove PWM only. Rev C master switch OFF + USB unplugged is full OFF.",
+    "Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state (non-stopping), status, help",
+    "READY"
+  ],
+  "stop_acknowledgement": "OFF. Emergency PWM stop.",
+  "contract_checks": "passed",
+  "frames_logged": 150,
+  "last_frame": 150,
+  "mode": "no-PWM shadow",
+  "MCU_vs_host_max_action_error_from_quantized_observations": 1.2043598890312118e-06,
+  "history_max_error": 8.439595441944725e-07,
+  "target_integration_max_error_rad": 1.1321442431877493e-06,
+  "unit_DOWN_max_norm_error": 5.588608438245046e-07,
+  "PWM_mapping_max_rounding_difference_us": 0.0,
+  "inference_median_us": 1200.0,
+  "inference_max_us": 1206,
+  "deadline_lateness_max_us": 1357,
+  "sample_age_max_us": 5157,
+  "i2c_errors_start_end": [
+    0,
+    0
+  ],
+  "dropped_telemetry": 0,
+  "battery_node_min_max_mv": [
+    4132,
+    4146
+  ],
+  "maximum_commanded_angle_deg": 21.28383510306323,
+  "limitation": "Telemetry confirms numerical commands, not actual shaft angles or physical recovery.",
+  "status": "completed",
+  "CSV_sha256": "6edc84ff2f167548821c2f2e5263135e6364d8f73d720573a565351592b3a5a4"
+}

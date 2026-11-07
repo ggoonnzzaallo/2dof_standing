@@ -1,8 +1,8 @@
 # Operating instructions
 
-**Rev C instructions, updated 7 November 2026:** one Pololu battery master switch; **lower signal D8 / 8, upper signal D7 / 7**, as reported by the user. Controller **0.4** matches this harness and is prepared but not uploaded. Complete the [wiring and commissioning checks](../electrical/README.md) first.
+**Rev C instructions, updated 7 November 2026:** one Pololu battery master switch; **lower signal D8 / 8, upper signal D7 / 7**, as reported by the user. Controller **0.4** was uploaded on 7 November 2026; 150 no-PWM frames and standalone arming passed, and the user confirms normal joint response. Complete the [wiring and commissioning checks](../electrical/README.md) first.
 
-**Firmware migration:** the last confirmed uploaded controller is 0.2 and drives the old D0/D1 pins. Upload 0.4 before arming or charging this D8/D7 harness. Current Mac helpers refuse older pin mappings for arm/charge; `stop` and `status` remain available. Firmware changes do not establish that the Rev C power/charging path has been commissioned.
+**Current controller: 0.4**, replacing the earlier 0.2 D0/D1 mapping. [Upload and standalone records](../firmware/policy_control/results/2026-11-07/deployment_0_4.json). Current Mac helpers refuse older pin mappings for arm/charge; `stop` and `status` remain available. Firmware changes do not establish that the Rev C power/charging path has been commissioned.
 
 ## Terminal
 

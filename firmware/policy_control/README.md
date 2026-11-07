@@ -2,9 +2,9 @@
 
 **Current source: 0.4, 7 November 2026. Lower servo PWM is D8 / printed 8; upper is D7 / printed 7.** This matches the user's new harness. Startup, stop, charge and fault paths drive those same pins LOW; D2 remains unused. The status banner reports the pin assignment. Bench, calibration and sensor-only sketch sources also follow D8/D7. Pin movement changes neither the actor weights, joint order, pulse-to-angle calibration nor training model.
 
-This version is built/tested offline, **not uploaded**; the last confirmed physical controller remains 0.2 with the old D0/D1 assignment. Upload 0.4 using the USB-only setup below before using this harness. Mac arm/charge helpers refuse older controller banners so they cannot silently use the old signal assignment. Stop/status remain available for older firmware. Historical captures and version-specific results below retain their original meaning.
+**Uploaded 7 November 2026:** controller 0.4 replaces 0.2. A 150-frame no-PWM check passed, standalone arming was acknowledged, and the user confirms normal response from both joints. [Deployment and captures](results/2026-11-07/deployment_0_4.json). Mac arm/charge helpers refuse older controller banners so they cannot silently use the old signal assignment. Stop/status remain available for older firmware. Historical captures and version-specific results below retain their original meaning.
 
-This program runs the existing exported actor on the XIAO and can send its outputs to both servos. **Boot is disarmed.** It requires explicit arming, a one-second nominal-neutral hold, and a `run` or `standalone` command. Version 0.3 adds a latched no-PWM charging mode, prepared but not uploaded. Version 0.2 supports explicit Mac arming followed by USB-free operation; see [standalone operation](#standalone-operation-02--arm-from-the-mac). Supervised trials still require a host heartbeat.
+This program runs the existing exported actor on the XIAO and can send its outputs to both servos. **Boot is disarmed.** It requires explicit arming, a one-second nominal-neutral hold, and a `run` or `standalone` command. Version 0.3 introduced latched no-PWM charging, included in uploaded 0.4; actual charging acceptance remains pending. Version 0.2 supports explicit Mac arming followed by USB-free operation; see [standalone operation](#standalone-operation-02--arm-from-the-mac). Supervised trials still require a host heartbeat.
 
 The user explicitly chose the trained **±80°** targets rather than restricting the policy to the measured ±45° range. The actor weights, observation normalization, **50 Hz** update rate and **0.06 radian incremental actions** are unchanged. There is no extra slow calibration slew limiter in the learned-control path: the training servo model already permits finite tracking speed/lag.
 
@@ -140,7 +140,7 @@ All maintained motion and sensor-only sketches use the new pins. The bench progr
 
 The Mac helper requires controller 0.4 before `arm`, supervised control or `charge`, and rejects old banners before sending motion/charge commands. Charge-version checks do not require a healthy IMU. `stop` and non-stopping `status` remain usable with old firmware.
 
-The native controller build succeeds at **85,940 bytes flash / 7,880 bytes static RAM**. The full regression suite passes, including actual lower/upper pin ordering, disabled D8/D7 after faults/charge, driver PWM on pins 8 and 7, and refusal of old firmware by the Mac helpers. No upload, serial command or physical movement was performed.
+The native controller build succeeds at **85,940 bytes flash / 7,880 bytes static RAM**. The full regression suite passes, including actual lower/upper pin ordering, disabled D8/D7 after faults/charge, driver PWM on pins 8 and 7, and refusal of old firmware by the Mac helpers. That offline validation preceded the separate hardware deployment below.
 
 [Pin-update build and validation record](results/2026-11-07/pin_routing_0_4.json).
 
@@ -151,3 +151,12 @@ python3 scripts/robot.py upload-control
 ```
 
 Upload verification, a no-motion state check and a supervised joint test follow separately; a successful compile is not an uploaded or physically validated pin assignment.
+
+
+## Hardware deployment 0.4 — 7 November 2026
+
+The user explicitly requested upload with battery and servos still connected. The existing controller acknowledged OFF, the uploader returned **Device programmed.**, and a disarmed status banner confirmed **lower D8 / upper D7** with ready IMU/filter. The three-second no-PWM check captured **150/150 frames**, zero I2C errors and zero dropped rows. Median/max inference were **1,200/1,206 µs**; host action parity error from quantized observations was **1.21e-6**. Both PWM fields stayed zero, and OFF was acknowledged.
+
+At the user's instruction the host then armed, held nominal neutral and entered standalone mode. A later non-stopping status read confirmed mode 4 at frame **1,231**, with sensor readiness, zero I2C errors and BAT-node estimate **4.137 V** while USB was connected. The user confirmed **both joints respond normally without binding or sustained buzzing**. Control was left running as requested; no automatic stop was sent after successful handoff.
+
+This confirms deployment and normal joint response on the new signal pins, not an isolated per-joint angle test, a new all-direction recovery score, or charging/termination validation. The existing deployed actor remains unchanged; the newer enclosure candidate remains offline. [Deployment summary](results/2026-11-07/deployment_0_4.json), [no-PWM check](results/2026-11-07/shadow_0_4.json), [arming](results/2026-11-07/arm_0_4.json), [non-stopping state](results/2026-11-07/status_0_4.json).

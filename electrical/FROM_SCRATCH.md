@@ -43,7 +43,7 @@ The complete motor-current path is battery + → VIN → Pololu → VOUT → J1 
 1. With battery and USB absent, position the boards and battery in their locating stops. Keep the battery unplugged throughout soldering.
 2. Build/insulate J1 and J2. Connect the twelve branches above. Leave enough flex for the lid and both joints, without loose wire entering a hinge or blocking the USB opening/slider.
 3. Inspect polarity and solder joints. Check ground continuity between J2, both boards and servo ground contacts. Check there is no persistent low-resistance positive-to-ground short. A brief capacitor-charging response on a resistance meter is not by itself a short.
-4. For the first USB-only controller check, leave battery and **both complete servo plugs disconnected**. Controller 0.4 is prepared but has not yet been uploaded. Older controllers use D0/D1 and must be replaced before arming or charging with this harness.
+4. For the first USB-only controller check, leave battery and **both complete servo plugs disconnected**. Controller 0.4 was uploaded to this robot on 7 November 2026; use that version for a fresh build. Older controllers use D0/D1 and must be replaced before arming or charging with this harness.
 5. With USB removed and servos still disconnected, test battery-only power: slider OFF should leave the XIAO off; ON should boot it disarmed. Remove battery power again before reconnecting servo plugs.
 6. Complete the supervised checks in the [commissioning guide](README.md#commissioning-the-new-harness), including no-PWM charging current and charge completion, before sealing the cup.
 
