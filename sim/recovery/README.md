@@ -2,7 +2,7 @@
 
 # Simulation recovery controller
 
-Recorded **1 November 2026**. Codex leads this work autonomously; physical observations will be requested when required for calibration. The current result is a **demonstration-trained neural controller that recovers in the tested simulator**. It has not been flashed to the robot.
+Recorded **1 November 2026**. Codex leads this work autonomously; physical observations will be requested when required for calibration. The experiment produced a **demonstration-trained neural controller that recovers in the tested simulator**. This records the original simulation stage. The retained actor was subsequently deployed, with user-confirmed physical and battery-only recovery on 2 November; [current controller and hardware evidence](../../firmware/policy_control/README.md).
 
 ![Neural controller during simulated recovery](results/neural_recovery.png)
 

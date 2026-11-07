@@ -5,7 +5,7 @@ from arm import operate, parse_state
 
 
 class Device:
-    def __init__(self, refuse=False, ready=True, charge_supported=True, version='0.5', locked=False):
+    def __init__(self, refuse=False, ready=True, charge_supported=True, version='0.6', locked=False):
         self.time=0.;self.mode=0;self.frames=0;self.ready=ready;self.refuse=refuse
         self.lines=deque();self.commands=[];self.armed_at=0;self.closed=False;self.charge_supported=charge_supported
         self.version=version;self.locked=locked
@@ -114,8 +114,9 @@ class ArmingTests(unittest.TestCase):
                 self.assertTrue(device.locked)
                 self.assertNotIn('arm',device.commands)
     def test_previous_d8_d7_firmware_remains_supported(self):
-        device=Device(version='0.4')
-        self.assertEqual(operate(device,'arm',device.now)['device_state']['mode'],4)
+        for version in ('0.4','0.5'):
+            device=Device(version=version)
+            self.assertEqual(operate(device,'arm',device.now)['device_state']['mode'],4)
     def test_status_preserves_charge(self):
         device=Device();device.mode=5
         result=operate(device,'status',device.now)

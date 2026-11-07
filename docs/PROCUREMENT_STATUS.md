@@ -1,6 +1,8 @@
-# Procurement status — 1 October 2026
+# Procurement history — 1 October 2026
 
-**Rev B update, 30 October 2026:** the two purchased Pololu 2810 boards are now unused spares. The battery pigtail and existing servo plugs remain in use; no new part is required for the direct-battery rewire. The receipt totals below remain actual spending, not refunded/subtracted costs.
+**V1 wrap-up, 7 November 2026:** the parts have arrived and the robot has operated. The current Rev C design packages **one purchased Pololu**, leaving one spare. Current roles are in the [build BOM](../BOM.md); the dated ordering table below preserves the original receipt record, not present delivery status. Exact total delivered cost is still not recorded.
+
+**Historical Rev B update, 30 October 2026:** the two purchased Pololu 2810 boards were temporarily unused spares. The battery pigtail and existing servo plugs remain in use; no new part is required for the direct-battery rewire. The receipt totals below remain actual spending, not refunded/subtracted costs.
 
 The user reports **all Rev A robot components ordered**. The later opposed-pivot CAD revision adds two bearings and two dowel pins that have **not** been reported ordered. This records what is known from the conversation; it is not a delivery or inspection record. Do not reorder parts solely because a historical sourcing page still has purchase links.
 
@@ -15,10 +17,10 @@ The user reports **all Rev A robot components ordered**. The later opposed-pivot
 
 The **known checkout totals** are $23.44 (Pololu) plus $28.97 (two batteries), or **$52.41**. This is not the project's total: servo, controller and remaining order costs are unknown. The original under-$100 goal cannot yet be assessed from recorded receipts. Do not publish personal details from order screenshots in this repository.
 
-## Incoming checks before assembly
+## Historical pre-assembly checklist
 
 1. Photograph or measure the received PTK servo's label and dimensions, spline and supplied horn/center screw. Also measure the battery and connector against the new centered tunnel. Print the [small fit coupons](../cad/README.md), including the pivot coupon if adding the opposed supports, and update `cad/build_cad.py` from actual measurements before final printing. The current PTK geometry is provisional.
 2. Confirm connector polarity with a multimeter before connecting the battery. Keep motor current off XIAO power traces; the battery feeds the XIAO and, separately through Pololu 2810, both servo power wires.
 3. Characterize one servo, then both, at battery voltages near 4.2, 3.8 and 3.6 V. Record current, voltage sag, travel, unloaded and loaded step response, and whether a scripted rise succeeds. The reference robot's one-cell success is useful evidence, but the PTK servo is not guaranteed by a published 1S rating.
 4. Update the servo ranges in `sim/` from the measured PTK data before substantial RL training. The current numbers are placeholders and should not be treated as measured PTK performance.
-5. Implement and verify firmware servo cutoff, USB charging interlock and charge-current configuration before relying on in-robot charging or unattended operation. These are still requirements, not finished features.
+5. Implement and verify firmware servo cutoff, USB charging interlock and charge-current configuration before relying on in-robot charging or unattended operation. PWM shutdown, charge-current selection and motion guards have since been implemented in the controller. Full electrical charging/idle-current characterization remains unrecorded; see current operating instructions.

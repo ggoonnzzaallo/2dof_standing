@@ -1,5 +1,7 @@
 # Hardware backlog
 
+V1 is wrapped as a working prototype. The items below are optional future iterations/characterization, not uncompleted promises to add hardware to this build. See [project summary](PROJECT_SUMMARY.md).
+
 ## Onboard RGB LED for battery status — future firmware idea
 
 Requested by the user after the final-CAD simulator update. Revisit later; no firmware change or upload is part of this note.
@@ -27,6 +29,6 @@ PCB design and component selection are deferred to a future hardware revision; t
 At the user's instruction, ignore wiring mass for the first simulation mass model. Keep that exclusion explicit in mass records. The current model must not add an imaginary carrier PCB mass; the PCB belongs to a later physical revision.
 
 
-## Simulation contact correction before next training — 2 November 2026
+## Contact correction — implemented in the offline C2 model
 
-At the user's request, replace the current base–middle and middle–upper whole-body contact exclusions with geometry/selective contact rules that allow intended pivot mating but detect real adjacent-link clashes. Audit the full joint envelope and dynamic motion, regenerate affected demonstrations, and retrain/evaluate with the real observation pipeline. Details are in [the calibration/training plan](SIM_CALIBRATION_PLAN.md#required-correction-at-the-next-training-pass--2-november-2026). This is explicitly deferred to the next training pass; it is not a claim that the present simulator has validated physical clearance.
+At the user's request, replace the current base–middle and middle–upper whole-body contact exclusions with geometry/selective contact rules that allow intended pivot mating but detect real adjacent-link clashes. Audit the full joint envelope and dynamic motion, regenerate affected demonstrations, and retrain/evaluate with the real observation pipeline. Details are in [the calibration/training plan](SIM_CALIBRATION_PLAN.md#required-correction-at-the-next-training-pass--2-november-2026). This was implemented before the [C2 enclosure training pass](../sim/enclosure/README.md#contacts), using selective pivot-interface masks and active adjacent-body contacts. The older model/deployed actor retain their original exclusions, and continuous physical clearance is not established by the sampled model checks.

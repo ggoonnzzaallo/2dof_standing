@@ -15,8 +15,8 @@ from shadow import HostActor
 
 ROOT = Path(__file__).resolve().parents[1]
 LIMIT = 1.3962634016
-BANNER = 'ROBOT POLICY CONTROL 0.5'
-SUPPORTED_BANNERS = {BANNER, 'ROBOT POLICY CONTROL 0.4'}
+BANNER = 'ROBOT POLICY CONTROL 0.6'
+SUPPORTED_BANNERS = {BANNER, 'ROBOT POLICY CONTROL 0.5', 'ROBOT POLICY CONTROL 0.4'}
 
 
 def handshake(device, require_ready=True):

@@ -1,14 +1,20 @@
 # Training and deployment pipeline
 
-**Current model:** `robot.xml` is now built from the user's [final Onshape assembly](../cad/onshape_import/README.md), with structural pivots at CAD Z=24.4 and 61.4 mm, nine detailed visual parts, decomposed printed collision shapes and explicitly aggregated body inertia. See the [model review, animation and run instructions](onshape/README.md). Hardware masses, physical joint mapping, adjacent-link contact/clearance, servo dynamics and IMU filtering still need calibration before hardware transfer.
+**V1 status, 7 November 2026:** a retained demonstration-trained actor runs on the physical robot and has demonstrated unassisted recovery, including battery operation without USB. Firmware 0.6 adds automatic battery-only startup. [Project summary](../docs/PROJECT_SUMMARY.md) · [Current controller](../firmware/policy_control/README.md).
 
-**Mass properties:** the sliced print job yields **27.922 g of printed plastic**, excluding supports, at its actual 12% infill settings. The complete exploratory model totals **73.922 g**, including nominal battery/servo masses, an assumed 4 g board and 1.5 g small-hardware allowance. These assumptions are editable in [onshape/assumptions.json](onshape/assumptions.json). Wiring mass is excluded by user request. See [per-part mass records](mass_properties/README.md).
+## Choose the model and experiment
 
-**Electrical Rev B:** the physical build and the new simulation omit the Pololu switch. See [current wiring](../electrical/README.md).
+| Path | Purpose/status |
+|---|---|
+| `robot.xml`, `onshape/`, `recovery/` | Original final-Onshape geometry and the experiment supplying the deployed actor. Original masses total 73.922 g; adjacent-body exclusions remain a known limitation. |
+| `enclosure/robot.xml`, `enclosure/` | Frozen fit-approved C2 enclosure, relocated electronics/IMU and corrected adjacent contacts. Offline candidate and results; not promoted to the robot. Model mass estimate 87.987 g. |
+| `archive/` | Historical pre-Onshape primitive models/software checks. |
 
-The old 170 mm/42 mm/87 mm primitive model is preserved in [archive](archive/robot_before_onshape.xml). It is no longer the environment default. The final CAD spans 153 mm from base underside to tip.
+Latest printable CAD is C3, but the enclosure experiment deliberately uses frozen C2 inputs. No model builder silently updates the deployed actor. Current electrical design includes **one Pololu master switch**; the older original-geometry model predates the under-base enclosure.
 
-**Recovery experiment:** a [demonstration-trained actor](recovery/README.md) now passes 10/10 nominal, 30/30 separate scripted-case and 100/100 broader held-out simulated trials. PPO refinement was tested for 67,584 transitions and did not improve the retained checkpoint. The saved actor and host-verified C export are simulation-only; real sensor/servo calibration and firmware integration remain outstanding.
+The [original experiment](recovery/README.md) retained behavior cloning over a tested 67,584-transition PPO refinement. Its 100/100 broad simulated result is specific to that earlier suite. The [C2 experiment](enclosure/README.md) ran three PPO experiments totaling 202,752 transitions; its selected offline candidate scored 18/30 fresh randomized cases versus 8/30 for the original actor on the same new-model cases. These are different models/evaluations, not a single evolving hardware success rate.
+
+Sliced print mass, component inertia assumptions and omitted wiring mass are documented in [original mass properties](mass_properties/README.md) and [C2 model report](enclosure/README.md#geometry-and-mass). Physical servo dynamics, power margins and impact behavior remain incompletely measured.
 
 Use **MuJoCo + Gymnasium + Stable-Baselines3 PPO**. The two-action, small-MLP problem does not justify changing to a GPU robotics stack before basic recovery is demonstrated. SB3 recommends CPU operation for its MLP PPO workloads and supports multiple environments. [Official PPO documentation](https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html), [MuJoCo simulation documentation](https://mujoco.readthedocs.io/en/stable/computation/index.html).
 
@@ -58,7 +64,7 @@ There is no `VecNormalize` state to forget during export. The export preserves S
 
 Actual joint angle and velocity are used for simulated servo dynamics and reward, **not policy observations**, since the selected three-wire PTK servos do not report them. Floor contact is likewise used to score success during training, not passed to the policy. It is fine for a simulator to use these privileged quantities for its reward: the deployed policy only runs inference and does not calculate that reward. A future feedback-servo upgrade requires a changed wiring/model/observation contract.
 
-## Real training sequence
+## Reproduction and optional further-training sequence
 
 1. **Identify the hardware.** Review the [calibration plan](../docs/SIM_CALIBRATION_PLAN.md). Audit mass and COM where practical. Record pulse-to-angle curves, sign, endpoints, no-load and loaded step responses, backlash, battery sag and current across normal operating battery voltages while retaining the firmware guard. Fit servo dynamics and bound torque; stall torque is not continuous torque.
 2. **Make a demonstrably recoverable mechanism.** Find slow scripted or short waypoint sequences for cardinal and diagonal falls. Search safe sequences in simulation, then test under supervision. If necessary change base width, paddle reach or contact shape. Preserve a simple scripted baseline.
@@ -68,10 +74,10 @@ Actual joint angle and velocity are used for simulated servo dynamics and reward
 6. **Evaluate separate from training.** Use held-out seeds; four side falls, four diagonals, inverted starts and multiple initial joint states; test several surfaces and voltages. Log recovery success within 10 s, recovery time, peak current, stalls and peak contact loads. Require sustained base uprightness, near-home arm, low angular velocity and floor contact. Do not count an airborne or tip-balanced instant as success.
 7. **Deploy and compare logs.** Run IMU acquisition/fusion around 200 Hz, policy/PWM target update at 50 Hz. Export only the actor and compare known input/output vectors on the MCU. Then start with restricted motion and expand toward the validated envelope.
 
-## IMU and sim-to-real details still to implement
+## IMU and sim-to-real status
 
-**The current environment is a software starter, not yet sensor-faithful for transfer.** Its gravity observation comes from MuJoCo's exact base orientation plus noise, while the real robot has only one base-mounted accelerometer/gyro. Real hardware needs a quaternion-based gyro/accelerometer attitude filter and explicit sensor-to-base alignment; the environment must then use the same estimator or model its delay and dynamic errors before training a deployment policy. A normalized raw accelerometer reading is not gravity during a flip. Gate accelerometer correction during strong non-gravitational acceleration, and test recovery through 180-degree orientations. Avoid a roll/pitch formula that changes branches or saturates at 90 degrees. The IMU cannot directly see joint angle, contact or absolute yaw; upright recovery should not depend on absolute yaw.
+The original default environment observes exact base DOWN plus simple noise. The filtered evaluator and C2 experiment instead run the portable firmware gravity estimator on simulated specific force and gyro, including the IMU site translation. Hardware acquisition, provisional measured sensor alignment/gyro bias, filtered DOWN, calibrated visual PWM signs and actor inference are implemented in the [current controller](../firmware/policy_control/README.md). This supersedes the earlier plan to implement the sensor stack before transfer.
 
-The 10-input starter has no history or battery observation. If real servo lag creates partial observability, add a short observation history first (and update the exporter), or a battery-voltage feature after calibrating the ADC. A recurrent policy is an option, but makes deployment and reset behavior more complicated. Do not change observation dimensions only on one side.
+The policy still has no joint feedback, contact sensor, battery observation or recurrent state. Servo lag/backlash/torque ranges and some mass distributions remain estimates; a successful physical recovery does not make the simulator a fully calibrated digital twin. The old model's adjacent-link exclusions are retained for provenance, while C2 uses selective pivot masks and genuine adjacent contacts.
 
-The bench firmware already provides board support, PWM motion, battery estimates and timeout/heartbeat guards. IMU acquisition/filtering, calibrated pulse-to-angle mapping and policy inference integration remain to be implemented. The portable policy exporter has historical software parity checks; it has not yet been deployed as a recovery controller.
+Future training may add observation history, calibrated voltage dependence, trapped-state coverage and persistent recovery rewards. Those require coordinated model/export/firmware changes, not changing observation dimensions on one side. See [recovery behavior](../docs/RECOVERY_BEHAVIOR.md). No further training is required to reproduce the preserved V1 software state.

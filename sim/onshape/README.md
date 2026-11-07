@@ -49,7 +49,7 @@ Current [model checks](validation.json) cover compile, visual placement, reconst
 
 [Environment checks](environment_validation.json) pass Gymnasium's checker and 1,500 random-action steps each with and without parameter randomization. Resets now use the robot's collision support points to place the neutral assembly 2 mm above the floor at the requested orientation, then settle it. They no longer start every orientation at a fixed 180 mm base height. The policy observation/action dimensions remain 10/2; servo dynamics still permit tracking error and are not ideal angle constraints.
 
-These model checks do not train a policy or send physical robot commands. Subsequent [recovery experiments](../recovery/README.md) now include trajectory search, demonstration training, PPO comparisons, held-out evaluation and C-export parity for the selected simulation-only actor. Historical pre-Onshape checks remain in [archive](../archive/software_validation_before_onshape.json).
+These model checks do not train a policy or send physical robot commands. Subsequent [recovery experiments](../recovery/README.md) now include trajectory search, demonstration training, PPO comparisons, held-out evaluation and C-export parity for the selected original actor, subsequently deployed in the [onboard controller](../../firmware/policy_control/README.md). Historical pre-Onshape checks remain in [archive](../archive/software_validation_before_onshape.json).
 
 ## Run and inspect
 

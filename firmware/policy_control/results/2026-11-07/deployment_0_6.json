@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-07",
+  "firmware": "ROBOT POLICY CONTROL 0.6",
+  "previous_git_revision": "c4cc4c3",
+  "source_state": "File hashes identify the uploaded inputs; implementation is in the commit containing this record.",
+  "uploaded": true,
+  "upload_acknowledgement": "Device programmed.",
+  "upload_port": "/dev/cu.usbmodem1101",
+  "upload_setup": "PWM OFF acknowledged before connected-harness upload under standing user authorization. Physical USB present at boot inhibited automatic motion.",
+  "native_build": {
+    "flash_bytes": 87128,
+    "static_ram_bytes": 7920
+  },
+  "host_tests": {
+    "full_firmware_regression": "passed",
+    "mac_helper_tests": 12,
+    "actual_sketch_boot_coverage": [
+      "battery-only wait/neutral/standalone without USB serial",
+      "physical VBUS inhibition independent of DTR/enumeration",
+      "USB insertion during wait or neutral",
+      "USB removal stays in charge",
+      "stop cancels automatic startup",
+      "low-battery/attach/sensor failures never auto-retry",
+      "inactivity latch then reboot restores automatic startup"
+    ]
+  },
+  "hardware_usb_boot_record": "usb_boot_0_6.json",
+  "hardware_usb_boot": "CHARGE (5), USB_POWER: 1, zero policy frames, ready sensors; no host stop/arm override needed.",
+  "battery_only_physical_power_cycle_observed": false,
+  "battery_only_check_status": "Requested user observation after upload; no response recorded yet. Host tests establish software behavior, not the physical battery-only boot.",
+  "latest_observed_hardware_mode": "CHARGE (5) at USB-connected boot check; subsequent user battery-only testing may change it.",
+  "net_charging_verified": false,
+  "sha256": {
+    "firmware/policy_control/policy_control.ino": "0906f8afb4a041801e92a69c3afcb31c1db166ded19115dcf6082f943b39a963",
+    "firmware/policy_control/InactivityGuard.h": "580b253625f29cda804ccdbb5a8997ab5560c909f7f65ab0a79d9d27a6abf3e3",
+    "firmware/policy_control/ServoProfile.h": "31c654bc83fb7f33c5efda7fb3c884172a9de2d7384dcde5feccb34879154fb1",
+    "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff",
+    "build/policy_control/policy_control.ino.hex": "6d68176298a751e2aa071c71a6ca428dd6b487b47abb68605b7d0e7be05f24ff",
+    "build/policy_control/policy_control.ino.zip": "41b2a0c449664713a23a16974bff3497a28281abae08ee8f11b1f5e9ecef0330",
+    "firmware/policy_control/results/2026-11-07/usb_boot_0_6.json": "366366c10546146bb474fe40871d7f55c245d15f8aae9e973e6caddf03913498"
+  }
+}

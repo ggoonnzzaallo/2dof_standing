@@ -43,16 +43,16 @@ The complete motor-current path is battery + → VIN → Pololu → VOUT → J1 
 1. With battery and USB absent, position the boards and battery in their locating stops. Keep the battery unplugged throughout soldering.
 2. Build/insulate J1 and J2. Connect the twelve branches above. Leave enough flex for the lid and both joints, without loose wire entering a hinge or blocking the USB opening/slider.
 3. Inspect polarity and solder joints. Check ground continuity between J2, both boards and servo ground contacts. Check there is no persistent low-resistance positive-to-ground short. A brief capacitor-charging response on a resistance meter is not by itself a short.
-4. For the first USB-only controller check, leave battery and **both complete servo plugs disconnected**. Controller 0.4 was uploaded to this robot on 7 November 2026; use that version for a fresh build. Older controllers use D0/D1 and must be replaced before arming or charging with this harness.
-5. With USB removed and servos still disconnected, test battery-only power: slider OFF should leave the XIAO off; ON should boot it disarmed. Remove battery power again before reconnecting servo plugs.
+4. For the first USB-only controller check, leave battery and **both complete servo plugs disconnected**. Controller 0.6 is uploaded; use it for a fresh build. USB-at-boot selects PWM-off charge mode, while battery-only boot automatically starts recovery after initialization. Older controllers use D0/D1 and must be replaced before arming or charging with this harness.
+5. With USB removed and servos still disconnected, test battery-only power: slider OFF should leave the XIAO off; **ON now triggers automatic recovery startup after about three seconds**. Keep clearance even when testing with the servo plugs disconnected. Remove battery power again before reconnecting servo plugs.
 6. Complete the supervised checks in the [commissioning guide](README.md#commissioning-the-new-harness), including no-PWM charging current and charge completion, before sealing the cup.
 
 ## How the finished harness operates
 
 | Purpose | Physical switch | USB | Software |
 |---|---|---|---|
-| Run on battery | ON | Unplugged after arming | `./robot arm` first, while USB is connected |
-| Charge | **ON** | Connected | **`./robot charge`**, firmware 0.4 |
+| Run on battery | OFF → ON | Unplugged | Automatic startup in 0.6; no computer needed |
+| Charge | **ON** | Present at startup | Automatic CHARGE in 0.6; `./robot charge` is an optional override |
 | Fully off / store | **OFF** | **Unplugged** | None |
 
 In charge mode PWM stops, but both servos still have electrical power. Charging through the enabled Pololu is inferred from its schematic and must be verified on this harness; servo idle current reduces current available to the cell. USB connected does not guarantee net charging. With the slider OFF, the battery is isolated and **cannot charge**; USB can still power the XIAO/shared output rail.

@@ -1,82 +1,76 @@
-# Self-righting arm — design package
+# Two-DOF self-righting robot
 
-**Using the assembled robot:** [Operating instructions](docs/OPERATING_INSTRUCTIONS.md) — disarm, check battery, charge and rearm from the Mac.
+A small, 3D-printed robot that uses two perpendicular servo joints and a learned onboard controller to get back upright. Inspired by [Homemade Garbage's project](https://homemadegarbage.com/rl13) and [SelfRisingRobot](https://github.com/homemadegarbage/SelfRisingRobot).
 
-## Final Onshape CAD
+**V1 project wrap-up — 7 November 2026.** The robot has demonstrated unassisted physical self-righting and recovery on battery without USB. Firmware **0.6** adds automatic battery-only startup; **0.5** introduced the one-minute inactivity lock. Later enclosure-training experiments are preserved separately and have not replaced the deployed actor.
 
-The user-supplied final assembly and joint review are in [cad/onshape_import](cad/onshape_import/README.md). The corrected export is imported; a 0.57 mm residual servo-model offset is documented and the structural upper pivot remains the confirmed reference. The [MuJoCo model](sim/onshape/README.md) now uses that assembly, with a [simulated motion preview](sim/onshape/joint_motion.gif), explicit body inertia and decomposed printed collision shapes. Physical joint mapping, contact limits and servo/IMU calibration remain before hardware transfer.
+- **[Operating instructions](docs/OPERATING_INSTRUCTIONS.md)** — run without a computer, stop, charge, wake after inactivity.
+- **[Project summary and video facts](docs/PROJECT_SUMMARY.md)** — what was built, how the controller learned, demonstrated results and remaining limits.
+- **[Complete wiring](electrical/FROM_SCRATCH.md)** — [schematic PDF](electrical/REV_C_WIRING.pdf), [PNG](electrical/REV_C_WIRING.png), [phone map](electrical/REV_C_PHONE_WIRING.png).
+- **[Build BOM](BOM.md)** · **[CAD and enclosure](cad/electronics_pod/README.md)** · **[Controller firmware](firmware/policy_control/README.md)**.
 
-**Enclosure fit revision 3:** [latest cup](cad/electronics_pod/README.md) tightens the USB opening to 9.8 × 4.1 mm and moves the battery 7.3 mm rearward / 3.65 mm left, using the wall as an end stop with local screw-boss relief. **[Print the C3 cup only](cad/electronics_pod/rev_c3_print_fit.zip); the fit-approved C2 lid is unchanged.** The 70 mm footprint, 14 mm closed package, XIAO/Pololu positions and two M2×10 screws remain. The [MuJoCo model and joint controls](sim/enclosure/README.md) remain frozen to approved C2 geometry/masses; the C3 battery shift awaits its fit/model update. Initial C2 retraining improves fresh randomized simulation recovery from 8/30 to 18/30; the candidate remains offline pending further improvement and hardware validation.
+![Robot during simulated recovery](sim/recovery/results/neural_recovery.png)
 
-The original arm slicer job gives **27.922 g of printed parts after removing supports**. The new cup/lid job gives **29.125 g** for those two replacement pieces; see the [enclosure mass report](sim/enclosure/README.md#geometry-and-mass) and [original mass properties](sim/mass_properties/README.md). The requested future carrier PCB is tracked in the [hardware backlog](docs/HARDWARE_BACKLOG.md).
+## Everyday use
 
-Current purchased architecture: **XIAO nRF52840 Sense + two PTK 7465 MG servos + one 500 mAh, 1S LiPo**. The user reported all parts ordered on 1 October 2026; see [procurement status](docs/PROCUREMENT_STATUS.md). Train on a computer with MuJoCo and Stable-Baselines3 PPO; run the small exported actor on the XIAO. The **IMU and LiPo charger are already on the XIAO Sense board**, which is attached to the robot's base. **Rev C is prepared with ONE existing Pololu as the battery master switch**, software PWM-off charging and an under-base enclosure. The user reports lower PWM on **D8 / 8** and upper on **D7 / 7** (7 November 2026); D2, Pololu ON and SW are unused. No second switch board, boost converter, external IMU, servo driver, separate charger or extra electronic components are added. Firmware 0.5 is uploaded, adding a **60-second base-IMU inactivity stop that requires reboot before rearming**. The preceding 0.4 deployment passed 150 no-PWM frames and the user confirmed normal joint response. Complete Rev C power/charging checks remain pending.
+**Run:** unplug USB, slide the Pololu OFF and then ON. Keep the base still for initialization and allow joint clearance: after about two seconds it commands neutral for one second, then starts recovery. A fresh IMU/filter and approximately 3.7–4.4 V BAT reading are required.
 
-This is an assembled prototype, with both servo joints tested and Rev B wiring live. The final mechanical design is the user's Onshape assembly; earlier generated parts remain historical references. The simulator uses sliced printed masses and CAD geometry, while hardware mass/distribution, servo behavior and sensing still contain explicit assumptions. A [simulation-only neural recovery controller](sim/recovery/README.md) now passes 100/100 broader held-out simulated trials; its C actor was verified on the XIAO in [motor-disabled shadow firmware](firmware/policy_shadow/README.md), with virtual joint targets only. With the actual firmware gravity filter and simulated IMU readings, a newer fresh evaluation recovered in 26/30 trials. The first 500 hardware shadow frames matched host inference within 2.32e-7 and took about 1.2 ms per inference. Demonstration training outperformed the tested PPO refinement, so the earlier checkpoint is retained. The [bench firmware](firmware/README.md) provides terminal motion control, battery estimates, disarmed startup and timeout/heartbeat guards. Software stop/charge cannot disconnect servo power or idle drain. Rev C provides manual battery isolation with the slider; full OFF also requires USB unplugged. See the electrical guide for charging and commissioning checks.
+**Idle:** 60 seconds without meaningful movement at the base IMU stops PWM and locks motion until reboot. Moving it or reconnecting USB does not wake it. To wake, unplug USB and cycle OFF → ON.
 
-On **2 November 2026**, the [onboard controller](firmware/policy_control/README.md) completed its first user-confirmed **unassisted sideways self-righting** trial, with additional manual disturbances during the 15-second run. It uses the unchanged actor at 50 Hz and the trained ±80° target range; inference peaked at 1.272 ms. Raw logs and operator observations are preserved. This is a first demonstration, not a reliability rate. The uploaded version 0.2 boots disarmed and adds explicit Mac arming; the user also confirmed **recovery on battery with USB unplugged**. [Standalone deployment records](firmware/policy_control/results/2026-11-02/standalone_0_2/deployment.json) preserve that observation. The broad adjacent-body collision exclusions are explicitly scheduled for correction before the next training pass.
+**Charge without a computer:** start fully off with USB unplugged and slider OFF. Connect USB, then slide ON. USB power at startup selects motionless charge mode; the switch must be ON to connect the cell to the charger. Unplugging USB alone does not restart motion. For storage, unplug USB and slide OFF.
 
-## Arm from the Mac
+Connecting USB to an already-running robot does not itself stop it. Wait for inactivity, explicitly stop/charge from the Mac, or start the USB-at-boot charging sequence above. PWM-off leaves the electronics and servo idle loads powered; through-switch charging current and termination have not been measured.
 
-For the full step-by-step procedure, see [Operating instructions](docs/OPERATING_INSTRUCTIONS.md).
-
-With the battery, both servos and USB connected, place the robot near straight on a clear surface. From this repository folder:
+Optional Mac controls, from the repository root:
 
 ```sh
-./robot arm       # Moves to neutral, then starts onboard recovery
-./robot status    # Reads state without stopping motion
-./robot stop      # Stops PWM
-./robot charge    # Latch PWM-off charge mode; switch ON + USB
+./robot status   # Read state without stopping motion
+./robot stop     # Stop PWM; cancels pending automatic startup
+./robot charge   # Stop PWM and hold charge mode; retains any inactivity lock
+./robot arm      # Explicit bench override; cannot clear an inactivity lock
 ```
 
-After the arm command confirms **“Armed. Unplug USB”**, unplug USB for battery operation. Reconnect USB to use `status` or `stop`. For Rev C storage, unplug USB and slide OFF; for charging, keep ON + USB and run `./robot charge`. It boots disarmed after every reset/power cycle. The battery guard stops PWM but cannot operate the physical switch. Until rewiring, Rev B still requires battery and USB disconnected for full OFF. Firmware 0.5 is uploaded; 60 seconds of base-IMU inactivity stops PWM until reboot. Charging remains available while locked. Arm/charge accept 0.4/0.5 for D8/D7; stop/status remain compatible with older controllers. [Current deployment evidence](firmware/policy_control/results/2026-11-07/deployment_0_5.json). See [standalone operation](firmware/policy_control/README.md#standalone-operation-02--arm-from-the-mac) for details and VS Code tasks.
+## Hardware
 
-## Package
+| Part | Role |
+|---|---|
+| XIAO nRF52840 Sense, headers removed | Runs inference; onboard six-axis IMU, battery ADC and USB-C LiPo charger |
+| Two PTK 7465 MG servos | Move the arm; ordinary PWM commands, no joint-position telemetry |
+| One 500 mAh 1S LiPo | Powers controller and servos; no boost converter |
+| One Pololu 2810 LV | Manual battery master switch; ON/SW pads and XIAO D2 unused |
+| PLA arm and under-base cup/lid | Mechanical structure and electronics packaging |
 
-- [Operating instructions: disarm, battery checks, charging and rearming](docs/OPERATING_INSTRUCTIONS.md)
-- [One-piece under-base electronics cup and 3D layout](cad/electronics_pod/README.md) — [C3 print-fit ZIP](cad/electronics_pod/rev_c3_print_fit.zip), tighter USB and outward battery; reprint cup only, retain C2 lid
-- [Current PTK parts list and fastener plan](BOM.md)
-- [Ordered-parts status and incoming checks](docs/PROCUREMENT_STATUS.md)
-- [Controller comparison and IMU location](docs/CONTROLLER_DECISION.md)
-- [Future integrated controller/power PCB: replace XIAO and Pololu](docs/INTEGRATED_CONTROLLER_PCB.md) — feasibility, clean charging/OFF behavior and provisional cost targets
-- [Servo choice versus SO-100 smart servos](docs/SERVO_DECISION.md)
-- [Historical AliExpress shopping plan](docs/ALIEXPRESS_SOURCING.md)
-- [Historical DigiKey sourcing audit](docs/DIGIKEY_SOURCING.md)
-- [Wiring, commissioning, and design rationale](HARDWARE.md)
-- [Complete wiring from scratch: twelve branches and both buses](electrical/FROM_SCRATCH.md), [one-page schematic PDF](electrical/REV_C_WIRING.pdf) ([PNG](electrical/REV_C_WIRING.png), [phone map](electrical/REV_C_PHONE_WIRING.png)) and [commissioning guide](electrical/README.md)
-- [Onboard voltage monitoring and USB-C charging plan](HARDWARE.md#battery-monitoring-and-charging)
-- [Power budget and brownout acceptance test](HARDWARE.md#power-budget-and-brownout-check)
-- [Final Onshape assembly and 3D review](cad/onshape_import/README.md); [earlier parametric CAD and fit coupons](cad/README.md)
-- [VS Code setup, first power-up and servo centering](firmware/README.md) — disarmed USB-controlled bench program
-- [IMU commissioning and CSV logging](firmware/imu_bench/README.md) — first hardware-deployment stage, with servo outputs inactive
-- [Onboard recovery controller](firmware/policy_control/README.md) — current uploaded firmware; disarmed boot, trained ±80° limits, Mac arming and standalone operation
-- [Visual servo pulse-to-angle calibration](firmware/servo_calibration/README.md) — six measured visual references and signed PWM mapping
-- [Calibrated IMU filter and motor-disabled neural policy checks](firmware/policy_shadow/README.md) — measured sensor/filter/inference results
-- [Training and deployment pipeline](sim/README.md)
-- [Current enclosure model, checkpoints and initial retraining results](sim/enclosure/README.md), [joint sliders](sim/enclosure/joints.html) and [persistent recovery/personality goals](docs/RECOVERY_BEHAVIOR.md)
-- [Original-geometry neural recovery animation, results and saved actor](sim/recovery/README.md)
-- [Current model checks](sim/onshape/validation.json), [Gymnasium checks](sim/validation.json), and [calibration/learning plan](docs/SIM_CALIBRATION_PLAN.md)
+Lower PWM is **D8 / printed 8**, upper **D7 / printed 7**. Servo power comes from the switched battery bus, never the XIAO's 3V3 output. The [hardware guide](HARDWARE.md) explains sensing, power paths and measured versus assumed parameters. Receipt totals are incomplete; the original under-$100 target is not a verified total.
 
-## Design decisions
+The latest printable cup is **C3** with a tighter USB opening and outward battery placement; its lid is unchanged from fit-approved **C2**. The [enclosure simulator](sim/enclosure/README.md) deliberately stays on frozen C2 geometry and masses. The original arm is from the user's [final Onshape export](cad/onshape_import/README.md); older generated arm concepts are historical.
 
-The serial hinges are **perpendicular**: lower X axis, upper Y axis. Two parallel hinges would concentrate motion in one plane and make general sideways recovery much harder. The supplied reference XML also uses perpendicular axes. The base is free to translate and rotate; it is not attached to the table. Once recovered, the robot stands on a stable platform rather than continuously balancing on an edge. [Reference project](https://github.com/homemadegarbage/SelfRisingRobot), [project article](https://homemadegarbage.com/rl13).
+## Learning and simulation
 
-The final Onshape base footprint is **70 × 70 mm**, with **153 mm** from base underside to upright tip. The pivot heights are CAD Z=24.4 and 61.4 mm, relative to an origin 2 mm above the base underside. The battery and XIAO sit on the base. The exploratory simulation totals **73.92 g**, including an assumed board mass and small-hardware allowance; wiring is excluded by request. The earlier 170 mm generated design and its mass estimates are historical.
+The deployed actor is a **10 → 64 → 64 → 2** network with **4,994 float32 parameters**, evaluated onboard at **50 Hz**. It observes estimated base DOWN, gyro, commanded joint targets and previous actions. It outputs target increments; simulated servos have finite speed, lag and torque. Actual joint angles are not policy inputs.
 
-The [XIAO Sense](https://wiki.seeedstudio.com/XIAO_BLE/) is 21 × 17.8 mm and combines an nRF52840, six-axis IMU, battery input and LiPo charger. It has enough memory for the provided 4,994-parameter actor: **19,976 bytes of float32 weights** plus small working buffers. This is inference only; training stays on the workstation. Select SKU **102010469**; similarly named XIAO boards have different sensors.
+The retained actor was trained by **behavior cloning of searched recovery demonstrations**. Stable-Baselines3 PPO refinement was tested but did not beat that checkpoint in the original experiment. It is accurate to describe the project as learned control using a simulation/demo/PPO workflow; the deployed weights are not the best PPO checkpoint. See [training records and saved checkpoints](sim/recovery/README.md).
 
-The reference [ATOM Matrix](https://docs.m5stack.com/en/core/ATOM%20Matrix) **also has its IMU onboard** and the author reports running the build on a 3.7 V cell. Its documented input is 5 V, and its board documentation does not list an onboard LiPo charger. For this version, the XIAO offers a smaller board footprint and integrated charging; the ATOM retains advantages for reproducing the author's firmware and Wi-Fi user interface. The [detailed comparison](docs/CONTROLLER_DECISION.md) separates verified specifications from prototype assumptions.
+For the original actor's mouse-force playground on this configured Mac:
 
-The [reference robot](https://homemadegarbage.com/rl13) used PTK 7465 MG servos from one 3.7 V LiPo; the author confirms operation without a boost converter in the article comments. This is direct evidence for the same kind of recovery task, but **not** a manufacturer's 1S operating guarantee. Confirm the exact received servo variant, test it at 4.2, 3.8 and 3.6 V, and update the CAD and simulation with measured dimensions and dynamics before relying on the design.
+```sh
+.venv-sim/bin/mjpython sim/recovery/play.py
+```
 
-## Evidence and limits
+Double-click a body, then Control + right-drag to pull; release to watch recovery. Drag normally to orbit and scroll to zoom. This opens simulation only. [Full setup and model guide](sim/README.md).
 
-All three robot-part STLs and four fit-coupon STLs pass watertight-mesh and single-connected-component checks; see `cad/stl_validation.json`.
+| Model/experiment | Status |
+|---|---|
+| Original Onshape geometry + retained demonstration-trained actor | Source of the deployed actor; physical self-righting observed |
+| Original actor's broad simulation evaluation | 100/100 in that specific historical suite; not a hardware success rate |
+| C2 enclosure, relocated IMU and corrected adjacent contacts | Separate offline candidate; 18/30 fresh randomized cases versus old actor's 8/30 on the same new-model cases |
+| C3 cup/battery layout | Printable CAD; not silently substituted into C2 training or deployed weights |
 
-The provisional PTK CAD solids export successfully; each printed part and fit coupon is one valid connected solid. The upright assembly has no unintended rigid-envelope overlaps. An 81-pose grid over both joints at 20-degree increments from −80 to +80 degrees found no clashes in the checked bodies, bearings and pins. This is **not** a continuous clearance certificate: actual horns, screw heads, nuts, leads, compliance and manufacturing tolerances still require inspection.
+## Reproduce and inspect
 
-The earlier Gymnasium environment check, 1,500 randomized steps and short 512-step PPO training smoke test passed before the PTK geometry update. Exported C inference then agreed with SB3 deterministic inference to better than 1e-5 on 100 test observations. That smoke policy was discarded; the centered `sim/robot.xml` has only been loaded and briefly stepped in MuJoCo, not retrained or rechecked end-to-end.
+- **Firmware:** [toolchain setup](firmware/README.md), [current controller](firmware/policy_control/README.md), [validation history](firmware/VALIDATION.md).
+- **Geometry:** [final Onshape import](cad/onshape_import/README.md), [enclosure sources and print package](cad/electronics_pod/README.md), [original mass accounting](sim/mass_properties/README.md).
+- **Training:** [pipeline](sim/README.md), [deployed actor experiment](sim/recovery/README.md), [offline enclosure experiment](sim/enclosure/README.md).
+- **Decisions:** [controller/IMU](docs/CONTROLLER_DECISION.md), [servo feedback tradeoff](docs/SERVO_DECISION.md), [procurement history](docs/PROCUREMENT_STATUS.md).
+- **Future iterations:** [integrated controller PCB](docs/INTEGRATED_CONTROLLER_PCB.md), [battery LED and hardware backlog](docs/HARDWARE_BACKLOG.md), [persistent recovery/personality](docs/RECOVERY_BEHAVIOR.md).
 
-The next physical milestones are: fit the supplied servo horns; measure travel/torque/lag at 4.2, 3.8 and 3.6 V; demonstrate a scripted rise from each major fall direction; update the model; then train and transfer. If scripted recovery is mechanically impossible from a resting pose, change the contact geometry before spending time on RL.
-
-The USA distributor prices and listing availability in the [earlier FT90M estimate](docs/FT90M_BOM_HISTORY.md) were checked on **27 September 2026**. They are historical estimates, **not the actual cost of the ordered PTK build**. The capacitor and signal resistors remain optional diagnostic additions. The confirmed Pololu and battery order totals, and the still-unknown delivered costs of other purchases, are recorded in [procurement status](docs/PROCUREMENT_STATUS.md).
+CAD revisions, raw captures, source hashes and checkpoint histories are retained. Build outputs, downloaded toolchains, virtual environments and local training runs are ignored by Git. Hardware demonstrations establish a working experimental build, not guaranteed recovery from every fall, measured servo dynamics or a completed charging qualification.

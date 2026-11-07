@@ -1,6 +1,6 @@
 # Rev C — one Pololu battery master switch
 
-Controller **0.5** adds a reboot-only 60-second base-IMU inactivity stop. Wiring is unchanged; PWM shuts down while charging remains available. See [operating instructions](../docs/OPERATING_INSTRUCTIONS.md#automatic-inactivity-stop--reboot-to-wake).
+Controller **0.6** adds automatic battery-only startup and USB-at-boot charge mode, retaining the reboot-only 60-second base-IMU inactivity stop. Wiring is unchanged; PWM shuts down while charging remains available. See [operating instructions](../docs/OPERATING_INSTRUCTIONS.md#automatic-inactivity-stop).
 
 **Signal update, 7 November 2026:** the user reports lower servo signal on **D8 / 8** and upper on **D7 / 7**. Controller 0.4 matches these pins and was uploaded on 7 November 2026; no-PWM checks and standalone arming passed, with normal joint response confirmed by the user. Full Rev C power/charging commissioning remains pending; the earlier confirmed harness was [Rev B](REV_B_NOTES.md). Rev C reinstalls **one existing Pololu 2810 LV** upstream of both the XIAO and servos. No second switch board, charger, MOSFET, diode, resistor or capacitor is added. D2 stays unused.
 
@@ -35,7 +35,7 @@ Each existing servo plug still carries positive, ground and signal. The battery 
 | OFF | Absent | Any | Battery isolated from XIAO and servos; only switch leakage and cell self-discharge remain. |
 | OFF | Connected | Any | Battery isolated, so **it cannot charge**. USB can still power the XIAO and shared servo rail through the charger. This is not full OFF. |
 
-**Storage OFF = unplug USB + slide OFF. Charging = slide ON + USB + software charge mode.** Software mode 5 indicates PWM inhibition, not measured positive battery current, a physical servo cutoff or a fuel-gauge result. The charger operates automatically when USB is present; the command stops motion rather than enabling the charger IC.
+**Storage OFF = unplug USB + slide OFF. Charging = slide ON + USB-at-boot charge mode (or explicit `./robot charge`).** Software mode 5 indicates PWM inhibition, not measured positive battery current, a physical servo cutoff or a fuel-gauge result. The charger operates automatically when USB is present; the command stops motion rather than enabling the charger IC.
 
 ## Commissioning the new harness
 
@@ -43,8 +43,8 @@ Each existing servo plug still carries positive, ground and signal. The battery 
 2. Follow the [twelve-branch wiring table](FROM_SCRATCH.md#connect-these-twelve-wire-branches). Battery positive goes to **VIN only**, and **VOUT** feeds J1. J1 branches to BAT+ and both servo positives. Do not bypass the Pololu with another battery-positive connection.
 3. J2 joins battery negative, Pololu GND, XIAO GND and both servo grounds. Connect D8/D7 to the lower/upper signal wires; leave D2/ON/SW unconnected. Insulate joints separately and leave solder/lead bends clear beneath the PCB.
 4. With all power absent, check polarity, common-ground continuity and absence of a low-resistance positive-to-ground short. A MOSFET switch is not an ordinary mechanical contact; resistance across VIN/VOUT by itself is not a definitive on/off test.
-5. Build/upload controller **0.4** as described in the [firmware guide](../firmware/policy_control/README.md). Controller 0.4 is now uploaded; see the [deployment record](../firmware/policy_control/results/2026-11-07/deployment_0_4.json). Through-switch charging/current checks remain pending.
-6. Before closing the enclosure, verify battery-only OFF shuts the XIAO down and ON boots it **disarmed**. Check both servos remain still with no PWM. Then use `./robot charge` with USB and switch ON; confirm mode 5 and no servo pulses.
+5. Build/upload controller **0.6** as described in the [firmware guide](../firmware/policy_control/README.md). It is now uploaded; see the [deployment record](../firmware/policy_control/results/2026-11-07/deployment_0_6.json). Through-switch charging/current checks remain pending.
+6. Battery-only OFF with USB absent should shut the robot down. ON with USB absent now **automatically starts recovery after initialization and neutral acquisition**. For a no-PWM check instead, boot with USB present; that selects CHARGE (5). Keep the switch ON to connect the battery for charging. `./robot charge` remains available as an explicit command.
 7. Verify charging current actually reaches the cell through the enabled Pololu, and measure the pair's no-PWM idle load and charge completion/termination. A series current measurement at the battery connection is useful; do not put a meter's current input directly across the cell. USB current or voltage alone does not establish net battery charging.
 8. Confirm OFF with USB removed eliminates the ongoing controller/servo drain. Test slider travel and USB insertion before closing the original base over the cup.
 

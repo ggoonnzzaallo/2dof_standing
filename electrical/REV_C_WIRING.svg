@@ -85,10 +85,10 @@
 			<text x="35" y="194" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,388) scale(1,-1)">D2 remains UNUSED. XIAO 3V3 and 5V/VBUS are NOT connected to servo power.</text>
 			<rect x="35" y="38" width="1130" height="132" rx="8" ry="8" style="stroke: rgb(89%,70%,40%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,94%,87%); fill-rule: evenodd;"/>
 			<text x="48" y="97.0" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,194) scale(1,-1)"></text>
-			<text x="52" y="141" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,282) scale(1,-1)">CHARGE: switch ON + USB connected + ./robot charge (firmware 0.4).</text>
-			<text x="52" y="111" style="font-family: Helvetica; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,222) scale(1,-1)">Charge mode stops PWM, not servo power; idle current and charging completion need measurement.</text>
+			<text x="52" y="141" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,282) scale(1,-1)">CHARGE: USB at boot + switch ON (0.6); or ./robot charge.</text>
+			<text x="52" y="111" style="font-family: Helvetica; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,222) scale(1,-1)">Battery-only ON starts recovery; 60 s of base stillness locks PWM until reboot.</text>
 			<text x="52" y="81" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,162) scale(1,-1)">STORAGE OFF: unplug USB AND slide OFF. OFF + USB isolates the cell but may power the servos.</text>
-			<text x="52" y="53" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,106) scale(1,-1)">No routine connector access. Disconnect battery AND USB before soldering or servicing.</text>
+			<text x="52" y="53" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,106) scale(1,-1)">PWM off is not power off. Verify idle load/charge completion. Disconnect battery + USB before service.</text>
 			<text x="35" y="16" style="font-family: Helvetica; font-size: 13px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,32) scale(1,-1)">Not a physical pad layout. Verify board labels. Numbered assembly steps: electrical/FROM_SCRATCH.md</text>
 		</g>
 	</g>

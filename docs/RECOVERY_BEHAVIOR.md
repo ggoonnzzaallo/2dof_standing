@@ -6,7 +6,7 @@ User direction, 3 November 2026: a recovery may take several attempts. Occasiona
 
 The enclosure candidate's **16/20** is seven nominal plus nine development cases completing a strict goal within ten seconds. The base must be within 10° of upright, touching the floor, with angular speed below 0.4 rad/s; both joints must be within 0.18 rad (10.3°) of neutral. All conditions must hold for 50 consecutive 50 Hz steps, or one second. Timing starts after sensor initialization and 0.8 s free settling. These are simulated truth checks, not extra sensors available to the actor.
 
-The ten-second horizon is a training/evaluation cutoff. A miss is not proof the robot never got upright, stopped moving, or could not recover with more time. The native playground and battery-powered standalone firmware do not stop at that episode boundary or at success: the policy keeps running until the operator stops it or a genuine sensor, voltage, timing or numerical fault requires stopping. Such faults must stay separate from behavioral retries; automatic fault rearming is not part of this request.
+The ten-second horizon is a training/evaluation cutoff. A miss is not proof the robot never got upright, stopped moving, or could not recover with more time. The native playground and battery-powered standalone firmware do not stop at that episode boundary or at success: the policy keeps running until the operator stops it, the 0.5+ firmware inactivity lock triggers, or a genuine sensor, voltage, timing or numerical fault requires stopping. Such faults must stay separate from behavioral retries; automatic fault rearming is not part of this request.
 
 Preserve the original strict scores. Add a **base-only stable recovery** measurement with the same tilt/contact/angular-rate/dwell thresholds but no requirement for straight joints. Report both at 10, 30 and 60 seconds, time to first recovery, unresolved cases and faults. A finite test can establish recovery within its window, not a guarantee of "eventually". On the robot, base tilt/rotation are observable with the IMU; actual joint angles and floor contact remain unmeasured.
 
@@ -14,7 +14,7 @@ Preserve the original strict scores. Add a **base-only stable recovery** measure
 
 **Diagnostic result:** both goals score 16/20 by 10, 30 and 60 seconds. None of the four strict failures becomes a success just by relaxing joint posture or waiting longer. No filter/numerical faults occurred. Those unresolved starts need better recovery behavior, not a relabeling of results. [Raw evaluation](../sim/enclosure/results/persistence_evaluation.json).
 
-## Next training experiment
+## Optional next-iteration training experiment
 
 1. Extend continuous training episodes toward 30–60 seconds. Train through failed attempts, ordinary stumbles and post-recovery disturbances. Use time-limit truncation with bootstrapping; do not treat a missed ten-second deadline as an absorbing "give up" state. Sample starts with varied joint poses and states harvested from failed recoveries, rather than resetting every failure to straight joints.
 2. Make stable base recovery the primary goal. Keep a soft preference for a relaxed neutral arm, rather than requiring perfectly straight joints to count a recovery. Continue training after first recovery so the actor learns to stand, react and recover again.

@@ -15,6 +15,7 @@ arduino=fixtures['ARDUINO'].replace('clockUs','fakeTimeUs')
 arduino=arduino.replace('inline int analogRead(int){return 1800;}','inline int adcRaw=1800;\ninline int analogRead(int){return adcRaw;}')
 arduino=arduino.replace(' bool open=true;', ' int txAvailable=256;\n bool open=true;')
 arduino=arduino.replace(' void begin(int){}',' void begin(int){}\n int availableForWrite(){return txAvailable;}\n size_t write(const uint8_t* b,size_t n){output.write(reinterpret_cast<const char*>(b),n);return n;}')
+arduino+='''\nstruct FakePower {uint32_t USBREGSTATUS=1;};\ninline FakePower fakePower;\ninline FakePower* NRF_POWER=&fakePower;\nconstexpr uint32_t POWER_USBREGSTATUS_VBUSDETECT_Msk=1;\n'''
 clock='#pragma once\nstruct MicrosecondClock {void begin(){} uint32_t now()const{return uint32_t(fakeTimeUs);}};\n'
 servo='''#pragma once
 #include <cassert>
@@ -36,12 +37,12 @@ test=r'''
 #include <fstream>
 void checkOff(){assert(mode==OFF&&!motors[0].attached()&&!motors[1].attached());assert(levels[D8]==LOW&&levels[D7]==LOW);}
 void send(const char* text){Serial.send(text);while(Serial.available())loop();}
-void resetFixture(uint64_t origin=0){
- inactivity=InactivityGuard();stop();fakeTimeUs=origin;serialCostUs=0;Serial.open=true;Serial.txAvailable=256;Serial.rx.clear();Serial.output.str("");Serial.output.clear();
+void resetFixture(uint64_t origin=0,bool usb=true,bool serial=true,bool cancelBoot=true){
+ inactivity=InactivityGuard();stop();fakeTimeUs=origin;serialCostUs=0;Serial.open=serial;fakePower.USBREGSTATUS=usb?1:0;Serial.txAvailable=256;Serial.rx.clear();Serial.output.str("");Serial.output.clear();
  adcRaw=1800;Wire1.reset();Wire1.raw(5,4098);imu=Lsm6ds3();attitude=GravityFilter();
  hadSerial=false;discard=false;used=0;sampleAt=lastPoll=batteryAt=0;filterRejects=0;
  for(auto& motor:motors)motor=FineServo();setup();for(int i=0;i<22;++i){delay(5);loop();}
- checkOff();assert(fresh());
+ if(cancelBoot){stop();checkOff();}assert(fresh());
 }
 void waitMs(int ms){uint32_t start=millis();while(uint32_t(millis()-start)<uint32_t(ms)){delay(1);loop();}}
 void running(){resetFixture();send("arm\n");assert(mode==HOLD);waitMs(1100);send("run\n");assert(mode==RUN);}
@@ -89,7 +90,7 @@ int main(int argc,char** argv){
  report();assert(!Serial.output.str().empty()&&Serial.output.str().size()<=256); // Maximal telemetry still fits board TX FIFO.
  resetFixture((1ULL<<32)-160000);send("arm\n");waitMs(1100);send("run\n");waitMs(100);assert(mode==RUN&&frames==5);
 
- // Standalone is an explicit transition: not boot, disconnect, keep or early command.
+ // Manual standalone requires arming; automatic battery startup is tested separately below.
  resetFixture();send("standalone\n");checkOff();
  resetFixture();send("arm\n");send("standalone\n");checkOff();
  resetFixture();send("arm\n");waitMs(1100);send("standalone\n");assert(mode==STANDALONE);
@@ -128,6 +129,38 @@ int main(int argc,char** argv){
  send("!\n");checkOff(); // Emergency stop remains available during charge.
  resetFixture();send("charge\n");send("arm\n");assert(mode==HOLD);
  waitMs(1100);send("standalone\n");assert(mode==STANDALONE);send("off\n");checkOff();
+ // USB presence uses VBUS, not DTR: a wall charger must inhibit automatic motion.
+ resetFixture(0,true,false,false);assert(mode==CHARGE&&!bootPending&&!bootNeutral);
+ waitMs(3500);assert(mode==CHARGE&&!motors[0].attached()&&!motors[1].attached());
+ fakePower.USBREGSTATUS=0;waitMs(3500);assert(mode==CHARGE); // Unplugging alone is not a reboot.
+ // Battery-only power-on acquires neutral, then runs without serial/heartbeat.
+ resetFixture(0,false,false,false);assert(mode==OFF&&bootPending);
+ waitMs(1750);assert(mode==OFF&&!motors[0].attached());
+ waitMs(250);assert(mode==HOLD&&bootNeutral&&motors[0].pulse==1500&&motors[1].pulse==1500);
+ waitMs(700);assert(mode==HOLD);waitMs(350);assert(mode==STANDALONE&&frames>0);
+ waitMs(200);assert(mode==STANDALONE&&motors[0].attached()&&motors[1].attached());
+ // An explicit stop or fault cancels automatic startup permanently for this boot.
+ stop();waitMs(3500);checkOff();assert(!bootPending&&!bootNeutral);
+ resetFixture(0,false,false,false);adcRaw=1500;waitMs(3500);checkOff();
+ adcRaw=1800;waitMs(3500);checkOff(); // Voltage recovery does not retry startup.
+ resetFixture(0,false,false,false);motors[1].fail=true;waitMs(3500);checkOff();
+ motors[1].fail=false;waitMs(3500);checkOff();
+ resetFixture(0,false,false,false);Wire1.regs[0x1e]=0;attitude=GravityFilter();waitMs(15100);checkOff();
+ Wire1.regs[0x1e]=3;waitMs(3500);checkOff();
+ // USB inserted during initialization or neutral acquisition cancels startup.
+ resetFixture(0,false,false,false);fakePower.USBREGSTATUS=1;loop();assert(mode==CHARGE);
+ resetFixture(0,false,false,false);waitMs(2050);assert(mode==HOLD&&bootNeutral);
+ fakePower.USBREGSTATUS=1;loop();assert(mode==CHARGE&&!motors[0].attached()&&!motors[1].attached());
+ // A boot neutral-acquisition sensor fault stops and must not auto-retry.
+ resetFixture(0,false,false,false);waitMs(2050);assert(mode==HOLD);
+ Wire1.regs[0x1e]=0;waitMs(30);checkOff();assert(!bootNeutral);
+ Wire1.regs[0x1e]=3;waitMs(3500);checkOff();
+ // The inactivity lock after automatic start is still reboot-only.
+ resetFixture(0,false,false,false);waitMs(3200);assert(mode==STANDALONE);
+ waitMs(60100);assert(mode==INACTIVE&&inactivity.locked);
+ fakePower.USBREGSTATUS=1;Serial.open=true;send("arm\n");assert(mode==INACTIVE);
+ fakePower.USBREGSTATUS=0;Serial.open=false;waitMs(3500);assert(mode==INACTIVE);
+ resetFixture(0,false,false,false);waitMs(3200);assert(mode==STANDALONE&&!inactivity.locked);
  // Noise cannot keep it awake; timeout detaches both outputs and is reboot-only.
  resetFixture();send("arm\n");waitMs(1100);send("standalone\n");Serial.open=false;
  Wire1.raw(0,10); // 0.0122 rad/s, comfortably below motion threshold.
@@ -163,7 +196,7 @@ int main(int argc,char** argv){
  a[0]=0;guard=InactivityGuard();guard.begin(0,a);g[2]=.1f;
  guard.observe(100,a,g);guard.observe(105,a,g);guard.observe(110,a,g);
  assert(guard.lastMotionMs==110&&!guard.expired(60109)&&guard.expired(60110));
- std::cout<<"PASS: actual actor, 80-degree conversion, one-second neutral hold, 50 Hz target/PWM, shadow isolation, attach failures, battery/sensor/nonfinite/USB/heartbeat/deadline/session/input stops, nonblocking telemetry, clock rollover, standalone operation, no-PWM charging and reboot-only IMU inactivity lock.\n";
+ std::cout<<"PASS: actual actor, 80-degree conversion, one-second neutral hold, 50 Hz target/PWM, shadow isolation, attach failures, battery/sensor/nonfinite/USB/heartbeat/deadline/session/input stops, nonblocking telemetry, clock rollover, standalone operation, no-PWM charging, reboot-only IMU inactivity lock, guarded battery-only automatic startup and physical-USB boot inhibition.\n";
 }
 '''
 with tempfile.TemporaryDirectory() as folder:

@@ -80,10 +80,10 @@ for y, pin, endpoint in [(768, 'XIAO D8 / marked 8', 'Lower servo J_S1 / SIG'),
     box(855, y-25, 310, 50, endpoint)
 text(35, 886, 'D2 remains UNUSED. XIAO 3V3 and 5V/VBUS are NOT connected to servo power.', 17, True)
 box(35, 910, 1130, 132, '', fill='#FFF2DF', stroke='#E4B568')
-text(52, 939, 'CHARGE: switch ON + USB connected + ./robot charge (firmware 0.4).', 21, True)
-text(52, 969, 'Charge mode stops PWM, not servo power; idle current and charging completion need measurement.', 17)
+text(52, 939, 'CHARGE: USB at boot + switch ON (0.6); or ./robot charge.', 21, True)
+text(52, 969, 'Battery-only ON starts recovery; 60 s of base stillness locks PWM until reboot.', 17)
 text(52, 999, 'STORAGE OFF: unplug USB AND slide OFF. OFF + USB isolates the cell but may power the servos.', 17, True)
-text(52, 1027, 'No routine connector access. Disconnect battery AND USB before soldering or servicing.', 16)
+text(52, 1027, 'PWM off is not power off. Verify idle load/charge completion. Disconnect battery + USB before service.', 16)
 text(35, 1064, 'Not a physical pad layout. Verify board labels. Numbered assembly steps: electrical/FROM_SCRATCH.md', 13, color=MUTED)
 
 renderSVG.drawToFile(d, str(OUT/'REV_C_WIRING.svg'))
@@ -121,7 +121,7 @@ y = card(draw, 145, '1  RAW BATTERY POSITIVE', ['Battery +  ->  Pololu VIN only'
 y = card(draw, y, '2  SWITCHED POSITIVE BUS / J1', ['Join: Pololu VOUT', '       XIAO underside BAT+', '       Lower servo red / +', '       Upper servo red / +'], RED)
 y = card(draw, y, '3  COMMON GROUND BUS / J2', ['Join: battery negative', '       Pololu GND', '       XIAO GND or BAT- (one connection)', '       Lower servo ground', '       Upper servo ground'], GROUND)
 y = card(draw, y, '4  ONLY TWO SIGNAL WIRES', ['XIAO D8 / 8  ->  lower servo signal', 'XIAO D7 / 7  ->  upper servo signal', 'D2, Pololu ON and SW: no wires', 'XIAO 3V3 and 5V: no wires'], BLUE)
-y = card(draw, y, 'OPERATING RULE', ['Charge: ON + USB + ./robot charge', 'PWM OFF; servo power stays connected.', 'Storage: USB unplugged + switch OFF.', 'USB alone does not prove net charging.'])
+y = card(draw, y, 'OPERATING RULE', ['Run: USB absent, cycle OFF -> ON.', 'Charge: USB at boot + switch ON.', '60 s base stillness: reboot to wake.', 'PWM off leaves servo power connected.', 'Storage: USB unplugged + switch OFF.', 'USB alone does not prove net charging.'])
 assert y < 1740
 im.save(OUT/'REV_C_PHONE_WIRING.png')
 print('Wrote Rev C SVG, vector PDF, PNG and phone wiring map.')

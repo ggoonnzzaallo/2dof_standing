@@ -1,4 +1,4 @@
-// Boot disarmed. USB-supervised trials or explicitly latched standalone operation.
+// Battery-only boot starts recovery. USB-at-boot stays in no-PWM charge mode.
 #include <Arduino.h>
 #include <Adafruit_TinyUSB.h>
 #include <string.h>
@@ -30,6 +30,8 @@ uint32_t sampleAt=0,lastPoll=0,batteryAt=0,heartbeatAt=0,armedAt=0,runAt=0,nextP
 uint32_t frames=0,inferenceUs=0,lateUs=0,dropped=0,filterRejects=0;
 uint8_t lowCount=0;
 bool hadSerial=false,discard=false;
+bool bootPending=false,bootNeutral=false;
+uint32_t bootAt=0;
 char command[24];size_t used=0;
 const char* HEADER="frame,t_us,mode,obs0_u6,obs1_u6,obs2_u6,obs3_u6,obs4_u6,obs5_u6,obs6_u6,obs7_u6,obs8_u6,obs9_u6,action0_u6,action1_u6,target0_urad,target1_urad,pwm0_us,pwm1_us,battery_mv,inference_us,late_us,sample_age_us,sample_seq,i2c_errors,dropped,filter_rejects";
 
@@ -45,6 +47,7 @@ void resetPolicy(){
   frames=inferenceUs=lateUs=dropped=0;
 }
 void stop(){
+  bootPending=bootNeutral=false; // A stop/fault cancels startup; never auto-retry.
   for(int i=0;i<2;++i)if(motors[i].attached())motors[i].detach();
   digitalWrite(D8,LOW);pinMode(D8,OUTPUT);digitalWrite(D7,LOW);pinMode(D7,OUTPUT);pinMode(D2,INPUT);
   mode=inactivity.locked?INACTIVE:OFF;resetPolicy();
@@ -60,8 +63,12 @@ void beginCharge(){
 }
 bool fresh(){return imu.ready&&attitude.ready&&sampleAt&&uint32_t(clockUs.now()-sampleAt)<20000;}
 bool validStartBattery(){batteryMv=readBatteryMv();return batteryMv>=3700&&batteryMv<=4400;}
+bool usbPowerPresent(){
+  // Physical VBUS, independent of enumeration/DTR: also detects a wall charger.
+  return (NRF_POWER->USBREGSTATUS & POWER_USBREGSTATUS_VBUSDETECT_Msk)!=0;
+}
 void status(){
-  Serial.println("ROBOT POLICY CONTROL 0.5");
+  Serial.println("ROBOT POLICY CONTROL 0.6");
   Serial.print("MODE: ");Serial.println(int(mode));
   Serial.print("IMU_READY: ");Serial.println(imu.ready?1:0);
   Serial.print("FILTER_READY: ");Serial.println(attitude.ready?1:0);
@@ -71,6 +78,8 @@ void status(){
   Serial.println("GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.");
   Serial.println("INACTIVITY: 60 s without base IMU motion stops PWM until reboot; charge stays available.");
   Serial.print("INACTIVITY_LOCKED: ");Serial.println(inactivity.locked?1:0);
+  Serial.println("BOOT: battery only auto-starts after initialization; USB at startup keeps PWM off.");
+  Serial.print("USB_POWER: ");Serial.println(usbPowerPresent()?1:0);
   Serial.print("LAST_STOP: ");Serial.println(lastStopReason);
   Serial.println("POWER: stop/charge remove PWM only. Rev C master switch OFF + USB unplugged is full OFF.");
   Serial.println("Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state (non-stopping), status, help");
@@ -102,6 +111,19 @@ void beginControl(bool shadow,bool standalone=false){
   if(standalone)Serial.println("STANDALONE: running; USB may be unplugged. Rev C: switch OFF after unplugging USB for full OFF.");
   runAt=heartbeatAt=millis();nextPolicy=clockUs.now()+20000;lowCount=0;
   inactivity.begin(millis(),accelBase);
+}
+void automaticStartup(){
+  if(!bootPending&&!bootNeutral)return;
+  if(usbPowerPresent()){beginCharge();return;}
+  if(bootPending){
+    if(uint32_t(millis()-bootAt)>=15000){halt("automatic startup: IMU initialization timeout; reboot or explicitly arm.");return;}
+    if(uint32_t(millis()-bootAt)<2000||!fresh())return;
+    // arm() enforces battery/sensor/attach guards and cancels pending startup.
+    arm();
+    if(mode==HOLD)bootNeutral=true;
+  }else if(bootNeutral&&uint32_t(clockUs.now()-armedAt)>=1000000){
+    bootNeutral=false;beginControl(false,true);
+  }
 }
 bool appendInteger(char* row,size_t& n,long value){
   const int count=snprintf(row+n,256-n,",%ld",value);
@@ -178,6 +200,7 @@ void setup(){
   stop();digitalWrite(VBAT_ENABLE,LOW);pinMode(VBAT_ENABLE,OUTPUT);
   digitalWrite(PIN_CHARGING_CURRENT,LOW);pinMode(PIN_CHARGING_CURRENT,OUTPUT);
   Serial.begin(115200);clockUs.begin();imu.begin();batteryMv=readBatteryMv();
+  bootAt=millis();bootPending=true;
 }
 void loop(){
   uint32_t now=clockUs.now();
@@ -192,11 +215,12 @@ void loop(){
       if(mode==RUN||mode==STANDALONE||mode==SHADOW)inactivity.observe(millis(),accelBase,gyroBase);
     }
   }
+  automaticStartup();
   const bool connected=bool(Serial);
   if(!connected){
-    if(mode!=STANDALONE&&mode!=CHARGE&&mode!=INACTIVE)stop();
+    if(mode!=STANDALONE&&mode!=CHARGE&&mode!=INACTIVE&&!bootPending&&!bootNeutral)stop();
     hadSerial=false;used=0;discard=false;
-    if(mode!=STANDALONE&&mode!=CHARGE&&mode!=INACTIVE){delay(1);return;}
+    if(mode!=STANDALONE&&mode!=CHARGE&&mode!=INACTIVE&&!bootPending&&!bootNeutral){delay(1);return;}
   }
   if(connected&&!hadSerial){
     // A USB/DTR reconnect must not reset targets or block an active standalone loop.
@@ -220,7 +244,7 @@ void loop(){
   if(mode!=OFF&&mode!=CHARGE&&mode!=INACTIVE){
     if(!fresh())halt("stale/invalid IMU/filter.");
     else if((mode==RUN||mode==STANDALONE||mode==SHADOW)&&inactivity.expired(millis()))halt(INACTIVE_REASON);
-    else if(mode!=STANDALONE&&uint32_t(millis()-heartbeatAt)>=3000)halt("host heartbeat timeout.");
+    else if(mode!=STANDALONE&&!bootNeutral&&uint32_t(millis()-heartbeatAt)>=3000)halt("host heartbeat timeout.");
     else if((mode==RUN||mode==SHADOW)&&uint32_t(millis()-runAt)>=60000)halt("trial duration limit.");
     else if(mode==HOLD&&uint32_t(clockUs.now()-armedAt)>=10000000)halt("armed hold timeout.");
     else if(mode==RUN||mode==SHADOW||mode==STANDALONE){

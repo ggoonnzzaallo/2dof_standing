@@ -177,12 +177,10 @@ def main():
     print(f"{state['mode_name']} | BAT {state['battery_mv']/1000:.3f} V | frames {state['policy_frames']}")
     if args.action == 'arm':
         print('Armed. Unplug USB: the robot will keep running on battery.')
-        print('Firmware 0.5: 60 s of base IMU inactivity stops PWM until reboot.')
+        print('Firmware 0.5+: 60 s of base IMU inactivity stops PWM until reboot.')
         print('Stop via ./robot stop. Rev C full OFF: unplug USB and slide the master switch OFF.')
-        print('Before the Rev C rewire, disconnect battery and USB for full OFF.')
     elif args.action == 'stop':
         print('PWM stopped. Rev C full OFF: unplug USB and slide the master switch OFF.')
-        print('Before the Rev C rewire, disconnect battery and USB for full OFF.')
     elif args.action == 'charge':
         print('Charge mode latched; PWM is OFF. Servos still receive power.')
         if 'reboot required' in state['last_stop']:
