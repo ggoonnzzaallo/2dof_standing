@@ -1,6 +1,8 @@
 # Operating instructions
 
-**V1, updated 7 November 2026 — controller 0.6.** One Pololu battery master switch; lower signal **D8 / 8**, upper **D7 / 7**. Normal running and charging do not require a computer. [Wiring](../electrical/FROM_SCRATCH.md) · [Current deployment evidence](../firmware/policy_control/results/2026-11-07/deployment_0_6.json).
+**V1, updated 7 November 2026 — controller 0.7.** One Pololu battery master switch; lower signal **D8 / 8**, upper **D7 / 7**. Normal running and charging do not require a computer. [Wiring](../electrical/FROM_SCRATCH.md) · [Current deployment evidence](../firmware/policy_control/results/2026-11-07/deployment_0_7.json).
+
+Controller 0.7 uses the C3-matched PPO actor. Stable-base recovery is the learned goal; the arm may rest bent after recovering. Physical recovery on the latest enclosure is awaiting operator observation.
 
 ## Run without a computer
 

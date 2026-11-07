@@ -44,7 +44,7 @@ def main():
     params=geometry['parameters']
     old=json.loads((ROOT/'sim/onshape/body_properties.json').read_text())
     tree=ET.parse(ROOT/'sim/robot.xml');xml=tree.getroot()
-    xml.set('model','self_righting_enclosure_c2_provisional')
+    xml.set('model',config.get('model_name','self_righting_enclosure_c2_provisional'))
     xml.find('compiler').set('meshdir','..')
     assets=xml.find('asset');base=xml.find(".//body[@name='base']")
     for a in assets:
@@ -81,15 +81,15 @@ def main():
     board=next(p for p in components if p['alias']=='controller_board')
     base.find("site[@name='imu']").set('pos',numbers(board['com_cad_m']))
     provenance={'original_model_sha256':digest(ROOT/'sim/robot.xml'),'pod_geometry_sha256':digest(POD_CAD/'geometry.json'),
-        'configuration_sha256':digest(HERE/'configuration.json'),'date':'2026-11-03',
-        'fit_check':'User reports new cup and lid pass physical fit',
+        'configuration_sha256':digest(HERE/'configuration.json'),'date':config.get('date','2026-11-03'),
+        'fit_check':config.get('fit_check','User reports new cup and lid pass physical fit'),
         'imu_mount':'CAD orientation retained; physical confirmation pending' if not config['imu_orientation_confirmed'] else 'User confirmed CAD orientation',
         'parts':{}}
     coacd.set_log_level('warn')
     for alias in ('base_modified','electronics_cup','battery','controller_board','pololu_2810_master_switch'):
         v,f=mesh_arrays(geometry['parts'][alias]);visual=alias+'_visual'
         write_obj(HERE/'assets'/(visual+'.obj'),v,f)
-        ET.SubElement(assets,'mesh',name=visual,file='enclosure/assets/'+visual+'.obj')
+        ET.SubElement(assets,'mesh',name=visual,file=HERE.name+'/assets/'+visual+'.obj')
         color=geometry['parts'][alias]['color']+[1]
         ET.SubElement(base,'geom',name=visual,type='mesh',mesh=visual,group='1',contype='0',conaffinity='0',mass='0',rgba=numbers(color))
         if alias=='base_modified':
@@ -116,7 +116,7 @@ def main():
         for i,(a,b) in enumerate(hulls):
             name=f'{alias}_collision_{i:02d}';names.append(name)
             write_obj(HERE/'assets'/(name+'.obj'),a,b)
-            ET.SubElement(assets,'mesh',name=name,file='enclosure/assets/'+name+'.obj')
+            ET.SubElement(assets,'mesh',name=name,file=HERE.name+'/assets/'+name+'.obj')
             ET.SubElement(base,'geom',name=name,type='mesh',mesh=name,group='3',mass='0',rgba='.25 .49 .54 1')
         provenance['parts'][alias]={'collision_geoms':names,'collision_method':method,'bbox_cad_m':[v.min(axis=0).tolist(),v.max(axis=0).tolist()]}
     # Inspect full adjacent contacts before selecting any narrowly scoped mating
@@ -133,7 +133,7 @@ def main():
     report={**provenance,'component_masses':components,'groups':groups,'whole_upright':aggregate(components),
         'body_frame_origins_cad_mm':old['body_frame_origins_cad_mm'],'imu_site_cad_m':board['com_cad_m'],
         'robot_xml_sha256':digest(HERE/'robot.xml'),'mass_status':config.get('printed_mass_source','Provisional printed masses until supplied'),
-        'slicer_source_sha256':digest(HERE/'source/enclosure_print.gcode.3mf'),
+        'slicer_source_sha256':digest(Path(config.get('slicer_source',str(HERE/'source/enclosure_print.gcode.3mf')))),
         'pivot_sleeve_piece_count':len(policy['excluded_pieces']),
         'historical_model_preserved':True,'physical_robot_commands_sent':False}
     from asset_hashes import snapshot

@@ -10,7 +10,7 @@
 #include "../servo_center/FineServo.h"
 #include "ServoProfile.h"
 #include "InactivityGuard.h"
-#include "../../sim/recovery/results/policy_simulation_only.h"
+#include "PolicySelection.h"
 #ifndef TARGET_SEEED_XIAO_NRF52840_SENSE
 #error "Use the classic XIAO nRF52840 Sense, Seeed non-mbed core."
 #endif
@@ -68,7 +68,9 @@ bool usbPowerPresent(){
   return (NRF_POWER->USBREGSTATUS & POWER_USBREGSTATUS_VBUSDETECT_Msk)!=0;
 }
 void status(){
-  Serial.println("ROBOT POLICY CONTROL 0.6");
+  Serial.println("ROBOT POLICY CONTROL 0.7");
+  Serial.print("POLICY_GEOMETRY: ");Serial.println(POLICY_GEOMETRY);
+  Serial.print("POLICY_ACTOR_SHA256: ");Serial.println(POLICY_ACTOR_SHA256);
   Serial.print("MODE: ");Serial.println(int(mode));
   Serial.print("IMU_READY: ");Serial.println(imu.ready?1:0);
   Serial.print("FILTER_READY: ");Serial.println(attitude.ready?1:0);
@@ -82,7 +84,7 @@ void status(){
   Serial.print("USB_POWER: ");Serial.println(usbPowerPresent()?1:0);
   Serial.print("LAST_STOP: ");Serial.println(lastStopReason);
   Serial.println("POWER: stop/charge remove PWM only. Rev C master switch OFF + USB unplugged is full OFF.");
-  Serial.println("Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state (non-stopping), status, help");
+  Serial.println("Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state, sensors (non-stopping), status, help");
   Serial.println("READY");
 }
 void arm(){
@@ -180,6 +182,16 @@ void reportState(){
   if(n>0&&size_t(n)<sizeof(row)&&Serial.availableForWrite()>=n)
     Serial.write(reinterpret_cast<const uint8_t*>(row),size_t(n));
 }
+void reportSensors(){
+  if(!Serial)return;
+  char row[256];
+  int n=snprintf(row,sizeof(row),"SENSORS,%d,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld\n",fresh()?1:0,
+    lroundf(attitude.down[0]*1e6f),lroundf(attitude.down[1]*1e6f),lroundf(attitude.down[2]*1e6f),
+    lroundf(gyroBase[0]*1e6f),lroundf(gyroBase[1]*1e6f),lroundf(gyroBase[2]*1e6f),
+    lroundf(accelBase[0]*1e6f),lroundf(accelBase[1]*1e6f),lroundf(accelBase[2]*1e6f));
+  if(n>0&&size_t(n)<sizeof(row)&&Serial.availableForWrite()>=n)
+    Serial.write(reinterpret_cast<const uint8_t*>(row),size_t(n));
+}
 void execute(){
   command[used]=0;
   if(!strcmp(command,"keep")){if(mode!=OFF)heartbeatAt=millis();}
@@ -191,6 +203,7 @@ void execute(){
   else if(!strcmp(command,"run"))beginControl(false);
   else if(!strcmp(command,"standalone"))beginControl(false,true);
   else if(!strcmp(command,"state"))reportState();
+  else if(!strcmp(command,"sensors"))reportSensors();
   else if((mode==CHARGE||mode==INACTIVE)&&(!strcmp(command,"status")||!strcmp(command,"help")))status();
   else if(!strcmp(command,"shadow"))beginControl(true);
   else{stop();if(!inactivity.locked)lastStopReason="Operator stop or command.";Serial.println("OFF. PWM stopped; servo supply may remain powered.");

@@ -12,11 +12,18 @@ from pathlib import Path
 import statistics
 import time
 from shadow import HostActor
+from policy_artifact import verify_selection
 
 ROOT = Path(__file__).resolve().parents[1]
 LIMIT = 1.3962634016
-BANNER = 'ROBOT POLICY CONTROL 0.6'
-SUPPORTED_BANNERS = {BANNER, 'ROBOT POLICY CONTROL 0.5', 'ROBOT POLICY CONTROL 0.4'}
+BANNER = 'ROBOT POLICY CONTROL 0.7'
+SUPPORTED_BANNERS = {BANNER}
+
+
+def expected_policy_lines():
+    manifest = verify_selection()
+    return ['POLICY_GEOMETRY: ' + manifest['geometry_id'],
+            'POLICY_ACTOR_SHA256: ' + manifest['actor_header_sha256']]
 
 
 def handshake(device, require_ready=True):
@@ -30,7 +37,7 @@ def handshake(device, require_ready=True):
             next_request = time.monotonic() + .6
         line = device.readline().decode('ascii', errors='replace').strip()
         if line.startswith('ROBOT POLICY CONTROL ') and line not in SUPPORTED_BANNERS:
-            raise RuntimeError('D8 lower / D7 upper wiring requires controller firmware 0.4. Upload the updated controller before arming or charging. Received: ' + line)
+            raise RuntimeError('D8 lower / D7 upper C3 deployment requires controller firmware 0.7 with the selected actor. Upload before arming or charging. Received: ' + line)
         if line.startswith('OFF.'):
             stopped = True
             lines = []
@@ -40,6 +47,8 @@ def handshake(device, require_ready=True):
             lines.append(line)
         if line == 'READY' and require_ready and 'INACTIVITY_LOCKED: 1' in lines:
             raise RuntimeError('IMU inactivity lock: reboot the XIAO before arming. Charging remains available.')
+        if line == 'READY' and lines and lines[0] in SUPPORTED_BANNERS and not all(v in lines for v in expected_policy_lines()):
+            raise RuntimeError('C3 policy identity mismatch: upload the selected geometry/actor before arming or charging.')
         required = ['IMU_READY: 1', 'FILTER_READY: 1'] if require_ready else []
         disarmed = 'MODE: 0' in lines or (not require_ready and 'MODE: 6' in lines)
         if line == 'READY' and disarmed and lines and lines[0] in SUPPORTED_BANNERS and all(v in lines for v in required):
@@ -106,10 +115,13 @@ def main():
     parser.add_argument('--shadow', action='store_true')
     parser.add_argument('--out', type=Path)
     parser.add_argument('--analyze', type=Path)
+    parser.add_argument('--actor-header', type=Path, help='Historical --analyze only; live checks use the pinned controller actor')
     args = parser.parse_args()
     if not 1 <= args.seconds <= 45:
         parser.error('--seconds must be between 1 and 45.')
-    actor = HostActor()
+    if args.actor_header and not args.analyze:
+        parser.error('--actor-header is only for analyzing historical captures.')
+    actor = HostActor(args.actor_header or ROOT/verify_selection()['actor_header_path'])
     try:
         if args.analyze:
             with args.analyze.open(newline='') as source:

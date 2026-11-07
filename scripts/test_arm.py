@@ -2,13 +2,14 @@
 from collections import deque
 import unittest
 from arm import operate, parse_state
+from control import expected_policy_lines
 
 
 class Device:
-    def __init__(self, refuse=False, ready=True, charge_supported=True, version='0.6', locked=False):
+    def __init__(self, refuse=False, ready=True, charge_supported=True, version='0.7', locked=False, identity=True):
         self.time=0.;self.mode=0;self.frames=0;self.ready=ready;self.refuse=refuse
         self.lines=deque();self.commands=[];self.armed_at=0;self.closed=False;self.charge_supported=charge_supported
-        self.version=version;self.locked=locked
+        self.version=version;self.locked=locked;self.identity=identity
     def now(self):return self.time
     def reset_input_buffer(self):self.lines.clear()
     def write(self,data):
@@ -17,7 +18,7 @@ class Device:
             if command in ('!','off'):
                 self.mode=6 if self.locked else 0;self.lines.append('OFF. PWM stopped.')
             elif command=='status':
-                self.lines.extend([f'ROBOT POLICY CONTROL {self.version}',f'MODE: {self.mode}',f'INACTIVITY_LOCKED: {int(self.locked)}',f'IMU_READY: {int(self.ready)}',f'FILTER_READY: {int(self.ready)}','READY'])
+                self.lines.extend([f'ROBOT POLICY CONTROL {self.version}',f'MODE: {self.mode}',f'INACTIVITY_LOCKED: {int(self.locked)}',f'IMU_READY: {int(self.ready)}',f'FILTER_READY: {int(self.ready)}',*(expected_policy_lines() if self.identity else ['POLICY_GEOMETRY: wrong','POLICY_ACTOR_SHA256: wrong']),'READY'])
             elif command=='arm':
                 assert not self.locked
                 self.mode=1;self.armed_at=self.time;self.lines.append('ARMED: nominal neutral.')
@@ -85,7 +86,7 @@ class ArmingTests(unittest.TestCase):
         self.assertNotIn('off',tail);self.assertNotIn('!',tail)
     def test_charge_on_old_firmware_fails_stopped(self):
         device=Device(charge_supported=False);device.mode=4
-        with self.assertRaisesRegex(RuntimeError,'0.4'):
+        with self.assertRaisesRegex(RuntimeError,'0.7'):
             operate(device,'charge',device.now)
         self.assertEqual(device.mode,0)
         self.assertNotIn('arm',device.commands)
@@ -113,10 +114,19 @@ class ArmingTests(unittest.TestCase):
                 self.assertEqual(result['device_state']['mode'],5 if action=='charge' else 6)
                 self.assertTrue(device.locked)
                 self.assertNotIn('arm',device.commands)
-    def test_previous_d8_d7_firmware_remains_supported(self):
-        for version in ('0.4','0.5'):
+    def test_previous_actor_firmware_is_rejected_before_arm(self):
+        for version in ('0.4','0.5','0.6'):
             device=Device(version=version)
-            self.assertEqual(operate(device,'arm',device.now)['device_state']['mode'],4)
+            with self.assertRaisesRegex(RuntimeError,'0.7'):
+                operate(device,'arm',device.now)
+            self.assertNotIn('arm',device.commands)
+    def test_wrong_actor_identity_is_rejected_before_motion(self):
+        for action in ('arm','charge'):
+            device=Device(identity=False)
+            with self.assertRaisesRegex(RuntimeError,'identity mismatch'):
+                operate(device,action,device.now)
+            self.assertNotIn('arm',device.commands)
+            self.assertNotIn('charge',device.commands)
     def test_status_preserves_charge(self):
         device=Device();device.mode=5
         result=operate(device,'status',device.now)

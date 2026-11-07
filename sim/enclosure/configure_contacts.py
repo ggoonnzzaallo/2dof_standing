@@ -49,7 +49,7 @@ def configure(path=HERE/'robot.xml'):
         'excluded_pieces':[r for r in rows if r['near']],
         'classes':[{'group':g,'near_joints':n,'bit':b} for (g,n),b in bits.items()],
         'limitation':'Sleeve pieces are intentionally not collidable against the adjacent body; real bearing fit and clearance remain approximate.'}
-    (HERE/'contact_policy.json').write_text(json.dumps(report,indent=2)+'\n')
+    (Path(path).parent/'contact_policy.json').write_text(json.dumps(report,indent=2)+'\n')
     print('Selective contacts:',len(report['excluded_pieces']),'small sleeve pieces;',len(rows),'total collision geoms; no body exclusions',flush=True)
     return report
 if __name__=='__main__':configure()

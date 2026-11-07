@@ -1,0 +1,24 @@
+{
+  "revision": "Installed C3, user confirmed 7 November 2026",
+  "fit_approved_by_user": true,
+  "fit_approval_date": "2026-11-03",
+  "printed_mass_g": {
+    "base_modified": 13.551740771186957,
+    "electronics_cup": 15.748536787893961
+  },
+  "mass_fallback": "Full-solid PLA reference at 1.32 g/cm3; conservative placeholder, not a slicer estimate. Replace before final training.",
+  "imu_orientation_confirmed": true,
+  "imu_orientation_assumption": "Original CAD orientation, USB/component side up, USB facing enclosure opening; no rotation, board translation only",
+  "hardware_position_assumption": "Components seated in approved locating stops with nominal 0.4 mm PSA",
+  "wiring_mass": "Excluded per user's earlier instruction",
+  "printed_mass_source": "Lid: unchanged C2 slicer mass. C3 cup: C2 slicer mass scaled by CAD solid-volume ratio; provisional until C3 slice/scale weight, training mass randomization remains enabled.",
+  "model_name": "self_righting_installed_c3",
+  "date": "2026-11-07",
+  "fit_check": "User confirms latest C3 tight-USB cup and battery against side wall installed. Battery-only startup works, original actor cannot self-right.",
+  "cup_mass_scaling": {
+    "c2_volume_mm3": 12488.20717911288,
+    "c3_volume_mm3": 12628.548155850982,
+    "ratio": 1.0112378802437574
+  },
+  "slicer_source": "sim/enclosure/source/enclosure_print.gcode.3mf"
+}

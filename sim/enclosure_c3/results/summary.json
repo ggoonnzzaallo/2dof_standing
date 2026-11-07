@@ -1,0 +1,493 @@
+{
+  "date": "2026-11-07",
+  "status": "C3-trained PPO actor uploaded in controller 0.7 and armed standalone; physical recovery unconfirmed",
+  "algorithm": "PPO, actor warm-start from C2; new critic; training-return normalization only",
+  "additional_ppo_steps_run": 202752,
+  "selected_additional_ppo_steps": 33792,
+  "completed_training_episodes": 206,
+  "completed_episodes_at_selected_checkpoint": 34,
+  "episodes_recovered_at_least_once": 191,
+  "episodes_ending_with_control_fault": 5,
+  "selection_criteria": "20 nominal/development cases, lexicographic base then strict success; fresh tests reserved until selection",
+  "standard_development_evaluation": {
+    "base_successes": 20,
+    "strict_successes": 0,
+    "episodes": 20,
+    "trials": [
+      {
+        "case": "nominal/side_000",
+        "seed": 100,
+        "requested_pose": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 0.0
+        },
+        "randomized": false,
+        "first_base_only_stable_s": 4.34,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999931225129,
+        "final_command_deg": [
+          -29.92098226105883,
+          5.790672036157909
+        ],
+        "final_true_joints_deg": [
+          -30.533869435415088,
+          5.8175718480776295
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "nominal/side_045",
+        "seed": 200,
+        "requested_pose": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 0.7853981633974483
+        },
+        "randomized": false,
+        "first_base_only_stable_s": 1.84,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999894669287,
+        "final_command_deg": [
+          -27.807999716287135,
+          5.337669073337216
+        ],
+        "final_true_joints_deg": [
+          -28.403659000263357,
+          5.356709897711819
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "nominal/side_090",
+        "seed": 300,
+        "requested_pose": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 1.5707963267948966
+        },
+        "randomized": false,
+        "first_base_only_stable_s": 2.02,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999885206683,
+        "final_command_deg": [
+          -29.11891304864029,
+          5.049102569006217
+        ],
+        "final_true_joints_deg": [
+          -29.738664903019018,
+          5.0666639592994045
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "nominal/side_135",
+        "seed": 400,
+        "requested_pose": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 2.356194490192345
+        },
+        "randomized": false,
+        "first_base_only_stable_s": 1.62,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.999999992850202,
+        "final_command_deg": [
+          -30.9985459754421,
+          3.897755439427421
+        ],
+        "final_true_joints_deg": [
+          -31.629378847054618,
+          3.9177604275736795
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "nominal/side_180",
+        "seed": 500,
+        "requested_pose": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 3.141592653589793
+        },
+        "randomized": false,
+        "first_base_only_stable_s": 1.58,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.999999990537075,
+        "final_command_deg": [
+          -27.31466169244329,
+          4.428367675336358
+        ],
+        "final_true_joints_deg": [
+          -27.889560044783373,
+          4.448382111970453
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "nominal/side_225",
+        "seed": 600,
+        "requested_pose": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 3.9269908169872414
+        },
+        "randomized": false,
+        "first_base_only_stable_s": 1.6,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999912154695,
+        "final_command_deg": [
+          -29.55071298051525,
+          6.2822704044169075
+        ],
+        "final_true_joints_deg": [
+          -30.165853319544134,
+          6.309543643920143
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "nominal/side_270",
+        "seed": 700,
+        "requested_pose": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 4.71238898038469
+        },
+        "randomized": false,
+        "first_base_only_stable_s": 1.68,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999889425704,
+        "final_command_deg": [
+          -28.711543021492115,
+          4.9578525010109935
+        ],
+        "final_true_joints_deg": [
+          -29.323949120014504,
+          4.975298115516709
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "nominal/side_315",
+        "seed": 800,
+        "requested_pose": {
+          "tilt": 1.5707963267948966,
+          "azimuth": 5.497787143782138
+        },
+        "randomized": false,
+        "first_base_only_stable_s": 1.7,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999888809713,
+        "final_command_deg": [
+          -28.334124389845318,
+          5.654615698822949
+        ],
+        "final_true_joints_deg": [
+          -28.939363389752078,
+          5.675254769666733
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "nominal/inverted",
+        "seed": 900,
+        "requested_pose": {
+          "tilt": 3.141592653589793,
+          "azimuth": 0.0
+        },
+        "randomized": false,
+        "first_base_only_stable_s": 1.58,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999910314871,
+        "final_command_deg": [
+          -29.284525012568157,
+          4.507733399871551
+        ],
+        "final_true_joints_deg": [
+          -29.895095282476987,
+          4.528740210500109
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "nominal/upright",
+        "seed": 1000,
+        "requested_pose": {
+          "tilt": 0.0,
+          "azimuth": 0.0
+        },
+        "randomized": false,
+        "first_base_only_stable_s": 1.0,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999879569867,
+        "final_command_deg": [
+          -29.938271446334113,
+          3.4703098620043993
+        ],
+        "final_true_joints_deg": [
+          -30.57278171989382,
+          3.480962495697256
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "development/side_000",
+        "seed": 3000,
+        "requested_pose": {
+          "tilt": 1.5486360337961915,
+          "azimuth": -0.06001153674393412
+        },
+        "randomized": true,
+        "first_base_only_stable_s": 2.54,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.99999998848884,
+        "final_command_deg": [
+          -28.434244299444874,
+          6.486895909426388
+        ],
+        "final_true_joints_deg": [
+          -28.890863224481706,
+          6.490011824879723
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "development/side_045",
+        "seed": 3100,
+        "requested_pose": {
+          "tilt": 1.6995032568228667,
+          "azimuth": 0.734762126318194
+        },
+        "randomized": true,
+        "first_base_only_stable_s": 2.14,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999911212146,
+        "final_command_deg": [
+          -27.77908919038907,
+          5.334158213096741
+        ],
+        "final_true_joints_deg": [
+          -28.585529188076404,
+          5.366120103189989
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "development/side_090",
+        "seed": 3200,
+        "requested_pose": {
+          "tilt": 1.67676229825521,
+          "azimuth": 1.5517357663165834
+        },
+        "randomized": true,
+        "first_base_only_stable_s": 1.8800000000000001,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999927250114,
+        "final_command_deg": [
+          -29.093446551715996,
+          5.6813334650587235
+        ],
+        "final_true_joints_deg": [
+          -29.5714788980844,
+          5.702422908259105
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "development/side_135",
+        "seed": 3300,
+        "requested_pose": {
+          "tilt": 1.664200671265426,
+          "azimuth": 2.4456686672611365
+        },
+        "randomized": true,
+        "first_base_only_stable_s": 1.62,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999892252249,
+        "final_command_deg": [
+          -29.48098968901236,
+          6.798298901518516
+        ],
+        "final_true_joints_deg": [
+          -30.02480781677986,
+          6.822209845151003
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "development/side_180",
+        "seed": 3400,
+        "requested_pose": {
+          "tilt": 1.6039321420196078,
+          "azimuth": 3.029148366760352
+        },
+        "randomized": true,
+        "first_base_only_stable_s": 1.62,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999929065868,
+        "final_command_deg": [
+          -30.933820154062513,
+          4.597121880598595
+        ],
+        "final_true_joints_deg": [
+          -31.466714279347542,
+          4.610913213125617
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "development/side_225",
+        "seed": 3500,
+        "requested_pose": {
+          "tilt": 1.4839131563158514,
+          "azimuth": 4.043973659527744
+        },
+        "randomized": true,
+        "first_base_only_stable_s": 1.72,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999935164827,
+        "final_command_deg": [
+          -28.11704229745498,
+          7.21012140732369
+        ],
+        "final_true_joints_deg": [
+          -28.62636817622307,
+          7.242186332263078
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "development/side_270",
+        "seed": 3600,
+        "requested_pose": {
+          "tilt": 1.469720019185694,
+          "azimuth": 4.724497303062579
+        },
+        "randomized": true,
+        "first_base_only_stable_s": 1.7,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999932834125,
+        "final_command_deg": [
+          -26.98757732026215,
+          5.08733924864042
+        ],
+        "final_true_joints_deg": [
+          -27.440238616710978,
+          5.1071517191324105
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "development/side_315",
+        "seed": 3700,
+        "requested_pose": {
+          "tilt": 1.6428944262786722,
+          "azimuth": 5.650982851719008
+        },
+        "randomized": true,
+        "first_base_only_stable_s": 2.24,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999890702632,
+        "final_command_deg": [
+          -28.821364484831268,
+          7.071935299611617
+        ],
+        "final_true_joints_deg": [
+          -29.383870695669724,
+          7.095240067768519
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "development/inverted",
+        "seed": 3800,
+        "requested_pose": {
+          "tilt": 3.2024767218516197,
+          "azimuth": 0.07256656785257394
+        },
+        "randomized": true,
+        "first_base_only_stable_s": 1.62,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999931930026,
+        "final_command_deg": [
+          -29.4153596819382,
+          4.371897355347205
+        ],
+        "final_true_joints_deg": [
+          -30.20704902395766,
+          4.398843886794861
+        ],
+        "mujoco_warnings": 0
+      },
+      {
+        "case": "development/upright",
+        "seed": 3900,
+        "requested_pose": {
+          "tilt": 0.05704866836359514,
+          "azimuth": 0.12265581792746924
+        },
+        "randomized": true,
+        "first_base_only_stable_s": 1.62,
+        "first_strict_success_s": null,
+        "seconds": 15.0,
+        "failure": null,
+        "final_upright": 0.9999999949413919,
+        "final_command_deg": [
+          -20.09876747113167,
+          -5.715702217103678
+        ],
+        "final_true_joints_deg": [
+          -20.390092057353634,
+          -5.797750986637272
+        ],
+        "mujoco_warnings": 0
+      }
+    ]
+  },
+  "checkpoints_saved": 7,
+  "robot_xml_sha256": "e04bd648b4f0f7ec46ee9b6918eac781faee92c2ac2eb5bfa834edc5b6fab2b5",
+  "mesh_assets_sha256": "30adb98827adffdc23b398f7145880bd3bbb31e1526d101f009ae481a8cd37e9",
+  "actor_archive_sha256": "cff95efe8cce8a38f9613ae93dfe491c6abc53cf49809f86111e66cf3984f05f",
+  "warm_start_actor_sha256": "55619f4b267ee6bbef40d47c16f80ce035e99d77260aa3a98303b23b5302b1fb",
+  "source_training_report_sha256": "bf44b6dec84027290bc931048b7b49233973b5e9fbf0d10aa8eee4804220771b",
+  "training_source_sha256": "b788705f6d1abba3f14a71c5850e8793ad5ec6710e3424ae7aa0c8ddcf9f1a48",
+  "firmware_uploaded": true,
+  "physical_recovery_confirmed": false,
+  "limitation": "Base-only recovery is primary. Preserve strict-posture scores and bent final pose; do not call base-only successes straight-arm recoveries.",
+  "standalone_handoff_confirmed": true,
+  "deployment_record": "../../../firmware/policy_control/results/2026-11-07/deployment_0_7.json",
+  "held_out_selected": "../held_out_selected.json",
+  "held_out_previous_actor": "../held_out_deployed.json"
+}

@@ -26,8 +26,8 @@
   },
   "hardware_usb_boot_record": "usb_boot_0_6.json",
   "hardware_usb_boot": "CHARGE (5), USB_POWER: 1, zero policy frames, ready sensors; no host stop/arm override needed.",
-  "battery_only_physical_power_cycle_observed": false,
-  "battery_only_check_status": "Requested user observation after upload; no response recorded yet. Host tests establish software behavior, not the physical battery-only boot.",
+  "battery_only_physical_power_cycle_observed": true,
+  "battery_only_check_status": "User confirms automatic startup without computer; reports that the installed C3 robot cannot flip itself back upright with the retained original-geometry actor.",
   "latest_observed_hardware_mode": "CHARGE (5) at USB-connected boot check; subsequent user battery-only testing may change it.",
   "net_charging_verified": false,
   "sha256": {
@@ -38,5 +38,7 @@
     "build/policy_control/policy_control.ino.hex": "6d68176298a751e2aa071c71a6ca428dd6b487b47abb68605b7d0e7be05f24ff",
     "build/policy_control/policy_control.ino.zip": "41b2a0c449664713a23a16974bff3497a28281abae08ee8f11b1f5e9ecef0330",
     "firmware/policy_control/results/2026-11-07/usb_boot_0_6.json": "366366c10546146bb474fe40871d7f55c245d15f8aae9e973e6caddf03913498"
-  }
+  },
+  "installed_enclosure_confirmed": "C3: tight USB opening, battery against side wall",
+  "physical_recovery_on_C3_confirmed": false
 }

@@ -1,0 +1,408 @@
+{
+  "method": "Keep adjacent-link dynamics, exempt only convex pieces contained in pivot sleeves.\n\nThe entire convex piece must lie within a 6 mm radius of its hinge axis.\nThis disables that piece against its adjacent link, not against the floor or\nnonadjacent link. No body-pair exclusions or per-contact Python callbacks.\n",
+  "pivot_sleeve_radius_mm": 6.0,
+  "whole_body_exclusions": 0,
+  "excluded_pieces": [
+    {
+      "name": "lower_servo_collision_10",
+      "group": "base",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "lower_servo_collision_11",
+      "group": "base",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "lower_servo_collision_14",
+      "group": "base",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "lower_servo_collision_15",
+      "group": "base",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "lower_servo_collision_16",
+      "group": "base",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "lower_servo_collision_17",
+      "group": "base",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "lower_servo_collision_18",
+      "group": "base",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "lower_servo_collision_19",
+      "group": "base",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "lower_servo_collision_20",
+      "group": "base",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "base_modified_collision_00",
+      "group": "base",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_01",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_02",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_03",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_04",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_05",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_06",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_07",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_08",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_09",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_23",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_35",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_40",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_41",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_42",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_43",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_44",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_45",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_46",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_47",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_48",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_49",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_servo_horn_bracket_collision_50",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "upper_servo_collision_13",
+      "group": "middle",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "upper_servo_collision_15",
+      "group": "middle",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "upper_servo_collision_16",
+      "group": "middle",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "upper_servo_collision_17",
+      "group": "middle",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "upper_servo_collision_18",
+      "group": "middle",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "upper_servo_collision_19",
+      "group": "middle",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "upper_servo_collision_20",
+      "group": "middle",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "upper_servo_collision_21",
+      "group": "middle",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "middle_link_main_body_collision_00",
+      "group": "middle",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "middle_link_main_body_collision_11",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_main_body_collision_12",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_main_body_collision_13",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "middle_link_main_body_collision_14",
+      "group": "middle",
+      "near": [
+        1
+      ]
+    },
+    {
+      "name": "top_link_main_body_collision_19",
+      "group": "upper",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "top_link_main_body_collision_22",
+      "group": "upper",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "top_link_main_body_collision_23",
+      "group": "upper",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "top_link_main_body_collision_24",
+      "group": "upper",
+      "near": [
+        2
+      ]
+    },
+    {
+      "name": "top_link_main_body_collision_25",
+      "group": "upper",
+      "near": [
+        2
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "group": "base",
+      "near_joints": [],
+      "bit": 1
+    },
+    {
+      "group": "base",
+      "near_joints": [
+        1
+      ],
+      "bit": 2
+    },
+    {
+      "group": "middle",
+      "near_joints": [],
+      "bit": 4
+    },
+    {
+      "group": "middle",
+      "near_joints": [
+        1
+      ],
+      "bit": 8
+    },
+    {
+      "group": "middle",
+      "near_joints": [
+        2
+      ],
+      "bit": 16
+    },
+    {
+      "group": "upper",
+      "near_joints": [],
+      "bit": 32
+    },
+    {
+      "group": "upper",
+      "near_joints": [
+        2
+      ],
+      "bit": 64
+    },
+    {
+      "group": "world",
+      "near_joints": [],
+      "bit": 128
+    }
+  ],
+  "limitation": "Sleeve pieces are intentionally not collidable against the adjacent body; real bearing fit and clearance remain approximate."
+}

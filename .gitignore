@@ -12,6 +12,10 @@ runs/
 *.log
 sim/onshape/assets/*_hulls.json
 sim/enclosure/assets/*_hulls.json
+sim/enclosure_c3/assets/*_hulls.json
 
 !sim/enclosure/results/best.zip
 !sim/enclosure/results/checkpoints/*.zip
+
+!sim/enclosure_c3/results/best.zip
+!sim/enclosure_c3/results/checkpoints/*.zip

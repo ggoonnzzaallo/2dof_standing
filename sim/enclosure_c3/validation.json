@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "date": "2026-11-07",
+  "robot_xml_sha256": "e04bd648b4f0f7ec46ee9b6918eac781faee92c2ac2eb5bfa834edc5b6fab2b5",
+  "mass_g": 88.1622089748794,
+  "whole_com_cad_mm": [
+    -2.4408337293963833,
+    3.0228077255195527,
+    20.062806416729526
+  ],
+  "imu_site_cad_mm": [
+    -22.95901,
+    -15.5,
+    -7.17
+  ],
+  "old_model_and_policy_preserved": true,
+  "neutral_false_contacts": 0,
+  "inertia_checks": "passed",
+  "ground_bottom_cad_mm": -12,
+  "compound_grid_poses": 81,
+  "poses_with_active_nonmating_contacts": [],
+  "out_of_range_fold_contact_count": 246,
+  "placed_fall_trials": [
+    {
+      "case": "upright",
+      "warnings": 0,
+      "deepest_penetration_mm": 0.22710558528692484,
+      "max_joint_abs_deg": 0.29417291330642287
+    },
+    {
+      "case": "side_0",
+      "warnings": 0,
+      "deepest_penetration_mm": 0.06009999999999349,
+      "max_joint_abs_deg": 0.58540221058099
+    },
+    {
+      "case": "side_45",
+      "warnings": 0,
+      "deepest_penetration_mm": 0.8065615383071896,
+      "max_joint_abs_deg": 1.7733703008151331
+    },
+    {
+      "case": "side_90",
+      "warnings": 0,
+      "deepest_penetration_mm": 0.5342724681629577,
+      "max_joint_abs_deg": 2.7476507639030947
+    },
+    {
+      "case": "side_135",
+      "warnings": 0,
+      "deepest_penetration_mm": 0.13996793514453426,
+      "max_joint_abs_deg": 1.540843087536492
+    },
+    {
+      "case": "side_180",
+      "warnings": 0,
+      "deepest_penetration_mm": 0.16130233289157964,
+      "max_joint_abs_deg": 0.5036691360344714
+    },
+    {
+      "case": "side_225",
+      "warnings": 0,
+      "deepest_penetration_mm": 0.4131982232499394,
+      "max_joint_abs_deg": 1.595913710293167
+    },
+    {
+      "case": "side_270",
+      "warnings": 0,
+      "deepest_penetration_mm": 0.3229734796494771,
+      "max_joint_abs_deg": 2.39188132273181
+    },
+    {
+      "case": "side_315",
+      "warnings": 0,
+      "deepest_penetration_mm": 0.3336996671527067,
+      "max_joint_abs_deg": 1.6891354148293145
+    },
+    {
+      "case": "inverted",
+      "warnings": 0,
+      "deepest_penetration_mm": 1.021981073987157,
+      "max_joint_abs_deg": 1.141242350143653
+    }
+  ],
+  "random_action_steps": 1000,
+  "physical_robot_commands_sent": false
+}

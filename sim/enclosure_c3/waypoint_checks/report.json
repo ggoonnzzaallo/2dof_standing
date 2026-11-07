@@ -1,0 +1,533 @@
+{
+  "method": "C2 waypoint plans freshly replayed in C3 dynamics, no new search optimization",
+  "source_report_sha256": "5bc7344342593fa89d7901c750bb76e366ca67ef4fd6653c81f474a4936e6607",
+  "robot_xml_sha256": "e04bd648b4f0f7ec46ee9b6918eac781faee92c2ac2eb5bfa834edc5b6fab2b5",
+  "config": {
+    "cases": [
+      "side_000",
+      "side_045",
+      "side_090",
+      "side_135",
+      "side_180",
+      "side_225",
+      "side_270",
+      "side_315",
+      "inverted"
+    ],
+    "population": 32,
+    "iterations": 5,
+    "knots": 6,
+    "segment": 0.5,
+    "hold": 1.5,
+    "workers": 3,
+    "seed": 17,
+    "out": "/Users/super23/Documents/BLDC Motor Build/2dof_standing/sim/enclosure_c3/waypoint_checks"
+  },
+  "results": [
+    {
+      "case": "side_000",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.0
+      },
+      "result": {
+        "score": 58.00534963984435,
+        "success": true,
+        "invalid": false,
+        "steps": 222,
+        "final_upright": 0.9999999983365153,
+        "best_smoothed_upright": 0.9999999999744296,
+        "final_joint_degrees": [
+          -0.01622025838624306,
+          -0.0013325208411493674
+        ]
+      },
+      "waypoints_rad": [
+        [
+          1.2333332074025167,
+          0.13569750451635648
+        ],
+        [
+          0.6131855133365928,
+          -0.32625720695971483
+        ],
+        [
+          -0.06807526806071725,
+          -0.048968538004121334
+        ],
+        [
+          0.07807138728703508,
+          0.07855938681907926
+        ],
+        [
+          0.21798185739086182,
+          0.3002394352249624
+        ],
+        [
+          -0.5629595669083,
+          -0.4647373226740443
+        ]
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 223,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "side_000.npz"
+    },
+    {
+      "case": "side_045",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.7853981633974483
+      },
+      "result": {
+        "score": 57.97791855675025,
+        "success": true,
+        "invalid": false,
+        "steps": 217,
+        "final_upright": 0.9999999937587642,
+        "best_smoothed_upright": 0.9999999940918457,
+        "final_joint_degrees": [
+          -0.028916778167205535,
+          -0.0026687401703058707
+        ]
+      },
+      "waypoints_rad": [
+        [
+          1.2943230366297385,
+          1.3962634016
+        ],
+        [
+          -0.2351092168395461,
+          -0.03285318168603041
+        ],
+        [
+          -0.03650753919156566,
+          -0.052267888694322195
+        ],
+        [
+          0.318076713516069,
+          -0.16455625002510987
+        ],
+        [
+          -0.24063076226834548,
+          -0.2705010167398116
+        ],
+        [
+          0.55702490608915,
+          0.5251503874072199
+        ]
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 218,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "side_045.npz"
+    },
+    {
+      "case": "side_090",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 1.5707963267948966
+      },
+      "result": {
+        "score": 57.83425718873504,
+        "success": true,
+        "invalid": false,
+        "steps": 226,
+        "final_upright": 0.9999999906499383,
+        "best_smoothed_upright": 0.9999999947828444,
+        "final_joint_degrees": [
+          -0.01832482618963535,
+          0.0002505172098136074
+        ]
+      },
+      "waypoints_rad": [
+        [
+          1.1397200621991106,
+          1.1746457263210404
+        ],
+        [
+          -0.7189927516226691,
+          0.09586621994178283
+        ],
+        [
+          0.14248175700710683,
+          -0.07934016817545642
+        ],
+        [
+          0.30940628455824093,
+          0.7327683710500565
+        ],
+        [
+          0.14167456306620302,
+          -0.35306001992662167
+        ],
+        [
+          -0.8706835820049796,
+          0.6822302597920445
+        ]
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 227,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "side_090.npz"
+    },
+    {
+      "case": "side_135",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 2.356194490192345
+      },
+      "result": {
+        "score": 58.03121300217179,
+        "success": true,
+        "invalid": false,
+        "steps": 247,
+        "final_upright": 0.9999999835279609,
+        "best_smoothed_upright": 0.9999999966258416,
+        "final_joint_degrees": [
+          -0.02153791487827688,
+          -0.0010677921287458125
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.3962634016,
+          -0.4382076377189458
+        ],
+        [
+          -0.933698112608385,
+          0.10450861600440536
+        ],
+        [
+          0.6505384694929155,
+          0.24741805876328457
+        ],
+        [
+          0.15686830199358365,
+          -0.13958640837522418
+        ],
+        [
+          -0.08130395741922428,
+          -0.24277153988755154
+        ],
+        [
+          0.08438024295072007,
+          -0.04850416781520009
+        ]
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 248,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "side_135.npz"
+    },
+    {
+      "case": "side_180",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 3.141592653589793
+      },
+      "result": {
+        "score": 57.95351991731964,
+        "success": true,
+        "invalid": false,
+        "steps": 210,
+        "final_upright": 0.9999999837040056,
+        "best_smoothed_upright": 0.9999999949156623,
+        "final_joint_degrees": [
+          -0.02619074431930788,
+          -0.00027505509544687253
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.3774707241081525,
+          -0.639183345599023
+        ],
+        [
+          -1.1333959806710894,
+          -0.009260523166576662
+        ],
+        [
+          0.2936351277223035,
+          -0.17485609060610463
+        ],
+        [
+          -0.20958193320859744,
+          0.27191161878477876
+        ],
+        [
+          0.3310588669841946,
+          0.18004937744180266
+        ],
+        [
+          -0.06592315585158603,
+          -0.2857264316867601
+        ]
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 211,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "side_180.npz"
+    },
+    {
+      "case": "side_225",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 3.9269908169872414
+      },
+      "result": {
+        "score": 58.14601281679904,
+        "success": true,
+        "invalid": false,
+        "steps": 199,
+        "final_upright": 0.9999999955822465,
+        "best_smoothed_upright": 0.9999999952184835,
+        "final_joint_degrees": [
+          -0.015995889007357413,
+          0.0030486730046815026
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.3962634016,
+          -0.319032163319271
+        ],
+        [
+          -0.16702199113722802,
+          -0.2598226039091705
+        ],
+        [
+          0.05522022070240973,
+          0.26785602758146365
+        ],
+        [
+          0.011750553539198877,
+          -0.2432243658648323
+        ],
+        [
+          -0.027048867430357074,
+          0.12351158759747974
+        ],
+        [
+          0.12173487919951606,
+          -0.04008507491612988
+        ]
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 200,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "side_225.npz"
+    },
+    {
+      "case": "side_270",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 4.71238898038469
+      },
+      "result": {
+        "score": 7.775238446719795,
+        "success": false,
+        "invalid": false,
+        "steps": 250,
+        "final_upright": 0.9999999931454955,
+        "best_smoothed_upright": 0.9999999956631579,
+        "final_joint_degrees": [
+          0.00015924527559816698,
+          -0.00020404654400473762
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.3962634016,
+          -1.0093270479681662
+        ],
+        [
+          -0.3701240914873687,
+          -0.17547275331393936
+        ],
+        [
+          -0.009945795590913593,
+          -0.17955662087590035
+        ],
+        [
+          0.07570399259696417,
+          0.7207020537151392
+        ],
+        [
+          0.14845645108683458,
+          0.017745479027291927
+        ],
+        [
+          -0.2556677083616332,
+          0.3381293224321076
+        ]
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 251,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "side_270.npz"
+    },
+    {
+      "case": "side_315",
+      "requested_start": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 5.497787143782138
+      },
+      "result": {
+        "score": 57.882783825624266,
+        "success": true,
+        "invalid": false,
+        "steps": 221,
+        "final_upright": 0.9999999895106084,
+        "best_smoothed_upright": 0.9999999925715621,
+        "final_joint_degrees": [
+          -0.027152627316732705,
+          -0.002609851770978128
+        ]
+      },
+      "waypoints_rad": [
+        [
+          1.3962634016,
+          -1.077030495643639
+        ],
+        [
+          -0.30890548286546016,
+          0.16799661720810333
+        ],
+        [
+          -0.02818969206848012,
+          -0.6054277019984816
+        ],
+        [
+          0.05027186473621448,
+          0.0441822834478334
+        ],
+        [
+          0.19523682410576887,
+          -0.34901217251967726
+        ],
+        [
+          0.37260823071130394,
+          0.9844700677461322
+        ]
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 222,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "side_315.npz"
+    },
+    {
+      "case": "inverted",
+      "requested_start": {
+        "tilt": 3.141592653589793,
+        "azimuth": 0.0
+      },
+      "result": {
+        "score": 57.94773222144086,
+        "success": true,
+        "invalid": false,
+        "steps": 213,
+        "final_upright": 0.9999999916488724,
+        "best_smoothed_upright": 0.9999999968598319,
+        "final_joint_degrees": [
+          -0.01699677648408061,
+          0.0013991933316709288
+        ]
+      },
+      "waypoints_rad": [
+        [
+          -1.2355825380819954,
+          -0.04461303559055739
+        ],
+        [
+          -1.3069615551438543,
+          0.07389175192746811
+        ],
+        [
+          0.24698412790470126,
+          0.03446484355380465
+        ],
+        [
+          0.33012640577773944,
+          0.17827509938277142
+        ],
+        [
+          -0.06641439173988778,
+          -0.21423274905340817
+        ],
+        [
+          -0.07761141493226698,
+          0.37362656880977557
+        ]
+      ],
+      "adjacent_collision_audit": {
+        "status": "passed",
+        "sampled_frames": 214,
+        "mating_region_radius_mm": 6.0,
+        "overlap_flag_threshold_mm": 1.0,
+        "flagged_frames": 0,
+        "max_nonmating_penetration_mm": 0.0,
+        "worst_pairs_mm": {},
+        "limitation": "Static snapshots at policy rate; ignores pivot mating regions and does not replace calibrated mechanical stops or collision dynamics."
+      },
+      "trace_file": "inverted.npz"
+    }
+  ],
+  "physical_robot_commands_sent": false
+}

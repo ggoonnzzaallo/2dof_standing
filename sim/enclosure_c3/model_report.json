@@ -1,0 +1,1125 @@
+{
+  "original_model_sha256": "20222a23e4973b042574cef176fcc96145ac29c3e2f93d65c1a6c0d653099eb6",
+  "pod_geometry_sha256": "a9a52b9f3d3e15688ad8fd6aca4f893c672836a529a02bef8ad00ea3b6189da9",
+  "configuration_sha256": "058bb7b2128a0f258a37d0f9c22abceab2245e045e7a9714d28a8bc17c6c7829",
+  "date": "2026-11-07",
+  "fit_check": "User confirms latest C3 tight-USB cup and battery against side wall installed. Battery-only startup works, original actor cannot self-right.",
+  "imu_mount": "User confirmed CAD orientation",
+  "parts": {
+    "base_modified": {
+      "collision_geoms": [
+        "base_modified_collision_00",
+        "base_modified_collision_01",
+        "base_modified_collision_02",
+        "base_modified_collision_03",
+        "base_modified_collision_04",
+        "base_modified_collision_05",
+        "base_modified_collision_06",
+        "base_modified_collision_07",
+        "base_modified_collision_08",
+        "base_modified_collision_09",
+        "base_modified_collision_10",
+        "base_modified_collision_11",
+        "base_modified_collision_12",
+        "base_modified_collision_13",
+        "base_modified_collision_14",
+        "base_modified_collision_15",
+        "base_modified_collision_16",
+        "base_modified_collision_17",
+        "base_modified_collision_18",
+        "base_modified_collision_19",
+        "base_modified_collision_20",
+        "base_modified_collision_21",
+        "base_modified_collision_22",
+        "base_modified_collision_23",
+        "base_modified_collision_24",
+        "base_modified_collision_25",
+        "base_modified_collision_26",
+        "base_modified_collision_27",
+        "base_modified_collision_28",
+        "base_modified_collision_29",
+        "base_modified_collision_30",
+        "base_modified_collision_31",
+        "base_modified_collision_32",
+        "base_modified_collision_33",
+        "base_modified_collision_34",
+        "base_modified_collision_35",
+        "base_modified_collision_36",
+        "base_modified_collision_37",
+        "base_modified_collision_38",
+        "base_modified_collision_39",
+        "base_modified_collision_40",
+        "base_modified_collision_41",
+        "base_modified_collision_42",
+        "base_modified_collision_43",
+        "base_modified_collision_44",
+        "base_modified_collision_45",
+        "base_modified_collision_46",
+        "base_modified_collision_47",
+        "base_modified_collision_48",
+        "base_modified_collision_49",
+        "base_modified_collision_50",
+        "base_modified_collision_51",
+        "base_modified_collision_52",
+        "base_modified_collision_53",
+        "base_modified_collision_54",
+        "base_modified_collision_55",
+        "base_modified_collision_56",
+        "base_modified_collision_57",
+        "base_modified_collision_58",
+        "base_modified_collision_59",
+        "base_modified_collision_60",
+        "base_modified_collision_61",
+        "base_modified_collision_62",
+        "base_modified_collision_63",
+        "base_modified_collision_64",
+        "base_modified_collision_65",
+        "base_modified_collision_66",
+        "base_modified_collision_67",
+        "base_modified_collision_68",
+        "base_modified_collision_69",
+        "base_modified_collision_70",
+        "base_modified_collision_71",
+        "base_modified_collision_72",
+        "base_modified_collision_73",
+        "base_modified_collision_74",
+        "base_modified_collision_75",
+        "base_modified_collision_76",
+        "base_modified_collision_77",
+        "base_modified_collision_78",
+        "base_modified_collision_79",
+        "base_modified_collision_80",
+        "base_modified_collision_81",
+        "base_modified_collision_82",
+        "base_modified_collision_83",
+        "base_modified_collision_84",
+        "base_modified_collision_85",
+        "base_modified_collision_86",
+        "base_modified_collision_87",
+        "base_modified_collision_88",
+        "base_modified_collision_89",
+        "base_modified_collision_90",
+        "base_modified_collision_91",
+        "base_modified_collision_92",
+        "base_modified_collision_93",
+        "base_modified_collision_94",
+        "base_modified_collision_95",
+        "base_modified_collision_96",
+        "base_modified_collision_97",
+        "base_modified_collision_98",
+        "base_modified_collision_99",
+        "base_modified_collision_100"
+      ],
+      "collision_method": "Separate convex pieces of revised lid and retained servo frame",
+      "bbox_cad_m": [
+        [
+          -0.035,
+          -0.035,
+          0.0
+        ],
+        [
+          0.035,
+          0.035,
+          0.035
+        ]
+      ]
+    },
+    "electronics_cup": {
+      "collision_geoms": [
+        "electronics_cup_collision_00"
+      ],
+      "collision_method": "Closed convex external cup envelope, R1 bottom/R5 side corners; ports and internal cavities omitted",
+      "bbox_cad_m": [
+        [
+          -0.035,
+          -0.035,
+          -0.012
+        ],
+        [
+          0.035,
+          0.035,
+          0.0008
+        ]
+      ]
+    },
+    "battery": {
+      "collision_geoms": [],
+      "collision_method": "Internal fixed electronics: visual and inertia only, enclosed by cup/lid",
+      "bbox_cad_m": [
+        [
+          -0.0334,
+          0.0118,
+          -0.0099
+        ],
+        [
+          0.0261,
+          0.0308,
+          -0.0024
+        ]
+      ]
+    },
+    "controller_board": {
+      "collision_geoms": [],
+      "collision_method": "Internal fixed electronics: visual and inertia only, enclosed by cup/lid",
+      "bbox_cad_m": [
+        [
+          -0.0342,
+          -0.02439,
+          -0.0094
+        ],
+        [
+          -0.01171802,
+          -0.00661,
+          -0.00494
+        ]
+      ]
+    },
+    "pololu_2810_master_switch": {
+      "collision_geoms": [],
+      "collision_method": "Internal fixed electronics: visual and inertia only, enclosed by cup/lid",
+      "bbox_cad_m": [
+        [
+          0.016,
+          -0.035595,
+          -0.0094
+        ],
+        [
+          0.03124,
+          -0.01946,
+          -0.006984
+        ]
+      ]
+    }
+  },
+  "adjacent_contacts": "Enabled with per-convex-piece pivot sleeve masks; no whole-body exclusions",
+  "component_masses": [
+    {
+      "alias": "middle_link_main_body",
+      "group": "middle",
+      "mass_kg": 0.004789647018419836,
+      "com_cad_m": [
+        0.0011545388495996845,
+        0.0059696540974197325,
+        0.048050325566020236
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          1.0482422274444079e-06,
+          1.0020365532039442e-07,
+          2.5450658337498653e-07
+        ],
+        [
+          1.0020365532039442e-07,
+          1.2230477706357468e-06,
+          -1.9695238064129429e-07
+        ],
+        [
+          2.5450658337498653e-07,
+          -1.9695238064129429e-07,
+          6.51613513372763e-07
+        ]
+      ],
+      "source": "slicer_masses.json, supports excluded",
+      "distribution": "Uniform CAD density scaled to sliced mass. Does not resolve shell/infill distribution or true print COM."
+    },
+    {
+      "alias": "top_link_main_body",
+      "group": "upper",
+      "mass_kg": 0.005656754879046084,
+      "com_cad_m": [
+        -0.0023499983171674185,
+        0.002658854683774,
+        0.10371749255230332
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          3.7399194305352384e-06,
+          -6.911695988610829e-16,
+          -2.7616908263887346e-13
+        ],
+        [
+          -6.911695988610829e-16,
+          3.4843253206465993e-06,
+          3.836373101056252e-07
+        ],
+        [
+          -2.7616908263887346e-13,
+          3.836373101056252e-07,
+          3.48056702016106e-07
+        ]
+      ],
+      "source": "slicer_masses.json, supports excluded",
+      "distribution": "Uniform CAD density scaled to sliced mass. Does not resolve shell/infill distribution or true print COM."
+    },
+    {
+      "alias": "middle_link_servo_horn_bracket",
+      "group": "middle",
+      "mass_kg": 0.0009077647115416997,
+      "com_cad_m": [
+        -0.021215915041433796,
+        7.55127239652623e-20,
+        0.0321622500137039
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          4.587268177536354e-08,
+          -2.8928924497013584e-25,
+          -7.572768110714357e-10
+        ],
+        [
+          -2.8928924497013584e-25,
+          3.9974760071993e-08,
+          -4.459956291524347e-25
+        ],
+        [
+          -7.572768110714357e-10,
+          -4.459956291524347e-25,
+          9.620887312029072e-09
+        ]
+      ],
+      "source": "slicer_masses.json, supports excluded",
+      "distribution": "Uniform CAD density scaled to sliced mass. Does not resolve shell/infill distribution or true print COM."
+    },
+    {
+      "alias": "top_link_servo_horn_bracket",
+      "group": "upper",
+      "mass_kg": 0.0009077648067908619,
+      "com_cad_m": [
+        -0.0023500000000000023,
+        -0.01814742209588878,
+        0.06971079328941442
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          3.507797458291618e-08,
+          -6.573853593341289e-24,
+          -2.6295414373365155e-23
+        ],
+        [
+          -6.573853593341289e-24,
+          4.0480459869837794e-08,
+          -4.1949451838896116e-10
+        ],
+        [
+          -2.6295414373365155e-23,
+          -4.1949451838896116e-10,
+          9.148000819148092e-09
+        ]
+      ],
+      "source": "slicer_masses.json, supports excluded",
+      "distribution": "Uniform CAD density scaled to sliced mass. Does not resolve shell/infill distribution or true print COM."
+    },
+    {
+      "alias": "lower_servo",
+      "group": "base",
+      "mass_kg": 0.013,
+      "com_cad_m": [
+        -0.00377423807251502,
+        -1.4325575663494107e-18,
+        0.019155699883190366
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          7.7411297522501e-07,
+          -1.068081905377064e-22,
+          5.505662358765292e-08
+        ],
+        [
+          -1.068081905377064e-22,
+          1.2800169104852742e-06,
+          -1.7528122252739512e-23
+        ],
+        [
+          5.505662358765292e-08,
+          -1.7528122252739512e-23,
+          8.013511958840226e-07
+        ]
+      ],
+      "source": "Related 7465 MG-D family mass proxy; uniform CAD distribution assumed"
+    },
+    {
+      "alias": "upper_servo",
+      "group": "middle",
+      "mass_kg": 0.013,
+      "com_cad_m": [
+        -0.0017999999999999984,
+        -0.0007742380725150167,
+        0.05630569988319036
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          1.2800169104852749e-06,
+          3.999541448033044e-23,
+          3.5214623692714563e-23
+        ],
+        [
+          3.999541448033044e-23,
+          7.741129752250102e-07,
+          5.505662358765338e-08
+        ],
+        [
+          3.5214623692714563e-23,
+          5.505662358765338e-08,
+          8.013511958840215e-07
+        ]
+      ],
+      "source": "Related 7465 MG-D family mass proxy; uniform CAD distribution assumed"
+    },
+    {
+      "alias": "base_small_hardware_allowance",
+      "group": "base",
+      "mass_kg": 0.0005,
+      "com_cad_m": [
+        0.0,
+        0.0,
+        0.024399999999999998
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          8.333333333333334e-09,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          8.333333333333334e-09,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          8.333333333333334e-09
+        ]
+      ],
+      "source": "ASSUMED 0.5 g per group for screws/OEM horn and other omitted hardware, lumped near each relevant pivot. Replace with actual inventory or weighing. Not printed bracket mass."
+    },
+    {
+      "alias": "middle_small_hardware_allowance",
+      "group": "middle",
+      "mass_kg": 0.0005,
+      "com_cad_m": [
+        -0.00235,
+        0.0,
+        0.061399999999999996
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          8.333333333333334e-09,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          8.333333333333334e-09,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          8.333333333333334e-09
+        ]
+      ],
+      "source": "ASSUMED 0.5 g per group for screws/OEM horn and other omitted hardware, lumped near each relevant pivot. Replace with actual inventory or weighing. Not printed bracket mass."
+    },
+    {
+      "alias": "upper_small_hardware_allowance",
+      "group": "upper",
+      "mass_kg": 0.0005,
+      "com_cad_m": [
+        -0.00235,
+        0.0,
+        0.061399999999999996
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          8.333333333333334e-09,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          8.333333333333334e-09,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          8.333333333333334e-09
+        ]
+      ],
+      "source": "ASSUMED 0.5 g per group for screws/OEM horn and other omitted hardware, lumped near each relevant pivot. Replace with actual inventory or weighing. Not printed bracket mass."
+    },
+    {
+      "alias": "electronics_cup",
+      "group": "base",
+      "mass_kg": 0.015748536787893962,
+      "com_cad_m": [
+        2.0574699192310898e-05,
+        0.0009867750536440257,
+        -0.009088099072909011
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          8.775111507525147e-06,
+          -9.328962949573392e-07,
+          -7.517461899252794e-10
+        ],
+        [
+          -9.328962949573392e-07,
+          8.445314922768567e-06,
+          -7.598539023173241e-09
+        ],
+        [
+          -7.517461899252794e-10,
+          -7.598539023173241e-09,
+          1.6873973762562127e-05
+        ]
+      ],
+      "source": "Lid: unchanged C2 slicer mass. C3 cup: C2 slicer mass scaled by CAD solid-volume ratio; provisional until C3 slice/scale weight, training mass randomization remains enabled.",
+      "distribution": "Uniform CAD solid scaled to assigned mass; shell/infill unresolved"
+    },
+    {
+      "alias": "base_modified",
+      "group": "base",
+      "mass_kg": 0.013551740771186956,
+      "com_cad_m": [
+        0.0014071112078914063,
+        0.0002458756962036154,
+        0.005242368876342895
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          5.121874317405043e-06,
+          -2.9215442237549466e-08,
+          -2.866231431250802e-07
+        ],
+        [
+          -2.9215442237549466e-08,
+          5.309563329330484e-06,
+          1.413574936105488e-08
+        ],
+        [
+          -2.866231431250802e-07,
+          1.413574936105488e-08,
+          8.175207410240655e-06
+        ]
+      ],
+      "source": "Lid: unchanged C2 slicer mass. C3 cup: C2 slicer mass scaled by CAD solid-volume ratio; provisional until C3 slice/scale weight, training mass randomization remains enabled.",
+      "distribution": "Uniform CAD solid scaled to assigned mass; shell/infill unresolved"
+    },
+    {
+      "alias": "battery",
+      "group": "base",
+      "mass_kg": 0.0145,
+      "com_cad_m": [
+        -0.003650004095778732,
+        0.021300002214177098,
+        -0.00615
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          5.014165371708531e-07,
+          7.415007665166345e-24,
+          -1.7018540207823085e-22
+        ],
+        [
+          7.415007665166345e-24,
+          4.336146069473265e-06,
+          -2.800750839318191e-23
+        ],
+        [
+          -1.7018540207823085e-22,
+          -2.800750839318191e-23,
+          4.70242768469632e-06
+        ]
+      ],
+      "source": "Nominal manufacturer catalog mass; uniform CAD distribution assumed; translated into fit-approved cup, orientation retained"
+    },
+    {
+      "alias": "controller_board",
+      "group": "base",
+      "mass_kg": 0.004,
+      "com_cad_m": [
+        -0.022959010000000002,
+        -0.015499999999999998,
+        -0.007170000000000001
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          1.1200666666666668e-07,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.751103415734667e-07,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          2.738559415734667e-07
+        ]
+      ],
+      "source": "ASSUMED 4 g placeholder carried over from earlier model; not a verified datasheet weight. Uniform CAD bounding box.; translated into fit-approved cup, orientation retained"
+    },
+    {
+      "alias": "pololu_2810_master_switch",
+      "group": "base",
+      "mass_kg": 0.0006,
+      "com_cad_m": [
+        0.023583184093655587,
+        -0.027198786244173438,
+        -0.008676862521630777
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          1.2876907592652933e-08,
+          -2.160447909789232e-11,
+          7.732692228115606e-12
+        ],
+        [
+          -2.160447909789232e-11,
+          9.90637095702331e-09,
+          1.3786165344554416e-10
+        ],
+        [
+          7.732692228115606e-12,
+          1.3786165344554416e-10,
+          2.2448058903531096e-08
+        ]
+      ],
+      "source": "Pololu 2810 manufacturer nominal 0.6 g; no extra wire mass",
+      "distribution": "Uniform CAD solid scaled to assigned mass; shell/infill unresolved"
+    }
+  ],
+  "groups": {
+    "base": {
+      "mass_kg": 0.06190027755908092,
+      "com_cad_m": [
+        -0.0025893818648810487,
+        0.004029110645773694,
+        0.0010675548645614583
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          2.9770146131340198e-05,
+          -1.5242357613930487e-06,
+          -4.217433553461185e-07
+        ],
+        [
+          -1.5242357613930487e-06,
+          2.9466481013596367e-05,
+          1.7099777994803024e-06
+        ],
+        [
+          -4.217433553461185e-07,
+          1.7099777994803024e-06,
+          4.028457765791799e-05
+        ]
+      ]
+    },
+    "middle": {
+      "mass_kg": 0.019197411729961537,
+      "com_cad_m": [
+        -0.001995280716892875,
+        0.0009651009868738217,
+        0.05323707003033245
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          3.2308302267551974e-06,
+          1.2107845089528517e-08,
+          -4.205268063177661e-08
+        ],
+        [
+          1.2107845089528517e-08,
+          3.116670970246098e-06,
+          3.72924713119522e-08
+        ],
+        [
+          -4.205268063177661e-08,
+          3.72924713119522e-08,
+          2.014954942146884e-06
+        ]
+      ]
+    },
+    "upper": {
+      "mass_kg": 0.007064519685836946,
+      "com_cad_m": [
+        -0.002349998652509748,
+        -0.00020285907198853067,
+        0.09635268455743977
+      ],
+      "inertia_com_cad_kg_m2": [
+        [
+          5.683976133777454e-06,
+          -2.793288577009181e-14,
+          -3.4627742543327436e-13
+        ],
+        [
+          -2.793288577009181e-14,
+          5.0951315403735765e-06,
+          -1.66440122773749e-07
+        ],
+        [
+          -3.4627742543327436e-13,
+          -1.66440122773749e-07,
+          7.041910049707534e-07
+        ]
+      ]
+    }
+  },
+  "whole_upright": {
+    "mass_kg": 0.0881622089748794,
+    "com_cad_m": [
+      -0.0024408337293963835,
+      0.0030228077255195526,
+      0.020062806416729525
+    ],
+    "inertia_com_cad_kg_m2": [
+      [
+        0.00012348115238765216,
+        -1.4832043648386264e-06,
+        -9.711715423419864e-07
+      ],
+      [
+        -1.4832043648386264e-06,
+        0.00012226224495287283,
+        5.8130011069361184e-06
+      ],
+      [
+        -9.711715423419864e-07,
+        5.8130011069361184e-06,
+        4.322643254584609e-05
+      ]
+    ]
+  },
+  "body_frame_origins_cad_mm": {
+    "base": [
+      0,
+      0,
+      0
+    ],
+    "middle": [
+      0,
+      0.0,
+      24.4
+    ],
+    "upper": [
+      -2.35,
+      0,
+      61.4
+    ]
+  },
+  "imu_site_cad_m": [
+    -0.022959010000000002,
+    -0.015499999999999998,
+    -0.007170000000000001
+  ],
+  "robot_xml_sha256": "e04bd648b4f0f7ec46ee9b6918eac781faee92c2ac2eb5bfa834edc5b6fab2b5",
+  "mass_status": "Lid: unchanged C2 slicer mass. C3 cup: C2 slicer mass scaled by CAD solid-volume ratio; provisional until C3 slice/scale weight, training mass randomization remains enabled.",
+  "slicer_source_sha256": "64934b79c31bb78c4d7a18db40021734f02304241c9ea5a4d33d03c411e5367a",
+  "pivot_sleeve_piece_count": 50,
+  "historical_model_preserved": true,
+  "physical_robot_commands_sent": false,
+  "mesh_assets": {
+    "sim/onshape/assets/middle_link_servo_horn_bracket_visual.obj": "e53361d98b6423b1e7f7cf4649780b6ec39dddf5571936f74c3c2354f0034346",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_00.obj": "cb678af7820228db059fb026e310b7fab230cc1d73ce9588f6cd2ff4e9b1f19b",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_01.obj": "afe939e39221b2ee1e289a3ec2ee692c1063382eca8d29daaeb653f69e9d3ca6",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_02.obj": "a28ca3a58c454c78db519e3c65b61e0931e4c2c9b0d26ad27321cc0176637b72",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_03.obj": "ffa9e58f160befba3de889c5f1c7152a5e34c67c92d9e715ab445b66a5055554",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_04.obj": "1041f5383c3ecd0be6fbcf598e5d43784ec8f0d468235edb6488f62f291895be",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_05.obj": "e6a15691e49aad488a3ba4ad84c7f80efcfb0188ca83dc01befd9c547bd09c7d",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_06.obj": "b1c1648c984899adc98afcc6d8ec2613a63181a6a2eb319da48f4b50262c7ddc",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_07.obj": "4407e0772c374b8ce3c1111ae55c5099971efe57ab20ca865d415287a8a164b1",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_08.obj": "4847275b6eeb614678d6738cee8b373cab2b84c436ba8933adea4e3e73f2b0e4",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_09.obj": "699565bfa3bf3fb45ad6b0faf0663182b4eb85c6d4a17978712cc1e71150b4e1",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_10.obj": "d1effb8ba0ee215a8606c496dc55832a4195c6649af653f4233604f0d7ac08d3",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_11.obj": "cf6e216468f8632369a58c99247d6b284a37c303f2f43b35ad237ca12922fb54",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_12.obj": "e5669d7c789070322e980e54de0e70a7f53476169f213a5b60f6fa43c0ddf313",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_13.obj": "cb7e81eb851b30f8632d4a25d1d6bba83c63ad5a018d6ed7317df94d8e846a3f",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_14.obj": "aa72c37ffdb5db869bda5a48dbd5f370613304e57aa2975b225c9ccad899f4f2",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_15.obj": "5c55bea5eabbcd7300a4d4caddcc28891e160e8819f53ae75893a9bb9ed36196",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_16.obj": "83c4a6688efe93c625f56e025f562b68d5820c80aa31da146d5b73d08acc41dc",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_17.obj": "8d497e9276e0f07b45259f93d2c5e8a62adde7ab70c78192336ab2968d2b8082",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_18.obj": "e1864c5e0a7117f371f40c42f9cf4e7ad327646b6ee06ce8d8274dea565e6bb7",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_19.obj": "909db4fe52fc4711eb55718d884293e4cd3fa0a464840b5d9c8cb71cbd328e4c",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_20.obj": "0767519f5bf2799c1c18941fc30375472be58f4a9f03840c7810b5b7d2f8b961",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_21.obj": "73c086216e49b7fc94f22d77b891c2ac4b25e5e449521d33b827254c8bfe63c5",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_22.obj": "4ad8d7ab63ef7255feadd2e28f404b5ad8edd64a4b8f6118a99698a3b763303c",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_23.obj": "342eed74dc50156f7cbfc4ea79959e28dd0ac2cfa09477848aaef3ac818eb06b",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_24.obj": "16f37aded368c3efdf8c7b070b8f43bf0203f6e42e029753ab68c68e94ad8778",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_25.obj": "b0032940e27ef1169fdf2e76a3c03eb1de09e85a299b7fdbe85ddbd26f94f0df",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_26.obj": "d16093795ed514300315278d848db9fdd7041b20f1cfb6dfedf51d966703bb0a",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_27.obj": "33e8328263e0941a7892fd448bd63d3a3800a85ccbad9d04eb03c61157d3ecc8",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_28.obj": "2d87e1b8d82385394376d09a4f55bfdd989b4c301a8a273cf199ca10eb499b3c",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_29.obj": "4b3c9f561d70361348d159840fcbffff0b9a9ecbab26912e950c2a75ee33f41c",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_30.obj": "6ef0f78d8869b32f25329b646b9668d530cef76b1099cfac02ac2118b9433ec9",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_31.obj": "8081d530f120e3ef9b5da3bd2832f7993405db7e24d453e7469f802d1ac196eb",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_32.obj": "7c73d1e56bd825b8db6b48286e9b7f42af27260861c4080c936ca1baa9c6b081",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_33.obj": "e5b05e4d3e74deb1e8c259bc17a63c4e4be1ccf88d8dcbab49425b4f629b817b",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_34.obj": "88bb82755413d34d7e4863fcb37c60eb17fca4eb64615caa29d71f6fec3ef5f5",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_35.obj": "2df72f1f1bd788fac76bec3904b5a31ebf9d358ac38ef7fc4cd610ed0e04c166",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_36.obj": "df6f13f8ac7ca999299049fe96cbdcf8b388a9c2b4fe715a42d6c8c5c4b2755a",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_37.obj": "d16af5c99d1850df0f833816c7c01f2d020aaeaf8806a25ab23b8989ec75bb6f",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_38.obj": "1d02723325327da1f7702ba72e27f9d3269b8ae866228b423157de76541705ab",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_39.obj": "b6c90a823121dd0e4337d082c653ff4c5e5561dc4e1916e2f90a2af028bfbc85",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_40.obj": "e6e9254fda7c986424183988dad41760c10b5f9a782c346635b458a80301ce45",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_41.obj": "2630df48c090920801f9137f3a042e28868c61632b9314ba8c4120487631b256",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_42.obj": "2a09a7f26949de74093a988c256d2779eec29f1d780c48e1363e05d654b5ad2e",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_43.obj": "ef3139c3166f28d55c21e74ce7b4c879d8bff2f3898c22215c1d5e6f731270f4",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_44.obj": "18131828093c4bd5828e5a1c0be9fe5738642e75ca1804bc512795eb6e4a84ee",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_45.obj": "1b81f9fdb67c3a6679a93318998ec61e30a1d4b9d4856d016a648b87de1cde3d",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_46.obj": "0a8862be3db4c640d2da3fe21f9fb8f067902fa88a0369b99b678c48d74fd3fb",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_47.obj": "d97bbf17c40ad7970e81a004b6622621c10c290c3e08c800ba575e1afdda31e8",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_48.obj": "4c58e26ec601ca8237e321a3fefea60c130e7e5b17e1c5e9419bf33bf18c0a57",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_49.obj": "42baa7a4e113d3136fdf944435177f15420cec4e0a66ffce766dd0d18ae16b59",
+    "sim/onshape/assets/middle_link_servo_horn_bracket_collision_50.obj": "4f2c1d4f5c70ed25e761d597dbfb5cba00609bf650bf9e004fcccc7cd71b2563",
+    "sim/onshape/assets/upper_servo_visual.obj": "9136ca573508b43fe594897463ad13f02d24937f6a029082b91dd6cebe59ba78",
+    "sim/onshape/assets/upper_servo_collision_00.obj": "10a2e7d7903da789d912f19fca93f49573361b891be7b159e7100eff618e4114",
+    "sim/onshape/assets/upper_servo_collision_01.obj": "267ba6c931f6df989f4fb0cb9f2124267826c78c0455d0a7287ae6f4f35ab176",
+    "sim/onshape/assets/upper_servo_collision_02.obj": "0c0566c0a04f08217263f4967430d48d9e9d388ef144853ca490bce587a8d6d8",
+    "sim/onshape/assets/upper_servo_collision_03.obj": "4bc579fda02cf33a32e051a77aede01bd260e32c7f1048b6d4cd30d46f93dcb2",
+    "sim/onshape/assets/upper_servo_collision_04.obj": "380470465e448e9ca60cbe1a8b622fa7bdec97fbc869951c4cf76c3887a1e39c",
+    "sim/onshape/assets/upper_servo_collision_05.obj": "cad12a8c1f03b04437b0c6cbb7013323703a69171542e4fd93d79a3f74f34e27",
+    "sim/onshape/assets/upper_servo_collision_06.obj": "12f17acdd68414c8548138c63ef6e16aeaa4779320c89f1fd0a7896e25032840",
+    "sim/onshape/assets/upper_servo_collision_07.obj": "292a3d493f254908bcbff7e25abd0e4b715daea7aaf92950d29911b8df774673",
+    "sim/onshape/assets/upper_servo_collision_08.obj": "76fa55b96d7c4ad549e9b8777d96adaec544f4b4411cee99e6441728cbe0fba5",
+    "sim/onshape/assets/upper_servo_collision_09.obj": "b9478372210d73f8d89f025ae82016aa249088e4f3f24ccea142f9874c658e89",
+    "sim/onshape/assets/upper_servo_collision_10.obj": "b5a63b452fdadf4135135be0d80c7e40d34984ce75ed4ab7c3c2e08e66c31a25",
+    "sim/onshape/assets/upper_servo_collision_11.obj": "ea839759cf5143e0496ae0c06b289b9f8c60e2aaa1cf18f70228846e62646620",
+    "sim/onshape/assets/upper_servo_collision_12.obj": "c6352a0e883957cc1d23c293f34df9623609b072adcce10fc5e2d2e3dbec72f7",
+    "sim/onshape/assets/upper_servo_collision_13.obj": "6d2bc723da14fa6fef1d43184feb407a4d8bc7d9bea31e350da43e5e9401565d",
+    "sim/onshape/assets/upper_servo_collision_14.obj": "2b5fbd024552d23b2ac651c42b7cfddea77d539c29781ad0b461ad96ab6e5801",
+    "sim/onshape/assets/upper_servo_collision_15.obj": "d345bafe2bd6525b25fdf86b2aaea04c83a470ecac09360a8d749fc611bfcb8f",
+    "sim/onshape/assets/upper_servo_collision_16.obj": "d7f177b7c6d2ef681ae247b7138afae0596e47a24b53f6a0163291a6604e6687",
+    "sim/onshape/assets/upper_servo_collision_17.obj": "64d724ebed6d36d66c5a4411002ada96095bec47377b98f6f80072668317c278",
+    "sim/onshape/assets/upper_servo_collision_18.obj": "e1d9ce16a94142eae85c0111bb787bd49b332e3465d59e80e5c94339338b27fe",
+    "sim/onshape/assets/upper_servo_collision_19.obj": "3e64f3513b8a275a0c1df5de5ffb80581a318173bad2a1a7f4ac7e6da91fd57d",
+    "sim/onshape/assets/upper_servo_collision_20.obj": "c485e2c441a0ca19b370ce483e73d02c8350f504023e8d94d8ccef8a04c6a64c",
+    "sim/onshape/assets/upper_servo_collision_21.obj": "e2e7e02e3a49748c3d28f5bd731194ff36347bedc5a25eb4b39639e0ce19d63d",
+    "sim/onshape/assets/top_link_servo_horn_bracket_visual.obj": "fdb657f7793133098520058859e982026a9bfeabef37d33dbbc6882764c48c88",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_00.obj": "ba8286bc8cf5b41d4d0161b2d54b72b45e37801db46b3a4b4d3cf166f205f33e",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_01.obj": "52e3e6e6b78ed98333816507e02344db93cf1c4ac44ecee9dbf8f72f8f7264b5",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_02.obj": "0eafc498dfb1c2402ca554db743f2ed4d4f5d20a5376e914269189d0dd6922b9",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_03.obj": "0d75743b2792ab5433dab7e00410e3c51a619647118ab3374e4cc117da5cee68",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_04.obj": "2aed24f00d34baeb1bb4142d42183748df8880ea9c27c8cff32a868dee8c725e",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_05.obj": "ea6991372bedaa4868f8b2396f95fca3be12e1ffdeee1567a035a9d7239c854f",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_06.obj": "83d938bed25b9c38f505b0e62ada20d57562a4c2c707cad5ee1f391addddcae2",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_07.obj": "5071bafe8bb5db18e72f45dc9a89f71f415d3627d57e2619bb9e351e7c603c02",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_08.obj": "ac90576cbebcb241d6072432a6edb0dcbdc970933522a6d67041b96222a27d31",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_09.obj": "a462fc992bec40d6f064e4828dd1dac2ed085a179a93247fe59b8910c1b0f0ba",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_10.obj": "5d9e1cfa00a4f10eb62b83277038fd36ee45a9b44b43aa7212d1e455fce635cc",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_11.obj": "20080d03e3dd33a0fe736b0289a75ecbac5833ed8bab41d8a923a5693284e37c",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_12.obj": "e13f9d0a691dd8fd96d65c5cda2d774249aa002024fe71c022fc06cd2ba5a26e",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_13.obj": "657153e7b53caa2aae03168af227cbfbb00958cc1a9f004bfa5ae40b01dec4b8",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_14.obj": "a2c60ca637746ef220dbc59d0dea400189d475efbba87ad5775897c0911baa55",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_15.obj": "e3c70c0e3cf4acae3c9bb908ed01e5bee92b9442628d7455845984019ceb4e54",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_16.obj": "801cb8b51b2ab930933e4da84df4bf1d39d34366f9d05e3004874da4d164a365",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_17.obj": "577259ad7529dca5decba3eb947f649af2e132ce4b61e42926fec35329e7656d",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_18.obj": "38d8b56ed79fdbbb7f310c3368fa954e7cadf5ad5706813321fb2a872d99c64e",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_19.obj": "07e6646927d44741010b32e919f5225f664e740c0a57b558ffb0c46a102390b9",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_20.obj": "0d13634fcc31b3780c0b48881cd8c1fd76e3ffd8ca123fc69532963227d9ed5c",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_21.obj": "37a1a898a9a5dcec18aa0c8abba378d223773ebdc724e9b7187a2e0fd2afa039",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_22.obj": "99752999cc19c59563f5ff3689d6f6c4204e749a0c5865216a79cb38c20152fa",
+    "sim/onshape/assets/top_link_servo_horn_bracket_collision_23.obj": "b79ebe5d0a2b7066d049a2473b15ee793b93ddbca8c125bd2c4ae07c98810914",
+    "sim/onshape/assets/top_link_main_body_visual.obj": "1050dff066fe6309f3b49abbce2791a81828484590b1f5d502d3fb8e4d561b9a",
+    "sim/onshape/assets/top_link_main_body_collision_00.obj": "699933d43410ca5445ca29537da1db5a9becd8f5f5082438dcd74b61e1597b65",
+    "sim/onshape/assets/top_link_main_body_collision_01.obj": "a6deaa2ef2cb37b449370e77cad62cc08eab528ca99eb31a61143dee161baef4",
+    "sim/onshape/assets/top_link_main_body_collision_02.obj": "f0ac5f555b6377b91d28877f370e715fdc8549adee44676dbc4e446d5cc07574",
+    "sim/onshape/assets/top_link_main_body_collision_03.obj": "800cb38b32166ac307192c8c26a6b53f6d2d1743341cde338f8da48243846ff6",
+    "sim/onshape/assets/top_link_main_body_collision_04.obj": "4dc7c1ca73c042133827b87a0f35949893843f08781d5b3f3378afd5df80a5d0",
+    "sim/onshape/assets/top_link_main_body_collision_05.obj": "9c1c4bff1fcbf37a2e12b874c95f086d8101f17c30b403446fc144e9f7235815",
+    "sim/onshape/assets/top_link_main_body_collision_06.obj": "e8e3c7a2cc9daf4f1dd73f4133e1cefc6a821ecf81f84b3efc941b17f23db252",
+    "sim/onshape/assets/top_link_main_body_collision_07.obj": "edafe2b08717212c7ef1fe61b04978d822e430a6295499aa04068e76fcb4b2fe",
+    "sim/onshape/assets/top_link_main_body_collision_08.obj": "03a152546a241165db755002a0d400f927dd849fca27b7569bd66733e0c22e15",
+    "sim/onshape/assets/top_link_main_body_collision_09.obj": "15805bede1f953e3016173823dcdad55256f9cabeb2529a6ae1497303cb22a96",
+    "sim/onshape/assets/top_link_main_body_collision_10.obj": "fad01aa558704dba9d7dc9da53aaa8fa5d4789d115118b226ae03d62307808bc",
+    "sim/onshape/assets/top_link_main_body_collision_11.obj": "123e3bf29d9d7e6489251635ae3298d93f40aaabd9d53c72f1fbffe52e752d15",
+    "sim/onshape/assets/top_link_main_body_collision_12.obj": "4574c95b9f1ef33903f14104df2042ce5f924500700e77a991b1668bbe045211",
+    "sim/onshape/assets/top_link_main_body_collision_13.obj": "77f236ab328c2128a61fbaab339b23b5da4365d069656c5f66b6c5ddc3d238f3",
+    "sim/onshape/assets/top_link_main_body_collision_14.obj": "863d2d6cbf056fc1379555165475d3e95136c374e3414727ca483605d393647b",
+    "sim/onshape/assets/top_link_main_body_collision_15.obj": "719b2aaa80d97801d44c3614dc80ee62cc8f6566d1ed84020be89843678a115b",
+    "sim/onshape/assets/top_link_main_body_collision_16.obj": "bb62a02e9243150e89b165970c71c668b2b83f1a69ee3ed1ed5e36b61b657e88",
+    "sim/onshape/assets/top_link_main_body_collision_17.obj": "5c1e5b8b87bde4755b55722509ecfbcb13e11dc70b54d5058ed09c2d6ae34ff4",
+    "sim/onshape/assets/top_link_main_body_collision_18.obj": "e9f3f0b151ffa337d9b826919305ebf5c94793bb1c4bd1473cea10d06b6cd002",
+    "sim/onshape/assets/top_link_main_body_collision_19.obj": "441c6987983dae0dca7f43483cfb141478feb8b9902cc59b9199e7fd89c80ddc",
+    "sim/onshape/assets/top_link_main_body_collision_20.obj": "366f3d481414cea8036b26c381321e14171cb0f401a00d48f1378083f2a8a223",
+    "sim/onshape/assets/top_link_main_body_collision_21.obj": "4af1bbbe58f8286f66e4a21e2eb590d4a9336a3ac3a0c9df170b3f048abcd5b1",
+    "sim/onshape/assets/top_link_main_body_collision_22.obj": "4ef3d300c1a68df8b2dd5ace4182cf58b1586623292aaa06f12a6d7ebdae47cf",
+    "sim/onshape/assets/top_link_main_body_collision_23.obj": "cbb28c198ca2e94d16d30a7cfa7609b96e3ec41037d1f5885c41c28301ba6b6e",
+    "sim/onshape/assets/top_link_main_body_collision_24.obj": "fdc3ce278aea97d78e9bfefabe856639f492c38ee4fc38bc0d6759a57e1a45b1",
+    "sim/onshape/assets/top_link_main_body_collision_25.obj": "1f68336197f0e8b1879101a7b7aec31906e291fad42eda7869dfd39baf8c3e61",
+    "sim/onshape/assets/top_link_main_body_collision_26.obj": "7c33cc676fd32c9db46b64a836f6fb0fc28c4614bda31b200e56c84a26b1f221",
+    "sim/onshape/assets/top_link_main_body_collision_27.obj": "9e01cb22c3060dba57411934fed53d7820577714c1a3a47286600842b7f2eba6",
+    "sim/onshape/assets/top_link_main_body_collision_28.obj": "7d9f45d3e63e62dce8b81dae41a2e452ca65fa2c6facd10a8582c8244f353183",
+    "sim/onshape/assets/top_link_main_body_collision_29.obj": "f035578118fa6abca1cac092e8b5127e00b653d08ecaf021e7b564945ec06706",
+    "sim/onshape/assets/top_link_main_body_collision_30.obj": "c9c28cc83e28f6bace1e2b9bba390fd5c25fc7b5c605699451ecb3317b33976c",
+    "sim/onshape/assets/top_link_main_body_collision_31.obj": "f66fb241fd9f7a4329df0a2a6684ee51aaace18d109570f5f6d38663d4daedd5",
+    "sim/onshape/assets/top_link_main_body_collision_32.obj": "4b7b35f26d67a1fee829985d0f9c2234b25d756de4b3e7a7ead39732570a363c",
+    "sim/onshape/assets/top_link_main_body_collision_33.obj": "2bc647d2e7a2e9baf215dd5a6fa88109391f3222e68bbafb08e27dbba68171dd",
+    "sim/onshape/assets/top_link_main_body_collision_34.obj": "357175c778df995f2d2731e8e2d090bc776d112629b459b1743231bcc6b99688",
+    "sim/onshape/assets/top_link_main_body_collision_35.obj": "82db767f3dcb6c2fafeda51989c5e939ce98e9f9a09c12fb22d0f9a276f6e55c",
+    "sim/onshape/assets/top_link_main_body_collision_36.obj": "b99c7f944ee39d2cbd188e888814b96dba0a4f313bebe6febd45dcf5dc99cfb8",
+    "sim/onshape/assets/top_link_main_body_collision_37.obj": "8487b93d5914f982e306b45df5c5701a3b6a3b94e534563bd406e97fcfc2a474",
+    "sim/onshape/assets/top_link_main_body_collision_38.obj": "d3677a1c02b01491f156568df73b1e5c0428d31e3a1ce361ca7ed2045944fedf",
+    "sim/onshape/assets/top_link_main_body_collision_39.obj": "779ea98f6e21b57d5166fc1f6dcc888abd2c9459dcee15d7420449fc3be39ef5",
+    "sim/onshape/assets/top_link_main_body_collision_40.obj": "cb16b0ac23668e986e1f93a4f2693d2afaed1f6be5ce09a14bfbd2dfcd1cd392",
+    "sim/onshape/assets/top_link_main_body_collision_41.obj": "d745dec34e285f30ae30efa3994db946af4706e8f4db95634c4b195c4d0b0152",
+    "sim/onshape/assets/top_link_main_body_collision_42.obj": "692df7cd6f74996644f33ae67fcc0f6074945f35b4bb3cbef735ced1b6a9d90c",
+    "sim/onshape/assets/top_link_main_body_collision_43.obj": "39b82cd3692db6c0f7f080cf5f3e468aa62972dedfc08fccf4018afa31ddb0ea",
+    "sim/onshape/assets/top_link_main_body_collision_44.obj": "9f55a4b590b3baed67a57825604d530c8a81e2d34cf23a5ff1aab68f5c5033a0",
+    "sim/onshape/assets/top_link_main_body_collision_45.obj": "96b3bd64b5297dd91a17413c5919af517e55f6ed996e97906f338e6a5a436c7a",
+    "sim/onshape/assets/top_link_main_body_collision_46.obj": "8305c4bf47ca9ea0816c19b64adf3fddcececd01278a14a679840ade9ec40407",
+    "sim/onshape/assets/top_link_main_body_collision_47.obj": "772370e8455b8ce95770456d7cfd604fd25ecff1a4061b0a848a03efa6001066",
+    "sim/onshape/assets/top_link_main_body_collision_48.obj": "c8ad5d6794b3d1397547afe03cea09a60a49dad4745c0afb74d91805bcb67552",
+    "sim/onshape/assets/top_link_main_body_collision_49.obj": "c9aab51ae052042530a57611442aab32025abfe2fdf45e69185e2a7a27be610b",
+    "sim/onshape/assets/top_link_main_body_collision_50.obj": "740dad03af87391e7253f35bf31e64794b10321c9d84e03fd8e56277891e939a",
+    "sim/onshape/assets/top_link_main_body_collision_51.obj": "f47b2f646276d18dadf79294148da3facad35fce94c349671dbfd0322c76e84b",
+    "sim/onshape/assets/top_link_main_body_collision_52.obj": "8ff078a71c7a125fbd32304f344ca20ddcf6466c87febca48e6aa30f6d100be3",
+    "sim/onshape/assets/top_link_main_body_collision_53.obj": "c4c82d01d8f76edae52aee2ed506746d4a2ffa1f9127a134dfccde6e11077d87",
+    "sim/onshape/assets/top_link_main_body_collision_54.obj": "d625985c3dbd7a0c8f70b0a98ad8ae6fb2bc494a06174720a9d54925d1e62c4a",
+    "sim/onshape/assets/top_link_main_body_collision_55.obj": "3bfd2afe792d733da8d2a11c6c056538f43dd48f3593861b936e7a0bf267964a",
+    "sim/onshape/assets/top_link_main_body_collision_56.obj": "01c8ca75b5ee7e1114d5102c602f11bab6db813647bd14174f662a4cd1879ed3",
+    "sim/onshape/assets/top_link_main_body_collision_57.obj": "dbca194a218794b048c236035b04f7bceced7acc9955c781680e5a2885087967",
+    "sim/onshape/assets/top_link_main_body_collision_58.obj": "c23b132a96e60336daf93cf6a8d71b2c57c837b73b53218c7c5f3db018a75198",
+    "sim/onshape/assets/top_link_main_body_collision_59.obj": "b31b7f024429983f2a1631558b82a6c6fe250af7e76e0d785b7cb0debe994c85",
+    "sim/onshape/assets/top_link_main_body_collision_60.obj": "3bd8e68ce1571cc264055f763fc6cc1d6004e94eb1f5bff810cc73e9c35a4881",
+    "sim/onshape/assets/top_link_main_body_collision_61.obj": "afad5436d26c5289c9cbf6c068f45e6f3734693141bb24cd5d1a190bd1d43183",
+    "sim/onshape/assets/top_link_main_body_collision_62.obj": "8e552b6fb9f95f1b34c8e77fb23b5e9f8f649a689afefcb7946c098960cd7a6e",
+    "sim/onshape/assets/top_link_main_body_collision_63.obj": "84ca57bde6ecd0943c22d4d9ea431a662461c0935a1080ed4a92cb739e30fb4c",
+    "sim/onshape/assets/top_link_main_body_collision_64.obj": "629234e2ac98328ea238ddcab4b836552aca00c2137e6e09dee4f28bad9f423a",
+    "sim/onshape/assets/top_link_main_body_collision_65.obj": "07c990a834af34d9bf346266c1ff22a9dc0f62e9b15119f691f74dc5877f30ce",
+    "sim/onshape/assets/top_link_main_body_collision_66.obj": "8124c0b7f1f92f0fbe967e40e1bd34bc163f1a6a228206008845f593336bb6a6",
+    "sim/onshape/assets/top_link_main_body_collision_67.obj": "5981794b8362848ef796017df55dc7695d908f65fb167ac4979f5a04dc36ed50",
+    "sim/onshape/assets/top_link_main_body_collision_68.obj": "ebe5a610629a4bc4251af104cfa2ab867f8be985a6b70f1512f83305006b3876",
+    "sim/onshape/assets/top_link_main_body_collision_69.obj": "e5600427274f5813b6d7d5a02cb36c20e77fef69a873e5c0ccecdc418f3ba17b",
+    "sim/onshape/assets/top_link_main_body_collision_70.obj": "12f3888e19422a9b0ffed9441857b6430ada81709dbea5f457b290350a62a6d9",
+    "sim/onshape/assets/top_link_main_body_collision_71.obj": "63a95599887bb4127614c0950157cdfc49ab0bdc1613b2dfaf5ee462875664c5",
+    "sim/onshape/assets/lower_servo_visual.obj": "1838c035c346cfcc597b583e590441509c5c68dfd2f04cad46d9fdc105ae5e76",
+    "sim/onshape/assets/lower_servo_collision_00.obj": "1ff56f9dddf30a92b9f9d6e571eacf8ce370db87f396608167e7d0abaca2c8a9",
+    "sim/onshape/assets/lower_servo_collision_01.obj": "835a0d3aaf6958b4afb418beacab5568a365e118371d5268b3582739405b48d6",
+    "sim/onshape/assets/lower_servo_collision_02.obj": "170a40cd781126aab0b210f080c02303446dc4734b023c1ce3b70edfb2f65f9d",
+    "sim/onshape/assets/lower_servo_collision_03.obj": "643d2e05a1bad9e26853a72353ad50139451af3dadb7717111fc1b395ff4592d",
+    "sim/onshape/assets/lower_servo_collision_04.obj": "c098a9de103795b187ad888d98460bfccae111f62d5898164b718166d62ba1a6",
+    "sim/onshape/assets/lower_servo_collision_05.obj": "68bb518de3654a063b8c761d56fc43515f4ca4714cffe20ed0a3373fc9d4b305",
+    "sim/onshape/assets/lower_servo_collision_06.obj": "159efcd799e71b232eca7f97a12c9d7143b1064f4d8984185fb436fc4da018c0",
+    "sim/onshape/assets/lower_servo_collision_07.obj": "261b708e654a044fb8cec89837e5eeec8977678646b3b2a3c27aeabee49ed844",
+    "sim/onshape/assets/lower_servo_collision_08.obj": "b83d3369e2695724ec9456056de286e6667da469d7229f5972e6975ae1a93f62",
+    "sim/onshape/assets/lower_servo_collision_09.obj": "08760a0b8f5054790410327f80f561ed44aeb536fcb54cb7c3bd28a6ad902be7",
+    "sim/onshape/assets/lower_servo_collision_10.obj": "ed986c2e45ff98cb4524611b8f9a2696a05d74b38aecfaa1c65d31000ae53267",
+    "sim/onshape/assets/lower_servo_collision_11.obj": "757c5728a0ea25d739d92d608a9e33aaac6fb33f8b250b2e3cf81351e90fcb93",
+    "sim/onshape/assets/lower_servo_collision_12.obj": "14b2b6a5de1e3007d38e5b839c1a11ce8e5632f0dfd059216d67648577665065",
+    "sim/onshape/assets/lower_servo_collision_13.obj": "3bd09b3893aee2488edec57f9e1b634702e6387fd9ebbcb1d739c06354054c0b",
+    "sim/onshape/assets/lower_servo_collision_14.obj": "5bf402c83f57bc1e97b9cb5ad9c4b3796b9bc87f6d669ead6c8ba886fe081eb6",
+    "sim/onshape/assets/lower_servo_collision_15.obj": "01e2ae3ae66911b3a11bb84d20b33f68c6df9c4b6ce73b92bb5129a1d2bf3af8",
+    "sim/onshape/assets/lower_servo_collision_16.obj": "7f2b5ebd7a706005e12aa226c84b24a42c655f25183250d23bc68297f03f9608",
+    "sim/onshape/assets/lower_servo_collision_17.obj": "98f3886d7321d92b1c6a45b90707d362c81ab116a78d02b74c47900437ecb40c",
+    "sim/onshape/assets/lower_servo_collision_18.obj": "911f5b17f37ca59d0763e4d9fcc71367943b45c6b8314eab9d859411565eaaf8",
+    "sim/onshape/assets/lower_servo_collision_19.obj": "8dfb5f1b4f24b39d4eb70b8d82bf9c42b98aa21abcf5a37ae8d4d0354f60dc84",
+    "sim/onshape/assets/lower_servo_collision_20.obj": "8725039332da170bce78b0d4a24ce8bad8c45d1fec10721069a70f6f7a0edf55",
+    "sim/onshape/assets/middle_link_main_body_visual.obj": "6cacb52e4239b1035f3afd15e4e0c1050b89b31d8defe338902abc1e025efca8",
+    "sim/onshape/assets/middle_link_main_body_collision_00.obj": "4f0c944afc564990de7dadd27cb767181572ef7b994c8ae7386af757aa87ba96",
+    "sim/onshape/assets/middle_link_main_body_collision_01.obj": "ad143b821347e92e69cf56b375d4cc3ad6937f66a15d5e128160cdb20667d190",
+    "sim/onshape/assets/middle_link_main_body_collision_02.obj": "8fdc436e4f96d5070efcdcb539c3074d90c68f2dcba5efc29b051017ef04a71d",
+    "sim/onshape/assets/middle_link_main_body_collision_03.obj": "52047aab6ae021630a212583e78691235efc8c659bf34b8f20b86b4b6b73430d",
+    "sim/onshape/assets/middle_link_main_body_collision_04.obj": "702908082a786f5ca9a4e5d0d8b40e55c9f0fe2d9b46294d09aa649ac78b7b66",
+    "sim/onshape/assets/middle_link_main_body_collision_05.obj": "08876c938328c14fe4e39ea8b6541f5a6c62ec8bcd7e98058972a5a8389d701f",
+    "sim/onshape/assets/middle_link_main_body_collision_06.obj": "e8c4dadfd5e646b5b27a87bc1d4a82a17ff2ceee48f8829a468a0d5bdfa1dced",
+    "sim/onshape/assets/middle_link_main_body_collision_07.obj": "388f40905ea4114768b3ab8c9e31ee897dc8b9b2f9a52470b143ddaa10cf54d4",
+    "sim/onshape/assets/middle_link_main_body_collision_08.obj": "28341aa23cef5331e14a84bae0eeea0e66d6b8e734f7b46b2ea12e7dce46f06f",
+    "sim/onshape/assets/middle_link_main_body_collision_09.obj": "adfb746289b1ad2d203ffd7fe4045305ac5536ebe80127835caec349d96af594",
+    "sim/onshape/assets/middle_link_main_body_collision_10.obj": "02c1c5680a467187daf535799a292dc185fa768fc5005a62054e170524af964f",
+    "sim/onshape/assets/middle_link_main_body_collision_11.obj": "facfec59dc4eff0d84db8628540c03fccd3b77d350adc25d1776af94961bc10d",
+    "sim/onshape/assets/middle_link_main_body_collision_12.obj": "ba45c3c271d3a0dda8fbfd158c3f3aa6d446fec725eb659a13e287e7ee8e930f",
+    "sim/onshape/assets/middle_link_main_body_collision_13.obj": "315652ef370e1fca21179f8128a92213f07ef5cb83d8905ad628a701ce8234d6",
+    "sim/onshape/assets/middle_link_main_body_collision_14.obj": "91971dce0107dfcd2cad0470ad4cb689d7527f269bed78e2236ed17cbd216e16",
+    "sim/onshape/assets/middle_link_main_body_collision_15.obj": "08df9d724de42ba2a6095b7691810ac67f78e5441b2415e731f458fd982ea854",
+    "sim/onshape/assets/middle_link_main_body_collision_16.obj": "9a3d1d90ec49d44ae2d3a37de47f3a4ab30b43a41b2a070ec58200a1fd9c7ee4",
+    "sim/onshape/assets/middle_link_main_body_collision_17.obj": "32bd0dac0fc66bafd5c321962dcd5920e3cf10d39456320af0932d013544795d",
+    "sim/onshape/assets/middle_link_main_body_collision_18.obj": "1c48f4ca4a63296ddb2006e505c3dc848f822a6eca0a4e2af93a82987b6b3520",
+    "sim/onshape/assets/middle_link_main_body_collision_19.obj": "860d1f9a393053e534a9300f7efd974e9ed12fd24a7572f7dde1e53b45988821",
+    "sim/onshape/assets/middle_link_main_body_collision_20.obj": "080bd7d427f0156d6e9b1816d570980f15466b4a8b3bb745036006efd31806f5",
+    "sim/onshape/assets/middle_link_main_body_collision_21.obj": "a5a7e3fcf781968f430af16bb4e2dd5401edce90e82796bf867398d2e96c4020",
+    "sim/onshape/assets/middle_link_main_body_collision_22.obj": "49031d17c6ed97eb955f5285fa66f95b1a72a9702e0cdff94a550aaed695370b",
+    "sim/onshape/assets/middle_link_main_body_collision_23.obj": "ea1710f2c52c8d44c0370a2118de6e64eeafa5c84d7de54baf34d342b6d62dcb",
+    "sim/onshape/assets/middle_link_main_body_collision_24.obj": "86e0f1aa710d770aef8259af729459fb1c79736320b9b23d0071db31174c8a87",
+    "sim/onshape/assets/middle_link_main_body_collision_25.obj": "51c1ff4e933e7b1d5c15fe4718b2826cc366f91b12728996756616fca0397b82",
+    "sim/onshape/assets/middle_link_main_body_collision_26.obj": "19cebdcda3f0de6f508515c624ed6e914726b4afa27eb03122fe0bed17937aa9",
+    "sim/onshape/assets/middle_link_main_body_collision_27.obj": "a5f76abd8cd7434c6b183d4828168964e4f9e280f8ee131af14a33bc9ed6b926",
+    "sim/onshape/assets/middle_link_main_body_collision_28.obj": "6219958fb84c57829378f110ef0d7d7babaf60e3e6ca03ffd5b293a5905bc86b",
+    "sim/onshape/assets/middle_link_main_body_collision_29.obj": "c8edc896162c5df3d04b663baad2953fa79709500919e07b48cc2ca42b44c2da",
+    "sim/onshape/assets/middle_link_main_body_collision_30.obj": "47722a17aac6af87a779065e17b351bc2237c31550e49355cf047458c11e714e",
+    "sim/onshape/assets/middle_link_main_body_collision_31.obj": "22161a440db14d8be954c12975d295313b7606ee1ebf116eabb0e9ff81606205",
+    "sim/onshape/assets/middle_link_main_body_collision_32.obj": "e32b7e0dc2004f75b47ba8fa9c98a3adcb5d00c83718d971f83011db52269c3b",
+    "sim/onshape/assets/middle_link_main_body_collision_33.obj": "9cbb6d5f595108139a47fb4913f6d273217a94431c18eb857a5da74b3109bca1",
+    "sim/onshape/assets/middle_link_main_body_collision_34.obj": "e24aab898773d689cd143a09806e1332b6eae90fa97d365500a91aa49677c9cb",
+    "sim/onshape/assets/middle_link_main_body_collision_35.obj": "5cd2f4a8d2bbc4dd190a3e98778498657e58c9bb3b621e88122edfeb87e150ea",
+    "sim/onshape/assets/middle_link_main_body_collision_36.obj": "92e2b4f4e9ad71fc8b5b9d894046f5ddb029ff44f77cbfb2271bc243b5bc21d8",
+    "sim/onshape/assets/middle_link_main_body_collision_37.obj": "4019b7b2e702e8d1f716158c36b621816ae7f59e98933fcb171176e91ab7cda0",
+    "sim/onshape/assets/middle_link_main_body_collision_38.obj": "87dde9424f549390e45dc175b5df0225fc86be5a8ccceb60e368080fff5e084b",
+    "sim/onshape/assets/middle_link_main_body_collision_39.obj": "7378d6e442ea1bd5d6d49ec45e88f95570163a02b64cabca0a5e6c8b97a397a7",
+    "sim/onshape/assets/middle_link_main_body_collision_40.obj": "d0cd6fb41e280425b0d1671e7b9f55169e1d3ff4f580543e8e3d74b2bc4c060d",
+    "sim/onshape/assets/middle_link_main_body_collision_41.obj": "7cb39e4f0d95e77ab35356c42975fa006fd0e79d9e1981892cc62f8ac9d317c9",
+    "sim/onshape/assets/middle_link_main_body_collision_42.obj": "52e7ed28e0e3f21a726f780f86141583ef0abdb9654fdebdffcb66bec382edea",
+    "sim/onshape/assets/middle_link_main_body_collision_43.obj": "1a516f5693a78c76667d12aefa70cc695d05282cdbf066d94584a735f27af394",
+    "sim/onshape/assets/middle_link_main_body_collision_44.obj": "49d07c33ffb507bc125db66da7c0ff915caaec6bec4dcade744893c624a12565",
+    "sim/onshape/assets/middle_link_main_body_collision_45.obj": "58e6288f3312f961693caf637148c20e7e53cd4e1727aa79be00544e5876cd6f",
+    "sim/onshape/assets/middle_link_main_body_collision_46.obj": "11c48aaa881804abe8ef4db58118c0f51f9582a956895fd1ad262c6a330c590d",
+    "sim/onshape/assets/middle_link_main_body_collision_47.obj": "3c61010a074d5efafa09cafa4e00705ecc1f968e096fce86476039be95bdc9bc",
+    "sim/onshape/assets/middle_link_main_body_collision_48.obj": "bac2491d587fd79d9706ed07cf2bc7455854f5604f2b8b40057cc0712b465adc",
+    "sim/onshape/assets/middle_link_main_body_collision_49.obj": "63de53864814cec24368c2e8767d18bf1d64acd0560f609595b34a4f7b3955e4",
+    "sim/onshape/assets/middle_link_main_body_collision_50.obj": "6a12dfeb3f99631a933aa9af766efee3ae9ff5e5e18c1b08b67266f901ce61d0",
+    "sim/onshape/assets/middle_link_main_body_collision_51.obj": "c66068958eb631498be315e77174d379af682581aaff8b3f7d5567de880353a4",
+    "sim/onshape/assets/middle_link_main_body_collision_52.obj": "5c69b5dfd309dd319cc668674b263fbb911d31b126c1d800d121907ed89d3e48",
+    "sim/onshape/assets/middle_link_main_body_collision_53.obj": "cf06e30151c57f2498f47f10ea3a4a7629156b55e74929fae12f3e6b3762ea4d",
+    "sim/onshape/assets/middle_link_main_body_collision_54.obj": "dc5068969b92579400963b72c2484353c07903a63aad5981416a97f5e9d7db03",
+    "sim/onshape/assets/middle_link_main_body_collision_55.obj": "a95787c8ef8ebc4583ca29c4a61bfa38eb18f4605925bc071c89d8ac774d5216",
+    "sim/onshape/assets/middle_link_main_body_collision_56.obj": "a5d0de04cf1ade38167d1625d72a8e984067e46002869bf3a403f35713af64e1",
+    "sim/onshape/assets/middle_link_main_body_collision_57.obj": "4175995b21bfda376697c098cc3bf18939dbb7280402bff6bcdbd3f6b6de044c",
+    "sim/onshape/assets/middle_link_main_body_collision_58.obj": "3b384fb6490b731ed658de8d1b37b8f22812aefeab913e7faa1a70162acdda6a",
+    "sim/onshape/assets/middle_link_main_body_collision_59.obj": "b8f6dbbe335fc2e27bd4690ea2e96b9e7b0f8f4264f3de8e4a4d859f04844c2e",
+    "sim/onshape/assets/middle_link_main_body_collision_60.obj": "e885ef57ca929f3b1522b7f63455bddd72eefae94920da3acd2734ba39e81279",
+    "sim/onshape/assets/middle_link_main_body_collision_61.obj": "76e438bc5ac17764ea78a9f6abcca56769762bb40477054cea4ab85ca6153d74",
+    "sim/onshape/assets/middle_link_main_body_collision_62.obj": "3f6266b94f9837d2b9c7788949a8b2cf15df1b6b17923967aeb8a2aea2add022",
+    "sim/onshape/assets/middle_link_main_body_collision_63.obj": "a03295774c0778fab7479f58552dbf201bb945ed5f396d7e4bc4e71795dbd817",
+    "sim/onshape/assets/middle_link_main_body_collision_64.obj": "fe6e57522a288c010df630f0e05b02daaa3e41e32558ebf5727bc7a2b31c0364",
+    "sim/onshape/assets/middle_link_main_body_collision_65.obj": "749635509e61eff12bfe298864952e8fc7e5b4969f7cae4ec7fc632a233e54d2",
+    "sim/onshape/assets/middle_link_main_body_collision_66.obj": "1434d4528106a1b6d489b53e5cb4f8782d207e8ac1a202017f89470a6a723a9a",
+    "sim/onshape/assets/middle_link_main_body_collision_67.obj": "ca466fb3d149b3474d42ba5468b7341efd6ac4586fd5de491c9f5271614a275c",
+    "sim/onshape/assets/middle_link_main_body_collision_68.obj": "fee510b9fc987cf19886082b60e62918af4016a3b23701cb4cca9d1c9eb6c130",
+    "sim/onshape/assets/middle_link_main_body_collision_69.obj": "88f866926f2e4d2b7b4f1edfa41112138e319929933caa890aae4bdde54dd7c0",
+    "sim/onshape/assets/middle_link_main_body_collision_70.obj": "c173d687e3061a69851be9ef339395fdc869d58b6aad9e3b85e949d10cd9363c",
+    "sim/onshape/assets/middle_link_main_body_collision_71.obj": "f6d38433d8adbc6cae5c797cc7b7538a54230af037c21e8cf03becdd37e63de3",
+    "sim/onshape/assets/middle_link_main_body_collision_72.obj": "6b0d19e84fc88965263abaaeb507b05bc2b73222e7fea064b3b5b0162f294367",
+    "sim/onshape/assets/middle_link_main_body_collision_73.obj": "7537338efcab049644886fadc7fcbfc6568bf5c17c2665784b92bc7fd5972ebc",
+    "sim/onshape/assets/middle_link_main_body_collision_74.obj": "56395a6d89ad37ff3dddb004af0c8322524615046d9346ec63e3f0f95858804f",
+    "sim/onshape/assets/middle_link_main_body_collision_75.obj": "40b988f4d70714b0fb02672db5bcc2e444815b73f4d8be09e56675c65a294db5",
+    "sim/onshape/assets/middle_link_main_body_collision_76.obj": "a145996796b989ed175e13966b91a93d3d7237a177f953086caa0740fe7e7018",
+    "sim/onshape/assets/middle_link_main_body_collision_77.obj": "6c6cc66b59409f5305107340608e4038c12a2335e62136458cad3fb25e2714a6",
+    "sim/onshape/assets/middle_link_main_body_collision_78.obj": "d5015ec50703bfe096149c1fef8bbe0ef2e9a109a9b34be50821d122e20299bf",
+    "sim/onshape/assets/middle_link_main_body_collision_79.obj": "96d506a8cd2c9ff7fbe08e1593d258fcaea051be1718073d2cb44a778f071bf0",
+    "sim/onshape/assets/middle_link_main_body_collision_80.obj": "f2aa632afe72e7dd141bdd0245c1f033c00ec216d5e3d393eadbcf6c4ec1e3b2",
+    "sim/onshape/assets/middle_link_main_body_collision_81.obj": "c332328cd95be29bb358e0d46ae699c4e483b62234dc716d0e81ede6522c8df4",
+    "sim/onshape/assets/middle_link_main_body_collision_82.obj": "0067717eabeeb784840744b2dd28e39e4ca07942499ada53ffa451e9e7a3ce0e",
+    "sim/onshape/assets/middle_link_main_body_collision_83.obj": "3df66f73e1e8ae80290aa3f0c8af4141848782f2db1c6661aa40911ff1f28dd9",
+    "sim/onshape/assets/middle_link_main_body_collision_84.obj": "aa6ff1f08dacc68ac6ae2b127d21ed2803d2afa16d6e4b4afd739a8ef2d4b25f",
+    "sim/onshape/assets/middle_link_main_body_collision_85.obj": "682978d6cbcadfd8f98ceb54af17f3223471c669d1548c315989ab98d4875363",
+    "sim/onshape/assets/middle_link_main_body_collision_86.obj": "f3eb529686a36e1e03e509d135e6ca65f517ae45cc95c755664395f1d37c369a",
+    "sim/onshape/assets/middle_link_main_body_collision_87.obj": "209848345dfe934fc44d6e676bfa19b154ab91465231cbf64b7d0e07abfa3bbe",
+    "sim/onshape/assets/middle_link_main_body_collision_88.obj": "8aefa3cc06fd3ae6ff6f4b96ce635372779ab3399dea743434f919576c856e7c",
+    "sim/onshape/assets/middle_link_main_body_collision_89.obj": "c65b9b7fd873497c9a9bafff517335814d07b593f793c1303ae7d584f9cc49d3",
+    "sim/onshape/assets/middle_link_main_body_collision_90.obj": "2c5e389dbb4de8e9a74ac31d57a396698c3a80d4fb22135358026d58709f54ec",
+    "sim/onshape/assets/middle_link_main_body_collision_91.obj": "26ee97c0d13ef0ce913f671fdfa3f20c47f7ffc33907df5512d925aadf10d73a",
+    "sim/onshape/assets/middle_link_main_body_collision_92.obj": "e87eb3fd46da987e53d235a33f1575d675adcfc4195a5c5bf7c22496e163b937",
+    "sim/enclosure_c3/assets/base_modified_visual.obj": "09e228beed8cbdc39f5264966614e05a7eaa19a1e127374ed6420e0ee42e0406",
+    "sim/enclosure_c3/assets/base_modified_collision_00.obj": "b77668f0291af499e22e4b462ac0a9501780158e1d6ca740d34866eecada6b5d",
+    "sim/enclosure_c3/assets/base_modified_collision_01.obj": "53c7fa893248d78d20e5bc8ae240a83616f9263067bdde05bb0d789dcedd73dc",
+    "sim/enclosure_c3/assets/base_modified_collision_02.obj": "141eb96f843285f44c4cf74a71e039340817a1edbc8a60d26fb16ba504e9ae39",
+    "sim/enclosure_c3/assets/base_modified_collision_03.obj": "f62d670fbf9fcbde51de1e1aabd3905fb1ed078f3a400acabe91ab7aeeec78a3",
+    "sim/enclosure_c3/assets/base_modified_collision_04.obj": "e789a58baaa2ccc00c64e78c838dad27bca485fa200be71798bd5979aa0ec919",
+    "sim/enclosure_c3/assets/base_modified_collision_05.obj": "4b1a8b7da5edad0926448788e6beb39128a5b9d5a4107f1d2a0a40d4d73365c8",
+    "sim/enclosure_c3/assets/base_modified_collision_06.obj": "1a46ae67a597f819d25f1d544501d1e3a37ff73cc4a844591fc711ef19fff948",
+    "sim/enclosure_c3/assets/base_modified_collision_07.obj": "e5c3f92e5adc0bc3401d107b359f9cc01d7c5b13622a9b9be6d0aac1208f1ed4",
+    "sim/enclosure_c3/assets/base_modified_collision_08.obj": "4e3d7052f1a095c2b05d5ea52ba05cecb332a9deb21a515863f1985a5ada4a3b",
+    "sim/enclosure_c3/assets/base_modified_collision_09.obj": "e8c20346fe1da41d33f2d0355777853fea8552b2e3c09b0a50e50c28d6799e00",
+    "sim/enclosure_c3/assets/base_modified_collision_10.obj": "430352c17453e0fb926589273d39e387110c586ed9f6506c538c19193e4bc68a",
+    "sim/enclosure_c3/assets/base_modified_collision_11.obj": "d74bd8105ba7b1bad83d78d11aaf5c3027d915fd24eb6bab773ad666444b9dba",
+    "sim/enclosure_c3/assets/base_modified_collision_12.obj": "cb4898ec034d904fb662895d65088e0bef50b30cab7f3da85628ea7b0433fdc6",
+    "sim/enclosure_c3/assets/base_modified_collision_13.obj": "1a6bffe2852ddfa65cf2db77339b72a1daecc945f35edeb8a3d1e5e5c360f927",
+    "sim/enclosure_c3/assets/base_modified_collision_14.obj": "2118f3a56e83384f7ef286f66f6fd93fc3a33d15aaa8ea4c435e31e411133344",
+    "sim/enclosure_c3/assets/base_modified_collision_15.obj": "91a08915b659a9c946b1a3281955c53a93c5eb0d2bec788f0760316684012b12",
+    "sim/enclosure_c3/assets/base_modified_collision_16.obj": "c9e87948ad7df90fec578d72e570ba3ef8779d79bd999579182f96f405402430",
+    "sim/enclosure_c3/assets/base_modified_collision_17.obj": "ae4af748ff0d72449c623914851bb0956d406f6578d98d06fa3848f372187281",
+    "sim/enclosure_c3/assets/base_modified_collision_18.obj": "47c38452cc4fa01805746c75897eee691bb99842e7a8a3cb6ba1ebd4c06a3a22",
+    "sim/enclosure_c3/assets/base_modified_collision_19.obj": "f6988897a2d2c0f7e2121a3474589949ef0077f20d5a7d2886f850b8e848c161",
+    "sim/enclosure_c3/assets/base_modified_collision_20.obj": "6d0bed042ef9678687a488836d4c8e77fc04b100d41fe52a0d479d1b0f688d00",
+    "sim/enclosure_c3/assets/base_modified_collision_21.obj": "72302ee27a95c0b5fd48407f54d7757db8e4a0f32e59ea968f0a813a00d0dac5",
+    "sim/enclosure_c3/assets/base_modified_collision_22.obj": "c775afc4a8e7f7863a6f5bc9803ed8a5adb82e7e9edd2a5bcc92f230ce5affb9",
+    "sim/enclosure_c3/assets/base_modified_collision_23.obj": "838d73ee705ea9294970f9bafe84a3e3d0ea76871c8e62d4189c9299383943cc",
+    "sim/enclosure_c3/assets/base_modified_collision_24.obj": "0916b7f6bcc1907617aaf40eb293b4c136c8c99fb71b6ebd3f7b4417eb753849",
+    "sim/enclosure_c3/assets/base_modified_collision_25.obj": "08a8d8956589ac04f683151160967284966a107901fdb96847f51c6277a5d3c4",
+    "sim/enclosure_c3/assets/base_modified_collision_26.obj": "8545144a7b19bc19448ba9538373c00ab31d0414c23b6edef87160e5bc5f23ac",
+    "sim/enclosure_c3/assets/base_modified_collision_27.obj": "c5d1711b910efe02f1b9af4eb04fac843a568161b08c55d91712679ec929c64a",
+    "sim/enclosure_c3/assets/base_modified_collision_28.obj": "4be54d14667e90b9436bafdfa2c7af50927707c4c856bb61a0db1c5303ec8811",
+    "sim/enclosure_c3/assets/base_modified_collision_29.obj": "45cd0c87a0abd288f284d4a4a97cd189a20881963c9a4491b7f9625d4921632a",
+    "sim/enclosure_c3/assets/base_modified_collision_30.obj": "f5f29da5d7f7d7b8025e33e263bf4e0ee6e724aeab9bdd84ee9014bacbceba45",
+    "sim/enclosure_c3/assets/base_modified_collision_31.obj": "0ad56e7d1d005a1e9b97c7faf3e08384d40bfaca37a9ad0cc0130c3b15aa7a83",
+    "sim/enclosure_c3/assets/base_modified_collision_32.obj": "ccebf6a1881f35e6cf36860f20b170c7e3886bf11b426f4dcceb042c9fbf966e",
+    "sim/enclosure_c3/assets/base_modified_collision_33.obj": "b238c4c546ca5a783bbd911b8d772ecf1f0b4eb7a1b18b66670d68fa2b89baf3",
+    "sim/enclosure_c3/assets/base_modified_collision_34.obj": "92b4df4a66e11613f78332b431d77cf6e53ae395df3cbcd6a3bd98258244adfd",
+    "sim/enclosure_c3/assets/base_modified_collision_35.obj": "89e3d88352cc8841c2d23635b4a65690a40bfc42a2af4d4aa0a9f72d63011a94",
+    "sim/enclosure_c3/assets/base_modified_collision_36.obj": "44a55c8c120a15465eb2094c6235578a5b11593c37dfdc6fc6e28c4c9e68e231",
+    "sim/enclosure_c3/assets/base_modified_collision_37.obj": "547dd3870182be6f03ce77aabaec8941fed73e99534296b3fc7e49979cf8e43b",
+    "sim/enclosure_c3/assets/base_modified_collision_38.obj": "aeb101ff8f0b1ff723668c26331ca62a971817bafd74b5874d5d6a5701351781",
+    "sim/enclosure_c3/assets/base_modified_collision_39.obj": "0245baf1fa5207d806c37d3634177aa36cef800bfa29d6d98484e0ada76a936e",
+    "sim/enclosure_c3/assets/base_modified_collision_40.obj": "91b51751d1209fb4f7a6f2cfa471dc6441ee3e94cc38fdf9db7ea4682510e0f9",
+    "sim/enclosure_c3/assets/base_modified_collision_41.obj": "db0e6ba384f5edc1256826fc9880fc518ac9310f591b9651e13154c58d6c9fc9",
+    "sim/enclosure_c3/assets/base_modified_collision_42.obj": "876f9c8e77b62df14a810da75bb312c60751da2fb7a1541cd86e3525c948319a",
+    "sim/enclosure_c3/assets/base_modified_collision_43.obj": "b37222fd75d9062a2032f518f444a299604f1e13933baf90c13a31f410fffa7c",
+    "sim/enclosure_c3/assets/base_modified_collision_44.obj": "cf5a0c511eb98c448dbfe166b9d2c41639a236073ad7efee9b375e29939062d8",
+    "sim/enclosure_c3/assets/base_modified_collision_45.obj": "1a83e7964efd516c2d390d32c1cd1da48aefe840e3c46090407b548d01b16766",
+    "sim/enclosure_c3/assets/base_modified_collision_46.obj": "b5a8a6a1eb536142b91d3f2946939019af1d82d83fa3b284ec0a76d5fee5aba7",
+    "sim/enclosure_c3/assets/base_modified_collision_47.obj": "7985885a8f01789a62d7f915810ca173da0d439e20b65867ba025c74b7aca0db",
+    "sim/enclosure_c3/assets/base_modified_collision_48.obj": "d7a4e6a5b0431a97b2ad30b77eff9edec24471794895dc4a58f40403fd0e6fc7",
+    "sim/enclosure_c3/assets/base_modified_collision_49.obj": "8866620a0954d364e3affedf5564274e272b5f43e9a7c8ccf420725d01b210fb",
+    "sim/enclosure_c3/assets/base_modified_collision_50.obj": "df238d8dce04bdc6044bee7e801283d87a0ff80306a044421531942f926fc048",
+    "sim/enclosure_c3/assets/base_modified_collision_51.obj": "093dc4b9d728eeeebbe9df509c9ea474125bb276bfaf98e6e304c9c87d7f5f00",
+    "sim/enclosure_c3/assets/base_modified_collision_52.obj": "e179625f58dfcb7f11121fa233e4c1a71fecafa3ea74e8c094b2c48c948f0b2d",
+    "sim/enclosure_c3/assets/base_modified_collision_53.obj": "2312113b2811c8f28b47e7b62b87b047787ed5ea1758851ba761bc61bb72106d",
+    "sim/enclosure_c3/assets/base_modified_collision_54.obj": "104a53cac4870d1221174f8696847ff0085ee7ab37450adf468b1c00dcb24d96",
+    "sim/enclosure_c3/assets/base_modified_collision_55.obj": "3bb192de3c37bd808fbd58c05249777f31f0132b6f40c4e50584db0691431f80",
+    "sim/enclosure_c3/assets/base_modified_collision_56.obj": "6ed13b6fdf60ab7417aad4c7ed465c20c742e1913ee2c6f455c420a6241e5ead",
+    "sim/enclosure_c3/assets/base_modified_collision_57.obj": "6ea2805bffc0926954075d8478c89e390af623de6b832480d0e01881f29df38f",
+    "sim/enclosure_c3/assets/base_modified_collision_58.obj": "df748727596b55a5c899eb8db1ff7671808d003fd95193b1d09379d622b8246e",
+    "sim/enclosure_c3/assets/base_modified_collision_59.obj": "600fa244e55e4a6c04343324c4b7dfd6df238d914b2755261cf9646daddabd47",
+    "sim/enclosure_c3/assets/base_modified_collision_60.obj": "37e696383c6bccd4535d2b15b4478ba5995e2935a539f1f7b83c1f4ef91d9a91",
+    "sim/enclosure_c3/assets/base_modified_collision_61.obj": "c8184066bb9fe5f00d2e38f5bd7c76d38ff644faa31186d586ef757cbed8cec5",
+    "sim/enclosure_c3/assets/base_modified_collision_62.obj": "0ca697cafad835c906ee05be1627563b7a94bccfed5745bd1a9601cfa1e1d027",
+    "sim/enclosure_c3/assets/base_modified_collision_63.obj": "ac4b14f47a90d88d7a588385cbe72036215fe1bd6d0d1d0b18dc81b168bd974a",
+    "sim/enclosure_c3/assets/base_modified_collision_64.obj": "b69152fe8f1b9051110e92a496bf4eeb62915451c6d481d761927a3fd6994bca",
+    "sim/enclosure_c3/assets/base_modified_collision_65.obj": "e5dfd97ad83b2e09e0623bc6a4b92084dd018b1dc6482c6804b989a0cadf8626",
+    "sim/enclosure_c3/assets/base_modified_collision_66.obj": "6f019a38028cfea35880ec88a1b6b91940eaf1ede7c1a64ad9a494b2c3168d00",
+    "sim/enclosure_c3/assets/base_modified_collision_67.obj": "bb24985b2f88976a9dbb852ba26ff652b6475396f920de2eba20251b2c616051",
+    "sim/enclosure_c3/assets/base_modified_collision_68.obj": "b2c00727151f227e8f6b91d774fe45e074ed50cab93332c0997e40986018d63d",
+    "sim/enclosure_c3/assets/base_modified_collision_69.obj": "35f251007b96b688d37a2dede5f9d7e40fa870c0fdf3bddf37f5c5bb3be51508",
+    "sim/enclosure_c3/assets/base_modified_collision_70.obj": "93f4c586f5a74e4c2b9a618d78d0983c46e497f97918b8259d73c78949638e5e",
+    "sim/enclosure_c3/assets/base_modified_collision_71.obj": "e1132c55bcd9fc217df09a9b5421c8afce9c6b49a5b105808ce816133db001d1",
+    "sim/enclosure_c3/assets/base_modified_collision_72.obj": "662800b43fdf741495c823cf84b61284174dd29c89dbfa732e9ee65ebd1cc06c",
+    "sim/enclosure_c3/assets/base_modified_collision_73.obj": "2f0f21434fd8a8a571bfe757051194d63dc534e3dc080a810bd4743a1c5df086",
+    "sim/enclosure_c3/assets/base_modified_collision_74.obj": "015cf88335c29ed8718ed5b026606e347937b33c124653d4be61fcb6386231a9",
+    "sim/enclosure_c3/assets/base_modified_collision_75.obj": "e051d20b90e6aba6beeaaf46c020c10662ec023b72a2926c4d9441ff06651993",
+    "sim/enclosure_c3/assets/base_modified_collision_76.obj": "a08ff4b8502eb630feb585a3b947c730a189986fceb8e5ee1e06731b55573dfd",
+    "sim/enclosure_c3/assets/base_modified_collision_77.obj": "8711cd50c5e306ca580defbdb53658d13cf91d95fff527c90020954f0f3b3d00",
+    "sim/enclosure_c3/assets/base_modified_collision_78.obj": "f04cd0399e44f6621613d61fd259f3c1e0c9112ca5021a18c4f8a99a442f9518",
+    "sim/enclosure_c3/assets/base_modified_collision_79.obj": "4823293c409a0be18ae3b439ff00c66438b26148795cd79205b6781a3e2a39d6",
+    "sim/enclosure_c3/assets/base_modified_collision_80.obj": "263d18ac93ecd2e86be366bac1b3ce5af1115a6cde03c01eed5cfec3a320c16a",
+    "sim/enclosure_c3/assets/base_modified_collision_81.obj": "204e9cf4100229e9bf78afc7f3e57d01871b0d1843f463b921e28d596ecaa6da",
+    "sim/enclosure_c3/assets/base_modified_collision_82.obj": "18c75a7f9c1882fdef8eefe46682351733eb6c3e93f81d7d70559b24d297c7c2",
+    "sim/enclosure_c3/assets/base_modified_collision_83.obj": "1e9ae38f486c00eb3d34ea4e7a6f2c70c5f6b8f26ae5cc132b88401c15a46661",
+    "sim/enclosure_c3/assets/base_modified_collision_84.obj": "e56a3d4be0ea9da91094e1725b8d9f542745b55238034e1c61942e6721198062",
+    "sim/enclosure_c3/assets/base_modified_collision_85.obj": "e1d11768547378978ec178fa65edf36444cce60d18f0fc91bc6e9a2d44106ad0",
+    "sim/enclosure_c3/assets/base_modified_collision_86.obj": "b510cfea776196f865096b30d0252ff7a3ee54ca88cbd74b5587c36ebc4b3cc8",
+    "sim/enclosure_c3/assets/base_modified_collision_87.obj": "dce38bdb1e4f4d6ead244d29a89c22d118397efa5d3b9cf33a355b6e6c82f12a",
+    "sim/enclosure_c3/assets/base_modified_collision_88.obj": "30252eb01fe1f3001e27de2fc650cbc1e7bf03f5e45e9211df39dbfd3a76f239",
+    "sim/enclosure_c3/assets/base_modified_collision_89.obj": "5e69ef955abbd889460dc7d2c40e524730db8f79372975300272b891251376b9",
+    "sim/enclosure_c3/assets/base_modified_collision_90.obj": "41d51135f18ba3410658a43c39b9108a2563f819812c3a299449481b06b75491",
+    "sim/enclosure_c3/assets/base_modified_collision_91.obj": "2b07530576e929f9c2bdd5863d1971181f9e82d186d3afbf33208733aa460ae1",
+    "sim/enclosure_c3/assets/base_modified_collision_92.obj": "5aded48a4b95c8add31b9707bdd34a9516073c6e7e236ce33e50e036cceadf6b",
+    "sim/enclosure_c3/assets/base_modified_collision_93.obj": "cce6a034cdc3e57d65886e79022468c31a5a54a5ca0e6a1385d843be7b617aba",
+    "sim/enclosure_c3/assets/base_modified_collision_94.obj": "7b1c1a27243b3771018c6133535f6753c51a6170a4833c259769dcb9aa0495cd",
+    "sim/enclosure_c3/assets/base_modified_collision_95.obj": "b2af2102b909ed7080db2f290f38a5f330b108efa1178b13f505f469aa04feb0",
+    "sim/enclosure_c3/assets/base_modified_collision_96.obj": "6e356b8dcb990532962de87f6b8e1d5644b09e63964e9f16f0d1e58a82dbe4c7",
+    "sim/enclosure_c3/assets/base_modified_collision_97.obj": "60c3b074c48c9f792e3d2a0cbfc31145054c7e87b2d6c8031e0ec70668ff8ede",
+    "sim/enclosure_c3/assets/base_modified_collision_98.obj": "9479823a194bf248459bb3c4130aa62d07601ce2be760923875af97a8b446ccd",
+    "sim/enclosure_c3/assets/base_modified_collision_99.obj": "fc1906c44507b9e2eae74d43a9b791e9860c9e7a46c1039e69c45bb26e1636e9",
+    "sim/enclosure_c3/assets/base_modified_collision_100.obj": "b06bcd75b80588284d32bbf9cb76c631ecf7a06d626d3ff29b504edb8be6577a",
+    "sim/enclosure_c3/assets/electronics_cup_visual.obj": "3ad39cec21e90c207b8a95ab0506fd25de3fca35d6b7541d11319fa784cccab6",
+    "sim/enclosure_c3/assets/electronics_cup_collision_00.obj": "9fb4a4870298c6e2d32b8c9e7719b7c1dca3047f97a93b0901631966a93ae08f",
+    "sim/enclosure_c3/assets/battery_visual.obj": "c33ae258496a1d95a46ffbfa7001c096cb5fb0d2747093dee436deab50cc83cd",
+    "sim/enclosure_c3/assets/controller_board_visual.obj": "e0b79e023570435c924b2372508357794df760c5adbec6ac01db3e7bb5306982",
+    "sim/enclosure_c3/assets/pololu_2810_master_switch_visual.obj": "c186d2a8612cd15a896bdba31a6b12513758c6433c654115f14df547b37540b6"
+  },
+  "mesh_assets_sha256": "30adb98827adffdc23b398f7145880bd3bbb31e1526d101f009ae481a8cd37e9"
+}

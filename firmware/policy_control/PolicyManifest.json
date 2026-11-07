@@ -1,0 +1,17 @@
+{
+  "geometry_id": "installed_enclosure_c3",
+  "mesh_assets_sha256": "30adb98827adffdc23b398f7145880bd3bbb31e1526d101f009ae481a8cd37e9",
+  "observation_count": 10,
+  "action_count": 2,
+  "period_ms": 20,
+  "action_increment_rad": 0.06,
+  "hardware_validation": "Separate deployment record; selection does not imply physical success",
+  "actor_header_path": "sim/enclosure_c3/results/policy_c3.h",
+  "actor_header_sha256": "0857ad97462e121bb45a72f2700950a98bfc391235571acfd3c09ad62948a047",
+  "actor_archive_path": "sim/enclosure_c3/results/best.zip",
+  "actor_archive_sha256": "cff95efe8cce8a38f9613ae93dfe491c6abc53cf49809f86111e66cf3984f05f",
+  "model_path": "sim/enclosure_c3/robot.xml",
+  "model_sha256": "e04bd648b4f0f7ec46ee9b6918eac781faee92c2ac2eb5bfa834edc5b6fab2b5",
+  "training_report_path": "sim/enclosure_c3/results/training_report.json",
+  "training_report_sha256": "f60feea3b9b691855270e7dbb11c3671f1c870565d18a2ced5ce21aadf1e926c"
+}

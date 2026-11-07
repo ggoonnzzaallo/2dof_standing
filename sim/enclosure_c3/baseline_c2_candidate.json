@@ -1,0 +1,484 @@
+{
+  "status": "offline simulation, not physical validation",
+  "suite": "standard",
+  "horizon_seconds": 15.0,
+  "actor_sha256": "55619f4b267ee6bbef40d47c16f80ce035e99d77260aa3a98303b23b5302b1fb",
+  "robot_xml_sha256": "e04bd648b4f0f7ec46ee9b6918eac781faee92c2ac2eb5bfa834edc5b6fab2b5",
+  "filter_header_sha256": "56a9f56320f34c741928b741b59f6deacd61c940d45438b712e1bb8d6de92279",
+  "episodes": 20,
+  "metrics": {
+    "10": {
+      "first_base_only_stable_s": 17,
+      "first_strict_success_s": 17
+    },
+    "15.0": {
+      "first_base_only_stable_s": 17,
+      "first_strict_success_s": 17
+    }
+  },
+  "faults": 0,
+  "wall_seconds": 20.016909250058234,
+  "trials": [
+    {
+      "case": "nominal/side_000",
+      "seed": 100,
+      "requested_pose": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.0
+      },
+      "randomized": false,
+      "first_base_only_stable_s": 4.22,
+      "first_strict_success_s": 4.24,
+      "seconds": 4.24,
+      "failure": null,
+      "final_upright": 0.9999999881599542,
+      "final_command_deg": [
+        -3.9236673500628134,
+        -4.7067928407193085
+      ],
+      "final_true_joints_deg": [
+        -4.003106914054472,
+        -4.734475592575808
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "nominal/side_045",
+      "seed": 200,
+      "requested_pose": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 0.7853981633974483
+      },
+      "randomized": false,
+      "first_base_only_stable_s": null,
+      "first_strict_success_s": null,
+      "seconds": 15.0,
+      "failure": null,
+      "final_upright": 0.340460241918051,
+      "final_command_deg": [
+        12.234598181777365,
+        58.75674956579265
+      ],
+      "final_true_joints_deg": [
+        15.316270665545995,
+        59.18856207343287
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "nominal/side_090",
+      "seed": 300,
+      "requested_pose": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 1.5707963267948966
+      },
+      "randomized": false,
+      "first_base_only_stable_s": null,
+      "first_strict_success_s": null,
+      "seconds": 15.0,
+      "failure": null,
+      "final_upright": 0.5285841536030972,
+      "final_command_deg": [
+        37.850095866258535,
+        72.75390603678545
+      ],
+      "final_true_joints_deg": [
+        37.998178139227505,
+        74.03411764514027
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "nominal/side_135",
+      "seed": 400,
+      "requested_pose": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 2.356194490192345
+      },
+      "randomized": false,
+      "first_base_only_stable_s": 1.68,
+      "first_strict_success_s": 2.08,
+      "seconds": 2.08,
+      "failure": null,
+      "final_upright": 0.9999999826326094,
+      "final_command_deg": [
+        -4.400368928466115,
+        -2.7711604095398563
+      ],
+      "final_true_joints_deg": [
+        -4.506316200841243,
+        -2.781064763783921
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "nominal/side_180",
+      "seed": 500,
+      "requested_pose": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 3.141592653589793
+      },
+      "randomized": false,
+      "first_base_only_stable_s": 1.68,
+      "first_strict_success_s": 2.1,
+      "seconds": 2.1,
+      "failure": null,
+      "final_upright": 0.9999999905958764,
+      "final_command_deg": [
+        -3.948209914491399,
+        -4.867413955538675
+      ],
+      "final_true_joints_deg": [
+        -4.065770156616723,
+        -4.903401390355036
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "nominal/side_225",
+      "seed": 600,
+      "requested_pose": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 3.9269908169872414
+      },
+      "randomized": false,
+      "first_base_only_stable_s": 1.6600000000000001,
+      "first_strict_success_s": 2.2,
+      "seconds": 2.2,
+      "failure": null,
+      "final_upright": 0.9999999847037071,
+      "final_command_deg": [
+        -6.0573806758287185,
+        -3.0525905422613726
+      ],
+      "final_true_joints_deg": [
+        -6.215926986105134,
+        -3.0793664792985314
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "nominal/side_270",
+      "seed": 700,
+      "requested_pose": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 4.71238898038469
+      },
+      "randomized": false,
+      "first_base_only_stable_s": 2.94,
+      "first_strict_success_s": 2.94,
+      "seconds": 2.94,
+      "failure": null,
+      "final_upright": 0.9999999816234,
+      "final_command_deg": [
+        -4.2134858472786085,
+        -5.178360251300802
+      ],
+      "final_true_joints_deg": [
+        -4.315426739302244,
+        -5.219087021510197
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "nominal/side_315",
+      "seed": 800,
+      "requested_pose": {
+        "tilt": 1.5707963267948966,
+        "azimuth": 5.497787143782138
+      },
+      "randomized": false,
+      "first_base_only_stable_s": 1.78,
+      "first_strict_success_s": 3.6,
+      "seconds": 3.6,
+      "failure": null,
+      "final_upright": 0.9999999914391684,
+      "final_command_deg": [
+        -4.590183377434943,
+        -2.536874282988808
+      ],
+      "final_true_joints_deg": [
+        -4.689763018946785,
+        -2.5329272460627887
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "nominal/inverted",
+      "seed": 900,
+      "requested_pose": {
+        "tilt": 3.141592653589793,
+        "azimuth": 0.0
+      },
+      "randomized": false,
+      "first_base_only_stable_s": 1.68,
+      "first_strict_success_s": 2.06,
+      "seconds": 2.06,
+      "failure": null,
+      "final_upright": 0.9999999908018776,
+      "final_command_deg": [
+        -3.7686241519178543,
+        -1.781064242809159
+      ],
+      "final_true_joints_deg": [
+        -3.861481312986447,
+        -1.7873797249805758
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "nominal/upright",
+      "seed": 1000,
+      "requested_pose": {
+        "tilt": 0.0,
+        "azimuth": 0.0
+      },
+      "randomized": false,
+      "first_base_only_stable_s": 1.0,
+      "first_strict_success_s": 1.0,
+      "seconds": 1.0,
+      "failure": null,
+      "final_upright": 0.9999999936580805,
+      "final_command_deg": [
+        -4.9614305703128885,
+        -4.746065344154357
+      ],
+      "final_true_joints_deg": [
+        -5.081932277104262,
+        -4.739334648138886
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "development/side_000",
+      "seed": 3000,
+      "requested_pose": {
+        "tilt": 1.5486360337961915,
+        "azimuth": -0.06001153674393412
+      },
+      "randomized": true,
+      "first_base_only_stable_s": 5.82,
+      "first_strict_success_s": 5.82,
+      "seconds": 5.82,
+      "failure": null,
+      "final_upright": 0.9999999795969776,
+      "final_command_deg": [
+        -5.25497426550857,
+        -7.827270899910475
+      ],
+      "final_true_joints_deg": [
+        -5.373952249104055,
+        -7.85852570757156
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "development/side_045",
+      "seed": 3100,
+      "requested_pose": {
+        "tilt": 1.6995032568228667,
+        "azimuth": 0.734762126318194
+      },
+      "randomized": true,
+      "first_base_only_stable_s": 3.38,
+      "first_strict_success_s": 3.38,
+      "seconds": 3.38,
+      "failure": null,
+      "final_upright": 0.9999999842020297,
+      "final_command_deg": [
+        -5.1396201824559045,
+        -4.574122755361148
+      ],
+      "final_true_joints_deg": [
+        -5.357649584558648,
+        -4.681954204601422
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "development/side_090",
+      "seed": 3200,
+      "requested_pose": {
+        "tilt": 1.67676229825521,
+        "azimuth": 1.5517357663165834
+      },
+      "randomized": true,
+      "first_base_only_stable_s": null,
+      "first_strict_success_s": null,
+      "seconds": 15.0,
+      "failure": null,
+      "final_upright": 0.4727908414087488,
+      "final_command_deg": [
+        25.80739877758576,
+        74.37454566931792
+      ],
+      "final_true_joints_deg": [
+        22.599349671068875,
+        73.13450587094535
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "development/side_135",
+      "seed": 3300,
+      "requested_pose": {
+        "tilt": 1.664200671265426,
+        "azimuth": 2.4456686672611365
+      },
+      "randomized": true,
+      "first_base_only_stable_s": 2.1,
+      "first_strict_success_s": 2.14,
+      "seconds": 2.14,
+      "failure": null,
+      "final_upright": 0.9999999905216442,
+      "final_command_deg": [
+        -4.790603039783768,
+        -4.973141954173255
+      ],
+      "final_true_joints_deg": [
+        -4.868782901053237,
+        -4.867169137992471
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "development/side_180",
+      "seed": 3400,
+      "requested_pose": {
+        "tilt": 1.6039321420196078,
+        "azimuth": 3.029148366760352
+      },
+      "randomized": true,
+      "first_base_only_stable_s": 1.6400000000000001,
+      "first_strict_success_s": 2.22,
+      "seconds": 2.22,
+      "failure": null,
+      "final_upright": 0.9999999914542582,
+      "final_command_deg": [
+        -6.337929278722784,
+        -5.156373001513431
+      ],
+      "final_true_joints_deg": [
+        -6.490142681273761,
+        -5.194969760563511
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "development/side_225",
+      "seed": 3500,
+      "requested_pose": {
+        "tilt": 1.4839131563158514,
+        "azimuth": 4.043973659527744
+      },
+      "randomized": true,
+      "first_base_only_stable_s": 2.04,
+      "first_strict_success_s": 8.66,
+      "seconds": 8.66,
+      "failure": null,
+      "final_upright": 0.9999999923565687,
+      "final_command_deg": [
+        -4.12683650079318,
+        -9.791603188340776
+      ],
+      "final_true_joints_deg": [
+        -4.270772943632541,
+        -9.856959877789546
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "development/side_270",
+      "seed": 3600,
+      "requested_pose": {
+        "tilt": 1.469720019185694,
+        "azimuth": 4.724497303062579
+      },
+      "randomized": true,
+      "first_base_only_stable_s": 2.72,
+      "first_strict_success_s": 2.72,
+      "seconds": 2.72,
+      "failure": null,
+      "final_upright": 0.9999999917568358,
+      "final_command_deg": [
+        -2.633230305855617,
+        -2.7794625983911483
+      ],
+      "final_true_joints_deg": [
+        -2.674387405552883,
+        -2.7972883006760942
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "development/side_315",
+      "seed": 3700,
+      "requested_pose": {
+        "tilt": 1.6428944262786722,
+        "azimuth": 5.650982851719008
+      },
+      "randomized": true,
+      "first_base_only_stable_s": 3.4,
+      "first_strict_success_s": 3.4,
+      "seconds": 3.4,
+      "failure": null,
+      "final_upright": 0.9999999917762773,
+      "final_command_deg": [
+        -6.392255062319589,
+        -4.139434191344587
+      ],
+      "final_true_joints_deg": [
+        -6.588064395815112,
+        -4.209124518035431
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "development/inverted",
+      "seed": 3800,
+      "requested_pose": {
+        "tilt": 3.2024767218516197,
+        "azimuth": 0.07256656785257394
+      },
+      "randomized": true,
+      "first_base_only_stable_s": 1.6400000000000001,
+      "first_strict_success_s": 2.2,
+      "seconds": 2.2,
+      "failure": null,
+      "final_upright": 0.9999999924141973,
+      "final_command_deg": [
+        -5.5388245903850875,
+        -5.979147829948041
+      ],
+      "final_true_joints_deg": [
+        -5.719555487166626,
+        -6.059855434169624
+      ],
+      "mujoco_warnings": 0
+    },
+    {
+      "case": "development/upright",
+      "seed": 3900,
+      "requested_pose": {
+        "tilt": 0.05704866836359514,
+        "azimuth": 0.12265581792746924
+      },
+      "randomized": true,
+      "first_base_only_stable_s": 1.96,
+      "first_strict_success_s": 1.96,
+      "seconds": 1.96,
+      "failure": null,
+      "final_upright": 0.9999999838745347,
+      "final_command_deg": [
+        -3.9174562492392035,
+        -3.089923677514612
+      ],
+      "final_true_joints_deg": [
+        -4.085529576542884,
+        -3.101547951869949
+      ],
+      "mujoco_warnings": 0
+    }
+  ],
+  "physical_robot_commands_sent": false
+}

@@ -1,16 +1,17 @@
 # Training and deployment pipeline
 
-**V1 status, 7 November 2026:** a retained demonstration-trained actor runs on the physical robot and has demonstrated unassisted recovery, including battery operation without USB. Firmware 0.6 adds automatic battery-only startup. [Project summary](../docs/PROJECT_SUMMARY.md) · [Current controller](../firmware/policy_control/README.md).
+**V1 status, 7 November 2026:** controller **0.7** is uploaded and armed with the new **C3 PPO actor**. Battery-only automatic startup is user-confirmed; physical recovery of the C3 build awaits operator observation. Earlier hardware recovered with the original demonstration-trained actor. [Project summary](../docs/PROJECT_SUMMARY.md) · [Current controller](../firmware/policy_control/README.md).
 
 ## Choose the model and experiment
 
 | Path | Purpose/status |
 |---|---|
-| `robot.xml`, `onshape/`, `recovery/` | Original final-Onshape geometry and the experiment supplying the deployed actor. Original masses total 73.922 g; adjacent-body exclusions remain a known limitation. |
+| `robot.xml`, `onshape/`, `recovery/` | Historical final-Onshape geometry and original actor experiment. Original masses total 73.922 g; adjacent-body exclusions remain a known limitation. |
 | `enclosure/robot.xml`, `enclosure/` | Frozen fit-approved C2 enclosure, relocated electronics/IMU and corrected adjacent contacts. Offline candidate and results; not promoted to the robot. Model mass estimate 87.987 g. |
+| `enclosure_c3/robot.xml`, `enclosure_c3/` | Installed C3 enclosure, current PPO actor and deployment provenance. 88.162 g estimated mass; 49/50 held-out stable-base recoveries in simulation, 0/50 strict straight-arm. |
 | `archive/` | Historical pre-Onshape primitive models/software checks. |
 
-Latest printable CAD is C3, but the enclosure experiment deliberately uses frozen C2 inputs. No model builder silently updates the deployed actor. Current electrical design includes **one Pololu master switch**; the older original-geometry model predates the under-base enclosure.
+The current [C3 experiment](enclosure_c3/README.md) freezes the installed C3 CAD. The earlier enclosure experiment retains frozen C2 inputs. No model builder silently updates the deployed actor. Current electrical design includes **one Pololu master switch**; the older original-geometry model predates the under-base enclosure.
 
 The [original experiment](recovery/README.md) retained behavior cloning over a tested 67,584-transition PPO refinement. Its 100/100 broad simulated result is specific to that earlier suite. The [C2 experiment](enclosure/README.md) ran three PPO experiments totaling 202,752 transitions; its selected offline candidate scored 18/30 fresh randomized cases versus 8/30 for the original actor on the same new-model cases. These are different models/evaluations, not a single evolving hardware success rate.
 

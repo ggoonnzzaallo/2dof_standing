@@ -111,6 +111,10 @@ def require_tools():
 
 def build(sketch='servo_center'):
     require_tools()
+    if sketch == 'policy_control':
+        from policy_artifact import verify_selection
+        selected = verify_selection()
+        print('Recovery model: ' + selected['geometry_id'] + ' / actor ' + selected['actor_header_sha256'][:12], flush=True)
     if sketch not in ('servo_center', 'policy_probe', 'imu_bench', 'policy_shadow', 'servo_calibration', 'policy_control'):
         raise ValueError('Unknown project sketch.')
     build_path = ROOT / 'build' / sketch

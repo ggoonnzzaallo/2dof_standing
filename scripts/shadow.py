@@ -33,9 +33,9 @@ def handshake(device):
     return banner
 
 class HostActor:
-    def __init__(self):
+    def __init__(self,header=None):
         self.folder=tempfile.TemporaryDirectory();folder=Path(self.folder.name)
-        (folder/'policy.h').write_bytes((ROOT/'sim/recovery/results/policy_simulation_only.h').read_bytes())
+        (folder/'policy.h').write_bytes(Path(header or ROOT/'sim/recovery/results/policy_simulation_only.h').read_bytes())
         (folder/'policy.c').write_text('#include "policy.h"\nvoid infer(const float *x,float *y){robot_policy(x,y);}\n')
         subprocess.run(['cc','-O2','-shared','-fPIC',str(folder/'policy.c'),'-o',str(folder/'policy.so'),'-lm'],check=True)
         self.lib=ctypes.CDLL(str(folder/'policy.so'))

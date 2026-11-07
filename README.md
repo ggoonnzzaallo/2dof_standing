@@ -2,7 +2,9 @@
 
 A small, 3D-printed robot that uses two perpendicular servo joints and a learned onboard controller to get back upright. Inspired by [Homemade Garbage's project](https://homemadegarbage.com/rl13) and [SelfRisingRobot](https://github.com/homemadegarbage/SelfRisingRobot).
 
-**V1 project wrap-up — 7 November 2026.** The robot has demonstrated unassisted physical self-righting and recovery on battery without USB. Firmware **0.6** adds automatic battery-only startup; **0.5** introduced the one-minute inactivity lock. Later enclosure-training experiments are preserved separately and have not replaced the deployed actor.
+**Current status — 7 November 2026:** controller **0.7**, with a newly trained **C3-matched PPO actor**, is uploaded and armed for standalone operation. The simulator includes the installed thicker electronics enclosure and outward battery position. Physical C3 recovery is awaiting operator observation; earlier hardware self-righting used the earlier build.
+
+**V1 development history.** Earlier hardware demonstrated unassisted self-righting and battery-only recovery. Controller **0.7** replaces the original actor with the C3 candidate, retaining **0.6** automatic battery-only startup and the **0.5** one-minute inactivity lock. [Deployment record](firmware/policy_control/results/2026-11-07/deployment_0_7.json).
 
 - **[Operating instructions](docs/OPERATING_INSTRUCTIONS.md)** — run without a computer, stop, charge, wake after inactivity.
 - **[Project summary and video facts](docs/PROJECT_SUMMARY.md)** — what was built, how the controller learned, demonstrated results and remaining limits.
@@ -42,34 +44,35 @@ Optional Mac controls, from the repository root:
 
 Lower PWM is **D8 / printed 8**, upper **D7 / printed 7**. Servo power comes from the switched battery bus, never the XIAO's 3V3 output. The [hardware guide](HARDWARE.md) explains sensing, power paths and measured versus assumed parameters. Receipt totals are incomplete; the original under-$100 target is not a verified total.
 
-The latest printable cup is **C3** with a tighter USB opening and outward battery placement; its lid is unchanged from fit-approved **C2**. The [enclosure simulator](sim/enclosure/README.md) deliberately stays on frozen C2 geometry and masses. The original arm is from the user's [final Onshape export](cad/onshape_import/README.md); older generated arm concepts are historical.
+The latest printable cup is **C3** with a tighter USB opening and outward battery placement; its lid is unchanged from fit-approved **C2**. The [deployed training model](sim/enclosure_c3/README.md) uses frozen installed C3 inputs; the earlier [C2 simulator](sim/enclosure/README.md) remains preserved separately. The original arm is from the user's [final Onshape export](cad/onshape_import/README.md); older generated arm concepts are historical.
 
 ## Learning and simulation
 
 The deployed actor is a **10 → 64 → 64 → 2** network with **4,994 float32 parameters**, evaluated onboard at **50 Hz**. It observes estimated base DOWN, gyro, commanded joint targets and previous actions. It outputs target increments; simulated servos have finite speed, lag and torque. Actual joint angles are not policy inputs.
 
-The retained actor was trained by **behavior cloning of searched recovery demonstrations**. Stable-Baselines3 PPO refinement was tested but did not beat that checkpoint in the original experiment. It is accurate to describe the project as learned control using a simulation/demo/PPO workflow; the deployed weights are not the best PPO checkpoint. See [training records and saved checkpoints](sim/recovery/README.md).
+The current actor uses **Stable-Baselines3 PPO**, warm-started from the C2 candidate on the installed C3 model. The run completed **202,752 new transitions / 206 episodes**; the selected checkpoint is at **33,792 transitions / 34 completed episodes**, with seven checkpoints saved. In 50 held-out simulated cases it restored a stable base in **49/50**, versus **36/50** for the old actor on the same cases within 15 seconds. It often rests with a bent arm: strict straight-arm success is **0/50**. These are simulation results. [C3 training, selection and limits](sim/enclosure_c3/README.md). The [original experiment](sim/recovery/README.md) supplied an earlier demonstration-trained actor.
 
-For the original actor's mouse-force playground on this configured Mac:
+For the current C3 actor's mouse-force playground on this configured Mac:
 
 ```sh
-.venv-sim/bin/mjpython sim/recovery/play.py
+ROBOT_MODEL_PATH="$PWD/sim/enclosure_c3/robot.xml" .venv-sim/bin/mjpython sim/recovery/play.py \
+  --model sim/enclosure_c3/results/best.zip --filtered
 ```
 
 Double-click a body, then Control + right-drag to pull; release to watch recovery. Drag normally to orbit and scroll to zoom. This opens simulation only. [Full setup and model guide](sim/README.md).
 
 | Model/experiment | Status |
 |---|---|
-| Original Onshape geometry + retained demonstration-trained actor | Source of the deployed actor; physical self-righting observed |
+| Original Onshape geometry + demonstration-trained actor | Historical deployment; physical self-righting observed |
 | Original actor's broad simulation evaluation | 100/100 in that specific historical suite; not a hardware success rate |
 | C2 enclosure, relocated IMU and corrected adjacent contacts | Separate offline candidate; 18/30 fresh randomized cases versus old actor's 8/30 on the same new-model cases |
-| C3 cup/battery layout | Printable CAD; not silently substituted into C2 training or deployed weights |
+| Installed C3 cup/battery layout + new PPO actor | Current controller 0.7; 49/50 held-out simulated stable-base recoveries; physical result pending |
 
 ## Reproduce and inspect
 
 - **Firmware:** [toolchain setup](firmware/README.md), [current controller](firmware/policy_control/README.md), [validation history](firmware/VALIDATION.md).
 - **Geometry:** [final Onshape import](cad/onshape_import/README.md), [enclosure sources and print package](cad/electronics_pod/README.md), [original mass accounting](sim/mass_properties/README.md).
-- **Training:** [pipeline](sim/README.md), [deployed actor experiment](sim/recovery/README.md), [offline enclosure experiment](sim/enclosure/README.md).
+- **Training:** [pipeline](sim/README.md), [current C3 actor](sim/enclosure_c3/README.md), [original actor experiment](sim/recovery/README.md), [C2 experiment](sim/enclosure/README.md).
 - **Decisions:** [controller/IMU](docs/CONTROLLER_DECISION.md), [servo feedback tradeoff](docs/SERVO_DECISION.md), [procurement history](docs/PROCUREMENT_STATUS.md).
 - **Future iterations:** [integrated controller PCB](docs/INTEGRATED_CONTROLLER_PCB.md), [battery LED and hardware backlog](docs/HARDWARE_BACKLOG.md), [persistent recovery/personality](docs/RECOVERY_BEHAVIOR.md).
 

@@ -2,6 +2,7 @@
 import ast
 import csv
 import io
+import json
 import sys
 from pathlib import Path
 import subprocess
@@ -103,7 +104,7 @@ int main(int argc,char** argv){
  Wire1.raw(0,100);waitMs(30);Wire1.raw(0,0);waitMs(31000);
  assert(mode==STANDALONE&&frames>=before+3050); // Meaningful motion extends the idle window.
  Serial.open=true;before=frames;loop();assert(mode==STANDALONE&&frames>=before);
- send("state\n");assert(mode==STANDALONE);waitMs(100);assert(frames>before);
+ send("state\nsensors\n");assert(mode==STANDALONE);assert(Serial.output.str().find("SENSORS,1,")!=std::string::npos);waitMs(100);assert(frames>before);
  send("off\n");checkOff();
  resetFixture();send("arm\n");waitMs(1100);send("standalone\n");Serial.open=false;
  adcRaw=1600;waitMs(250);checkOff();assert(std::string(lastStopReason).find("battery")!=std::string::npos);
@@ -169,7 +170,7 @@ int main(int argc,char** argv){
  assert(!motors[0].attached()&&!motors[1].attached()&&levels[D8]==LOW&&levels[D7]==LOW);
  assert(pulses[0]==0&&pulses[1]==0);
  Wire1.raw(0,200);waitMs(100);assert(mode==INACTIVE); // Moving does not wake it.
- Serial.open=true;send("state\nstatus\nhelp\nkeep\n");assert(mode==INACTIVE);
+ Serial.open=true;send("state\nsensors\nstatus\nhelp\nkeep\n");assert(mode==INACTIVE);
  send("arm\nrun\nstandalone\nshadow\noff\n!\n");assert(mode==INACTIVE&&inactivity.locked);
  assert(!motors[0].attached()&&!motors[1].attached());
  send("charge\n");assert(mode==CHARGE&&inactivity.locked&&levels[PIN_CHARGING_CURRENT]==LOW);
@@ -201,15 +202,17 @@ int main(int argc,char** argv){
 '''
 with tempfile.TemporaryDirectory() as folder:
     root=Path(folder)
-    for path in ['firmware/policy_control','firmware/policy_shadow','firmware/servo_center','firmware/imu_bench','sim/recovery/results']:(root/path).mkdir(parents=True,exist_ok=True)
+    for path in ['firmware/policy_control','firmware/policy_shadow','firmware/servo_center','firmware/imu_bench','sim/recovery/results','sim/enclosure_c3/results']:(root/path).mkdir(parents=True,exist_ok=True)
     (root/'Arduino.h').write_text(arduino);(root/'Adafruit_TinyUSB.h').write_text('')
     (root/'firmware/imu_bench/ImuBus.h').write_text(fixtures['BUS'])
     (root/'firmware/imu_bench/Lsm6ds3.h').write_bytes((HERE/'imu_bench/Lsm6ds3.h').read_bytes())
     (root/'firmware/servo_center/FineServo.h').write_text(servo)
     (root/'firmware/policy_shadow/MicrosecondClock.h').write_text(clock)
     for name in ['GravityFilter.h','MountCalibration.h']:(root/'firmware/policy_shadow'/name).write_bytes((HERE/'policy_shadow'/name).read_bytes())
-    for name in ['policy_control.ino','ServoProfile.h','InactivityGuard.h']:(root/'firmware/policy_control'/name).write_bytes((HERE/'policy_control'/name).read_bytes())
-    (root/'sim/recovery/results/policy_simulation_only.h').write_bytes((HERE.parent/'sim/recovery/results/policy_simulation_only.h').read_bytes())
+    for name in ['policy_control.ino','ServoProfile.h','InactivityGuard.h','PolicySelection.h']:(root/'firmware/policy_control'/name).write_bytes((HERE/'policy_control'/name).read_bytes())
+    manifest=json.loads((HERE/'policy_control/PolicyManifest.json').read_text())
+    actor_header=HERE.parent/manifest['actor_header_path']
+    (root/manifest['actor_header_path']).write_bytes(actor_header.read_bytes())
     (root/'test.cpp').write_text(test)
     subprocess.run(['c++','-std=c++17','-O2','-I',str(root),str(root/'test.cpp'),'-o',str(root/'test')],check=True)
     capture=root/'capture.txt'
@@ -220,7 +223,7 @@ with tempfile.TemporaryDirectory() as folder:
     lines=capture.read_text().splitlines()
     header=next(line for line in lines if line.startswith('frame,t_us,mode,'))
     rows=list(csv.DictReader(io.StringIO(header+'\n'+'\n'.join(line[2:] for line in lines if line.startswith('D,')))))
-    actor=HostActor()
+    actor=HostActor(actor_header)
     try:
         result=analyze(rows,actor,False)
         assert result['contract_checks']=='passed' and result['frames_logged']>=100

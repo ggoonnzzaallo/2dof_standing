@@ -75,9 +75,9 @@ def operate(device, action, clock=time.monotonic):
                     result['charge_acknowledgement'] = line
                     break
                 if line.startswith(('OFF', 'REFUSED', 'ERROR')):
-                    raise RuntimeError(line + ' This harness requires controller firmware 0.4.')
+                    raise RuntimeError(line + ' This harness requires controller firmware 0.7.')
             else:
-                raise RuntimeError('Charge mode was not acknowledged; firmware 0.4 is required for this harness.')
+                raise RuntimeError('Charge mode was not acknowledged; firmware 0.7 is required for this harness.')
             result['device_state'] = query_state(device, clock)
             if result['device_state']['mode'] != 5:
                 raise RuntimeError('Device did not remain in no-PWM charge mode.')

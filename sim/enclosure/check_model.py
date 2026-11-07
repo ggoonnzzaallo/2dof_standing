@@ -62,7 +62,7 @@ def main():
         assert not any(w.number for w in env.data.warning)
         if term or trunc:env.reset(seed=step+100)
     env.close()
-    out={'status':'passed','date':'2026-11-03','robot_xml_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+    out={'status':'passed','date':r.get('date','2026-11-03'),'robot_xml_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
         'mass_g':m.body_mass.sum()*1000,'whole_com_cad_mm':(np.array(r['whole_upright']['com_cad_m'])*1000).tolist(),
         'imu_site_cad_mm':(m.site('imu').pos*1000).tolist(),'old_model_and_policy_preserved':True,
         'neutral_false_contacts':0,'inertia_checks':'passed','ground_bottom_cad_mm':-12,

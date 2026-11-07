@@ -1,6 +1,6 @@
 # V1 project summary and video facts
 
-Recorded 7 November 2026. V1 is wrapped as a working experimental self-righting robot. This page separates demonstrated behavior from offline experiments and future ideas.
+Recorded 7 November 2026. Controller **0.7** is uploaded and armed with a **C3-matched PPO actor**. Automatic battery-only startup is user-confirmed; physical self-righting of this new enclosure/controller combination is awaiting operator observation. Earlier hardware demonstrated self-righting with the original actor. This page separates hardware observations from simulation results.
 
 ## What we built
 
@@ -18,9 +18,11 @@ The user's final Onshape assembly supplied the arm geometry. A custom under-base
 4. Behavior-cloned a small neural actor, then compared PPO refinement using Stable-Baselines3. The retained original actor was the stronger behavior-cloning checkpoint.
 5. Exported the actor to portable C, calibrated IMU alignment and visual PWM angle signs, checked MCU/host inference agreement, then tested physical recovery.
 
-The deployed original experiment used **71 demonstrations / 13,750 observation-action pairs** and **3,000 behavior-cloning minibatch updates**. PPO refinement ran **67,584 transitions**; it did not improve the retained checkpoint. These are transitions and optimizer updates, not episode counts. [Original experiment, evaluations and checkpoints](../sim/recovery/README.md).
+The historical original experiment used **71 demonstrations / 13,750 observation-action pairs** and **3,000 behavior-cloning minibatch updates**. PPO refinement ran **67,584 transitions**; it did not improve the retained checkpoint. These are transitions and optimizer updates, not episode counts. [Original experiment, evaluations and checkpoints](../sim/recovery/README.md).
 
 The actor has **4,994 parameters**, about **20 kB of float32 weights**, with 10 inputs and two outputs. It runs at **50 Hz**, with roughly **1.2 ms inference** in recorded hardware checks. Inputs are estimated base gravity direction, angular rate, previous commanded targets and previous actions. The three-wire servos do not report position; actual joint angle and floor contact can be used for simulation rewards but are not policy inputs.
+
+The current **C3** actor warm-starts from the C2 candidate and uses PPO with the firmware IMU filter on the installed geometry. Training completed **202,752 additional transitions / 206 episodes**, with seven saved checkpoints. The checkpoint at **33,792 transitions / 34 completed episodes** was selected on 20 development cases. Held-out simulation recovered a stable base in **49/50 within 15 seconds**, versus **36/50** for the original actor on matched cases. Strict straight-arm success was **0/50**: the reward permits a bent resting arm. These scores do not establish hardware reliability. [C3 records](../sim/enclosure_c3/README.md).
 
 ## Demonstrated results
 
@@ -30,17 +32,18 @@ The actor has **4,994 parameters**, about **20 kB of float32 weights**, with 10 
 | Recovery on battery after unplugging USB | [Standalone deployment record](../firmware/policy_control/results/2026-11-02/standalone_0_2/deployment.json) |
 | Both joints responded normally after D8/D7 reroute | [Controller 0.4 deployment](../firmware/policy_control/results/2026-11-07/deployment_0_4.json) |
 | Real-board one-minute inactivity latch, motion-command refusals and charge-mode availability | [Controller 0.5 no-PWM capture](../firmware/policy_control/results/2026-11-07/inactivity_0_5.json) |
-| Controller 0.6 battery-only automatic startup | Actual-sketch host tests cover start, USB inhibition, faults and inactivity; see [current deployment record](../firmware/policy_control/results/2026-11-07/deployment_0_6.json) for hardware observations |
+| Controller 0.6 battery-only automatic startup | User-confirmed; [record](../firmware/policy_control/results/2026-11-07/deployment_0_6.json) |
+| Controller 0.7 C3 actor uploaded and armed | Identity and standalone handoff confirmed; physical C3 recovery pending. [Record](../firmware/policy_control/results/2026-11-07/deployment_0_7.json) |
 
 The recorded sideways run included disturbances, so it is not a clean untouched single-recovery timing measurement. No repeated physical trial count establishes an all-direction success rate.
 
 ## Separate enclosure experiment
 
-The later **C2** model relocates electronics/IMU, uses sliced enclosure masses and enables genuine adjacent-link contacts with selective pivot-interface masks. Three PPO experiments ran **202,752 transitions total**. The selected offline candidate achieved **18/30** fresh randomized recoveries versus **8/30** for the original actor on those same new-model cases. It has not replaced the deployed actor.
+The later **C2** model relocates electronics/IMU, uses sliced enclosure masses and enables genuine adjacent-link contacts with selective pivot-interface masks. Three PPO experiments ran **202,752 transitions total**. The selected offline candidate achieved **18/30** fresh randomized recoveries versus **8/30** for the original actor on those same new-model cases. Its selected checkpoint supplied the warm start for the current C3 PPO run; C2 weights themselves were not deployed.
 
 On a different, familiar 20-case diagnostic, the candidate recovered in **16/20** by 10 seconds and still 16/20 by 60 seconds. That score is neither the fresh 30-case result nor a hardware rate. The original actor's historical **100/100** simulated score belongs to its earlier model/test suite. [Enclosure results](../sim/enclosure/README.md).
 
-Original/deployed-model adjacent-body contact exclusions remain a modeling limitation; the C2 correction is an offline improvement. C3 CAD is not the C2 simulator. Preserve those distinctions when showing a simulation next to real footage.
+The original model suppressed adjacent-body contacts. Both C2 and the current C3 model correct this with selective pivot-interface masks. C3 has separate frozen assets, evaluations and actor weights; preserve model/revision distinctions in video footage.
 
 ## Using it on camera
 
@@ -50,6 +53,6 @@ Useful figures already in the repo: [neural recovery animation](../sim/recovery/
 
 ## Future ideas, outside the V1 wrap-up
 
-An integrated MCU/IMU/charger/power PCB to remove wires; onboard RGB battery indication; stronger persistent recovery and expressive behavior; physical servo-dynamics and charging-current characterization; and a C3-matched training model. See the [hardware backlog](HARDWARE_BACKLOG.md) and [recovery behavior notes](RECOVERY_BEHAVIOR.md).
+An integrated MCU/IMU/charger/power PCB to remove wires; onboard RGB battery indication; stronger persistent recovery and expressive behavior; physical servo-dynamics and charging-current characterization; and further C3 physical validation/refinement. See the [hardware backlog](HARDWARE_BACKLOG.md) and [recovery behavior notes](RECOVERY_BEHAVIOR.md).
 
 Known receipt totals cover only part of the purchases. Do not describe the under-$100 design target as a verified delivered build cost. No private order screenshots or personal receipt details are needed for the video.

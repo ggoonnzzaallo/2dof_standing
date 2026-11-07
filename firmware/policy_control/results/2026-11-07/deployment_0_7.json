@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-07",
+  "firmware": "ROBOT POLICY CONTROL 0.7",
+  "previous_git_revision": "57768d7",
+  "uploaded": true,
+  "upload_acknowledgement": "Device programmed.",
+  "upload_port": "/dev/cu.usbmodem1101",
+  "native_build": {
+    "flash_bytes": 87704,
+    "static_ram_bytes": 7920
+  },
+  "policy_selection": {
+    "geometry_id": "installed_enclosure_c3",
+    "mesh_assets_sha256": "30adb98827adffdc23b398f7145880bd3bbb31e1526d101f009ae481a8cd37e9",
+    "observation_count": 10,
+    "action_count": 2,
+    "period_ms": 20,
+    "action_increment_rad": 0.06,
+    "hardware_validation": "Separate deployment record; selection does not imply physical success",
+    "actor_header_path": "sim/enclosure_c3/results/policy_c3.h",
+    "actor_header_sha256": "0857ad97462e121bb45a72f2700950a98bfc391235571acfd3c09ad62948a047",
+    "actor_archive_path": "sim/enclosure_c3/results/best.zip",
+    "actor_archive_sha256": "cff95efe8cce8a38f9613ae93dfe491c6abc53cf49809f86111e66cf3984f05f",
+    "model_path": "sim/enclosure_c3/robot.xml",
+    "model_sha256": "e04bd648b4f0f7ec46ee9b6918eac781faee92c2ac2eb5bfa834edc5b6fab2b5",
+    "training_report_path": "sim/enclosure_c3/results/training_report.json",
+    "training_report_sha256": "f60feea3b9b691855270e7dbb11c3671f1c870565d18a2ced5ce21aadf1e926c"
+  },
+  "validation_completed_before_user_requested_no_more_tests": {
+    "full_firmware_regression": "passed",
+    "mac_helper_tests": 13,
+    "C_export_max_absolute_error": 3.5762786865234375e-07,
+    "flat_no_PWM_sensor_capture": "c3_flat_sensors_0_7.json",
+    "upright_tilt_deg": 2.4854,
+    "sensor_to_base_rotation_changed": false
+  },
+  "standalone_handoff_record": "arm_0_7.json",
+  "standalone_handoff_confirmed": true,
+  "handoff_battery_mv": 4145,
+  "left_running_after_serial_close": true,
+  "physical_recovery_on_C3_confirmed": false,
+  "physical_observation_status": "Awaiting operator observation; arming acknowledgement is not proof of self-righting.",
+  "later_state": "No follow-up hardware commands after standalone handoff; inactivity/battery/fault guards remain active.",
+  "charging_current_and_termination_verified": false,
+  "source_state": "Hashes identify uploaded inputs; implementation is in the commit containing this record.",
+  "sha256": {
+    "firmware/policy_control/policy_control.ino": "6342850d20f3350e387395604abfb4edf574f7ac355ca3e481c5a5b2efd19ccc",
+    "firmware/policy_control/PolicySelection.h": "8acc3dd972d6bead5eb753f7e0a8f92129ea1c9bdc27e3f5290a0707c5330179",
+    "firmware/policy_control/PolicyManifest.json": "c1093deabc769a63ae53f50862890b752485cb704d0ae0356793985190d2ebff",
+    "firmware/policy_control/InactivityGuard.h": "580b253625f29cda804ccdbb5a8997ab5560c909f7f65ab0a79d9d27a6abf3e3",
+    "firmware/policy_control/ServoProfile.h": "31c654bc83fb7f33c5efda7fb3c884172a9de2d7384dcde5feccb34879154fb1",
+    "build/policy_control/policy_control.ino.hex": "d52946a1cc5c419ebbd79dad230f4c9441b55ad5a3de27d87852c2874c86c0d5",
+    "build/policy_control/policy_control.ino.zip": "6ea909917f6bd43be2874168b96d87f3c7493bdca60a7fcef092efb7bb5bb20d"
+  }
+}

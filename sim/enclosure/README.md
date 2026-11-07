@@ -1,3 +1,5 @@
+> **Historical C2 experiment.** Controller 0.7 now uses the separate [installed C3 model and PPO actor](../enclosure_c3/README.md). References below to the deployed/original actor describe the C2 experiment baseline.
+
 # Fit-approved enclosure model
 
 **CAD revision note:** the [C3 printable cup](../../cad/electronics_pod/README.md) now has a tighter USB opening and shifted battery. This saved model/results remain C2. Its exact CAD inputs are frozen in [source/fit_approved_c2](source/fit_approved_c2); the model builder and joint viewer use that snapshot. C3 has not silently replaced training geometry, masses or checkpoints.
