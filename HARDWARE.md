@@ -31,8 +31,8 @@ Pololu VOUT ---- J1 switched-positive bus ---- XIAO BAT+
 Battery negative -- J2 common GND ----------- XIAO GND or BAT-
                                          +-- Pololu GND
                                          +-- both servo grounds
-XIAO D0 ------------------------------------ lower servo signal
-XIAO D1 ------------------------------------ upper servo signal
+XIAO D8 ------------------------------------ lower servo signal
+XIAO D7 ------------------------------------ upper servo signal
 XIAO D2 / Pololu ON / Pololu SW ------------- no wires
 USB-C -------------------------------------- XIAO programming + onboard charger
 ```
@@ -65,7 +65,7 @@ Before untethered operation, test around 4.2, 3.8, and 3.6 V cell voltage while 
 
 **Do not operate this design below 3.0 V at the cell.** The PTK servo's *published* lower operating limit is around **5 V** on the [manufacturer's related 7465 MG-D page](https://www.ptkhobby.com/en/sys-pd/234.html), so **all direct 1S operation is outside that rating**, despite the reference robot's 3.7 V success. The XIAO's 3.3 V regulator cannot maintain a 3.3 V output from a battery below 3.3 V, so a reset or unstable sensing is possible. The selected single-cell LiPo should be shut down well before 3.0 V; [Horizon Hobby's LiPo equipment guidance](https://www.horizonhobby.com/on/demandware.static/-/Sites-horizon-master/default/Manuals/EFLU02050_MANUAL_EN.pdf) uses a 3.0 V-per-cell low-voltage cutoff. Our initial **3.6 V loaded manual-stop threshold** is intentionally earlier to preserve regulator headroom and battery life, pending measurement. Raise that threshold if recovery weakens sooner. The Rev C firmware can only stop PWM; it cannot operate the manual slider. Unplug USB and slide OFF when low and for storage; do not assume the RC battery includes its own low-voltage protection.
 
-Use a watchdog and explicit arming state. Invalid sensor data, a stale control loop and low voltage should stop PWM, drive D0/D1 LOW and indicate a fault; they cannot cut the direct supply. D2 is unused. Use the selected software charge mode for Rev C routine charging, after the electrical checks pass; first firmware commissioning still uses unplugged servo plugs before enclosure closure. Start with a USB command to arm during bench development, then add a deliberate untethered arming gesture/button behavior. No wireless link is needed during normal operation.
+Use a watchdog and explicit arming state. Invalid sensor data, a stale control loop and low voltage should stop PWM, drive D8/D7 LOW and indicate a fault; they cannot cut the direct supply. D2 is unused. Use the selected software charge mode for Rev C routine charging, after the electrical checks pass; first firmware commissioning still uses unplugged servo plugs before enclosure closure. Start with a USB command to arm during bench development, then add a deliberate untethered arming gesture/button behavior. No wireless link is needed during normal operation.
 
 ## Why 500 mAh, and estimated runtime
 

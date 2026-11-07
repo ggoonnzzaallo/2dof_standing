@@ -43,7 +43,7 @@ void resetPolicy(){
 }
 void stop(){
   for(int i=0;i<2;++i)if(motors[i].attached())motors[i].detach();
-  digitalWrite(D0,LOW);pinMode(D0,OUTPUT);digitalWrite(D1,LOW);pinMode(D1,OUTPUT);pinMode(D2,INPUT);
+  digitalWrite(D8,LOW);pinMode(D8,OUTPUT);digitalWrite(D7,LOW);pinMode(D7,OUTPUT);pinMode(D2,INPUT);
   mode=OFF;resetPolicy();
 }
 void halt(const char* reason){stop();lastStopReason=reason;if(Serial){Serial.print("OFF: ");Serial.println(reason);}}
@@ -57,10 +57,11 @@ void beginCharge(){
 bool fresh(){return imu.ready&&attitude.ready&&sampleAt&&uint32_t(clockUs.now()-sampleAt)<20000;}
 bool validStartBattery(){batteryMv=readBatteryMv();return batteryMv>=3700&&batteryMv<=4400;}
 void status(){
-  Serial.println("ROBOT POLICY CONTROL 0.3");
+  Serial.println("ROBOT POLICY CONTROL 0.4");
   Serial.print("MODE: ");Serial.println(int(mode));
   Serial.print("IMU_READY: ");Serial.println(imu.ready?1:0);
   Serial.print("FILTER_READY: ");Serial.println(attitude.ready?1:0);
+  Serial.println("SERVO_PINS: lower=D8 (8), upper=D7 (7).");
   Serial.println("RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.");
   Serial.println("PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.");
   Serial.println("GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.");
@@ -74,7 +75,7 @@ void arm(){
   if(!fresh()){Serial.println("REFUSED: IMU/filter is not fresh and ready.");return;}
   if(!validStartBattery()){Serial.println("REFUSED: battery start guard, 3700..4400 mV.");return;}
   for(int i=0;i<2;++i){
-    if(motors[i].attach(i==0?D0:D1,500,2500)==INVALID_SERVO){halt("PWM attach failed.");return;}
+    if(motors[i].attach(i==0?D8:D7,500,2500)==INVALID_SERVO){halt("PWM attach failed.");return;}
     pulses[i]=1500;motors[i].writeMicroseconds(1500);
   }
   mode=HOLD;armedAt=clockUs.now();heartbeatAt=millis();lowCount=0;

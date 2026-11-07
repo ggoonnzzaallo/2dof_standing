@@ -1,10 +1,12 @@
 # Rev B terminal control - direct battery power
 
-> **Current recovery/Rev C workflow:** use [policy controller 0.3](policy_control/README.md), [operating instructions](../docs/OPERATING_INSTRUCTIONS.md) and the [single-Pololu schematic](../electrical/README.md). Version 0.3 adds `./robot charge` but is not uploaded yet. The bench-sketch Rev A/B wiring and charging procedures below are historical; do not use them to wire the Rev C master switch.
+**7 November 2026 source update:** all maintained sketches now use **D8 / 8 for lower PWM** and **D7 / 7 for upper PWM**, including boot/stop/no-motion paths. The recovery controller is **0.4** and requires a new upload; the last confirmed board firmware is still 0.2. References below to earlier builds/uploads are historical. The bench program keeps its existing command protocol/banner; its help now names D8/D7.
 
-**Currently uploaded: [learned controller 0.2](policy_control/README.md)**, with explicit Mac arming and confirmed standalone battery operation. Version 0.3 is prepared with software charge mode but is not uploaded. It boots disarmed and retains the trained ±80° policy and measured negative PWM signs. Use `build-control` / `upload-control` and `scripts/control.py`. The first 500-frame no-PWM hardware check passed. The [visual calibration](servo_calibration/README.md) and [policy shadow](policy_shadow/README.md) remain available through their explicit upload targets. Ordinary `upload` still selects the servo bench 0.10 described below.
+> **Current recovery/Rev C workflow:** use [policy controller 0.4](policy_control/README.md), [operating instructions](../docs/OPERATING_INSTRUCTIONS.md) and the [single-Pololu schematic](../electrical/README.md). Version 0.4 includes `./robot charge` and the D8/D7 routing but is not uploaded yet. The bench-sketch Rev A/B wiring and charging procedures below are historical; do not use them to wire the Rev C master switch.
 
-**Historical bench-sketch source: version 0.10, direct-powered servos with no Pololu.** D0/marked 0 controls the lower servo, D1/marked 1 controls the upper, and D2 is unused. Both PWM outputs stop on boot, timeout, USB serial disconnect, `off` or `!`. **None of these actions disconnects servo power.** Full OFF requires battery and USB unplugged.
+**Currently uploaded: [learned controller 0.2](policy_control/README.md)**, with explicit Mac arming and confirmed standalone battery operation. Version 0.4 is prepared with software charge mode and D8/D7 routing but is not uploaded. It boots disarmed and retains the trained ±80° policy and measured negative PWM signs. Use `build-control` / `upload-control` and `scripts/control.py`. The first 500-frame no-PWM hardware check passed. The [visual calibration](servo_calibration/README.md) and [policy shadow](policy_shadow/README.md) remain available through their explicit upload targets. Ordinary `upload` still selects the servo bench 0.10 described below.
+
+**Historical bench-sketch source: version 0.10, direct-powered servos with no Pololu.** D8/marked 8 controls the lower servo, D7/marked 7 controls the upper, and D2 is unused. Both PWM outputs stop on boot, timeout, USB serial disconnect, `off` or `!`. **None of these actions disconnects servo power.** Full OFF requires battery and USB unplugged.
 
 The user confirmed Rev B wiring is live. Version 0.3 has also executed individual joint motions on this harness. Version 0.10 was successfully built and uploaded. It adds battery telemetry and guarded continuous faster dancing to the finer-PWM driver introduced in 0.7; commissioning details and physical observations are recorded separately in the [validation log](VALIDATION.md). Earlier 0.4 target builds were blocked by compiler subprocesses terminated with signal 9. Source defaults to `ROBOT_USE_POWER_SWITCH=0`; setting it to 1 is only for the archived Pololu Rev A harness.
 
@@ -45,12 +47,12 @@ Serial uses **115200 baud**. Type **one command**, press Enter, and wait for the
 | `tempo N` | Change active loop period to 1000–10000 ms, blending angular speed over 2 seconds without resetting phase; does not start a stopped robot |
 | `keep` | Refresh continuous dance heartbeat; no motion started |
 | `dance` | Both joints simultaneously; continuous phase-offset 1100–1900 us waves, neutral hold, PWM stops after 25.5 s; supervised clearance required |
-| `lower-small` | D0: 1500, 1450, 1500, 1550, 1500 us; approximately 1.5 s each; stop at 7.5 s |
-| `upper-small` | Same small supported-assembly check on D1 |
-| `lower` | D0 nominal neutral 1500 us for up to 15 s |
-| `upper` | D1 nominal neutral 1500 us for up to 15 s |
-| `lower-jog` | **HORNS OFF ONLY:** D0 at 1500, 1200, 1800, 1200, 1800, 1200, 1500 us; stop at 10.5 s |
-| `upper-jog` | Same unloaded/horns-off test on D1 |
+| `lower-small` | D8: 1500, 1450, 1500, 1550, 1500 us; approximately 1.5 s each; stop at 7.5 s |
+| `upper-small` | Same small supported-assembly check on D7 |
+| `lower` | D8 nominal neutral 1500 us for up to 15 s |
+| `upper` | D7 nominal neutral 1500 us for up to 15 s |
+| `lower-jog` | **HORNS OFF ONLY:** D8 at 1500, 1200, 1800, 1200, 1800, 1200, 1500 us; stop at 10.5 s |
+| `upper-jog` | Same unloaded/horns-off test on D7 |
 | `off` | Detach PWM and drive both signal pins LOW; **power stays connected** |
 | `!` | Immediate PWM stop without Enter; send a newline before another command |
 | `help` | Stop PWM and print menu |

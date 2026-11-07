@@ -16,7 +16,7 @@ ARDUINO = r'''
 #include <deque>
 #include <cassert>
 #define TARGET_SEEED_XIAO_NRF52840_SENSE 1
-constexpr int D0=0,D1=1,D2=2,VBAT_ENABLE=14,PIN_CHARGING_CURRENT=22,PIN_VBAT=32;
+constexpr int D8=8,D7=7,D2=2,VBAT_ENABLE=14,PIN_CHARGING_CURRENT=22,PIN_VBAT=32;
 constexpr int PIN_LSM6DS3TR_C_POWER=15,LOW=0,HIGH=1,INPUT=0,OUTPUT=1,AR_INTERNAL_3_0=1;
 constexpr int OUTPUT_H0H1=3;
 inline uint64_t clockUs=0;
@@ -25,7 +25,7 @@ inline int levels[33]={},modes[33]={};
 inline uint32_t micros(){return uint32_t(clockUs);}
 inline uint32_t millis(){return uint32_t(clockUs/1000);}
 inline void delay(uint32_t ms){clockUs+=uint64_t(ms)*1000;}
-inline void digitalWrite(int p,int v){if(p==D0||p==D1)assert(v==LOW);levels[p]=v;}
+inline void digitalWrite(int p,int v){if(p==D8||p==D7)assert(v==LOW);levels[p]=v;}
 inline void pinMode(int p,int m){modes[p]=m;}
 inline void analogReference(int){}
 inline void analogReadResolution(int){}
@@ -75,7 +75,7 @@ TEST = r'''
 int main(){
  Wire1.reset();setup();loop();
  assert(imu.ready&&imu.address==0x6a&&imu.identity==0x6a);
- assert(levels[D0]==LOW&&levels[D1]==LOW&&modes[D0]==OUTPUT&&modes[D1]==OUTPUT);
+ assert(levels[D8]==LOW&&levels[D7]==LOW&&modes[D8]==OUTPUT&&modes[D7]==OUTPUT);
  assert(levels[VBAT_ENABLE]==LOW&&levels[PIN_CHARGING_CURRENT]==LOW);
  assert(modes[PIN_LSM6DS3TR_C_POWER]==OUTPUT_H0H1&&levels[PIN_LSM6DS3TR_C_POWER]==HIGH);
  // Signed little-endian decode with documented, distinct accelerometer/gyro units.

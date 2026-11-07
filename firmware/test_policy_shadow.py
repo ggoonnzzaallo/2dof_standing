@@ -38,7 +38,7 @@ int main(){
  fresh();send("stream\n");serialCostUs=250;delay(20);loop();assert(streaming);serialCostUs=0;
  fresh((1ULL<<32)-180000);send("stream\n");for(int i=0;i<10;++i){delay(20);loop();assert(streaming);}
  assert(policyFrames==10);send("off\n");
- assert(levels[D0]==LOW&&levels[D1]==LOW); // Fake GPIO also rejects every HIGH write to these pins.
+ assert(levels[D8]==LOW&&levels[D7]==LOW); // Fake GPIO also rejects every HIGH write to these pins.
  std::cout<<"PASS: no automatic inference/PWM, exact virtual action history, stop/disconnect/stale/timeout handling, slow USB and 32-bit clock rollover.\n";
 }
 '''

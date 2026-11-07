@@ -16,7 +16,7 @@ TEST = r'''
 #include <cassert>
 #include <iostream>
 void checkOff(){
- assert(selected==-1&&!servo.attached());assert(pins[D0]==LOW&&pins[D1]==LOW);
+ assert(selected==-1&&!servo.attached());assert(pins[D8]==LOW&&pins[D7]==LOW);
  assert(modes[D2]==INPUT&&writes[D2]==0);
 }
 void send(const char* s){Serial.send(s);while(Serial.available())loop();}
@@ -27,14 +27,14 @@ void reset(){
 }
 int main(){
  reset();send("status\n");checkOff();send("keep\n");checkOff();
- send("lower\n");assert(selected==0&&servo.pin==D0&&servo.pulse==1500&&pins[D1]==LOW);
+ send("lower\n");assert(selected==0&&servo.pin==D8&&servo.pulse==1500&&pins[D7]==LOW);
  send("set 1550\n");assert(targetUs==1550&&pulseUs==1500);
  int previous=pulseUs;
  for(int i=0;i<50;++i){clockMs+=10;loop();assert(pulseUs-previous==1);previous=pulseUs;}
  assert(pulseUs==1550);
  send("set 1500\n");clockMs+=3000;loop();assert(pulseUs==1549); // No catch-up jump.
  send("off\n");checkOff();
- reset();send("upper\n");assert(selected==1&&servo.pin==D1&&pins[D0]==LOW);
+ reset();send("upper\n");assert(selected==1&&servo.pin==D7&&pins[D8]==LOW);
  send("set 1551\n");checkOff(); // Target changes larger than 50 us are rejected.
  reset();send("lower\n");send("window 500 2500\n");checkOff();assert(windowMin==1000);
  send("window 500 2500\n");assert(windowMin==500&&windowMax==2500);checkOff();

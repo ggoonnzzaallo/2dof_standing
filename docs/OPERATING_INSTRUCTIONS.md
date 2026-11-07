@@ -1,8 +1,8 @@
 # Operating instructions
 
-**Rev C instructions, prepared 3 November 2026:** one Pololu battery master switch and controller firmware **0.3**. The enclosure and software are prepared, but wiring is not yet installed and firmware is not uploaded. Complete the [wiring and commissioning checks](../electrical/README.md) first.
+**Rev C instructions, updated 7 November 2026:** one Pololu battery master switch; **lower signal D8 / 8, upper signal D7 / 7**, as reported by the user. Controller **0.4** matches this harness and is prepared but not uploaded. Complete the [wiring and commissioning checks](../electrical/README.md) first.
 
-**Until the rewire:** the last confirmed Rev B hardware still needs battery **and USB unplugged** for full OFF, and both complete servo plugs unplugged for routine charging. The uploaded firmware remains 0.2; the new `charge` command needs 0.3. Existing arm/stop/status commands remain compatible with 0.2.
+**Firmware migration:** the last confirmed uploaded controller is 0.2 and drives the old D0/D1 pins. Upload 0.4 before arming or charging this D8/D7 harness. Current Mac helpers refuse older pin mappings for arm/charge; `stop` and `status` remain available. Firmware changes do not establish that the Rev C power/charging path has been commissioned.
 
 ## Terminal
 
@@ -10,7 +10,7 @@
 cd "/Users/super23/Documents/BLDC Motor Build/2dof_standing"
 ./robot status   # Read state without stopping or recentering
 ./robot stop     # Stop PWM; power remains connected
-./robot charge   # Firmware 0.3: latch PWM-off charging mode
+./robot charge   # Firmware 0.4: latch PWM-off charging mode
 ./robot arm      # Centre both joints, then start onboard recovery
 ```
 
@@ -18,7 +18,7 @@ The helper uses the installed project Python; no Arduino IDE or environment acti
 
 ## Stop and store
 
-Support the arm and run **`./robot stop`** with USB connected. Wait for OFF confirmation. This detaches PWM and drives D0/D1 LOW, but does not physically cut servo power or idle drain.
+Support the arm and run **`./robot stop`** with USB connected. Wait for OFF confirmation. This detaches PWM and drives D8/D7 LOW, but does not physically cut servo power or idle drain.
 
 For complete Rev C OFF, **unplug USB and slide the Pololu OFF**. No battery connector needs reaching. The robot boots disarmed after every reset or power cycle and never automatically rearms after a fault.
 

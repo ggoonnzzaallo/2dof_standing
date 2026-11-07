@@ -5,9 +5,10 @@ from arm import operate, parse_state
 
 
 class Device:
-    def __init__(self, refuse=False, ready=True, charge_supported=True):
+    def __init__(self, refuse=False, ready=True, charge_supported=True, version='0.4'):
         self.time=0.;self.mode=0;self.frames=0;self.ready=ready;self.refuse=refuse
         self.lines=deque();self.commands=[];self.armed_at=0;self.closed=False;self.charge_supported=charge_supported
+        self.version=version
     def now(self):return self.time
     def reset_input_buffer(self):self.lines.clear()
     def write(self,data):
@@ -16,7 +17,7 @@ class Device:
             if command in ('!','off'):
                 self.mode=0;self.lines.append('OFF. PWM stopped.')
             elif command=='status':
-                self.lines.extend(['ROBOT POLICY CONTROL 0.2','MODE: 0','IMU_READY: 1','FILTER_READY: 1','READY'])
+                self.lines.extend([f'ROBOT POLICY CONTROL {self.version}','MODE: 0',f'IMU_READY: {int(self.ready)}',f'FILTER_READY: {int(self.ready)}','READY'])
             elif command=='arm':
                 self.mode=1;self.armed_at=self.time;self.lines.append('ARMED: nominal neutral.')
             elif command=='charge':
@@ -83,10 +84,20 @@ class ArmingTests(unittest.TestCase):
         self.assertNotIn('off',tail);self.assertNotIn('!',tail)
     def test_charge_on_old_firmware_fails_stopped(self):
         device=Device(charge_supported=False);device.mode=4
-        with self.assertRaisesRegex(RuntimeError,'0.3'):
+        with self.assertRaisesRegex(RuntimeError,'0.4'):
             operate(device,'charge',device.now)
         self.assertEqual(device.mode,0)
         self.assertNotIn('arm',device.commands)
+    def test_old_pin_mapping_is_rejected_before_arm_or_charge(self):
+        for version in ('0.2','0.3'):
+            for action in ('arm','charge'):
+                with self.subTest(version=version,action=action):
+                    device=Device(version=version)
+                    with self.assertRaisesRegex(RuntimeError,'D8 lower / D7 upper'):
+                        operate(device,action,device.now)
+                    self.assertNotIn('arm',device.commands)
+                    self.assertNotIn('charge',device.commands)
+                    self.assertEqual(device.mode,0)
     def test_status_preserves_charge(self):
         device=Device();device.mode=5
         result=operate(device,'status',device.now)

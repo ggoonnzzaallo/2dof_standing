@@ -1,6 +1,6 @@
 # Wire the complete robot — Rev C
 
-Fresh-build instructions, 3 November 2026. Use **one Pololu 2810 LV** as the battery master switch, the XIAO nRF52840 Sense, two PTK 7465 MG servos and the existing 1S battery. This is the selected harness for the fit-approved enclosure. Physical assembly and through-switch charging have not yet been commissioned.
+Fresh-build instructions, updated 7 November 2026: **lower signal D8 / 8; upper signal D7 / 7**, as wired by the user. Use **one Pololu 2810 LV** as the battery master switch, the XIAO nRF52840 Sense, two PTK 7465 MG servos and the existing 1S battery. This is the selected harness for the fit-approved enclosure. Physical assembly and through-switch charging have not yet been commissioned.
 
 **Unplug both the battery and USB before soldering.** Leave the three-pin servo plugs unplugged until the initial controller check. The slider alone does not isolate every possible source when USB is connected.
 
@@ -29,12 +29,12 @@ Fresh-build instructions, 3 November 2026. Use **one Pololu 2810 LV** as the bat
 | 8 | XIAO **GND** | **J2** | Controller return; underside BAT− can be used instead. Only one is required. |
 | 9 | Lower servo **ground** | **J2** | Lower motor return and PWM reference. |
 | 10 | Upper servo **ground** | **J2** | Upper motor return and PWM reference. |
-| 11 | XIAO **D0**, marked **0** | Lower servo **signal** | Lower-joint PWM. |
-| 12 | XIAO **D1**, marked **1** | Upper servo **signal** | Upper-joint PWM. |
+| 11 | XIAO **D8**, marked **8** | Lower servo **signal** | Lower-joint PWM. |
+| 12 | XIAO **D7**, marked **7** | Upper servo **signal** | Upper-joint PWM. |
 
 The existing three-pin servo plugs each carry one positive, one ground and one signal; do not add a second ground cable alongside them. Ground is commonly brown/black and signal yellow/orange on hobby servos. Identify the actual received lead assignments before connecting; connector orientation is not defined by this drawing. Check battery-connector polarity too.
 
-**Leave these pads unconnected:** XIAO **D2 / 2**, **3V3**, **5V**; Pololu **ON** and **SW**. Do not connect D2 to ON. No separate IMU wiring is needed: the IMU is already on the Sense board. USB-C uses the existing cable for programming and charging.
+The former D0/0 and D1/1 signal pads are now unused. **Leave these pads unconnected:** XIAO **D2 / 2**, **3V3**, **5V**; Pololu **ON** and **SW**. Do not connect D2 to ON. No separate IMU wiring is needed: the IMU is already on the Sense board. USB-C uses the existing cable for programming and charging.
 
 The complete motor-current path is battery + → VIN → Pololu → VOUT → J1 → servo → J2 → battery −. Motor current does not pass through XIAO power traces.
 
@@ -43,7 +43,7 @@ The complete motor-current path is battery + → VIN → Pololu → VOUT → J1 
 1. With battery and USB absent, position the boards and battery in their locating stops. Keep the battery unplugged throughout soldering.
 2. Build/insulate J1 and J2. Connect the twelve branches above. Leave enough flex for the lid and both joints, without loose wire entering a hinge or blocking the USB opening/slider.
 3. Inspect polarity and solder joints. Check ground continuity between J2, both boards and servo ground contacts. Check there is no persistent low-resistance positive-to-ground short. A brief capacitor-charging response on a resistance meter is not by itself a short.
-4. For the first USB-only controller check, leave battery and **both complete servo plugs disconnected**. Firmware 0.3 is prepared but has not yet been uploaded; do that before relying on `./robot charge`.
+4. For the first USB-only controller check, leave battery and **both complete servo plugs disconnected**. Controller 0.4 is prepared but has not yet been uploaded. Older controllers use D0/D1 and must be replaced before arming or charging with this harness.
 5. With USB removed and servos still disconnected, test battery-only power: slider OFF should leave the XIAO off; ON should boot it disarmed. Remove battery power again before reconnecting servo plugs.
 6. Complete the supervised checks in the [commissioning guide](README.md#commissioning-the-new-harness), including no-PWM charging current and charge completion, before sealing the cup.
 
@@ -52,7 +52,7 @@ The complete motor-current path is battery + → VIN → Pololu → VOUT → J1 
 | Purpose | Physical switch | USB | Software |
 |---|---|---|---|
 | Run on battery | ON | Unplugged after arming | `./robot arm` first, while USB is connected |
-| Charge | **ON** | Connected | **`./robot charge`**, firmware 0.3 |
+| Charge | **ON** | Connected | **`./robot charge`**, firmware 0.4 |
 | Fully off / store | **OFF** | **Unplugged** | None |
 
 In charge mode PWM stops, but both servos still have electrical power. Charging through the enabled Pololu is inferred from its schematic and must be verified on this harness; servo idle current reduces current available to the cell. USB connected does not guarantee net charging. With the slider OFF, the battery is isolated and **cannot charge**; USB can still power the XIAO/shared output rail.

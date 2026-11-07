@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-07",
+  "firmware_version": "0.4",
+  "status": "Source updated, host regression and native controller build passed; not uploaded",
+  "servo_signal_pins": {
+    "lower": {
+      "label": "8",
+      "symbol": "D8",
+      "nrf_gpio": "P1.13"
+    },
+    "upper": {
+      "label": "7",
+      "symbol": "D7",
+      "nrf_gpio": "P1.12"
+    }
+  },
+  "previous_signal_pins": {
+    "lower": "D0",
+    "upper": "D1"
+  },
+  "board_core": "Seeeduino:nrf52:xiaonRF52840Sense 1.1.13, non-mbed",
+  "compiler": "native Arm GNU 13.2.Rel1, -O2",
+  "controller_build": {
+    "flash_bytes": 85940,
+    "static_ram_bytes": 7880
+  },
+  "regression": "python3 scripts/robot.py test: passed all firmware checks and nine Mac-helper tests",
+  "checks": [
+    "Actual lower/upper PWM pin ordering 8/7",
+    "Boot/stop/charge/fault paths hold D8/D7 LOW",
+    "FineServo hardware-PWM adapter exercised with pins 8/7",
+    "Old controller 0.2/0.3 banners refused before arm/charge",
+    "Charge handshake works without a ready IMU",
+    "Model, actor weights, angle mapping and gravity filter unchanged"
+  ],
+  "firmware_uploaded": false,
+  "serial_commands_sent": false,
+  "physical_motion_tested": false,
+  "source_sha256": {
+    "firmware/policy_control/policy_control.ino": "0562591685c3af5b8e8b38500cccd7a36f60f97b95d7f3b724461ac2ad5adad7",
+    "firmware/policy_control/ServoProfile.h": "31c654bc83fb7f33c5efda7fb3c884172a9de2d7384dcde5feccb34879154fb1",
+    "firmware/policy_shadow/GravityFilter.h": "56a9f56320f34c741928b741b59f6deacd61c940d45438b712e1bb8d6de92279",
+    "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff",
+    "scripts/control.py": "bab58d76247a470563e430e9dba64e0549ae58c5b7a2ce5664ad03647e397789",
+    "scripts/arm.py": "e6c03b998fdc2461b4a93216246cc8647a3a27e7e38056e4fb694d25f433d3f1",
+    "electrical/REV_C_WIRING.svg": "e9818be2fbb058dbcf413c486597d3fbc6c1da28aa7855c7d9e7577780df2008",
+    "electrical/REV_C_WIRING.pdf": "7763e2dfe9342c2e9a5fb06dec29cc04325ccf0b1cf6823b5a9092ce989811a1",
+    "electrical/REV_C_WIRING.png": "4f696e75b7cb5473c6367c92c69c9dc392e7a3b5591c2a9ed4cc07c749a2c0e6",
+    "electrical/REV_C_PHONE_WIRING.png": "ffa3c8e2df21be205ffbf1930e9a2ad24d79dcbb0b1bb4eaa60d25ce89253853",
+    "firmware/servo_calibration/servo_calibration.ino": "0251ef745473789103e35bee4d93e7a78dd961c51d8fe1c9231686263637f847",
+    "firmware/policy_shadow/policy_shadow.ino": "22ec72cfa2a7774d41098e32e3c1d55b23ae22e44d4ed007f032f2a67461ec12",
+    "firmware/imu_bench/imu_bench.ino": "d459be2f39d5ca62e86557d5e746b326824df69d7d7559520200b9d8249db892",
+    "firmware/servo_center/servo_center.ino": "0c0d3fda88d56bdef14e40a0fe038556ca034101450b3344700a9beca0c9d38f",
+    "firmware/policy_probe/policy_probe.ino": "d864b89b3bb7b0f73a677375c891e5b4258287f6146a64416ca067b52612bac8"
+  },
+  "build_hex_sha256": "c4c2ba50a1079d2195bc93fbbea09316a9a1e70b570da98cf1a06cf378175402",
+  "native_builds": {
+    "policy_control": {
+      "status": "passed",
+      "flash_bytes": 85940,
+      "static_ram_bytes": 7880
+    },
+    "servo_center": {
+      "status": "passed",
+      "flash_bytes": 60080,
+      "static_ram_bytes": 7680
+    },
+    "servo_calibration": {
+      "status": "passed",
+      "flash_bytes": 48316,
+      "static_ram_bytes": 7680
+    },
+    "imu_bench": {
+      "status": "passed",
+      "flash_bytes": 55520,
+      "static_ram_bytes": 7576
+    },
+    "policy_shadow": {
+      "status": "passed",
+      "flash_bytes": 82320,
+      "static_ram_bytes": 7736
+    },
+    "policy_probe": {
+      "status": "passed",
+      "flash_bytes": 69968,
+      "static_ram_bytes": 7464
+    }
+  }
+}

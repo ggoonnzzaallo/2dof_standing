@@ -1,5 +1,7 @@
 # Visual servo calibration 0.1
 
+**Source pin update, 7 November 2026:** lower PWM now uses **D8 / printed 8**, upper uses **D7 / printed 7**. Only pin routing changed; the recorded 2026-11-02 pulse/angle observations remain historical and unchanged.
+
 This is a supervised pulse-to-angle measurement program for the assembled Rev B robot. It contains **no learned controller**. Both signals start LOW. Only an explicit `lower` or `upper` command starts PWM, at nominal **1500 µs**. The other joint receives no PWM and must be supported. The first pulse can move an unknown starting shaft position; the subsequent slew limiter cannot smooth that initial acquisition without position feedback.
 
 The user chose easy visual poses rather than a precision angle gauge: **straight = 0°, then approximately ±45°, and ±90° if physically clear and reachable**. These observations give a first approximate mapping; they do not establish precision angular accuracy, dynamic tracking, backlash or loaded torque.

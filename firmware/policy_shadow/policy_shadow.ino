@@ -38,7 +38,7 @@ void stop(){streaming=false;resetPolicy();}
 bool fresh(){return imu.ready&&attitude.ready&&sampleAt&&uint32_t(clockUs.now()-sampleAt)<20000;}
 void status(){
   Serial.println("ROBOT POLICY SHADOW 0.1");
-  Serial.println("MOTOR_OUTPUTS: DISABLED; D0/D1 LOW. Policy targets are virtual, not servo positions.");
+  Serial.println("MOTOR_OUTPUTS: DISABLED; D8/D7 LOW. Policy targets are virtual, not servo positions.");
   Serial.print("IMU_READY: ");Serial.println(imu.ready?1:0);
   Serial.print("FILTER_READY: ");Serial.println(attitude.ready?1:0);
   Serial.print("I2C_ERRORS: ");Serial.println(imu.errors);
@@ -81,7 +81,7 @@ void handleCommand(){
   else status();
 }
 void setup(){
-  digitalWrite(D0,LOW);pinMode(D0,OUTPUT);digitalWrite(D1,LOW);pinMode(D1,OUTPUT);pinMode(D2,INPUT);
+  digitalWrite(D8,LOW);pinMode(D8,OUTPUT);digitalWrite(D7,LOW);pinMode(D7,OUTPUT);pinMode(D2,INPUT);
   digitalWrite(PIN_CHARGING_CURRENT,LOW);pinMode(PIN_CHARGING_CURRENT,OUTPUT);
   digitalWrite(VBAT_ENABLE,LOW);pinMode(VBAT_ENABLE,OUTPUT);
   Serial.begin(115200);clockUs.begin();imu.begin();batteryMv=readBatteryMv();

@@ -25,8 +25,8 @@ uint16_t readBatteryMv(){
 }
 void stop(){
   if(servo.attached())servo.detach();
-  digitalWrite(D0,LOW);pinMode(D0,OUTPUT);
-  digitalWrite(D1,LOW);pinMode(D1,OUTPUT);pinMode(D2,INPUT);
+  digitalWrite(D8,LOW);pinMode(D8,OUTPUT);
+  digitalWrite(D7,LOW);pinMode(D7,OUTPUT);pinMode(D2,INPUT);
   selected=-1;
 }
 void report(){
@@ -56,7 +56,7 @@ void beginJoint(int joint){
   stop();batteryMv=readBatteryMv();
   if(batteryMv<3700||batteryMv>4400){Serial.println("REFUSED: battery start guard (3700-4400 mV). No PWM.");return;}
   targetUs=pulseUs=1500;
-  if(servo.attach(joint==0?D0:D1,500,2500)==INVALID_SERVO){stop();Serial.println("ERROR: PWM attach failed.");return;}
+  if(servo.attach(joint==0?D8:D7,500,2500)==INVALID_SERVO){stop();Serial.println("ERROR: PWM attach failed.");return;}
   selected=joint;servo.writeMicroseconds(1500);
   startedAt=heartbeatAt=rampAt=batteryAt=reportAt=millis();lowCount=0;
   Serial.println("ACK: selected joint at nominal 1500 us. Other joint receives no PWM.");report();

@@ -1,5 +1,9 @@
 # Learned controller — trained ±80° targets
 
+**Current source: 0.4, 7 November 2026. Lower servo PWM is D8 / printed 8; upper is D7 / printed 7.** This matches the user's new harness. Startup, stop, charge and fault paths drive those same pins LOW; D2 remains unused. The status banner reports the pin assignment. Bench, calibration and sensor-only sketch sources also follow D8/D7. Pin movement changes neither the actor weights, joint order, pulse-to-angle calibration nor training model.
+
+This version is built/tested offline, **not uploaded**; the last confirmed physical controller remains 0.2 with the old D0/D1 assignment. Upload 0.4 using the USB-only setup below before using this harness. Mac arm/charge helpers refuse older controller banners so they cannot silently use the old signal assignment. Stop/status remain available for older firmware. Historical captures and version-specific results below retain their original meaning.
+
 This program runs the existing exported actor on the XIAO and can send its outputs to both servos. **Boot is disarmed.** It requires explicit arming, a one-second nominal-neutral hold, and a `run` or `standalone` command. Version 0.3 adds a latched no-PWM charging mode, prepared but not uploaded. Version 0.2 supports explicit Mac arming followed by USB-free operation; see [standalone operation](#standalone-operation-02--arm-from-the-mac). Supervised trials still require a host heartbeat.
 
 The user explicitly chose the trained **±80°** targets rather than restricting the policy to the measured ±45° range. The actor weights, observation normalization, **50 Hz** update rate and **0.06 radian incremental actions** are unchanged. There is no extra slow calibration slew limiter in the learned-control path: the training servo model already permits finite tracking speed/lag.
@@ -114,7 +118,7 @@ Prepared **3 November 2026**, not uploaded or physically commissioned. No policy
 ./robot status
 ```
 
-The helper first stops/acknowledges PWM OFF, then requests `charge` and confirms mode **5**. It sends no arm or servo-motion command. Both PWM channels detach and D0/D1 go LOW; approximately 100 mA charge configuration remains selected. Charge mode is latched across terminal close, USB/DTR loss/reconnect and status/help/state requests. It requires no heartbeat or healthy IMU. Sensor faults and trial deadlines cannot resume PWM. `run`, `standalone` and `shadow` are refused while charge mode is latched; explicit `arm` acquires neutral again. `off`/`!` remain available and also leave PWM off. Reset boots disarmed rather than resuming charge or motion.
+The helper first stops/acknowledges PWM OFF, then requests `charge` and confirms mode **5**. It sends no arm or servo-motion command. Both PWM channels detach and the selected signal pins go LOW (D0/D1 in 0.3; D8/D7 in current 0.4); approximately 100 mA charge configuration remains selected. Charge mode is latched across terminal close, USB/DTR loss/reconnect and status/help/state requests. It requires no heartbeat or healthy IMU. Sensor faults and trial deadlines cannot resume PWM. `run`, `standalone` and `shadow` are refused while charge mode is latched; explicit `arm` acquires neutral again. `off`/`!` remain available and also leave PWM off. Reset boots disarmed rather than resuming charge or motion.
 
 The charger itself operates automatically on USB; mode 5 confirms **PWM inhibition**, not positive battery current or a full cell. Servo power remains present. In Rev C, **USB unplugged + switch OFF** isolates the cell for storage; OFF + USB cannot charge the isolated cell and can still power the shared rail from the charger. There is no switch-position or battery-current sensor. Reverse-path charging, no-PWM servo idle load, charging termination and enclosure fit remain physical acceptance checks.
 
@@ -126,3 +130,24 @@ python3 scripts/robot.py upload-control
 ```
 
 Native build passed: **85,900 bytes flash / 7,880 bytes static RAM**. The actual-sketch fake-hardware regression passed, including charge entry from active motion, no pulses/frames for over a minute with no USB and stale IMU, retained mode after status/reconnect, refusal of run/standalone/shadow, emergency stop and explicit rearm. **Eight** Mac-helper tests passed, including no-motion charging without a ready filter, serial-close persistence, status preserving charge and old firmware failing stopped. The helper still accepts controller 0.2 for existing arm/stop/status; new charge mode reports that 0.3 is required. No hardware commands were sent during this preparation.
+
+
+## Signal-pin reroute (0.4) — 7 November 2026
+
+The user wired lower signal to printed 8 and upper to printed 7. Current attach, boot, stop and fault paths use **D8** and **D7**, respectively. The installed Seeed non-mbed core maps these to **P1.13** and **P1.12**; hardware PWM routes through the core pin map. Neither SPI nor Serial1 is used, so the alternate SCK/RX labels do not conflict. USB `Serial` is unchanged. Former D0/D1 are unwired; D2 stays unused.
+
+All maintained motion and sensor-only sketches use the new pins. The bench program retains its existing command protocol; help strings name the current pins. Historic diagrams, measurements and captures keep their original pin assignments. The trained actor, IMU filter, calibration signs, target range and 50 Hz timing are unchanged; this wire reroute needs no model retraining.
+
+The Mac helper requires controller 0.4 before `arm`, supervised control or `charge`, and rejects old banners before sending motion/charge commands. Charge-version checks do not require a healthy IMU. `stop` and non-stopping `status` remain usable with old firmware.
+
+The native controller build succeeds at **85,940 bytes flash / 7,880 bytes static RAM**. The full regression suite passes, including actual lower/upper pin ordering, disabled D8/D7 after faults/charge, driver PWM on pins 8 and 7, and refusal of old firmware by the Mac helpers. No upload, serial command or physical movement was performed.
+
+[Pin-update build and validation record](results/2026-11-07/pin_routing_0_4.json).
+
+To install, first unplug the battery and both complete three-pin servo plugs, leaving USB connected, then run:
+
+```sh
+python3 scripts/robot.py upload-control
+```
+
+Upload verification, a no-motion state check and a supervised joint test follow separately; a successful compile is not an uploaded or physically validated pin assignment.

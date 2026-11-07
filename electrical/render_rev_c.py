@@ -42,7 +42,7 @@ def dot(x, y, color):
 
 d.add(Rect(0, 0, W, H, fillColor=colors.white, strokeColor=None))
 text(35, 48, 'Rev C | COMPLETE ROBOT WIRING', 32, True)
-text(35, 81, 'One Pololu 2810 LV master switch. Fresh-build harness; physical commissioning pending.', 18, color=MUTED)
+text(35, 81, 'One Pololu 2810 LV master switch. 7 Nov 2026 signal update: lower D8, upper D7.', 18, color=MUTED)
 text(35, 123, 'POSITIVE | servo current passes through the Pololu, never through the XIAO', 20, True)
 box(35, 158, 220, 70, 'Battery RCY + / red', 'Raw battery + goes ONLY to VIN')
 wire([(255, 193), (300, 193)], RED)
@@ -73,14 +73,14 @@ for y, title in [(460, 'Pololu GND'), (525, 'XIAO BAT- or GND'),
 dot(825, 555, GROUND)
 
 text(35, 720, 'PWM | these signal wires share the same existing three-pin servo plugs', 20, True)
-for y, pin, endpoint in [(768, 'XIAO D0 / marked 0', 'Lower servo J_S1 / SIG'),
-                         (831, 'XIAO D1 / marked 1', 'Upper servo J_S2 / SIG')]:
+for y, pin, endpoint in [(768, 'XIAO D8 / marked 8', 'Lower servo J_S1 / SIG'),
+                         (831, 'XIAO D7 / marked 7', 'Upper servo J_S2 / SIG')]:
     box(35, y-25, 250, 50, pin)
     wire([(285, y), (855, y)], BLUE)
     box(855, y-25, 310, 50, endpoint)
 text(35, 886, 'D2 remains UNUSED. XIAO 3V3 and 5V/VBUS are NOT connected to servo power.', 17, True)
 box(35, 910, 1130, 132, '', fill='#FFF2DF', stroke='#E4B568')
-text(52, 939, 'CHARGE: switch ON + USB connected + ./robot charge (firmware 0.3).', 21, True)
+text(52, 939, 'CHARGE: switch ON + USB connected + ./robot charge (firmware 0.4).', 21, True)
 text(52, 969, 'Charge mode stops PWM, not servo power; idle current and charging completion need measurement.', 17)
 text(52, 999, 'STORAGE OFF: unplug USB AND slide OFF. OFF + USB isolates the cell but may power the servos.', 17, True)
 text(52, 1027, 'No routine connector access. Disconnect battery AND USB before soldering or servicing.', 16)
@@ -94,7 +94,7 @@ scale = min(768/W, 768/H)
 c.translate((792-W*scale)/2, (792-H*scale)/2); c.scale(scale, scale)
 renderPDF.draw(d, c, 0, 0); c.showPage(); c.save()
 with fitz.open(pdf) as doc:
-    assert len(doc)==1 and all(t in doc[0].get_text() for t in ('D0', 'D1', 'D2', 'VOUT', 'VIN', './robot charge'))
+    assert len(doc)==1 and all(t in doc[0].get_text() for t in ('D8', 'D7', 'D2', 'VOUT', 'VIN', './robot charge'))
     doc[0].get_pixmap(matrix=fitz.Matrix(2, 2)).save(str(OUT/'REV_C_WIRING.png'))
 
 FONT = Path('/System/Library/Fonts/Supplemental')
@@ -116,11 +116,11 @@ def card(draw, y, title, rows, color=INK):
 
 im = Image.new('RGB', (1000, 1740), '#F6F8FA'); draw = ImageDraw.Draw(im)
 phone_text(draw, 40, 52, 'REV C - ONE POLOLU', 43, True)
-phone_text(draw, 40, 105, 'Complete fresh-build wiring; commissioning pending.', 29)
+phone_text(draw, 40, 105, '7 Nov 2026: lower D8 / upper D7.', 29)
 y = card(draw, 145, '1  RAW BATTERY POSITIVE', ['Battery +  ->  Pololu VIN only'], RED)
 y = card(draw, y, '2  SWITCHED POSITIVE BUS / J1', ['Join: Pololu VOUT', '       XIAO underside BAT+', '       Lower servo red / +', '       Upper servo red / +'], RED)
 y = card(draw, y, '3  COMMON GROUND BUS / J2', ['Join: battery negative', '       Pololu GND', '       XIAO GND or BAT- (one connection)', '       Lower servo ground', '       Upper servo ground'], GROUND)
-y = card(draw, y, '4  ONLY TWO SIGNAL WIRES', ['XIAO D0 / 0  ->  lower servo signal', 'XIAO D1 / 1  ->  upper servo signal', 'D2, Pololu ON and SW: no wires', 'XIAO 3V3 and 5V: no wires'], BLUE)
+y = card(draw, y, '4  ONLY TWO SIGNAL WIRES', ['XIAO D8 / 8  ->  lower servo signal', 'XIAO D7 / 7  ->  upper servo signal', 'D2, Pololu ON and SW: no wires', 'XIAO 3V3 and 5V: no wires'], BLUE)
 y = card(draw, y, 'OPERATING RULE', ['Charge: ON + USB + ./robot charge', 'PWM OFF; servo power stays connected.', 'Storage: USB unplugged + switch OFF.', 'USB alone does not prove net charging.'])
 assert y < 1740
 im.save(OUT/'REV_C_PHONE_WIRING.png')

@@ -235,3 +235,14 @@ For the next 15-second run, the user confirmed the robot resting sideways, base 
 The estimated initial/final base tilts were **98.59° / 1.52°**. Asked separately, the user confirmed **it got upright without assistance** and **they disturbed it again during the run**. Exact disturbance times/count are not established. This supports a first real self-righting demonstration, not an untouched benchmark trajectory, repeatability statistic or full collision-clearance validation. [Telemetry and operator observations](policy_control/results/2026-11-02/sideways_observation.json) preserve that distinction.
 
 The host process exited after stopping; the user was asked to disconnect battery and USB for full power-off. No physical disconnect confirmation is claimed. The deployed program boots disarmed and still requires USB heartbeat; standalone arming/stop operation remains a subsequent step. Collision correction/retraining is deferred as requested, with current trained weights and XML unchanged.
+
+
+## 7 November 2026 — D8 lower / D7 upper signal reroute
+
+The user reports signal wiring on printed 8 (lower) and 7 (upper). All maintained sketch sources now use D8/D7, including boot, inactive, charge and fault paths. Controller 0.4 reports the pin mapping in its status banner. The actor weights, IMU estimator, angle calibration and simulator are unchanged. Historical records above still describe their original pins and physical deployments.
+
+The native controller build passes at **85,940 bytes flash / 7,880 bytes static RAM**. The complete firmware host regression and **nine** Mac-helper tests pass. Checks include joint ordering on 8/7, high-numbered PWM pins, disabled outputs on faults/charge, and rejection of old 0.2/0.3 controller banners before arm/charge. Charging-version verification permits an unready IMU. The Rev C PDF/SVG/PNG and phone map match the new pins.
+
+This is an offline build/source change: **no upload, serial commands or physical joint test**. See [controller 0.4 instructions](policy_control/README.md#signal-pin-reroute-04--7-november-2026) and [build/provenance record](policy_control/results/2026-11-07/pin_routing_0_4.json).
+
+Native target builds also pass for all maintained auxiliary sketches: servo bench, servo calibration, IMU bench, policy shadow and arithmetic probe. Pin-update record includes flash/RAM sizes for all six targets.

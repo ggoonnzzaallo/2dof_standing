@@ -1,6 +1,6 @@
 # Motor-disabled policy shadow 0.1
 
-This firmware runs the exported neural actor on the XIAO nRF52840 Sense using its calibrated IMU. **It contains no servo/PWM driver. D0 and D1 are held LOW.** Joint targets and previous actions are virtual bookkeeping; the robot does not respond to them. A successful shadow run establishes arithmetic, observation handling and timing, not physical recovery.
+This firmware runs the exported neural actor on the XIAO nRF52840 Sense using its calibrated IMU. **It contains no servo/PWM driver. D8 and D7 are held LOW.** Joint targets and previous actions are virtual bookkeeping; the robot does not respond to them. A successful shadow run establishes arithmetic, observation handling and timing, not physical recovery.
 
 Uploaded and checked on **1 November 2026**. The [initial 500-frame capture](results/2026-11-01/2026-11-01_initial_01.json) has zero I2C errors, 1,199 µs median / 1,208 µs maximum actor inference, and maximum MCU-versus-host action error 2.32e-7. No frames were over 10 ms late; maximum scheduling lateness was 1,376 µs. Flash is 82,320 bytes and static RAM 7,736 bytes. [Commissioning provenance](results/2026-11-01/commissioning.json) records source/image hashes and build settings.
 

@@ -14,7 +14,7 @@ ARDUINO = r'''
 #include <deque>
 #include <string>
 #define TARGET_SEEED_XIAO_NRF52840_SENSE 1
-constexpr uint8_t D0=0, D1=1, D2=2, VBAT_ENABLE=14, PIN_CHARGING_CURRENT=22, PIN_VBAT=32;
+constexpr uint8_t D8=8, D7=7, D2=2, VBAT_ENABLE=14, PIN_CHARGING_CURRENT=22, PIN_VBAT=32;
 constexpr int AR_INTERNAL_3_0=1;
 inline int adcRaw=1800;
 inline void analogReference(int){}
@@ -71,7 +71,7 @@ TEST = r'''
 
 void checkOff(){
   assert(!activeServo.attached() && !secondServo.attached());
-  assert(pins[D0]==LOW && pins[D1]==LOW);
+  assert(pins[D8]==LOW && pins[D7]==LOW);
   if (USE_SERVO_POWER_SWITCH) assert(pins[D2]==LOW);
   else assert(modes[D2]==INPUT && writes[D2]==0);
   assert(activeMode==0);
@@ -86,7 +86,7 @@ int main(){
   // Boot, opening the monitor and malformed input never arm motors.
   fresh();assert(pins[VBAT_ENABLE]==LOW && pins[PIN_CHARGING_CURRENT]==LOW);
   send("lower");checkOff();send("\n");
-  assert(activeMode==2 && activeServo.pin==D0);
+  assert(activeMode==2 && activeServo.pin==D8);
   if (USE_SERVO_POWER_SWITCH) assert(pins[D2]==HIGH);
   assert(activeServo.pulse==1500);
   send("off\n");checkOff();
@@ -101,7 +101,7 @@ int main(){
   fresh();send("lower\n");clockMs=CENTER_HOLD_MS-1;loop();assert(activeMode==2);
   ++clockMs;loop();checkOff();
 
-  fresh();send("upper\n");assert(activeServo.pin==D1 && activeServo.pulse==1500);
+  fresh();send("upper\n");assert(activeServo.pin==D7 && activeServo.pulse==1500);
   Serial.open=false;loop();checkOff();
   Serial.open=true;loop();checkOff();
 
@@ -119,8 +119,8 @@ int main(){
   // returns to neutral before detaching, and still honors immediate shutdown.
   for (bool upper : {false, true}) {
     fresh();send(upper ? "upper-jog\n" : "lower-jog\n");
-    assert(activeServo.pin==(upper ? D1 : D0));
-    assert(pins[upper ? D0 : D1]==LOW);
+    assert(activeServo.pin==(upper ? D7 : D8));
+    assert(pins[upper ? D8 : D7]==LOW);
     assert(activeServo.pulse==1500);
     const int expected[]={1500,1200,1800,1200,1800,1200,1500};
     const uint32_t origin=startedAt;
@@ -139,8 +139,8 @@ int main(){
   clockMs=startedAt+10500;loop();checkOff();
   for (bool upper : {false, true}) {
     fresh();send(upper ? "upper-small\n" : "lower-small\n");
-    assert(activeServo.pin==(upper ? D1 : D0));
-    assert(pins[upper ? D0 : D1]==LOW);
+    assert(activeServo.pin==(upper ? D7 : D8));
+    assert(pins[upper ? D8 : D7]==LOW);
     const int expected[]={1500,1450,1500,1550,1500};
     const uint32_t origin=startedAt;
     assert(activeServo.pulse==1500);
@@ -158,7 +158,7 @@ int main(){
   clockMs=startedAt+4500;loop();assert(activeServo.pulse==1550);
   clockMs=startedAt+7500;loop();checkOff();
   fresh();send("dance\n");
-  assert(activeMode==8 && activeServo.pin==D0 && secondServo.pin==D1);
+  assert(activeMode==8 && activeServo.pin==D8 && secondServo.pin==D7);
   const uint32_t origin=startedAt;
   int previousLower=1500,previousUpper=1500;
   for(uint32_t t=0;t<DANCE_HOLD_MS;++t) {

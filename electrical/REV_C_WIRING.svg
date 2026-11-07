@@ -12,7 +12,7 @@
 		<g transform="">
 			<rect x="0" y="0" width="1200" height="1080" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
 			<text x="35" y="1032" style="font-family: Helvetica-Bold; font-size: 32px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,2064) scale(1,-1)">Rev C | COMPLETE ROBOT WIRING</text>
-			<text x="35" y="999" style="font-family: Helvetica; font-size: 18px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1998) scale(1,-1)">One Pololu 2810 LV master switch. Fresh-build harness; physical commissioning pending.</text>
+			<text x="35" y="999" style="font-family: Helvetica; font-size: 18px;fill: rgb(30%,39%,44%); stroke:none;" transform="translate(0,1998) scale(1,-1)">One Pololu 2810 LV master switch. 7 Nov 2026 signal update: lower D8, upper D7.</text>
 			<text x="35" y="957" style="font-family: Helvetica-Bold; font-size: 20px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1914) scale(1,-1)">POSITIVE | servo current passes through the Pololu, never through the XIAO</text>
 			<rect x="35" y="852" width="220" height="70" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
 			<text x="48" y="897" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,1794) scale(1,-1)">Battery RCY + / red</text>
@@ -73,19 +73,19 @@
 			<circle cx="825" cy="525" r="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,27%,33%); fill-rule: evenodd;"/>
 			<text x="35" y="360" style="font-family: Helvetica-Bold; font-size: 20px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,720) scale(1,-1)">PWM | these signal wires share the same existing three-pin servo plugs</text>
 			<rect x="35" y="287" width="250" height="50" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
-			<text x="48" y="305.0" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,610) scale(1,-1)">XIAO D0 / marked 0</text>
+			<text x="48" y="305.0" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,610) scale(1,-1)">XIAO D8 / marked 8</text>
 			<path d="M 285,312 L 855,312 Z" style="stroke: rgb(9%,42%,66%); stroke-linecap: butt; stroke-width: 3;"/>
 			<rect x="855" y="287" width="310" height="50" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
 			<text x="868" y="305.0" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,610) scale(1,-1)">Lower servo J_S1 / SIG</text>
 			<rect x="35" y="224" width="250" height="50" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
-			<text x="48" y="242.0" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,484) scale(1,-1)">XIAO D1 / marked 1</text>
+			<text x="48" y="242.0" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,484) scale(1,-1)">XIAO D7 / marked 7</text>
 			<path d="M 285,249 L 855,249 Z" style="stroke: rgb(9%,42%,66%); stroke-linecap: butt; stroke-width: 3;"/>
 			<rect x="855" y="224" width="310" height="50" rx="8" ry="8" style="stroke: rgb(79%,83%,86%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(96%,97%,98%); fill-rule: evenodd;"/>
 			<text x="868" y="242.0" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,484) scale(1,-1)">Upper servo J_S2 / SIG</text>
 			<text x="35" y="194" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,388) scale(1,-1)">D2 remains UNUSED. XIAO 3V3 and 5V/VBUS are NOT connected to servo power.</text>
 			<rect x="35" y="38" width="1130" height="132" rx="8" ry="8" style="stroke: rgb(89%,70%,40%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,94%,87%); fill-rule: evenodd;"/>
 			<text x="48" y="97.0" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,194) scale(1,-1)"></text>
-			<text x="52" y="141" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,282) scale(1,-1)">CHARGE: switch ON + USB connected + ./robot charge (firmware 0.3).</text>
+			<text x="52" y="141" style="font-family: Helvetica-Bold; font-size: 21px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,282) scale(1,-1)">CHARGE: switch ON + USB connected + ./robot charge (firmware 0.4).</text>
 			<text x="52" y="111" style="font-family: Helvetica; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,222) scale(1,-1)">Charge mode stops PWM, not servo power; idle current and charging completion need measurement.</text>
 			<text x="52" y="81" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,162) scale(1,-1)">STORAGE OFF: unplug USB AND slide OFF. OFF + USB isolates the cell but may power the servos.</text>
 			<text x="52" y="53" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,106) scale(1,-1)">No routine connector access. Disconnect battery AND USB before soldering or servicing.</text>

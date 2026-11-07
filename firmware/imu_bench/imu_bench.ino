@@ -1,4 +1,4 @@
-// Sensor-only commissioning. D0/D1 remain LOW: no servo library or PWM.
+// Sensor-only commissioning. D8/D7 remain LOW: no servo library or PWM.
 #include <Arduino.h>
 #include <Adafruit_TinyUSB.h>
 #include <math.h>
@@ -29,7 +29,7 @@ uint16_t readBatteryMv() {
 
 void status() {
   Serial.println("ROBOT IMU BENCH 0.4");
-  Serial.println("SENSOR_ONLY: D0/D1 LOW, no PWM; direct servo power is not disconnected.");
+  Serial.println("SENSOR_ONLY: D8/D7 LOW, no PWM; direct servo power is not disconnected.");
   Serial.print("IMU_READY: "); Serial.println(imu.ready ? 1 : 0);
   Serial.print("I2C_ADDRESS_DEC: "); Serial.println(imu.address);
   Serial.print("WHO_AM_I_DEC: "); Serial.println(imu.identity);
@@ -73,8 +73,8 @@ void handleCommand() {
 }
 
 void setup() {
-  digitalWrite(D0,LOW); pinMode(D0,OUTPUT);
-  digitalWrite(D1,LOW); pinMode(D1,OUTPUT);
+  digitalWrite(D8,LOW); pinMode(D8,OUTPUT);
+  digitalWrite(D7,LOW); pinMode(D7,OUTPUT);
   pinMode(D2,INPUT);
   digitalWrite(PIN_CHARGING_CURRENT,LOW); pinMode(PIN_CHARGING_CURRENT,OUTPUT);
   digitalWrite(VBAT_ENABLE,LOW); pinMode(VBAT_ENABLE,OUTPUT);

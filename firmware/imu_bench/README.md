@@ -19,7 +19,7 @@ Version **0.4**, uploaded and sensor identity verified on 1 November 2026. This 
 3. For the first capture, keep the base flat and still. The recorder checks the firmware banner and `IMU_READY: 1` before starting a stream. It sends only `off`, `status`, `stream` and stop commands. It saves CSV plus a JSON summary in the ignored `build/` directory.
 4. Review raw axes, approximate 1 g acceleration norm, near-zero stationary gyro, sample age, saturation and I2C error counts. A reported battery voltage with the battery unplugged is the charger/BAT node, not evidence of an attached cell.
 
-The program holds D0/D1 LOW and contains no PWM, servo or policy calls. `off` stops sensor streaming; it does not disconnect battery power. USB disconnection also stops streaming. A stream is limited to 30 seconds; the recorder accepts captures up to 25 seconds.
+The program holds D8/D7 LOW and contains no PWM, servo or policy calls. `off` stops sensor streaming; it does not disconnect battery power. USB disconnection also stops streaming. A stream is limited to 30 seconds; the recorder accepts captures up to 25 seconds.
 
 ## Sensor contract
 

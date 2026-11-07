@@ -15,7 +15,7 @@ The XIAO Sense board is fastened rigidly **on the base platform**, at approximat
    ├── nRF52840 MCU       → runs the trained policy at 50 Hz
    ├── LSM6DS3TR-C IMU    → senses base motion (accel + gyro)
    ├── BQ25101 charger    → charges a standard 1S LiPo over USB-C
-   ├── D0 and D1          → servo PWM signals
+   ├── D8 and D7          → lower and upper servo PWM (7 Nov 2026 harness)
    └── BAT pads           → battery input
 
    Rev B elsewhere: battery → positive/negative buses → two servos (removable plugs)

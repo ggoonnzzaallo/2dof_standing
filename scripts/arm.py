@@ -64,6 +64,7 @@ def operate(device, action, clock=time.monotonic):
     if action == 'charge':
         try:
             result['stop_acknowledgement'] = stop_pwm(device, clock)
+            result['firmware_banner'] = handshake(device, require_ready=False)
             if query_state(device, clock)['mode'] != 0:
                 raise RuntimeError('PWM stop was not confirmed before charge mode.')
             device.write(b'charge\n')
@@ -74,9 +75,9 @@ def operate(device, action, clock=time.monotonic):
                     result['charge_acknowledgement'] = line
                     break
                 if line.startswith(('OFF', 'REFUSED', 'ERROR')):
-                    raise RuntimeError(line + ' Charge mode requires controller firmware 0.3 or newer.')
+                    raise RuntimeError(line + ' This harness requires controller firmware 0.4.')
             else:
-                raise RuntimeError('Charge mode was not acknowledged; firmware 0.3 or newer is required.')
+                raise RuntimeError('Charge mode was not acknowledged; firmware 0.4 is required for this harness.')
             result['device_state'] = query_state(device, clock)
             if result['device_state']['mode'] != 5:
                 raise RuntimeError('Device did not remain in no-PWM charge mode.')

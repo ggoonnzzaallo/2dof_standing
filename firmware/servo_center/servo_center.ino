@@ -108,10 +108,10 @@ void motorOff() {
   // detach() must only be called when attached on the bundled nRF52 library.
   if (activeServo.attached()) activeServo.detach();
   if (secondServo.attached()) secondServo.detach();
-  digitalWrite(D0, LOW);
-  digitalWrite(D1, LOW);
-  pinMode(D0, OUTPUT);
-  pinMode(D1, OUTPUT);
+  digitalWrite(D8, LOW);
+  digitalWrite(D7, LOW);
+  pinMode(D8, OUTPUT);
+  pinMode(D7, OUTPUT);
   if (USE_SERVO_POWER_SWITCH) {
     digitalWrite(D2, LOW);
     pinMode(D2, OUTPUT);
@@ -138,12 +138,12 @@ void help() {
   Serial.println("battery : read BAT voltage estimate, millivolts");
   Serial.println("dance-loop : continuous FAST waves; keep heartbeat every 2 seconds; off/! stops");
   Serial.println("dance  : BOTH joints, smooth 1100-1900 us, center then stop after 25.5 seconds");
-  Serial.println("lower  : lower servo D0 at 1500 us for 15 seconds");
-  Serial.println("upper  : upper servo D1 at 1500 us for 15 seconds");
-  Serial.println("lower-jog : HORNS OFF ONLY, D0 1200-1800 us, off in 10.5 seconds");
-  Serial.println("upper-jog : HORNS OFF ONLY, D1 1200-1800 us, off in 10.5 seconds");
-  Serial.println("lower-small : D0 1500/1450/1500/1550/1500 us, off in 7.5 seconds");
-  Serial.println("upper-small : D1 1500/1450/1500/1550/1500 us, off in 7.5 seconds");
+  Serial.println("lower  : lower servo D8 at 1500 us for 15 seconds");
+  Serial.println("upper  : upper servo D7 at 1500 us for 15 seconds");
+  Serial.println("lower-jog : HORNS OFF ONLY, D8 1200-1800 us, off in 10.5 seconds");
+  Serial.println("upper-jog : HORNS OFF ONLY, D7 1200-1800 us, off in 10.5 seconds");
+  Serial.println("lower-small : D8 1500/1450/1500/1550/1500 us, off in 7.5 seconds");
+  Serial.println("upper-small : D7 1500/1450/1500/1550/1500 us, off in 7.5 seconds");
   Serial.println(USE_SERVO_POWER_SWITCH ? "off    : stop PWM and request Rev A rail off"
                                         : "off    : stop PWM ONLY; direct power remains connected");
   Serial.println("!      : immediate off, no newline needed");
@@ -175,7 +175,7 @@ void beginTest(uint8_t mode) {
     return;
   }
   delay(20);
-  const uint8_t pin = (mode == 2 || mode == 4 || mode == 6) ? D0 : D1;
+  const uint8_t pin = (mode == 2 || mode == 4 || mode == 6) ? D8 : D7;
   if (activeServo.attach(pin, 1000, 2000) == INVALID_SERVO) {
     motorOff();
     Serial.println("ERROR: could not start PWM; outputs stopped.");
@@ -201,8 +201,8 @@ void beginDance(bool continuous=false) {
   motorOff();
   if (!batteryAllowsMotion()) return;
   if (USE_SERVO_POWER_SWITCH) digitalWrite(D2, HIGH);
-  if (activeServo.attach(D0,1000,2000)==INVALID_SERVO ||
-      secondServo.attach(D1,1000,2000)==INVALID_SERVO) {
+  if (activeServo.attach(D8,1000,2000)==INVALID_SERVO ||
+      secondServo.attach(D7,1000,2000)==INVALID_SERVO) {
     motorOff();
     Serial.println("ERROR: could not start both PWM outputs.");
     return;

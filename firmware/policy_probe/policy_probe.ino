@@ -34,8 +34,8 @@ void runProbe() {
 }
 
 void setup() {
-  digitalWrite(D0,LOW);pinMode(D0,OUTPUT);
-  digitalWrite(D1,LOW);pinMode(D1,OUTPUT);
+  digitalWrite(D8,LOW);pinMode(D8,OUTPUT);
+  digitalWrite(D7,LOW);pinMode(D7,OUTPUT);
   // Preserve the bench firmware's documented charger configuration.
   digitalWrite(PIN_CHARGING_CURRENT,LOW);pinMode(PIN_CHARGING_CURRENT,OUTPUT);
   digitalWrite(VBAT_ENABLE,LOW);pinMode(VBAT_ENABLE,OUTPUT);
@@ -47,7 +47,7 @@ void loop() {
   static char command[16];
   static uint8_t used = 0;
   if (Serial && !banner) {
-    Serial.println("POLICY_PROBE_SIM_ONLY: D0/D1 held LOW; no PWM. Send probe or help.");
+    Serial.println("POLICY_PROBE_SIM_ONLY: D8/D7 held LOW; no PWM. Send probe or help.");
     banner = true;
   }
   if (!Serial) banner = false;

@@ -23,7 +23,7 @@ class FineServo {
  public:
  bool on=false,fail=false;int pin=-1,pulse=0,writes=0;
  bool attached()const{return on;}
- uint8_t attach(int p,int lo,int hi){assert(p==D0||p==D1);assert(lo==500&&hi==2500);if(fail)return INVALID_SERVO;on=true;pin=p;return 0;}
+ uint8_t attach(int p,int lo,int hi){assert(p==D8||p==D7);assert(lo==500&&hi==2500);if(fail)return INVALID_SERVO;on=true;pin=p;return 0;}
  void detach(){assert(on);on=false;}
  void writeMicroseconds(int us){assert(on&&us>=789&&us<=2211);pulse=us;++writes;}
 };
@@ -34,7 +34,7 @@ test=r'''
 #include <iostream>
 #include <limits>
 #include <fstream>
-void checkOff(){assert(mode==OFF&&!motors[0].attached()&&!motors[1].attached());assert(levels[D0]==LOW&&levels[D1]==LOW);}
+void checkOff(){assert(mode==OFF&&!motors[0].attached()&&!motors[1].attached());assert(levels[D8]==LOW&&levels[D7]==LOW);}
 void send(const char* text){Serial.send(text);while(Serial.available())loop();}
 void resetFixture(uint64_t origin=0){
  stop();fakeTimeUs=origin;serialCostUs=0;Serial.open=true;Serial.txAvailable=256;Serial.rx.clear();Serial.output.str("");Serial.output.clear();
@@ -53,6 +53,7 @@ int main(int argc,char** argv){
  assert(!controlPulse(1.5f,value)&&!controlPulse(std::numeric_limits<float>::quiet_NaN(),value));
  resetFixture();send("run\n");checkOff();
  resetFixture();send("arm\n");assert(mode==HOLD&&motors[0].pulse==1500&&motors[1].pulse==1500);
+ assert(motors[0].pin==8&&motors[1].pin==7); // Actual joint ordering, not just allowed pins.
  send("run\n");checkOff(); // One-second neutral acquisition is mandatory.
  running();for(int i=0;i<100;++i){
    waitMs(20);assert(mode==RUN);if(i%10==0)send("keep\n");
@@ -113,7 +114,7 @@ int main(int argc,char** argv){
  // Charging stops active PWM immediately and stays latched without USB/DTR,
  // heartbeat, sensor readiness or the normal trial timeout. It does not arm.
  running();send("charge\n");assert(mode==CHARGE);
- assert(!motors[0].attached()&&!motors[1].attached()&&levels[D0]==LOW&&levels[D1]==LOW);
+ assert(!motors[0].attached()&&!motors[1].attached()&&levels[D8]==LOW&&levels[D7]==LOW);
  assert(frames==0&&pulses[0]==0&&pulses[1]==0);
  assert(levels[PIN_CHARGING_CURRENT]==LOW);
  Wire1.regs[0x1e]=0;Serial.open=false;waitMs(61000);

@@ -15,11 +15,11 @@ from shadow import HostActor
 
 ROOT = Path(__file__).resolve().parents[1]
 LIMIT = 1.3962634016
-BANNER = 'ROBOT POLICY CONTROL 0.3'
-SUPPORTED_BANNERS = {BANNER, 'ROBOT POLICY CONTROL 0.2'}
+BANNER = 'ROBOT POLICY CONTROL 0.4'
+SUPPORTED_BANNERS = {BANNER}
 
 
-def handshake(device):
+def handshake(device, require_ready=True):
     lines = []
     stopped = False
     end = time.monotonic() + 8
@@ -29,6 +29,8 @@ def handshake(device):
             device.write(b'off\nstatus\n')
             next_request = time.monotonic() + .6
         line = device.readline().decode('ascii', errors='replace').strip()
+        if line.startswith('ROBOT POLICY CONTROL ') and line not in SUPPORTED_BANNERS:
+            raise RuntimeError('D8 lower / D7 upper wiring requires controller firmware 0.4. Upload the updated controller before arming or charging. Received: ' + line)
         if line.startswith('OFF.'):
             stopped = True
             lines = []
@@ -36,7 +38,8 @@ def handshake(device):
             lines = [line]
         elif lines and line:
             lines.append(line)
-        if line == 'READY' and lines and lines[0] in SUPPORTED_BANNERS and all(v in lines for v in ['MODE: 0', 'IMU_READY: 1', 'FILTER_READY: 1']):
+        required = ['MODE: 0'] + (['IMU_READY: 1', 'FILTER_READY: 1'] if require_ready else [])
+        if line == 'READY' and lines and lines[0] in SUPPORTED_BANNERS and all(v in lines for v in required):
             return lines
     raise RuntimeError('Expected a ready, disarmed learned controller.\n' + '\n'.join(lines))
 
