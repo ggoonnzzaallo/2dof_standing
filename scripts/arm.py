@@ -7,7 +7,7 @@ import time
 from control import handshake
 
 ROOT = Path(__file__).resolve().parents[1]
-MODES = {0: 'OFF', 1: 'NEUTRAL HOLD', 2: 'USB TRIAL', 3: 'SHADOW', 4: 'STANDALONE', 5: 'CHARGE / PWM OFF'}
+MODES = {0: 'OFF', 1: 'NEUTRAL HOLD', 2: 'USB TRIAL', 3: 'SHADOW', 4: 'STANDALONE', 5: 'CHARGE / PWM OFF', 6: 'INACTIVE / REBOOT REQUIRED'}
 
 
 def parse_state(line):
@@ -55,7 +55,7 @@ def operate(device, action, clock=time.monotonic):
     if action == 'stop':
         result['stop_acknowledgement'] = stop_pwm(device, clock)
         result['device_state'] = query_state(device, clock)
-        if result['device_state']['mode'] != 0:
+        if result['device_state']['mode'] not in (0, 6):
             raise RuntimeError('Device did not remain stopped.')
         return result
     if action == 'status':
@@ -65,7 +65,7 @@ def operate(device, action, clock=time.monotonic):
         try:
             result['stop_acknowledgement'] = stop_pwm(device, clock)
             result['firmware_banner'] = handshake(device, require_ready=False)
-            if query_state(device, clock)['mode'] != 0:
+            if query_state(device, clock)['mode'] not in (0, 6):
                 raise RuntimeError('PWM stop was not confirmed before charge mode.')
             device.write(b'charge\n')
             deadline = clock() + 3
@@ -177,6 +177,7 @@ def main():
     print(f"{state['mode_name']} | BAT {state['battery_mv']/1000:.3f} V | frames {state['policy_frames']}")
     if args.action == 'arm':
         print('Armed. Unplug USB: the robot will keep running on battery.')
+        print('Firmware 0.5: 60 s of base IMU inactivity stops PWM until reboot.')
         print('Stop via ./robot stop. Rev C full OFF: unplug USB and slide the master switch OFF.')
         print('Before the Rev C rewire, disconnect battery and USB for full OFF.')
     elif args.action == 'stop':
@@ -184,6 +185,8 @@ def main():
         print('Before the Rev C rewire, disconnect battery and USB for full OFF.')
     elif args.action == 'charge':
         print('Charge mode latched; PWM is OFF. Servos still receive power.')
+        if 'reboot required' in state['last_stop']:
+            print('Inactivity lock remains set: reboot before arming again.')
         print('Rev C: keep the master switch ON and USB connected for charging.')
         print('This confirms PWM shutdown, not positive battery current or a full battery.')
         print('After charging: unplug USB and slide the master switch OFF for storage.')

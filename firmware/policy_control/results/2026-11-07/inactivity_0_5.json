@@ -1,0 +1,147 @@
+{
+  "firmware": "0.5",
+  "test": "real-time no-PWM shadow inactivity and reboot-only latch",
+  "physical_PWM_enabled_by_test": false,
+  "events": [
+    {
+      "command": "arm",
+      "reply": "REFUSED: inactivity lock; reboot required before arming.",
+      "state": {
+        "mode": 6,
+        "mode_name": "INACTIVE / REBOOT REQUIRED",
+        "battery_mv": 4140,
+        "policy_frames": 0,
+        "sensor_ready": true,
+        "i2c_errors": 0,
+        "last_stop": "IMU inactive for 60 s; reboot required. PWM off; charging available."
+      }
+    },
+    {
+      "command": "run",
+      "reply": "REFUSED: inactivity lock; reboot required before control.",
+      "state": {
+        "mode": 6,
+        "mode_name": "INACTIVE / REBOOT REQUIRED",
+        "battery_mv": 4140,
+        "policy_frames": 0,
+        "sensor_ready": true,
+        "i2c_errors": 0,
+        "last_stop": "IMU inactive for 60 s; reboot required. PWM off; charging available."
+      }
+    },
+    {
+      "command": "standalone",
+      "reply": "REFUSED: inactivity lock; reboot required before control.",
+      "state": {
+        "mode": 6,
+        "mode_name": "INACTIVE / REBOOT REQUIRED",
+        "battery_mv": 4140,
+        "policy_frames": 0,
+        "sensor_ready": true,
+        "i2c_errors": 0,
+        "last_stop": "IMU inactive for 60 s; reboot required. PWM off; charging available."
+      }
+    },
+    {
+      "command": "shadow",
+      "reply": "REFUSED: inactivity lock; reboot required before control.",
+      "state": {
+        "mode": 6,
+        "mode_name": "INACTIVE / REBOOT REQUIRED",
+        "battery_mv": 4140,
+        "policy_frames": 0,
+        "sensor_ready": true,
+        "i2c_errors": 0,
+        "last_stop": "IMU inactive for 60 s; reboot required. PWM off; charging available."
+      }
+    }
+  ],
+  "port": "/dev/cu.usbmodem1101",
+  "initial_banner": [
+    "ROBOT POLICY CONTROL 0.5",
+    "MODE: 0",
+    "IMU_READY: 1",
+    "FILTER_READY: 1",
+    "SERVO_PINS: lower=D8 (8), upper=D7 (7).",
+    "RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.",
+    "PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.",
+    "GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.",
+    "INACTIVITY: 60 s without base IMU motion stops PWM until reboot; charge stays available.",
+    "INACTIVITY_LOCKED: 0",
+    "LAST_STOP: Operator stop or command.",
+    "POWER: stop/charge remove PWM only. Rev C master switch OFF + USB unplugged is full OFF.",
+    "Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state (non-stopping), status, help",
+    "READY"
+  ],
+  "shadow": {
+    "elapsed_host_s": 59.9986911250744,
+    "frames": 2999,
+    "first_sample_us": 14716094,
+    "last_sample_us": 74676416,
+    "maximum_gyro_norm_rad_s_from_quantized_telemetry": 0.012903119777790177,
+    "terminal_message": "OFF: IMU inactive for 60 s; reboot required. PWM off; charging available."
+  },
+  "timeout_state": {
+    "mode": 6,
+    "mode_name": "INACTIVE / REBOOT REQUIRED",
+    "battery_mv": 4140,
+    "policy_frames": 0,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "IMU inactive for 60 s; reboot required. PWM off; charging available."
+  },
+  "stop_acknowledgement": "OFF. Emergency PWM stop.",
+  "charge_banner": [
+    "ROBOT POLICY CONTROL 0.5",
+    "MODE: 6",
+    "IMU_READY: 1",
+    "FILTER_READY: 1",
+    "SERVO_PINS: lower=D8 (8), upper=D7 (7).",
+    "RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.",
+    "PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.",
+    "GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.",
+    "INACTIVITY: 60 s without base IMU motion stops PWM until reboot; charge stays available.",
+    "INACTIVITY_LOCKED: 1",
+    "LAST_STOP: IMU inactive for 60 s; reboot required. PWM off; charging available.",
+    "POWER: stop/charge remove PWM only. Rev C master switch OFF + USB unplugged is full OFF.",
+    "Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state (non-stopping), status, help",
+    "READY"
+  ],
+  "charge_state": {
+    "mode": 5,
+    "mode_name": "CHARGE / PWM OFF",
+    "battery_mv": 4144,
+    "policy_frames": 0,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "IMU inactive for 60 s; reboot required. PWM off; charging available."
+  },
+  "after_serial_reopen": {
+    "mode": 5,
+    "mode_name": "CHARGE / PWM OFF",
+    "battery_mv": 4144,
+    "policy_frames": 0,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "IMU inactive for 60 s; reboot required. PWM off; charging available."
+  },
+  "final_banner": [
+    "ROBOT POLICY CONTROL 0.5",
+    "MODE: 5",
+    "IMU_READY: 1",
+    "FILTER_READY: 1",
+    "SERVO_PINS: lower=D8 (8), upper=D7 (7).",
+    "RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.",
+    "PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.",
+    "GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.",
+    "INACTIVITY: 60 s without base IMU motion stops PWM until reboot; charge stays available.",
+    "INACTIVITY_LOCKED: 1",
+    "LAST_STOP: IMU inactive for 60 s; reboot required. PWM off; charging available.",
+    "POWER: stop/charge remove PWM only. Rev C master switch OFF + USB unplugged is full OFF.",
+    "Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state (non-stopping), status, help",
+    "READY"
+  ],
+  "status": "passed",
+  "left_in_mode": "CHARGE / PWM OFF with inactivity lock still set",
+  "net_charging_verified": false
+}

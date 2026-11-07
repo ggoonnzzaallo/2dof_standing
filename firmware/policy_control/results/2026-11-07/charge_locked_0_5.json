@@ -1,0 +1,34 @@
+{
+  "created_utc": "2026-11-07T19:46:24.646386+00:00",
+  "action": "charge",
+  "stop_acknowledgement": "OFF. Emergency PWM stop.",
+  "firmware_banner": [
+    "ROBOT POLICY CONTROL 0.5",
+    "MODE: 6",
+    "IMU_READY: 1",
+    "FILTER_READY: 1",
+    "SERVO_PINS: lower=D8 (8), upper=D7 (7).",
+    "RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.",
+    "PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.",
+    "GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.",
+    "INACTIVITY: 60 s without base IMU motion stops PWM until reboot; charge stays available.",
+    "INACTIVITY_LOCKED: 1",
+    "LAST_STOP: IMU inactive for 60 s; reboot required. PWM off; charging available.",
+    "POWER: stop/charge remove PWM only. Rev C master switch OFF + USB unplugged is full OFF.",
+    "Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state (non-stopping), status, help",
+    "READY"
+  ],
+  "charge_acknowledgement": "CHARGE: PWM stopped and held LOW. Switch ON + USB required to charge; net charging not measured.",
+  "device_state": {
+    "mode": 5,
+    "mode_name": "CHARGE / PWM OFF",
+    "battery_mv": 4143,
+    "policy_frames": 0,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "IMU inactive for 60 s; reboot required. PWM off; charging available."
+  },
+  "continues_after_serial_close": true,
+  "net_charging_verified": false,
+  "status": "confirmed"
+}

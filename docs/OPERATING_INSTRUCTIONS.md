@@ -1,8 +1,8 @@
 # Operating instructions
 
-**Rev C instructions, updated 7 November 2026:** one Pololu battery master switch; **lower signal D8 / 8, upper signal D7 / 7**, as reported by the user. Controller **0.4** was uploaded on 7 November 2026; 150 no-PWM frames and standalone arming passed, and the user confirms normal joint response. Complete the [wiring and commissioning checks](../electrical/README.md) first.
+**Rev C instructions, updated 7 November 2026:** one Pololu battery master switch; **lower signal D8 / 8, upper signal D7 / 7**, as reported by the user. Controller **0.5** is uploaded, adding the one-minute IMU inactivity lock described below. Earlier 0.4 deployment confirmed normal response from both joints. Complete the [wiring and commissioning checks](../electrical/README.md) first.
 
-**Current controller: 0.4**, replacing the earlier 0.2 D0/D1 mapping. [Upload and standalone records](../firmware/policy_control/results/2026-11-07/deployment_0_4.json). Current Mac helpers refuse older pin mappings for arm/charge; `stop` and `status` remain available. Firmware changes do not establish that the Rev C power/charging path has been commissioned.
+**Current controller: 0.5**, retaining the 0.4 D8/D7 mapping. [Current upload and timeout record](../firmware/policy_control/results/2026-11-07/deployment_0_5.json). Current Mac helpers refuse older pin mappings for arm/charge; `stop` and `status` remain available. Firmware changes do not establish that the Rev C power/charging path has been commissioned.
 
 ## Terminal
 
@@ -10,7 +10,7 @@
 cd "/Users/super23/Documents/BLDC Motor Build/2dof_standing"
 ./robot status   # Read state without stopping or recentering
 ./robot stop     # Stop PWM; power remains connected
-./robot charge   # Firmware 0.4: latch PWM-off charging mode
+./robot charge   # Latch PWM-off charging mode; inactivity lock stays set
 ./robot arm      # Centre both joints, then start onboard recovery
 ```
 
@@ -24,13 +24,25 @@ For complete Rev C OFF, **unplug USB and slide the Pololu OFF**. No battery conn
 
 With USB connected, OFF disconnects the cell but USB may still power the XIAO and shared servo rail through the charger. Therefore OFF + USB is neither full OFF nor battery charging. Before soldering or servicing, unplug the battery **and** USB rather than relying on the switch alone.
 
+## Automatic inactivity stop — reboot to wake
+
+While recovery runs, **60 seconds without meaningful movement at the base IMU detaches both PWM outputs and holds D8/D7 LOW**. Status reports **INACTIVE / REBOOT REQUIRED**, mode **6**. The timer starts when recovery starts and resets on detected base movement. It also runs in no-PWM shadow mode for verification. Joint motion alone does not count: the IMU is attached to the base.
+
+Noise filtering uses three consecutive fresh samples with gyro magnitude at least **0.08 rad/s** (about 4.6°/s), or acceleration-vector change at least **0.04 g** relative to the last motion reference. Slow accumulated tilts can reset the timer. These are initial thresholds; physical servo vibration could keep resetting it and needs observation during use.
+
+After timeout, moving the robot, reconnecting USB, `arm`, `run`, `standalone`, `shadow`, `stop` or `charge` **cannot clear the motion lock**. `status` and `charge` still work. With switch **ON + USB connected**, charging remains available without restarting the servos. `./robot charge` reports mode 5 while preserving the inactivity lock. You do not need to issue that command for the hardware charger to operate after timeout.
+
+To run again, **unplug USB, slide OFF, then ON**, or press the XIAO's reset button once. A reboot clears the lock but boots **disarmed**. Reconnect USB and run `./robot arm` when ready. A USB reconnect alone does not intentionally reset the board or clear the lock.
+
+This is PWM shutdown, not electrical isolation or deep sleep: the XIAO and servo idle loads remain powered. For storage without charging, unplug USB and slide OFF.
+
 ## Charge
 
 1. Support the links so they can relax when PWM stops. Leave the battery and servo connectors connected inside the enclosure.
 2. Slide **ON** and connect USB-C to the Mac. Connecting USB alone does not stop an already-running policy.
 3. Run **`./robot charge`** and wait for **CHARGE / PWM OFF**, device mode **5**.
 4. Keep **ON + USB** while charging. Both PWM outputs remain detached and LOW; the servos remain electrically powered. Closing the terminal, reading status or losing USB serial does not resume motion. You may transfer the cable to a USB supply while leaving the switch ON; a reset instead boots disarmed with PWM off.
-5. After charging, **unplug USB and slide OFF** for storage. To run again, leave ON, connect the Mac and explicitly arm.
+5. After charging, **unplug USB and slide OFF** for storage. To run again, connect the Mac and explicitly arm; if inactivity has locked motion, reboot first as described above.
 
 The charger starts automatically when USB and battery are electrically connected. `charge` stops motion; it does not enable the charger hardware, measure charging current or indicate a full cell. The approximately **100 mA** setting is unchanged. Servo idle current and the switch LED leave less current for the cell; movement can exceed charger output and discharge it despite USB. More than five hours may be needed for a depleted 500 mAh pack, depending on idle load and taper.
 
@@ -53,7 +65,7 @@ Sampling is about every 100 ms. One reading below 3.4 V or above 4.4 V also stop
 1. Leave the internal battery/servo connectors connected; slide **ON** and connect USB.
 2. Put the robot upright, links near straight, on a clear surface with room to move. Keep the base briefly still for the IMU.
 3. Run **`./robot arm`**. Both joints briefly centre at nominal 1500 µs, then onboard recovery starts. This moves the robot.
-4. Wait for **Armed. Unplug USB** before removing the cable. Standalone recovery continues on battery; reconnect USB for stop, charge or status commands.
+4. Wait for **Armed. Unplug USB** before removing the cable. Standalone recovery continues on battery until a guard or 60-second inactivity stop; reconnect USB for stop, charge or status commands.
 5. At the end, unplug USB and slide OFF. After a fault, check the reported reason and explicitly rearm only after resolving it; do not repeatedly rearm a low battery.
 
 The existing ±80° policy and timing/battery/sensor guards are unchanged. The user has approved the new enclosure fit. The [revised offline model](../sim/enclosure/README.md) now includes its floor contacts, slicer masses and relocated IMU; physical recovery needs supervised evaluation of a new candidate after retraining. See the [controller guide](../firmware/policy_control/README.md) and [enclosure fit instructions](../cad/electronics_pod/PRINT_FIT_CHECK.md).

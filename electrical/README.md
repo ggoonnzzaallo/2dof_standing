@@ -1,5 +1,7 @@
 # Rev C — one Pololu battery master switch
 
+Controller **0.5** adds a reboot-only 60-second base-IMU inactivity stop. Wiring is unchanged; PWM shuts down while charging remains available. See [operating instructions](../docs/OPERATING_INSTRUCTIONS.md#automatic-inactivity-stop--reboot-to-wake).
+
 **Signal update, 7 November 2026:** the user reports lower servo signal on **D8 / 8** and upper on **D7 / 7**. Controller 0.4 matches these pins and was uploaded on 7 November 2026; no-PWM checks and standalone arming passed, with normal joint response confirmed by the user. Full Rev C power/charging commissioning remains pending; the earlier confirmed harness was [Rev B](REV_B_NOTES.md). Rev C reinstalls **one existing Pololu 2810 LV** upstream of both the XIAO and servos. No second switch board, charger, MOSFET, diode, resistor or capacitor is added. D2 stays unused.
 
 Open the [complete schematic PDF](REV_C_WIRING.pdf), [SVG](REV_C_WIRING.svg), [PNG](REV_C_WIRING.png), or [large-text phone map](REV_C_PHONE_WIRING.png). These are connection maps; use the physical board's printed pad labels, not drawing positions.

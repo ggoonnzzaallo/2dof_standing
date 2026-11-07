@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-07",
+  "firmware": "ROBOT POLICY CONTROL 0.5",
+  "previous_git_revision": "766584c",
+  "source_state": "Feature changes recorded in the commit containing this record; file hashes below identify uploaded inputs.",
+  "uploaded": true,
+  "upload_acknowledgement": "Device programmed.",
+  "upload_setup": "Connected battery/servo harness retained under existing user authorization; PWM OFF acknowledged before upload; new controller booted disarmed.",
+  "native_build": {
+    "flash_bytes": 86552,
+    "static_ram_bytes": 7912
+  },
+  "host_tests": "Full firmware regression passed; updated real-sketch and 12 Mac-helper tests passed.",
+  "hardware_test_record": "inactivity_0_5.json",
+  "hardware_test": "Real-time no-PWM shadow; 2999 frames before inactivity lock at about 60 s; arm/run/standalone/shadow refused; charge accepted; USB serial reopen preserved lock.",
+  "hardware_PWM_motion_test_this_version": false,
+  "through_switch_net_charging_validated": false,
+  "left_in_mode": "CHARGE (5), PWM detached/LOW, INACTIVITY_LOCKED: 1",
+  "limitations": "Initial thresholds are validated against stationary sensor noise with PWM disabled. Rejection of actual running-servo vibration still requires observation. Base IMU does not measure joint angles; no new physical recovery rate or charge-current measurement.",
+  "sha256": {
+    "firmware/policy_control/policy_control.ino": "dbf59b623d403ecb5b27251e3ff1f0a7aff47e4a9f2042b0f31ebd4805764228",
+    "firmware/policy_control/InactivityGuard.h": "580b253625f29cda804ccdbb5a8997ab5560c909f7f65ab0a79d9d27a6abf3e3",
+    "firmware/policy_control/ServoProfile.h": "31c654bc83fb7f33c5efda7fb3c884172a9de2d7384dcde5feccb34879154fb1",
+    "sim/recovery/results/policy_simulation_only.h": "89e196a8409df9d23bfdcc0ec5a5952a3b756876bcd2a6317e588aeea8e643ff",
+    "build/policy_control/policy_control.ino.hex": "5048e5568edfc4877cbcd207861aaec2d32970106af2f1c25ba343a261b7c4b3",
+    "build/policy_control/policy_control.ino.zip": "9ec80f3444875ba38806520c787419382ce1716107f9a4a6bb73c213140481fd",
+    "firmware/policy_control/results/2026-11-07/inactivity_0_5.json": "1961c0b9b9a536d9f18825a9b2d6a8a13b966e959f75d3b922b0a2c9a1991acd",
+    "firmware/policy_control/results/2026-11-07/charge_locked_0_5.json": "96f848b6528d67f1ebb02e9a1f8a206191833ada6ecea9b6c528e46ea49370b8"
+  },
+  "mac_charge_command_record": "charge_locked_0_5.json"
+}

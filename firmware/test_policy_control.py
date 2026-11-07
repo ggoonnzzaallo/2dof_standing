@@ -37,7 +37,7 @@ test=r'''
 void checkOff(){assert(mode==OFF&&!motors[0].attached()&&!motors[1].attached());assert(levels[D8]==LOW&&levels[D7]==LOW);}
 void send(const char* text){Serial.send(text);while(Serial.available())loop();}
 void resetFixture(uint64_t origin=0){
- stop();fakeTimeUs=origin;serialCostUs=0;Serial.open=true;Serial.txAvailable=256;Serial.rx.clear();Serial.output.str("");Serial.output.clear();
+ inactivity=InactivityGuard();stop();fakeTimeUs=origin;serialCostUs=0;Serial.open=true;Serial.txAvailable=256;Serial.rx.clear();Serial.output.str("");Serial.output.clear();
  adcRaw=1800;Wire1.reset();Wire1.raw(5,4098);imu=Lsm6ds3();attitude=GravityFilter();
  hadSerial=false;discard=false;used=0;sampleAt=lastPoll=batteryAt=0;filterRejects=0;
  for(auto& motor:motors)motor=FineServo();setup();for(int i=0;i<22;++i){delay(5);loop();}
@@ -98,7 +98,9 @@ int main(int argc,char** argv){
  assert(motors[0].attached()&&motors[1].attached());
  heartbeatAt=millis()-5000;runAt=millis()-65000;waitMs(100);
  assert(mode==STANDALONE); // Neither USB heartbeat nor supervised trial deadline applies.
- before=frames;waitMs(61000);assert(mode==STANDALONE&&frames>=before+3050);
+ before=frames;waitMs(30000);
+ Wire1.raw(0,100);waitMs(30);Wire1.raw(0,0);waitMs(31000);
+ assert(mode==STANDALONE&&frames>=before+3050); // Meaningful motion extends the idle window.
  Serial.open=true;before=frames;loop();assert(mode==STANDALONE&&frames>=before);
  send("state\n");assert(mode==STANDALONE);waitMs(100);assert(frames>before);
  send("off\n");checkOff();
@@ -126,7 +128,42 @@ int main(int argc,char** argv){
  send("!\n");checkOff(); // Emergency stop remains available during charge.
  resetFixture();send("charge\n");send("arm\n");assert(mode==HOLD);
  waitMs(1100);send("standalone\n");assert(mode==STANDALONE);send("off\n");checkOff();
- std::cout<<"PASS: actual actor, 80-degree conversion, one-second neutral hold, 50 Hz target/PWM, shadow isolation, attach failures, battery/sensor/nonfinite/USB/heartbeat/deadline/session/input stops, nonblocking telemetry, clock rollover, standalone operation and latched no-PWM charging/rearming.\n";
+ // Noise cannot keep it awake; timeout detaches both outputs and is reboot-only.
+ resetFixture();send("arm\n");waitMs(1100);send("standalone\n");Serial.open=false;
+ Wire1.raw(0,10); // 0.0122 rad/s, comfortably below motion threshold.
+ waitMs(59900);assert(mode==STANDALONE&&!inactivity.locked);
+ waitMs(110);assert(mode==INACTIVE&&inactivity.locked);
+ assert(!motors[0].attached()&&!motors[1].attached()&&levels[D8]==LOW&&levels[D7]==LOW);
+ assert(pulses[0]==0&&pulses[1]==0);
+ Wire1.raw(0,200);waitMs(100);assert(mode==INACTIVE); // Moving does not wake it.
+ Serial.open=true;send("state\nstatus\nhelp\nkeep\n");assert(mode==INACTIVE);
+ send("arm\nrun\nstandalone\nshadow\noff\n!\n");assert(mode==INACTIVE&&inactivity.locked);
+ assert(!motors[0].attached()&&!motors[1].attached());
+ send("charge\n");assert(mode==CHARGE&&inactivity.locked&&levels[PIN_CHARGING_CURRENT]==LOW);
+ Serial.open=false;waitMs(1000);assert(mode==CHARGE&&inactivity.locked);
+ Serial.open=true;send("arm\nstandalone\n");assert(mode==INACTIVE&&inactivity.locked);
+ assert(!motors[0].attached()&&!motors[1].attached());
+ send("charge\n!");assert(mode==INACTIVE&&inactivity.locked);
+ resetFixture();send("arm\n");assert(mode==HOLD&&!inactivity.locked); // Simulated reboot clears latch.
+ // No-PWM shadow exercises the same guard, including with USB connected/heartbeat.
+ resetFixture();send("shadow\n");
+ for(int i=0;i<60;++i){send("keep\n");waitMs(1000);}
+ assert(mode==INACTIVE&&inactivity.locked&&!motors[0].attached()&&!motors[1].attached());
+ // Guard boundaries, wraparound, slow accumulated tilt, and single-sample spikes.
+ InactivityGuard guard;float a[3]={0,0,1},g[3]={};
+ guard.begin(100,a);guard.observe(200,a,g);assert(!guard.expired(60099));assert(guard.expired(60100));
+ guard.begin(90000,a);guard.observe(90001,a,g);assert(guard.locked);
+ guard=InactivityGuard();guard.begin(0xfffffff0u,a);
+ assert(!guard.expired(uint32_t(0xfffffff0u+59999)));assert(guard.expired(uint32_t(0xfffffff0u+60000)));
+ guard=InactivityGuard();guard.begin(0,a);
+ g[0]=.1f;guard.observe(100,a,g);g[0]=0;guard.observe(101,a,g);
+ assert(guard.lastMotionMs==0); // Isolated spike rejected.
+ for(int i=1;i<=60;++i){a[0]=i*.001f;guard.observe(i*100,a,g);}
+ assert(guard.lastMotionMs>=4000); // Fixed reference catches slow tilt, not just sample delta.
+ a[0]=0;guard=InactivityGuard();guard.begin(0,a);g[2]=.1f;
+ guard.observe(100,a,g);guard.observe(105,a,g);guard.observe(110,a,g);
+ assert(guard.lastMotionMs==110&&!guard.expired(60109)&&guard.expired(60110));
+ std::cout<<"PASS: actual actor, 80-degree conversion, one-second neutral hold, 50 Hz target/PWM, shadow isolation, attach failures, battery/sensor/nonfinite/USB/heartbeat/deadline/session/input stops, nonblocking telemetry, clock rollover, standalone operation, no-PWM charging and reboot-only IMU inactivity lock.\n";
 }
 '''
 with tempfile.TemporaryDirectory() as folder:
@@ -138,7 +175,7 @@ with tempfile.TemporaryDirectory() as folder:
     (root/'firmware/servo_center/FineServo.h').write_text(servo)
     (root/'firmware/policy_shadow/MicrosecondClock.h').write_text(clock)
     for name in ['GravityFilter.h','MountCalibration.h']:(root/'firmware/policy_shadow'/name).write_bytes((HERE/'policy_shadow'/name).read_bytes())
-    for name in ['policy_control.ino','ServoProfile.h']:(root/'firmware/policy_control'/name).write_bytes((HERE/'policy_control'/name).read_bytes())
+    for name in ['policy_control.ino','ServoProfile.h','InactivityGuard.h']:(root/'firmware/policy_control'/name).write_bytes((HERE/'policy_control'/name).read_bytes())
     (root/'sim/recovery/results/policy_simulation_only.h').write_bytes((HERE.parent/'sim/recovery/results/policy_simulation_only.h').read_bytes())
     (root/'test.cpp').write_text(test)
     subprocess.run(['c++','-std=c++17','-O2','-I',str(root),str(root/'test.cpp'),'-o',str(root/'test')],check=True)

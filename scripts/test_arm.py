@@ -5,20 +5,21 @@ from arm import operate, parse_state
 
 
 class Device:
-    def __init__(self, refuse=False, ready=True, charge_supported=True, version='0.4'):
+    def __init__(self, refuse=False, ready=True, charge_supported=True, version='0.5', locked=False):
         self.time=0.;self.mode=0;self.frames=0;self.ready=ready;self.refuse=refuse
         self.lines=deque();self.commands=[];self.armed_at=0;self.closed=False;self.charge_supported=charge_supported
-        self.version=version
+        self.version=version;self.locked=locked
     def now(self):return self.time
     def reset_input_buffer(self):self.lines.clear()
     def write(self,data):
         for command in data.decode().splitlines():
             self.commands.append(command)
             if command in ('!','off'):
-                self.mode=0;self.lines.append('OFF. PWM stopped.')
+                self.mode=6 if self.locked else 0;self.lines.append('OFF. PWM stopped.')
             elif command=='status':
-                self.lines.extend([f'ROBOT POLICY CONTROL {self.version}','MODE: 0',f'IMU_READY: {int(self.ready)}',f'FILTER_READY: {int(self.ready)}','READY'])
+                self.lines.extend([f'ROBOT POLICY CONTROL {self.version}',f'MODE: {self.mode}',f'INACTIVITY_LOCKED: {int(self.locked)}',f'IMU_READY: {int(self.ready)}',f'FILTER_READY: {int(self.ready)}','READY'])
             elif command=='arm':
+                assert not self.locked
                 self.mode=1;self.armed_at=self.time;self.lines.append('ARMED: nominal neutral.')
             elif command=='charge':
                 if self.charge_supported:
@@ -98,6 +99,23 @@ class ArmingTests(unittest.TestCase):
                     self.assertNotIn('arm',device.commands)
                     self.assertNotIn('charge',device.commands)
                     self.assertEqual(device.mode,0)
+    def test_inactivity_refuses_arm_before_any_motion_command(self):
+        device=Device(locked=True)
+        with self.assertRaisesRegex(RuntimeError,'inactivity lock'):
+            operate(device,'arm',device.now)
+        self.assertNotIn('arm',device.commands)
+        self.assertEqual(device.mode,6)
+    def test_inactivity_allows_stop_status_and_charge_without_clearing_lock(self):
+        for action in ('stop','status','charge'):
+            with self.subTest(action=action):
+                device=Device(locked=True,ready=False);device.mode=6
+                result=operate(device,action,device.now)
+                self.assertEqual(result['device_state']['mode'],5 if action=='charge' else 6)
+                self.assertTrue(device.locked)
+                self.assertNotIn('arm',device.commands)
+    def test_previous_d8_d7_firmware_remains_supported(self):
+        device=Device(version='0.4')
+        self.assertEqual(operate(device,'arm',device.now)['device_state']['mode'],4)
     def test_status_preserves_charge(self):
         device=Device();device.mode=5
         result=operate(device,'status',device.now)

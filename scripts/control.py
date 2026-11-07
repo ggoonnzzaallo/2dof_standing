@@ -15,8 +15,8 @@ from shadow import HostActor
 
 ROOT = Path(__file__).resolve().parents[1]
 LIMIT = 1.3962634016
-BANNER = 'ROBOT POLICY CONTROL 0.4'
-SUPPORTED_BANNERS = {BANNER}
+BANNER = 'ROBOT POLICY CONTROL 0.5'
+SUPPORTED_BANNERS = {BANNER, 'ROBOT POLICY CONTROL 0.4'}
 
 
 def handshake(device, require_ready=True):
@@ -38,8 +38,11 @@ def handshake(device, require_ready=True):
             lines = [line]
         elif lines and line:
             lines.append(line)
-        required = ['MODE: 0'] + (['IMU_READY: 1', 'FILTER_READY: 1'] if require_ready else [])
-        if line == 'READY' and lines and lines[0] in SUPPORTED_BANNERS and all(v in lines for v in required):
+        if line == 'READY' and require_ready and 'INACTIVITY_LOCKED: 1' in lines:
+            raise RuntimeError('IMU inactivity lock: reboot the XIAO before arming. Charging remains available.')
+        required = ['IMU_READY: 1', 'FILTER_READY: 1'] if require_ready else []
+        disarmed = 'MODE: 0' in lines or (not require_ready and 'MODE: 6' in lines)
+        if line == 'READY' and disarmed and lines and lines[0] in SUPPORTED_BANNERS and all(v in lines for v in required):
             return lines
     raise RuntimeError('Expected a ready, disarmed learned controller.\n' + '\n'.join(lines))
 
