@@ -22,6 +22,7 @@
 | [Firmware setup](../firmware/README.md) | Mac/VS Code toolchain, build and upload commands |
 | [Current controller](../firmware/policy_control/README.md) | Inference, limits, operating modes, telemetry and supervised trials |
 | [Simulation guide](../sim/README.md) | Current interactive playground, setup and experiment navigation |
+| [Filming the simulation](FILMING_SIMULATION.md) | Repeatable timed pushes, restart/pause keys and portrait MP4 export |
 | [Current C3 training and results](../sim/enclosure_c3/upright/README.md) | PPO checkpoint, success definition, held-out evaluation and joint-clearance calculations |
 | [Controller development history](../firmware/policy_control/HISTORY.md) | Dated firmware releases and physical observations |
 | [Validation log](../firmware/VALIDATION.md) | Chronological builds, captures and checks |

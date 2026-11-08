@@ -54,4 +54,6 @@ Open the current model and exact controller:
 
 Enter resets, Space pauses, drag rotates, scroll zooms. Double-click a body and Control + right-drag to pull it.
 
+For video takes, the separate [filming demo](../../../docs/FILMING_SIMULATION.md) applies three timed forces, supports one-key restart and exports portrait MP4 footage without changing this controller or model.
+
 [Selected actor](results/best.zip) · [checkpoints](results/checkpoints) · [training report](results/training_report.json) · [source snapshots](results/source) · [C export](results/policy_upright.json) · [manifest](../../../firmware/policy_control/PolicyManifest.json).

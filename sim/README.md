@@ -27,6 +27,8 @@ On macOS, launch with `mjpython`:
 
 The playground uses the matching controller runtime and sends no robot commands. For model geometry and body grouping, see the [frozen C3 model](enclosure_c3/README.md#matched-model).
 
+For repeatable video takes, use the [filming demo](../docs/FILMING_SIMULATION.md): three timed pushes, one-key restart and portrait MP4 export.
+
 ## How learning works
 
 MuJoCo supplies contact and servo physics; Gymnasium supplies the environment; Stable-Baselines3 PPO refines the policy. The exported **10 → 64 → 64 → 2** actor runs onboard at **50 Hz**. Inputs are estimated base DOWN, gyro, commanded targets and previous applied actions. The servos have finite speed, torque and delay; actual joint angles are used in simulated physics/rewards, not policy observations.

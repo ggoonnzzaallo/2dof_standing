@@ -1,0 +1,101 @@
+{
+  "status": "passed",
+  "maximum_restart_trace_difference": 0.0,
+  "restart_during_active_push_checked": true,
+  "repeats": [
+    {
+      "duration_s": 22,
+      "controller": "0.9",
+      "seed": 17,
+      "randomized_mechanics": false,
+      "force_body": "upper",
+      "force_application": "upper body center of mass; world coordinates",
+      "pushes": [
+        {
+          "force_world_n": [
+            0.4,
+            0.0,
+            0.0
+          ],
+          "start_s": 3.0,
+          "duration_s": 0.3,
+          "peak_base_tilt_deg": 93.62907012400966,
+          "recovery_after_push_s": 2.46
+        },
+        {
+          "force_world_n": [
+            -0.4,
+            0.0,
+            0.0
+          ],
+          "start_s": 9.0,
+          "duration_s": 0.3,
+          "peak_base_tilt_deg": 147.28464226011292,
+          "recovery_after_push_s": 3.380000000000001
+        },
+        {
+          "force_world_n": [
+            0.0,
+            0.4,
+            0.0
+          ],
+          "start_s": 15.0,
+          "duration_s": 0.3,
+          "peak_base_tilt_deg": 139.6350134423343,
+          "recovery_after_push_s": 3.240000000000002
+        }
+      ],
+      "final_upright_and_straight": true,
+      "actor_sha256": "97a66e09f56f2df6765da0b97a6f0f2332c6f43bad8df29d898d2ede7a884805",
+      "model_sha256": "a3f99042bcce3daf94d81f4c9e6ac053b4872dee23c65982ac574de5263e4bd4",
+      "physical_robot_commands_sent": false
+    },
+    {
+      "duration_s": 22,
+      "controller": "0.9",
+      "seed": 17,
+      "randomized_mechanics": false,
+      "force_body": "upper",
+      "force_application": "upper body center of mass; world coordinates",
+      "pushes": [
+        {
+          "force_world_n": [
+            0.4,
+            0.0,
+            0.0
+          ],
+          "start_s": 3.0,
+          "duration_s": 0.3,
+          "peak_base_tilt_deg": 93.62907012400966,
+          "recovery_after_push_s": 2.46
+        },
+        {
+          "force_world_n": [
+            -0.4,
+            0.0,
+            0.0
+          ],
+          "start_s": 9.0,
+          "duration_s": 0.3,
+          "peak_base_tilt_deg": 147.28464226011292,
+          "recovery_after_push_s": 3.380000000000001
+        },
+        {
+          "force_world_n": [
+            0.0,
+            0.4,
+            0.0
+          ],
+          "start_s": 15.0,
+          "duration_s": 0.3,
+          "peak_base_tilt_deg": 139.6350134423343,
+          "recovery_after_push_s": 3.240000000000002
+        }
+      ],
+      "final_upright_and_straight": true,
+      "actor_sha256": "97a66e09f56f2df6765da0b97a6f0f2332c6f43bad8df29d898d2ede7a884805",
+      "model_sha256": "a3f99042bcce3daf94d81f4c9e6ac053b4872dee23c65982ac574de5263e4bd4",
+      "physical_robot_commands_sent": false
+    }
+  ]
+}
