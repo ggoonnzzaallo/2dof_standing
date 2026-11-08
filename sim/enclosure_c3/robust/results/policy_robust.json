@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "model_sha256": "010adca21bdd2423c761fb9681bdcb9d8497c7d9de473a460c8f53c60dcd5d59",
+  "actor_header_sha256": "807b34590e265c3ded44a9ce83ff605c4e8178d6aae34962ca9d95a3de4c4019",
+  "actor_parameters": 4994,
+  "actor_weight_bytes_float32": 19976,
+  "host_C_test_vectors": 1000,
+  "host_C_max_absolute_error": 3.5762786865234375e-07,
+  "MCU_timing_tested": false,
+  "firmware_uploaded": false,
+  "hardware_validation_complete": false,
+  "note": "Mathematical host parity only. Calibrate sensor/servo mapping, limits and timing before hardware transfer."
+}

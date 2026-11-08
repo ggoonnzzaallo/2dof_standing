@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-07",
+  "firmware": "0.8 early stage",
+  "uploaded": true,
+  "armed": true,
+  "physical_recovery_confirmed": false,
+  "valid_training_evidence": false,
+  "reason": "mj_setConst reset requested fallen pose upright during mass setup; evaluation and retraining metrics from seed83 must not be used.",
+  "action": "PWM stopped, corrected-pose regression added, replacement training started from preserved valid C3 0.7 actor.",
+  "source_actor_sha256": "883a14bba5e82ba88150a1354320371db421dc9c8bb28c07787a67bb2971ee82",
+  "header_sha256": "be2a94a8f16a7c693761f53811d312f353cf116343bb7bc9337324a7c44a26ee",
+  "arm_record": "arm_0_8_early_invalid.json",
+  "superseded": true,
+  "image_sha256": "6bbc0f2424db7c705629d9cd0bba4c56c83cfa5b99a0bf27494ad106ab07fcc3"
+}

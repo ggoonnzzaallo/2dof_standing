@@ -1,8 +1,8 @@
 # Operating instructions
 
-**V1, updated 7 November 2026 — controller 0.7.** One Pololu battery master switch; lower signal **D8 / 8**, upper **D7 / 7**. Normal running and charging do not require a computer. [Wiring](../electrical/FROM_SCRATCH.md) · [Current deployment evidence](../firmware/policy_control/results/2026-11-07/deployment_0_7.json).
+**V1, updated 7 November 2026 — controller 0.8.** One Pololu battery master switch; lower signal **D8 / 8**, upper **D7 / 7**. Normal running and charging do not require a computer. [Wiring](../electrical/FROM_SCRATCH.md) · [Current deployment evidence](../firmware/policy_control/results/2026-11-07/deployment_0_8.json).
 
-Controller 0.7 uses the C3-matched PPO actor. Stable-base recovery is the learned goal; the arm may rest bent after recovering. Physical recovery on the latest enclosure is awaiting operator observation.
+Controller 0.8 uses the heavier C3 PPO model, faster targets and varied recovery retries. If progress stalls for roughly five seconds, it can switch to a larger sweep; later attempts change order, signs, timing and amplitude. A brief near-upright wobble does not clear retry memory: it needs one second within about 10° of level. It does not learn new weights on the robot. Stable-base recovery is the learned goal; the arm may rest bent after recovering. Physical recovery on the latest enclosure is awaiting operator observation.
 
 ## Run without a computer
 
@@ -72,4 +72,4 @@ With the switch ON, `./robot status` reports approximate BAT voltage. Load, char
 
 Voltage is sampled about every 100 ms. The guard cannot operate the physical slider. A forgotten ON robot can discharge its pack after motion stops. Do not repeatedly reboot/rearm a low battery. `status` also reports the last stop reason; sensor/timing/numerical faults stop motion rather than automatically restarting it.
 
-The deployed actor and ±80° target profile remain unchanged. The later [C2 enclosure model/candidate](../sim/enclosure/README.md) is offline; C3 CAD is not silently substituted into it. Optional next-iteration ideas are in the [hardware backlog](HARDWARE_BACKLOG.md).
+The current [robust C3 actor/runtime](../sim/enclosure_c3/robust/README.md) uses ±80° targets and a 5 rad/s target-rate cap. Earlier C2 and first-C3 experiments remain historical. Optional next-iteration ideas are in the [hardware backlog](HARDWARE_BACKLOG.md).

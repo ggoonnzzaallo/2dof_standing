@@ -29,3 +29,8 @@ The desired character is determined and a little imperfect. The printed proporti
 Judge a candidate on recovery by each time threshold, recovery-time distribution, repeated disturbances without controller resets, quiet stable dwell, impact/effort and sensor faults. Show failed trials as well as successful ones. Keep the historical strict score as a secondary regression measure; do not silently relabel old failures as successes.
 
 [Enclosure model and results](../sim/enclosure/README.md) · [Current complete wiring](../electrical/FROM_SCRATCH.md)
+
+
+## Implemented in controller 0.8 — 7 November 2026
+
+The [robust C3 experiment](../sim/enclosure_c3/robust/README.md) reduces effort penalties, favors prompt recovery, uses heavier/variable-friction/weak-servo models and increases the target-rate cap to 5 rad/s. A portable stateful supervisor replaces repeating deterministic failures with eight bounded large-sweep patterns after stalled progress. It varies order, signs, timing and amplitude. This is scripted retry memory around a learned policy, not online learning. The same header runs in simulation and firmware. Genuine sensor/battery/timing faults and the user-requested one-minute inactivity latch still stop motion. Corrected 0.8 is uploaded/armed; physical effectiveness remains unconfirmed. The invalid early mass-reset stage is explicitly withdrawn in its records.

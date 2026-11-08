@@ -64,6 +64,16 @@ int main(int argc,char** argv){
  assert(frames>=100&&inferenceUs<20000);
  if(argc>1){std::ofstream capture(argv[1]);capture<<Serial.output.str();}
  send("off\n");checkOff();
+ // A base held fallen must switch to the varied strategy without leaving bounds.
+ if(POLICY_RETRIES){
+   running();recovery.reset(19);bool saw=false;
+   for(int frame=0;frame<450;++frame){
+     attitude.down[0]=1;attitude.down[1]=attitude.down[2]=0;
+     assert(infer());saw|=retryOverride;
+     for(int j=0;j<2;++j)assert(fabsf(target[j])<=CONTROL_LIMIT_RAD);
+   }
+   assert(saw&&recovery.retries>=1);send("off\n");checkOff();
+ }
  resetFixture();send("shadow\n");assert(mode==SHADOW);waitMs(100);
  assert(frames==5&&!motors[0].attached()&&!motors[1].attached()&&pulses[0]==0&&pulses[1]==0);
  resetFixture();adcRaw=1500;send("arm\n");checkOff();
@@ -209,9 +219,10 @@ with tempfile.TemporaryDirectory() as folder:
     (root/'firmware/servo_center/FineServo.h').write_text(servo)
     (root/'firmware/policy_shadow/MicrosecondClock.h').write_text(clock)
     for name in ['GravityFilter.h','MountCalibration.h']:(root/'firmware/policy_shadow'/name).write_bytes((HERE/'policy_shadow'/name).read_bytes())
-    for name in ['policy_control.ino','ServoProfile.h','InactivityGuard.h','PolicySelection.h']:(root/'firmware/policy_control'/name).write_bytes((HERE/'policy_control'/name).read_bytes())
+    for name in ['policy_control.ino','ServoProfile.h','InactivityGuard.h','RecoveryStrategy.h','PolicySelection.h']:(root/'firmware/policy_control'/name).write_bytes((HERE/'policy_control'/name).read_bytes())
     manifest=json.loads((HERE/'policy_control/PolicyManifest.json').read_text())
     actor_header=HERE.parent/manifest['actor_header_path']
+    (root/manifest['actor_header_path']).parent.mkdir(parents=True,exist_ok=True)
     (root/manifest['actor_header_path']).write_bytes(actor_header.read_bytes())
     (root/'test.cpp').write_text(test)
     subprocess.run(['c++','-std=c++17','-O2','-I',str(root),str(root/'test.cpp'),'-o',str(root/'test')],check=True)
@@ -225,7 +236,7 @@ with tempfile.TemporaryDirectory() as folder:
     rows=list(csv.DictReader(io.StringIO(header+'\n'+'\n'.join(line[2:] for line in lines if line.startswith('D,')))))
     actor=HostActor(actor_header)
     try:
-        result=analyze(rows,actor,False)
+        result=analyze(rows,actor,False,manifest['action_increment_rad'])
         assert result['contract_checks']=='passed' and result['frames_logged']>=100
     finally:
         actor.close()

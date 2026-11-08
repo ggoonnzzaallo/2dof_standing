@@ -228,6 +228,7 @@ def main():
         run([sys.executable, ROOT / 'firmware' / 'test_policy_shadow.py'])
         run([sys.executable, ROOT / 'firmware' / 'test_servo_calibration.py'])
         run([sys.executable, ROOT / 'firmware' / 'test_policy_control.py'])
+        run([sys.executable, ROOT / 'firmware' / 'test_recovery_strategy.py'])
         run([sys.executable, ROOT / 'scripts' / 'test_arm.py'])
 
 

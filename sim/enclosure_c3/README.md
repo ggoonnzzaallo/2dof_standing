@@ -1,6 +1,8 @@
+> **Historical first C3 experiment (controller 0.7).** The user reports physical recovery failures. Current controller 0.8 uses the separate [heavier, faster C3 model with varied retries](robust/README.md). The original C3 scores below remain valid for their own model/runtime.
+
 # Installed C3 enclosure — model and recovery training
 
-**7 November 2026: trained, uploaded and armed.** The user confirms the latest tight-USB cup and battery against the side wall are installed. The original actor could not flip this revised physical build upright. Controller **0.7** now runs the selected C3-trained PPO actor, with a confirmed standalone handoff. Physical C3 self-righting is awaiting operator observation. The original actor and frozen C2 model/results are preserved. [Deployment record](../../firmware/policy_control/results/2026-11-07/deployment_0_7.json).
+**7 November 2026: trained, uploaded and armed.** The user confirms the latest tight-USB cup and battery against the side wall are installed. The original actor could not flip this revised physical build upright. Controller **0.7** now runs the selected C3-trained PPO actor, with a confirmed standalone handoff. The user subsequently reported repeated failed physical recovery with 0.7; corrected 0.8 is documented separately. The original actor and frozen C2 model/results are preserved. [Deployment record](../../firmware/policy_control/results/2026-11-07/deployment_0_7.json).
 
 ## Matched model
 

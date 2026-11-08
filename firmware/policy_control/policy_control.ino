@@ -10,7 +10,9 @@
 #include "../servo_center/FineServo.h"
 #include "ServoProfile.h"
 #include "InactivityGuard.h"
+#include "RecoveryStrategy.h"
 #include "PolicySelection.h"
+static_assert(!POLICY_RETRIES || POLICY_ACTION_INCREMENT_RAD==RecoveryStrategy::increment,"Retry integration rate mismatch");
 #ifndef TARGET_SEEED_XIAO_NRF52840_SENSE
 #error "Use the classic XIAO nRF52840 Sense, Seeed non-mbed core."
 #endif
@@ -18,6 +20,8 @@
 enum Mode { OFF=0, HOLD=1, RUN=2, SHADOW=3, STANDALONE=4, CHARGE=5, INACTIVE=6 };
 Mode mode=OFF;
 InactivityGuard inactivity;
+RecoveryStrategy recovery;
+bool retryOverride=false;
 const char* INACTIVE_REASON="IMU inactive for 60 s; reboot required. PWM off; charging available.";
 const char* lastStopReason="Boot disarmed.";
 Lsm6ds3 imu;
@@ -33,7 +37,7 @@ bool hadSerial=false,discard=false;
 bool bootPending=false,bootNeutral=false;
 uint32_t bootAt=0;
 char command[24];size_t used=0;
-const char* HEADER="frame,t_us,mode,obs0_u6,obs1_u6,obs2_u6,obs3_u6,obs4_u6,obs5_u6,obs6_u6,obs7_u6,obs8_u6,obs9_u6,action0_u6,action1_u6,target0_urad,target1_urad,pwm0_us,pwm1_us,battery_mv,inference_us,late_us,sample_age_us,sample_seq,i2c_errors,dropped,filter_rejects";
+const char* HEADER="frame,t_us,mode,obs0_u6,obs1_u6,obs2_u6,obs3_u6,obs4_u6,obs5_u6,obs6_u6,obs7_u6,obs8_u6,obs9_u6,action0_u6,action1_u6,target0_urad,target1_urad,pwm0_us,pwm1_us,battery_mv,inference_us,late_us,sample_age_us,sample_seq,i2c_errors,dropped,filter_rejects,retry";
 
 uint16_t readBatteryMv(){
   analogReference(AR_INTERNAL_3_0);analogReadResolution(12);analogSampleTime(40);
@@ -44,7 +48,8 @@ uint16_t readBatteryMv(){
 float clip(float v){return fminf(1.f,fmaxf(-1.f,v));}
 void resetPolicy(){
   for(int i=0;i<2;++i){target[i]=previous[i]=action[i]=0;pulses[i]=0;}
-  frames=inferenceUs=lateUs=dropped=0;
+  frames=inferenceUs=lateUs=dropped=0;retryOverride=false;
+  recovery.reset(clockUs.now()^imu.sequence^batteryMv);
 }
 void stop(){
   bootPending=bootNeutral=false; // A stop/fault cancels startup; never auto-retry.
@@ -68,15 +73,18 @@ bool usbPowerPresent(){
   return (NRF_POWER->USBREGSTATUS & POWER_USBREGSTATUS_VBUSDETECT_Msk)!=0;
 }
 void status(){
-  Serial.println("ROBOT POLICY CONTROL 0.7");
+  Serial.println("ROBOT POLICY CONTROL 0.8");
   Serial.print("POLICY_GEOMETRY: ");Serial.println(POLICY_GEOMETRY);
   Serial.print("POLICY_ACTOR_SHA256: ");Serial.println(POLICY_ACTOR_SHA256);
+  Serial.print("POLICY_RUNTIME_SHA256: ");Serial.println(POLICY_RUNTIME_SHA256);
   Serial.print("MODE: ");Serial.println(int(mode));
   Serial.print("IMU_READY: ");Serial.println(imu.ready?1:0);
   Serial.print("FILTER_READY: ");Serial.println(attitude.ready?1:0);
   Serial.println("SERVO_PINS: lower=D8 (8), upper=D7 (7).");
   Serial.println("RANGE: trained +/-80 deg; approximate extrapolated PWM 789..2211 us.");
-  Serial.println("PROFILE: 50 Hz, action increment 0.06 rad; both measured PWM signs negative.");
+  Serial.print("PROFILE: 50 Hz, action increment rad: ");Serial.println(POLICY_ACTION_INCREMENT_RAD);
+  Serial.print("VARIED_RETRIES: ");Serial.println(POLICY_RETRIES?1:0);
+  Serial.print("RETRY_COUNT: ");Serial.println(recovery.retries);
   Serial.println("GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.");
   Serial.println("INACTIVITY: 60 s without base IMU motion stops PWM until reboot; charge stays available.");
   Serial.print("INACTIVITY_LOCKED: ");Serial.println(inactivity.locked?1:0);
@@ -150,6 +158,7 @@ void report(){
   ok &= appendUnsigned(row,n,uint32_t(lateUs));ok &= appendUnsigned(row,n,uint32_t(clockUs.now()-sampleAt));
   ok &= appendUnsigned(row,n,uint32_t(imu.sequence));ok &= appendUnsigned(row,n,uint32_t(imu.errors));
   ok &= appendUnsigned(row,n,uint32_t(dropped));ok &= appendUnsigned(row,n,uint32_t(filterRejects));
+  ok &= appendInteger(row,n,retryOverride?1:0);
   if(!ok||n+1>=sizeof(row)||Serial.availableForWrite()<int(n+1)){++dropped;return;}
   row[n++]='\n';
   if(Serial.write(reinterpret_cast<const uint8_t*>(row),n)!=n)++dropped;
@@ -161,11 +170,13 @@ bool infer(){
   for(int i=0;i<2;++i){observation[i+6]=clip(target[i]/CONTROL_LIMIT_RAD);observation[i+8]=previous[i];}
   for(float value:observation)if(!isfinite(value)){halt("non-finite observation.");return false;}
   uint32_t at=clockUs.now();robot_policy(observation,action);inferenceUs=clockUs.now()-at;
+  for(float value:action)if(!isfinite(value)){halt("non-finite actor action.");return false;}
+  retryOverride=POLICY_RETRIES&&recovery.apply(attitude.down,target,action);
   uint16_t proposed[2];
   for(int i=0;i<2;++i){
     if(!isfinite(action[i])){halt("non-finite action.");return false;}
     action[i]=clip(action[i]);
-    target[i]=fminf(CONTROL_LIMIT_RAD,fmaxf(-CONTROL_LIMIT_RAD,target[i]+.06f*action[i]));
+    target[i]=fminf(CONTROL_LIMIT_RAD,fmaxf(-CONTROL_LIMIT_RAD,target[i]+POLICY_ACTION_INCREMENT_RAD*action[i]));
     if(!controlPulse(target[i],proposed[i])){halt("invalid angle/pulse mapping.");return false;}
   }
   for(int i=0;i<2;++i){

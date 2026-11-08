@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-07",
+  "firmware": "ROBOT POLICY CONTROL 0.8",
+  "previous_git_revision": "08c9d38",
+  "uploaded": true,
+  "upload_acknowledgement": "Device programmed.",
+  "policy_selection": {
+    "geometry_id": "installed_c3_robust",
+    "mesh_assets_sha256": "30adb98827adffdc23b398f7145880bd3bbb31e1526d101f009ae481a8cd37e9",
+    "observation_count": 10,
+    "action_count": 2,
+    "period_ms": 20,
+    "action_increment_rad": 0.1,
+    "retry_supervisor": true,
+    "hardware_validation": "Separate deployment record; selection does not imply physical success",
+    "actor_header_path": "sim/enclosure_c3/robust/results/policy_robust.h",
+    "actor_header_sha256": "807b34590e265c3ded44a9ce83ff605c4e8178d6aae34962ca9d95a3de4c4019",
+    "actor_archive_path": "sim/enclosure_c3/robust/results/best.zip",
+    "actor_archive_sha256": "010adca21bdd2423c761fb9681bdcb9d8497c7d9de473a460c8f53c60dcd5d59",
+    "model_path": "sim/enclosure_c3/robust/robot.xml",
+    "model_sha256": "2d20a8464a2c39b18ee0fd5f897e0127b65403d5f3455cb957eb5ef44a922d60",
+    "training_report_path": "sim/enclosure_c3/robust/results/training_report.json",
+    "training_report_sha256": "d839c013a10e0fdaefb20f841962d9ac43bb36c4f0935fc5616da487a5828a7b",
+    "runtime_validation_path": "sim/enclosure_c3/robust/results/runtime_validation.json",
+    "runtime_validation_sha256": "5e64e7843a1f3e9b617ba83c8c97e91320332a4c376a11a84aa7adcb300bf412",
+    "retry_strategy_sha256": "6b656d12bc15790070840fc9db9aac12ce11ab21dff906adca98b680fb18a5fc",
+    "runtime_sources": [
+      {
+        "path": "firmware/policy_control/RecoveryStrategy.h",
+        "sha256": "6b656d12bc15790070840fc9db9aac12ce11ab21dff906adca98b680fb18a5fc"
+      },
+      {
+        "path": "sim/enclosure_c3/robust/robust_env.py",
+        "sha256": "8026acb9b838b8ea6664c7407ca3ade75e63d9283986c9b4d1fe2e51b58db112"
+      },
+      {
+        "path": "sim/environment.py",
+        "sha256": "7ee6ae89698f7296407a2579814ab63b23593c1f0e35d5a65c0379a6cda332c9"
+      },
+      {
+        "path": "sim/enclosure_c3/robust/strategy.py",
+        "sha256": "03c77f2b59d0fa757475567c0149a0a29959b6e573dd952d26debbfa10a5c8fc"
+      }
+    ]
+  },
+  "build": {
+    "flash_bytes": 89364,
+    "static_ram_bytes": 7968
+  },
+  "validation": {
+    "corrected_fallen_pose_regression": "passed, upright/cardinal-side/inverted/diagonal starts survive mass updates",
+    "firmware_actual_sketch_regression": "passed including forced-fallen retry integration",
+    "portable_strategy_regression": "passed, 8 patterns, 5 s trigger, bounded large sweep and upright cancellation",
+    "mac_helper_tests": 13,
+    "export_parity_1000_vectors_max_absolute_error": 3.5762786865234375e-07
+  },
+  "standalone_handoff": "arm_0_8.json",
+  "handoff_confirmed": true,
+  "battery_mv_at_handoff": 4135,
+  "left_running_after_serial_close": true,
+  "physical_recovery_confirmed": false,
+  "physical_observation_status": "Awaiting user observation of corrected actor. Previous 0.7 actor failed physical recovery.",
+  "supersedes_invalid_early_stage": "deployment_0_8_early_invalid.json",
+  "sha256": {
+    "firmware/policy_control/policy_control.ino": "7099946227354405b04ed120c63ec372c7d8086c61460bfcabb86d77a56cbc1d",
+    "firmware/policy_control/RecoveryStrategy.h": "6b656d12bc15790070840fc9db9aac12ce11ab21dff906adca98b680fb18a5fc",
+    "firmware/policy_control/PolicySelection.h": "dec02def26e1ff7dc02ab4bee61701135a8a9fcf96bdba64f9af71db2ba7c97e",
+    "firmware/policy_control/PolicyManifest.json": "6d6c247f1947d216241c9ece4e2ca1fb9d1647b565d2a5976fbe9a8e18b929df",
+    "firmware/policy_control/ServoProfile.h": "31c654bc83fb7f33c5efda7fb3c884172a9de2d7384dcde5feccb34879154fb1",
+    "build/policy_control/policy_control.ino.hex": "f4e0242af5dad405477541e06ca8375a824ca8883b867a9586fd3b32031a6d4d",
+    "build/policy_control/policy_control.ino.zip": "e18ce9762e7552268637afb2c9e05215a697bc818d9f6b2fb04e175d67d7c4be"
+  },
+  "guard_refinement": "Release uses one-second / 10-degree level criterion before clearing failed-attempt memory, retaining retries for stalled near-upright rocking. Actor unchanged; exact runtime separately validated and fingerprinted.",
+  "runtime_validation": "../../../../sim/enclosure_c3/robust/results/runtime_validation.json",
+  "previous_guard_stage": "deployment_0_8_pre_guard_refinement.json"
+}

@@ -81,7 +81,7 @@ class SelfRightingEnv(gym.Env):
     def step(self,action):
         action=np.clip(np.asarray(action,dtype=float),-1,1)
         old=self.previous.copy()
-        self.command=np.clip(self.command+.06*action,-self.limit,self.limit)
+        self.command=np.clip(self.command+getattr(self,'action_increment',.06)*action,-self.limit,self.limit)
         self.queue.append(self.command.copy()); delayed=self.queue.pop(0)
         self._physics(delayed)
         self.previous=action.copy(); self.steps+=1

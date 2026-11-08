@@ -1,0 +1,6 @@
+{
+  "status": "INVALID: mj_setConst reset requested fallen poses upright before settling",
+  "date": "2026-11-07",
+  "metrics_must_not_be_used": true,
+  "firmware_stage": "0.8 early candidate briefly uploaded then PWM stopped; superseded after corrected-pose training"
+}

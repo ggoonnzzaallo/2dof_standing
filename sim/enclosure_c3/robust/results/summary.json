@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-07",
+  "algorithm": "PPO actor warm-started from valid C3 0.7 actor, fresh critic; reward-return normalization only",
+  "status": "Corrected fallen-pose actor uploaded and armed in controller 0.8; physical recovery unconfirmed",
+  "selected_checkpoint_steps": 33792,
+  "completed_training_episodes_at_selected_checkpoint": 336,
+  "last_saved_training_steps": 67584,
+  "completed_episodes_at_last_saved_stage": 751,
+  "checkpoint_count": 3,
+  "runtime": {
+    "period_ms": 20,
+    "action_increment_rad": 0.1,
+    "target_rate_limit_rad_s": 5,
+    "joint_limits_deg": [
+      -80,
+      80
+    ],
+    "varied_retry_supervisor": true,
+    "retry_clear_requirement": "50 consecutive samples within 10 degrees of level",
+    "retry_strategy_sha256": "6b656d12bc15790070840fc9db9aac12ce11ab21dff906adca98b680fb18a5fc"
+  },
+  "held_out_current": "held_out_release.json",
+  "held_out_previous": "held_out_previous_controller.json",
+  "held_out_case_seeds": [
+    71000,
+    71039
+  ],
+  "held_out_results": {
+    "current_successes": 40,
+    "previous_successes": 38,
+    "episodes": 40,
+    "horizon_s": 25,
+    "current_mean_capped_recovery_s": 1.7615,
+    "previous_mean_capped_recovery_s": 3.1565
+  },
+  "model_mass_g_nominal": 94.1622089748794,
+  "added_wire_glue_mass_g_assumed": 6,
+  "physical_recovery_confirmed": false,
+  "invalid_run": "../invalid_reset_stage/INVALID.json",
+  "training_stop_note": "Stopped optional further learning after saving 67,584-step stage. Interrupted, unsaved updates after that stage are not used or counted. Deployed checkpoint remains the 33,792-step candidate already validated and armed; the 67,584-step candidate only reduced 20-case development mean by 0.035 s, insufficient evidence for another hardware update.",
+  "runtime_validation": "runtime_validation.json"
+}

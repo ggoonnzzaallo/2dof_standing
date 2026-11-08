@@ -16,14 +16,15 @@ from policy_artifact import verify_selection
 
 ROOT = Path(__file__).resolve().parents[1]
 LIMIT = 1.3962634016
-BANNER = 'ROBOT POLICY CONTROL 0.7'
+BANNER = 'ROBOT POLICY CONTROL 0.8'
 SUPPORTED_BANNERS = {BANNER}
 
 
 def expected_policy_lines():
     manifest = verify_selection()
     return ['POLICY_GEOMETRY: ' + manifest['geometry_id'],
-            'POLICY_ACTOR_SHA256: ' + manifest['actor_header_sha256']]
+            'POLICY_ACTOR_SHA256: ' + manifest['actor_header_sha256'],
+            'POLICY_RUNTIME_SHA256: ' + manifest.get('retry_strategy_sha256','none')]
 
 
 def handshake(device, require_ready=True):
@@ -37,7 +38,7 @@ def handshake(device, require_ready=True):
             next_request = time.monotonic() + .6
         line = device.readline().decode('ascii', errors='replace').strip()
         if line.startswith('ROBOT POLICY CONTROL ') and line not in SUPPORTED_BANNERS:
-            raise RuntimeError('D8 lower / D7 upper C3 deployment requires controller firmware 0.7 with the selected actor. Upload before arming or charging. Received: ' + line)
+            raise RuntimeError('D8 lower / D7 upper C3 deployment requires controller firmware 0.8 with the selected actor. Upload before arming or charging. Received: ' + line)
         if line.startswith('OFF.'):
             stopped = True
             lines = []
@@ -56,7 +57,8 @@ def handshake(device, require_ready=True):
     raise RuntimeError('Expected a ready, disarmed learned controller.\n' + '\n'.join(lines))
 
 
-def analyze(rows, actor, shadow):
+def analyze(rows, actor, shadow, increment=None):
+    increment=verify_selection()['action_increment_rad'] if increment is None else increment
     if len(rows) < 20:
         raise ValueError('Insufficient telemetry: at least 20 policy frames required.')
     parity = history = integration = norm_error = pulse_error = 0.
@@ -70,7 +72,9 @@ def analyze(rows, actor, shadow):
         target = [values[f'target{i}_urad'] / 1e6 for i in range(2)]
         if max(map(abs, obs + action)) > 1.000001 or max(map(abs, target)) > LIMIT + 1e-6:
             raise ValueError('Observation, action or target out of contract bounds.')
-        parity = max(parity, max(abs(a - b) for a, b in zip(actor.predict(obs), action)))
+        if values.get('retry',0) not in (0,1):raise ValueError('Invalid retry flag.')
+        if not values.get('retry',0):
+            parity = max(parity, max(abs(a - b) for a, b in zip(actor.predict(obs), action)))
         norm_error = max(norm_error, abs(math.sqrt(sum(v*v for v in obs[:3])) - 1))
         if values['frame'] == 1:
             history = max(history, *map(abs, obs[6:]))
@@ -79,7 +83,7 @@ def analyze(rows, actor, shadow):
                 history = max(history, abs(obs[6+i] - int(prior[f'target{i}_urad']) / 1e6 / LIMIT),
                               abs(obs[8+i] - int(prior[f'action{i}_u6']) / 1e6))
         for i in range(2):
-            expected = max(-LIMIT, min(LIMIT, obs[6+i] * LIMIT + .06 * action[i]))
+            expected = max(-LIMIT, min(LIMIT, obs[6+i] * LIMIT + increment * action[i]))
             integration = max(integration, abs(expected - target[i]))
             pwm = values[f'pwm{i}_us']
             if shadow:
@@ -92,7 +96,7 @@ def analyze(rows, actor, shadow):
         prior = row
     if parity > .001 or history > 5e-6 or integration > 5e-6 or norm_error > 1e-4 or pulse_error > 1:
         raise ValueError(f'Contract check failed: parity={parity}, history={history}, integration={integration}, norm={norm_error}, pulse={pulse_error}')
-    return {'contract_checks': 'passed', 'frames_logged': len(rows), 'last_frame': int(rows[-1]['frame']),
+    return {'contract_checks': 'passed', 'retry_frames': sum(int(r.get('retry',0)) for r in rows), 'frames_logged': len(rows), 'last_frame': int(rows[-1]['frame']),
             'mode': 'no-PWM shadow' if shadow else 'physical PWM control',
             'MCU_vs_host_max_action_error_from_quantized_observations': parity,
             'history_max_error': history, 'target_integration_max_error_rad': integration,
@@ -115,17 +119,18 @@ def main():
     parser.add_argument('--shadow', action='store_true')
     parser.add_argument('--out', type=Path)
     parser.add_argument('--analyze', type=Path)
+    parser.add_argument('--increment',type=float,help='Historical --analyze only; defaults to selected manifest rate')
     parser.add_argument('--actor-header', type=Path, help='Historical --analyze only; live checks use the pinned controller actor')
     args = parser.parse_args()
     if not 1 <= args.seconds <= 45:
         parser.error('--seconds must be between 1 and 45.')
-    if args.actor_header and not args.analyze:
+    if (args.actor_header or args.increment is not None) and not args.analyze:
         parser.error('--actor-header is only for analyzing historical captures.')
     actor = HostActor(args.actor_header or ROOT/verify_selection()['actor_header_path'])
     try:
         if args.analyze:
             with args.analyze.open(newline='') as source:
-                print(json.dumps(analyze(list(csv.DictReader(source)), actor, args.shadow), indent=2))
+                print(json.dumps(analyze(list(csv.DictReader(source)), actor, args.shadow, args.increment), indent=2))
             return
         if args.out is None:
             parser.error('--out is required for a new recording.')
@@ -143,7 +148,7 @@ def main():
         report = {'requested_seconds': args.seconds, 'shadow': args.shadow,
                   'physical_motor_commands_requested': not args.shadow,
                   'trained_range_deg': [-80, 80], 'angle_mapping': 'Linear extrapolation of visually measured +/-45 deg references, explicitly authorized by user.',
-                  'actor_header_sha256': hashlib.sha256((ROOT/'sim/recovery/results/policy_simulation_only.h').read_bytes()).hexdigest()}
+                  'actor_header_sha256': hashlib.sha256((args.actor_header or ROOT/verify_selection()['actor_header_path']).read_bytes()).hexdigest()}
         rows = []
         error = None
         with serial.Serial(args.port or ports[0], 115200, timeout=.04, write_timeout=1) as device:
@@ -224,7 +229,7 @@ def main():
                 except (OSError, serial.SerialException) as exc:
                     report['stop_write_error'] = str(exc)
         try:
-            report.update(analyze(rows, actor, args.shadow))
+            report.update(analyze(rows, actor, args.shadow, args.increment))
         except ValueError as exc:
             report['contract_checks'] = 'failed or insufficient data'
             error = error or str(exc)

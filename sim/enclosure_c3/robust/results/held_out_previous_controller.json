@@ -1,0 +1,656 @@
+{
+  "episodes": 40,
+  "successes": 38,
+  "faults": 0,
+  "successes_by_5s": 38,
+  "mean_capped_recovery_s": 3.1565,
+  "trials": [
+    {
+      "seed": 71000,
+      "pose": {
+        "tilt": 2.0819850565234805,
+        "azimuth": 0.3370598398877047
+      },
+      "first_stable_s": 1.78,
+      "fault": false,
+      "max_target_deg": 62.04737459973304,
+      "retries": 0,
+      "mass_g": 100.08492780622811,
+      "friction": 1.1156013858074747,
+      "servo_torque_Nm": 0.06026903907664513,
+      "speed_rad_s": 3.778603472163849,
+      "final_up": 0.9999999915203468
+    },
+    {
+      "seed": 71001,
+      "pose": {
+        "tilt": 1.4904110751590263,
+        "azimuth": 0.4151106542492042
+      },
+      "first_stable_s": 1.84,
+      "fault": false,
+      "max_target_deg": 62.48083408828395,
+      "retries": 0,
+      "mass_g": 94.79676679662853,
+      "friction": 1.311828526913329,
+      "servo_torque_Nm": 0.06475503543617955,
+      "speed_rad_s": 3.645816064420148,
+      "final_up": 0.9999999873082848
+    },
+    {
+      "seed": 71002,
+      "pose": {
+        "tilt": 1.3033625675599536,
+        "azimuth": 3.637353900952577
+      },
+      "first_stable_s": 1.6600000000000001,
+      "fault": false,
+      "max_target_deg": 80.00000000025992,
+      "retries": 0,
+      "mass_g": 100.33953982554043,
+      "friction": 1.314275385919556,
+      "servo_torque_Nm": 0.06727206046011222,
+      "speed_rad_s": 4.8404291731838365,
+      "final_up": 0.9999999922672134
+    },
+    {
+      "seed": 71003,
+      "pose": {
+        "tilt": 1.7767567354778502,
+        "azimuth": 3.7352579344835903
+      },
+      "first_stable_s": 1.78,
+      "fault": false,
+      "max_target_deg": 80.00000000025992,
+      "retries": 0,
+      "mass_g": 96.44467580977114,
+      "friction": 1.2012236571954469,
+      "servo_torque_Nm": 0.044020163799920436,
+      "speed_rad_s": 2.728321719083166,
+      "final_up": 0.999999991385302
+    },
+    {
+      "seed": 71004,
+      "pose": {
+        "tilt": 2.643306672077225,
+        "azimuth": 0.8349487129450289
+      },
+      "first_stable_s": 1.84,
+      "fault": false,
+      "max_target_deg": 68.9406072097945,
+      "retries": 0,
+      "mass_g": 101.25401382505822,
+      "friction": 1.120462780126456,
+      "servo_torque_Nm": 0.05118252714909508,
+      "speed_rad_s": 4.344476203397493,
+      "final_up": 0.9999999913113433
+    },
+    {
+      "seed": 71005,
+      "pose": {
+        "tilt": 3.017457861601712,
+        "azimuth": 0.10184771311083428
+      },
+      "first_stable_s": 2.04,
+      "fault": false,
+      "max_target_deg": 74.64248577288608,
+      "retries": 0,
+      "mass_g": 93.71688597604245,
+      "friction": 1.2576011258914028,
+      "servo_torque_Nm": 0.034824322778271764,
+      "speed_rad_s": 3.5521057803899696,
+      "final_up": 0.9999999896968432
+    },
+    {
+      "seed": 71006,
+      "pose": {
+        "tilt": 2.1126926799044687,
+        "azimuth": 4.174785023280047
+      },
+      "first_stable_s": 1.74,
+      "fault": false,
+      "max_target_deg": 74.72561580036863,
+      "retries": 0,
+      "mass_g": 97.68587163673594,
+      "friction": 0.4060095421928519,
+      "servo_torque_Nm": 0.05431050204285495,
+      "speed_rad_s": 4.309013567345078,
+      "final_up": 0.9999999955978927
+    },
+    {
+      "seed": 71007,
+      "pose": {
+        "tilt": 1.9327781647855453,
+        "azimuth": 4.233399689738286
+      },
+      "first_stable_s": 1.84,
+      "fault": false,
+      "max_target_deg": 72.90267707221578,
+      "retries": 0,
+      "mass_g": 91.89238507134156,
+      "friction": 0.4421911190425357,
+      "servo_torque_Nm": 0.041865277942030425,
+      "speed_rad_s": 3.923279461040904,
+      "final_up": 0.9999999854297357
+    },
+    {
+      "seed": 71008,
+      "pose": {
+        "tilt": 1.3276363822826713,
+        "azimuth": 5.062682142427066
+      },
+      "first_stable_s": 1.76,
+      "fault": false,
+      "max_target_deg": 72.86971778947019,
+      "retries": 0,
+      "mass_g": 98.69709088554025,
+      "friction": 0.7836311494577649,
+      "servo_torque_Nm": 0.04843207166581908,
+      "speed_rad_s": 3.0963463516305687,
+      "final_up": 0.9999999879032263
+    },
+    {
+      "seed": 71009,
+      "pose": {
+        "tilt": 1.8845713253575163,
+        "azimuth": 1.6059539032507255
+      },
+      "first_stable_s": 1.8800000000000001,
+      "fault": false,
+      "max_target_deg": 68.27400389260482,
+      "retries": 0,
+      "mass_g": 92.14329878394337,
+      "friction": 1.3268231487454365,
+      "servo_torque_Nm": 0.06690065817291538,
+      "speed_rad_s": 3.7218899064891877,
+      "final_up": 0.9999999863393398
+    },
+    {
+      "seed": 71010,
+      "pose": {
+        "tilt": 2.534644465861911,
+        "azimuth": 4.359563962815079
+      },
+      "first_stable_s": 1.74,
+      "fault": false,
+      "max_target_deg": 74.5105716998228,
+      "retries": 0,
+      "mass_g": 97.804629157907,
+      "friction": 0.27307448305163046,
+      "servo_torque_Nm": 0.03840012936657503,
+      "speed_rad_s": 3.4666359415201136,
+      "final_up": 0.9999999899653849
+    },
+    {
+      "seed": 71011,
+      "pose": {
+        "tilt": 2.1260827731377003,
+        "azimuth": 3.1411615882003576
+      },
+      "first_stable_s": 1.58,
+      "fault": false,
+      "max_target_deg": 76.74201017695012,
+      "retries": 0,
+      "mass_g": 97.69676003421282,
+      "friction": 0.6282397795691065,
+      "servo_torque_Nm": 0.06178536600891893,
+      "speed_rad_s": 5.125362409338315,
+      "final_up": 0.9999999999621698
+    },
+    {
+      "seed": 71012,
+      "pose": {
+        "tilt": 2.9285439355389125,
+        "azimuth": 4.691664843935959
+      },
+      "first_stable_s": 1.84,
+      "fault": false,
+      "max_target_deg": 75.93374898396871,
+      "retries": 0,
+      "mass_g": 96.63360765214168,
+      "friction": 1.1094879034671388,
+      "servo_torque_Nm": 0.035108478195646886,
+      "speed_rad_s": 3.6080976245471548,
+      "final_up": 0.999999995068446
+    },
+    {
+      "seed": 71013,
+      "pose": {
+        "tilt": 1.6361043877652968,
+        "azimuth": 6.174544301380991
+      },
+      "first_stable_s": 1.92,
+      "fault": false,
+      "max_target_deg": 63.162570483589306,
+      "retries": 0,
+      "mass_g": 94.89162085840698,
+      "friction": 1.2389500508807791,
+      "servo_torque_Nm": 0.046074707663941075,
+      "speed_rad_s": 4.918625971155796,
+      "final_up": 0.9999999911102544
+    },
+    {
+      "seed": 71014,
+      "pose": {
+        "tilt": 3.039758366648801,
+        "azimuth": 0.6172805001217119
+      },
+      "first_stable_s": 1.82,
+      "fault": false,
+      "max_target_deg": 68.99927052636814,
+      "retries": 0,
+      "mass_g": 97.31814744738521,
+      "friction": 0.4754638277281581,
+      "servo_torque_Nm": 0.062378055748336415,
+      "speed_rad_s": 3.707660839723072,
+      "final_up": 0.9999999927303913
+    },
+    {
+      "seed": 71015,
+      "pose": {
+        "tilt": 2.7129627029061574,
+        "azimuth": 1.7230884612838095
+      },
+      "first_stable_s": 1.78,
+      "fault": false,
+      "max_target_deg": 70.94137614553628,
+      "retries": 0,
+      "mass_g": 92.93809968260327,
+      "friction": 0.4036177683133586,
+      "servo_torque_Nm": 0.032401087566569,
+      "speed_rad_s": 4.203499822831126,
+      "final_up": 0.9999999888737839
+    },
+    {
+      "seed": 71016,
+      "pose": {
+        "tilt": 2.8362083086247063,
+        "azimuth": 1.8724103330095556
+      },
+      "first_stable_s": 2.72,
+      "fault": false,
+      "max_target_deg": 69.54925779767866,
+      "retries": 0,
+      "mass_g": 99.43150452116767,
+      "friction": 0.9100145906477348,
+      "servo_torque_Nm": 0.036640027225875366,
+      "speed_rad_s": 4.617321203813148,
+      "final_up": 0.9999999910406594
+    },
+    {
+      "seed": 71017,
+      "pose": {
+        "tilt": 1.8843159178735336,
+        "azimuth": 1.0716658526434983
+      },
+      "first_stable_s": 1.96,
+      "fault": false,
+      "max_target_deg": 76.13706392508685,
+      "retries": 0,
+      "mass_g": 99.14930463749862,
+      "friction": 0.9605984476832358,
+      "servo_torque_Nm": 0.0365079383936366,
+      "speed_rad_s": 2.973478623534263,
+      "final_up": 0.9999999901484605
+    },
+    {
+      "seed": 71018,
+      "pose": {
+        "tilt": 3.0559994573583413,
+        "azimuth": 2.757519162581605
+      },
+      "first_stable_s": 1.96,
+      "fault": false,
+      "max_target_deg": 74.4453414124943,
+      "retries": 0,
+      "mass_g": 96.65286571450213,
+      "friction": 1.2540881291197294,
+      "servo_torque_Nm": 0.04016571966498121,
+      "speed_rad_s": 3.0723568897339106,
+      "final_up": 0.9999999888404971
+    },
+    {
+      "seed": 71019,
+      "pose": {
+        "tilt": 1.1501211768547606,
+        "azimuth": 5.077301167282857
+      },
+      "first_stable_s": 1.72,
+      "fault": false,
+      "max_target_deg": 71.68718634053985,
+      "retries": 0,
+      "mass_g": 96.97539469727342,
+      "friction": 0.2992713766830609,
+      "servo_torque_Nm": 0.03816679174087547,
+      "speed_rad_s": 4.896132914771911,
+      "final_up": 0.9999999671761004
+    },
+    {
+      "seed": 71020,
+      "pose": {
+        "tilt": 0.9454655609684561,
+        "azimuth": 4.783522368198183
+      },
+      "first_stable_s": 2.22,
+      "fault": false,
+      "max_target_deg": 72.20345284838972,
+      "retries": 0,
+      "mass_g": 93.30011828218704,
+      "friction": 0.3152668795301736,
+      "servo_torque_Nm": 0.03909576127141956,
+      "speed_rad_s": 4.209134074387015,
+      "final_up": 0.999999977781225
+    },
+    {
+      "seed": 71021,
+      "pose": {
+        "tilt": 1.908968832841172,
+        "azimuth": 4.982824213341417
+      },
+      "first_stable_s": 1.86,
+      "fault": false,
+      "max_target_deg": 80.00000000025992,
+      "retries": 0,
+      "mass_g": 91.55121623045434,
+      "friction": 0.970897783360353,
+      "servo_torque_Nm": 0.03817965433632957,
+      "speed_rad_s": 2.9108431574873217,
+      "final_up": 0.9999999907270345
+    },
+    {
+      "seed": 71022,
+      "pose": {
+        "tilt": 1.7504470170859718,
+        "azimuth": 6.055615110675804
+      },
+      "first_stable_s": 1.9000000000000001,
+      "fault": false,
+      "max_target_deg": 61.962190777055774,
+      "retries": 0,
+      "mass_g": 105.73877449322589,
+      "friction": 1.3162886553965478,
+      "servo_torque_Nm": 0.0469344925186375,
+      "speed_rad_s": 5.258539275405434,
+      "final_up": 0.999999991417591
+    },
+    {
+      "seed": 71023,
+      "pose": {
+        "tilt": 2.822076250988415,
+        "azimuth": 1.1767416594455784
+      },
+      "first_stable_s": 2.6,
+      "fault": false,
+      "max_target_deg": 70.61395319234028,
+      "retries": 0,
+      "mass_g": 94.92896447466069,
+      "friction": 0.6688230379524336,
+      "servo_torque_Nm": 0.058907473785682396,
+      "speed_rad_s": 3.5309238782280232,
+      "final_up": 0.9999999819225704
+    },
+    {
+      "seed": 71024,
+      "pose": {
+        "tilt": 2.9996420831466963,
+        "azimuth": 5.7082860546999195
+      },
+      "first_stable_s": 4.12,
+      "fault": false,
+      "max_target_deg": 62.369748036764385,
+      "retries": 0,
+      "mass_g": 104.68786656800275,
+      "friction": 0.213310059654386,
+      "servo_torque_Nm": 0.052293677976814855,
+      "speed_rad_s": 3.332948276114693,
+      "final_up": 0.999999988198534
+    },
+    {
+      "seed": 71025,
+      "pose": {
+        "tilt": 1.787181087172802,
+        "azimuth": 3.3136785411205145
+      },
+      "first_stable_s": 1.7,
+      "fault": false,
+      "max_target_deg": 80.00000000025992,
+      "retries": 0,
+      "mass_g": 104.37088378598341,
+      "friction": 0.8249518210724206,
+      "servo_torque_Nm": 0.06762723797265344,
+      "speed_rad_s": 3.0183857186351766,
+      "final_up": 0.9999999955282214
+    },
+    {
+      "seed": 71026,
+      "pose": {
+        "tilt": 3.087457593065052,
+        "azimuth": 5.70479347274112
+      },
+      "first_stable_s": 1.6600000000000001,
+      "fault": false,
+      "max_target_deg": 69.77534554571612,
+      "retries": 0,
+      "mass_g": 103.71825222014215,
+      "friction": 0.5848811183048404,
+      "servo_torque_Nm": 0.04326639441332433,
+      "speed_rad_s": 5.490144003059736,
+      "final_up": 0.9999999942085456
+    },
+    {
+      "seed": 71027,
+      "pose": {
+        "tilt": 2.364596121395988,
+        "azimuth": 5.729354578446745
+      },
+      "first_stable_s": 4.84,
+      "fault": false,
+      "max_target_deg": 63.24555748691062,
+      "retries": 0,
+      "mass_g": 94.65027351176681,
+      "friction": 0.4497857813309407,
+      "servo_torque_Nm": 0.05382140764323107,
+      "speed_rad_s": 5.232677243884346,
+      "final_up": 0.9999999920733911
+    },
+    {
+      "seed": 71028,
+      "pose": {
+        "tilt": 1.376480199786653,
+        "azimuth": 1.4658456059481177
+      },
+      "first_stable_s": 1.86,
+      "fault": false,
+      "max_target_deg": 70.8723476241613,
+      "retries": 0,
+      "mass_g": 91.82661808132234,
+      "friction": 1.1905063358028252,
+      "servo_torque_Nm": 0.04774845743478715,
+      "speed_rad_s": 4.8845084774413685,
+      "final_up": 0.9999999934143727
+    },
+    {
+      "seed": 71029,
+      "pose": {
+        "tilt": 1.551113532140024,
+        "azimuth": 1.9068002056688673
+      },
+      "first_stable_s": 2.38,
+      "fault": false,
+      "max_target_deg": 75.0536243995973,
+      "retries": 0,
+      "mass_g": 101.79740526338688,
+      "friction": 0.27330367636500696,
+      "servo_torque_Nm": 0.036712718517452364,
+      "speed_rad_s": 3.26789146059249,
+      "final_up": 0.9999999682180173
+    },
+    {
+      "seed": 71030,
+      "pose": {
+        "tilt": 1.949932792494712,
+        "azimuth": 0.816382227188954
+      },
+      "first_stable_s": null,
+      "fault": false,
+      "max_target_deg": 76.3556467466417,
+      "retries": 0,
+      "mass_g": 97.35653182707628,
+      "friction": 0.9405215577692355,
+      "servo_torque_Nm": 0.03805089015275051,
+      "speed_rad_s": 3.80091199285338,
+      "final_up": 0.4706279206341452
+    },
+    {
+      "seed": 71031,
+      "pose": {
+        "tilt": 1.6434643361598733,
+        "azimuth": 2.2957687956605866
+      },
+      "first_stable_s": 1.82,
+      "fault": false,
+      "max_target_deg": 72.63255965375048,
+      "retries": 0,
+      "mass_g": 94.81091079996067,
+      "friction": 1.253354708484788,
+      "servo_torque_Nm": 0.043299029289574825,
+      "speed_rad_s": 4.410681857950162,
+      "final_up": 0.999999994469549
+    },
+    {
+      "seed": 71032,
+      "pose": {
+        "tilt": 2.450963331507997,
+        "azimuth": 3.2958759280670527
+      },
+      "first_stable_s": 1.68,
+      "fault": false,
+      "max_target_deg": 77.97269061754763,
+      "retries": 0,
+      "mass_g": 92.94498952517876,
+      "friction": 0.4209764747437156,
+      "servo_torque_Nm": 0.042802196418975216,
+      "speed_rad_s": 5.22463530331409,
+      "final_up": 0.9999999885575731
+    },
+    {
+      "seed": 71033,
+      "pose": {
+        "tilt": 2.027884731047817,
+        "azimuth": 4.9196708568994545
+      },
+      "first_stable_s": 1.74,
+      "fault": false,
+      "max_target_deg": 71.52019974127728,
+      "retries": 0,
+      "mass_g": 96.87315735726467,
+      "friction": 0.8148258251832373,
+      "servo_torque_Nm": 0.04644181391307888,
+      "speed_rad_s": 4.527623434133109,
+      "final_up": 0.9999999929501089
+    },
+    {
+      "seed": 71034,
+      "pose": {
+        "tilt": 2.1223531299401452,
+        "azimuth": 5.128178907125704
+      },
+      "first_stable_s": 1.7,
+      "fault": false,
+      "max_target_deg": 69.6546241890231,
+      "retries": 0,
+      "mass_g": 95.35580914879404,
+      "friction": 1.2624491802574278,
+      "servo_torque_Nm": 0.05173566187880854,
+      "speed_rad_s": 4.991756776938962,
+      "final_up": 0.9999999905461089
+    },
+    {
+      "seed": 71035,
+      "pose": {
+        "tilt": 1.79617315601392,
+        "azimuth": 1.019518843876106
+      },
+      "first_stable_s": null,
+      "fault": false,
+      "max_target_deg": 77.12325619047573,
+      "retries": 0,
+      "mass_g": 92.49988307379209,
+      "friction": 0.38001409835056377,
+      "servo_torque_Nm": 0.03792722116510836,
+      "speed_rad_s": 2.8704482284015516,
+      "final_up": 0.47072319916736255
+    },
+    {
+      "seed": 71036,
+      "pose": {
+        "tilt": 2.5854789172887207,
+        "azimuth": 4.574959883760022
+      },
+      "first_stable_s": 1.56,
+      "fault": false,
+      "max_target_deg": 77.4110215712468,
+      "retries": 0,
+      "mass_g": 104.40054871125218,
+      "friction": 1.073054834063626,
+      "servo_torque_Nm": 0.04472088685294234,
+      "speed_rad_s": 4.180121205638552,
+      "final_up": 0.9999999939005222
+    },
+    {
+      "seed": 71037,
+      "pose": {
+        "tilt": 2.7435988703665557,
+        "azimuth": 6.242077375258346
+      },
+      "first_stable_s": 1.92,
+      "fault": false,
+      "max_target_deg": 63.12139663478179,
+      "retries": 0,
+      "mass_g": 98.9987040797778,
+      "friction": 0.5999120967338887,
+      "servo_torque_Nm": 0.05230959195156734,
+      "speed_rad_s": 3.607829837739425,
+      "final_up": 0.9999999884678088
+    },
+    {
+      "seed": 71038,
+      "pose": {
+        "tilt": 2.888389332328976,
+        "azimuth": 1.7561531737777487
+      },
+      "first_stable_s": 1.78,
+      "fault": false,
+      "max_target_deg": 69.78911771717738,
+      "retries": 0,
+      "mass_g": 97.6502082320473,
+      "friction": 1.2465780299788198,
+      "servo_torque_Nm": 0.05305632469781921,
+      "speed_rad_s": 4.9950590177787095,
+      "final_up": 0.9999999889071386
+    },
+    {
+      "seed": 71039,
+      "pose": {
+        "tilt": 2.186023237277836,
+        "azimuth": 5.42628244298224
+      },
+      "first_stable_s": 1.72,
+      "fault": false,
+      "max_target_deg": 74.43750786853522,
+      "retries": 0,
+      "mass_g": 91.2841614694932,
+      "friction": 1.0933783939572068,
+      "servo_torque_Nm": 0.055403220141375324,
+      "speed_rad_s": 3.8716397060435925,
+      "final_up": 0.9999999920718055
+    }
+  ],
+  "status": "Matched robust simulation; not physical recovery",
+  "horizon_s": 25,
+  "first_seed": 71000,
+  "action_increment_rad": 0.06,
+  "retries_enabled": false,
+  "actor_sha256": "cff95efe8cce8a38f9613ae93dfe491c6abc53cf49809f86111e66cf3984f05f",
+  "wall_seconds": 41.20067104208283
+}

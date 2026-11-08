@@ -51,5 +51,6 @@
     "firmware/policy_control/ServoProfile.h": "31c654bc83fb7f33c5efda7fb3c884172a9de2d7384dcde5feccb34879154fb1",
     "build/policy_control/policy_control.ino.hex": "d52946a1cc5c419ebbd79dad230f4c9441b55ad5a3de27d87852c2874c86c0d5",
     "build/policy_control/policy_control.ino.zip": "6ea909917f6bd43be2874168b96d87f3c7493bdca60a7fcef092efb7bb5bb20d"
-  }
+  },
+  "operator_feedback": "User reports repeated failed recovery attempts in real life; requests stronger sweeps and varied retries."
 }
