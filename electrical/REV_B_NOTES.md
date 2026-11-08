@@ -49,7 +49,7 @@ For charging, keep the pack connected to BAT+ and GND, remove both servo plugs a
 
 ## Firmware and regeneration
 
-The [bench firmware guide](../firmware/README.md) covers terminal control. Version 0.10 defaults to Rev B direct power, leaves D2 as an unconnected input and makes the stop semantics explicit. Older version 0.3 motion commands can still produce PWM after rewiring, but its power-off wording no longer describes the hardware.
+The [bench firmware guide](../firmware/BENCH_GUIDE.md) covers terminal control. Version 0.10 defaults to Rev B direct power, leaves D2 as an unconnected input and makes the stop semantics explicit. Older version 0.3 motion commands can still produce PWM after rewiring, but its power-off wording no longer describes the hardware.
 
 Using the project-local Python environment with `reportlab`, `pymupdf` and Pillow installed:
 

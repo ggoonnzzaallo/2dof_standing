@@ -1,4 +1,4 @@
-> **Historical first C3 experiment (controller 0.7).** The user reports physical recovery failures. Current controller 0.8 uses the separate [heavier, faster C3 model with varied retries](robust/README.md). The original C3 scores below remain valid for their own model/runtime.
+> **Historical first C3 experiment (controller 0.7).** The user reports physical recovery failures. Current [controller 0.9](upright/README.md) adds ±90° travel and level-base straight-arm holding; [0.8](robust/README.md) is the earlier heavier, faster model with varied retries. The original C3 scores below remain valid for their own model/runtime.
 
 # Installed C3 enclosure — model and recovery training
 

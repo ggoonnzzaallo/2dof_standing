@@ -1,6 +1,6 @@
 # Wire the complete robot — Rev C
 
-Fresh-build instructions, updated 7 November 2026: **lower signal D8 / 8; upper signal D7 / 7**, as wired by the user. Use **one Pololu 2810 LV** as the battery master switch, the XIAO nRF52840 Sense, two PTK 7465 MG servos and the existing 1S battery. This is the selected harness for the fit-approved enclosure. Physical assembly and through-switch charging have not yet been commissioned.
+Fresh-build instructions, updated 7 November 2026: **lower signal D8 / 8; upper signal D7 / 7**, as wired by the user. Use **one Pololu 2810 LV** as the battery master switch, the XIAO nRF52840 Sense, two PTK 7465 MG servos and the existing 1S battery. This is the selected harness for the fit-approved enclosure. The controller is deployed on the assembled robot; through-switch charging current and termination remain unmeasured.
 
 **Unplug both the battery and USB before soldering.** Leave the three-pin servo plugs unplugged until the initial controller check. The slider alone does not isolate every possible source when USB is connected.
 

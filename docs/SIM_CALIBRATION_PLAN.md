@@ -1,4 +1,6 @@
-# From the final CAD model to useful training
+# Calibration plan and earlier measurements
+
+This records the original geometry/calibration stage through 2 November 2026. References below to disarmed boot, ±80° deployment and pending adjacent-contact correction describe that stage. The [current controller](../firmware/policy_control/README.md) auto-starts on battery, uses ±90° targets and trains with corrected C3 contacts; see [current results and remaining measurement limits](../sim/enclosure_c3/upright/README.md).
 
 The final-CAD exploratory simulator is runnable. The next work is to establish the physical conventions and dynamics that the exported policy must share. No additional CAD export is needed unless the mechanism changes.
 

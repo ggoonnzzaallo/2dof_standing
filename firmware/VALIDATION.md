@@ -243,7 +243,7 @@ The user reports signal wiring on printed 8 (lower) and 7 (upper). All maintaine
 
 The native controller build passes at **85,940 bytes flash / 7,880 bytes static RAM**. The complete firmware host regression and **nine** Mac-helper tests pass. Checks include joint ordering on 8/7, high-numbered PWM pins, disabled outputs on faults/charge, and rejection of old 0.2/0.3 controller banners before arm/charge. Charging-version verification permits an unready IMU. The Rev C PDF/SVG/PNG and phone map match the new pins.
 
-This is an offline build/source change: **no upload, serial commands or physical joint test**. See [controller 0.4 instructions](policy_control/README.md#signal-pin-reroute-04--7-november-2026) and [build/provenance record](policy_control/results/2026-11-07/pin_routing_0_4.json).
+This is an offline build/source change: **no upload, serial commands or physical joint test**. See [controller 0.4 instructions](policy_control/HISTORY.md#signal-pin-reroute-04--7-november-2026) and [build/provenance record](policy_control/results/2026-11-07/pin_routing_0_4.json).
 
 Native target builds also pass for all maintained auxiliary sketches: servo bench, servo calibration, IMU bench, policy shadow and arithmetic probe. Pin-update record includes flash/RAM sizes for all six targets.
 
