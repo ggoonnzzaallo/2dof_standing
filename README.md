@@ -2,9 +2,9 @@
 
 A small, 3D-printed robot that uses two perpendicular servo joints and a learned onboard controller to get back upright. Inspired by [Homemade Garbage's project](https://homemadegarbage.com/rl13) and [SelfRisingRobot](https://github.com/homemadegarbage/SelfRisingRobot).
 
-**Current status — 7 November 2026:** controller **0.8** is uploaded and armed, using a heavier C3 training model, faster targets and varied stalled-recovery sweeps. The preceding 0.7 controller failed to self-right the physical C3 build. Corrected 0.8 physical recovery is awaiting operator observation; its new held-out simulation result is **40/40**, versus **38/40** for 0.7 on matched harder cases. [Training, runtime and limitations](sim/enclosure_c3/robust/README.md).
+**Current status — 7 November 2026:** controller **0.9** is uploaded and armed. It uses **±90° targets** and smoothly returns both joints to calibrated neutral on a level base, then resumes recovery when disturbed. C3 collision sweeps support ±90° on both; ±110° on the lower joint intersects the base. [Upright mode, range calculations and results](sim/enclosure_c3/upright/README.md).
 
-**V1 development history.** Earlier hardware demonstrated unassisted self-righting and battery-only recovery. Controller **0.8** retains **0.6** automatic battery-only startup and the **0.5** one-minute inactivity lock. [Current deployment record](firmware/policy_control/results/2026-11-07/deployment_0_8.json).
+Automatic battery-only startup, USB-at-startup charging, battery/sensor stops and the one-minute inactivity shutdown remain. [Current deployment](firmware/policy_control/results/2026-11-07/deployment_0_9.json). Physical behavior with 0.9 awaits operator confirmation.
 
 - **[Operating instructions](docs/OPERATING_INSTRUCTIONS.md)** — run without a computer, stop, charge, wake after inactivity.
 - **[Project summary and video facts](docs/PROJECT_SUMMARY.md)** — what was built, how the controller learned, demonstrated results and remaining limits.
@@ -42,20 +42,20 @@ Optional Mac controls, from the repository root:
 
 Lower PWM is **D8 / printed 8**, upper **D7 / printed 7**. Servo power comes from the switched battery bus, never the XIAO's 3V3 output. The [hardware guide](HARDWARE.md) explains sensing, power paths and measured versus assumed parameters. Receipt totals are incomplete; the original under-$100 target is not a verified total.
 
-The latest printable cup is **C3** with a tighter USB opening and outward battery placement; its lid is unchanged from fit-approved **C2**. The [deployed training model](sim/enclosure_c3/robust/README.md) uses frozen installed C3 inputs; the earlier [C2 simulator](sim/enclosure/README.md) remains preserved separately. The original arm is from the user's [final Onshape export](cad/onshape_import/README.md); older generated arm concepts are historical.
+The latest printable cup is **C3** with a tighter USB opening and outward battery placement; its lid is unchanged from fit-approved **C2**. The [deployed training model](sim/enclosure_c3/upright/README.md) uses frozen installed C3 inputs; the earlier [C2 simulator](sim/enclosure/README.md) remains preserved separately. The original arm is from the user's [final Onshape export](cad/onshape_import/README.md); older generated arm concepts are historical.
 
 ## Learning and simulation
 
 The deployed actor is a **10 → 64 → 64 → 2** network with **4,994 float32 parameters**, evaluated onboard at **50 Hz**. It observes estimated base DOWN, gyro, commanded joint targets and previous actions. It outputs target increments; simulated servos have finite speed, lag and torque. Actual joint angles are not policy inputs.
 
-The current actor uses **Stable-Baselines3 PPO** on the installed C3 geometry, with **6 g provisional extra wire/glue mass**, varied friction, COM and servo strength. It is warm-started from the earlier C3 actor. The deployed checkpoint has **33,792 additional PPO transitions / 336 completed episodes**; saved later training reaches 67,584 transitions / 751 episodes. The target-rate cap is **5 rad/s**, up from 3, while travel stays **±80°**. A portable stateful supervisor varies large sweeps after stalled attempts; it does not update neural weights online.
+The current actor uses **Stable-Baselines3 PPO** on C3 with a provisional extra **6 g wire/glue estimate**, varied friction, COM and servo strength. Its target observation was rescaled for ±90°, then it received **33,792 additional PPO transitions / 239 episodes**. Recovery targets can change at **5 rad/s**. A portable supervisor handles varied stalled attempts and a level-base straight pose; no weights are updated online.
 
-On 40 matched held-out fallen simulations, the corrected 0.8 controller reached stable base recovery in **40/40 within five seconds**, versus **38/40 within 25 seconds** for 0.7. Failure-capped mean time fell from **3.16 s to 1.76 s**. Straight joints are not required, and physical success is not established by those scores. [Training records, invalid-stage correction and limits](sim/enclosure_c3/robust/README.md).
+The new goal requires both an upright base and straight links. It completed **48/50 fresh simulated cases** within 25 seconds, with zero faults; earlier base-only scores use a different criterion. Five flat-base checks straightened an initially bent arm and held it through ten seconds. [Evidence and limits](sim/enclosure_c3/upright/README.md).
 
-For the current model **and matching faster/retry runtime** on this configured Mac:
+Open the current model and matching controller:
 
 ```sh
-.venv-sim/bin/mjpython sim/enclosure_c3/robust/play.py --tilt 90
+.venv-sim/bin/mjpython sim/enclosure_c3/upright/play.py --tilt 90
 ```
 
 Double-click a body, then Control + right-drag to pull; release to watch recovery. Drag normally to orbit and scroll to zoom. This opens simulation only. [Full setup and model guide](sim/README.md).
@@ -66,13 +66,14 @@ Double-click a body, then Control + right-drag to pull; release to watch recover
 | Original actor's broad simulation evaluation | 100/100 in that specific historical suite; not a hardware success rate |
 | C2 enclosure, relocated IMU and corrected adjacent contacts | Separate offline candidate; 18/30 fresh randomized cases versus old actor's 8/30 on the same new-model cases |
 | C3 geometry + first C3 PPO actor | Historical 0.7: 49/50 in its simulation suite, but user reports physical failures |
-| Heavier C3 + faster actor and varied retries | Current 0.8: 40/40 in matched harder simulations; physical observation pending |
+| Heavier C3 + faster actor and varied retries | Historical 0.8: base-only recovery, ±80° |
+| C3 + upright-hold supervisor and ±90° actor | Current 0.9: 48/50 under the new upright-and-straight simulation criterion; physical observation pending |
 
 ## Reproduce and inspect
 
 - **Firmware:** [toolchain setup](firmware/README.md), [current controller](firmware/policy_control/README.md), [validation history](firmware/VALIDATION.md).
 - **Geometry:** [final Onshape import](cad/onshape_import/README.md), [enclosure sources and print package](cad/electronics_pod/README.md), [original mass accounting](sim/mass_properties/README.md).
-- **Training:** [pipeline](sim/README.md), [current robust C3 actor](sim/enclosure_c3/robust/README.md), [original actor experiment](sim/recovery/README.md), [C2 experiment](sim/enclosure/README.md).
+- **Training:** [pipeline](sim/README.md), [current upright C3 actor](sim/enclosure_c3/upright/README.md), [original actor experiment](sim/recovery/README.md), [C2 experiment](sim/enclosure/README.md).
 - **Decisions:** [controller/IMU](docs/CONTROLLER_DECISION.md), [servo feedback tradeoff](docs/SERVO_DECISION.md), [procurement history](docs/PROCUREMENT_STATUS.md).
 - **Future iterations:** [integrated controller PCB](docs/INTEGRATED_CONTROLLER_PCB.md), [battery LED and hardware backlog](docs/HARDWARE_BACKLOG.md), [persistent recovery/personality](docs/RECOVERY_BEHAVIOR.md).
 

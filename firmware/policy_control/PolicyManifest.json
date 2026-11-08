@@ -1,39 +1,43 @@
 {
-  "geometry_id": "installed_c3_robust",
+  "geometry_id": "installed_c3_upright90",
   "mesh_assets_sha256": "30adb98827adffdc23b398f7145880bd3bbb31e1526d101f009ae481a8cd37e9",
   "observation_count": 10,
   "action_count": 2,
   "period_ms": 20,
   "action_increment_rad": 0.1,
   "retry_supervisor": true,
+  "joint_limit_deg": 90,
+  "neutral_hold": true,
   "hardware_validation": "Separate deployment record; selection does not imply physical success",
-  "actor_header_path": "sim/enclosure_c3/robust/results/policy_robust.h",
-  "actor_header_sha256": "807b34590e265c3ded44a9ce83ff605c4e8178d6aae34962ca9d95a3de4c4019",
-  "actor_archive_path": "sim/enclosure_c3/robust/results/best.zip",
-  "actor_archive_sha256": "010adca21bdd2423c761fb9681bdcb9d8497c7d9de473a460c8f53c60dcd5d59",
-  "model_path": "sim/enclosure_c3/robust/robot.xml",
-  "model_sha256": "2d20a8464a2c39b18ee0fd5f897e0127b65403d5f3455cb957eb5ef44a922d60",
-  "training_report_path": "sim/enclosure_c3/robust/results/training_report.json",
-  "training_report_sha256": "d839c013a10e0fdaefb20f841962d9ac43bb36c4f0935fc5616da487a5828a7b",
-  "runtime_validation_path": "sim/enclosure_c3/robust/results/runtime_validation.json",
-  "runtime_validation_sha256": "5e64e7843a1f3e9b617ba83c8c97e91320332a4c376a11a84aa7adcb300bf412",
-  "retry_strategy_sha256": "6b656d12bc15790070840fc9db9aac12ce11ab21dff906adca98b680fb18a5fc",
+  "actor_header_path": "sim/enclosure_c3/upright/results/policy_upright.h",
+  "actor_header_sha256": "34627fe97cf0f081921c1b95519c06a603caa03f2b4b93d782ea219317eab1f3",
+  "actor_archive_path": "sim/enclosure_c3/upright/results/best.zip",
+  "actor_archive_sha256": "97a66e09f56f2df6765da0b97a6f0f2332c6f43bad8df29d898d2ede7a884805",
+  "model_path": "sim/enclosure_c3/upright/robot.xml",
+  "model_sha256": "a3f99042bcce3daf94d81f4c9e6ac053b4872dee23c65982ac574de5263e4bd4",
+  "training_report_path": "sim/enclosure_c3/upright/results/training_report.json",
+  "training_report_sha256": "a61ba6091efa61d2e9663a192a9f738f42279d533a5643c0933d9607adbf52fa",
+  "retry_strategy_sha256": "d647c7e1dfcefef993bf59813c09cad033d6308a2c253366804873215e587d35",
   "runtime_sources": [
     {
       "path": "firmware/policy_control/RecoveryStrategy.h",
-      "sha256": "6b656d12bc15790070840fc9db9aac12ce11ab21dff906adca98b680fb18a5fc"
+      "sha256": "d647c7e1dfcefef993bf59813c09cad033d6308a2c253366804873215e587d35"
     },
     {
-      "path": "sim/enclosure_c3/robust/robust_env.py",
-      "sha256": "8026acb9b838b8ea6664c7407ca3ade75e63d9283986c9b4d1fe2e51b58db112"
+      "path": "sim/enclosure_c3/upright/robust_env.py",
+      "sha256": "fc7aba713e66feb16f7a66b21ccb5530711f7b1c58b3e4204143ce85dae071c7"
     },
     {
       "path": "sim/environment.py",
       "sha256": "7ee6ae89698f7296407a2579814ab63b23593c1f0e35d5a65c0379a6cda332c9"
     },
     {
-      "path": "sim/enclosure_c3/robust/strategy.py",
-      "sha256": "03c77f2b59d0fa757475567c0149a0a29959b6e573dd952d26debbfa10a5c8fc"
+      "path": "sim/enclosure_c3/upright/strategy.py",
+      "sha256": "b28dd4e350553f6b2602a6bf062d5b5d5885fb2b6408cb0a67485df945df214c"
+    },
+    {
+      "path": "firmware/policy_control/ServoProfile.h",
+      "sha256": "ede0edae9e23ab05188cf297bf49e12d17b09bd67edc5b9493977e9f4ce6ab8c"
     }
   ]
 }

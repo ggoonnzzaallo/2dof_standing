@@ -9,7 +9,7 @@ class Strategy:
         global LIB,FOLDER
         if LIB is None:
             FOLDER=tempfile.TemporaryDirectory();p=Path(FOLDER.name)
-            (p/'RecoveryStrategy.h').write_bytes((ROOT/'firmware/policy_control/RecoveryStrategy.h').read_bytes())
+            (p/'RecoveryStrategy.h').write_bytes((Path(__file__).with_name('RecoveryStrategy_v0_8.h')).read_bytes())
             (p/'strategy.cpp').write_text('''#include "RecoveryStrategy.h"
 extern "C" {void* create(){return new RecoveryStrategy();}
 void destroy(void* p){delete static_cast<RecoveryStrategy*>(p);}

@@ -24,3 +24,7 @@ sim/enclosure_c3/assets/*_hulls.json
 !sim/enclosure_c3/robust/results/checkpoints/*.zip
 sim/enclosure_c3/robust/invalid_reset_stage/*
 !sim/enclosure_c3/robust/invalid_reset_stage/INVALID.json
+
+!sim/enclosure_c3/upright/results/best.zip
+!sim/enclosure_c3/upright/results/checkpoints/*.zip
+!sim/enclosure_c3/upright/results/source/warm_start_rescaled.zip

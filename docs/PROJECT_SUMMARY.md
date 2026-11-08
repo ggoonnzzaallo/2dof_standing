@@ -1,6 +1,6 @@
 # V1 project summary and video facts
 
-Recorded 7 November 2026. Corrected controller **0.8** is uploaded and armed with a heavier C3 PPO model, faster targets and varied stalled-recovery patterns. Controller 0.7's strong simulation results did not transfer: the user reports failed physical recovery. Physical recovery of corrected 0.8 is awaiting operator observation. Earlier hardware demonstrated self-righting with the original actor. Simulation scores below are not hardware reliability.
+Recorded 7 November 2026. **Controller 0.9** is uploaded and armed with **±90° targets and automatic straight-arm holding on a level base**. Its new simulation goal requires an upright base and straight joints; 48/50 fresh cases qualified within 25 seconds. Physical 0.9 behavior awaits operator confirmation. Earlier scores and demonstrations below are version-specific. [Current model, range calculations and evidence](../sim/enclosure_c3/upright/README.md).
 
 ## What we built
 
@@ -24,7 +24,9 @@ The actor has **4,994 parameters**, about **20 kB of float32 weights**, with 10 
 
 The historical **0.7 C3** actor warm-starts from the C2 candidate and uses PPO with the firmware IMU filter on the installed geometry. Training completed **202,752 additional transitions / 206 episodes**, with seven saved checkpoints. The checkpoint at **33,792 transitions / 34 completed episodes** was selected on 20 development cases. Held-out simulation recovered a stable base in **49/50 within 15 seconds**, versus **36/50** for the original actor on matched cases. Strict straight-arm success was **0/50**: the reward permits a bent resting arm. These scores do not establish hardware reliability. [C3 records](../sim/enclosure_c3/README.md).
 
-The current **0.8 robust C3** actor adds 6 g provisional wire/glue mass, broader mechanics variation, a 3 → 5 rad/s target-rate cap and a portable varied-retry supervisor. The deployed checkpoint has **33,792 new PPO transitions / 336 completed episodes**. Saved training reaches 67,584 transitions / 751 episodes; later weights remain offline. On 40 matched genuine fallen held-out cases, corrected 0.8 recovered **40/40 within five seconds**, versus **38/40 within 25 seconds** for 0.7. Failure-capped mean time fell from **3.16 s to 1.76 s**. This is simulation only. [Records, runtime and withdrawn invalid early stage](../sim/enclosure_c3/robust/README.md).
+The historical **0.8 robust C3** actor adds 6 g provisional wire/glue mass, broader mechanics variation, a 3 → 5 rad/s target-rate cap and a portable varied-retry supervisor. The deployed checkpoint has **33,792 new PPO transitions / 336 completed episodes**. Saved training reaches 67,584 transitions / 751 episodes; later weights remain offline. On 40 matched genuine fallen held-out cases, corrected 0.8 recovered **40/40 within five seconds**, versus **38/40 within 25 seconds** for 0.7. Failure-capped mean time fell from **3.16 s to 1.76 s**. This is simulation only. [Records, runtime and withdrawn invalid early stage](../sim/enclosure_c3/robust/README.md).
+
+Current 0.9 expands targets to ±90°, uses a gyro-qualified averaged-accelerometer level detector, and eases targets to neutral while level. The selected refinement has **33,792 additional PPO steps / 239 completed episodes**. No substantial self-contact appeared in a 32,761-pose ±90° sweep or eight nominal dynamic recoveries. Lower-joint ±110° intersects the base; upper ±110° clears the sampled structural envelope but has not been physically calibrated.
 
 The retry supervisor remembers stalled attempts and varies sweep order, signs, amplitude and timing. **It is not online learning on the robot.** Battery, sensor, timing and inactivity stops are retained.
 
@@ -38,6 +40,7 @@ The retry supervisor remembers stalled attempts and varies sweep order, signs, a
 | Real-board one-minute inactivity latch, motion-command refusals and charge-mode availability | [Controller 0.5 no-PWM capture](../firmware/policy_control/results/2026-11-07/inactivity_0_5.json) |
 | Controller 0.6 battery-only automatic startup | User-confirmed; [record](../firmware/policy_control/results/2026-11-07/deployment_0_6.json) |
 | Controller 0.7 C3 actor uploaded and armed | User subsequently reports physical self-righting failures. [Record](../firmware/policy_control/results/2026-11-07/deployment_0_7.json) |
+| Controller 0.9 uploaded and armed | Actor/model/runtime identity and standalone handoff confirmed; physical upright behavior pending. [Record](../firmware/policy_control/results/2026-11-07/deployment_0_9.json) |
 | Corrected controller 0.8 uploaded and armed | Actor identity and standalone handoff confirmed; physical recovery awaiting observation. [Record](../firmware/policy_control/results/2026-11-07/deployment_0_8.json) |
 
 The recorded sideways run included disturbances, so it is not a clean untouched single-recovery timing measurement. No repeated physical trial count establishes an all-direction success rate.

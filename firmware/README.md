@@ -1,3 +1,5 @@
+> **Current controller: [0.9](policy_control/README.md)** — ±90° recovery and smooth straight-arm holding on a level base. [Operating instructions](../docs/OPERATING_INSTRUCTIONS.md). The dated 0.8 notes and bench workflow below are historical.
+
 # Rev B terminal control - direct battery power
 
 **7 November 2026 source update:** all maintained sketches now use **D8 / 8 for lower PWM** and **D7 / 7 for upper PWM**, including boot/stop/no-motion paths. The recovery controller **0.8** is uploaded with the heavier C3 PPO actor, faster targets, varied retries, automatic battery-only startup, USB-at-boot charge mode and the reboot-only 60-second base-IMU inactivity lock. Earlier 0.4 passed 150 no-PWM frames and standalone arming on 7 November 2026. References below to earlier builds/uploads are historical. The bench program keeps its existing command protocol/banner; its help now names D8/D7.

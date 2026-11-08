@@ -1,0 +1,446 @@
+{
+  "status": "static exterior geometry audit; no physical servo-travel claim",
+  "model_sha256": "2d20a8464a2c39b18ee0fd5f897e0127b65403d5f3455cb957eb5ef44a922d60",
+  "adjacent_contacts": "active with existing pivot-interface masks",
+  "floor": "base raised to 1 m to isolate self-contact",
+  "ranges": [
+    {
+      "limit_deg": 80,
+      "compound_grid_spacing_deg": 2,
+      "sampled_poses": 6561,
+      "poses_with_penetration_over_0_2mm": 0,
+      "max_penetration_mm": 0,
+      "examples": [],
+      "single_axis": {
+        "0": {
+          "first_positive_clash_deg": 93.0,
+          "first_negative_clash_deg": -91.0
+        },
+        "1": {
+          "first_positive_clash_deg": null,
+          "first_negative_clash_deg": -119.5
+        }
+      }
+    },
+    {
+      "limit_deg": 90,
+      "compound_grid_spacing_deg": 2,
+      "sampled_poses": 8281,
+      "poses_with_penetration_over_0_2mm": 0,
+      "max_penetration_mm": 0,
+      "examples": [],
+      "single_axis": {
+        "0": {
+          "first_positive_clash_deg": 93.0,
+          "first_negative_clash_deg": -91.0
+        },
+        "1": {
+          "first_positive_clash_deg": null,
+          "first_negative_clash_deg": -119.5
+        }
+      }
+    },
+    {
+      "limit_deg": 100,
+      "compound_grid_spacing_deg": 2,
+      "sampled_poses": 10201,
+      "poses_with_penetration_over_0_2mm": 909,
+      "max_penetration_mm": 14.701723263941147,
+      "examples": [
+        {
+          "q_deg": [
+            -100,
+            -100
+          ],
+          "depth_mm": 9.7797877529878,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "base_modified_collision_52",
+            "top_link_main_body_collision_00"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -98
+          ],
+          "depth_mm": 9.185237600161264,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "base_modified_collision_52",
+            "top_link_main_body_collision_00"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -96
+          ],
+          "depth_mm": 8.810776705955883,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "electronics_cup_collision_00",
+            "top_link_main_body_collision_00"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -94
+          ],
+          "depth_mm": 8.303716105732189,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "electronics_cup_collision_00",
+            "top_link_main_body_collision_00"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -92
+          ],
+          "depth_mm": 7.646072878532258,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "electronics_cup_collision_00",
+            "top_link_main_body_collision_00"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -90
+          ],
+          "depth_mm": 7.145792192882635,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "electronics_cup_collision_00",
+            "top_link_main_body_collision_21"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -88
+          ],
+          "depth_mm": 7.138524268554276,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "electronics_cup_collision_00",
+            "top_link_main_body_collision_21"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -86
+          ],
+          "depth_mm": 7.127724751464455,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "electronics_cup_collision_00",
+            "top_link_main_body_collision_21"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -84
+          ],
+          "depth_mm": 7.128286600591401,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "electronics_cup_collision_00",
+            "top_link_main_body_collision_25"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -82
+          ],
+          "depth_mm": 7.1246716257399,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "electronics_cup_collision_00",
+            "top_link_main_body_collision_25"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -80
+          ],
+          "depth_mm": 7.115086211536142,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "electronics_cup_collision_00",
+            "top_link_main_body_collision_25"
+          ]
+        },
+        {
+          "q_deg": [
+            -100,
+            -78
+          ],
+          "depth_mm": 7.1122278806367705,
+          "bodies": [
+            "base",
+            "upper"
+          ],
+          "geoms": [
+            "electronics_cup_collision_00",
+            "top_link_main_body_collision_25"
+          ]
+        }
+      ],
+      "single_axis": {
+        "0": {
+          "first_positive_clash_deg": 93.0,
+          "first_negative_clash_deg": -91.0
+        },
+        "1": {
+          "first_positive_clash_deg": null,
+          "first_negative_clash_deg": -119.5
+        }
+      }
+    },
+    {
+      "limit_deg": 110,
+      "compound_grid_spacing_deg": 2,
+      "sampled_poses": 12321,
+      "poses_with_penetration_over_0_2mm": 2109,
+      "max_penetration_mm": 22.873819908443945,
+      "examples": [
+        {
+          "q_deg": [
+            -110,
+            -110
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -108
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -106
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -104
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -102
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -100
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -98
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -96
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -94
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -92
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -90
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        },
+        {
+          "q_deg": [
+            -110,
+            -88
+          ],
+          "depth_mm": 21.826530201427225,
+          "bodies": [
+            "base",
+            "middle"
+          ],
+          "geoms": [
+            "base_modified_collision_70",
+            "middle_link_main_body_collision_01"
+          ]
+        }
+      ],
+      "single_axis": {
+        "0": {
+          "first_positive_clash_deg": 93.0,
+          "first_negative_clash_deg": -91.0
+        },
+        "1": {
+          "first_positive_clash_deg": null,
+          "first_negative_clash_deg": -119.5
+        }
+      }
+    }
+  ],
+  "limits": [
+    "2-degree compound grid is sampled, not a proof of all continuous paths.",
+    "Electrical PWM endpoints, internal servo stops, wires and flexible deformation are not represented."
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "source_actor": "sim/enclosure_c3/robust/results/best.zip",
+  "source_sha256": "010adca21bdd2423c761fb9681bdcb9d8497c7d9de473a460c8f53c60dcd5d59",
+  "transformation": "Multiply first policy-layer weights at columns 6 and 7 by 90/80. This preserves physical commanded-target interpretation under the new command/90-degree observation normalization.",
+  "factor": 1.125,
+  "rescaled_archive_sha256": "a50f52c27ffb7507dfc2390e8f299a02640ffbb17c99e14a356b100ab5a9df1a"
+}

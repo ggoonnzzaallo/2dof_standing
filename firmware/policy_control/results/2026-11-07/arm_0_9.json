@@ -1,0 +1,40 @@
+{
+  "created_utc": "2026-11-08T03:53:31.970544+00:00",
+  "action": "arm",
+  "firmware_banner": [
+    "ROBOT POLICY CONTROL 0.9",
+    "POLICY_GEOMETRY: installed_c3_upright90",
+    "POLICY_ACTOR_SHA256: 34627fe97cf0f081921c1b95519c06a603caa03f2b4b93d782ea219317eab1f3",
+    "POLICY_RUNTIME_SHA256: d647c7e1dfcefef993bf59813c09cad033d6308a2c253366804873215e587d35",
+    "MODE: 0",
+    "IMU_READY: 1",
+    "FILTER_READY: 1",
+    "SERVO_PINS: lower=D8 (8), upper=D7 (7).",
+    "RANGE: trained +/-90 deg; approximate extrapolated PWM 700..2300 us.",
+    "PROFILE: 50 Hz, action increment rad: 0.10",
+    "VARIED_RETRIES: 1",
+    "UPRIGHT: stable level base eases both targets to zero, then holds; tilt/spin returns to recovery.",
+    "RETRY_COUNT: 0",
+    "GUARDS: USB trials need heartbeat and have 60 s limit; standalone keeps sensor/timing/battery stops.",
+    "INACTIVITY: 60 s without base IMU motion stops PWM until reboot; charge stays available.",
+    "INACTIVITY_LOCKED: 0",
+    "BOOT: battery only auto-starts after initialization; USB at startup keeps PWM off.",
+    "USB_POWER: 1",
+    "LAST_STOP: Operator stop or command.",
+    "POWER: stop/charge remove PWM only. Rev C master switch OFF + USB unplugged is full OFF.",
+    "Commands: arm, run, standalone, charge (PWM off), shadow (no PWM), keep, off, !, state, sensors (non-stopping), status, help",
+    "READY"
+  ],
+  "handoff_acknowledgement": "STANDALONE: running; USB may be unplugged. Rev C: switch OFF after unplugging USB for full OFF.",
+  "device_state": {
+    "mode": 4,
+    "mode_name": "STANDALONE",
+    "battery_mv": 4143,
+    "policy_frames": 10,
+    "sensor_ready": true,
+    "i2c_errors": 0,
+    "last_stop": "Operator stop or command."
+  },
+  "continues_after_serial_close": true,
+  "status": "confirmed"
+}

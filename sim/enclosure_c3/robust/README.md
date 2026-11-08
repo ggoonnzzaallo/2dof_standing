@@ -1,3 +1,5 @@
+> **Historical controller 0.8.** Current [0.9 uses ±90° and level-base straight holding](../upright/README.md). This directory retains its frozen v0.8 supervisor for playback. The following scores use the old base-only goal.
+
 # C3: stronger recovery and varied retries
 
 **7 November 2026 — controller 0.8 is uploaded and armed.** The user reports that the 0.7 policy repeats unsuccessful motions on the physical robot. This revision increases target speed, trains with broader mechanics variation and introduces a portable stalled-recovery supervisor. Physical recovery with the corrected 0.8 actor is awaiting operator observation. [Deployment](../../../firmware/policy_control/results/2026-11-07/deployment_0_8.json).

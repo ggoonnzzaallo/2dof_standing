@@ -1,6 +1,6 @@
 # Training and deployment pipeline
 
-**V1 status, 7 November 2026:** controller **0.8** is uploaded and armed with the [robust C3 PPO actor/runtime](enclosure_c3/robust/README.md): heavier model, faster targets and varied retries. The previous C3 actor failed physically despite strong simulated results. Physical recovery with corrected 0.8 awaits operator observation. [Project summary](../docs/PROJECT_SUMMARY.md) · [Current controller](../firmware/policy_control/README.md).
+**V1 status, 7 November 2026:** [controller 0.9](enclosure_c3/upright/README.md) is uploaded and armed: ±90° recovery and a level-base straight-hold mode, with calculated C3 clearance. New success scoring requires straight joints as well as a stable upright base; physical 0.9 behavior awaits confirmation.
 
 ## Choose the model and experiment
 
@@ -9,7 +9,8 @@
 | `robot.xml`, `onshape/`, `recovery/` | Historical final-Onshape geometry and original actor experiment. Original masses total 73.922 g; adjacent-body exclusions remain a known limitation. |
 | `enclosure/robot.xml`, `enclosure/` | Frozen fit-approved C2 enclosure, relocated electronics/IMU and corrected adjacent contacts. Offline candidate and results; not promoted to the robot. Model mass estimate 87.987 g. |
 | `enclosure_c3/robot.xml`, `enclosure_c3/` | Historical first C3 enclosure/PPO experiment (0.7). 88.162 g estimated mass; 49/50 held-out stable-base recoveries in simulation, 0/50 strict straight-arm. |
-| `enclosure_c3/robust/` | Current 0.8: 94.162 g nominal mass, wider mechanics randomization, 5 rad/s target cap and portable varied retries. Use its own playground wrapper. |
+| `enclosure_c3/robust/` | Historical 0.8: 94.162 g nominal mass, wider mechanics randomization, 5 rad/s target cap and portable varied retries. Use its own playground wrapper. |
+| `enclosure_c3/upright/` | Current 0.9: ±90° hinges, level-base neutral hold, 48/50 fresh upright-and-straight simulations. Use its own playground wrapper. |
 | `archive/` | Historical pre-Onshape primitive models/software checks. |
 
 The current [C3 experiment](enclosure_c3/README.md) freezes the installed C3 CAD. The earlier enclosure experiment retains frozen C2 inputs. No model builder silently updates the deployed actor. Current electrical design includes **one Pololu master switch**; the older original-geometry model predates the under-base enclosure.

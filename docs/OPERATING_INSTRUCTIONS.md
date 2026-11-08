@@ -1,13 +1,13 @@
 # Operating instructions
 
-**V1, updated 7 November 2026 — controller 0.8.** One Pololu battery master switch; lower signal **D8 / 8**, upper **D7 / 7**. Normal running and charging do not require a computer. [Wiring](../electrical/FROM_SCRATCH.md) · [Current deployment evidence](../firmware/policy_control/results/2026-11-07/deployment_0_8.json).
+**V1, updated 7 November 2026 — controller 0.9.** One Pololu battery master switch; lower signal **D8 / 8**, upper **D7 / 7**. Normal running and charging do not require a computer. [Wiring](../electrical/FROM_SCRATCH.md) · [Current deployment evidence](../firmware/policy_control/results/2026-11-07/deployment_0_9.json).
 
-Controller 0.8 uses the heavier C3 PPO model, faster targets and varied recovery retries. If progress stalls for roughly five seconds, it can switch to a larger sweep; later attempts change order, signs, timing and amplitude. A brief near-upright wobble does not clear retry memory: it needs one second within about 10° of level. It does not learn new weights on the robot. Stable-base recovery is the learned goal; the arm may rest bent after recovering. Physical recovery on the latest enclosure is awaiting operator observation.
+Controller 0.9 uses **±90° targets**. On a slowly moving level base it eases both targets to calibrated neutral (1500 µs) at <=2 rad/s and holds a straight arm. It switches back to recovery when tilted or rotated quickly. Varied stalled-recovery sweeps remain. This commands neutral without shaft-position readback; physical accuracy depends on horn calibration and load. The 60-second inactivity shutdown still applies. [Controller and range checks](../sim/enclosure_c3/upright/README.md).
 
 ## Run without a computer
 
 1. **Unplug USB** and slide the Pololu **OFF** to remove all robot power.
-2. Place the base on a clear surface, with the links near straight and room for the trained ±80° motion. Switching ON will move the robot.
+2. Place the base on a clear surface, with the links near straight and room for the trained ±90° motion. Switching ON will move the robot.
 3. Slide **ON**. Keep the base still while the IMU initializes.
 4. After about **two seconds**, both joints are commanded to nominal neutral (1500 µs) for **one second**, then onboard recovery starts automatically. No Mac command or heartbeat is required.
 
@@ -72,4 +72,4 @@ With the switch ON, `./robot status` reports approximate BAT voltage. Load, char
 
 Voltage is sampled about every 100 ms. The guard cannot operate the physical slider. A forgotten ON robot can discharge its pack after motion stops. Do not repeatedly reboot/rearm a low battery. `status` also reports the last stop reason; sensor/timing/numerical faults stop motion rather than automatically restarting it.
 
-The current [robust C3 actor/runtime](../sim/enclosure_c3/robust/README.md) uses ±80° targets and a 5 rad/s target-rate cap. Earlier C2 and first-C3 experiments remain historical. Optional next-iteration ideas are in the [hardware backlog](HARDWARE_BACKLOG.md).
+The current [upright C3 actor/runtime](../sim/enclosure_c3/upright/README.md) uses ±90° targets and a 5 rad/s target-rate cap. Earlier C2 and first-C3 experiments remain historical. Optional next-iteration ideas are in the [hardware backlog](HARDWARE_BACKLOG.md).

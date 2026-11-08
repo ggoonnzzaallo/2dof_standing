@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "test": "flat base, initially bent arm, 10 s continuous control with randomized mechanics",
+  "cases": [
+    {
+      "seed": 301,
+      "straight_upright_s": 1.28,
+      "max_joint_error_after_5s_deg": 0.04165176981429701,
+      "target_after_settle_rad": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 302,
+      "straight_upright_s": 1.24,
+      "max_joint_error_after_5s_deg": 0.07276795219659539,
+      "target_after_settle_rad": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 303,
+      "straight_upright_s": 1.26,
+      "max_joint_error_after_5s_deg": 0.10845981345187986,
+      "target_after_settle_rad": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 304,
+      "straight_upright_s": 1.24,
+      "max_joint_error_after_5s_deg": 0.026883137249309127,
+      "target_after_settle_rad": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 305,
+      "straight_upright_s": 1.18,
+      "max_joint_error_after_5s_deg": 0.020379716085164205,
+      "target_after_settle_rad": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "physical_robot_commands_sent": false
+}

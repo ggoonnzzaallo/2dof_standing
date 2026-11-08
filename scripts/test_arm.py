@@ -6,7 +6,7 @@ from control import expected_policy_lines
 
 
 class Device:
-    def __init__(self, refuse=False, ready=True, charge_supported=True, version='0.8', locked=False, identity=True):
+    def __init__(self, refuse=False, ready=True, charge_supported=True, version='0.9', locked=False, identity=True):
         self.time=0.;self.mode=0;self.frames=0;self.ready=ready;self.refuse=refuse
         self.lines=deque();self.commands=[];self.armed_at=0;self.closed=False;self.charge_supported=charge_supported
         self.version=version;self.locked=locked;self.identity=identity
@@ -86,7 +86,7 @@ class ArmingTests(unittest.TestCase):
         self.assertNotIn('off',tail);self.assertNotIn('!',tail)
     def test_charge_on_old_firmware_fails_stopped(self):
         device=Device(charge_supported=False);device.mode=4
-        with self.assertRaisesRegex(RuntimeError,'0.8'):
+        with self.assertRaisesRegex(RuntimeError,'0.9'):
             operate(device,'charge',device.now)
         self.assertEqual(device.mode,0)
         self.assertNotIn('arm',device.commands)
@@ -115,9 +115,9 @@ class ArmingTests(unittest.TestCase):
                 self.assertTrue(device.locked)
                 self.assertNotIn('arm',device.commands)
     def test_previous_actor_firmware_is_rejected_before_arm(self):
-        for version in ('0.4','0.5','0.6','0.7'):
+        for version in ('0.4','0.5','0.6','0.7','0.8'):
             device=Device(version=version)
-            with self.assertRaisesRegex(RuntimeError,'0.8'):
+            with self.assertRaisesRegex(RuntimeError,'0.9'):
                 operate(device,'arm',device.now)
             self.assertNotIn('arm',device.commands)
     def test_wrong_actor_identity_is_rejected_before_motion(self):

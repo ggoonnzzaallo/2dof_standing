@@ -34,3 +34,8 @@ Judge a candidate on recovery by each time threshold, recovery-time distribution
 ## Implemented in controller 0.8 — 7 November 2026
 
 The [robust C3 experiment](../sim/enclosure_c3/robust/README.md) reduces effort penalties, favors prompt recovery, uses heavier/variable-friction/weak-servo models and increases the target-rate cap to 5 rad/s. A portable stateful supervisor replaces repeating deterministic failures with eight bounded large-sweep patterns after stalled progress. It varies order, signs, timing and amplitude. This is scripted retry memory around a learned policy, not online learning. The same header runs in simulation and firmware. Genuine sensor/battery/timing faults and the user-requested one-minute inactivity latch still stop motion. Corrected 0.8 is uploaded/armed; physical effectiveness remains unconfirmed. The invalid early mass-reset stage is explicitly withdrawn in its records.
+
+
+## Upright pose and ±90° travel in controller 0.9
+
+[Controller/model 0.9](../sim/enclosure_c3/upright/README.md) adds a deterministic level-base neutral-hold mode around the recovery policy, a gyro-qualified averaged-accelerometer detector, and collision-checked ±90° bounds. The new success metric includes straight links; 48/50 fresh cases meet it. The one-minute inactivity stop remains authoritative. ±110° is not available on both joints because the lower link intersects the installed base. Physical endpoint calibration cannot be derived from exterior CAD.

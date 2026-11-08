@@ -27,7 +27,7 @@ class FineServo {
  bool attached()const{return on;}
  uint8_t attach(int p,int lo,int hi){assert(p==D8||p==D7);assert(lo==500&&hi==2500);if(fail)return INVALID_SERVO;on=true;pin=p;return 0;}
  void detach(){assert(on);on=false;}
- void writeMicroseconds(int us){assert(on&&us>=789&&us<=2211);pulse=us;++writes;}
+ void writeMicroseconds(int us){assert(on&&us>=700&&us<=2300);pulse=us;++writes;}
 };
 '''
 test=r'''
@@ -49,10 +49,10 @@ void waitMs(int ms){uint32_t start=millis();while(uint32_t(millis()-start)<uint3
 void running(){resetFixture();send("arm\n");assert(mode==HOLD);waitMs(1100);send("run\n");assert(mode==RUN);}
 int main(int argc,char** argv){
  uint16_t value=0;assert(controlPulse(0,value)&&value==1500);
- assert(controlPulse(CONTROL_LIMIT_RAD,value)&&value==789);
- assert(controlPulse(-CONTROL_LIMIT_RAD,value)&&value==2211);
+ assert(controlPulse(CONTROL_LIMIT_RAD,value)&&value==700);
+ assert(controlPulse(-CONTROL_LIMIT_RAD,value)&&value==2300);
  assert(controlPulse(.7853981634f,value)&&value==1100);
- assert(!controlPulse(1.5f,value)&&!controlPulse(std::numeric_limits<float>::quiet_NaN(),value));
+ assert(!controlPulse(1.7f,value)&&!controlPulse(std::numeric_limits<float>::quiet_NaN(),value));
  resetFixture();send("run\n");checkOff();
  resetFixture();send("arm\n");assert(mode==HOLD&&motors[0].pulse==1500&&motors[1].pulse==1500);
  assert(motors[0].pin==8&&motors[1].pin==7); // Actual joint ordering, not just allowed pins.
@@ -64,12 +64,20 @@ int main(int argc,char** argv){
  assert(frames>=100&&inferenceUs<20000);
  if(argc>1){std::ofstream capture(argv[1]);capture<<Serial.output.str();}
  send("off\n");checkOff();
+ // With a level base, persistent actor bends must converge to zero targets.
+ if(POLICY_RETRIES){
+   running();target[0]=.8f;target[1]=-.6f;
+   for(int frame=0;frame<100;++frame){attitude.down[0]=attitude.down[1]=0;attitude.down[2]=-1;gyroBase[0]=gyroBase[1]=gyroBase[2]=0;assert(infer());}
+   assert(recovery.neutralHold&&fabsf(target[0])<1e-5&&fabsf(target[1])<1e-5);
+   assert(motors[0].pulse==1500&&motors[1].pulse==1500);send("off\n");checkOff();
+ }
  // A base held fallen must switch to the varied strategy without leaving bounds.
  if(POLICY_RETRIES){
    running();recovery.reset(19);bool saw=false;
    for(int frame=0;frame<450;++frame){
      attitude.down[0]=1;attitude.down[1]=attitude.down[2]=0;
-     assert(infer());saw|=retryOverride;
+     float fallenAccel[3]={-1,0,0};recovery.observe(fallenAccel,gyroBase,.02f);
+     assert(infer());saw|=supervisorOverride;
      for(int j=0;j<2;++j)assert(fabsf(target[j])<=CONTROL_LIMIT_RAD);
    }
    assert(saw&&recovery.retries>=1);send("off\n");checkOff();
@@ -93,7 +101,7 @@ int main(int argc,char** argv){
  running();Serial.txAvailable=0;waitMs(100);assert(mode==RUN&&dropped>=5); // Never block for telemetry.
  Serial.txAvailable=256;waitMs(20);assert(mode==RUN);
  for(int i=0;i<2;++i)target[i]=CONTROL_LIMIT_RAD;assert(infer());
- for(int i=0;i<2;++i)assert(motors[i].pulse>=789&&motors[i].pulse<=2211);
+ for(int i=0;i<2;++i)assert(motors[i].pulse>=700&&motors[i].pulse<=2300);
  Serial.output.str("");Serial.output.clear();
  frames=sampleAt=imu.sequence=imu.errors=dropped=filterRejects=0xffffffff;
  inferenceUs=lateUs=0xffffffff;for(int i=0;i<10;++i)observation[i]=-1;
@@ -207,7 +215,7 @@ int main(int argc,char** argv){
  a[0]=0;guard=InactivityGuard();guard.begin(0,a);g[2]=.1f;
  guard.observe(100,a,g);guard.observe(105,a,g);guard.observe(110,a,g);
  assert(guard.lastMotionMs==110&&!guard.expired(60109)&&guard.expired(60110));
- std::cout<<"PASS: actual actor, 80-degree conversion, one-second neutral hold, 50 Hz target/PWM, shadow isolation, attach failures, battery/sensor/nonfinite/USB/heartbeat/deadline/session/input stops, nonblocking telemetry, clock rollover, standalone operation, no-PWM charging, reboot-only IMU inactivity lock, guarded battery-only automatic startup and physical-USB boot inhibition.\n";
+ std::cout<<"PASS: actual actor, 90-degree conversion, one-second neutral hold, 50 Hz target/PWM, shadow isolation, attach failures, battery/sensor/nonfinite/USB/heartbeat/deadline/session/input stops, nonblocking telemetry, clock rollover, standalone operation, no-PWM charging, reboot-only IMU inactivity lock, guarded battery-only automatic startup and physical-USB boot inhibition.\n";
 }
 '''
 with tempfile.TemporaryDirectory() as folder:
@@ -236,7 +244,7 @@ with tempfile.TemporaryDirectory() as folder:
     rows=list(csv.DictReader(io.StringIO(header+'\n'+'\n'.join(line[2:] for line in lines if line.startswith('D,')))))
     actor=HostActor(actor_header)
     try:
-        result=analyze(rows,actor,False,manifest['action_increment_rad'])
+        result=analyze(rows,actor,False,manifest['action_increment_rad'],manifest.get('joint_limit_deg',80))
         assert result['contract_checks']=='passed' and result['frames_logged']>=100
     finally:
         actor.close()

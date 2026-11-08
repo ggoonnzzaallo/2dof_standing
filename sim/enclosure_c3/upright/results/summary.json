@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-07",
+  "geometry": "Installed C3, extra 6 g wire/glue estimate, 90-degree hinges",
+  "algorithm": "PPO warm-start with target-normalization correction, then 33,792 additional steps",
+  "selected_steps": 33792,
+  "completed_episodes": 239,
+  "checkpoints": 2,
+  "joint_limits_deg": [
+    90,
+    90
+  ],
+  "action_increment_rad": 0.1,
+  "target_rate_rad_s": 5,
+  "flat_base_behavior": "gyro-qualified low-pass accelerometer level detector, ease both targets to zero at <=2 rad/s, hysteretic return to recovery",
+  "held_out_successes": 48,
+  "held_out_episodes": 50,
+  "held_out_horizon_s": 25,
+  "held_out_criterion": "base within 8 degrees, actual joints within 0.12 rad, targets within 0.05 rad, mean angular speed below 0.4 rad/s and resting base for 1 s. Resting includes <=0.5 mm solver contact gap; angular speed smoothed over ~100 ms.",
+  "comparison_note": "Stricter arm goal and different stability filtering from historical base-only results; scores are not directly comparable.",
+  "static_range_checks": {
+    "both90_grid_1deg_samples": 32761,
+    "lower90_upper110_grid_1deg_samples": 40001,
+    "self_penetration_in_those_grids_mm": 0,
+    "lower_first_substantial_collision_negative_deg": -91,
+    "lower_first_substantial_collision_positive_deg": 93
+  },
+  "flat_hold_cases": 5,
+  "physical_recovery_confirmed": false,
+  "servo_90_endpoints_us": [
+    700,
+    2300
+  ],
+  "servo_mapping": "Extrapolated from measured zero/+/-45-degree references; actual 90-degree endpoint accuracy not newly measured."
+}

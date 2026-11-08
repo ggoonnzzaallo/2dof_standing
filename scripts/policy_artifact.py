@@ -47,6 +47,8 @@ def select(args):
     manifest={'geometry_id':args.geometry_id,'mesh_assets_sha256':model_report['mesh_assets_sha256'],
               'observation_count':10,'action_count':2,'period_ms':20,'action_increment_rad':training['config'].get('action_increment_rad',.06),
               'retry_supervisor':training['config'].get('retry_supervisor',False),
+              'joint_limit_deg':training['config'].get('joint_limit_deg',80),
+              'neutral_hold':training['config'].get('neutral_hold',False),
               'hardware_validation':'Separate deployment record; selection does not imply physical success'}
     for name,path in [('actor_header',args.actor_header),('actor_archive',args.actor_archive),('model',args.model),('training_report',args.training_report)]:
         manifest[name+'_path']=str(path.resolve().relative_to(ROOT));manifest[name+'_sha256']=digest(path)
@@ -66,7 +68,7 @@ def select(args):
         environment=(args.model.parent/'robust_env.py').resolve()
         assert digest(environment)==training['environment_sha256'],'Environment differs from selected training'
         manifest['runtime_sources'].append({'path':str(environment.relative_to(ROOT)),'sha256':digest(environment)})
-        for path in (ROOT/'sim/environment.py',args.model.parent/'strategy.py'):
+        for path in (ROOT/'sim/environment.py',args.model.parent/'strategy.py',ROOT/'firmware/policy_control/ServoProfile.h'):
             path=path.resolve()
             manifest['runtime_sources'].append({'path':str(path.relative_to(ROOT)),'sha256':digest(path)})
     args.out_dir.mkdir(parents=True,exist_ok=True)
