@@ -1,12 +1,12 @@
-# Rev C3 — cup-only fit check
+# Rev C3 — printing and fit checks
 
-The C2 cup/lid passed your previous fit check. This revision changes only the cup's USB opening, battery location/stops and a small battery-side screw-boss relief. Reuse the C2 lid and your two M2 × 10 mm screws; no nuts or coupon.
+The current C3 enclosure was confirmed installed on 7 November 2026. For a new build, print the cup and lid supplied here. For an upgrade from C2, only reprint the cup: its USB opening, battery location/stops and battery-side screw-boss relief changed. Use two M2 × 10 mm screws into plastic; no nuts or coupon.
 
 ## Print
 
 Print **`electronics_cup.stl`**, millimetres, 100% scale, floor down/open side up. It is one connected watertight solid with Z=0 on the bed; total height is 12.8 mm including the 0.8 mm registration tabs. Inspect the USB bridge and R0.6 opening corners in the slicer. Keep your previous successful PLA settings and record the new cup's sliced mass.
 
-`base_modified.stl` is supplied for completeness and is byte-identical to the approved C2 lid: no lid reprint required.
+Print **`base_modified.stl`** for a new build. It is byte-identical to the approved C2 lid, so an existing C2 lid needs no reprint. The four printed arm components are in the [complete robot STEP](assembly_review.step); export those bodies from your CAD tool if needed.
 
 ## Unpowered fit
 
@@ -17,4 +17,4 @@ Print **`electronics_cup.stl`**, millimetres, 100% scale, floor down/open side u
 5. Transfer the Pololu to its unchanged front-corner lands/stops. Route existing plugs flat in the centre, check switch travel, and close the original C2 lid. Check that wires and connector overmoulds are not pinched.
 6. Reuse the two M2 × 10 screws. Find their existing formed threads by back-turning and snug by hand; check the lid seats flat and the battery remains free of screw/boss pressure.
 
-The 70 mm footprint, 12 mm cup body, 2 mm lid, ground-edge radius, switch position and wiring are unchanged. The new USB/cable and battery/boss fit await your confirmation. No electrical testing, upload or motion is performed by the CAD scripts.
+The 70 mm footprint, 12 mm cup body, 2 mm lid, ground-edge radius, switch position and wiring are unchanged. Verify USB/cable and battery/boss fit on each new print. No electrical testing, upload or motion is performed by the CAD scripts.

@@ -12,7 +12,7 @@ The build uses a **XIAO nRF52840 Sense**, two **PTK 7465 MG servos**, a **500 mA
 |---|---|
 | Run, stop or charge the robot | [Operating instructions](docs/OPERATING_INSTRUCTIONS.md) |
 | Buy parts and wire the electronics | [BOM](BOM.md) · [Complete wiring](electrical/FROM_SCRATCH.md) |
-| Print or inspect the CAD | [CAD guide](cad/README.md) · [Electronics enclosure](cad/electronics_pod/README.md) |
+| Print or inspect the CAD | **[Current complete STEP](cad/assembly.step)** · [Enclosure STL package](cad/electronics_pod/rev_c3_print_fit.zip) · [CAD guide](cad/README.md) |
 | Open the simulation or understand training | [Simulation guide](sim/README.md) |
 | Build or upload firmware | [Firmware setup](firmware/README.md) |
 | Understand the project or find detailed records | [Project summary](docs/PROJECT_SUMMARY.md) · [Documentation index](docs/README.md) |

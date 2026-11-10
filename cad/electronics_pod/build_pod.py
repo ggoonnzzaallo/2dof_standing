@@ -7,6 +7,7 @@ from pathlib import Path
 import hashlib
 import json
 import math
+import shutil
 import sys
 
 print('Loading CAD kernel...', flush=True)
@@ -282,6 +283,8 @@ def main():
     assert sum(n.startswith('pololu_2810') for n in pieces)==1
     print('Exporting revised cup, thin lid and review...',flush=True)
     assembly.save(str(OUT/'assembly_review.step'))
+    # Keep the obvious top-level download synchronized with the full current robot.
+    shutil.copyfile(OUT/'assembly_review.step', ROOT/'cad/assembly.step')
     printable={'electronics_cup':cup.val(),'base_modified':base.val()}
     print_checks={}
     for alias,shape in printable.items():

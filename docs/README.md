@@ -11,7 +11,7 @@
 | [Complete wiring](../electrical/FROM_SCRATCH.md) | Current Rev C connections, including D8/D7 PWM; [phone diagram](../electrical/REV_C_PHONE_WIRING.png), [schematic PDF](../electrical/REV_C_WIRING.pdf) |
 | [Electrical design](../electrical/README.md) | Master-switch behavior, charging limits and commissioning |
 | [Hardware reference](../HARDWARE.md) | Power, sensing, servo selection and measurement assumptions |
-| [CAD guide](../cad/README.md) | Arm geometry and final Onshape import |
+| [CAD guide](../cad/README.md) | Current complete STEP, printable enclosure and arm source |
 | [Electronics enclosure](../cad/electronics_pod/README.md) | Current C3 cup, C2 lid, layouts, previews and printable files |
 | [Print and fit checks](../cad/electronics_pod/PRINT_FIT_CHECK.md) | Enclosure assembly checks |
 
