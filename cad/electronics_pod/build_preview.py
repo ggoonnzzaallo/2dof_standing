@@ -80,8 +80,8 @@ def render_region(region, anchor, center, yaw, pitch, scale, include):
     im.paste(Image.fromarray(rgb),region[:2])
 
 
-draw.text((55,35),'UNDER-BASE ELECTRONICS POD',font=font(36),fill='#183644')
-draw.text((55,85),'FIT REVISION 3 | tighter USB opening, battery toward edge, wall stop and local boss relief',font=font(23),fill='#526b78')
+draw.text((55,35),'2DoF ALWAYS STANDING | CURRENT C3 CAD',font=font(36),fill='#183644')
+draw.text((55,85),'Complete robot assembly and electronics enclosure | dimensions in millimetres',font=font(23),fill='#526b78')
 render_region((30,145,660,970),(345,570),(0,0,63),-.67,.28,4.3,{'original','arm','cup','electronics'})
 render_region((700,170,1770,880),(1225,535),(0,0,-6),-.65,.85,8.,{'cup','electronics'})
 draw.text((90,150),'Assembled: 12 mm cup + 2 mm lid',font=font(24),fill='#183644')
@@ -90,7 +90,7 @@ draw.text((760,880),'Battery: 7.3 mm rearward / 3.65 mm left; wall replaces end 
 draw.text((760,920),'Both boards: 0.6 mm PSA lands; no pin headers',font=font(22),fill='#285e43')
 draw.text((760,960),'USB 9.8 × 4.1 mm; two screw axes and C2 lid unchanged',font=font(22),fill='#8d4038')
 draw.line((55,1010,1745,1010),fill='#c5d3d8',width=2)
-draw.text((55,1034),'Reprint cup only; check USB cable, battery and boss fit. Saved training model remains frozen to C2.',font=font(22),fill='#96512a')
+draw.text((55,1034),'Current assembly.step: complete robot. Enclosure ZIP: cup/lid print files + complete assembly STEP.',font=font(22),fill='#96512a')
 im.save(OUT/'preview.png')
 
 # True-scale dimensioned top plan, with enough space for readable callouts.
